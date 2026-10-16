@@ -10,8 +10,12 @@ namespace Hellscript
         public string id,name,station,residentId,country,gender,food,appearance,palette,greeting,portrait,portraitFacing,portraitMirror,role;
         // The base portrait looks toward portraitFacing ("right" when empty); portraitMirror is the same art flipped to look the other way.
         // Two figures in a scene face each other: the one on the left looks right and the one on the right looks left.
-        public string PortraitFor(bool onLeft)
+        public bool IsHero=>id=="hero-warrior"||id=="hero-ranger"||id=="hero-mage";
+        public Rect PortraitUvFor(bool onLeft)=>IsHero&&portraitFacing!=(onLeft?"right":"left")?new Rect(1,0,-1,1):new Rect(0,0,1,1);
+        public string PortraitFor(bool onLeft,HeroGender gender=HeroGender.Male)
         {
+            // Hero masters are reused by gender; the renderer flips UVs instead of creating mirror files.
+            if(IsHero)return portrait+(gender==HeroGender.Female?"-f":"");
             string baseFacing=string.IsNullOrEmpty(portraitFacing)?"right":portraitFacing;
             return string.IsNullOrEmpty(portraitMirror)||baseFacing==(onLeft?"right":"left")?portrait:portraitMirror;
         }

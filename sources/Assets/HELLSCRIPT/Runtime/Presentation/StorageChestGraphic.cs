@@ -25,16 +25,16 @@ namespace Hellscript
         }
         public override Texture mainTexture => ArtSprite != null ? ArtSprite.texture : Texture2D.whiteTexture;
 
-        // Equal-size UV windows retain native alpha and line up both chest bases without changing the tab layout.
-        // Pixel measurements and original PNG hashes are recorded in Docs/Art/StorageChests.
-        public Rect ArtUv => new Rect(64f / 1254, (IsOpen ? 79f : 50f) / 1254, 1174f / 1254, 974f / 1254);
+        // Approved replacement canvases already include their transparent margin.
+        public Rect ArtUv => new Rect(0, 0, 1, 1);
         public Rect ArtRect
         {
             get
             {
                 var r = GetPixelAdjustedRect();
-                float width = Mathf.Min(r.width, r.height * 1174 / 974);
-                float height = width * 974 / 1174;
+                float aspect = ArtSprite != null ? (float)ArtSprite.texture.width / ArtSprite.texture.height : 1;
+                float width = Mathf.Min(r.width, r.height * aspect);
+                float height = width / aspect;
                 return new Rect(r.center.x - width / 2, r.center.y - height / 2 - PressOffset, width, height);
             }
         }

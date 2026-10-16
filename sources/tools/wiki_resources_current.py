@@ -20,9 +20,33 @@ PRESERVED_DOCUMENTS = (
 )
 
 
+EXACT_RETIREMENT = ('casual-art-followup-20261015', '2026-10-15')
+
+
+def exact_retired_source(api, path, entry):
+    if (entry.get('retirementScope'), entry.get('retiredOn')) != EXACT_RETIREMENT:
+        return False
+    if (not path.startswith(ART) or PurePosixPath(path).as_posix() != path or '\\' in path
+            or not re.fullmatch(r'.+\.png(?:\.meta)?', path)):
+        return False
+    if (type(entry.get('bytes')) is not int or entry['bytes'] <= 0
+            or not isinstance(entry.get('sha256'), str)
+            or not re.fullmatch(r'[0-9a-f]{64}', entry['sha256'])):
+        return False
+    if path.startswith(ART + 'ClassSkillIcons/'):
+        skills = json.loads(api.read(RESOURCES + 'Data/ClassSkills.json'))['skills']
+        current = {ART + 'ClassSkillIcons/' + ('Warrior', 'Ranger', 'Mage')[row['heroClass']]
+                   + '/' + row['id'] + '.png' for row in skills}
+        if path.removesuffix('.meta') in current:
+            return False
+    return True
+
+
 def source_bytes(api, path, optional=False):
     safe_relative(path)
     file = api.ROOT / path
+    if not file.resolve().is_relative_to(api.ROOT.resolve()):
+        raise ValueError('Wiki source escapes repository: ' + path)
     if file.is_file():
         return file.read_bytes()
     if not hasattr(api, '_historical_art'):
@@ -31,17 +55,35 @@ def source_bytes(api, path, optional=False):
         return api._historical_art[path]
     manifest_file = api.ROOT / ARCHIVE_MANIFEST
     manifest = json.loads(api.read(ARCHIVE_MANIFEST)) if manifest_file.is_file() else {'files': []}
-    entry = next((x for x in manifest['files'] if x['path'] == path), None)
+    matches = [x for x in manifest['files'] if x['path'] == path]
+    if len(matches) > 1:
+        raise ValueError('Duplicate historical art source: ' + path)
+    entry = matches[0] if matches else None
     if entry:
         safe_relative(path)
-        if (not path.startswith(RETIRED) and path not in PRESERVED_DOCUMENTS) or not re.fullmatch(r'[0-9a-f]{40}', entry['commit']):
+        allowed = path.startswith(RETIRED) or path in PRESERVED_DOCUMENTS or exact_retired_source(api, path, entry)
+        if not allowed or not isinstance(entry.get('commit'), str) or not re.fullmatch(r'[0-9a-f]{40}', entry['commit']):
             raise ValueError('Invalid historical art source: ' + path)
-        result = subprocess.run(['git', '-C', str(api.ROOT), 'show', entry['commit'] + ':' + path],
-                                capture_output=True)
-        if result.returncode or len(result.stdout) != entry['bytes'] or api.digest(result.stdout) != entry['sha256']:
+        if path in PRESERVED_DOCUMENTS:
+            archive_path = 'Wiki/assets/preserved-documents/20261014/' + PurePosixPath(path).name
+            if entry.get('archivePath') != archive_path:
+                raise ValueError('Invalid preserved document archive: ' + path)
+            archive_file = api.ROOT / archive_path
+            if not archive_file.is_file() or not archive_file.resolve().is_relative_to(api.ROOT.resolve()):
+                raise ValueError('Missing or unsafe preserved document archive: ' + path)
+            raw = archive_file.read_bytes()
+        else:
+            if 'archivePath' in entry:
+                raise ValueError('Invalid historical art archive: ' + path)
+            result = subprocess.run(['git', '-C', str(api.ROOT), 'show', entry['commit'] + ':' + path],
+                                    capture_output=True)
+            raw = result.stdout if result.returncode == 0 else b''
+        if len(raw) != entry['bytes'] or api.digest(raw) != entry['sha256']:
             raise ValueError('Missing or changed historical art object: ' + path)
-        api._historical_art[path] = result.stdout
-        return result.stdout
+        if path in PRESERVED_DOCUMENTS:
+            api.INPUTS[archive_path] = entry['sha256']
+        api._historical_art[path] = raw
+        return raw
     if optional:
         return None
     raise ValueError('Missing wiki source: ' + path)
@@ -52,7 +94,7 @@ def archived_sources(api):
     if not used:
         return {}
     manifest = json.loads(api.read(ARCHIVE_MANIFEST))
-    return {x['path']: {k: x[k] for k in ('commit', 'sha256', 'bytes')}
+    return {x['path']: {k: x[k] for k in ('commit', 'sha256', 'bytes', 'archivePath', 'retirementScope', 'retiredOn') if k in x}
             for x in manifest['files'] if x['path'] in used}
 
 
@@ -222,7 +264,7 @@ def _models(api, databases, existing):
 
 def build(api, databases, existing):
     rows = _equipment(api, databases)
-    represented = {r.get('assetPath') for r in existing + rows if r.get('image')}
+    represented = {r.get('assetPath') for r in existing + rows if r.get('image') or r.get('historicalOnly')}
     # These are runtime Resources, not original artwork, scratch output or historical archives.
     roots = [api.ROOT / ART, api.ROOT / (RESOURCES + 'DailyQuestCasual'), api.ROOT / (RESOURCES + 'UI/PotionQuickCasual')]
     for root in roots:
@@ -252,10 +294,100 @@ def build(api, databases, existing):
                               {'경로 / Path': path, '파일 크기 / Bytes': len(raw), 'SHA-256': api.digest(raw)}, path,
                               status='등록된 게임 리소스'))
     replaced.add('todo-character-rig')
-    retained = [r for r in existing if r['id'] not in replaced and not r['id'].startswith('legacy-cell-')
+    retained = [r for r in existing if r['id'] not in replaced and (not r['id'].startswith('legacy-cell-') or r.get('historicalOnly'))
                 and not r.get('assetPath', '').startswith(RETIRED)]
     for row in retained:
         if row['id'].startswith('model-'):
             row['summary'] = '런타임 대체 표현 기록 / Runtime fallback representation'
             row['fields']['독립 모델·프리팹'] = '현재 모델·필드 정본 항목과 런타임 적용 범위를 함께 확인합니다. / See current model and field records.'
-    return retained + rows
+    return classify_historical_references(api, retained + rows)
+
+# Presentation-only roles: exact current paths, never a frame/name prefix rule.
+FUNCTIONAL_IMAGE_ROLES = {
+    ART + 'RuneBoard/Icons/emblem-attack-a.png': ('9px 룬 유형 식별 표식 / Tiny rune type indicator', '작은 보드 기능 기호이며 큰 분류는 별도 원화를 사용합니다. / Tiny board function glyph; large categories use separate painted artwork.'),
+    ART + 'RuneBoard/Icons/emblem-critical-b.png': ('9px 룬 유형 식별 표식 / Tiny rune type indicator', '작은 보드 기능 기호이며 큰 분류는 별도 원화를 사용합니다. / Tiny board function glyph; large categories use separate painted artwork.'),
+    ART + 'RuneBoard/Icons/emblem-magic-a.png': ('9px 룬 유형 식별 표식 / Tiny rune type indicator', '작은 보드 기능 기호이며 큰 분류는 별도 원화를 사용합니다. / Tiny board function glyph; large categories use separate painted artwork.'),
+    ART + 'RuneBoard/Icons/emblem-skill-a.png': ('9px 룬 유형 식별 표식 / Tiny rune type indicator', '작은 보드 기능 기호이며 큰 분류는 별도 원화를 사용합니다. / Tiny board function glyph; large categories use separate painted artwork.'),
+    ART + 'RuneBoard/Icons/emblem-support-a.png': ('9px 룬 유형 식별 표식 / Tiny rune type indicator', '작은 보드 기능 기호이며 큰 분류는 별도 원화를 사용합니다. / Tiny board function glyph; large categories use separate painted artwork.'),
+    ART + 'GlobalHUD/Casual/mask-circle.png': ('원형 클리핑 마스크 / Circular clipping mask', '원형 자르기와 진행 게이지에 쓰는 기능 이미지입니다. / Functional circle mask for clipping and gauges.'),
+    ART + 'GlobalHUD/Casual/mask-square.png': ('사각 클리핑 마스크 / Square clipping mask', '아이콘 자르기와 쿨다운에 쓰는 기능 이미지입니다. / Functional square mask for icons and cooldowns.'),
+    ART + 'GlobalHUD/Casual/fill-vital.png': ('게이지 채움 / Gauge fill', '게임이 색과 채움 비율을 적용하는 게이지 바탕입니다. / Tintable gauge fill; not a painted border.'),
+    ART + 'GlobalHUD/Casual/panel-cream.png': ('분할 확장 패널 바탕 / Sliced panel base', '모서리를 보존해 늘려 쓰는 UI 패널 바탕입니다. / Stretchable UI panel base with preserved corners.'),
+    ART + 'GlobalHUD/Casual/panel-white.png': ('분할 확장 패널 바탕 / Sliced panel base', '게임이 색을 입혀 쓰는 UI 패널 기본 바탕입니다. / Tintable UI panel base.'),
+    ART + 'GlobalHUD/Casual/plate-icon.png': ('상태 아이콘 바탕 / Status icon backing', '상태 아이콘 아래에 놓고 색과 페이드를 적용하는 바탕입니다. / Tintable backing for effect icons; not a clipping mask.'),
+    ART + 'GlobalHUD/Casual/ring-state.png': ('위험·사망 상태 겹침 / Danger and death overlay', '체력 위험·사망 상태를 색으로 표시하는 겹침 이미지입니다. / Tintable state overlay; not a clipping mask.'),
+    ART + 'GlobalHUD/Casual/xp-tick.png': ('경험치 눈금 / Experience tick', '경험치 진행 눈금용 기능 이미지입니다. / Functional experience tick.'),
+    ART + 'GlobalHUD/Casual/xp-tick-major.png': ('경험치 주요 눈금 / Major experience tick', '경험치 주요 눈금용 기능 이미지입니다. / Functional major experience tick.'),
+    ART + 'GlobalHUD/fill-white.png': ('단색 채움 / Solid fill', '게임이 색을 입혀 막대와 면을 채우는 기본 이미지입니다. / Tintable solid-fill primitive.'),
+    ART + 'GlobalHUD/mask-diamond.png': ('마름모 마스크 / Diamond mask', '마름모형 자르기용 도형 리소스입니다. / Diamond clipping primitive; registration does not prove current use.'),
+    ART + 'GlobalHUD/mask-edge-smooth.png': ('가장자리 마스크 / Edge mask', '가장자리 처리를 위한 기능 이미지입니다. / Functional edge mask.'),
+    ART + 'GlobalHUD/portrait-placeholder.png': ('초상화 대체 이미지 / Portrait placeholder', '전용 초상화가 없을 때 쓰는 공통 대체 이미지입니다. / Shared missing-portrait fallback, not a character illustration.'),
+    ART + 'GlobalHUD/xp-cap.png': ('경험치 끝단 표식 / Experience cap', '경험치 끝단 표식용 기능 리소스입니다. / Experience-cap primitive; registration does not prove current use.'),
+}
+
+
+def annotate_resource_roles(rows):
+    """Label rendering primitives without changing media, identity, scope or provenance."""
+    for row in rows:
+        role = FUNCTIONAL_IMAGE_ROLES.get(row.get('assetPath'))
+        if role is None:
+            continue
+        row['category'] = 'UI 기능 이미지'
+        row['summary'] = role[1]
+        row['fields']['표현 용도 / Visual role'] = role[0]
+        row['fields']['완성 원화 여부 / Standalone illustration'] = 'UI 기능용 이미지이며 독립 장식 원화가 아닙니다. / UI rendering primitive, not a standalone illustration.'
+    return rows
+
+
+HISTORICAL_REFERENCE87 = 'tools/wiki_historical_reference87.json'
+HISTORICAL_REFERENCE87_SHA256 = 'f9a7b3181dd721b2364244430862c3d3cff3c27049918caf4b97e16aa1d336df'
+
+
+def classify_historical_references(api, rows):
+    """Keep exact old source identities/downloads while hiding their current-art previews."""
+    text = api.read(HISTORICAL_REFERENCE87)
+    if api.digest(text.encode('utf-8')) != HISTORICAL_REFERENCE87_SHA256:
+        raise ValueError('Changed exact87 historical reference plan')
+    plan = json.loads(text)
+    entries = plan['records']
+    by_path = {entry['path']: entry for entry in entries}
+    if (plan.get('schemaVersion') != 1 or plan.get('recordCount') != 87
+            or len(entries) != 87 or len(by_path) != 87
+            or set(by_path) & set(FUNCTIONAL_IMAGE_ROLES)):
+        raise ValueError('Invalid exact87 historical reference scope')
+    registry = json.loads(api.read(ARCHIVE_MANIFEST))['files']
+    canonical = json.dumps(sorted(registry, key=lambda entry: entry['path']),
+                           ensure_ascii=False, sort_keys=True, separators=(',', ':')).encode('utf-8')
+    if (len(registry) != 416 or len({entry['path'] for entry in registry}) != 416
+            or api.digest(canonical) != plan['registryRecordSetSha256']):
+        raise ValueError('Exact416 original-SHA history bridge is not adopted')
+    selected = [row for row in rows if row.get('assetPath') in by_path]
+    if {row['assetPath'] for row in selected} != set(by_path):
+        raise ValueError('Missing exact87 historical resource identities')
+    # This alternative retains all originals; physical retirement needs a separate root transition.
+    for path, entry in by_path.items():
+        for source in (entry['png'], entry['meta']):
+            target = api.ROOT / source['path']
+            if (not target.is_file() or target.resolve() != api.ROOT.resolve() / source['path']
+                    or api.INPUTS.get(source['path']) != source['sha256']):
+                raise ValueError('Missing or uncollected retained historical source: ' + source['path'])
+    for row in selected:
+        path = row['assetPath']; entry = by_path[path]
+        row.pop('image', None)
+        row['historicalOnly'] = True
+        row['retirementStatus'] = 'retained_pending_physical_retirement'
+        row['category'] = '역사·참조 원화 / Historical reference artwork'
+        row['status'] = '원형 보존 · 물리 분리 미실행 / Original retained; physical retirement not performed'
+        row['summary'] = ('이전 원화의 원본·근거를 보존합니다. 현재 원화 미리보기와 기능 도형으로 분류하지 않습니다. / '
+                          'Previous artwork retained as source evidence, not a current-art preview or rendering primitive.')
+        fields = row['fields']
+        fields['역사 분류 / Historical classification'] = '이전 원화 · 참조 전용 / Previous artwork; reference only'
+        fields['원본 위치 / Original location'] = path
+        fields['물리 분리 / Physical retirement'] = '미실행; Resources의 PNG와 메타 원형 보존 / Not performed; original PNG and metadata remain in Resources'
+        fields['원본 SHA-256 / Original PNG'] = entry['png']['sha256']
+        fields['원본 메타 SHA-256 / Original metadata'] = entry['meta']['sha256']
+        refs = row.setdefault('refs', [])
+        for source in (path, path + '.meta'):
+            if not any(ref.get('path') == source for ref in refs):
+                refs.append(api.source_ref(source))
+    return rows

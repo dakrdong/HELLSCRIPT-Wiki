@@ -172,8 +172,7 @@ namespace Hellscript
         }
         void BuildForestGround(Transform layout)
         {
-            var soil=TownMat("Forest earth",.19f,.21f,.16f);var moss=TownMat("Moss",.16f,.21f,.12f);var mud=TownMat("Worn trail",.33f,.29f,.22f);
-            var wood=TownMat("Timber",.23f,.16f,.1f);var bark=TownMat("Bark",.15f,.12f,.085f);var needles=TownMat("Pine",.105f,.19f,.14f);var needlesLight=TownMat("Pine tips",.16f,.25f,.18f);
+            var wood=TownMat("Timber",.23f,.16f,.1f);var bark=TownMat("Bark",.15f,.12f,.085f);var needles=TownMat("Pine",.23f,.43f,.25f);var needlesLight=TownMat("Pine tips",.38f,.58f,.28f);
             BuildTownGroundMesh(layout);
             var random=new System.Random(74219);float R(float a,float b)=>Mathf.Lerp(a,b,(float)random.NextDouble());
             var pine=ConeMesh(1,1,13);
@@ -190,25 +189,6 @@ namespace Hellscript
                 }
             }
             // Rocks and scrub: placed by BuildTownEnvironment (WorldView.TownEnvironment.cs).
-            // A small communal fire and split logs make the center a lived-in gathering place.
-            for(int n=0;n<9;n++)
-            {
-                float a=n*Mathf.PI*2/9;Shape("Campfire stone",PrimitiveType.Sphere,layout,new Vector3(-9+Mathf.Cos(a)*1.4f,.2f,-7+Mathf.Sin(a)*1.4f),new Vector3(.6f,.4f,.6f),stone);
-            }
-            for(int n=0;n<4;n++)
-            {
-                var log=Shape("Split firewood",PrimitiveType.Cylinder,layout,new Vector3(-9,.3f,-7),new Vector3(.3f,1.1f,.3f),wood);log.transform.localRotation=Quaternion.Euler(90,n*45,0);
-                var flame=MeshPart(layout,"Hearth flame",pine,new Vector3(-9+R(-.4f,.4f),.35f,-7+R(-.4f,.4f)),ember);flame.transform.localScale=new Vector3(.3f,R(.5f,1.1f),.3f);
-            }
-            for(int n=0;n<(WorldArt.Has(WallArt)?0:44);n++)
-            {
-                float x=-54+n*2.5f;
-                for(int side=-1;side<=1;side+=2)
-                {
-                    Block(layout,"Settlement palisade",new Vector3(x,1.25f,side*37),new Vector3(.6f,2.5f,.55f),wood);
-                    Block(layout,"Fence rail",new Vector3(x,1.2f,side*37),new Vector3(2.5f,.22f,.2f),bark);
-                }
-            }
             for(int n=0;n<8;n++)TownLantern(layout,new Vector3(-49+n*14,0,n%2==0?5:-5));
             // A low stone well and supply cart leave the 110 m main road unobstructed.
             if(SpawnTownModel(TownArt+"Prop_StoneWell",layout,new Vector3(-7,0,7))==null)
@@ -338,7 +318,7 @@ namespace Hellscript
         }
         void BuildTrainingYard(Transform p,TownStationDefinition s)
         {
-            var wood=TownMat("Timber",.23f,.16f,.1f);var straw=TownMat("Straw",.58f,.47f,.26f);
+            var wood=TownMat("Fence timber",.58f,.35f,.17f);var straw=TownMat("Straw",.78f,.64f,.34f);
             // The yard floor is trampled earth in the ground mask now; the old sand slab is kept just under the ground.
             Block(p,"Training sand",new Vector3(39,-.25f,22),new Vector3(20,.1f,20),TownMat("Sand",.4f,.36f,.26f));
             for(int n=0;n<4;n++)
@@ -350,7 +330,8 @@ namespace Hellscript
                 Block(p,"Dummy arms",new Vector3(x,2.3f,23),new Vector3(2.8f,.2f,.2f),wood);
                 for(int ring=0;ring<3;ring++){var r=Ring(p,new Vector3(x,2,22.58f),.18f+ring*.15f,ring%2==0?red:trim,.05f);r.transform.localRotation=Quaternion.Euler(90,0,0);}
             }
-            for(int n=0;n<10;n++){float x=29+n*2.3f;Block(p,"Training fence",new Vector3(x,1,33),new Vector3(.2f,2,.2f),wood);Block(p,"Training rail",new Vector3(x,1.3f,33),new Vector3(2.3f,.15f,.15f),wood);}
+            var fence=new GameObject("Training yard fence").transform;fence.SetParent(p,false);
+            TownFence(fence,new Vector2(28,11),new Vector2(28,34));TownFence(fence,new Vector2(28,34),new Vector2(50,34));TownFence(fence,new Vector2(50,34),new Vector2(50,11));BatchTownGeometry(fence);
             TownLantern(p,new Vector3(29,0,12));TownLantern(p,new Vector3(49,0,12));
         }
         Transform BuildTownPortal(Transform p,Vector2 at,bool returning=false)
@@ -362,8 +343,8 @@ namespace Hellscript
             Transform fx=root;
             if(!returning&&SpawnTownModel(TownArt+"Portal_RiftGateway",root,Vector3.zero)!=null){fx=new GameObject("Portal effect").transform;fx.SetParent(root,false);fx.localPosition=new Vector3(0,1,.45f);fx.localScale=Vector3.one*.55f;}
             else Shape("Portal dais",PrimitiveType.Cylinder,root,new Vector3(0,.12f,0),new Vector3(7,.12f,5),darkStone);
-            var glow=returning?new Color(.15f,.7f,1):new Color(1,.45f,.08f);
-            var goldLight=PortalMat(returning?"Return portal light":"Portal gold",returning?new Color(.45f,.9f,1):new Color(1,.73f,.19f));var orange=PortalMat(returning?"Return portal edge":"Portal orange",returning?new Color(.08f,.35f,1):new Color(1,.3f,.045f));
+            var glow=returning?new Color(.15f,.7f,1):new Color(.48f,.27f,1);
+            var goldLight=PortalMat(returning?"Return portal light":"Portal violet light",returning?new Color(.45f,.9f,1):new Color(.57f,.65f,1));var orange=PortalMat(returning?"Return portal edge":"Portal violet edge",returning?new Color(.08f,.35f,1):new Color(.46f,.19f,1));
             var runes=new GameObject("Turning portal runes").transform;runes.SetParent(fx,false);runes.localPosition=Vector3.up*4.2f;townPortalRunes.Add(runes);
             for(int n=0;n<3;n++)
             {
@@ -377,7 +358,7 @@ namespace Hellscript
             }
             // Translucent elliptical membranes leave the destination visible through the opening.
             string membraneKey=returning?"Return portal membrane":"Portal membrane";
-            var fadeShader=Resources.Load<Shader>("TownFade");if(!materials.TryGetValue(membraneKey,out var veil)){veil=new Material(fadeShader){name="HELLSCRIPT "+membraneKey};veil.SetColor("_BaseColor",returning?new Color(.1f,.6f,1,.22f):new Color(1,.37f,.04f,.22f));materials[membraneKey]=veil;}
+            var fadeShader=Resources.Load<Shader>("TownFade");if(!materials.TryGetValue(membraneKey,out var veil)){veil=new Material(fadeShader){name="HELLSCRIPT "+membraneKey};veil.SetColor("_BaseColor",returning?new Color(.1f,.6f,1,.22f):new Color(.48f,.23f,1,.22f));materials[membraneKey]=veil;}
             var membrane=Shape("Portal membrane",PrimitiveType.Sphere,fx,new Vector3(0,4.2f,.1f),new Vector3(4.5f,7.3f,.12f),veil);
             var light=new GameObject("Portal glow").AddComponent<Light>();light.transform.SetParent(fx,false);light.transform.localPosition=new Vector3(0,2,-1);light.type=LightType.Point;light.color=glow;light.intensity=3;light.range=returning?8:12;light.shadows=LightShadows.None;
             return root;

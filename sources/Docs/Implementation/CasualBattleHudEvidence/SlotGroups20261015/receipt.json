@@ -1,0 +1,203 @@
+{
+  "schemaVersion": 1,
+  "recordedUtc": "2026-10-15T15:36:31.722316+00:00",
+  "status": "SCOPED_HUD_ROW_AND_TRAINING_HEADER_ACCEPTED_FULL_INTEGRATION_PENDING",
+  "baseCommit": "b5b86c51156ffb9bc0f534a5afa49edba96dda29",
+  "selectedSourceFiles": [
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GlobalHudLayout.cs",
+      "selectedCommitSha256": "2444395b69bde359fa3eb139ddf2fc3f25978be087492abadfbb3fda21fbcdfa",
+      "testedWorkingSha256": "2444395b69bde359fa3eb139ddf2fc3f25978be087492abadfbb3fda21fbcdfa",
+      "wholeCurrentFileSelected": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs",
+      "selectedCommitSha256": "3d954f97189253a476731509b0e198459c4c8c4bda58adebd04f709febe92ae5",
+      "testedWorkingSha256": "7b80244384ea1b8e0018fc3fc7839e739aa23472874296bbd2832eb715e6ca80",
+      "wholeCurrentFileSelected": false
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Tests/Editor/GlobalHudTests.cs",
+      "selectedCommitSha256": "1b191f433eb01ec0cd7dc6ea71b013a2d634ef11cfcfbfa1a25a689476512297",
+      "testedWorkingSha256": "1b191f433eb01ec0cd7dc6ea71b013a2d634ef11cfcfbfa1a25a689476512297",
+      "wholeCurrentFileSelected": true
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/GameUI.BattleLayout.cs",
+      "selectedCommitSha256": "78dd091d775caeaff1a52858c9b40071c1ab8f8b91677b1c50db55672b639334",
+      "testedWorkingSha256": "78dd091d775caeaff1a52858c9b40071c1ab8f8b91677b1c50db55672b639334",
+      "wholeCurrentFileSelected": true
+    }
+  ],
+  "slotPatchSha256": "656eb19d5d432166d7d0c92225705a8cf541fe68f5880fe6b23f4f3e1a12de60",
+  "workingTreeScope": "Actual Editor observations and source checks include a separate uncommitted art/provider integration unit. They are not clean-HEAD-only validation. ContentDock provider hunk is intentionally excluded from this local change.",
+  "portraitLayout": {
+    "maximumDesignUnits": 50,
+    "withinGroupDesignUnits": 4,
+    "betweenGroupsDesignUnits": 16,
+    "spareWidth": "outside centered pair of groups",
+    "actual602x930": {
+      "slotPixels": 48.64,
+      "innerGapPixels": 3.89,
+      "groupGapPixels": 15.56
+    },
+    "potionCanvas": "whole512 at66%; no alpha crop",
+    "portraitDockBasisDesignUnits": 44
+  },
+  "row": {
+    "geometryConditions": 10,
+    "languages": [
+      "ko",
+      "en"
+    ],
+    "viewports": [
+      [
+        602,
+        930
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        320,
+        568
+      ],
+      [
+        956,
+        440
+      ],
+      [
+        1600,
+        900
+      ]
+    ],
+    "centerEventSystemHitsPerCondition": 8,
+    "tapDetailClose": 16,
+    "timedPartialHoldExitCancel": 16,
+    "nonemptyFullHoldDetailClose": 8,
+    "emptyUltimateFullHoldNotRun": 8,
+    "rootAcceptedFrames": 10,
+    "rejectedVfxFramePreserved": {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-row-focused-helper/evidence/session-20261015T144452Z-c2747821beba429e938f622b0db4b008/ko-602x930.png",
+      "reason": "Title flight VFX blocks row; root rejected visual acceptance; preserved without overwrite"
+    },
+    "rawStatusesUnchanged": [
+      "FAIL",
+      "FAIL"
+    ],
+    "rawReportSha256": [
+      "049519d801a733a9bb2eacd276c5b1b79c6b09fd0e4cd6c78c9e2a7e93c83035",
+      "f4dcef3faa488e729b86c56646931f960d24fda7decd08d23c16545dfe1dcd1c"
+    ],
+    "helperFailureCause": "First temphelper wrong RemoveCustomSize totalindex conversion; second strict full-token baseText check met Unity automatic truncation. Both original FAILreports retained; root exact cleanup/restoration proved separately. Product row assertions had no error."
+  },
+  "trainingHeader": {
+    "viewport": [
+      1600,
+      900
+    ],
+    "language": "ko",
+    "actualDisjointControlsAndRaycasts": 3,
+    "actualShortcutCount": 4,
+    "max5ArithmeticOnly": true,
+    "actualDockOpenClose": true,
+    "actualEdictOpenBackdropClose": true,
+    "settings": "raycast only; panel NOT_RUN",
+    "rootAcceptedFrames": 2,
+    "rawStatusUnchanged": "HEADER_SCOPED_PASS_VISUAL_REVIEW_PENDING",
+    "rawReportSha256": "3ede3c3240d517dc7b71869cc15b843f15c06a7f9c2d5abbc45ec3be53ecce0e",
+    "priorBootstrapAttempt": "FAIL before Training, PNG0; KST day rollover attendance popup; original preserved",
+    "fixtureSetup": "Two public SetHidden display preference calls only; synchronous account JSON unchanged; no clock/entitlement/reward changes"
+  },
+  "checks": {
+    "uiContract": "15/15 PASS current working source",
+    "uiContractSeconds": 21.197,
+    "refresh": "14 bindings /195 UI source candidates PASS; not runtime reachability",
+    "fullIntegratedNUnitRuns": 0,
+    "nativeBuilds": 0,
+    "physicalInput": "NOT_RUN"
+  },
+  "cleanup": {
+    "editorPid": 53002,
+    "gracefulExitCode": 0,
+    "pidAbsent": true,
+    "gameViewOriginalPresets": 8,
+    "gameViewSelected": 0,
+    "originalCustomPreset": "Options review FixedResolution2100x900",
+    "preferenceBytesExact": true,
+    "ownedFixtureFilesExactlyRestored": 7,
+    "temporaryHelperAndMetaRecoverablyRetired": 2,
+    "realUserSaveAccess": false,
+    "permanentDeletion": false
+  },
+  "notRun": [
+    "ordinary quick-list/equip",
+    "ultimate grant/unlock",
+    "potion consumption/auto-buy",
+    "all144 art review",
+    "all viewport Training header runtime",
+    "physical mouse/touch",
+    "full-screen regression",
+    "full integrated NUnit",
+    "native build/smoke",
+    "Options PR138 adoption before user approval"
+  ],
+  "images": [
+    {
+      "repositoryPath": "Docs/Implementation/CasualBattleHudEvidence/SlotGroups20261015/portrait-ko.png",
+      "origin": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-row-ko602-followup-helper/evidence/session-20261015T145843Z-f70a8a38ead746dda0af0450a29237ac/ko-602x930-natural-flight-complete.png",
+      "sha256": "afc9efde110472936dd42a12fe750a684e9d0eab0ba663587987396e5d401cb9",
+      "bytes": 577656,
+      "rootVisualAccepted": true
+    },
+    {
+      "repositoryPath": "Docs/Implementation/CasualBattleHudEvidence/SlotGroups20261015/training-header-ko.png",
+      "origin": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-header-dayrollover-helper/evidence/session-20261015T152500Z-d74a3f6abf314bbeb05702f532977cbf/ko-1600x900-header-closed.png",
+      "sha256": "4ec4f2bdec58e271d525168989ce006e16a4b39c1c758a5c45f65147e4dc7a18",
+      "bytes": 1190108,
+      "rootVisualAccepted": true
+    }
+  ],
+  "taskEvidenceRoot": "/Users/t8g-2410-pn-005/Documents/Codex/2026-10-14/task-23/validation/cleanup-20261015/main-canonical-resources/new-art",
+  "supportingEvidence": [
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-editor-session/row-only-root-acceptance.json",
+      "sha256": "d46995225b209f9e3d665795c76945cd66331bce6a1def7d8635fdd4162c33b4"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-editor-session/header-root-acceptance.json",
+      "sha256": "69928ae465646c6a73ba08567645185ee7ad7e04e160449128973e604255f37b"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-editor-session/header-day-rollover-diagnosis.json",
+      "sha256": "e877bc40574387b959ae67957f714f3ddf017e05478e72279eeb6d962f23b54a"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-editor-session/unity-close-result.json",
+      "sha256": "73b07f975b43cece33317df1db184ccd67620d8402130df65b98b0308cbc3ac4"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-fixture-checkpoint/owned-editor-closed.json",
+      "sha256": "45b49175900041a9d7475c0ec8af409a32864b092f312fc7d9c58a9668a66379"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-fixture-checkpoint/restore-receipt.json",
+      "sha256": "c8490d009d4c3147a9d6703b1097f8fd3a258fbd0bd9b137ada07a992b71cdd6"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-focused-source-adoption/retirement-receipt.json",
+      "sha256": "37b31b37a40e786c3fa3b1e12fbd76b85336b95858c7e0c5e11a495b4e032847"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-header-source-adoption/ui-contract-receipt.json",
+      "sha256": "8c818acb9070b83b2e68aa0e07e275fb6bb3e5b1b9bbc527c0d7cdbe85a69126"
+    },
+    {
+      "path": "validation/cleanup-20261015/main-canonical-resources/new-art/hud-header-source-adoption/refresh-inventory.json",
+      "sha256": "2f32fe92719edf063fd6b2d7d60bc8ed115e1dd1d33597c9e39da98f8cbcae99"
+    }
+  ],
+  "evidencePrivacy": "No account/save content, raw logs or assemblies copied into repository; compact receipt and two screenshots only.",
+  "next": "Await Options PR138 user decision, fix final integration scope, then one full suite and one reused native build. Private CI/push/budget changes remain on hold."
+}

@@ -42,9 +42,9 @@ namespace Hellscript
                 fog=new Color(.85f,.92f,.98f),fogStart=48,fogEnd=115,background=new Color(.8f,.92f,.99f),moon=new Color(1,.97f,.9f),moonIntensity=1.25f,moonPitch=50,moonYaw=-35,
                 heroIntensity=2.5f,saturation=1,contrast=2,exposure=-.75f,shadows=new Color(.5f,.5f,.5f),highlights=new Color(.5f,.5f,.5f),vignette=.06f,bloom=.3f},
         };
-        public static readonly FieldLook Town=new FieldLook{id="town",particles="village-motes",sky=new Color(.44f,.48f,.52f),equator=new Color(.4f,.43f,.39f),ground=new Color(.2f,.19f,.16f),
-            fog=new Color(.09f,.13f,.12f),fogStart=38,fogEnd=105,background=new Color(.022f,.033f,.05f),moon=new Color(.68f,.78f,1),moonIntensity=1.3f,moonPitch=45,moonYaw=-25,
-            heroIntensity=7,saturation=-8,contrast=8,exposure=.4f,shadows=new Color(.46f,.48f,.52f),highlights=new Color(.58f,.53f,.46f),vignette=.24f};
+        public static readonly FieldLook Town=new FieldLook{id="town",particles="village-motes",sky=new Color(.75f,.9f,.98f),equator=new Color(.66f,.75f,.58f),ground=new Color(.42f,.5f,.32f),
+            fog=new Color(.78f,.9f,.85f),fogStart=48,fogEnd=115,background=new Color(.75f,.9f,.98f),moon=new Color(1,.96f,.82f),moonIntensity=1.45f,moonPitch=50,moonYaw=-35,
+            heroIntensity=2.5f,saturation=4,contrast=2,exposure=-.35f,shadows=new Color(.5f,.5f,.5f),highlights=new Color(.5f,.5f,.5f),vignette=.06f,vignetteColor=new Color(.24f,.32f,.24f),bloom=.35f};
         // The legacy ring (training, developer training, boss arena) by theme: the pre-overhaul night look, graveyard or fortress tinted.
         public static readonly FieldLook[] Legacy=
         {

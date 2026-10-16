@@ -189,16 +189,19 @@ namespace Hellscript
         {
             var root=Rect(name,parent);var clipping=Picture("Circle",root,"mask-circle");Stretch(clipping.rectTransform);
             clipping.gameObject.AddComponent<Mask>().showMaskGraphic=false;
-            portrait=Picture("Selected class",clipping.transform,"portrait-mage");Stretch(portrait.rectTransform);
+            portrait=Picture("Selected class",clipping.transform,"seal-mage-m");Stretch(portrait.rectTransform);
             frame=Picture("Seal frame",root,"frame-seal");Stretch(frame.rectTransform);return root;
         }
+        // Shared source lookup only; callers retain frame roles, crops and existing caches.
+        public static Sprite LoadArt(string id)
+            =>string.IsNullOrEmpty(id)?null:Resources.Load<Sprite>("Art/GlobalHUD/Casual/"+id)??Resources.Load<Sprite>("Art/GlobalHUD/"+id);
         public Sprite Sprite(string id)
         {
             if(string.IsNullOrEmpty(id))return null;
             if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility"||id.StartsWith("elixir-",StringComparison.Ordinal))return PotionArt.Bottle(id,casualHud:true);
             if(!sprites.TryGetValue(id,out var value))
             {
-                value=Resources.Load<Sprite>("Art/GlobalHUD/Casual/"+id)??Resources.Load<Sprite>("Art/GlobalHUD/"+id);
+                value=LoadArt(id);
                 sprites[id]=value;
             }
             return value;

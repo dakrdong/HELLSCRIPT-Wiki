@@ -25,12 +25,13 @@ namespace Hellscript
     public sealed class StoryDialogueState
     {
         readonly StoryLine[] lines;
+        public readonly HeroGender Gender;
         public int Index {get;private set;}
         public float Shown;
         public bool Complete;
         internal int presented=-1;
-        public StoryDialogueState(IEnumerable<StoryLine> lines)
-        {this.lines=lines?.ToArray()??Array.Empty<StoryLine>();if(this.lines.Length==0)throw new ArgumentException("A dialogue needs at least one line.");}
+        public StoryDialogueState(IEnumerable<StoryLine> lines,HeroGender gender=HeroGender.Male)
+        {Gender=gender;this.lines=lines?.ToArray()??Array.Empty<StoryLine>();if(this.lines.Length==0)throw new ArgumentException("A dialogue needs at least one line.");}
         public int Count=>lines.Length;
         public StoryLine Current=>lines[Index];
         public StoryLine Previous=>Index>0?lines[Index-1]:null;
@@ -89,10 +90,10 @@ namespace Hellscript
             =>view=>Render(view,readingScale?.Invoke()??1,state,choices,heading,listener,choicesAtOnce,closable,lineName,()=>Advance(view,state),()=>Skip(view,state));
         static void Advance(ContentWindowView view,StoryDialogueState state){if(view!=null&&state.Next()){state.Current.cue?.Invoke();view.Repaint();}}
         static void Skip(ContentWindowView view,StoryDialogueState state){if(view==null)return;if(state.Skip())state.Current.cue?.Invoke();view.Repaint();}
-        static RawImage Figure(ContentWindowView view,string name,Texture2D texture,float x,float y,float height,Color tint)
+        static RawImage Figure(ContentWindowView view,string name,Texture2D texture,float x,float y,float height,Color tint,Rect uv)
         {
             float width=height*texture.width/texture.height;var art=UiLayout.Rect(name,view.Frame);UiLayout.Place(art,x,y,width,height);
-            var image=art.gameObject.AddComponent<RawImage>();image.texture=texture;image.raycastTarget=false;image.color=tint;return image;
+            var image=art.gameObject.AddComponent<RawImage>();image.texture=texture;image.raycastTarget=false;image.color=tint;image.uvRect=uv;return image;
         }
         static void Render(ContentWindowView view,float reading,StoryDialogueState state,Func<IReadOnlyList<StoryChoice>> choices,string heading,string listenerPath,
             bool choicesAtOnce,bool closable,string lineName,Action advance,Action skip)
@@ -101,9 +102,9 @@ namespace Hellscript
             var safe=UiSafeArea.Current.size/UiTheme.Scale(UiSafeArea.Current);float w=view.Width,h=view.Frame.rect.height;bool narrow=w<600;
             // A narrow screen has room for the speaker only; two figures side by side would hide the whole field.
             // The speaker on the left looks right and the listener on the right looks left, so the two face each other.
-            var speakerArt=profile!=null?Resources.Load<Texture2D>(profile.PortraitFor(true)):null;// A line the listener speaks shows that figure once, as the speaker.
+            var speakerArt=profile!=null?Resources.Load<Texture2D>(profile.PortraitFor(true,state.Gender)):null;// A line the listener speaks shows that figure once, as the speaker.
             var listenerProfile=NpcProfiles.FindByPortrait(listenerPath);
-            var listenerArt=!narrow&&listenerPath!=""&&profile?.portrait!=listenerPath?Resources.Load<Texture2D>(listenerProfile!=null?listenerProfile.PortraitFor(false):listenerPath):null;
+            var listenerArt=!narrow&&listenerPath!=""&&profile?.portrait!=listenerPath?Resources.Load<Texture2D>(listenerProfile!=null?listenerProfile.PortraitFor(false,state.Gender):listenerPath):null;
             view.Frame.GetComponent<Image>().color=Color.clear;view.Title.gameObject.SetActive(false);view.Navigation.gameObject.SetActive(false);
             var close=view.Frame.Find("content-close");
             // Landscape figures stand from the bottom of the safe area and rise far above the band, in front of it; on a narrow
@@ -115,7 +116,7 @@ namespace Hellscript
             RawImage speaker=null,silent=null;
             if(speakerArt!=null)
             {
-                speaker=Figure(view,"Dialogue portrait "+profile.id,speakerArt,narrow?0:4,figureY,figureH,Color.white);
+                speaker=Figure(view,"Dialogue portrait "+profile.id,speakerArt,narrow?0:4,figureY,figureH,Color.white,profile.PortraitUvFor(true));
                 if(!narrow)left=4+speaker.rectTransform.rect.width+14;
                 if(state.presented!=state.Index&&(state.Previous==null||state.Previous.speaker!=line.speaker)&&!ReduceMotion)speaker.gameObject.AddComponent<DialogueEntrance>();
             }
@@ -123,7 +124,7 @@ namespace Hellscript
             {
                 // The one who listens stays in shadow, the way a story scene marks who is speaking.
                 float listenerW=figureH*listenerArt.width/listenerArt.height;
-                silent=Figure(view,"Dialogue listener",listenerArt,narrow?w-listenerW:w-4-listenerW,figureY,figureH,new Color(.4f,.4f,.44f,1));
+                silent=Figure(view,"Dialogue listener",listenerArt,narrow?w-listenerW:w-4-listenerW,figureY,figureH,new Color(.4f,.4f,.44f,1),listenerProfile?.PortraitUvFor(false)??new Rect(0,0,1,1));
                 if(!narrow)right=w-4-listenerW-14;
             }
             // Order: narrow figures, band, then every control and line; landscape figures come after the band, in front of it.

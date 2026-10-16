@@ -16,6 +16,8 @@ import sys
 import tempfile
 import xml.etree.ElementTree as ET
 import wiki_resources_current
+from io import BytesIO
+import wiki_art_attestation
 from pathlib import Path
 from urllib.parse import quote, unquote, urlsplit
 
@@ -31,7 +33,7 @@ NOW = dt.datetime.now(dt.timezone(dt.timedelta(hours=9))).isoformat(timespec='se
 INPUTS = {}
 
 def read(path):
-    data = (ROOT / path).read_bytes()
+    data = wiki_resources_current.source_bytes(sys.modules[__name__], str(path))
     INPUTS[str(path)] = hashlib.sha256(data).hexdigest()
     return data.decode('utf-8-sig')
 
@@ -329,11 +331,43 @@ def build_databases():
     data.extend(wiki_operations_rewards.build(argparse.Namespace(read=read, record=record, source_ref=source_ref, db=db)))
     return data
 
+def historical_skill_atlas_rows():
+    """Keep stable historical IDs/downloads without exposing old art as a current preview."""
+    from PIL import Image
+    path=ART+'SkillAtlas.png'
+    raw=wiki_resources_current.source_bytes(sys.modules[__name__],path); INPUTS[path]=digest(raw)
+    meta=read(path+'.meta')
+    with Image.open(BytesIO(raw)) as image:
+        alpha=image.getchannel('A') if 'A' in image.getbands() else None
+        fields={'원본 경로':path,'해상도':f'{image.width} × {image.height}','색상 모드':image.mode,
+                '파일 크기 (바이트)':len(raw),'완전 투명 픽셀':alpha.histogram()[0] if alpha else 0,
+                '알파 범위':str(alpha.getextrema()) if alpha else '알파 채널 없음',
+                '사용처':'과거 액티브 18개·직업 3개·장비 3셀 기록 / Historical 18 active, 3 class and 3 equipment cells',
+                'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
+                '제작 방법':'Codex 내장 image_gen (기존 기록)',
+                '출처 확인':'기존 기록에서 생성 모델명을 확인하지 못했습니다.',
+                '사용 상태':'역사·미사용; 현재 원화나 런타임 사용 근거가 아닙니다. / Historical, unused; not current artwork or runtime evidence.'}
+    refs=[source_ref(path),source_ref(path+'.meta')]
+    rows=[record('asset-skillatlas','SkillAtlas.png','역사 이미지 원본 / Historical image source',
+                 '과거 아틀라스 원본 다운로드 / Historical atlas source download',fields,
+                 IMPL+'Asset_Provenance.md',status='역사·미사용 / Historical; unused',assetPath=path,
+                 historicalOnly=True,refs=refs,related=['asset-provenance','image-prompts'])]
+    for cell in [21,22,23]:
+        rows.append(record(f'legacy-cell-{cell}','기존 장비 표시 셀 '+str(cell-20),'미사용 참고 셀',
+            'SkillAtlas의 원래 장비 표시용 영역입니다. 현재 장비는 공통 정본 원화를 사용합니다. / Historical atlas cell; current equipment uses canonical artwork.',
+            {'셀 번호 (0부터)':cell,'현재 장비 아이콘':'공통 정본 장비 원화 / Shared canonical equipment artwork',
+             '사용 상태':'역사·미사용 / Historical; unused','원본 경로':path},
+            IMPL+'Asset_Provenance.md',status='참고 보존',historicalOnly=True,refs=list(refs)))
+    return rows
+
+
 def build_resources(databases):
     from PIL import Image
     from wiki_attendance import resource_rows as attendance_resource_rows
-    rows=[]
-    uses={'Sanctuary.png':'성소·결과 화면의 배경','SkillAtlas.png':'액티브 18개·직업 3개와 기존 장비용 3셀',
+    wiki_art_attestation._index(sys.modules[__name__])  # Reject partial imports before collecting rows.
+    wiki_art_attestation.apply_legacy_images(sys.modules[__name__],databases)
+    rows=historical_skill_atlas_rows()
+    uses={'Sanctuary.png':'성소·결과 화면의 배경',
           'EquipmentAtlas.png':'정본 그림이 없는 장비의 공통 대체 아틀라스 / Shared missing-art fallback','RiftStone.png':'균열 바닥 재질'}
     sizes={}
     for filename in sorted(uses):
@@ -419,23 +453,25 @@ def build_resources(databases):
          '제작 방법':'내장 image_gen 원본; 픽셀 변경 없음','출처 확인':'정확한 모델 버전 미확인'},
         IMPL+'Character_Selection.md',status='임시 사용',image={'file':'CharacterSelection/SelectionCourtyard.png'},assetPath=courtyard_path,
         refs=[source_ref(IMPL+'Character_Selection_Prompts.txt')],related=['character-selection','character-selection.en']))
-    storage_path=ART+'GlobalHUD/menu-storage.png'
+    storage_path=wiki_art_attestation.resolve_path(sys.modules[__name__],ART+'GlobalHUD/menu-storage.png')
     storage_raw=(ROOT/storage_path).read_bytes();INPUTS[storage_path]=digest(storage_raw)
     storage_meta=read(storage_path+'.meta')
     storage_provenance=json.loads(read(IMPL+'TownHudEvidence/provenance.json'))
+    wiki_art_attestation.expected(sys.modules[__name__],storage_path,storage_raw,storage_provenance['sha256'])
     rows.append(record('ui-menu-storage','창고 바로가기 아이콘','콘텐츠 바로가기 아이콘',
-        '사용자가 첨부한 투명 PNG를 마을·전투의 실제 창고 바로가기에 적용했습니다.',
+        '마을·전투 창고 바로가기의 현재 정본 원화입니다. 이전 첨부 근거는 별도 보존합니다. / Current canonical storage shortcut art; previous attachment provenance is retained separately.',
         {'원본 경로':storage_path,'해상도':'1254 × 1254','색상 모드':'RGBA','제작 방법':'사용자 첨부 원본을 변경 없이 복사',
          '완전 투명 픽셀':storage_provenance['fullyTransparentPixels'],'SHA-256':digest(storage_raw),
          'Unity GUID':re.search(r'^guid: (\w+)',storage_meta,re.M)[1],'사용처':'GameUI.ContentDock → ShowStorage'},
-        IMPL+'Town_Hud_Responsive.md',status='사용 중',image={'file':'GlobalHUD/menu-storage.png'},assetPath=storage_path,
+        IMPL+'Town_Hud_Responsive.md',status='사용 중',image={'file':storage_path.removeprefix(ART)},assetPath=storage_path,
         refs=[source_ref('Assets/HELLSCRIPT/Runtime/Presentation/GameUI.ContentDock.cs')],related=['town-hud-responsive','play-content-dock']))
     coin_path=ART+'GlobalHUD/currency-abyssal-coin.png'
     coin_raw=(ROOT/coin_path).read_bytes();INPUTS[coin_path]=digest(coin_raw)
     coin_meta=read(coin_path+'.meta')
     coin_source=IMPL+'PotionSlotsEvidence/abyssal-coin-source.json'
     coin_provenance=json.loads(read(coin_source))
-    if digest(coin_raw)!=coin_provenance['sha256']:raise ValueError('Abyssal Coin source image changed')
+    coin_check=wiki_art_attestation.expected(sys.modules[__name__],coin_path,coin_raw,coin_provenance['sha256']) or coin_provenance
+    if digest(coin_raw)!=coin_check['sha256']:raise ValueError('Abyssal Coin source image changed')
     rows.append(record('currency-abyssal-coin','심연 주화 / Abyssal Coin','이미지 원본',
         '기존 premium 잔액을 표시하는 인벤토리 아이콘입니다. / Inventory icon for the existing premium balance.',
         {'원본 경로':coin_path,'해상도':'1254 × 1254','색상 모드':'RGBA','SHA-256':digest(coin_raw),
@@ -451,6 +487,7 @@ def build_resources(databases):
                     '손 코어 / Hands core','발 코어 / Feet core','벨트 코어 / Belt core','목걸이 코어 / Amulet core','반지 코어 / Ring core']
     for a,name in zip(currency_manifest['assets'],currency_names):
         path=a['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=currency_qa[a['id']]
+        qc=wiki_art_attestation.expected(sys.modules[__name__],path,raw,qc['sha256']) or qc
         if digest(raw)!=qc['sha256']:raise ValueError('Currency differs from its original generated PNG: '+a['id'])
         rows.append(record('currency-'+a['id'],name,'이미지 원본',
             '강화석과 부위별 오라 색으로 구분하는 코어 아이콘입니다. / Enhancement ore and shared-form cores with distinct aura colors.',
@@ -468,6 +505,7 @@ def build_resources(databases):
     chest_qa={r['id']:r for r in json.loads(read('Docs/Art/StorageChests/alpha-validation.json'))}
     for a in chest_manifest['assets']:
         path=a['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=chest_qa[a['id']]
+        qc=wiki_art_attestation.expected(sys.modules[__name__],path,raw,qc['sha256']) or qc
         if digest(raw)!=qc['sha256']:raise ValueError('Storage chest differs from its native PNG: '+a['id'])
         opened=a['id']=='chest-open'
         rows.append(record('storage-'+a['id'],'열린 창고 상자 / Open storage chest' if opened else '닫힌 창고 상자 / Closed storage chest','이미지 원본',
@@ -486,7 +524,8 @@ def build_resources(databases):
     for asset in item_art.values():
         if asset['id'].startswith('B') or asset['path'].startswith(wiki_resources_current.RETIRED):continue
         path=asset['path'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
-        if digest(raw)!=asset['sha256']:raise ValueError('Item art native source mismatch: '+path)
+        item_check=wiki_art_attestation.expected(sys.modules[__name__],path,raw,asset['sha256']) or asset
+        if digest(raw)!=item_check['sha256']:raise ValueError('Item art native source mismatch: '+path)
         rows.append(record('item-art-'+asset['id'],asset['name'],'아이템 이미지',
             '보상과 공통 아이템 표시에 연결된 투명 이미지입니다. / Transparent artwork used by shared collectible views.',
             {'원본 경로':path,'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
@@ -502,6 +541,7 @@ def build_resources(databases):
     for npc in json.loads(read(npc_path))['profiles']:
         file=npc['portrait'].removeprefix('Art/')+'.png';path=ART+file
         raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta');qc=npc_qa[npc['id']]
+        qc=wiki_art_attestation.expected(sys.modules[__name__],path,raw,qc['sha256']) or qc
         if digest(raw)!=qc['sha256']:raise ValueError('NPC portrait differs from its native generated source: '+npc['id'])
         rows.append(record('npc-portrait-'+npc['id'],npc['name'],'이미지 원본',
             npc['food']+' 콘셉트의 NPC 상반신 초상화입니다. / Food-inspired upper-body NPC portrait.',
@@ -519,7 +559,8 @@ def build_resources(databases):
     hero_manifest=json.loads(read(hero_art))
     for hero in hero_manifest['assets']:
         path=hero['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
-        if digest(raw)!=hero['sha256']:raise ValueError('Hero portrait differs from its native generated source: '+hero['id'])
+        hero_check=wiki_art_attestation.expected(sys.modules[__name__],path,raw,hero['sha256']) or hero
+        if digest(raw)!=hero_check['sha256']:raise ValueError('Hero portrait differs from its native generated source: '+hero['id'])
         rows.append(record('dialogue-portrait-'+hero['id'],hero['id'],'이미지 원본',
             '대화에서 듣는 쪽에 어둡게 서는 주인공 상반신 초상화입니다. / Hero upper-body portrait that listens, dimmed, in dialogue scenes.',
             {'원본 경로':path,'해상도':'1024 × 1536','SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
@@ -533,11 +574,12 @@ def build_resources(databases):
     hud_use={'menu-power-saving':('절전 모드 메달 / Power saving medallion','GameUI.BattleLayout → GameController.RequestIdle'),
              'menu-escape':('탈출 메달 / Escape medallion','GameUI.BattleEscape → ConfirmEscape')}
     for icon in hud_manifest['assets']:
-        path=icon['file'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
-        if digest(raw)!=icon['sha256']:raise ValueError('HUD medallion differs from its native generated source: '+icon['id'])
+        path=wiki_art_attestation.resolve_path(sys.modules[__name__],icon['file']);raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+        current_icon=wiki_art_attestation.expected(sys.modules[__name__],path,raw,icon['sha256']) or icon
+        if digest(raw)!=current_icon['sha256']:raise ValueError('HUD medallion differs from its attested current source: '+icon['id'])
         name,use=hud_use[icon['id']]
         rows.append(record('ui-'+icon['id'],name,'이미지 원본',
-            '전투 화면 위쪽 가운데에 나란히 놓이는 버튼 메달입니다. / Button medallion side by side at the top centre of the battle screen.',
+            '전투 메뉴에 연결된 현재 정본 원화입니다. / Current canonical artwork for the battle menu.',
             {'원본 경로':path,'해상도':' × '.join(map(str,struct.unpack('>II',raw[16:24]))),'SHA-256':digest(raw),'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],
              '사용처':use,'제작 방법':'Codex 내장 image_gen; 원본 PNG와 알파 보존 / Native PNG and alpha preserved','출처 확인':hud_manifest['provenance'],
              '승인 상태':'개발용 후보, 생성 모델 출처 미확인 / Prototype candidate; model provenance unverified'},
@@ -560,6 +602,16 @@ def build_resources(databases):
                     content={'db':group,'id':item['id']},related=['native-inventory','resource-guide']))
                 continue
             image=item['image']
+            if 'cell' not in image:
+                path=item['assetPath'];raw=(ROOT/path).read_bytes();INPUTS[path]=digest(raw);meta=read(path+'.meta')
+                width,height=struct.unpack('>II',raw[16:24])
+                rows.append(record('icon-'+item['id'],item['name']+' 아이콘','스킬·직업 아이콘',
+                    '현재 캐주얼 개별 이미지 / Current individual casual artwork',
+                    {'콘텐츠 ID':item['id'],'원본 경로':path,'해상도':f'{width} × {height}','SHA-256':digest(raw),
+                     'Unity GUID':re.search(r'^guid: (\w+)',meta,re.M)[1],'등록 방식':'전체 PNG 캔버스를 개별 리소스로 사용 / Individual full PNG canvas'},
+                    wiki_art_attestation.RECEIPT,status='개발 적용 · 출시 승인 별도',image=image,assetPath=path,
+                    refs=[item['source']],content={'db':group,'id':item['id']},related=['resource-guide']))
+                continue
             cell=image['cell'];width,height=sizes[image['file']]
             rows.append(record('icon-'+item['id'],item['name']+' 아이콘','장비 아이콘' if group=='items' else '스킬·직업 아이콘',
                 f'{item["id"]} · {image["file"]} · {cell//6+1}행 {cell%6+1}열',
@@ -568,11 +620,6 @@ def build_resources(databases):
                  '등록 방식':'독립 파일이 아닌 아틀라스 영역입니다. 원본 알파를 그대로 사용합니다.'},
                  'Assets/HELLSCRIPT/Runtime/Presentation/'+('GameUI.Items.cs' if group=='items' else 'GameUI.cs'),
                  17 if group=='items' else 72,status='임시 사용',image=image,content={'db':group,'id':item['id']},related=['resource-guide']))
-    for cell in [21,22,23]:
-        rows.append(record(f'legacy-cell-{cell}','기존 장비 표시 셀 '+str(cell-20),'미사용 참고 셀',
-            'SkillAtlas의 원래 장비 표시용 영역입니다. 현재 장비는 EquipmentAtlas를 사용합니다.',
-            {'셀 번호 (0부터)':cell,'현재 장비 아이콘':'EquipmentAtlas.png / B01–B24','사용 상태':'현재 GameUI 호출에서 이 셀의 사용을 확인하지 못했습니다.'},
-            IMPL+'Asset_Provenance.md',status='참고 보존',image={'file':'SkillAtlas.png','cell':cell}))
     for ident,name,path,purpose in [
         ('unity-catalog','게임 콘텐츠 카탈로그','Assets/HELLSCRIPT/Resources/GameCatalog.asset','액티브 스킬의 직렬화된 Unity 카탈로그입니다.'),
         ('unity-material','런타임 셰이더 재질','Assets/HELLSCRIPT/Resources/Materials/RuntimeShader.mat','런타임 표현에 사용하는 Unity 재질 자산입니다.'),
@@ -684,6 +731,8 @@ def build_resources(databases):
             related=['blacksmith-unity-integration','blacksmith-unity-integration.en','blacksmith-validation']))
     rows.extend(attendance_resource_rows(sys.modules[__name__]))
     rows=wiki_resources_current.build(sys.modules[__name__],databases,rows)
+    rows=wiki_resources_current.annotate_resource_roles(rows)
+    rows=wiki_art_attestation.decorate(sys.modules[__name__],rows)
     return db('resources','리소스 DB','현재 등록된 정본 이미지·모델·필드를 표시합니다. 공유 원본과 콘텐츠 수를 구분하며 과거 첨부는 문서 이력으로 보존합니다. / Current canonical art; historical attachments remain in document history.',rows)
 
 def build_class_abilities():
@@ -1075,10 +1124,124 @@ def public_dataset(dataset):
         mirror=dict(page,versions=[{k:v for k,v in version.items() if k not in VERSION_CONTENT} for version in page['versions']])
         if len(page['versions'])>1:mirror['history']='history/'+page['id']+'.js?v='+digest(history_script(page).encode())[:16]
         pages.append(mirror)
-    return {**dataset,'pages':pages,'audience':'public','readOnly':True}
+    return {**dataset,'pages':pages,'audience':'public','readOnly':True,'assetDelivery':public_delivery(dataset)}
 
 def public_history(dataset):
     return {page['id']+'.js':history_script(page) for page in dataset['pages'] if len(page['versions'])>1}
+
+
+
+PUBLIC_DELIVERY_MANIFEST = 'tools/wiki_public_delivery.json'
+PUBLIC_RASTER_EXTENSIONS = {'.png', '.jpg', '.jpeg', '.webp', '.gif'}
+PUBLIC_LOCAL_RASTER_PREFIXES = (
+    'Prototypes/', 'Docs/Implementation/D4LegacyArchive20261013/',
+    'Docs/Design/Balance1000/', 'Docs/Design/EquipmentShop/',
+    'Docs/Design/GlobalHUD/Resources/', 'Docs/Art/Gems/',
+)
+PUBLIC_MAX_BYTES = 900_000_000
+PUBLIC_PROTOTYPE_MANIFEST = 'tools/wiki_prototype_aliases.json'
+PUBLIC_LEGACY_ROOT = 'Docs/Implementation/D4LegacyArchive20261013/'
+PUBLIC_LEGACY_CATALOG = PUBLIC_LEGACY_ROOT + 'Prototypes/SkillTree/catalog.js'
+
+
+def public_prototype_aliases(dataset):
+    if PUBLIC_LEGACY_CATALOG not in dataset['inputManifest']:
+        return []
+    config = json.loads((ROOT / PUBLIC_PROTOTYPE_MANIFEST).read_text())
+    if (not isinstance(config, dict)
+            or set(config) != {'schemaVersion', 'publicRepository', 'publicCommit', 'sourceCommit', 'files'}
+            or type(config['schemaVersion']) is not int or config['schemaVersion'] != 1
+            or config['publicRepository'] != 'dakrdong/HELLSCRIPT-Wiki'
+            or not all(isinstance(config[k], str) and re.fullmatch(r'[0-9a-f]{40}', config[k]) for k in ('publicCommit', 'sourceCommit'))
+            or not isinstance(config['files'], list)):
+        raise ValueError('Invalid prototype originals manifest')
+    catalog = (SITE / 'sources' / PUBLIC_LEGACY_CATALOG).read_text()
+    required = set(re.findall(r'\.\./\.\./(Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/[^\s\"\'<>]+\.png)', catalog))
+    if not required:
+        raise ValueError('Missing prototype icon references')
+    sources = set()
+    for entry in config['files']:
+        if (not isinstance(entry, dict) or set(entry) != {'path', 'source', 'sha256', 'bytes'}
+                or not isinstance(entry['source'], str)
+                or not re.fullmatch(r'Assets/HELLSCRIPT/Resources/Art/ClassSkillIcons/(?:Warrior/WP?|Ranger/AP?|Mage/MP?)\d{2}\.png', entry['source'])
+                or entry['path'] != PUBLIC_LEGACY_ROOT + entry['source']
+                or entry['path'] in dataset['inputManifest'] or entry['source'] in sources
+                or not isinstance(entry['sha256'], str) or not re.fullmatch(r'[0-9a-f]{64}', entry['sha256'])
+                or type(entry['bytes']) is not int or entry['bytes'] < 1):
+            raise ValueError('Invalid prototype original entry')
+        sources.add(entry['source'])
+    if sources != required:
+        raise ValueError('Prototype originals do not match catalog dependencies')
+    return [dict(entry, commit=config['sourceCommit']) for entry in config['files']]
+
+
+def public_prototype_bytes(entry):
+    # The archived prototype needs its historical art, not current replacement icons.
+    raw = subprocess.check_output(['git', '-C', str(ROOT), 'show', entry['commit'] + ':' + entry['source']])
+    if len(raw) != entry['bytes'] or digest(raw) != entry['sha256']:
+        raise ValueError('Changed preserved prototype original: ' + entry['source'])
+    return raw
+
+
+def external_public_source(path):
+    return Path(path).suffix.lower() in PUBLIC_RASTER_EXTENSIONS and not path.startswith(PUBLIC_LOCAL_RASTER_PREFIXES)
+
+
+def public_delivery(dataset):
+    config = json.loads((ROOT / PUBLIC_DELIVERY_MANIFEST).read_text())
+    if (not isinstance(config, dict) or set(config) != {'schemaVersion', 'repository', 'commit', 'externalSources'}
+            or type(config.get('schemaVersion')) is not int or config['schemaVersion'] != 1
+            or config.get('repository') != 'dakrdong/HELLSCRIPT-Wiki'
+            or not re.fullmatch(r'[0-9a-f]{40}', str(config.get('commit', '')))):
+        raise ValueError('Invalid public originals snapshot')
+    external = config.get('externalSources', {})
+    selected = {path for path in dataset['inputManifest'] if external_public_source(path)}
+    if not isinstance(external, dict) or set(external) != selected:
+        raise ValueError('Public originals inventory changed; preserve and pin a new public snapshot')
+    for path, entry in external.items():
+        wiki_resources_current.safe_relative(path)
+        original = SITE / 'sources' / path
+        if (not isinstance(entry, dict) or set(entry) != {'sha256', 'bytes'}
+                or entry.get('sha256') != dataset['inputManifest'][path]
+                or not re.fullmatch(r'[0-9a-f]{64}', str(entry.get('sha256', '')))
+                or type(entry.get('bytes')) is not int or entry['bytes'] < 1
+                or not original.is_file() or original.stat().st_size != entry['bytes']):
+            raise ValueError('Changed public original: ' + path)
+    media = wiki_resources_current.image_sources(dataset['databases'])
+    for file, path in media.items():
+        wiki_resources_current.safe_relative(file)
+        wiki_resources_current.safe_relative(path)
+        if path not in dataset['inputManifest']:
+            raise ValueError('Uncollected public preview source: ' + path)
+    return {**config, 'mediaSources': media}
+
+
+def check_public_files(dataset):
+    delivery = public_delivery(dataset)
+    target = SITE / 'public'
+    for source in dataset['inputManifest']:
+        original = SITE / 'sources' / source
+        exported = target / 'sources' / source
+        if source in delivery['externalSources']:
+            if exported.exists():
+                raise ValueError('External original retained in Pages: ' + source)
+        elif original.is_file() and (not exported.is_file() or original.read_bytes() != exported.read_bytes()):
+            raise ValueError('Stale public source: ' + source)
+    expected={p for p in dataset['inputManifest'] if (SITE/'sources'/p).is_file() and p not in delivery['externalSources']}
+    for entry in public_prototype_aliases(dataset):
+        exported=target/'sources'/entry['path']
+        if not exported.is_file() or exported.read_bytes()!=public_prototype_bytes(entry):
+            raise ValueError('Stale prototype original: '+entry['path'])
+        expected.add(entry['path'])
+    actual={p.relative_to(target/'sources').as_posix() for p in (target/'sources').rglob('*') if p.is_file()}
+    if actual != expected:
+        raise ValueError('Unexpected public source inventory')
+    if (target / 'media').exists():
+        raise ValueError('Public previews must resolve to preserved originals')
+    total = sum(file.stat().st_size for file in target.rglob('*') if file.is_file())
+    if total > PUBLIC_MAX_BYTES:
+        raise ValueError('Public export exceeds 900 MB safety limit: ' + str(total))
+    return total
 
 
 def copy_public_file(source, destination):
@@ -1103,30 +1266,37 @@ def build_public(dataset):
         (stage/'index.html').write_text(shell)
         for name in ['app.js','app.css']:copy_public_file(SITE/name,stage/name)
         shutil.copytree(SITE/'icons',stage/'icons',copy_function=copy_public_file)
-        shutil.copytree(SITE/'media',stage/'media',copy_function=copy_public_file)
         # Copy only current collected source snapshots, not stale files from prior builds.
         for source in dataset['inputManifest']:
             original=SITE/'sources'/source
-            if original.is_file():
+            if original.is_file() and source not in public['assetDelivery']['externalSources']:
                 destination=stage/'sources'/source
                 destination.parent.mkdir(parents=True,exist_ok=True)
                 copy_public_file(original,destination)
+        for entry in public_prototype_aliases(dataset):
+            destination=stage/'sources'/entry['path']
+            destination.parent.mkdir(parents=True,exist_ok=True)
+            destination.write_bytes(public_prototype_bytes(entry))
         save(stage/'catalog.json',{'generatedAt':dataset['generatedAt'],'databases':dataset['databases']})
         save(stage/'data.json',public)
         (stage/'data.js').write_text('window.HELLSCRIPT_WIKI='+json.dumps(public,ensure_ascii=False).replace('</','<\\/')+';\n')
         (stage/'history').mkdir()
         for name,script in public_history(dataset).items():(stage/'history'/name).write_text(script)
         (stage/'.wiki-generated').write_text('Generated by tools/wiki.py; publish only this directory.\n')
+        total=sum(file.stat().st_size for file in stage.rglob('*') if file.is_file())
+        if total>PUBLIC_MAX_BYTES:raise ValueError('Public export exceeds 900 MB safety limit: '+str(total))
         if target.exists():shutil.rmtree(target)
         stage.rename(target)
 
 def build():
     INPUTS.clear()
-    if hasattr(sys.modules[__name__],'_historical_art'):delattr(sys.modules[__name__],'_historical_art')
+    for cache in ('_historical_art','_current_art_receipt','_current_art_path_aliases','_current_art_manifest'):
+        if hasattr(sys.modules[__name__],cache):delattr(sys.modules[__name__],cache)
     pages=build_pages();databases=build_databases();resources=build_resources(databases)
     databases.insert(0,resources);databases.extend(build_class_abilities());databases.append(build_edict_disclosures());databases.append(build_evidence())
+    wiki_art_attestation.attach_current_skill_images(sys.modules[__name__],databases,resources['rows'])
     # Include the generator and UI in the evidence manifest, so check also finds stale tooling.
-    for path in ['tools/wiki.py','tools/wiki_resources_current.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
+    for path in ['tools/wiki.py',PUBLIC_DELIVERY_MANIFEST,PUBLIC_PROTOTYPE_MANIFEST,'tools/wiki_art_attestation.py','tools/wiki_resources_current.py','tools/wiki_retired_art_sources.json','tools/wiki_reward_boxes.py','Wiki/site/index.html','Wiki/site/app.js','Wiki/site/app.css']:read(path)
     dataset={'schemaVersion':1,'generatedAt':NOW,'pages':pages,'databases':databases,
              'archivedSources':wiki_resources_current.archived_sources(sys.modules[__name__]),
              'inputManifest':dict(sorted(INPUTS.items()))}
@@ -1201,11 +1371,7 @@ def check():
     if {f.name:f.read_text() for f in (SITE/'public/history').glob('*')}!=public_history(dataset):raise ValueError('Stale public history')
     for name in ['app.js','app.css']:
         if (SITE/name).read_bytes()!=(SITE/'public'/name).read_bytes():raise ValueError('Stale public UI: '+name)
-    for source in dataset['inputManifest']:
-        original=SITE/'sources'/source
-        if original.is_file() and (not (SITE/'public/sources'/source).is_file() or original.read_bytes()!=(SITE/'public/sources'/source).read_bytes()):raise ValueError('Stale public source: '+source)
-    for original in (SITE/'media').rglob('*'):
-        if original.is_file() and (not (SITE/'public/media'/original.relative_to(SITE/'media')).is_file() or original.read_bytes()!=(SITE/'public/media'/original.relative_to(SITE/'media')).read_bytes()):raise ValueError('Stale public media: '+original.name)
+    result['publicBytes']=check_public_files(dataset)
     result['publicPages']=len(public_dataset(dataset)['pages'])
     print(json.dumps(result,ensure_ascii=False,indent=2))
 

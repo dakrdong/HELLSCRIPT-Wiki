@@ -2,6 +2,8 @@
 
 Date: 2026-09-14 · Updated: 2026-10-03 · [한국어](Settings_Revision.md)
 
+Current presentation follows the [2026-10-15 casual conversion](Casual_Options_Window_20261015.en.md). Historical validation below describes its original state.
+
 ## Layout and controls
 
 The wide settings/help button is now a square gear icon throughout the game. The base header height decreases from 110 to 80, with town guidance and navigation space adjusted accordingly.
@@ -10,7 +12,7 @@ In landscape, settings occupy the right half of the usable screen. The actual to
 
 The initial separate character, preview camera and render texture have been removed. The existing gameplay camera temporarily changes its viewport and center while preserving the actual player’s position, facing and pose. Camera angle and apparent character size remain unchanged. Closing restores gameplay framing and UI. Before entering the town, the title retains its existing background with dimming.
 
-## Four categories
+## Five categories
 
 | Category | Controls |
 |---|---|
@@ -18,6 +20,7 @@ The initial separate character, preview camera and render texture have been remo
 | View distance | At the top of Screen, 50–150% in 5% steps using a slider, wheel or − / + buttons. 50% is closer, 100% is the default, and 150% is wider. |
 | Sound | Master, music and effects volume; mute all; effects preview; defaults |
 | Language | English / 한국어, immediately repainting the current screen |
+| Account | Copy support UID, Google linking and local-progress/telemetry notices. Return to title moves here during the tutorial. |
 | Character | Warrior → Mage → Ranger; the selected character cannot be selected again; all hero buttons are disabled during a rift hunt. Return to title is available in the same tab |
 
 Ratios apply immediately. Desktop windows resize to fit the monitor; mobile requests the corresponding orientation and fits the game into the selected ratio. Unused space is black. Fit display uses the current window or device screen.

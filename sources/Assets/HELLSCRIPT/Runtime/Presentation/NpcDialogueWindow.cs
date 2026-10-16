@@ -8,7 +8,7 @@ namespace Hellscript
     // at once. The shared shell owns the bottom dock, safe area and input; the story dialogue draws inside it.
     public static class NpcDialogueWindow
     {
-        public static ContentWindowView Open(Transform parent,NpcProfile profile,Func<float> readingScale,Action<int> service,Action closed,string listener="")
+        public static ContentWindowView Open(Transform parent,NpcProfile profile,Func<float> readingScale,Action<int> service,Action closed,string listener="",HeroGender gender=HeroGender.Male)
         {
             ContentWindowView window=null;
             bool merchant=profile.Station==TownStation.Merchant||profile.Station==TownStation.Gambler;
@@ -19,7 +19,7 @@ namespace Hellscript
                 if(merchant)choices.Add(new StoryChoice("npc-sell","판매",()=>{window.Close();service?.Invoke(1);}));
             }
             choices.Add(new StoryChoice("npc-goodbye","대화를 마친다",()=>window.Close()));
-            var greeting=new StoryDialogueState(new[]{new StoryLine(profile.id,profile.greeting)});
+            var greeting=new StoryDialogueState(new[]{new StoryLine(profile.id,profile.greeting)},gender);
             window=ContentWindowView.Open(parent,profile.name,EquipmentViewSource.Catalog,readingScale,
                 StoryDialogueWindow.Scene(greeting,readingScale,()=>choices,listener:listener,choicesAtOnce:true,closable:true,lineName:"NPC greeting"),
                 closed,maximumSize:StoryDialogueWindow.Size,bottomDock:true);

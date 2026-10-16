@@ -14,7 +14,7 @@ namespace Hellscript
         GameController game;
         RectTransform root,shell,headerApron,footerApron,content,header,footer,overlay,toastFrame;
         Font font;
-        Texture2D background,atlas,equipmentAtlas;
+        Texture2D background,equipmentAtlas;
         Text status,hpText,resourceText,timerText,actionText,meterText,toast,headerTitle,headerSubtitle;
         Image hpFill,resourceFill,meterFill;
         List<Text> skillLabels=new List<Text>();
@@ -37,7 +37,7 @@ namespace Hellscript
             game=controller;
             windowHost=gameObject.AddComponent<ContentWindowHost>();windowHost.Initialize(()=>game.Active?game.Combat.State:null);
             font=CreateFont();
-            background=Resources.Load<Texture2D>("Art/Sanctuary");atlas=Resources.Load<Texture2D>("Art/SkillAtlas");
+            background=Resources.Load<Texture2D>("Art/Sanctuary");
             equipmentAtlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");
             var canvasObject=new GameObject("HELLSCRIPT UI",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
             canvasObject.transform.SetParent(transform,false);var canvas=canvasObject.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=100;canvas.pixelPerfect=true;
@@ -166,8 +166,10 @@ namespace Hellscript
         {
             if(index>=0&&index<18)
             {var skill=SkillIconView.Create(parent,false);Place(skill.Rect,x,y,size,size);skill.SetSprite(SkillIconAssets.Active(index));return;}
-            var r=Rect("Generated art",parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();raw.texture=atlas;
-            int col=index%6,row=index/6;raw.uvRect=new Rect(col/6f,1-(row+1)/4f,1/6f,1/4f);raw.raycastTarget=false;
+            if(index<18||index>20)return;
+            string hero=index==18?"warrior":index==19?"ranger":"mage";
+            var r=Rect("Class crest",parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();
+            raw.texture=Resources.Load<Texture2D>("Art/CharacterPlaza/crest_"+hero);raw.raycastTarget=false;
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {

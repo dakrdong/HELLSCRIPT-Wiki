@@ -33,6 +33,7 @@ namespace Hellscript
         void Glyph(Transform parent,string symbol,float x,float y,float size,Color color)
         {
             var r=UiLayout.Rect("Daily glyph "+symbol,parent);UiLayout.Place(r,x,y,size,size);
+            if(AcceptedSemanticArt.TryDraw(r,"daily/"+symbol,color.a))return;
             var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=color;glyph.raycastTarget=false;
         }
         void Bar(Transform parent,string name,float x,float y,float w,float fraction,Color color)

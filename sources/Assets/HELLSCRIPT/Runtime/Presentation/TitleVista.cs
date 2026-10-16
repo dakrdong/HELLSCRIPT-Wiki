@@ -24,9 +24,9 @@ namespace Hellscript
         // The rift burst sound starts at ImpactAt so its loudest moment, about 0.3 s in, meets the light.
         public const float Peak=2.15f,End=2.75f,ImpactAt=1.85f;
         const float FarZoom=2.6f,SkipGuard=.25f;
-        TitleSession session;RectTransform root;CanvasGroup layers;
+        RectTransform root;CanvasGroup layers;
         RawImage far,mid,close,left,right;Image flash;Material farLight,closeLight,cliffs;
-        Texture2D wide,tall;BaseInputModule blockedInput;Vector2 laidOut=-Vector2.one;float flight=-1;
+        Texture2D wide,tall;BaseInputModule blockedInput;float flight=-1;
         // Button panel top and width as fractions of the vista, measured while the title is up and kept for the flight.
         RectTransform controls,logo;float homeTop,homeWidth;Vector4 logoShade;static readonly Vector3[] Corners=new Vector3[4];
         const float ShadeStrength=.5f;
@@ -42,7 +42,7 @@ namespace Hellscript
         public float FlightTime {get=>flight;set{if(flight<0)return;float before=flight;flight=Mathf.Clamp(value,0,End-.01f);Cue(before);Layout();}}
         public void Initialize(TitleSession state)
         {
-            session=state;root=(RectTransform)transform;
+            root=(RectTransform)transform;
             var group=Rect("Painted layers",root);layers=group.gameObject.AddComponent<CanvasGroup>();layers.blocksRaycasts=false;
             wide=Resources.Load<Texture2D>(Folder+"vista_far_landscape");tall=Resources.Load<Texture2D>(Folder+"vista_far_portrait");
             var shader=Resources.Load<Shader>("Art/Title/TitleVista");
@@ -91,8 +91,7 @@ namespace Hellscript
                 flight+=dt;Clock+=dt;Cue(before);
                 if(flight>=End){Destroy(root.parent.gameObject);return;}
             }
-            else if(session==null||session.MotionEnabled)Clock+=dt;
-            else if(root.rect.size==laidOut&&!ControlsMoved())return;
+            else Clock+=dt; // Title motion stays on independently of legacy session flags.
             Layout();
         }
         void Cue(float before){if(before<ImpactAt&&flight>=ImpactAt)Impact?.Invoke();}
@@ -100,11 +99,6 @@ namespace Hellscript
         {
             var pointer=Pointer.current;if(pointer!=null&&pointer.press.wasPressedThisFrame)return true;
             var keys=Keyboard.current;return keys!=null&&keys.anyKey.wasPressedThisFrame;
-        }
-        bool ControlsMoved()
-        {
-            if(controls==null)return false;float top=homeTop,width=homeWidth;Measure(root.rect.size);
-            return top!=homeTop||width!=homeWidth;
         }
         void Measure(Vector2 size)
         {
@@ -118,7 +112,15 @@ namespace Hellscript
         static float Ramp(float from,float to,float x)=>Mathf.SmoothStep(0,1,Mathf.InverseLerp(from,to,x));
         void Layout()
         {
-            var size=root.rect.size;if(size.x<1||size.y<1)return;laidOut=size;Measure(size);
+            // Idle title art uses the selected aspect frame, just like the controls. The flight
+            // already owns a framed overlay after Depart(); do not change its reparented anchors.
+            if(flight<0)
+            {
+                var frame=UiSafeArea.FrameNormalized;
+                if(root.anchorMin!=frame.min||root.anchorMax!=frame.max||root.offsetMin!=Vector2.zero||root.offsetMax!=Vector2.zero)
+                {root.anchorMin=frame.min;root.anchorMax=frame.max;root.offsetMin=root.offsetMax=Vector2.zero;}
+            }
+            var size=root.rect.size;if(size.x<1||size.y<1)return;Measure(size);
             bool portrait=size.y>size.x;var focus=Vector2.Scale(size,portrait?TallFocus:WideFocus);
             float t=Mathf.Max(0,flight),travel=Mathf.Clamp01(t/2f),part=Mathf.Clamp01(t/1.05f);part*=part;
             float zoom=Mathf.Pow(FarZoom,travel*travel*(3-2*travel))*(1+.012f*(.5f-.5f*Mathf.Cos(Clock*.15f)));

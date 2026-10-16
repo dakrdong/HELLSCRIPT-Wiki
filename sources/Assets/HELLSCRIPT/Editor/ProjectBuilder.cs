@@ -30,7 +30,7 @@ namespace Hellscript.Editor
             var shader=Shader.Find("Universal Render Pipeline/Lit");if(shader==null)throw new InvalidOperationException("URP Lit shader is unavailable.");
             const string matPath="Assets/HELLSCRIPT/Resources/Materials/RuntimeShader.mat";
             if(AssetDatabase.LoadAssetAtPath<Material>(matPath)==null)AssetDatabase.CreateAsset(new Material(shader){name="Runtime Shader Reference"},matPath);
-            foreach(string image in new[]{"Sanctuary","SkillAtlas","EquipmentAtlas"})
+            foreach(string image in new[]{"Sanctuary","EquipmentAtlas"})
             {
                 var importer=(TextureImporter)AssetImporter.GetAtPath("Assets/HELLSCRIPT/Resources/Art/"+image+".png");
                 if(importer!=null&&(importer.mipmapEnabled||importer.maxTextureSize!=2048))

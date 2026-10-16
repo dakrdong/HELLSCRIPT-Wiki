@@ -3,6 +3,60 @@
   const D=window.HELLSCRIPT_WIKI, $=s=>document.querySelector(s);
   const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
   const PUBLIC=D.audience==='public';
+  // Public originals stay pinned to one verified snapshot; retained paths stay local.
+  function safeAssetPath(value){
+    if(typeof value!=='string'||!value||value.startsWith('/')||/^[a-z][a-z0-9+.-]*:/i.test(value)||/[\\\u0000-\u001f\u007f]/.test(value)||value.split('/').some(part=>!part||part==='.'||part==='..'))throw new Error('Invalid wiki asset path');
+    return value;
+  }
+  const owns=(object,key)=>Object.prototype.hasOwnProperty.call(object,key);
+  const encodeAssetPath=value=>safeAssetPath(value).split('/').map(part=>encodeURIComponent(part).replace(/[!'()*]/g,char=>'%'+char.charCodeAt(0).toString(16).toUpperCase())).join('/');
+  function sourcePath(value){
+    safeAssetPath(value);
+    if(!D.inputManifest||!owns(D.inputManifest,value))throw new Error('Unknown wiki source: '+value);
+    return value;
+  }
+  function readAssetDelivery(){
+    if(D.assetDelivery===undefined)return null;
+    const delivery=D.assetDelivery,object=value=>value!==null&&typeof value==='object'&&!Array.isArray(value);
+    const keys=['schemaVersion','repository','commit','externalSources','mediaSources'];
+    if(!PUBLIC||!object(delivery)||Object.keys(delivery).length!==keys.length||!keys.every(key=>owns(delivery,key))||delivery.schemaVersion!==1||delivery.repository!=='dakrdong/HELLSCRIPT-Wiki'||typeof delivery.commit!=='string'||!/^[0-9a-f]{40}$/.test(delivery.commit)||!object(delivery.externalSources)||!object(delivery.mediaSources))throw new Error('Invalid wiki asset-delivery manifest');
+    for(const [path,entry] of Object.entries(delivery.externalSources)){
+      sourcePath(path);
+      if(!object(entry)||Object.keys(entry).length!==2||!owns(entry,'sha256')||!owns(entry,'bytes')||typeof entry.sha256!=='string'||!/^[0-9a-f]{64}$/.test(entry.sha256)||entry.sha256!==D.inputManifest[path]||!Number.isSafeInteger(entry.bytes)||entry.bytes<=0)throw new Error('Invalid wiki external source: '+path);
+    }
+    for(const [file,path] of Object.entries(delivery.mediaSources)){safeAssetPath(file);sourcePath(path)}
+    return delivery;
+  }
+  const assetDelivery=readAssetDelivery();
+  function resolveSourceUrl(path){
+    sourcePath(path);
+    const relative='sources/'+encodeAssetPath(path);
+    return assetDelivery&&owns(assetDelivery.externalSources,path)?'https://raw.githubusercontent.com/dakrdong/HELLSCRIPT-Wiki/'+assetDelivery.commit+'/'+relative:relative;
+  }
+  function resolveMediaUrl(file){
+    safeAssetPath(file);
+    if(!assetDelivery)return 'media/'+encodeAssetPath(file);
+    if(!owns(assetDelivery.mediaSources,file))throw new Error('Unknown wiki media: '+file);
+    return resolveSourceUrl(assetDelivery.mediaSources[file]);
+  }
+  function resolveAssetLink(value){
+    const match=/^(sources|media)\/([^?#]*)([?#].*)?$/.exec(value);
+    if(!match)return value;
+    const path=decodeURIComponent(match[2]),suffix=match[3]||'';
+    return (match[1]==='sources'?resolveSourceUrl(path):resolveMediaUrl(path))+suffix;
+  }
+  function resolveAssetMarkup(markup){
+    if(!assetDelivery)return markup;
+    const template=document.createElement('template');template.innerHTML=markup;
+    for(const element of template.content.querySelectorAll('[href],[src]')){
+      for(const attribute of ['href','src']){
+        if(!element.hasAttribute(attribute))continue;
+        const value=element.getAttribute(attribute);
+        if(/^(sources|media)\//.test(value))element.setAttribute(attribute,resolveAssetLink(value));
+      }
+    }
+    return template.innerHTML;
+  }
   if(PUBLIC)document.body.classList.add('public-wiki');
   const pageLink=p=>`#/page/${p.id}`;
   function badge(s){return `<span class="badge ${/현재|추출|등록/.test(s)?'current':/대기|후속|임시|검토/.test(s)?'pending':''}">${esc(s)}</span>`}
@@ -61,7 +115,7 @@
     if(params.get('view')==='history')return compare(p,params);
     const version=params.get('version');const v=version?(p.versions||[]).find(v=>String(v.revision)===version):null;if(version&&!v)return missing();const content=v?full(p,v):p;if(!content)return loadHistory(p,()=>page(id,params));
     document.title=p.title+' · HELLSCRIPT 위키';
-    $('#main').innerHTML=`<div class="page-heading document-heading"><div><p class="eyebrow">${esc(p.category)}</p><h1>${esc(p.title)}</h1><div class="meta">${badge(p.status||'원문 기록')}<span>최초 등록 ${esc(dateText(stamp(p,'createdAt')))}</span><span>마지막 변경 ${esc(dateText(content.capturedAt||stamp(p)))}</span><span>v${String(content.revision).padStart(3,'0')}</span>${`<a class="button" href="sources/${esc(p.source)}" download>원문 내려받기</a>`}</div></div></div>${tagLinks(p)}${p.notice?`<div class="notice">${esc(p.notice)}</div>`:''}<nav class="toc" aria-label="문서 목차">${(content.headings||[]).map(h=>`<a href="#/page/${p.id}?${version?'version='+version+'&':''}section=${encodeURIComponent(h.id)}">${esc(h.title)}</a>`).join('')}</nav><article class="prose">${content.html||'<pre>'+esc(content.body)+'</pre>'}</article>${`<div class="source">원본: ${esc(p.source)}<br>문서 해시: ${esc(content.hash||'')}</div><h2>보존 이력</h2><div class="actions">${(p.versions||[p]).slice().reverse().map(v=>`<a class="button" href="#/page/${p.id}?version=${v.revision}">v${String(v.revision).padStart(3,'0')} · ${esc(v.date||p.date)}</a>`).join('')}<a class="button" href="${pageLink(p)}?view=history">이력 비교</a></div>`}${connections(p)}`;
+    $('#main').innerHTML=`<div class="page-heading document-heading"><div><p class="eyebrow">${esc(p.category)}</p><h1>${esc(p.title)}</h1><div class="meta">${badge(p.status||'원문 기록')}<span>최초 등록 ${esc(dateText(stamp(p,'createdAt')))}</span><span>마지막 변경 ${esc(dateText(content.capturedAt||stamp(p)))}</span><span>v${String(content.revision).padStart(3,'0')}</span>${`<a class="button" href="${esc(resolveSourceUrl(p.source))}" download>원문 내려받기</a>`}</div></div></div>${tagLinks(p)}${p.notice?`<div class="notice">${esc(p.notice)}</div>`:''}<nav class="toc" aria-label="문서 목차">${(content.headings||[]).map(h=>`<a href="#/page/${p.id}?${version?'version='+version+'&':''}section=${encodeURIComponent(h.id)}">${esc(h.title)}</a>`).join('')}</nav><article class="prose">${content.html?resolveAssetMarkup(content.html):'<pre>'+esc(content.body)+'</pre>'}</article>${`<div class="source">원본: ${esc(p.source)}<br>문서 해시: ${esc(content.hash||'')}</div><h2>보존 이력</h2><div class="actions">${(p.versions||[p]).slice().reverse().map(v=>`<a class="button" href="#/page/${p.id}?version=${v.revision}">v${String(v.revision).padStart(3,'0')} · ${esc(v.date||p.date)}</a>`).join('')}<a class="button" href="${pageLink(p)}?view=history">이력 비교</a></div>`}${connections(p)}`;
     const section=params.get('section');if(section)document.getElementById(section)?.scrollIntoView();
   }
   function connections(p){
@@ -99,9 +153,9 @@
   function missing(){$('#main').innerHTML='<h1>항목을 찾을 수 없습니다.</h1><p><a href="#/tree">전체 위키 트리로 돌아가기</a></p>'}
   function visual(row,large=false){
     const img=row.image;if(!img)return `<div class="preview"><span class="badge">${esc(row.status==='제작 대기'?'제작 대기':row.category)}</span></div>`;
-    const file='media/'+encodeURIComponent(img.file);
+    const file=resolveMediaUrl(img.file);
     if(img.cell!==undefined){const col=img.cell%6,line=Math.floor(img.cell/6);return `<span role="img" aria-label="${esc(row.name)} 아틀라스 영역" class="${large?'atlas':'thumb'}" style="background-image:url('${file}');background-size:600% 400%;background-position:${col*20}% ${line*100/3}%"></span>`}
-    return `<img src="${file}" alt="${esc(row.name)}" loading="lazy">`;
+    return `<img src="${esc(file)}" alt="${esc(row.name)}" loading="lazy">`;
   }
   function value(v){return v===true?'예':v===false?'아니요':v===null||v===undefined?'미기재':Array.isArray(v)?v.join(' · '):String(v)}
   function related(row){return (row.related||[]).map(id=>{const p=D.pages.find(x=>x.id===id);return p?`<a class="button" href="${pageLink(p)}">${esc(p.shortTitle||p.title)}</a>`:''}).join('')}
@@ -112,7 +166,7 @@
       ${row.image?`<div class="preview">${visual(row,true)}</div>`:''}
       <dl>${Object.entries(row.fields).map(([k,v])=>`<dt>${esc(k)}</dt><dd>${esc(value(v))}</dd>`).join('')}</dl>
       <h3>연결된 자료</h3><div class="actions">${row.content?`<a class="button" href="#/db/${row.content.db}?record=${encodeURIComponent(row.content.id)}">콘텐츠 ${esc(row.content.id)}</a>`:''}${row.resource?`<a class="button" href="#/db/resources?record=${encodeURIComponent(row.resource)}">연결 리소스</a>`:''}${related(row)}</div>
-      <h3>원본 근거</h3>${refs.map(s=>`<p class="source"><a href="sources/${s.path.split('/').map(encodeURIComponent).join('/')}" target="_blank" rel="noopener">${esc(s.path)}</a><br>${s.line}행부터 · 수집한 원본 사본</p>`).join('')}`;
+      <h3>원본 근거</h3>${refs.map(s=>`<p class="source"><a href="${esc(resolveSourceUrl(s.path))}" target="_blank" rel="noopener">${esc(s.path)}</a><br>${s.line}행부터 · 수집한 원본 사본</p>`).join('')}`;
     popup.setAttribute('aria-label',row.name+' 상세');if(!popup.open)popup.showModal();popup.scrollTop=0;
   }
   function database(id,params){
