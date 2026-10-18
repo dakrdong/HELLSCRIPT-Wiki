@@ -14,7 +14,9 @@ namespace Hellscript
         void AddContentDock(float top,float size)
         {
             const float gap=6;
-            var dock=Rect("Content dock",header);Right(dock,12,top,size,size);
+            // Keep world shortcuts above the draggable battle graphs and below quick editors.
+            var dock=ContentWindowView.FixedOverlay(header,"Content dock",106);Right(dock,12,top,size,size);
+            dock.gameObject.AddComponent<GraphicRaycaster>();
             var view=dock.gameObject.AddComponent<ContentDockView>();contentDock=view;
             var items=Rect("Shortcuts",dock);Place(items,0,0,size,0);items.gameObject.AddComponent<RectMask2D>();
             int count=0;
@@ -25,10 +27,11 @@ namespace Hellscript
                 else{var label=b.GetComponentInChildren<Text>();label.fontSize=Mathf.RoundToInt(size*.3f);label.color=gold;}
                 return b;
             }
-            // The prologue keeps the Hunt Edict and codex; the other shortcuts arrive in town.
+            // Tutorial lessons use the battle HUD; top shortcuts arrive in town.
             bool prologue=game.TutorialActive;
             if(!prologue)Add("캐릭터","menu-character",ShowPlayInventory);
-            contentDockEdict=Add("사냥 칙령","menu-hunt-edict",ShowEdictEditor);
+            contentDockEdict=Add("사냥 칙령","menu-hunt-edict",ToggleEdictQuick);
+            if(!prologue)globalHud.BindEdictAnchor((RectTransform)contentDockEdict.transform);
             Add("몬스터 도감","menu-monster-codex",ShowMonsterCodex);
             contentDockRune=null;
             if(!prologue)
@@ -42,8 +45,8 @@ namespace Hellscript
             }
             var toggle=Button(dock,"콘텐츠 메뉴",()=>{view.Set(!view.Open);contentDockOpen=view.Open;},Color.clear);toggle.targetGraphic=Emblem(toggle,"menu-toggle");
             view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap));view.Snap(contentDockOpen||prologue);
-            // Before the scroll arrives the dock is laid out but unseen, so the emblem has a place to fly to.
-            if(prologue&&game.Combat.State.tutorialPhase==ProloguePhase.Surrounded){var hidden=dock.gameObject.AddComponent<CanvasGroup>();hidden.alpha=0;hidden.blocksRaycasts=false;}
+            // Keep references available for reflow without exposing shortcuts during the tutorial.
+            dock.gameObject.SetActive(!prologue);
         }
         // Gear and shortcuts keep their approved base size when the portrait slot row grows.
         float DockIconSize(float hudTop,bool minimumInPixels)
@@ -65,7 +68,7 @@ namespace Hellscript
             var border=button.GetComponent<UIRectBorder>();if(border!=null)border.enabled=false;
             button.GetComponentInChildren<Text>().text="";
             var art=Rect("Emblem",button.transform);Stretch(art);var image=art.gameObject.AddComponent<Image>();
-            image.sprite=sprite;image.preserveAspect=true;return image;
+            image.sprite=sprite;image.preserveAspect=true;CasualBattleHudStyle.IconOutline(image);return image;
         }
     }
     // Opening: shortcuts unfold below the fixed arrow, which turns over to point up.

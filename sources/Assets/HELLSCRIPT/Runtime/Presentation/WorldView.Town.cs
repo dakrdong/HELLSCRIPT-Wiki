@@ -29,8 +29,8 @@ namespace Hellscript
                 if(s.id==TownStation.Training)BuildTrainingYard(layout,s);
                 if(s.id==TownStation.RiftKeeper)BuildTownPortal(layout,s.position);
                 var attendant=CreateTownAttendant(s);attendant.transform.SetParent(world.transform,false);attendant.transform.position=TownPoint(s.NpcPosition);attendant.transform.rotation=TownRotation;
-                // The rune master works beside an altar. It stands level with the NPC, in front of the porch awning (behind that line the awning covers its top).
-                if(s.id==TownStation.RuneMaster)SpawnTownModel(TownArt+"Prop_RuneAltar",layout,new Vector3(s.position.x-4.5f,0,s.position.y-.4f));
+                // The rune master works beside an altar on the workshop forecourt, at the attendant's left.
+                if(s.id==TownStation.RuneMaster)SpawnTownModel(TownArt+"Prop_RuneAltar",layout,new Vector3(s.position.x-3.5f,0,s.position.y-.2f));
             }
             if(game.TownPortalAvailable)townReturnPortal=BuildTownPortal(layout,TownLayout.ReturnPortalPosition,true);
             for(int i=0;i<TownLayout.Residents.Length;i++)
@@ -78,8 +78,8 @@ namespace Hellscript
             {
                 void AddTarget(Vector2 point)
                 {
-                    var p=viewCamera.WorldToViewportPoint(TownPoint(point,s.id==TownStation.AspectStone?3.5f:1.6f));if(p.z<=0||p.x<0||p.x>1||p.y<0||p.y>1)return;
-                    var pixel=viewCamera.WorldToScreenPoint(TownPoint(point,s.id==TownStation.AspectStone?3.5f:1.6f));projected.Add((s.id,new Vector2(pixel.x,pixel.y)));
+                    var p=viewCamera.WorldToViewportPoint(TownPoint(point,s.id==TownStation.AspectStone?AspectStoneHeight*.5f:1.6f));if(p.z<=0||p.x<0||p.x>1||p.y<0||p.y>1)return;
+                    var pixel=viewCamera.WorldToScreenPoint(TownPoint(point,s.id==TownStation.AspectStone?AspectStoneHeight*.5f:1.6f));projected.Add((s.id,new Vector2(pixel.x,pixel.y)));
                 }
                 AddTarget(s.NpcPosition);if(s.id==TownStation.RiftKeeper)AddTarget(s.position);
             }
@@ -93,7 +93,7 @@ namespace Hellscript
             var p=viewCamera.WorldToScreenPoint(TownPoint(TownLayout.ReturnPortalPosition,2.7f));
             return p.z>0&&UiSafeArea.Frame.Contains(p)&&Vector2.Distance(screen,p)<=Mathf.Max(32,Screen.height*.045f);
         }
-        public Vector3 TownStationScreen(TownStation station)=>station==TownStation.AspectStone?viewCamera.WorldToScreenPoint(TownPoint(TownLayout.Station(station).building.center,7.5f)):TownNpcScreen(TownLayout.Station(station).NpcPosition);
+        public Vector3 TownStationScreen(TownStation station)=>station==TownStation.AspectStone?viewCamera.WorldToScreenPoint(TownPoint(TownLayout.Station(station).building.center,AspectStoneHeight+.4f)):TownNpcScreen(TownLayout.Station(station).NpcPosition);
         public void PresentTown(TownWalk walk,float dt)
         {
             if(world==null||hero==null)return;elapsed+=dt;hero.transform.position=TownPoint(walk.Position);
@@ -188,25 +188,26 @@ namespace Hellscript
                     branch.transform.localScale=new Vector3(r*(1-layer*.22f),h*.55f,r*(1-layer*.22f));branch.transform.localRotation=Quaternion.Euler(R(-4,4),R(0,360),R(-4,4));
                 }
             }
-            // Rocks and scrub: placed by BuildTownEnvironment (WorldView.TownEnvironment.cs).
-            for(int n=0;n<8;n++)TownLantern(layout,new Vector3(-49+n*14,0,n%2==0?5:-5));
-            // A low stone well and supply cart leave the 110 m main road unobstructed.
-            if(SpawnTownModel(TownArt+"Prop_StoneWell",layout,new Vector3(-7,0,7))==null)
+            // Lanterns, rocks, scrub and trees: placed by BuildTownEnvironment (WorldView.TownEnvironment.cs).
+            // The stone well stands on its own paved round between the weapon stall and the spine (a TownLayout obstacle).
+            var well=new Vector3(TownScenery.Well.x,0,TownScenery.Well.y);
+            if(SpawnTownModel(TownArt+"Prop_StoneWell",layout,well)==null)
             {
-                Shape("Well rim",PrimitiveType.Cylinder,layout,new Vector3(-7,.6f,7),new Vector3(3.3f,.6f,3.3f),stone);
-                Shape("Well water",PrimitiveType.Cylinder,layout,new Vector3(-7,1.21f,7),new Vector3(2.5f,.01f,2.5f),TownMat("Well water",.08f,.18f,.2f));
-                for(int side=-1;side<=1;side+=2)Block(layout,"Well upright",new Vector3(-7+side*1.5f,2.2f,7),new Vector3(.25f,3.2f,.25f),wood);
-                Block(layout,"Well crossbeam",new Vector3(-7,3.65f,7),new Vector3(3.6f,.3f,.3f),wood);
+                Shape("Well rim",PrimitiveType.Cylinder,layout,well+Vector3.up*.6f,new Vector3(3.3f,.6f,3.3f),stone);
+                Shape("Well water",PrimitiveType.Cylinder,layout,well+Vector3.up*1.21f,new Vector3(2.5f,.01f,2.5f),TownMat("Well water",.08f,.18f,.2f));
+                for(int side=-1;side<=1;side+=2)Block(layout,"Well upright",well+new Vector3(side*1.5f,2.2f,0),new Vector3(.25f,3.2f,.25f),wood);
+                Block(layout,"Well crossbeam",well+Vector3.up*3.65f,new Vector3(3.6f,.3f,.3f),wood);
             }
             BatchTownGeometry(layout);
         }
         void BuildTownHouse(Transform layout,TownStationDefinition s)
         {
             var house=new GameObject("Building "+s.id).transform;house.SetParent(layout,false);house.localPosition=new Vector3(s.building.center.x,0,s.building.center.y);
-            if(SpawnTownModel(TownBuildingArt(s.id),house,Vector3.zero)!=null)
+            var model=SpawnTownModel(TownBuildingArt(s.id),house,Vector3.zero);
+            if(model!=null)
             {
-                // The model brings its own doorway, forge, crates and awning; only the lantern post at the porch corner and the fade remain.
-                TownLantern(house,new Vector3(s.building.width/2-1,0,-s.building.height/2-1.2f));
+                // The model brings its own doorway, forge, crates and awning, shown at the layout's scale; the street lanterns light it.
+                model.transform.localScale=Vector3.one*s.scale;
                 townBuildings.Add(new TownBuildingFade(house.GetComponentsInChildren<Renderer>(),Resources.Load<Shader>("TownFade")));
                 return;
             }
@@ -319,20 +320,23 @@ namespace Hellscript
         void BuildTrainingYard(Transform p,TownStationDefinition s)
         {
             var wood=TownMat("Fence timber",.58f,.35f,.17f);var straw=TownMat("Straw",.78f,.64f,.34f);
-            // The yard floor is trampled earth in the ground mask now; the old sand slab is kept just under the ground.
-            Block(p,"Training sand",new Vector3(39,-.25f,22),new Vector3(20,.1f,20),TownMat("Sand",.4f,.36f,.26f));
+            // The yard floor is sand in the ground mask; four straw dummies stand in a row across its back half, facing the camera.
+            var yard=TownScenery.TrainingYard;float row=yard.yMin+yard.height*.6f;
             for(int n=0;n<4;n++)
             {
-                float x=32+n*4.4f;if(SpawnTownModel(TownArt+"Prop_TrainingDummy",p,new Vector3(x,0,23))!=null)continue;
-                Shape("Dummy post",PrimitiveType.Cylinder,p,new Vector3(x,1.2f,23),new Vector3(.25f,1.2f,.25f),wood);
-                Shape("Training dummy",PrimitiveType.Capsule,p,new Vector3(x,2,23),new Vector3(1.1f,.7f,.7f),straw);
-                Shape("Dummy head",PrimitiveType.Sphere,p,new Vector3(x,3,23),Vector3.one*.7f,straw);
-                Block(p,"Dummy arms",new Vector3(x,2.3f,23),new Vector3(2.8f,.2f,.2f),wood);
-                for(int ring=0;ring<3;ring++){var r=Ring(p,new Vector3(x,2,22.58f),.18f+ring*.15f,ring%2==0?red:trim,.05f);r.transform.localRotation=Quaternion.Euler(90,0,0);}
+                float x=yard.xMin+yard.width*(n+.7f)/4.4f;if(SpawnTownModel(TownArt+"Prop_TrainingDummy",p,new Vector3(x,0,row))!=null)continue;
+                Shape("Dummy post",PrimitiveType.Cylinder,p,new Vector3(x,1.2f,row),new Vector3(.25f,1.2f,.25f),wood);
+                Shape("Training dummy",PrimitiveType.Capsule,p,new Vector3(x,2,row),new Vector3(1.1f,.7f,.7f),straw);
+                Shape("Dummy head",PrimitiveType.Sphere,p,new Vector3(x,3,row),Vector3.one*.7f,straw);
+                Block(p,"Dummy arms",new Vector3(x,2.3f,row),new Vector3(2.8f,.2f,.2f),wood);
+                for(int ring=0;ring<3;ring++){var r=Ring(p,new Vector3(x,2,row-.42f),.18f+ring*.15f,ring%2==0?red:trim,.05f);r.transform.localRotation=Quaternion.Euler(90,0,0);}
             }
+            // Fenced on three sides, with an entrance gap in the front fence where the path from the street comes in.
             var fence=new GameObject("Training yard fence").transform;fence.SetParent(p,false);
-            TownFence(fence,new Vector2(28,11),new Vector2(28,34));TownFence(fence,new Vector2(28,34),new Vector2(50,34));TownFence(fence,new Vector2(50,34),new Vector2(50,11));BatchTownGeometry(fence);
-            TownLantern(p,new Vector3(29,0,12));TownLantern(p,new Vector3(49,0,12));
+            TownFence(fence,new Vector2(yard.xMin,yard.yMin),new Vector2(yard.xMin,yard.yMax));TownFence(fence,new Vector2(yard.xMin,yard.yMax),new Vector2(yard.xMax,yard.yMax));
+            TownFence(fence,new Vector2(yard.xMax,yard.yMax),new Vector2(yard.xMax,yard.yMin));
+            TownFence(fence,new Vector2(yard.xMin,yard.yMin),new Vector2(TownScenery.YardGateLeft,yard.yMin));TownFence(fence,new Vector2(TownScenery.YardGateRight,yard.yMin),new Vector2(yard.xMax,yard.yMin));
+            BatchTownGeometry(fence);
         }
         Transform BuildTownPortal(Transform p,Vector2 at,bool returning=false)
         {

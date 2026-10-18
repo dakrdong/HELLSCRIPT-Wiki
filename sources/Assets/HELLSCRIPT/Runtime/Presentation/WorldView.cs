@@ -177,6 +177,7 @@ namespace Hellscript
             var anchor=Isolated?Vector2.zero:stagedFocus??run.position;
             viewCamera.transform.position=snapPresentation?CameraPosition(anchor):Vector3.Lerp(viewCamera.transform.position,CameraPosition(anchor),dt*(stagedFocus.HasValue?2.4f:5));
             ApplyBattleViewport();
+            PrepareHookPresentation(run);PrepareRakingWoundPresentation(run);
             foreach(var enemy in run.enemies)
             {
                 bool buried=!enemy.dead&&MonsterBehavior.Hidden(enemy);
@@ -196,6 +197,7 @@ namespace Hellscript
                  string art=item?(decoy&&owner!=null?EnemyBodyArt(owner):null):EnemyBodyArt(enemy);
                  actor=CreateBody(item?enemy.objectType:!string.IsNullOrEmpty(enemy.eventId)?"균열 잔향":enemy.goblin?GoldenGoblin.Name:enemy.boss?GameCatalog.BossName(enemy.pattern):GameCatalog.EnemyName(enemy.kind),
                      decoy&&owner!=null?(owner.boss?BossCombat.ProfileOf(owner.pattern).body:owner.kind):item?6:enemy.boss?BossCombat.ProfileOf(enemy.pattern).body:enemy.kind,true,enemy.boss||decoy&&owner!=null&&owner.boss,art);actors[enemy.id]=actor;actor.transform.position=Position(enemy.position);
+                 if(GuideTutorial.TinySwarm(run,enemy))actor.transform.localScale*=.35f;
                  if(decoy){var shade=Mat("Decoy shade",new Color(.12f,.1f,.18f,1));foreach(var r in actor.GetComponentsInChildren<Renderer>())r.sharedMaterial=shade;}
                  // Elites wear the tier effect (WorldFx.Tier); the old ring stays only where the effects library is missing.
                  if(enemy.elite>=0&&Fx==null)Ring(actor.transform,Vector3.up*.1f,1.1f,purple,.1f);
@@ -205,7 +207,7 @@ namespace Hellscript
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
                 // Flyers hover above the floor.
                 var place=Position(enemy.position)+(MonsterRegistry.Behavior(enemy)?.traits.flying==true?Vector3.up*1.4f:Vector3.zero);
-                actor.SetActive(true);actor.transform.position=snapPresentation?place:Vector3.Lerp(actor.transform.position,place,Mathf.Min(1,dt*20));
+                actor.SetActive(true);actor.transform.position=HookEnemyPosition(run,enemy,place)??(snapPresentation?place:Vector3.Lerp(actor.transform.position,place,Mathf.Min(1,dt*20)));
                 Vector3 facing=new Vector3(enemy.brain.facing.x,0,enemy.brain.facing.y);if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
                 PoseEnemy(actor,enemy,run);AttackMotes(Fx,actor,enemy,run);
                 var bar=actor.transform.Find("Health");bar.gameObject.SetActive(!EdictPriorityVisible);bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);
@@ -219,7 +221,7 @@ namespace Hellscript
                 visual.transform.rotation=Quaternion.Euler(15,elapsed*55,25);
             }
             PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
-            PresentCombatFeedback(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
+            PresentCombatFeedback(run);PresentGrowthFeedback(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
             activeHazards.Clear();
             foreach(var fx in run.effects)
             {

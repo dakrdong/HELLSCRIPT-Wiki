@@ -49,16 +49,17 @@ namespace Hellscript
             string selected=QuickPresetSelection(scope);bool custom=selected==HuntEdictQuickPresets.Custom;
             bool expanded=customQuickScopes.Contains(scope);
             var preset=custom?null:HuntEdictQuickPresets.For(scope).Single(p=>p.id==selected);
-            Paragraph(list,"간편 프리셋",w,11,muted);
-            var row=Row(list,"Quick preset selector",36);
-            var button=Button(row,(preset?.Name??Loc.T(expanded?"직접 설정":"현재 설정"))+"  ›",0,0,w,36,()=>QuickPresetDialog(scope),"input-well",13);
+            Paragraph(list,"간편 프리셋",w,Look.SmallText,muted);
+            var row=Row(list,"Quick preset selector",Look.Button);
+            var button=Button(row,(preset?.Name??Loc.T(expanded?"직접 설정":"현재 설정")),0,0,w,Look.Button,()=>QuickPresetDialog(scope),"input-well",Look.CardTitle-1);
             button.name="edict-quick-picker-"+scope;
             var label=button.GetComponentInChildren<Text>();label.alignment=TextAnchor.MiddleLeft;
-            Place(label.rectTransform,8,0,w-16,1000);
-            float h=Mathf.Max(36,label.preferredHeight+10);
+            Place(label.rectTransform,14,0,Mathf.Max(1,w-48),1000);
+            float h=Mathf.Max(Look.Button,label.preferredHeight+16);
             row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h;
-            Place((RectTransform)button.transform,0,0,w,h);Place(label.rectTransform,8,0,w-16,h);
-            Paragraph(list,preset?.Description??Loc.T(expanded?"현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다.":"프리셋을 고르거나 직접 설정을 선택해 세부 옵션을 조정하세요."),w,11,muted);
+            Place((RectTransform)button.transform,0,0,w,h);Place(label.rectTransform,14,0,Mathf.Max(1,w-48),h);
+            SurfaceChoice(button,false,idleSkin:"input-well");HuntEdictDecor.Create(button.transform,"Picker chevron",w-30,(h-18)/2,18,18,"chevron",skin);
+            Paragraph(list,preset?.Description??Loc.T(expanded?"현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다.":"프리셋을 고르거나 직접 설정을 선택해 세부 옵션을 조정하세요."),w,Look.SmallText,muted);
             return expanded&&HasFeature(HuntEdictProgression.Details);
         }
         void QuickPresetDialog(string scope)
@@ -66,7 +67,8 @@ namespace Hellscript
             Dialog("간편 프리셋",p=>
             {
                 float h=Mathf.Min(height-16,470);
-                Scroll(p,"Quick preset choices",12,51,DialogWidth-24,h-61,out var list);
+                float top=DialogTop;
+                Scroll(p,"Quick preset choices",12,top,DialogWidth-24,Mathf.Max(1,h-top-Look.Gap),out var list);
                 string selected=QuickPresetSelection(scope);float w=DialogWidth-38;
                 foreach(var preset in HuntEdictQuickPresets.For(scope).Where(p=>QuickDisclosed(scope,p.id)))
                     QuickPresetChoice(list,w,scope,preset.id,preset.Name,preset.Description,selected==preset.id);
@@ -77,16 +79,17 @@ namespace Hellscript
         }
         void QuickPresetChoice(RectTransform list,float w,string scope,string id,string title,string description,bool selected)
         {
-            var row=Row(list,"Quick preset "+id,70);
-            var button=Button(row,"",0,0,w,70,()=>SelectQuickPreset(scope,id),selected?"tab-current":"button-idle");
-            button.name="edict-quick-choice-"+id;
-            var name=Text(button.transform,(selected?"✓ ":"")+title,9,5,w-18,1000,13,selected?gold:textColor,TextAnchor.UpperLeft);
-            float nameHeight=name.preferredHeight+4;Place(name.rectTransform,9,5,w-18,nameHeight);
-            var detail=Text(button.transform,description,9,nameHeight+6,w-18,1000,11,muted,TextAnchor.UpperLeft);
-            float detailHeight=detail.preferredHeight+4;Place(detail.rectTransform,9,nameHeight+6,w-18,detailHeight);
-            float h=nameHeight+detailHeight+13;
+            float cp=Look.CardPadding,textWidth=Mathf.Max(1,w-cp*2-34);
+            var row=Row(list,"Quick preset "+id,Look.Button);
+            var button=Button(row,"",0,0,w,Look.Button,()=>SelectQuickPreset(scope,id),"button-idle");
+            button.name="edict-quick-choice-"+id;SurfaceChoice(button,selected);
+            var name=Text(button.transform,title,cp,cp,textWidth,1000,Look.BodyText+1,textColor,TextAnchor.UpperLeft);skin.ApplyLabel(name,true,textColor);
+            float nameHeight=name.preferredHeight+4;Place(name.rectTransform,cp,cp,textWidth,nameHeight);
+            var detail=Text(button.transform,description,cp,cp+nameHeight+4,w-cp*2,1000,Look.SmallText,muted,TextAnchor.UpperLeft);skin.ApplyLabel(detail,false,muted);detail.lineSpacing=1.5f;
+            float detailHeight=detail.preferredHeight+4;Place(detail.rectTransform,cp,cp+nameHeight+4,w-cp*2,detailHeight);
+            float h=Mathf.Max(Look.Button,nameHeight+detailHeight+cp*2+4);
             row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h+3;
-            Place((RectTransform)button.transform,0,0,w,h);
+            Place((RectTransform)button.transform,0,0,w,h);ChoiceCheck(button.transform,w,h,selected);
         }
         // The selector exists for groups whose settings come in authored presets (not auto equip). Quick() owns which pickers exist: new accounts
         // never get the potion one, legacy accounts keep every picker (the v2 survival lesson points at it). The v3 prologue lists direct options

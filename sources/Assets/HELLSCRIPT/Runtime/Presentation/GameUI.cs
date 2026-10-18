@@ -102,6 +102,7 @@ namespace Hellscript
             // the periodic HUD refresh would otherwise leave the old portrait inset here.
             RefreshGlobalHud();ReflowBattleHud();Canvas.ForceUpdateCanvases();
             ReflowEdictSheet();
+            ReflowCasualNotices();
         }
         void RefreshCanvasScale()
         {
@@ -182,6 +183,7 @@ namespace Hellscript
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
+            ClearCasualConfirmations();
             CloseCharacterSelectionPage();
             if(combatLogView!=null){combatLogView.Close();combatLogView=null;}
             CloseRiftVictory();CloseTrainingResult();CloseNpcDialogue();CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
@@ -211,11 +213,11 @@ namespace Hellscript
             footerApron=Box("Footer apron",shell,UiTheme.Background);
             headerApron.GetComponent<Image>().raycastTarget=footerApron.GetComponent<Image>().raycastTarget=false;
             RefreshGlobalHud();ApplySafeArea();
-            overlay=Rect("Overlay",root);Stretch(overlay);
+            overlay=Rect("Overlay",shell);Stretch(overlay);
             var noticeCanvas=overlay.gameObject.AddComponent<Canvas>();noticeCanvas.overrideSorting=true;noticeCanvas.sortingOrder=3000;
-            toastFrame=Box("Notice",overlay,ink);toastFrame.GetComponent<Image>().raycastTarget=false;
-            toastFrame.anchorMin=new Vector2(.05f,0);toastFrame.anchorMax=new Vector2(.95f,0);toastFrame.pivot=new Vector2(.5f,0);toastFrame.anchoredPosition=new Vector2(0,battle?325:112);toastFrame.sizeDelta=new Vector2(0,battle?80:62);
-            toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);Inset(toast.rectTransform,16,16,8,8);toastTime=0;toastFrame.gameObject.SetActive(false);
+            toastFrame=Rect("Notice",overlay);
+            toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);toastTime=0;
+            InitializeCasualToast();toastFrame.gameObject.SetActive(false);
             if(!battle)
             {
                 var scroll=Rect("Scroll",root);scroll.SetSiblingIndex(root.childCount-2);scroll.anchorMin=new Vector2(0,0);scroll.anchorMax=Vector2.one;scroll.offsetMin=new Vector2(24,124);scroll.offsetMax=new Vector2(-24,-94);
@@ -483,12 +485,7 @@ namespace Hellscript
         void Confirm(string message,Action action)
         {
             game.ExitIdle();
-            var modal=Box("Confirm",root,new Color(0,0,0,.83f));Stretch(modal);var card=Box("Dialog",modal,panel);card.anchorMin=new Vector2(.08f,.35f);card.anchorMax=new Vector2(.92f,.65f);card.offsetMin=card.offsetMax=Vector2.zero;
-            var text=Label(card,message,25,pale,TextAnchor.MiddleCenter);text.rectTransform.anchorMin=new Vector2(.06f,.35f);text.rectTransform.anchorMax=new Vector2(.94f,.94f);text.rectTransform.offsetMin=text.rectTransform.offsetMax=Vector2.zero;
-            void Close(){ContentWindowHost.Detach(modal);modal.gameObject.SetActive(false);Destroy(modal.gameObject);}
-            ContentWindowHost.Attach(modal,Close);
-            var cancel=Button(card,"취소",Close);var ok=Button(card,"확인",()=>{Close();action();},new Color(.45f,.28f,.12f));
-            foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
+            OpenCasualConfirmation(message,action);
         }
         public void ShowToast(string text)=>ShowToast(text,5);
         public void ShowToast(string text,float seconds)=>ShowToast(text,seconds,false);
@@ -496,12 +493,10 @@ namespace Hellscript
         {
             if(game.DisplayDimmed){RefreshIdleSummary(true);return;}
             if(toast==null)return;toast.text=Loc.T(text);toastTime=seconds;toastFrame.gameObject.SetActive(!string.IsNullOrEmpty(text));overlay.SetAsLastSibling();
-            bool compact=seconds<=2;
-            toastFrame.anchorMin=new Vector2(compact?.5f:.05f,0);toastFrame.anchorMax=new Vector2(compact?.5f:.95f,0);
-            toastFrame.sizeDelta=new Vector2(compact?Mathf.Min(root.rect.width*.9f,toast.preferredWidth+32):0,62);
+            bool compact=seconds<=2;noticeCompact=compact;noticeMessage=toast.text;
             // Routine long notices stay hidden in battle; tutorial refusals and explicit save errors remain visible.
             if(Page=="battle"&&!compact&&!game.TutorialActive&&!showDuringBattle){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
-            Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
+            ReflowCasualToast();if(toastFrame.gameObject.activeSelf)noticeEntrance.Restart();
         }
         void LateUpdate()
         {
@@ -515,7 +510,7 @@ namespace Hellscript
             if(gearRecommendationStrip!=null)
             {bool visible=GearRecommendationsVisible;if(gearRecommendationStrip.gameObject.activeSelf!=visible)gearRecommendationStrip.gameObject.SetActive(visible);}
             PositionEdictLabels();PositionTargetLabels();PositionOrderLabels();
-            if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
+            if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";noticeMessage="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){gearShownAt.Clear();RefreshIdleSummary();return;}
             TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();

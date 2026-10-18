@@ -10,7 +10,7 @@ namespace Hellscript
         {
             if(aspectMask==null)
             {
-                aspectMask=Rect("Aspect frame",transform);var canvas=aspectMask.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=110;
+                aspectMask=Rect("Aspect frame",transform);var canvas=aspectMask.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=2600;
                 foreach(string name in new[]{"Left","Right","Bottom","Top"}){var bar=Box(name,aspectMask,Color.black);bar.GetComponent<Image>().raycastTarget=false;}
             }
             var f=UiSafeArea.FrameNormalized;

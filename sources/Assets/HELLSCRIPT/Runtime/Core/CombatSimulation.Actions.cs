@@ -146,7 +146,7 @@ namespace Hellscript
         {
             if(Hero.heroClass!=HeroClass.Warrior){LaunchBasicProjectile(a);return;}
             var target=State.enemies.Find(e=>e.id==a.targetId&&!e.dead);
-            if(target==null||Vector2.Distance(State.position,target.position)>(D4Combat?2*(Cast(a.id)?.formArea??D4FormArea):2)||!Map.LineClear(State.position,target.position))
+            if(target==null||Vector2.Distance(State.position,target.position)>(D4Combat?2*(Cast(a.id)?.formArea??D4FormArea):2)+GuideHookReachTolerance(target)||!Map.LineClear(State.position,target.position))
             {ActionEvent(a,"ACTION_MISS","기본 공격의 대상이 사라졌거나 실제 사거리·시야를 벗어났습니다.");return;}
             Hit(target,1,0,true,0,a.snapshot,kind:DamageKind.Basic);BasicResource(target.id,a.id,a.snapshot);Visual?.Invoke(a.origin,target.position,18,1);
         }

@@ -100,6 +100,7 @@ namespace Hellscript
                 if(State.training<0)Log("LIVEOPS_VERSION","Balance release "+State.liveOps.version+" / "+State.liveOps.configHash);
                 Log("RUN_START",training>=0?"훈련 시작 · 실제 재화와 성장에 반영하지 않습니다.":Loc.F("균열 {0}단계 진입", stage));
             }
+            if(IsGuide)RefreshGuideEnemyBalance();
             State.paused=TutorialWaiting;
         }
         void SpawnDungeon()
@@ -235,7 +236,9 @@ namespace Hellscript
             {
                 using var sample=PresentationMetrics.Decision.Auto();PresentationMetrics.DecisionCalls++;
                 Sense();
-                if(EdictActive)DecideEdictActions();
+                if(GuideSkillShowcase)
+                {if(!TryAutomaticClassSkill(onlyId:GuideTutorial.Rend))TryAutomaticClassSkill(onlyId:"BASIC");}
+                else if(EdictActive)DecideEdictActions();
                 else if(!TryClassPolicySurvival()&&!TryAutomaticClassSkill()&&(!(ChestBusy||ShrineBusy||ObjectiveBusy)||Target!=null||InDanger))DecideRules();
                 State.decisionTime=.2f;
             }

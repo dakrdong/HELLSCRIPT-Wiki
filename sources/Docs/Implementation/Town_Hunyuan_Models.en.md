@@ -212,3 +212,7 @@ The authoritative TASK evidence is under `task-23/validation/cleanup-20261015/ma
 - **Six dedicated props** (barrel, crate stack, banner post, signpost, fence module and garland) and **twelve new casual static NPC models** remain unfinished. Current F1 reuse, runtime geometry and retained NPCs do not establish completion of those dedicated assets.
 - **Full integrated NUnit, a native build and player validation remain NOT_RUN** for this step. No additional device or performance measurements were performed. Earlier full-suite or native results are not relabelled as passing for the current inputs.
 - No new artwork/3D generation, paid submission, payment or auto-recharge was performed. Remote push/CI remain on cost HOLD and WebGL remains cancelled. These focused results do not establish complete concept delivery or final release validation.
+
+## Casual NPCs (7) and crate stack rebuilt (2026-10-17)
+
+The seven NPCs on quality hold and the crate stack were rebuilt on a fresh UV atlas with a full re-bake and applied. Cause, numbers and evidence: [rebuild record](TownNpcRebake_20261017.en.md).

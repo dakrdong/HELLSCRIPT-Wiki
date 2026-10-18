@@ -105,9 +105,9 @@ namespace Hellscript
             // Keep each portrait group compact; use spare width for bounded icons, never wider gaps.
             if(!landscape)slot=Mathf.Min(slot,(w-2*margin-6*gap-group)/8);
             float row3=3*slot+2*gap,row8=8*slot+6*gap+group;
-            float first=!landscape?(w-row8)*.5f:w-margin-row8,slotY=!landscape?147:compact?37:54;
+            float first=!landscape?(w-row8)*.5f:w-margin-row8,slotY=!landscape?124:compact?37:54;
             for(int i=0;i<3;i++)potions[i]=R(first+i*(slot+gap),slotY,slot,slot);
-            potionBounds=R(first,slotY-18,row3,slot+18);
+            potionBounds=R(first,slotY-(landscape?18:0),row3,slot+18);
             float start=first+row3+group;
             ultimate=R(start,slotY,slot,slot);
             for(int i=0;i<4;i++)actives[i]=R(start+(i+1)*(slot+gap),slotY,slot,slot);

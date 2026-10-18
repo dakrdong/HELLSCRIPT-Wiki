@@ -52,6 +52,8 @@ namespace Hellscript
     public sealed class TownCircleGraphic : MaskableGraphic
     {
         public float InnerRatio;
+        float ringWidth;
+        public void SetRingWidth(float value){if(ringWidth==value)return;ringWidth=value;SetVerticesDirty();}
         protected override void OnPopulateMesh(VertexHelper vh)
         {
             vh.Clear();var rect=rectTransform.rect;var center=rect.center;float radius=Mathf.Min(rect.width,rect.height)/2;
@@ -59,7 +61,8 @@ namespace Hellscript
             for(int i=0;i<=segments;i++)
             {
                 float a=i*Mathf.PI*2/segments;var dir=new Vector2(Mathf.Cos(a),Mathf.Sin(a));
-                vh.AddVert(center+dir*radius,color,Vector2.zero);vh.AddVert(center+dir*radius*InnerRatio,color,Vector2.zero);
+                float inner=ringWidth>0?Mathf.Max(0,radius-ringWidth):radius*InnerRatio;
+                vh.AddVert(center+dir*radius,color,Vector2.zero);vh.AddVert(center+dir*inner,color,Vector2.zero);
                 if(i==0)continue;int n=i*2;vh.AddTriangle(n-2,n,n-1);vh.AddTriangle(n,n+1,n-1);
             }
         }

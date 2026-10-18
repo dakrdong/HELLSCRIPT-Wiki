@@ -967,12 +967,12 @@ def portable_attachment(target, source):
     if manifest.get('schemaVersion') != 1 or len(matches) != 1:
         raise ValueError(f'Nonportable local Markdown link: {source} -> {target}')
     record = matches[0]; dest = record['path']
-    if not dest.startswith('Docs/Implementation/') or '..' in Path(dest).parts:
+    if not (dest.startswith('Docs/Implementation/') or dest in wiki_resources_current.PRESERVED_DOCUMENTS) or '..' in Path(dest).parts:
         raise ValueError('Invalid portable attachment destination: ' + dest)
     candidate = ROOT / dest
     if not candidate.resolve().is_relative_to(ROOT.resolve()):
         raise ValueError('Portable attachment escapes repository: ' + dest)
-    raw = candidate.read_bytes()
+    raw = wiki_resources_current.source_bytes(sys.modules[__name__],dest)
     if len(raw) != record['bytes'] or digest(raw) != record['sha256']:
         raise ValueError('Portable attachment differs from preserved proof: ' + dest)
     return dest

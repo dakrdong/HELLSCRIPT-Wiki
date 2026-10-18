@@ -57,7 +57,6 @@
  + 강화 재료 {0}개	 + {0} enhancement materials
  / 장비 드롭	 / gear dropped
  / 환류 기준 {0:0}{1}	 / feedback threshold {0:0}{1}
- · HP 비율을 유지했습니다.	 · your HP ratio was kept.
  · {0:0.00}초 뒤 실행	 · runs in {0:0.00}s
  · {0} 해금 · 성장에서 설정 확인	 · {0} unlocked · check the settings under growth
  · 공격	 · attack
@@ -130,7 +129,6 @@ HP가 30% 이하인 적에게 치명 확률 +20%p를 적용합니다. 최종 상
 LM01이 없어 새 눈보라는 위치 고정으로 판단합니다.	Without LM01 a new blizzard is judged as staying in place.
 LM04가 없어 고유 대상 수로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
 LM04가 없어 고유 대상 수를 기준으로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
-Lv.{0} → {1} · HP 비율 유지{2}	Lv.{0} → {1} · HP ratio kept{2}
 Lv.{0} 달성{1}	Reached Lv.{0}{1}
 Lv.{0} 해금 예정	Unlocks at Lv.{0}
 Lv.{0} 해금 전 · 규칙 꺼짐	Before Lv.{0} unlocks it · rule off
@@ -3561,6 +3559,7 @@ UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 
 공격·생존·이동 등 행동을 판단하는 순서를 정합니다.	Set the order for attack, survival, movement and other actions.
 
 # --- composed at runtime; no source literal holds these ---
+Lv.{0} → {1} · HP 비율 유지{2}	Lv.{0} → {1} · HP ratio kept{2}
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
 1단계 보석을 판매합니다. 구매한 보석은 계정 보관함에 들어가며, 같은 보석을 모아 합성할 수 있습니다.	Tier 1 gems are available here. Purchases go to shared storage; combine matching gems to upgrade them.
@@ -7216,3 +7215,57 @@ Lv{n} 해금	Unlocked Lv{n}
 {0:0}초	{0:0}s
 
 보호막 {0:0}	Shield {0:0}
+
+# Guide tutorial skill lessons (2026-10-17)
+원거리 적이 나타났어요. 가까이 다가가기 전에 먼저 공격해 오네요.	A ranged enemy has appeared. It is attacking before we can get close.
+꿰뚫는 갈고리를 사용하면 멀리 있는 적을 끌어와 쉽게 처치할 수 있어요.	Piercing Hook pulls distant enemies to you, making them easy to defeat.
+스킬창에서 꿰뚫는 갈고리에 1포인트를 투자하고 장착해 볼까요?	Shall we spend 1 point on Piercing Hook in the skill tree and equip it?
+스킬을 배운다	Learn a skill
+작은 몬스터들이 전방에서 몰려왔어요. 하나씩 상대하니 체력이 많이 줄었네요.	Tiny monsters rushed in from the front. Fighting them one by one has cost you a lot of health.
+이번에는 갈고리에 쓴 1포인트를 회수하고, 찢어낸 상처에 다시 투자해 보세요.	Refund the point spent on Piercing Hook and invest it in Rend instead.
+찢어낸 상처는 전방의 여러 적에게 출혈을 입혀요. 몰려오는 적들을 한 번에 상대하기 좋죠.	Rend makes several enemies in front of you bleed. It is useful against a charging group.
+스킬을 바꾼다	Change skills
+이번에는 사방에서 둘러쌌어요. 전방만 공격하는 찢어낸 상처만으로는 역부족이에요.	Now they have surrounded you. Rend only attacks in front, so it is not enough on its own.
+아까 레벨이 올랐으니, 새로 얻은 포인트로 스킬을 강화해 볼까요?	You just leveled up. Shall we improve your skill with that new point?
+찢어낸 상처의 보조 스킬 '회전 베기'에 1포인트를 투자해 주세요. 이제 주변의 적을 모두 벨 수 있어요.	Invest 1 point in Rend's Spinning Rend modifier. You can now slash enemies all around you.
+보조 스킬을 배운다	Learn a modifier
+이렇게 적의 약점을 파악하고, 가장 효율적인 스킬을 골라 장착하는 것이 중요해요.	Study your enemies and equip the skill that works best against their weaknesses.
+똑같은 장비를 입더라도 적의 약점을 파악하느냐에 따라 승패가 갈릴 수 있답니다.	Even with the same equipment, understanding enemy weaknesses can decide whether you win or lose.
+이제 길을 따라가며, 적을 상대할 위치와 공격 순서도 정해 볼까요?	As we follow the road, let us decide where to fight and which enemies to attack first.
+계속 나아간다	Continue onward
+목표 · 꿰뚫는 갈고리 배우고 장착하기	Goal · Learn and equip Piercing Hook
+목표 · 전방의 작은 몬스터 처치	Goal · Defeat the tiny monsters in front
+목표 · 갈고리 포인트를 회수하고 찢어낸 상처 배우기	Goal · Refund Piercing Hook and learn Rend
+목표 · 포위한 작은 몬스터 처치	Goal · Defeat the surrounding tiny monsters
+목표 · 회전 베기에 1포인트 투자하기	Goal · Invest 1 point in Spinning Rend
+목표 · 상황에 맞는 스킬 선택하기	Goal · Choose skills for the situation
+빛나는 곳을 따라 스킬 포인트를 변경해 주세요.	Follow the highlighted controls to change your skill points.
+스킬창을 열어 주세요.	Open the skill tree.
+꿰뚫는 갈고리의 포인트 1점을 회수해 주세요.	Refund the point spent on Piercing Hook.
+회전 베기를 선택하고 1포인트를 투자해 주세요.	Select Spinning Rend and invest 1 point.
+{0}을 선택하고 1포인트를 투자해 주세요.	Select {0} and invest 1 point.
+ · HP를 모두 회복했습니다.	 · HP fully restored.
+Lv.{0} → {1} · HP 모두 회복{2}	Lv.{0} → {1} · HP fully restored{2}
+
+Lv.{0} → {1} · HP·MP 모두 회복{2}	Lv.{0} → {1} · HP/MP fully restored{2}
+ · HP·MP를 모두 회복했습니다.	 · HP/MP fully restored.
+보조 스킬은 연결된 주스킬을 먼저 배워야 투자할 수 있어요.	You must learn the linked main skill before spending points on a support skill.
+각 주스킬에는 보조 스킬을 한 가지만 선택해 투자할 수 있어요.	You can choose and invest in only one support skill for each main skill.
+보조 스킬마다 주스킬의 효과나 공격 형태가 달라져요. 상황에 맞는 하나를 골라 보세요.	Each support skill changes the main skill's effects or attack form. Choose one that fits the situation.
+
+먼저 세 보조 스킬을 하나씩 눌러 효과를 비교해 볼까요?	First, let's select each of the three modifiers and compare their effects.
+피의 회수를 눌러 효과를 살펴보세요.	Select Blood Reclaim to examine its effect.
+깊은 상처를 눌러 효과를 살펴보세요.	Select Deep Wound to examine its effect.
+회전 베기를 눌러 효과를 살펴보세요.	Select Spinning Rend to examine its effect.
+{0}의 효과 설명이 강조되어 있어요. 읽은 뒤 이 안내를 눌러 주세요.	{0}'s effect description is highlighted. Read it, then tap this message.
+적들이 사방을 둘러싸고 있으니 회전 베기가 알맞아요. 1포인트를 투자해 주변의 적을 물리쳐 보세요.	Enemies surround you, so Spinning Rend is the right choice. Invest one point and defeat the enemies around you.
+
+주변의 적을 모두 물리쳤어요. 이제 줄어든 체력을 회복해 볼까요?	You've defeated all the enemies around you. Now, let's restore your health.
+회복 물약 열 개가 준비되어 있어요. 지금은 HP가 1% 이하일 때만 자동으로 마시도록 되어 있죠.	Ten healing potions are ready. They are currently set to be used automatically only at 1% HP or lower.
+왼쪽 아래 물약 설정 버튼을 눌러 사용 기준을 HP 50%로 바꾼 뒤 저장해 주세요.	Press the potion settings button at the lower left, change the threshold to 50% HP, then save.
+물약 사용 시점을 바꾼다	Change potion timing
+목표 · 물약 사용 기준을 HP 50%로 저장하기	Goal · Save a 50% HP potion threshold
+왼쪽 아래 물약 설정 버튼을 눌러 주세요.	Press the potion settings button at the lower left.
+HP 물약 사용 기준을 50%로 변경해 주세요.	Set the HP potion threshold to 50%.
+변경 버튼을 눌러 HP 50% 기준을 저장해 주세요. 저장하면 회복 물약을 마셔요.	Press Apply to save the 50% HP threshold. A healing potion will be used once it is saved.
+물약 안내를 완료할 수 없습니다. 설정과 보유 수량을 확인해 주세요.	Unable to complete the potion lesson. Check the settings and potion stock.

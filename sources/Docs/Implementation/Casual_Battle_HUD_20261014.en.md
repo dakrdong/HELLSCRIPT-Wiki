@@ -1,5 +1,15 @@
 # Casual base battle HUD — source handoff (2026-10-14)
 
+## Hunt Edict navigation and HUD readability (2026-10-18)
+
+- The expanded right dock now opens the quick Edict menu in the former full-editor slot. Its separate top icon is hidden on dock screens; the character seal opens the retained full editor. Tutorial-specific entry and gates remain intact.
+- Hunt Edict → Combat → First Engagement / During Combat → matching popup. Disclosed target/order editors and tutorial pointers follow the same list.
+- Dark outlines distinguish shortcuts, potion settings and potion/skill frames. Counts and the ultimate caption use navy text with white outlines. Portrait slots move from design baseline 147 to 124 with captions above; landscape slot baselines are unchanged.
+- Native pointer testing found a DPS drag handle intercepting the dock. The common ContentWindowView.FixedOverlay owner now creates the dock at order 106, between HUD 105 and quick editors 107. Save/combat rules and source art are unchanged.
+- Scoped Edit Mode 67/67, shared-UI follow-up 26/26, final UI contract 15/15 and refresh audit (14 bindings/198 sources) pass. Native macOS KO/EN across five viewports passed 10/10 plus town access. After moving identical layer creation into the common owner, final Korean portrait battle/town pointer routes passed again. Full Edit Mode, physical-mobile and performance checks were not run.
+- Evidence: Builds/Validation/HudNavigation20261018/artifact-lifecycle.json and evidence-layout-matrix/evidence result files. Five builds/native attempts retain failures (collapsed-dock fixture, URP resources, graph interception) and final proof. Processing/wait/retry durations were not separately measured. Branch wiki generation/check/publication count: zero.
+- The generated player and isolated save are retained for review on 2026-10-25 pending exact-path permanent-deletion approval. No deletion or reclaimed-space claim. Original prop meta and runInBackground edits are preserved; only generated build settings were restored.
+
 [한국어](Casual_Battle_HUD_20261014.md) · [Reference](../Design/GlobalHUD/Casual/README.md) · [Shared handoff](Casual_UI_Parallel_Handoff_20261014.en.md)
 
 This is a source/static-validation delivery of the base HUD and four independent normal-rift graph windows. No Unity, EditMode execution, player build, actual screen pass, or real save access is claimed. The integration owner will run the single final combined validation after all 15 screens are assembled.

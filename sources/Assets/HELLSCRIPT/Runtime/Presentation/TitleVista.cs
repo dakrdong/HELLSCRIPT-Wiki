@@ -30,7 +30,7 @@ namespace Hellscript
         // Button panel top and width as fractions of the vista, measured while the title is up and kept for the flight.
         RectTransform controls,logo;float homeTop,homeWidth;Vector4 logoShade;static readonly Vector3[] Corners=new Vector3[4];
         const float ShadeStrength=.5f;
-        static readonly int ClockId=Shader.PropertyToID("_SceneTime"),CoreId=Shader.PropertyToID("_Core"),GlowId=Shader.PropertyToID("_Glow"),RushId=Shader.PropertyToID("_Rush"),FadeId=Shader.PropertyToID("_Fade"),ShadeId=Shader.PropertyToID("_Shade"),ShadeStrengthId=Shader.PropertyToID("_ShadeStrength");
+        static readonly int ClockId=Shader.PropertyToID("_SceneTime"),CoreId=Shader.PropertyToID("_Core"),GlowId=Shader.PropertyToID("_Glow"),RushId=Shader.PropertyToID("_Rush"),DefocusId=Shader.PropertyToID("_Defocus"),FadeId=Shader.PropertyToID("_Fade"),ShadeId=Shader.PropertyToID("_Shade"),ShadeStrengthId=Shader.PropertyToID("_ShadeStrength");
         public float Clock {get;private set;}
         public bool Departing=>flight>=0;
         // Raised once when the flight passes ImpactAt, also when a tap skips past it.
@@ -122,7 +122,7 @@ namespace Hellscript
             }
             var size=root.rect.size;if(size.x<1||size.y<1)return;Measure(size);
             bool portrait=size.y>size.x;var focus=Vector2.Scale(size,portrait?TallFocus:WideFocus);
-            float t=Mathf.Max(0,flight),travel=Mathf.Clamp01(t/2f),part=Mathf.Clamp01(t/1.05f);part*=part;
+            float t=Mathf.Max(0,flight),travel=Mathf.Clamp01(t/2f),part=Mathf.Clamp01(t/1.2f);part*=part;
             float zoom=Mathf.Pow(FarZoom,travel*travel*(3-2*travel))*(1+.012f*(.5f-.5f*Mathf.Cos(Clock*.15f)));
             float shake=flight>=0&&t<Peak?size.y*.005f*Ramp(.9f,2f,t):0;
             var drift=new Vector2(Mathf.Sin(Clock*.21f)*size.x*.004f,Mathf.Sin(Clock*.17f)*size.y*.003f);
@@ -140,7 +140,7 @@ namespace Hellscript
             bool lifted=homeWidth>.5f;float side=lifted?Mathf.Min(size.x*.64f,size.y*.5f):Mathf.Min(size.y*.86f,size.x*.47f);
             float overhang=lifted?.02f:.04f,bottom=lifted?(homeTop+.01f)*size.y-HeroFeet*side:-.025f*size.y;
             Cliff(left,side,overhang,bottom,part,drift*1.2f+jolt*1.6f,-1);Cliff(right,side,overhang,bottom,part,drift*1.2f+jolt*1.6f,1);
-            if(cliffs!=null)cliffs.SetVector(FadeId,lifted?LiftedFade:Vector4.zero);
+            if(cliffs!=null){cliffs.SetVector(FadeId,lifted?LiftedFade:Vector4.zero);cliffs.SetFloat(DefocusId,size.y*.004f*Ramp(.08f,.85f,t));}
             Light(farLight,core,(float)tex.width/tex.height,1+2.5f*Ramp(.6f,1.9f,t),.12f*Ramp(.5f,1.7f,t));
             if(farLight!=null){farLight.SetVector(ShadeId,logoShade);farLight.SetFloat(ShadeStrengthId,logoShade.z>0?ShadeStrength*(1-Ramp(0,.4f,t)):0);}
             if(close.texture!=null)Light(closeLight,CloseCore,(float)close.texture.width/close.texture.height,1.5f+4*Ramp(1.5f,Peak,t),.05f*Ramp(1.25f,1.6f,t)+.18f*Ramp(1.6f,Peak,t));
@@ -152,13 +152,13 @@ namespace Hellscript
             r.pivot=core;r.sizeDelta=Cover(size,(float)tex.width/tex.height,core,focus)*overscan;
             r.anchoredPosition=focus+offset;r.localScale=new Vector3(zoom,zoom,1);
         }
-        // Each cliff hangs past its bottom corner; during the flight it slides out sideways, dips and grows as the camera passes.
+        // Each cliff hangs past its bottom corner; during the flight it grows toward the camera and exits diagonally down and outward.
         static void Cliff(RawImage image,float side,float overhang,float bottom,float part,Vector2 offset,int sign)
         {
             var tex=image.texture;if(tex==null)return;var r=image.rectTransform;
             r.pivot=new Vector2(sign<0?0:1,0);r.sizeDelta=new Vector2(side*tex.width/tex.height,side);
-            r.anchoredPosition=new Vector2(sign*(overhang*side+part*side*1.6f),bottom-part*side*.15f)+offset;
-            r.localScale=Vector3.one*(1+part*.4f);
+            r.anchoredPosition=new Vector2(sign*(overhang*side+part*side*2.5f),bottom-part*side*.95f)+offset;
+            r.localScale=Vector3.one*(1+part*1.1f);
         }
         void Light(Material material,Vector3 core,float aspect,float glow,float rush)
         {

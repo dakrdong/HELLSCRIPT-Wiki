@@ -22,7 +22,7 @@ namespace Hellscript
             else if(run.tutorial)headerSubtitle.text=TutorialObjective(run);
             var last=run.growthEvents.LastOrDefault();if(last==null)return;
             if(growthRunId==run.id&&growthNotifiedLevel==last.toLevel)return;growthRunId=run.id;growthNotifiedLevel=last.toLevel;
-            ShowToast(Loc.F("Lv.{0} 달성{1}", last.toLevel, (last.unlockedSkills.Count>0?Loc.F(" · {0} 해금 · 성장에서 설정 확인", string.Join(", ",last.unlockedSkills.Select(i=>game.catalog.skills[i].name))):" · HP 비율을 유지했습니다.")));
+            ShowToast(Loc.F("Lv.{0} 달성{1}",last.toLevel,Loc.T(" · HP·MP를 모두 회복했습니다.")+(last.unlockedSkills.Count>0?Loc.F(" · {0} 해금 · 성장에서 설정 확인",string.Join(", ",last.unlockedSkills.Select(i=>game.catalog.skills[i].name))):"")));
         }
         public void ShowGrowth()
         {

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Hellscript
 {
     public enum ActorArchetype{Biped,Quadruped,Hover,Blob,Worm,Spider,Serpent}
-    public enum ActorAction{Idle,Windup,Release,Recover,Channel,Charge,Travel,Cast,Stagger,Hit,Dead,Despair,Offer}
+    public enum ActorAction{Idle,Windup,Release,Recover,Channel,Charge,Travel,Cast,Stagger,Hit,Dead,Despair,Offer,HookWindup,HookPull}
     // Presentation state the caller derives each frame. speed in m/s (model units), progress 0..1 through the action,
     // time = presentation clock (add a per-actor offset to desync packs), aimLocal = target direction in the actor's space.
     public struct ActorPose{public float speed;public ActorAction action;public float progress;public float time;public Vector3 aimLocal;}
@@ -119,6 +119,9 @@ namespace Hellscript
             switch(pose.action)
             {
                 case ActorAction.Windup:Set(-10*s,20*s,-155*s,20*s,-55*s,-25*s,-15*s,-10*s,.35f*s,-6*s,25*s,0,.12f*s);break;
+                case ActorAction.HookWindup:Set(-8*s,28*s,-65*s,25*s,-100*s,-15*s,-20*s,-25*s,.2f*s,-5*s,0,0,0);break;
+                case ActorAction.HookPull:
+                {float reel=Smooth(Mathf.InverseLerp(.2f,1,p));Set(Mathf.Lerp(14,-12,reel),Mathf.Lerp(-25,22,reel),Mathf.Lerp(-100,-35,reel),12,Mathf.Lerp(-10,-110,reel),-25,-15,-30,.22f,-5,0,0,0);break;}
                 case ActorAction.Release:{float r=1-(1-p)*(1-p)*(1-p);Released(r);break;}
                 case ActorAction.Recover:{Released(1);float r=1-s;for(int i=0;i<Channels;i++)target[i]*=r;break;}
                 case ActorAction.Channel:Set(6,Mathf.Sin(time*20)*4,-15,80,-5,-15,-80,-5,.3f,0,10,0,0);target[Wave]=1;break;

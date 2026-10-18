@@ -42,9 +42,12 @@ namespace Hellscript
                 fog=new Color(.85f,.92f,.98f),fogStart=48,fogEnd=115,background=new Color(.8f,.92f,.99f),moon=new Color(1,.97f,.9f),moonIntensity=1.25f,moonPitch=50,moonYaw=-35,
                 heroIntensity=2.5f,saturation=1,contrast=2,exposure=-.75f,shadows=new Color(.5f,.5f,.5f),highlights=new Color(.5f,.5f,.5f),vignette=.06f,bloom=.3f},
         };
-        public static readonly FieldLook Town=new FieldLook{id="town",particles="village-motes",sky=new Color(.75f,.9f,.98f),equator=new Color(.66f,.75f,.58f),ground=new Color(.42f,.5f,.32f),
-            fog=new Color(.78f,.9f,.85f),fogStart=48,fogEnd=115,background=new Color(.75f,.9f,.98f),moon=new Color(1,.96f,.82f),moonIntensity=1.45f,moonPitch=50,moonYaw=-35,
-            heroIntensity=2.5f,saturation=4,contrast=2,exposure=-.35f,shadows=new Color(.5f,.5f,.5f),highlights=new Color(.5f,.5f,.5f),vignette=.06f,vignetteColor=new Color(.24f,.32f,.24f),bloom=.35f};
+        // Sunny casual town: the sun comes from the front left of the screen (yaw 40 at the fixed camera), so the camera-facing facades
+        // stay lit and every tree and house throws its shadow to the right where the camera can see it, like the approved overview.
+        // Cooler ambient keeps those shadows blue-green.
+        public static readonly FieldLook Town=new FieldLook{id="town",particles="village-motes",sky=new Color(.6f,.74f,.86f),equator=new Color(.62f,.67f,.57f),ground=new Color(.36f,.42f,.3f),
+            fog=new Color(.78f,.9f,.85f),fogStart=60,fogEnd=160,background=new Color(.75f,.9f,.98f),moon=new Color(1,.95f,.84f),moonIntensity=1.75f,moonPitch=50,moonYaw=40,
+            heroIntensity=2.5f,saturation=0,contrast=10,exposure=-.6f,shadows=new Color(.48f,.5f,.54f),highlights=new Color(.53f,.5f,.47f),vignette=.08f,vignetteColor=new Color(.2f,.3f,.24f),bloom=.3f,filter=new Color(1,.98f,.93f)};
         // The legacy ring (training, developer training, boss arena) by theme: the pre-overhaul night look, graveyard or fortress tinted.
         public static readonly FieldLook[] Legacy=
         {

@@ -43,6 +43,28 @@ namespace Hellscript
             }
         }
 
+        // Rectangular passage slabs must not share coplanar area with a room or an earlier slab.
+        public static List<Rect> UncoveredRectangles(Rect floor,IEnumerable<Rect> covered)
+        {
+            var pieces=new List<Rect>{floor};
+            foreach(var other in covered)
+            {
+                var next=new List<Rect>();
+                foreach(var piece in pieces)
+                {
+                    float x0=Mathf.Max(piece.xMin,other.xMin),x1=Mathf.Min(piece.xMax,other.xMax);
+                    float y0=Mathf.Max(piece.yMin,other.yMin),y1=Mathf.Min(piece.yMax,other.yMax);
+                    if(x0>=x1||y0>=y1){next.Add(piece);continue;}
+                    if(piece.xMin<x0)next.Add(Rect.MinMaxRect(piece.xMin,piece.yMin,x0,piece.yMax));
+                    if(x1<piece.xMax)next.Add(Rect.MinMaxRect(x1,piece.yMin,piece.xMax,piece.yMax));
+                    if(piece.yMin<y0)next.Add(Rect.MinMaxRect(x0,piece.yMin,x1,y0));
+                    if(y1<piece.yMax)next.Add(Rect.MinMaxRect(x0,y1,x1,piece.yMax));
+                }
+                pieces=next;if(pieces.Count==0)break;
+            }
+            return pieces;
+        }
+
         public static GameObject Create(string label,Transform parent,IEnumerable<RiftFloorPatch> patches,RiftSurface surface,Material ground,Material edge,
             Material wall=null,uint seed=0,List<WallAnchor> anchors=null)
         {

@@ -81,3 +81,11 @@ A separate native Mac window was verified with actual pointer and keyboard input
 [iPhone portrait](TitleScreenEvidence/iphone-portrait-en.png) · [iPhone landscape](TitleScreenEvidence/iphone-landscape-en.png) · [PC 16:10](TitleScreenEvidence/pc-16x10-ko.png) · [PC ultrawide](TitleScreenEvidence/pc-ultrawide-ko.png) · [Login dialog](TitleScreenEvidence/iphone-login-ko.png) · [English server dialog](TitleScreenEvidence/iphone-servers-en.png)
 
 The person merging this branch into `main` must rebuild, validate and publish the public wiki. This work branch does not overwrite the public deployment.
+
+## Foreground approach and defocus (2026-10-18)
+
+During the first 1.2 seconds of the login flight, the hero cliffs grow from 1× to 2.1× and leave diagonally through the lower left and right corners. Downward travel compensates for growth so the feet move down rather than rise. A foreground-only, alpha-weighted 5×5 Gaussian blur ramps between 0.08 and 0.85 seconds to a maximum radius of 0.4% of the view height, avoiding dark cutout fringes. Existing central rift effects, overall timing, input, authentication and saves retain their current owners.
+
+The 29 focused title Edit Mode cases and 15 UI contract regressions passed. Five defocus cases initially failed because the test viewport had no parent bounds; after fixing the fixture, only those cases were rerun and passed. The shader/asset case passed again after refining the blur kernel. An isolated Editor camera rendered five times at each of 440×956, 956×440, 1440×810, 2560×1600 and 3440×1440, with simulated control bounds. This is render evidence, not actual player input proof. Player builds, physical mobile devices and GPU performance remain unverified; older runtime results above describe their original versions.
+
+Native macOS follow-up: built successfully (0 errors, 227 existing build warnings). The title smoke completed three flight sequences, checked off-screen exits, sounds, input blocking/restoration and character-selection handoff. Its final gameplay assertion failed because it skips the current character-creation phase and waits only 1.2 seconds for the 2.45-second entry. A subsequent native run and the user confirmed normal gameplay entry. The user explicitly accepted the transition on 2026-10-18. Physical-mobile/GPU performance remain unverified.

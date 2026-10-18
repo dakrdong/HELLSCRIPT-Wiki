@@ -204,6 +204,7 @@ namespace Hellscript
                     TickEnemyAction(e,dt);continue;
                 }
                 if(!visible&&State.time-e.lastSeenTime>4){EnemyMode(e,"목표 상실");continue;}
+                if(MoveGuideHookRetreat(e,dt))continue;
                 var def=EnemyCombat.Attack(e.kind);
                 // The ghoul leaps onto a hero 2.5-4.5 m away when it can land there; closer, it swings like N01.
                 if(e.kind==14&&visible&&e.cooldown<=.00001f&&distance>=EnemyCombat.GhoulLeapMin&&distance<=EnemyCombat.GhoulLeap.range&&Map.CanLand(GhoulLanding(e),.4f)&&!Immobilized(e))

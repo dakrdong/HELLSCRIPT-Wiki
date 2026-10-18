@@ -126,7 +126,7 @@ namespace Hellscript
             Text(row,"Daily reward "+q.id,Loc.F("{0} 주화",q.reward),left+23,h-28,w-left-146,24,UiTheme.Body,q.claimed?DailyQuestCasualSkin.Muted:DailyQuestCasualSkin.GoldText).alignment=TextAnchor.MiddleLeft;
             var b=view.Button(row,q.claimed?"수령 완료":ready?"보상 수령":"진행 중",w-118,h-28,108,24,()=>
             {notice=store.ClaimDailyQuest(q.id,day)?Loc.T("보상을 받았습니다."):store.Error;view.Repaint();},primary:ready);
-            b.name="daily-quest-claim-"+q.id;
+            b.name="daily-quest-claim-"+q.id;((UiButton)b).SetCompleted(q.claimed);
             ((UiButton)b).SoundCue="ui.click"; // Primary selects green chrome; keep the existing claim press sound.
             var label=DailyQuestCasualSkin.Display(b.GetComponentInChildren<Text>());label.fontSize=Mathf.RoundToInt(UiTheme.Caption*Scale);label.color=ready?view.Skin.Navy:view.Skin.Muted;
             if(q.claimed){Glyph(b.transform,"check",6,6,12,DailyQuestCasualSkin.SuccessText);UiLayout.Place(label.rectTransform,20,0,83,24);}

@@ -205,7 +205,7 @@ namespace Hellscript
                 if(d.age>=total){figures.Remove(d.go);rigs.Remove(d.go);rigPositions.Remove(d.go);Destroy(d.go);dying.RemoveAt(i);}
             }
         }
-        void ClearActorMotion(){figures.Clear();dying.Clear();enragedAuras.Clear();lastDamageSeen=null;}
-        void SeedCombatFeedback(RunState run){lastDamageSeen=run.damageEvents.Count>0?run.damageEvents[run.damageEvents.Count-1]:null;}
+        void ClearActorMotion(){figures.Clear();dying.Clear();enragedAuras.Clear();lastDamageSeen=null;lastGrowthShown=null;}
+        void SeedCombatFeedback(RunState run){lastDamageSeen=run.damageEvents.Count>0?run.damageEvents[run.damageEvents.Count-1]:null;SeedGrowthFeedback(run);}
     }
 }

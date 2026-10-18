@@ -26,12 +26,13 @@ namespace Hellscript
 
         // A restored run keeps its released casts silent; only casts released from now on play.
         void SeedClassSkillFx(RunState run){playedClassCasts.Clear();if(run.classSkills!=null)foreach(var c in run.classSkills.casts)if(c.released)playedClassCasts.Add(c.root);}
-        void ClearClassSkillFx(){playedClassCasts.Clear();foreach(var v in classEffectViews.Values)if(v.go!=null)Destroy(v.go);classEffectViews.Clear();}
+        void ClearClassSkillFx(){ClearHookViews();ClearRakingWoundArea();playedClassCasts.Clear();foreach(var v in classEffectViews.Values)if(v.go!=null)Destroy(v.go);classEffectViews.Clear();}
 
         void PresentClassSkillFx(RunState run)
         {
             var cs=run.classSkills;if(cs==null||presentationSuspended||world==null)return;var fx=Fx;if(fx==null)return;
             foreach(var c in cs.casts)if(c.released&&playedClassCasts.Add(c.root))PlayClassRelease(run,fx,c);
+            PresentHookViews(run);PresentRakingWoundArea(run,fx);
             finishedClassCasts.Clear();
             foreach(int root in playedClassCasts){bool alive=false;foreach(var c in cs.casts)if(c.root==root){alive=true;break;}if(!alive)finishedClassCasts.Add(root);}
             foreach(int root in finishedClassCasts)playedClassCasts.Remove(root);
@@ -50,8 +51,15 @@ namespace Hellscript
             float radius=SkillNumber(c.id,"radius",3);
             switch(c.id)
             {
-                case "W08":fx.Beam(O+up*1.2f,T+up*1.1f,new Color(.55f,.5f,.46f,1),.08f,.3f);fx.Burst("impact",T+up*1.1f,.7f);break;
-                case "W09":fx.Slash(O+up*.9f,D,Mathf.Max(2,radius),90,BloodTint,.22f);fx.Burst("blood",O+D*1.8f+up,.8f);break;
+                case "W08":
+                    var hookAt=hookViews.TryGetValue(c.root,out var hook)?Position(hook.before):A;
+                    if(c.mod==1)fx.Beam(O+up*1.2f,T+up*1.1f,PhysicalTint,.12f,.3f);
+                    fx.Flash(O+up*1.3f,.65f,PhysicalTint);fx.Burst("impact",hookAt+up*1.1f,.9f,PhysicalTint);fx.Burst("sparks",hookAt+up*1.1f,.65f,PhysicalTint);break;
+                case "W09":
+                    if(c.mod==2){fx.Burst("blood",T+up,.8f);break;}
+                    var rendArea=Combat.RakingWoundArea(c);
+                    fx.Slash(O+up*.9f,D,rendArea.radius,rendArea.angle,BloodTint,.3f);
+                    fx.Burst("blood",O+D*Mathf.Min(rendArea.radius,1.8f)+up,.8f);break;
                 case "W17":fx.Burst("arcane",O+up*1.2f,1.5f,SpiritTint);fx.Shockwave(O+up*.1f,2.5f,SpiritTint,.5f);break;
                 case "W18":
                     fx.Shockwave(O+up*.1f,Mathf.Max(3,radius),new Color(1,.8f,.5f,1),.6f);fx.Burst("explosion",O+up*1.1f,1.3f,new Color(1,.85f,.6f,1));

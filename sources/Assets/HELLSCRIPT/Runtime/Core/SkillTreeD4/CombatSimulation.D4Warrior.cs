@@ -6,6 +6,9 @@ namespace Hellscript
 {
     public sealed partial class CombatSimulation
     {
+        // Damage selection and its visible footprint read one source of radius/angle.
+        internal (float radius,float angle) RakingWoundArea(ClassSkillCast cast)
+            =>(N("W09","radius")*cast.area,cast.mod==3?360:N("W09","width"));
         bool ResolveD4WarriorNative(ClassSkillCast cast)
         {
             if(cast.id=="W17")
@@ -36,13 +39,19 @@ namespace Hellscript
                     if(cast.mod==3)
                     {bool enhanced=Gear("DES_LW41")&&Proc("DES_LW41",4,cast.root);ApplyStatus(enemy,StatusKind.Mark,"W08:brand",enhanced?8:6,cast.root,-D4ModValue("W08",cast)/100);if(enhanced)Resource(8,"DES_LW41",cast.root);}
                 }
-                if(victims.Length>0&&cast.mod!=1)Pull(victims[victims.Length-1],State.position,N("W08","pullMeters"),"W08",cast.root);
+                if(victims.Length>0&&cast.mod!=1)
+                {
+                    var pulled=victims[victims.Length-1];var before=pulled.position;
+                    Pull(pulled,State.position,GuideHookPullDistance(pulled,cast,N("W08","pullMeters")),"W08",cast.root);
+                    CompleteGuideHookPull(pulled,cast,before);
+                }
                 if(hits>0)Resource(D4BaseValue("W08",1,cast)+(cast.mod==1?D4ModValue("W08",cast):0),"W08",cast.root);
                 return true;
             }
             if(cast.id!="W09")return false;
+            var rendArea=RakingWoundArea(cast);
             var targets=cast.mod==2?new[]{Enemy(cast.target)}.Where(e=>e!=null&&Visible(e,cast.origin,N(cast.id,"range",cast:cast))).ToArray():
-                AreaTargets(cast.origin,N(cast.id,"radius")*cast.area,cast.aim-cast.origin,cast.mod==3?360:N(cast.id,"width")).Take((int)N(cast.id,"targets",5)).ToArray();
+                AreaTargets(cast.origin,rendArea.radius,cast.aim-cast.origin,rendArea.angle).Take((int)N(cast.id,"targets",5)).ToArray();
             var count=Counter("W09:casts");bool reclaim=cast.mod==1&&++count.count%3==0;int cashed=0;
             foreach(var enemy in targets)
             {

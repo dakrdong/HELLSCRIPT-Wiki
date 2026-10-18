@@ -22,7 +22,7 @@ namespace Hellscript
             var greeting=new StoryDialogueState(new[]{new StoryLine(profile.id,profile.greeting)},gender);
             window=ContentWindowView.Open(parent,profile.name,EquipmentViewSource.Catalog,readingScale,
                 StoryDialogueWindow.Scene(greeting,readingScale,()=>choices,listener:listener,choicesAtOnce:true,closable:true,lineName:"NPC greeting"),
-                closed,maximumSize:StoryDialogueWindow.Size,bottomDock:true);
+                closed,maximumSize:StoryDialogueWindow.Size,bottomDock:true,skin:UiSkin.Casual);
             return window;
         }
     }

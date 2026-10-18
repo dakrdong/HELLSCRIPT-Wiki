@@ -14,9 +14,11 @@ namespace Hellscript
         public string npcName=>NpcProfiles.ForStation(id)?.name??"";
         public readonly Vector2 position;
         public readonly Rect building;
+        // The building model is shown at this uniform scale; building is its scaled footprint.
+        public readonly float scale;
         public Vector2 NpcPosition=>id==TownStation.AspectStone?building.center:id==TownStation.RiftKeeper?position+new Vector2(-2.2f,-1.6f):position;
-        internal TownStationDefinition(TownStation id,string name,string service,string action,Vector2 position,Rect building=default)
-        {this.id=id;this.name=name;this.service=service;this.action=action;this.position=position;this.building=building;}
+        internal TownStationDefinition(TownStation id,string name,string service,string action,Vector2 position,Rect building=default,float scale=1)
+        {this.id=id;this.name=name;this.service=service;this.action=action;this.position=position;this.building=building;this.scale=scale;}
     }
     public sealed class TownResidentDefinition
     {
@@ -28,40 +30,55 @@ namespace Hellscript
     }
     public static class TownLayout
     {
-        public const float Speed=5.5f,ArriveRadius=1.4f,InteractionRadius=2.8f,HeroRadius=.55f,HalfWidth=55,HalfHeight=35;
-        public static readonly Vector2 Spawn=new Vector2(0,6);
+        public const float Speed=5.5f,ArriveRadius=1.4f,InteractionRadius=2.8f,HeroRadius=.55f,HalfWidth=35,HalfHeight=24;
+        public static readonly Vector2 Spawn=new Vector2(-2,1);
         // Map-right is screen-right at the fixed camera angle.
         public static readonly Vector2 Right=new Vector2(18,12).normalized,Back=new Vector2(-12,18).normalized;
         public static Vector2 ToWorld(Vector2 p)=>Right*p.x+Back*p.y;
         public static Vector2 FromWorld(Vector2 p)=>new Vector2(Vector2.Dot(p,Right),Vector2.Dot(p,Back));
         static Rect House(float x,float y,float w=12,float h=9)=>new Rect(x-w/2,y-h/2,w,h);
-        // Every building footprint follows its World/Town model (manifest footprint). The warehouse and blacksmith keep their front edge; the four
-        // south-row shops keep theirs at y -20.5, 3.5 m behind the attendant. A missing model falls back to a primitive house of the same rectangle.
+        // A building model's footprint (manifest size at scale 1) shown at scale, its camera-facing front edge on y = front.
+        static Rect Model(float x,float front,float w,float d,float scale)=>new Rect(x-w*scale/2,front,w*scale,d*scale);
+        // The layout follows the approved casual overview (Docs/Art/CasualConcept/2026-10-13/Town): a compact fenced village around a
+        // cross of cobbled streets. North row, west to east: warehouse, weapon stall, well, forge, training yard. The aspect stone stands
+        // on a round court in the middle of the west main street (the user's placement); the rift gateway at the south edge of the crossroads. South row: gamble, gem, rune and rune-workshop houses facing the
+        // camera. Every rectangle is its World/Town model footprint times the scale; a missing model falls back to a primitive house of it.
+        // South-row roofs stay below the main street on screen (back edge + height / tan 49 deg < -2.6), so they never hide it.
         public static readonly TownStationDefinition[] Stations=
         {
-            new TownStationDefinition(TownStation.AspectStone,"위상 각인석","위상 수집 · 레벨업 · 각인","각인석 열기",new Vector2(-34,1),House(-34,4,5,2)),
-            new TownStationDefinition(TownStation.Warehouse,"창고","계정 창고 · 장비 보관","창고 열기",new Vector2(-37,13),House(-37,20.8f,10.6f,9.6f)),
-            new TownStationDefinition(TownStation.Merchant,"무기 상인","장비 구매 · 판매","상점 열기",new Vector2(-14,16),House(-14,20.45f,5f,5.3f)),
-            new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-6,-24),House(-6,-17.3f,5.8f,6.4f)),
-            new TownStationDefinition(TownStation.Blacksmith,"대장간","장비 재련 · 강화 · 제작","대장간 이용",new Vector2(14,17),House(14,25.4f,6.7f,9.8f)),
-            new TownStationDefinition(TownStation.Training,"훈련 교관","자유 훈련 · 설정 비교","훈련하기",new Vector2(37,9)),
-            new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 변환 · 물약 제조 · 소켓 관리","보석상 열기",new Vector2(-32,-24),House(-32,-18f,7.7f,5f)),
-            new TownStationDefinition(TownStation.RuneMerchant,"룬 상인","룬 블록 구매 · 룬 배치","룬 상점 열기",new Vector2(21,-24),House(21,-17.05f,4.4f,6.9f)),
-            new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(43,-24),House(43,-17.2f,6.6f,6.6f)),
-            new TownStationDefinition(TownStation.RiftKeeper,"균열","단계 선택 · 균열 입장","균열 열기",new Vector2(8,0)),
+            new TownStationDefinition(TownStation.AspectStone,"위상 각인석","위상 수집 · 레벨업 · 각인","각인석 열기",new Vector2(-19,-2.2f),House(-19,.3f,3f,1.4f)),
+            new TownStationDefinition(TownStation.Warehouse,"창고","계정 창고 · 장비 보관","창고 열기",new Vector2(-26.5f,10.2f),Model(-26.5f,12,10.645f,9.577f,1),1),
+            new TownStationDefinition(TownStation.Merchant,"무기 상인","장비 구매 · 판매","상점 열기",new Vector2(-11,11.2f),Model(-11,13,5.035f,5.28f,1.2f),1.2f),
+            new TownStationDefinition(TownStation.Gambler,"갬블 상인","미확인 장비 구매 · 판매","갬블 상점 열기",new Vector2(-24.5f,-22),Model(-24.5f,-20,5.76f,6.447f,1.25f),1.25f),
+            new TownStationDefinition(TownStation.Blacksmith,"대장간","장비 재련 · 강화 · 제작","대장간 이용",new Vector2(10,9.7f),Model(10,11.5f,6.653f,9.835f,1.35f),1.35f),
+            new TownStationDefinition(TownStation.Training,"훈련 교관","자유 훈련 · 설정 비교","훈련하기",new Vector2(28,11.2f)),
+            new TownStationDefinition(TownStation.GemMerchant,"보석 상인","보석 변환 · 물약 제조 · 소켓 관리","보석상 열기",new Vector2(-8.5f,-22),Model(-8.5f,-20,7.723f,5f,1.15f),1.15f),
+            new TownStationDefinition(TownStation.RuneMerchant,"룬 상인","룬 블록 구매 · 룬 배치","룬 상점 열기",new Vector2(14,-22),Model(14,-20,4.375f,6.922f,1.15f),1.15f),
+            new TownStationDefinition(TownStation.RuneMaster,"룬 마스터","룬 재형성 · 룬 승급","룬 공방 열기",new Vector2(29.5f,-22),Model(29.5f,-20,6.579f,6.621f,1.25f),1.25f),
+            new TownStationDefinition(TownStation.RiftKeeper,"균열","단계 선택 · 균열 입장","균열 열기",new Vector2(5.5f,-3.8f)),
         };
         // Residents can converse, but never own a service ID or dispatch a shop.
         public static readonly TownResidentDefinition[] Residents=
         {
-            new TownResidentDefinition("Pyonya",new Vector2(-13,-7)),
-            new TownResidentDefinition("Jean",new Vector2(-11,7)),
-            new TownResidentDefinition("Darc",new Vector2(23,4)),
+            new TownResidentDefinition("Pyonya",new Vector2(-9.5f,-.6f)),
+            new TownResidentDefinition("Jean",new Vector2(-32,.4f)),
+            new TownResidentDefinition("Darc",new Vector2(21,-.6f)),
         };
+        // Solid scenery the hero walks around like a building: the well and the trunks of the trees that stand inside the fence
+        // (WorldView.TownEnvironment plants a tree on the centre of each). Small props (lanterns, barrels, planters) stay walk-through.
+        public static readonly Rect[] Obstacles=
+        {
+            House(-6.5f,6.2f,3.2f,3f),
+            House(-18,21.5f,2.6f,2.6f),House(-17.3f,16.2f,1.8f,1.8f),House(-5.6f,20.8f,2.6f,2.6f),House(17.4f,17.6f,1.8f,1.8f),House(-33.5f,18,1.8f,1.8f),
+            House(-33.5f,-11,2.6f,2.6f),House(-33.8f,-18.5f,1.8f,1.8f),House(-16.6f,-14.5f,1.8f,1.8f),House(21.8f,-12.5f,2.6f,2.6f),
+            House(-18,-8.2f,1.8f,1.8f),House(5.4f,-14.2f,2.6f,2.6f),House(9.2f,-9.8f,1.6f,1.6f),
+        };
+        static readonly Rect[] Blocks=Stations.Where(s=>s.building.width>0).Select(s=>s.building).Concat(Obstacles).ToArray();
         public static TownStationDefinition Station(TownStation id)=>Stations.Single(s=>s.id==(id==TownStation.Reroller?TownStation.Blacksmith:id));
         public static Vector2 ReturnPortalPosition=>Station(TownStation.RiftKeeper).position+new Vector2(7,0);
         public static Vector2 Clamp(Vector2 p)=>new Vector2(Mathf.Clamp(p.x,-HalfWidth,HalfWidth),Mathf.Clamp(p.y,-HalfHeight,HalfHeight));
         public static Rect Clearance(Rect r)=>new Rect(r.xMin-HeroRadius,r.yMin-HeroRadius,r.width+HeroRadius*2,r.height+HeroRadius*2);
-        public static bool Walkable(Vector2 p)=>p==Clamp(p)&&!Stations.Any(s=>s.building.width>0&&Clearance(s.building).Contains(p));
+        public static bool Walkable(Vector2 p)=>p==Clamp(p)&&!Blocks.Any(b=>Clearance(b).Contains(p));
         public static TownStation? Nearby(Vector2 p)
         {
             TownStation? result=null;float distance=InteractionRadius;
@@ -69,9 +86,9 @@ namespace Hellscript
         }
         public static bool ClearSegment(Vector2 a,Vector2 b)
         {
-            foreach(var s in Stations)
+            foreach(var block in Blocks)
             {
-                if(s.building.width<=0)continue;Rect r=Clearance(s.building);Vector2 d=b-a;float low=0,high=1;
+                Rect r=Clearance(block);Vector2 d=b-a;float low=0,high=1;
                 bool Intersects(float origin,float delta,float min,float max)
                 {
                     if(Mathf.Abs(delta)<.00001f)return origin>min&&origin<max;
@@ -86,9 +103,9 @@ namespace Hellscript
         {
             to=Clamp(to);if(!Walkable(to))return new List<Vector2>();if(ClearSegment(from,to))return new List<Vector2>{to};
             var nodes=new List<Vector2>{from,to};
-            foreach(var s in Stations.Where(s=>s.building.width>0))
+            foreach(var block in Blocks)
             {
-                Rect r=Clearance(s.building);const float e=.05f;
+                Rect r=Clearance(block);const float e=.05f;
                 nodes.Add(new Vector2(r.xMin-e,r.yMin-e));nodes.Add(new Vector2(r.xMax+e,r.yMin-e));
                 nodes.Add(new Vector2(r.xMax+e,r.yMax+e));nodes.Add(new Vector2(r.xMin-e,r.yMax+e));
             }
