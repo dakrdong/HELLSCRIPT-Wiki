@@ -3,7 +3,7 @@ import json
 import re
 
 RECEIPT = 'tools/casual_art_adoption_receipt_20261015.json'
-EXPECTED_COUNT = 603  # Exact root-approved import unit; runtime/release approval remains separate.
+EXPECTED_COUNT = 604  # Exact root-approved import unit; runtime/release approval remains separate.
 ADOPTED_SOURCE_STATUS = '개발 적용 · 출시 승인 별도 / Development; release approval separate'
 CLASS_GLYPH_PATHS = {
     18: 'Assets/HELLSCRIPT/Resources/Art/CharacterPlaza/crest_warrior.png',

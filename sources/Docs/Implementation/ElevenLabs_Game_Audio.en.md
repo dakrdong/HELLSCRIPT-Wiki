@@ -1,8 +1,10 @@
 # ElevenLabs game audio
 
-Updated: 2026-10-14 · Written: 2026-09-27 · [한국어](ElevenLabs_Game_Audio.md)
+Updated: 2026-10-18 · Written: 2026-09-27 · [한국어](ElevenLabs_Game_Audio.md)
 
 On 2026-09-27 the user accepted the then-adopted audio as the final version (454 sound effects and four music tracks: 458 files). On 2026-10-14 the art direction changed to bright casual fantasy, so **the four music tracks were replaced by six**. The current set is **456 sound effects (including the two title-flight effects merged the same day) and six music tracks: 462 files**. It covers all SFX identifiers and six music contexts. Nine SFX actions share suitable existing final clips. No additional SFX generation is planned. The 458-file and four-track statements and the evidence below describe the 2026-09-27 state.
+
+**Added 2026-10-18:** the 62 D4 skill modifiers without a sound got new sound effects, so the current set is **518 sound effects and 347 sound identifiers** (by the catalog). The 456-file and 285-identifier statements below describe the state just before. Details: [Skill sound effects: prompts and wiring](Skill_Sfx_Prompts_20261018.en.md).
 
 Final acceptance of the SFX is based on the user's instruction of 2026-09-27. It does not claim a new human listening test or physical mobile validation.
 
@@ -128,3 +130,13 @@ Two new sound effects for the [title login flight](Title_Screen.en.md) were gene
 The original MP3s are kept in `AudioSources/ElevenLabs/Sources/` and were mastered with `elevenlabs_audio.py`. The set is now 456 sound effect files plus the four music tracks of that moment (the same day's music replacement above made it six), with 285 SFX identifiers. The eight generations cost 54.7 credits (the estimate said 180). No human listening check was done.
 
 Note: on the same day `main`'s `sfx-catalog.json` and `bank.json` disagree because of the D4 skill identifier migration, so `generate_sfx.py --check` and `elevenlabs_audio.py --check` fail (they already did before this change). The two new bank rows match the generator's format, and `test_elevenlabs_audio.py` passes.
+
+## Addition: 62 skill modifier sound effects (2026-10-18)
+
+Only 22 of the 84 D4 skill modifiers had a sound; the others sounded like their skill. The 62 without one were made with ElevenLabs `eleven_text_to_sound_v2` (MCP, prompt influence 0.65, one take per modifier). Three (`A18-1`, `M08-1`, `M11-2`) were nearly silent or ended without a decay on the first take and were re-prompted once. Prompts, generation ids and hashes are in the [provenance manifest](../../AudioSources/ElevenLabs/manifest.json); the cost was 354.6 credits (flow `tcHr1hKn6p0at4pzyUOg`). The originals are kept in `AudioSources/ElevenLabs/Sources/`.
+
+`GameAudio` plays the cast modifier's own cue (`skill.<skill>-<number>`) at the moment its moment table gives (69 of the 84 modifiers replace the skill's cue at the cast; 15 sound at the wind-up start, the landing, the follow-up hit slot or a simulation event). Prompts, moments and deferred items are in [Skill sound effects: prompts and wiring](Skill_Sfx_Prompts_20261018.en.md). The 62 new clips pass the provenance and signal rules (no clipping, silent edges), and fourteen Unity Edit Mode `SkillModifierAudioTests` (rerun with `SoundBankTests` after the moment table was added), `SoundBankTests`, `NewContentAudioTests` and eight offline tool tests pass. Nobody has listened to them.
+
+The 11 replace-existing masters (14 clips) deferred the same day were regenerated and replaced under the same clip file names (flow `81oyAOAv3bzfGC0fFupM`, 64.0 credits). The new audio passes the provenance and signal rules; 29 Unity Edit Mode tests (`SoundBankTests`, `SkillModifierAudioTests`) and the eight offline tool tests pass. The 14 old original MP3s that left the manifest were deleted after the user confirmed (recoverable from git history).
+
+Note: the `--check` failure of the 2026-10-14 section (catalog and bank disagree on D4 ids) remains; the 62 new catalog and bank rows use the generator's format.

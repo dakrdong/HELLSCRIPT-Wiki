@@ -21,8 +21,9 @@ namespace Hellscript
         void MakeSettingsIcon(Button button)
         {
             button.GetComponentInChildren<Text>().text="";
-            var icon=Rect("Settings gear",button.transform);Stretch(icon);icon.offsetMin=Vector2.one*12;icon.offsetMax=-Vector2.one*12;
-            var graphic=icon.gameObject.AddComponent<SettingsGearGraphic>();graphic.color=pale;graphic.raycastTarget=false;
+            var icon=Rect("Settings gear",button.transform);Stretch(icon);
+            var graphic=icon.gameObject.AddComponent<Image>();graphic.sprite=GlobalHudView.LoadArt("menu-settings");graphic.preserveAspect=true;graphic.raycastTarget=false;
+            button.targetGraphic=graphic;
         }
     }
 }

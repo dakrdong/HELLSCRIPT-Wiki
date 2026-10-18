@@ -79,7 +79,7 @@ namespace Hellscript
         }
         bool TryUsePotion(float threshold)
         {
-            // Flow 7 first demonstrates its owned stock only after the player saves the 50% policy.
+            // Flow 7 first demonstrates its owned stock only after the player saves a safe potion policy.
             if(GuideTutorial.PotionTeaching(State)&&State.potions.uses==0&&!guidePotionCommit)return false;
             if(threshold<=0||State.health<=0||State.health/Stats.hp*100>threshold||State.potionCd>0||!HasHpPotion)return false;
             var def=State.potions.version==0?PotionCatalog.Get("PH01"):ReadyPotion("hp");

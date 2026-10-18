@@ -121,11 +121,11 @@ namespace Hellscript
         bool CompleteGuidePotionLesson()
         {
             if(!GuideTutorial.PotionLesson(State)||!State.paused||State.potions.version==0||State.potions.uses!=0||
-                !CurrentPotionPolicy.hp||CurrentPotionPolicy.hpThreshold!=50||ReadyPotion("hp")?.id!=GuideTutorial.HealingPotion)return false;
+                !CurrentPotionPolicy.hp||!GuideTutorial.PotionLessonThreshold(CurrentPotionPolicy.hpThreshold)||ReadyPotion("hp")?.id!=GuideTutorial.HealingPotion)return false;
             var visual=Visual;Visual=null;guidePotionCommit=true;
-            // An old SkillSummary checkpoint may already have received the retired free heal; keep its HP intact.
-            float trigger=State.tutorialPhase==GuideTutorial.SkillSummary?100:CurrentPotionPolicy.hpThreshold;
-            try{if(!TryUsePotion(trigger))return false;}
+            // Demonstrate one real potion immediately without lowering HP or changing the chosen automatic threshold.
+            // The paused lesson may still be above that threshold, including migrated SkillSummary checkpoints.
+            try{if(!TryUsePotion(100))return false;}
             finally{guidePotionCommit=false;Visual=visual;}
             State.tutorialPhase=GuideTutorial.SkillSummary;State.paused=true;return true;
         }

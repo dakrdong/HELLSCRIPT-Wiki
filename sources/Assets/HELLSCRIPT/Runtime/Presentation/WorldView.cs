@@ -70,7 +70,7 @@ namespace Hellscript
             shieldView=shadowView=shoutView=null;
             // Destroy is deferred to the end of the frame, so forget the old root's effects library now: a world rebuilt in the
             // same frame must not borrow it (its materials die with the old root and its effects would render magenta).
-            if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();mounds.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
+            if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();mounds.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();trapsSprung.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
             activeProjectiles.Clear();activeTraps.Clear();staleActions.Clear();activeHazards.Clear();staleHazards.Clear();
             roomGeometry.Clear();passageGeometry.Clear();terrainProps.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
         }
@@ -207,7 +207,7 @@ namespace Hellscript
                 if(enemy.boss)actor.transform.Find("Stagger").gameObject.SetActive(enemy.bossControl.staggered>0);
                 // Flyers hover above the floor.
                 var place=Position(enemy.position)+(MonsterRegistry.Behavior(enemy)?.traits.flying==true?Vector3.up*1.4f:Vector3.zero);
-                actor.SetActive(true);actor.transform.position=HookEnemyPosition(run,enemy,place)??(snapPresentation?place:Vector3.Lerp(actor.transform.position,place,Mathf.Min(1,dt*20)));
+                actor.SetActive(true);var shoved=ShoveBase(enemy.id,actor);actor.transform.position=(HookEnemyPosition(run,enemy,place)??(snapPresentation?place:Vector3.Lerp(shoved,place,Mathf.Min(1,dt*20))))+ShoveNow(enemy.id);
                 Vector3 facing=new Vector3(enemy.brain.facing.x,0,enemy.brain.facing.y);if(facing.sqrMagnitude>.01f)actor.transform.rotation=Quaternion.LookRotation(facing);
                 PoseEnemy(actor,enemy,run);AttackMotes(Fx,actor,enemy,run);
                 var bar=actor.transform.Find("Health");bar.gameObject.SetActive(!EdictPriorityVisible);bar.localScale=new Vector3(Mathf.Max(.01f,enemy.health/enemy.maxHealth),.1f,.1f);

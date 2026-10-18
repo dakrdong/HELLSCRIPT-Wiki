@@ -122,8 +122,7 @@ namespace Hellscript
             CasualSettingsStyle.Button(settings);((UiButton)settings).Face.SetRound(true);
             PlazaSkin.ApplyChrome((UiButton)settings);
             ((UiButton)settings).SetCasualAppearance(borderWidth:2,shadow:3,edge:UiSkin.Casual.Navy);
-            var gear=(RectTransform)settings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*12;gear.offsetMax=-Vector2.one*12;
-            gear.GetComponent<SettingsGearGraphic>().color=UiSkin.Casual.Navy;
+            ReflowPlazaGear(44);
         }
         static void OutlinePlazaText(Text label,float width=1,float drop=0,bool casual=false)
         {
@@ -158,8 +157,8 @@ namespace Hellscript
         void ReflowPlazaGear(float size)
         {
             var face=((UiButton)plazaSettings).Face.rectTransform;
-            face.anchorMin=Vector2.one*.16f;face.anchorMax=Vector2.one*.84f;face.offsetMin=face.offsetMax=Vector2.zero;
-            var gear=(RectTransform)plazaSettings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(size*.3096f);gear.offsetMax=-gear.offsetMin;
+            face.gameObject.SetActive(false);
+            var gear=(RectTransform)plazaSettings.transform.Find("Settings gear");gear.offsetMin=gear.offsetMax=Vector2.zero;
         }
         void ReflowPlazaGuide(GlobalHudLayout layout,float unit)
         {
@@ -213,23 +212,13 @@ namespace Hellscript
                 plazaKnobFace.offsetMin=Vector2.one*joystickBorder;plazaKnobFace.offsetMax=-plazaKnobFace.offsetMin;
                 plazaKnobDrop.anchoredPosition=new Vector2(0,-joystickDrop);
                 float hudScale=layout.scale/Mathf.Max(.001f,scale);
-                float gap=UiTheme.Gap*hudScale,edge=12*hudScale;
+                float gap=6*hudScale,edge=12*hudScale;
                 float dockLimit=(safe.height-layout.potionBounds.yMax*layout.scale)/scale;
                 float iconSize=DockIconSize(dockLimit,true);
                 var settingsRect=(RectTransform)plazaSettings.transform;
                 Right(settingsRect,edge,edge,iconSize/titleScale,iconSize/titleScale);settingsRect.localScale=Vector3.one*titleScale;ReflowPlazaGear(iconSize/titleScale);
                 float dockTop=edge+iconSize+gap,dockRight=edge;
-                float dockHeight=(contentDock.Items.childCount+1)*iconSize+contentDock.Items.childCount*gap;
-                var edict=layout.Pixels(layout.edict);
-                edict=new Rect(edict.x/scale,(safe.height-edict.yMax)/scale,edict.width/scale,edict.height/scale);
-                var dockBounds=new Rect(root.rect.width-dockRight-iconSize,dockTop,iconSize,dockHeight);
-                if(dockBounds.Overlaps(edict))
-                {
-                    // Reserve the complete open column even while folded, so the toggle never jumps.
-                    float below=edict.yMax+gap;
-                    if(below+dockHeight<=dockLimit)dockTop=below;
-                    else dockRight=root.rect.width-edict.xMin+gap;
-                }
+                // Town has no edict preview to reserve above the shortcut column.
                 Right((RectTransform)contentDock.transform,dockRight,dockTop,iconSize,iconSize);contentDock.Reflow(iconSize,gap);
                 ReflowEventButton();
                 if(plazaTitleUnit!=titleScale)

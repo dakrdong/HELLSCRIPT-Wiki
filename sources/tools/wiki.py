@@ -1163,7 +1163,10 @@ def public_delivery(dataset):
     external = config.get('externalSources', {})
     selected = {path for path in dataset['inputManifest'] if external_public_source(path)}
     if not isinstance(external, dict) or set(external) != selected:
-        raise ValueError('Public originals inventory changed; preserve and pin a new public snapshot')
+        added = sorted(selected - set(external)) if isinstance(external, dict) else []
+        removed = sorted(set(external) - selected) if isinstance(external, dict) else []
+        raise ValueError('Public originals inventory changed; preserve and pin a new public snapshot'
+                         +' (added %d: %s; removed %d: %s)' % (len(added), ', '.join(added[:40]), len(removed), ', '.join(removed[:40])))
     for path, entry in external.items():
         wiki_resources_current.safe_relative(path)
         original = SITE / 'sources' / path

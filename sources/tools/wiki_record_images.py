@@ -47,7 +47,7 @@ def attach(api, databases):
             resource_paths.setdefault(resource['assetPath'], resource)
     approval = json.loads(api.read(APPROVAL))
     if (approval.get('schemaVersion') != 1 or approval.get('adoption') != 'approved_for_import'
-            or len(approval.get('records', [])) != 603):
+            or len(approval.get('records', [])) != 604):
         raise ValueError('Changed current art approval unit')
     approved = _unique(approval['records'], 'path', 'approved art path')
     registry = _unique(json.loads(api.read(REGISTRY))['monsters'], 'id', 'monster')
@@ -62,10 +62,13 @@ def attach(api, databases):
     # model-matched replacements. Current runtime bytes have their own manifest.
     current_portraits = json.loads(api.read(CURRENT_PORTRAITS))
     portraits = current_portraits.get('items')
+    # Monsters added after the preserved 35-portrait proof (2026-10-18 StyleD batch) have no historical hash;
+    # they must still be listed in the current manifest, match the registry and pass the per-file checks below.
     if (current_portraits.get('generationSurface') != 'built-in image_gen'
-            or not isinstance(portraits, dict) or len(portraits) != 35):
+            or not isinstance(portraits, dict) or len(portraits) < 35):
         raise ValueError('Missing current runtime portrait authority')
-    _same_ids(portraits, historical_portraits, 'current/historical portrait')
+    if not set(historical_portraits) <= set(portraits):
+        raise ValueError('Changed current/historical portrait identities')
     _same_ids(portraits, registry, 'portrait/registry')
     for identifier, entry in portraits.items():
         if (entry.get('file') != ART+'TrainingGround/Portraits/'+identifier+'.png'

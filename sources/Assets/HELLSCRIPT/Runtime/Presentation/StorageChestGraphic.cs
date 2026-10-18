@@ -94,23 +94,25 @@ namespace Hellscript
         protected override void OnPopulateMesh(VertexHelper mesh)
         {
             mesh.Clear(); if (chest == null) return;
-            Color dark = Color.Lerp(UiTheme.Background, Color.black, .55f);
+            // Casual badges: a navy ring around a green plus (purchasable) or a grey padlock (locked).
+            var skin = UiSkin.Casual;
             if (chest.TransferHover > 0 && chest.Owned && !chest.IsOpen)
-                Stroke(mesh, UiTheme.Gold, 2, 10,50, 10+44*chest.TransferHover,50);
+                Stroke(mesh, skin.Gold, 2, 10,50, 10+44*chest.TransferHover,50);
             if (!chest.Owned)
             {
                 // Purchase badge and padlock occupy the same position but have distinct shapes.
-                Poly(mesh, dark, 41,30, 54,30, 59,35, 59,46, 44,48, 39,43, 39,35);
+                Poly(mesh, skin.Navy, 41,30, 54,30, 59,35, 59,46, 44,48, 39,43, 39,35);
                 if (chest.Purchasable)
                 {
-                    Poly(mesh, UiTheme.Primary, 43,32, 54,32, 57,36, 57,43, 45,46, 41,42, 41,36);
-                    Stroke(mesh, UiTheme.Text, 2, 45,39, 53,39); Stroke(mesh, UiTheme.Text, 2, 49,35, 49,43);
+                    Poly(mesh, skin.Green, 43,32, 54,32, 57,36, 57,43, 45,46, 41,42, 41,36);
+                    Stroke(mesh, skin.White, 2, 45,39, 53,39); Stroke(mesh, skin.White, 2, 49,35, 49,43);
                 }
                 else
                 {
-                    Stroke(mesh, UiTheme.Muted, 2, 44,37, 44,33, 46,30, 51,30, 54,33, 54,37);
-                    Poly(mesh, UiTheme.Muted, 42,36, 56,36, 56,45, 42,45);
-                    Stroke(mesh, dark, 1.5f, 49,39, 49,42);
+                    Poly(mesh, skin.Disabled, 43,32, 54,32, 57,36, 57,43, 45,46, 41,42, 41,36);
+                    Stroke(mesh, skin.Muted, 2, 46,38, 46,35, 48,33, 51,33, 53,35, 53,38);
+                    Poly(mesh, skin.Muted, 44,38, 55,38, 55,44, 44,44);
+                    Stroke(mesh, skin.Disabled, 1.5f, 49,40, 49,42);
                 }
             }
         }

@@ -127,3 +127,9 @@ When the Character screen exists, replace its notice with a real entry point. Th
 ## Battle size — 2026-10-08
 
 The battle screen's settings gear, content shortcuts and event icon now take the skill icons' size with the town's formula (`GlobalHudLayout.ShortcutIcon`: the skill icon's size on screen × 1.15, at least 44 screen pixels in town and 44 page units in battle). On 16:9 landscape that is 88.3 page units at any resolution. The map panel, observation menu, power saving and escape step back by the width of that column. See [Tutorial hub follow-up and per-hero tutorials](Tutorial_Hub_Followup_20261008.en.md).
+
+## Town settings and shortcut column (2026-10-18)
+
+Town no longer reserves an invisible combat-edict preview area above its shortcut column. Settings, toggle and shortcuts share one size, right edge and six-unit gap. The world HUD settings symbol uses a native-alpha silver-and-gold painted cog; town removes the old cream circle and inset. Battle retains its existing shortcut/minimap placement. [Art prompt and provenance](../Art/SettingsCog20261018/manifest.json). The exact generation model is unknown; this is development art, not a claim of gpt-image-2 provenance or production approval.
+
+[Validation: 19 Edit Mode + 15 UI contract cases; native macOS five viewport PASS](TownShortcutStackEvidence20261018/validation.json) | [Portrait](TownShortcutStackEvidence20261018/portrait.png) | [Landscape](TownShortcutStackEvidence20261018/landscape.png). Physical mobile and GPU performance remain unverified.

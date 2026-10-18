@@ -59,7 +59,7 @@ namespace Hellscript
         {
             settings.GetComponent<Image>().color=Color.clear;
             var border=settings.GetComponent<UIRectBorder>();if(border!=null)border.enabled=false;
-            var gear=(RectTransform)settings.transform.Find("Settings gear");gear.offsetMin=Vector2.one*(size*.2f);gear.offsetMax=-gear.offsetMin;
+            var gear=(RectTransform)settings.transform.Find("Settings gear");gear.offsetMin=gear.offsetMax=Vector2.zero;
         }
         Image Emblem(Button button,string sprite)
             =>Emblem(button,GlobalHudView.LoadArt(sprite));
