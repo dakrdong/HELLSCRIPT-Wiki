@@ -1224,6 +1224,9 @@ def write_source_snapshot(path, actual):
     if (not sources.resolve().is_relative_to(SITE.resolve())
             or not target.parent.resolve().is_relative_to(sources.resolve())):
         raise ValueError('Wiki snapshot escapes sources: ' + path)
+    if (target.is_file() and not target.is_symlink() and target.read_bytes() == actual
+            and (not original.is_file() or not target.samefile(original))):
+        return
     target.parent.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(dir=target.parent, prefix='.source-build-') as temporary:
         staged = Path(temporary) / target.name
@@ -1404,7 +1407,23 @@ def check():
     print(json.dumps(result,ensure_ascii=False,indent=2))
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('command',choices=['build','check','serve']);parser.add_argument('--port',type=int,default=4175);args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('command',choices=['build','check','serve','verify']);parser.add_argument('--port',type=int,default=4175)
+    parser.add_argument('--receipt',type=Path,help='Task-owned verification receipt')
+    parser.add_argument('--node',default='node',help='Installed Node executable')
+    parser.add_argument('--status',action='store_true',help='Read-only verification reuse plan; exit 1 if needed')
+    parser.add_argument('--force',action='store_true',help='Ignore previous successful verification')
+    parser.add_argument('--published-site',type=Path,help='Refreshed local published checkout for content comparison')
+    args=parser.parse_args()
+    if args.command!='verify' and (args.receipt or args.status or args.force or args.published_site or args.node!='node'):
+        parser.error('verification options require verify')
+    if args.command=='verify':
+        import wiki_verify
+        try:
+            code=wiki_verify.verify(sys.modules[__name__],args.receipt,node=args.node,status=args.status,
+                                   force=args.force,published_site=args.published_site)
+        except (OSError,ValueError,subprocess.SubprocessError) as error:
+            print('FAIL: '+str(error),file=sys.stderr);code=2
+        raise SystemExit(code)
     if args.command=='serve':
         from functools import partial
         handler=partial(http.server.SimpleHTTPRequestHandler,directory=str(SITE))
