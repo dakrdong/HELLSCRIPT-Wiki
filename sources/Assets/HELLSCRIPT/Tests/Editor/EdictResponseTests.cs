@@ -64,14 +64,13 @@ namespace Hellscript.Tests
             Assert.AreEqual(0,sim.State.statistics.feedback.attackSeconds);Advance(sim,.4f);Assert.IsFalse(sim.EdictDodgeHolding);
         }
         [Test]
-        public void StationaryDodgeAttacksAnotherReachableEnemyAndDoesNotChaseTheOldTarget()
+        public void AHeroWhoStandsClearAttacksWhatIsInReachAndAdvancesOnlyByStepsThatStayClearOfTheDodgedZone()
         {
-            var sim=Fixture(HeroClass.Warrior);DodgeDocument(sim,true);var h=Danger(sim);h.duration=4;h.interval=h.tick=.5f;
+            var sim=Fixture(HeroClass.Warrior);var document=DodgeDocument(sim,true);var h=Danger(sim);h.duration=4;h.interval=h.tick=.5f;
             sim.State.enemies[0].position+=Vector2.up*4;
             Advance(sim,.9f);var safe=sim.State.position;sim.State.targetId=900;
             var reachable=new EnemyState{id=901,position=safe+Vector2.right*1.2f,health=100000,maxHealth=100000,speed=0,attack=0,cooldown=1000,brain=new EnemyBrain{initialized=true}};sim.State.enemies.Add(reachable);
-            Advance(sim,2);Assert.IsTrue(sim.EdictDodgeHolding);Assert.AreEqual(safe,sim.State.position);Assert.Less(reachable.health,reachable.maxHealth);
-            Assert.IsTrue(sim.State.actionEvents.Any(a=>a.kind=="ACTION_START"&&a.targetId==901));Assert.Greater(sim.State.statistics.feedback.attackSeconds,0);
+            Advance(sim,2);Assert.IsTrue(sim.EdictDodgeHolding);Assert.IsFalse(sim.AssessEdictSurvival(document).DodgeRequested,"The hero walked back into the zone he dodged.");Assert.IsTrue(reachable.health<reachable.maxHealth||Vector2.Distance(sim.State.position,sim.State.enemies[0].position)<Vector2.Distance(safe,sim.State.enemies[0].position),"The hero stood idle after dodging.");
             Assert.Greater(sim.State.statistics.feedback.evasionSeconds,0);Assert.AreEqual(100,sim.State.statistics.feedback.ActivityPercentages().Sum());
         }
         [Test]

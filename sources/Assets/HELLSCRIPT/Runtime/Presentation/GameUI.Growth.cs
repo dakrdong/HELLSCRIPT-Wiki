@@ -27,7 +27,11 @@ namespace Hellscript
             string unlocked=last.unlockedSkills.Count>0?Loc.F(" · {0} 해금 · 성장에서 설정 확인",string.Join(", ",last.unlockedSkills.Select(i=>game.catalog.skills[i].name))):"";
             // A level just gained is a show; one read back from a restored run is only a note.
             if(run.time-last.time<=3f&&celebration!=null)
-                celebration.Play(last.toLevel,run.tutorial?Loc.T("HP·MP를 모두 회복했어요! 새 스킬 포인트가 생겼어요."):Loc.T("HP·MP를 모두 회복했습니다.")+unlocked,GuideTutorial.Running(run)&&run.tutorialPhase==GuideTutorial.LevelUp);
+            {
+                // One short line under the level: what the level gave, not a sentence.
+                string gained=run.tutorial?Loc.T("스킬 포인트 +1"):last.unlockedSkills.Count>0?Loc.F("{0} 해금",string.Join(", ",last.unlockedSkills.Select(i=>game.catalog.skills[i].name))):"";
+                celebration.Play(last.toLevel,Loc.T("HP·MP 회복")+(gained==""?"":"  /  "+gained),GuideTutorial.Running(run)&&run.tutorialPhase==GuideTutorial.LevelUp);
+            }
             else ShowToast(Loc.F("Lv.{0} 달성{1}",last.toLevel,Loc.T(" · HP·MP를 모두 회복했습니다.")+unlocked));
         }
         public void ShowGrowth()

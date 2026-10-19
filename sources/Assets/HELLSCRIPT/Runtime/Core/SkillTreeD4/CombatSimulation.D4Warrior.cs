@@ -41,9 +41,8 @@ namespace Hellscript
                 }
                 if(victims.Length>0&&cast.mod!=1)
                 {
-                    var pulled=victims[victims.Length-1];var before=pulled.position;
-                    Pull(pulled,State.position,GuideHookPullDistance(pulled,cast,N("W08","pullMeters")),"W08",cast.root);
-                    CompleteGuideHookPull(pulled,cast,before);
+                    var pulled=victims[victims.Length-1];
+                    Pull(pulled,State.position,N("W08","pullMeters"),"W08",cast.root);
                 }
                 if(hits>0)Resource(D4BaseValue("W08",1,cast)+(cast.mod==1?D4ModValue("W08",cast):0),"W08",cast.root);
                 return true;

@@ -6,6 +6,8 @@ Author: Claude (plan only). Codex implements, verifies and commits. When done, t
 
 [한국어](Guide_Tutorial_Segment4_Plan_20261013.md)
 
+> **Status (2026-10-19): implemented.** Phase numbers, the fixed loot and the card flow differ from this plan in places, so the result is recorded in [the gear lessons of the real-rules rework](Guide_Tutorial_Real_Rules_20261019.en.md). This document stays as the plan of record.
+
 ## 0. Prerequisites and baseline
 
 - Baseline code: **`origin/main` with segments 2 and 3** (PR #101, after `a5596519`). Phase constants in `GuideTutorial.cs`: `Entrance=0 … FinalBoss=24, Cleared=25, Last=Cleared`.

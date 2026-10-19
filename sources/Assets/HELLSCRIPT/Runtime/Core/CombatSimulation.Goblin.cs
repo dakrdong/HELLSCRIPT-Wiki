@@ -32,9 +32,6 @@ namespace Hellscript
         void TickGoldenGoblin(EnemyState e,float dt)
         {
             var g=State.goblin;if(g==null)return;var b=e.brain;
-            if(IsGuide&&State.tutorialPhase==GuideTutorial.GoblinAppear)
-            {e.position=Map.MoveDirect(e.position,g.fleeGoal,e.speed*dt,.4f);EnemyMode(e,"도주");return;}
-            if(IsGuide){TickGuideGoblinFlight(e,dt);return;}
             bool sees=Vector2.Distance(e.position,State.position)<=GoldenGoblin.DetectRange&&Map.LineClear(e.position,State.position),hurt=e.health<e.maxHealth-.0001f;
             if(!g.fleeing&&(sees||hurt))
             {
@@ -68,6 +65,7 @@ namespace Hellscript
         {
             var g=State.goblin;if(g==null||g.rewarded)return;g.rewarded=true;
             if(State.training>=0&&!IsGuide)return;
+            if(IsGuide&&GuideTutorial.SkillLessons(State)){RewardGuideTreasure(g);return;}
             var at=e.position;
             if(IsGuide)
             {

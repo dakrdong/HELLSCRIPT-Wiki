@@ -336,6 +336,7 @@ namespace Hellscript
         // Hazard lessons: when the current encounter began, and which enemy groups were already brought in (bit per group).
         public float guidePhaseAt;
         public int guideSpawned;
+        public int guideGear;
         public float pitStageTime;
         public string guideSetup="";
         public CombatJournalData journal;
