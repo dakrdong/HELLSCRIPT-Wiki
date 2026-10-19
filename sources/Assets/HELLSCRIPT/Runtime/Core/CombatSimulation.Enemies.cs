@@ -74,6 +74,8 @@ namespace Hellscript
             // escapes by stepping into the ring's middle or out past it.
             if(enemy.kind==19&&!remaining.HasValue){var toward=a.origin-State.position;a.aim=State.position+(toward.sqrMagnitude>1e-6f?toward.normalized:Vector2.up)*2.6f;}
             b.action=a;b.facing=a.direction;enemy.aim=a.aim;enemy.windup=a.remaining;enemy.cooldown=Mathf.Max(enemy.cooldown,def.cooldown);
+            // The tutorial's zone caster casts often enough for the lesson to be seen within one fight.
+            if(IsGuide&&GuideCadence(enemy) is float cadence&&cadence>0)enemy.cooldown=cadence;
             EnemyMode(enemy,"공격 준비");EnemyEvent(enemy,"PREPARE",action:a.id,value:a.remaining,aim:a.aim);
         }
         void InterruptEnemyAction(EnemyState enemy,string reason)
@@ -111,7 +113,7 @@ namespace Hellscript
             }
             if(a.kind==2||a.kind==8)EnemyProjectiles(e,a.id,a.origin,a.direction,attack,EnemyCombat.Id(a.kind),a.kind==8);
             else if(a.kind==3||a.kind==9)
-            {var hit=EnemyCombat.AreaHit(a.kind);CreateEnemyHazard(e,EnemyCombat.Id(a.kind),a.aim,0,hit.duration,attack*hit.power,hit.element,action:a.id);}
+            {var hit=EnemyCombat.AreaHit(a.kind);CreateEnemyHazard(e,EnemyCombat.Id(a.kind),a.aim,0,IsGuide&&e.group==GuideTutorial.DotGroup?GuideTutorial.DotZoneSeconds:hit.duration,attack*hit.power,hit.element,action:a.id);}
             else if(a.kind==4)
             {
                 foreach(var ally in State.enemies.Where(x=>!x.dead&&Vector2.Distance(e.position,x.position)<=3&&Map.LineClear(e.position,x.position)))

@@ -50,6 +50,10 @@ namespace Hellscript
             var stage=new GameObject("Tutorial staging",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));stage.transform.SetParent(transform,false);
             var stageCanvas=stage.GetComponent<Canvas>();stageCanvas.renderMode=RenderMode.ScreenSpaceOverlay;stageCanvas.sortingOrder=130;
             cinematic=stage.AddComponent<TutorialCinematic>();cinematic.Initialize(()=>InterfaceFactor);
+            // The level-up show draws above the staging (130) and below every content window (400+); only its confirm button takes taps.
+            var show=new GameObject("Level-up celebration",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));show.transform.SetParent(transform,false);
+            var showCanvas=show.GetComponent<Canvas>();showCanvas.renderMode=RenderMode.ScreenSpaceOverlay;showCanvas.sortingOrder=135;
+            celebration=show.AddComponent<LevelUpCelebration>();celebration.Initialize(show.GetComponent<CanvasScaler>());celebration.Sound=id=>game.Audio?.Play(id);celebration.Closed+=LevelUpClosed;
             InitializeGlobalHud();
             if(game.Store==null)
             {Base("recovery","저장 복구가 필요합니다","진행 기록을 덮어쓰지 않고 게임을 멈췄습니다");Note(content,game.Notice,22,360,pale);FooterButton(0,1,"게임 종료",()=>Application.Quit());}

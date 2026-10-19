@@ -15,7 +15,9 @@ namespace Hellscript
             var plus=Button(row,"",()=>SetViewDistance(game.ViewDistance.Percent+5));plus.name="settings-distance-up";RoundDistanceButton(plus,"control-plus");Right((RectTransform)plus.transform,0,14,48,68);
             var area=Box("settings-distance-slider",row,Color.clear);Span(area,56,14,56,68);viewDistanceSlider=area.gameObject.AddComponent<SettingsStepSlider>();viewDistanceSlider.minValue=0;viewDistanceSlider.maxValue=20;viewDistanceSlider.wholeNumbers=true;
             CasualSettingsStyle.Slider(viewDistanceSlider,UiSkin.Casual.Gold,UiSkin.Casual.GoldShade,true);
-            viewDistanceSlider.onValueChanged.AddListener(step=>SetViewDistance(50+Mathf.RoundToInt(step)*5));
+            // Start on the stored value and ignore no-op callbacks (the Editor fires one on layout), so a fresh slider at step 0 can never save 50%.
+            viewDistanceSlider.SetValueWithoutNotify((game.ViewDistance.Percent-50)/5);
+            viewDistanceSlider.onValueChanged.AddListener(step=>{int percent=50+Mathf.RoundToInt(step)*5;if(percent!=game.ViewDistance.Percent)SetViewDistance(percent);});
             foreach(var tick in new[]{(0f,"50%"),(.5f,"100%"),(1f,"150%")})
             {
                 var text=Label(row,tick.Item2,18,tick.Item1==.5f?UiSkin.Casual.OrangeInk:UiSkin.Casual.Muted,TextAnchor.MiddleCenter);text.font=UiSkin.Casual.DisplayFont;

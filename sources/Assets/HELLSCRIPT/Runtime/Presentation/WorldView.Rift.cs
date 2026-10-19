@@ -32,7 +32,7 @@ namespace Hellscript
                     var footprint=new Rect(middle-size*.5f,size);
                     foreach(var floor in RiftFloorMesh.UncoveredRectangles(footprint,coveredFloor))
                     {
-                        var piece=Shape("Passage "+corridor.index+" part "+part,PrimitiveType.Cube,world.transform,Position(floor.center)-Vector3.up*.25f,new Vector3(floor.width,.5f,floor.height),ground);
+                        var piece=RiftFloorMesh.CreateSlab("Passage "+corridor.index+" part "+part,world.transform,Position(Vector2.zero),floor,RiftMaterial(ground));
                         passageGeometry.Add(new PassageView{go=piece,roomA=corridor.roomA,roomB=corridor.roomB,center=floor.center});piece.SetActive(false);
                     }
                     coveredFloor.Add(footprint);

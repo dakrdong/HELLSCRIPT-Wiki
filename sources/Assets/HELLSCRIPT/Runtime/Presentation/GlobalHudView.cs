@@ -98,8 +98,7 @@ namespace Hellscript
             slot.glyph=Picture("Potion kind",slot.root,"");slot.glyph.enabled=potion;
             slot.number=Text("Cooldown time",slot.root,25);slot.number.font=UiFonts.CasualDisplay;Stretch(slot.number.rectTransform);
             CasualBattleHudStyle.IconOutline(slot.frame);
-            slot.caption=Text("Caption",slot.root,16);slot.caption.color=UiSkin.Casual.Navy;
-            slot.caption.GetComponent<SkillTreeD4TextShadow>().Apply(new[]{new D4Shadow{x=1,y=0,color="SteelFFFFFFA1000"},new D4Shadow{x=-1,y=0,color="SteelFFFFFFA1000"},new D4Shadow{x=0,y=1,color="SteelFFFFFFA1000"},new D4Shadow{x=0,y=-1,color="SteelFFFFFFA1000"}},1);
+            slot.caption=Text("Caption",slot.root,16);
             var target=slot.root.gameObject.AddComponent<Image>();target.color=Color.clear;
             // A slot is a tap (swap list) or a hold (details); the gauge rings the icon while the hold fills.
             var gauge=Picture("Hold gauge",slot.root,"mask-circle");Stretch(gauge.rectTransform);gauge.color=new Color(style.gold.r,style.gold.g,style.gold.b,.6f);
@@ -224,7 +223,7 @@ namespace Hellscript
         {
             var r=Rect(name,parent);var t=r.gameObject.AddComponent<Text>();t.font=font;t.fontSize=size;t.color=Pale;t.alignment=TextAnchor.MiddleCenter;
             t.horizontalOverflow=HorizontalWrapMode.Overflow;t.verticalOverflow=VerticalWrapMode.Overflow;t.raycastTarget=false;
-            CasualBattleHudStyle.Outline(t);return t;
+            CasualBattleHudStyle.WorldOutline(t);return t;
         }
         public static RectTransform Rect(string name,Transform parent)
         {var r=new GameObject(name,typeof(RectTransform)).GetComponent<RectTransform>();r.SetParent(parent,false);r.anchorMin=r.anchorMax=r.pivot=Vector2.zero;return r;}

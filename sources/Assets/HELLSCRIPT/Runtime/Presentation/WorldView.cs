@@ -221,7 +221,7 @@ namespace Hellscript
                 visual.transform.rotation=Quaternion.Euler(15,elapsed*55,25);
             }
             PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
-            PresentCombatFeedback(run);PresentGrowthFeedback(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
+            PresentCombatFeedback(run);PresentGrowthFeedback(run);PresentGuideAppearances(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
             activeHazards.Clear();
             foreach(var fx in run.effects)
             {

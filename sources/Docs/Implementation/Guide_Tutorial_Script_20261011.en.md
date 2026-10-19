@@ -150,3 +150,7 @@ Actual Unity compilation had zero errors/warnings. All **92 focused Edit Mode ca
 The real RAM Sandbox UI covered 30 explanations across KO/EN and five logical aspect ratios, checking wrapping, safe bounds, visible effect descriptions, real EventSystem selection, outside and duplicate taps, and no point spending. A portrait representative then read all three explanations, cleared the ring with Spinning Rend, blocked Apply at 29%, dragged the handle to 30% and saved through the real Apply control. HP 1/530, stock ten and uses zero became HP 530/530, stock nine, uses one and saved policy 30%.
 
 No full test suite, new native build, physical mobile or performance measurement ran. Physical Screen was 1893×1351; aspect tests used logical safe frames. No real user save was accessed. Original scene, GameView, aspect and mute were restored; the four pre-existing dirty files retain their original SHA. Evidence and classified fixture-input failures are under task-23 `tutorial-reading-20261018/`. Public Wiki publication remains held for the existing cost check.
+
+## 2026-10-19 rework link
+
+The flow from the plaza on (ground-zone and arrow dodge lessons, level-up fireworks, the new boss room and the Whirlwind lesson) and the corrected introduction and road lines are recorded in the [guide tutorial rework](Guide_Tutorial_Hazard_Yard_20261019.en.md). The line tables above predate that rework.

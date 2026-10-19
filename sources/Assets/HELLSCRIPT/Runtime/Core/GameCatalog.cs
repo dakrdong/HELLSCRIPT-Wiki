@@ -333,6 +333,9 @@ namespace Hellscript
         public float guideGoblinKilledAt,guideSwarmStartedAt;
         public float guideFrontSpawnAt;
         public bool guideFrontSpawnStopped;
+        // Hazard lessons: when the current encounter began, and which enemy groups were already brought in (bit per group).
+        public float guidePhaseAt;
+        public int guideSpawned;
         public float pitStageTime;
         public string guideSetup="";
         public CombatJournalData journal;

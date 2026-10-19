@@ -511,6 +511,7 @@ namespace Hellscript
             // The tutorial boss survives the intervening lessons; residual Whirlwind cannot erase the goblin entrance.
             if(IsGuide&&e.boss&&State.tutorialPhase<GuideTutorial.FinalBoss)damage=GuideTreasureScene?0:Mathf.Min(damage,Mathf.Max(0,e.health-e.maxHealth*(State.tutorialPhase<GuideTutorial.BossFight?.81f:.6f)));
             if(IsGuide&&e.goblin&&State.tutorialPhase==GuideTutorial.GoblinAppear)damage=0;
+            if(IsGuide&&GuideFoeFloor(e) is float floor&&floor>0)damage=Mathf.Min(damage,Mathf.Max(0,e.health-e.maxHealth*floor));
             float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             // Rooted at stage two the charger bends but never breaks, so the defeat does not depend on a class's damage.
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;

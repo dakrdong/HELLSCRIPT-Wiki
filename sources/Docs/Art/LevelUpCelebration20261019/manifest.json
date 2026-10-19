@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "generated": "2026-10-19",
+  "tool": "codex exec imagegen (gpt-6-astra requested), one call per asset, three parallel runs of 1-2 assets (about 2 minutes each)",
+  "productionApproved": false,
+  "purpose": "Level-up celebration kit: ribbon banner, sunburst, confetti, sparkle and firework sheets drawn by LevelUpCelebration.",
+  "postProcess": "Runtime PNG = native generation resized with premultiplied-alpha Lanczos (ribbon first cropped to its opaque bounds with 10 px margin). No chroma key, matte or background removal; native alpha untouched.",
+  "reference": "runA used Assets/HELLSCRIPT/Resources/Art/GlobalHUD/Casual/menu-character.png only as a gold-rim-on-navy bevel reference.",
+  "review": "All five came back with real alpha (edge alpha <= 7/255) and the requested layouts on the first try; Codex flagged the ribbon for a soft outer glow and a thin side margin, which the crop to opaque bounds removes. No retries were needed.",
+  "assets": [
+    {
+      "id": "levelup_ribbon",
+      "run": "runA",
+      "purpose": "Banner plate with an empty blue face; the game writes the title on it.",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/LevelUp/levelup_ribbon.png",
+      "sourceSize": [
+        1536,
+        1024
+      ],
+      "sourceSha256": "da25a79d4df3518ee417165629660e2b44bf22d624fa4d92ec799da17c376640",
+      "cropBox": [
+        0,
+        166,
+        1536,
+        779
+      ],
+      "plate": {
+        "x0": 0.1973,
+        "x1": 0.8037,
+        "y0": 0.2567,
+        "y1": 0.6919
+      },
+      "runtimeSize": [
+        1024,
+        409
+      ],
+      "fullyTransparentFraction": 0.4747,
+      "edgeAlphaMax": 7,
+      "runtimeBytes": 341947,
+      "runtimeSha256": "21a442f019f17ca2bf0b04ebb05cd56a91906e7b8aff90bc2d8ac882a0f469c0",
+      "sourceBackup": "~/HellscriptBackups/levelup-celebration-20261019/native/levelup_ribbon.png (not in repo)",
+      "promptFile": "prompts/levelup-runA-prompt.md",
+      "model": "unknown"
+    },
+    {
+      "id": "levelup_rays",
+      "run": "runB",
+      "purpose": "16-ray sunburst that turns behind the banner.",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/LevelUp/levelup_rays.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceSha256": "54c62f037f1d73890ff5e5f70349552700645843a2e3f4641c4889a90b075f12",
+      "runtimeSize": [
+        512,
+        512
+      ],
+      "fullyTransparentFraction": 0.502,
+      "edgeAlphaMax": 6,
+      "runtimeBytes": 236041,
+      "runtimeSha256": "94b8ade720926bdcd56fbec091fa59120aa11f28095a83216299303b4d2dae0f",
+      "sourceBackup": "~/HellscriptBackups/levelup-celebration-20261019/native/levelup_rays.png (not in repo)",
+      "promptFile": "prompts/levelup-runB-prompt.md",
+      "model": "unknown"
+    },
+    {
+      "id": "levelup_sparkle",
+      "run": "runB",
+      "purpose": "2x2 sheet of four white sparkle sprites (tinted at runtime).",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/LevelUp/levelup_sparkle.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceSha256": "33f1d8a78f731c6fa80e5b6417bf8bf192111fbd1d7724fb92b0da569a21597e",
+      "runtimeSize": [
+        512,
+        512
+      ],
+      "fullyTransparentFraction": 0.6717,
+      "edgeAlphaMax": 1,
+      "runtimeBytes": 192607,
+      "runtimeSha256": "eb8e0bfaf09ad4d87e18195723dd9f8dcb7482700f94e0c9ddaaa8dd447a6320",
+      "sourceBackup": "~/HellscriptBackups/levelup-celebration-20261019/native/levelup_sparkle.png (not in repo)",
+      "promptFile": "prompts/levelup-runB-prompt.md",
+      "model": "unknown"
+    },
+    {
+      "id": "levelup_confetti",
+      "run": "runC",
+      "purpose": "4x4 sheet of 16 confetti pieces (stars, hearts, dots, chips, streamers).",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/LevelUp/levelup_confetti.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceSha256": "32729371265dbfa69c8e6811d28776df51a1984f7a3d9412a6d3b377565204df",
+      "runtimeSize": [
+        1024,
+        1024
+      ],
+      "fullyTransparentFraction": 0.7182,
+      "edgeAlphaMax": 1,
+      "runtimeBytes": 626616,
+      "runtimeSha256": "5f30ac33432b6c90c41d38f191e573caf43922b17d2c595c71e016df15f851c3",
+      "sourceBackup": "~/HellscriptBackups/levelup-celebration-20261019/native/levelup_confetti.png (not in repo)",
+      "promptFile": "prompts/levelup-runC-prompt.md",
+      "model": "unknown"
+    },
+    {
+      "id": "levelup_firework",
+      "run": "runC",
+      "purpose": "2x2 sheet of four white firework bursts (peony, ring, willow, heart; tinted at runtime).",
+      "runtimePath": "Assets/HELLSCRIPT/Resources/Art/LevelUp/levelup_firework.png",
+      "sourceSize": [
+        1254,
+        1254
+      ],
+      "sourceSha256": "a699f06efb9bb2ba1a9848ecac7c351013e199f96fa8639c1223a44d8b3076c6",
+      "runtimeSize": [
+        1024,
+        1024
+      ],
+      "fullyTransparentFraction": 0.2999,
+      "edgeAlphaMax": 1,
+      "runtimeBytes": 1438812,
+      "runtimeSha256": "78654872f81f6f018c210800791846f0a951b517e9ddd8da9d0d58bc7f951350",
+      "sourceBackup": "~/HellscriptBackups/levelup-celebration-20261019/native/levelup_firework.png (not in repo)",
+      "promptFile": "prompts/levelup-runC-prompt.md",
+      "model": "unknown"
+    }
+  ]
+}
