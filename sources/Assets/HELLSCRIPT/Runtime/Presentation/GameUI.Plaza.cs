@@ -10,6 +10,7 @@ namespace Hellscript
         static readonly UiSkin PlazaSkin=UiSkin.Casual.WithInteractionStates();
         Text plazaStatus,plazaActionText,plazaServiceName,plazaServiceDetail,plazaNpcName;
         RectTransform plazaAction,plazaJoystickRect,plazaGuide,plazaTitlePlate,plazaPortalBubble;
+        CasualNoticeEntrance plazaEntrance;
         Button plazaSettings;
         StorageSurface plazaTitleSurface,plazaGuideSurface;
         TownCircleGraphic plazaJoystickRim;
@@ -57,6 +58,7 @@ namespace Hellscript
             plazaAction=Box("Town interaction card",root,UiTheme.Tint(UiTheme.InsetHex,.97f));plazaAction.anchorMin=plazaAction.anchorMax=new Vector2(1,.35f);plazaAction.pivot=new Vector2(1,.5f);plazaAction.anchoredPosition=new Vector2(-22,0);plazaAction.sizeDelta=new Vector2(250,232);
             var edge=Box("Interaction gold edge",plazaAction,gold);Place(edge,0,0,3,232);edge.gameObject.SetActive(false);
             plazaAction.GetComponent<Image>().color=Color.clear;
+            plazaEntrance=plazaAction.gameObject.AddComponent<CasualNoticeEntrance>();
             var shadow=Rect("Town card soft shadow",plazaAction);Stretch(shadow);var softShadow=shadow.gameObject.AddComponent<TownPlazaDecoration>();softShadow.shadowOnly=true;softShadow.raycastTarget=false;
             var frame=Rect("Casual interaction surface",plazaAction);Stretch(frame);var cardFrame=frame.gameObject.AddComponent<UiWindowFrame>();cardFrame.SetSkin(skin,borderWidth:3,shadow:4);cardFrame.raycastTarget=false;
             var trim=Rect("Town card stitch and gem",plazaAction);Stretch(trim);trim.gameObject.AddComponent<TownPlazaDecoration>().raycastTarget=false;
@@ -175,6 +177,7 @@ namespace Hellscript
         void PlazaService(string value)
         {
             if(plazaServiceSource==value)return;plazaServiceSource=value;
+            if(plazaAction.gameObject.activeSelf&&Application.isPlaying)plazaEntrance.Restart();
             var skin=UiSkin.Casual;plazaServiceName.font=skin.LabelFont(value);
             float Width(string text)=>plazaServiceName.cachedTextGeneratorForLayout.GetPreferredWidth(text,plazaServiceName.GetGenerationSettings(Vector2.zero))/plazaServiceName.pixelsPerUnit;
             float available=plazaServiceName.rectTransform.rect.width;
@@ -229,14 +232,17 @@ namespace Hellscript
                 float titleWidth=Mathf.Min(headerTitle.preferredWidth+padding*2,root.rect.width-iconSize-36*titleScale);
                 Place(plazaTitlePlate,8*titleScale,4*titleScale,titleWidth,titleHeight);Place(headerTitle.rectTransform,8*titleScale+padding,4*titleScale,titleWidth-2*padding,titleHeight);
                 float cardScale=TownPlazaLayout.CardScale(layout,portal)/Mathf.Max(.001f,scale);
-                plazaAction.localScale=Vector3.one*cardScale;
+                plazaEntrance.SetRestingScale(Vector3.one*cardScale);
                 float hudTop=layout.potions.Concat(layout.actives).Max(r=>r.yMax)*layout.scale/scale;
                 var joystick=new Rect(plazaJoystickRect.anchoredPosition,plazaJoystickRect.sizeDelta);
                 var bounds=TownPlazaLayout.CardBounds(root.rect.size,cardHeight,cardScale,dockRight+iconSize+gap,hudTop,joystick,!layout.landscape,12/scale);
-                plazaAction.anchoredPosition=new Vector2(bounds.xMax-root.rect.width,bounds.center.y-root.rect.height*.35f);
+                plazaEntrance.SetRestingPosition(new Vector2(bounds.xMax-root.rect.width,bounds.center.y-root.rect.height*.35f));
             }
             plazaStatus.text=walk.Destination.HasValue?Loc.F("{0}으로 이동 중 · {1:0.0}m",TownLayout.Station(walk.Destination.Value).name,walk.Remaining):Loc.F("{0} Lv.{1} · 중앙 길 횡단 약 20초",game.catalog.classNames[(int)game.Store.Data.Hero.heroClass],game.Store.Data.Hero.level);
-            plazaAction.gameObject.SetActive((portal||near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen);
+            // The card rises and fades in each time it appears, and again when it moves on to another service.
+            bool showCard=(portal||near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen;
+            if(showCard&&!plazaAction.gameObject.activeSelf&&Application.isPlaying)plazaEntrance.Restart();
+            plazaAction.gameObject.SetActive(showCard);
             plazaTalk.gameObject.SetActive(!portal&&npc!=null);
             bool merchant=!portal&&(near==TownStation.Merchant||near==TownStation.Gambler);
             plazaInteract.gameObject.SetActive(portal||near.HasValue&&!merchant);

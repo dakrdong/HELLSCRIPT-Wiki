@@ -29,6 +29,9 @@ namespace Hellscript
         readonly GameStore store;readonly AttendancePopupSettings settings;readonly Func<float> reading;readonly Action<AttendanceKind> visited;
         AttendanceKind kind;ContentWindowView view;string notice="",language=Loc.Language;Color noticeColor;int selected,observedEarned=-1;long selectedPeriod;
         public AttendanceSwipe Swipe;
+        // Days claimed by the last collect press and when it happened: a seal drawn for them stamps down once, staggered for collect-all,
+        // and a repaint during the stamp continues it instead of restarting it.
+        readonly System.Collections.Generic.Dictionary<int,float> stamps=new System.Collections.Generic.Dictionary<int,float>();float stampClock;AttendanceKind stampKind;
         readonly Action dailyQuests;
         float Scale=>reading?.Invoke()??1;
         AttendanceTrack Track=>Attendance.Track(store.Data.attendance,kind);
@@ -156,7 +159,7 @@ namespace Hellscript
             if(!claimed&&(ready||chest))Glow(t,cx,cy,Mathf.Min(icon*1.05f,Mathf.Min(w,h)/2-3),ready?A.Skin.GreenShade:A.Skin.Gold,ready);
             var artwork=UiLayout.Rect("Reward artwork",t);UiLayout.Stretch(artwork);
             Icon(artwork,reward,cx-icon/2,cy-icon/2,icon);
-            if(claimed){Dim(artwork);Seal(t,cx,cy,Mathf.Min(icon*1.05f,Mathf.Min(w,h)*.62f));}
+            if(claimed){Dim(artwork);Stamp(Seal(t,cx,cy,Mathf.Min(icon*1.05f,Mathf.Min(w,h)*.62f)),day);}
             if(ready)
             {
                 // Keep the eligibility border fully visible even when animation is reduced.
@@ -197,7 +200,7 @@ namespace Hellscript
             float cy=iconBottom-icon/2;
             if(!claimed)Glow(glow,w/2,cy,icon*.95f,ready?A.Skin.GreenShade:A.Skin.Gold,ready);
             Icon(icons,reward,(w-icon)/2,iconBottom-icon,icon);
-            if(claimed){Dim(icons);Seal(icons,w/2+icon*.3f,cy+icon*.2f,icon*.6f);}
+            if(claimed){Dim(icons);Stamp(Seal(icons,w/2+icon*.3f,cy+icon*.2f,icon*.6f),selected);}
             float ty=blockTop;
             foreach(var line in new[]{name,amount,status}){Move(line,pad,ty);ty+=H(line);}
             ty+=4*s;float g=total>7?1:2,seg=(iw-(total-1)*g)/total;
@@ -248,7 +251,10 @@ namespace Hellscript
         }
         void Claim(Func<bool> claim)
         {
+            var track=Track;var ready=Enumerable.Range(1,Attendance.Length(kind)).Where(d=>d<=track.earned&&!track.Claimed(d)).ToArray();
             bool ok=claim();notice=ok?Loc.T("출석 보상을 받았습니다."):Loc.T(store.Error);
+            stamps.Clear();stampClock=Time.unscaledTime;stampKind=kind;
+            if(ok)for(int i=0;i<ready.Length;i++)stamps[ready[i]]=Mathf.Min(i,7)*.07f;
             noticeColor=ok?A.GoldInk:A.Skin.Danger;view.Repaint();
         }
         public static void Icon(Transform parent,AttendanceReward reward,float x,float y,float size)
@@ -266,10 +272,16 @@ namespace Hellscript
             if(!view.TryGetComponent<AttendanceRewardTone>(out var tone))tone=view.gameObject.AddComponent<AttendanceRewardTone>();
             foreach(var image in artwork.GetComponentsInChildren<Image>()){image.color=A.Alpha(A.Skin.White,.42f);image.material=tone.Claimed;}
         }
-        static void Seal(Transform parent,float cx,float cy,float size)
+        static RectTransform Seal(Transform parent,float cx,float cy,float size)
         {
             var r=UiLayout.Rect("Claimed seal",parent);UiLayout.Place(r,cx,cy,size,size);r.pivot=new Vector2(.5f,.5f);r.localRotation=Quaternion.Euler(0,0,12);
             var image=r.gameObject.AddComponent<Image>();image.sprite=AttendanceArt.Seal;image.preserveAspect=true;image.raycastTarget=false;image.color=A.Alpha(A.Skin.White,.78f);
+            return r;
+        }
+        void Stamp(RectTransform seal,int day)
+        {
+            if(kind!=stampKind||!stamps.TryGetValue(day,out float delay))return;
+            float elapsed=Time.unscaledTime-stampClock;if(elapsed<delay+UiPopIn.Duration)UiPopIn.Play(seal,1.9f,delay,elapsed);
         }
         static void Glow(Transform parent,float cx,float cy,float radius,Color color,bool pulse)
         {

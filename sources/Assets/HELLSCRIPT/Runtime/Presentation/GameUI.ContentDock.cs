@@ -88,6 +88,7 @@ namespace Hellscript
             items=shortcuts;toggle=arrow;size=buttonSize;reach=travel;
             toggle.anchorMin=toggle.anchorMax=new Vector2(0,1);toggle.pivot=new Vector2(.5f,.5f);toggle.sizeDelta=new Vector2(size,size);
         }
+        public static float Decelerate(float t)=>1-Mathf.Pow(1-t,3);
         public void Set(bool open)=>Open=open;
         public void Reflow(float buttonSize,float gap)
         {
@@ -106,10 +107,11 @@ namespace Hellscript
         }
         void Apply()
         {
-            items.sizeDelta=new Vector2(size,slide*reach);
+            // The shortcuts decelerate into place and the arrow settles with a small overshoot; the steps above stay linear.
+            items.sizeDelta=new Vector2(size,Decelerate(slide)*reach);
             items.anchoredPosition=new Vector2(0,-reach/Mathf.Max(1,items.childCount));
             toggle.anchoredPosition=new Vector2(size*.5f,-size*.5f);
-            toggle.localRotation=Quaternion.Euler(0,0,180*turn);
+            toggle.localRotation=Quaternion.Euler(0,0,180*UiPopIn.EaseOutBack(turn));
         }
     }
 }
