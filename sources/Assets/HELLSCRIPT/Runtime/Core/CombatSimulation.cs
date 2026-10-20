@@ -438,7 +438,7 @@ namespace Hellscript
                 else
                 {
                     if(!State.layout.legacy)
-                    {var remembered=TargetPolicy==null?RiftExploration.RememberedTarget(State,Map):null;goal=remembered??RiftExploration.Goal(State,Map,Policy.exploration);State.action=remembered.HasValue?"마지막으로 발견한 적의 위치 확인":"미탐색 지점으로 이동";}
+                    {var remembered=TargetPolicy==null?RiftExploration.RememberedTarget(State,Map):null;goal=remembered??RiftExploration.Goal(State,Map,Policy.exploration);State.action=remembered.HasValue?"마지막으로 발견한 적의 위치 확인":"미탐색 지점으로 이동";if(IsGuide)goal=GuideForward(goal);}
                     else
                     {
                     if(Vector2.Distance(State.position,RiftMap.Rooms[State.exploreRoom])<2)

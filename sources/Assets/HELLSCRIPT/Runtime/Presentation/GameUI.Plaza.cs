@@ -72,7 +72,7 @@ namespace Hellscript
             plazaInteract=interact;
             plazaBuy=Button(plazaAction,"구매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Buy));plazaBuy.name="town-merchant-buy";Place((RectTransform)plazaBuy.transform,12,168,110,52);PlazaButton(plazaBuy,true);
             plazaSell=Button(plazaAction,"판매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Sell));plazaSell.name="town-merchant-sell";Place((RectTransform)plazaSell.transform,128,168,110,52);PlazaButton(plazaSell);
-            overlay.SetAsLastSibling();RefreshPlaza();
+            BuildTownQuest();overlay.SetAsLastSibling();RefreshPlaza();
         }
         RectTransform CreateTownBubble(string id,string contentName,string npcName,bool plazaSkin=false)
         {
@@ -231,6 +231,7 @@ namespace Hellscript
                 float titleHeight=(mobile?28:32)*titleScale,padding=12*titleScale;
                 float titleWidth=Mathf.Min(headerTitle.preferredWidth+padding*2,root.rect.width-iconSize-36*titleScale);
                 Place(plazaTitlePlate,8*titleScale,4*titleScale,titleWidth,titleHeight);Place(headerTitle.rectTransform,8*titleScale+padding,4*titleScale,titleWidth-2*padding,titleHeight);
+                RefreshTownQuest(iconSize,edge,titleScale,mobile,!layout.landscape);
                 float cardScale=TownPlazaLayout.CardScale(layout,portal)/Mathf.Max(.001f,scale);
                 plazaEntrance.SetRestingScale(Vector3.one*cardScale);
                 float hudTop=layout.potions.Concat(layout.actives).Max(r=>r.yMax)*layout.scale/scale;
@@ -274,6 +275,9 @@ namespace Hellscript
         {
             if(game.Town?.Nearby==station){if(station==TownStation.RiftKeeper)Tutorials.Performed(game.Store.Data,"F01");
                 string hint=station==TownStation.Warehouse?"H04":station==TownStation.Merchant||station==TownStation.Gambler?"H02":null;if(hint!=null)Tutorials.Discover(game.Store.Data,hint);}
+            if(station==TownStation.RiftKeeper&&game.Store.Data.guide.townQuest==TownQuest.TalkRiftKeeper){ResetTownInput();game.Town?.Cancel();ShowAntonGossip();return;}
+            if(station==TownStation.RiftKeeper&&TownQuest.RiftLocked(game.Store.Data.guide)){ResetTownInput();game.Town?.Cancel();ShowAntonLock();return;}
+            if(station==TownQuest.ForgeStation&&game.Store.Data.guide.townQuest==TownQuest.EnhanceWeapon&&TownQuest.Weapon(game.Store.Data.Hero)!=null){ResetTownInput();game.Town?.Cancel();ShowForgeLesson();return;}
             ResetTownInput();game.Town?.Cancel();
             switch(station)
             {

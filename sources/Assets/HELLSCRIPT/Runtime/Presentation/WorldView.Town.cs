@@ -46,11 +46,12 @@ namespace Hellscript
             }
             hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false,HeroBodyArt((int)game.Store.Data.Hero.heroClass));hero.transform.position=TownPoint(walk.Position);
             hero.transform.rotation=Quaternion.LookRotation(TownPoint(walk.Facing));
+            BuildTownGuide();
             viewCamera.transform.position=CameraPosition(TownLayout.ToWorld(walk.Position));
         }
         void ClearTownPresentation()
         {
-            foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();portalSparks.Clear();townPortalRunes.Clear();townReturnPortal=null;ClearRigs();
+            foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();ClearTownGuide();portalSparks.Clear();townPortalRunes.Clear();townReturnPortal=null;ClearRigs();
             foreach(var m in townMeshes)if(m!=null)Destroy(m);townMeshes.Clear();
         }
         public bool TryPickTownGround(Vector2 screen,out Vector2 point)
@@ -102,7 +103,7 @@ namespace Hellscript
             if(rigs.TryGetValue(hero,out var rig)&&rig!=null)rig.Tick(dt,new ActorPose{time=elapsed,speed=walk.Walking?3.2f:0,action=ActorAction.Idle,aimLocal=Vector3.forward});
             else{var body=hero.transform.GetChild(0);body.localPosition=new Vector3(0,1+(walk.Walking?Mathf.Sin(elapsed*13)*.08f:0),0);}
             viewCamera.transform.position=Vector3.Lerp(viewCamera.transform.position,CameraPosition(TownLayout.ToWorld(walk.Position)),1-Mathf.Exp(-dt*8));
-            foreach(var pair in stationMarks)pair.Value.SetActive(walk.Nearby==pair.Key||walk.Destination==pair.Key);
+            PresentTownGuide(walk);
             ApplyBattleViewport();
             foreach(var b in townBuildings)b.Update(viewCamera,hero.transform.position,dt);
             if(townReturnPortal!=null)townReturnPortal.gameObject.SetActive(game.TownPortalAvailable);

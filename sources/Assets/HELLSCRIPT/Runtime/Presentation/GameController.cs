@@ -114,6 +114,7 @@ namespace Hellscript
         {
             if(Active||liveOpsAdmissionPending)return;
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
+            if(training<0&&!resume&&TownQuest.RiftLocked(Store.Data.guide)){Notify(Loc.T(TownQuest.RiftLockedLine));return;}
             if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
             {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,replaceRunId));return;}
             if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}

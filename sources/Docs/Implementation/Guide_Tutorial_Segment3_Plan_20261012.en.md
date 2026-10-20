@@ -14,7 +14,7 @@ The gallery leads into the existing RM12 plaza. A melee tank stands ahead of two
 | TargetTalk (14) | Save NORMAL→SUMMONED→ELITE→BOSS and the first two types RANGED→CASTER |
 | TargetFight (15), BossFight (16) | Defeat non-boss plaza enemies and summons; lower boss HP below 80% |
 | GoblinAppear (17), GoblinTalk (18) | Move right for 0.9 seconds, pause in view; reveal the card and save TREASURE first |
-| GoblinChase (19), ReturnToBoss (20) | Defeat the goblin, leave rewards behind, start returning to the boss |
+| GoblinChase (19), ReturnToBoss (20) | Defeat the goblin, leave rewards behind, start returning to the boss; the loot lesson (`LootTalk`) starts 3 seconds later (`GuideTutorial.LootLessonSeconds`, changed 2026-10-20; it used to start 0.5-1.5 s after the kill, right beside the dropped items) |
 | LootTalk (21) | Save PRIORITY_LOOT first and personally press the existing close button |
 | Pickup (22), LootDoneTalk (23) | Collect every reward and choose to return to the boss |
 | FinalBoss (24), Cleared (25) | Defeat the boss; original closing dialogue and graduation transaction |
