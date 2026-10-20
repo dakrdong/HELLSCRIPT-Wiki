@@ -131,6 +131,17 @@ macOS 게임 흐름 검사는 합성 EventSystem 입력과 임시 계정을 사�
 
 참고: 같은 날 `main`에서는 D4 스킬 ID 이전 때문에 `sfx-catalog.json`과 `bank.json`이 서로 달라 `generate_sfx.py --check`와 `elevenlabs_audio.py --check`가 실패한다(이번 변경 전부터 그렇다). 새 두 신호의 뱅크 행은 생성기가 쓰는 형식과 같고, `test_elevenlabs_audio.py`는 통과한다.
 
+## 교체: 타이틀 로그인 연출 효과음 (2026-10-20)
+
+카메라 전진 연출이 4.4초로 느려져 위 2026-10-14 효과음 2종을 ElevenLabs `eleven_text_to_sound_v2`(프롬프트 반영도 0.7)로 다시 만들었다. 균열 섬광음은 4개, 바람 돌진은 두 가지 프롬프트로 4개씩 생성하고 음량 곡선·좌우 위상·대역별 에너지로 하나씩 골랐다. 첫 바람 후보는 150Hz 아래에 에너지가 거의 다 몰려 폰 스피커에서 약할 것 같아 중고음 공기 소리를 요청한 두 번째 후보에서 골랐다.
+
+| 신호 | 용도 | 채택 생성 ID | 길이 |
+|---|---|---|---|
+| `flow.title_flight` | 연출 0.7초부터 이어지는 바람 돌진 | `HZZ0h5dxgqSkhnqFzUfR` | 2.25초 |
+| `flow.title_rift` | 3.12초에 균열 빛이 터질 때 | `pt9OkWNTHt50Vuwc420D` | 2.20초 |
+
+이전 채택 음원 `PmH0ZtJAEtC86aHk2V7O`·`e9C3rrKPb3aFTcuHuWXP`(위 표)는 쓰지 않으며 원본 MP3는 `Artifacts/ElevenLabs/Replaced/title-flight-20261020/`로 옮겼다(Git 이력에도 있다). 새 원본은 `AudioSources/ElevenLabs/Sources/`에 보존했고 `elevenlabs_audio.py --index/--selection`으로 마스터했다. 생성 후보 12개는 공급자 응답 기준 약 101크레딧이 들었다. 사람의 청감 검토는 아직 없다.
+
 ## 추가: 스킬 변형 효과음 62개 (2026-10-18)
 
 D4 스킬 변형 84개 중 22개만 소리가 있었고 나머지는 기본 스킬과 같은 소리로 났다. 소리가 없던 62개를 ElevenLabs `eleven_text_to_sound_v2`(MCP, 프롬프트 반영도 0.65, 변형마다 1회 생성)로 만들었다. 3개(`A18-1`·`M08-1`·`M11-2`)는 처음 결과가 거의 무음이거나 끝나지 않고 잘려 프롬프트를 고쳐 한 번 더 만들었다. 프롬프트·생성 ID·해시는 [출처 목록](../../AudioSources/ElevenLabs/manifest.json)에 있고 비용은 354.6크레딧(생성 플로우 `tcHr1hKn6p0at4pzyUOg`)이다. 원본은 `AudioSources/ElevenLabs/Sources/`에 보존했다.
@@ -140,3 +151,42 @@ D4 스킬 변형 84개 중 22개만 소리가 있었고 나머지는 기본 스�
 같은 날 보류했던 기존 마스터 교체 11행(14클립)도 새로 만들어 같은 클립 파일 이름으로 교체했다(플로우 `81oyAOAv3bzfGC0fFupM`, 64.0크레딧). 새 음원은 출처 기록과 신호 규칙을 통과했고 `SoundBankTests`·`SkillModifierAudioTests` 29개와 오프라인 도구 시험 8개가 통과했다. 교체로 manifest에서 빠진 옛 원본 MP3 14개는 사용자 확인 뒤 지웠다(git 이력에서 복구 가능).
 
 참고: 위 2026-10-14 절의 `--check` 실패(카탈로그와 뱅크의 D4 ID 불일치)는 그대로 남아 있고, 새 62개의 카탈로그·뱅크 행은 생성기 형식과 같다.
+
+## 추가: 바닥 드롭 떨어짐·줍기 효과음 30개 (2026-10-20)
+
+바닥 드롭에는 등급 소리(`loot.drop.*`)와 재화를 줍는 소리만 있었다. 골드·강화석 같은 재화는 바닥에 나타날 때 소리가 없었고, 장비는 재질과 상관없이 등급 소리만 났다. 줍는 소리는 부위만 보고 재질을 정해서 천·쇠사슬 갑옷이 판금·가죽 소리로 났고, 판금 장갑·장화·벨트는 가죽 소리, 가죽 투구·조끼는 판금 소리로 났다. 새 재생 ID 15종(변주 2개씩 30클립)을 ElevenLabs `eleven_text_to_sound_v2`(MCP, 프롬프트 반영도 0.65)로 만들었고, 재생 ID는 뱅크 기준 360종이 되었다.
+
+| 재생 ID | 쓰이는 때 | 프롬프트 요지 (영어, 끝에 "isolated with a clear attack and controlled natural decay."를 붙인다) |
+|---|---|---|
+| `loot.land.gold` | 골드가 바닥에 나타남 | Three old gold coins dropped onto a stone floor, bright light metallic clinks with a short bounce and settle |
+| `loot.land.stone` | 강화석 | One rough enhancement stone dropped onto a stone floor, a hard mineral knock with a small gritty skid |
+| `loot.land.gem` | 보석 | One cut gemstone dropped onto a stone floor, a bright glassy tink with a short pure crystalline ring |
+| `loot.land.core` | 코어 | One dense crystal core dropped onto stone, a solid heavy thud with a low resonant crystalline hum |
+| `loot.land.material` | 제작 재료 | A few small crafting fragments dropped onto stone, a dry gritty clatter of small bits skipping and settling |
+| `loot.land.cloth` | 천 방어구, 두루마리 | One folded cloth garment dropped onto a stone floor, a soft muffled fabric thump with a light rustle |
+| `loot.land.leather` | 가죽 방어구, 화살통 | One heavy leather armor piece thrown onto a stone floor, a solid dull slap with a short leathery creak |
+| `loot.land.iron` | 쇠사슬 방어구 | One chainmail shirt dropped onto a stone floor, a heap of small iron links jingling and settling with a dull clank |
+| `loot.land.plate` | 판금 방어구 | One heavy steel plate armor piece dropped onto a stone floor, a loud metallic clang with overlapping plates rattling |
+| `loot.land.wood` | 활·지팡이·석궁·원형 방패 | One wooden staff dropped onto a stone floor, a hollow wooden clack with a short bounce |
+| `loot.land.metal` | 검·도끼·단검·금속 방패 | One steel sword dropped onto a stone floor, a bright metallic clatter with a short ringing blade decay |
+| `loot.land.jewelry` | 목걸이·반지·오브 | One small gold necklace dropped onto a stone floor, a delicate chain jingle with a tiny metallic tick |
+| `item.pick.cloth` | 천 방어구를 집음 | One folded cloth garment lifted, a soft fabric rustle with a light tactile slide |
+| `item.pick.iron` | 쇠사슬 방어구를 집음 | One chainmail shirt lifted, small iron links chiming and sliding over each other |
+| `item.pick.wood` | 석궁·원형 방패를 집음 | One wooden crossbow lifted from the floor, a dry wooden knock with a faint creak |
+
+### 재생 방식
+
+- **떨어짐:** 드롭이 처음 "발견"될 때(시야 12칸 안, 시선이 막히지 않음) 재생한다. 장비는 `GameAudio.LandSound`가 재질로 고른 `loot.land.*`를 내고, 일반 등급은 이것만, 마법 이상은 기존 등급 소리(`loot.drop.*`)를 위에 더한다. 재화는 종류별 `loot.land.<종류>`다. 줍는 순간 처음 본 재화는 떨어짐 소리를 건너뛴다.
+- **겹침 보호:** 한 프레임에 최대 3개까지만 떨어짐 소리가 나고, 각 소리는 자체 재사용 대기시간과 동시 재생 제한을 가진다(골드 0.07초·3개, 나머지 0.08초·2개). 기존 16개 음성 풀·우선순위·최종 제한기는 그대로이며, 우선순위는 줍기(60~65)보다 낮은 55다.
+- **줍기:** `GameAudio.Handling`이 장비 베이스의 `material`(천·가죽·철·판금)을 읽어 `item.pick.<재질>`을 고른다. 재질 값이 없는 옛 베이스 B10–B19는 표로, 석궁과 원형 방패(B06·B31·B32)는 나무로 정한다. 인벤토리·창고에서 장비를 집을 때(`GameAudio.Pick`)도 같은 소리다. 장착 소리는 새로 만들지 않고 천→가죽, 철→판금, 나무→방패의 기존 소리를 빌린다.
+- 기존 `Material()`(부위로 정한 재질)은 장착 소리와 시험의 기준으로 그대로 두었다.
+
+### 만든 과정과 비용
+
+생성 플로우 `BWSDiTUStD3dPj6fWW9C`에서 소리마다 노드를 하나씩 만들어 두 번(변주 2개) 생성했다. 사전 견적은 246.4크레딧이었고 생성 응답에 적힌 실제 비용의 합은 약 81.0크레딧이다. 가죽 떨어짐 2개(최대 -48·-41 dBFS)와 나무 줍기 1개(-33.5 dBFS)가 거의 무음이어서 가죽은 프롬프트를 고쳐 2개, 나무 줍기는 1개를 다시 만들었고(6.3크레딧 포함) 채택하지 않은 3개는 보관하지 않았다. 원본 MP3는 `AudioSources/ElevenLabs/Sources/`에 있고 프롬프트·생성 ID·해시는 [출처 목록](../../AudioSources/ElevenLabs/manifest.json)에 있다. 새 클립은 기존 효과음과 같은 가져오기 설정(모노, ADPCM, 메모리 압축, 미리 로드, 정규화 끔)으로 `.meta`를 맞췄다.
+
+### 검증
+
+- 새 30클립은 출처 기록과 신호 규칙(클리핑 0, 양 끝 0, true peak -2 dBTP)을 통과했다. 전체 `--check`는 위 D4 ID 불일치로 시작 전에 실패하므로 새 15종만 따로 검사했다. 최대 음량 제한 때문에 목표 음량보다 낮은 클립: `loot_land_core_1`(-25.3 LUFS, 목표 -23)·`loot_land_core_2`(-28.6)·`loot_land_leather_1`(-25.5)·`loot_land_leather_2`(-24.5)·`loot_land_stone_2`(-23.8).
+- Unity Edit Mode `GroundLootAudioTests` 5개(재질 매핑 전 베이스, 떨어짐 한 번과 줍기, 일반·희귀 장비, 한 프레임 3개 상한)와 `SoundBankTests` 23개가 통과했고, `SkillModifierAudioTests`·`NewContentAudioTests` 17개와 오프라인 도구 시험 8개도 통과했다.
+- 사람이 직접 들어 본 확인은 하지 않았다. 실제 전투에서 소리를 듣거나 모바일 실기기로 확인하지 않았고, 전체 Edit Mode도 실행하지 않았다.

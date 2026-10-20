@@ -32,7 +32,7 @@ namespace Hellscript
             if(Page!="title"||titleVista==null||!titleVista.Ready)return;
             titleFlight=new GameObject("Title flight",typeof(RectTransform),typeof(Canvas));titleFlight.transform.SetParent(transform,false);
             var canvas=titleFlight.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=2500;
-            game.Audio?.Play("flow.title_flight");titleVista.Impact=()=>game.Audio?.Play("flow.title_rift");
+            titleVista.Rush=()=>game.Audio?.Play("flow.title_flight");titleVista.Impact=()=>game.Audio?.Play("flow.title_rift");
             titleVista.Depart(titleFlight.transform);
         }
     }

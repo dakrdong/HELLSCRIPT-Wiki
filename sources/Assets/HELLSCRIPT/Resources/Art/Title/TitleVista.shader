@@ -26,7 +26,7 @@ Shader "HELLSCRIPT/Title Vista"
             #include "UnityCG.cginc"
             struct appdata {float4 vertex:POSITION;float2 uv:TEXCOORD0;fixed4 color:COLOR;};
             struct v2f {float4 vertex:SV_POSITION;float2 uv:TEXCOORD0;fixed4 color:COLOR;float4 screen:TEXCOORD1;};
-            sampler2D _MainTex;float4 _Core,_Fade,_Shade;float _SceneTime,_Glow,_Rush,_ShadeStrength,_Defocus;
+            sampler2D _MainTex;float4 _MainTex_TexelSize,_Core,_Fade,_Shade;float _SceneTime,_Glow,_Rush,_ShadeStrength,_Defocus;
             v2f vert(appdata v){v2f o;o.vertex=UnityObjectToClipPos(v.vertex);o.uv=v.uv;o.color=v.color;o.screen=ComputeScreenPos(o.vertex);return o;}
             float hash(float2 p){return frac(sin(dot(p,float2(127.1,311.7)))*43758.5453);}
             fixed4 frag(v2f i):SV_Target
@@ -40,15 +40,17 @@ Shader "HELLSCRIPT/Title Vista"
                     [unroll] for(int k=1;k<8;k++)sum+=tex2D(_MainTex,i.uv-d*_Rush*k/7);
                     col=sum/8;
                 }
-                // Alpha-weighted taps keep transparent cutout edges free of dark fringes.
+                // Alpha-weighted taps keep transparent cutout edges free of dark fringes. Each tap reads the mip level that
+                // covers its spacing, so a wide defocus stays smooth instead of showing the 5x5 grid as ghost copies.
                 if(_Defocus>.001)
                 {
                     float2 dx=ddx(i.uv)*_Defocus*.5,dy=ddy(i.uv)*_Defocus*.5;
+                    float lod=log2(max(1,max(length(dx),length(dy))*_MainTex_TexelSize.z));
                     float4 sum=0;
                     [unroll] for(int y=-2;y<=2;y++)
                     [unroll] for(int x=-2;x<=2;x++)
                     {
-                        float4 sample=tex2D(_MainTex,i.uv+dx*x+dy*y);
+                        float4 sample=tex2Dlod(_MainTex,float4(i.uv+dx*x+dy*y,0,lod));
                         float weight=(x==0?6:(abs(x)==1?4:1))*(y==0?6:(abs(y)==1?4:1));
                         sum+=float4(sample.rgb*sample.a,sample.a)*weight;
                     }

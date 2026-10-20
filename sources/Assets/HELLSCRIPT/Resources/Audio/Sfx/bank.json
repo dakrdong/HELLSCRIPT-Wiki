@@ -470,6 +470,54 @@
    "group": ""
   },
   {
+   "id": "item.pick.cloth",
+   "ko": "천 장비 집기",
+   "en": "Pick up cloth gear",
+   "category": "item",
+   "clips": [
+    "item_pick_cloth_1",
+    "item_pick_cloth_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.iron",
+   "ko": "쇠사슬 장비 집기",
+   "en": "Pick up chain mail gear",
+   "category": "item",
+   "clips": [
+    "item_pick_iron_1",
+    "item_pick_iron_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "item.pick.wood",
+   "ko": "나무 장비 집기",
+   "en": "Pick up wooden gear",
+   "category": "item",
+   "clips": [
+    "item_pick_wood_1",
+    "item_pick_wood_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.03,
+   "cooldown": 0.05,
+   "priority": 65,
+   "limit": 2,
+   "group": ""
+  },
+  {
    "id": "item.place",
    "ko": "가방에 내려놓기",
    "en": "Place in bag",
@@ -801,6 +849,198 @@
    "pitch": 0.02,
    "cooldown": 0.6,
    "priority": 100,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.gold",
+   "ko": "골드 떨어짐",
+   "en": "Gold lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_gold_1",
+    "loot_land_gold_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.07,
+   "priority": 55,
+   "limit": 3,
+   "group": ""
+  },
+  {
+   "id": "loot.land.stone",
+   "ko": "강화석 떨어짐",
+   "en": "Enhancement stone lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_stone_1",
+    "loot_land_stone_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.gem",
+   "ko": "보석 떨어짐",
+   "en": "Gem lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_gem_1",
+    "loot_land_gem_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.core",
+   "ko": "코어 떨어짐",
+   "en": "Core lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_core_1",
+    "loot_land_core_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.material",
+   "ko": "재료 떨어짐",
+   "en": "Material lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_material_1",
+    "loot_land_material_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.cloth",
+   "ko": "천 장비 떨어짐",
+   "en": "Cloth gear lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_cloth_1",
+    "loot_land_cloth_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.leather",
+   "ko": "가죽 장비 떨어짐",
+   "en": "Leather gear lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_leather_1",
+    "loot_land_leather_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.iron",
+   "ko": "쇠사슬 장비 떨어짐",
+   "en": "Chain mail gear lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_iron_1",
+    "loot_land_iron_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.plate",
+   "ko": "판금 장비 떨어짐",
+   "en": "Plate gear lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_plate_1",
+    "loot_land_plate_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.wood",
+   "ko": "나무 장비 떨어짐",
+   "en": "Wooden gear lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_wood_1",
+    "loot_land_wood_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.metal",
+   "ko": "금속 무기 떨어짐",
+   "en": "Metal weapon lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_metal_1",
+    "loot_land_metal_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
+   "limit": 2,
+   "group": ""
+  },
+  {
+   "id": "loot.land.jewelry",
+   "ko": "장신구 떨어짐",
+   "en": "Jewelry lands",
+   "category": "loot",
+   "clips": [
+    "loot_land_jewelry_1",
+    "loot_land_jewelry_2"
+   ],
+   "volume": 1.0,
+   "pitch": 0.04,
+   "cooldown": 0.08,
+   "priority": 55,
    "limit": 2,
    "group": ""
   },
