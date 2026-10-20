@@ -72,7 +72,7 @@ namespace Hellscript
             // same frame must not borrow it (its materials die with the old root and its effects would render magenta).
             if(world!=null)Destroy(world);world=null;fx=null;hero=null;ClearRigs();actors.Clear();hazards.Clear();drops.Clear();mounds.Clear();effects.Clear();chestViews.Clear();shrineViews.Clear();projectileViews.Clear();trapViews.Clear();trapsSprung.Clear();enemyThreatViews.Clear();threatFills.Clear();gauge.Clear();ClearActorMotion();ClearClassSkillFx();ClearAttackFx();
             activeProjectiles.Clear();activeTraps.Clear();staleActions.Clear();activeHazards.Clear();staleHazards.Clear();
-            roomGeometry.Clear();passageGeometry.Clear();terrainProps.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();ClearObjectiveChains();
+            roomGeometry.Clear();passageGeometry.Clear();terrainProps.Clear();sealViews.Clear();gateViews.Clear();resourceViews.Clear();dropFx.Clear();resourceFx.Clear();ClearObjectiveChains();
         }
         public void BuildDungeon(RunState run)
         {
@@ -224,7 +224,7 @@ namespace Hellscript
                 }
                 visual.transform.rotation=visual.name.StartsWith("Drop Model")?Quaternion.Euler(0,elapsed*55,0):Quaternion.Euler(15,elapsed*55,25);
             }
-            PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
+            PresentDropFx(run);PresentResources(run);PresentResourceFx(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
             PresentCombatFeedback(run);PresentGrowthFeedback(run);PresentGuideAppearances(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
             activeHazards.Clear();
             foreach(var fx in run.effects)
