@@ -217,8 +217,12 @@ namespace Hellscript
                 if(drop.claimed||drop.ignored){if(drops.TryGetValue(drop.id,out var old)){Destroy(old);drops.Remove(drop.id);}continue;}
                 if(!run.layout.legacy&&!drop.discovered)continue;
                 if(!drops.TryGetValue(drop.id,out var visual))
-                {var color=drop.item.rarity==3?ember:drop.item.rarity==2?purple:blue;visual=Shape(drop.item.name,PrimitiveType.Cube,world.transform,Position(drop.position)+Vector3.up*.4f,new Vector3(.35f,.65f,.2f),color);drops.Add(drop.id,visual);Ring(visual.transform,Vector3.zero,1,color,.04f);}
-                visual.transform.rotation=Quaternion.Euler(15,elapsed*55,25);
+                {
+                    visual=SpawnEquipmentDropModel(drop);
+                    if(visual!=null)drops.Add(drop.id,visual);
+                    else{var color=drop.item.rarity==3?ember:drop.item.rarity==2?purple:blue;visual=Shape(drop.item.name,PrimitiveType.Cube,world.transform,Position(drop.position)+Vector3.up*.4f,new Vector3(.35f,.65f,.2f),color);drops.Add(drop.id,visual);Ring(visual.transform,Vector3.zero,1,color,.04f);}
+                }
+                visual.transform.rotation=visual.name.StartsWith("Drop Model")?Quaternion.Euler(0,elapsed*55,0):Quaternion.Euler(15,elapsed*55,25);
             }
             PresentResources(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
             PresentCombatFeedback(run);PresentGrowthFeedback(run);PresentGuideAppearances(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
