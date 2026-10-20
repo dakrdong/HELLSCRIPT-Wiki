@@ -69,7 +69,8 @@ def attach(api, databases):
         raise ValueError('Missing current runtime portrait authority')
     if not set(historical_portraits) <= set(portraits):
         raise ValueError('Changed current/historical portrait identities')
-    _same_ids(portraits, registry, 'portrait/registry')
+    # Art-pending monsters ship without a portrait until their art lands.
+    _same_ids(portraits, [i for i, m in registry.items() if m.get('portrait')], 'portrait/registry')
     for identifier, entry in portraits.items():
         if (entry.get('file') != ART+'TrainingGround/Portraits/'+identifier+'.png'
                 or not re.fullmatch('[0-9a-f]{64}', entry.get('sha256', ''))):

@@ -1,6 +1,6 @@
 # Monster Roster per Field and Hunyuan Model Plan
 
-Updated: 2026-10-11 · [한국어](HELLSCRIPT_Monster_Roster_20261011.md)
+Updated: 2026-10-20 · [한국어](HELLSCRIPT_Monster_Roster_20261011.md)
 
 This plan gives each of the six rift fields at least 20 regular monsters and at least 3 bosses: 120 regular monsters (20 existing + 100 new) and 18 bosses (5 existing + 13 new), 138 in total. Models are made with the Tencent HY 3D (Hunyuan) free allowance of 20 generations per day, 20 per day in the priority order below. Field rules follow [Six Rift Fields](HELLSCRIPT_Rift_Fields.en.md); existing enemy and boss numbers follow the [regular enemy and elite detail](HELLSCRIPT_Enemy_Combat_Detail.md) and the [boss combat detail](HELLSCRIPT_Boss_Combat_Detail.en.md).
 
@@ -312,6 +312,14 @@ The foundation for adding monsters and bosses as data, without code changes. Whe
 ### 11.5 Shipped monsters (2026-10-11)
 
 N21 Grave Maggot Swarm, N22 Skeleton Shieldbearer, N23 Skeleton Spearman, N33 Bone Bomber and B06 Bone Matron shipped art-pending. Every skill description matches what it does (B06's bone prison is a breakable 2 s ring of bone walls, grave legion summons 2 each of N22 and N23).
+
+### 11.5.1 Art-pending batch (2026-10-20)
+
+88 of the 90 unshipped roster entries (79 regular N30, N32, N34, N36–N38, N41, N46, N47, N50–N57 and N59–N120, plus 9 bosses B09 and B11–B18) shipped together with `add --art-pending`. They have no model or portrait yet, so the world shows the primitive figure and the codex an empty portrait frame. `art-ready` clears the flag once art lands.
+
+- Unlock tiers are the roster's own (regular monsters tier 6 in graveyard, cavern and grassland, tier 11 in fortress, desert and highland; bosses tiers 26–66). B08 and B10 unlock at tier 1 and would change the boss choice of tiers 1–5, so they were left out. Seeds and fixed results of tiers 1–5 therefore stay as they were.
+- From tier 6 on, the slot candidate lists grow, so the same seed draws other monster kinds and the original monsters lose share (for example the desert melee slot goes from one kind to one of seven). Placement, roles, elites and rewards do not change, as `MonsterSpawnTableTests` checks.
+- The codex holds 136 monsters (120 regular + 16 bosses). Kills are recorded per id, so existing saves carry on unchanged.
 
 ### 11.6 Deferred and limits
 
