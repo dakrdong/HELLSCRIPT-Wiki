@@ -47,17 +47,17 @@ namespace Hellscript
             TransferHover = progress;
             if (overlay != null) overlay.SetVerticesDirty();
         }
-        public void Bind(UiButton control, bool owned, bool purchasable)
+        public void Bind(UiButton control, bool owned, bool purchasable, bool badges = true)
         {
             button = control; Owned = owned; Purchasable = purchasable; raycastTarget = false;
-            if (overlay == null)
+            if (overlay == null && badges)
             {
                 var r = UiLayout.Rect("Chest status", transform);
                 r.anchorMin = Vector2.zero; r.anchorMax = Vector2.one; r.offsetMin = r.offsetMax = Vector2.zero;
                 overlay = r.gameObject.AddComponent<StorageChestOverlay>(); overlay.Bind(this);
             }
             lastState = -1;
-            SetVerticesDirty(); SetMaterialDirty(); overlay.SetVerticesDirty();
+            SetVerticesDirty(); SetMaterialDirty(); if (overlay != null) overlay.SetVerticesDirty();
         }
         void LateUpdate()
         {

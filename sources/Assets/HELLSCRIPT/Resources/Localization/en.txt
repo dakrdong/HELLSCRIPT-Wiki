@@ -2714,31 +2714,11 @@ CC 지속시간 -{0:0.##}%	CC duration -{0:0.##}%
 보석상	Jeweler
 물약 제조	Elixirs
 소켓 관리	Sockets
-{0}개 제조	Craft {0}
-{0}\n보석 1개 → 물약 1개	{0}\n1 gem → 1 elixir
-보석 보관함 · {0}/{1}칸	Gems · {0}/{1} slots
-보유 {0:N0}개 · 계정 공유	Owned: {0:N0} · Shared by account
-합성 5 → 1 · 분해 1 → 5 · 한 단계씩 변환	Upgrade 5 → 1 · Split 1 → 5 · One tier at a time
 부서진 보석 구매 · {0:N0} 골드	Buy chipped gem · {0:N0} gold
 보석을 구매했습니다.	Gem purchased.
-작업 수량	Batch size
-1개	1
-5개	5
-등급 올리기	Upgrade
-등급 내리기	Downgrade
-{0:N0}개 → {1:N0}개	{0:N0} → {1:N0}
-보석 등급을 변환했습니다.	Gem conversion complete.
-보석 물약 · 30초	Gem elixirs · 30 seconds
-보조 물약 효과는 하나만 유지됩니다. 새 물약을 사용하면 이전 효과를 교체합니다.	Only one utility elixir remains active. Using a new elixir replaces the previous effect.
-재료 {0:N0}개 · 물약 {1:N0}개	Gems: {0:N0} · Elixirs: {1:N0}
-제조한 물약은 현재 캐릭터의 인벤토리 물약 슬롯에 장착할 수 있습니다.	Equip crafted elixirs in this character’s inventory potion slots.
-보호막은 사용 시 한 번 생성되며, 소진되거나 30초가 지나면 사라집니다.	The shield forms once on use and disappears when depleted or after 30 seconds.
-물약 제조를 완료했습니다.	Elixir crafting complete.
 보석상 가까이에서 이용하세요.	Move closer to the jeweler.
 같은 보석 5개 → {0}	5 matching gems → {0}
 보석 5개를 사용해 한 단계 합성합니다.	Use 5 gems to upgrade by one tier.
-매직찬스는 일반 등급의 드롭 확률을 매직으로 전환합니다. 희귀·전설 확률은 유지됩니다.	Magic chance shifts common drops to magic. Rare and legendary probabilities remain unchanged.
-마법력은 지능에 더해지며, 마나 효과는 각 직업의 전투 자원에 적용됩니다.	Magic power adds intelligence. Mana effects apply to each class’s combat resource.
 {0} 공격	{0} attack
 {0} · {1} 예고: {2:0.0}초 후 · 목표 위치 ({3:0.0}, {4:0.0})	{0} telegraphs {1}: in {2:0.0}s · aim ({3:0.0}, {4:0.0})
 {0} 격노: 강화된 공격에 주의하세요.	{0} enrages: watch for empowered attacks.
@@ -2865,23 +2845,18 @@ Google 로그인을 취소했습니다.	Google sign-in was cancelled.
 정예 특성: {0}	Elite traits: {0}
 사냥 칙령 설정	Hunt Edict settings
 균열 {0}단계 · 적 {1}종 · {2}마리 · 총 HP {3:N0}	Rift tier {0} · {1} kinds · {2} enemies · {3:N0} total HP
-스킬 {0}/{1}개	{0}/{1} skills
 체크한 스킬만 전투에서 사용합니다.	Only checked skills are used in combat.
 장착한 궁극기가 없습니다.	No ultimate is equipped.
 기본 공격과 공격 순서는 사냥 칙령 설정의 공통 공격 설정에서 바꿉니다.	Change basic attacks and the attack order under Attack settings in Hunt Edict settings.
 훈련 제외	Excluded
 자동 사용 꺼짐 · 전투에서 쓰지 않음	Automatic use off · not used in combat
 등장 적	Enemies
-적 {0}/{1}종	{0}/{1} kinds
-+ 적 추가	+ Add enemy
 적을 추가해 훈련을 구성하세요. 보스와 일반 몬스터를 합쳐 5종까지 넣을 수 있습니다.	Add enemies to build the training. Up to 5 kinds, bosses and normal monsters combined.
 균열 단계	Rift tier
 {0}단계	Tier {0}
 HP {0:N0} · 공격력 {1:N0}	HP {0:N0} · Attack {1:N0}
 마리당 HP {0:N0} · 공격력 {1:N0}	Each: HP {0:N0} · Attack {1:N0}
 실제 전투처럼 능력치는 일반과 같고 등급 효과만 다릅니다.	As in real combat, stats match Normal; only the tier effect differs.
-이 세팅의 기록이 아직 없습니다.	No clear with this setup yet.
-최고 {0} · 직전 {1}	Best {0} · Previous {1}
 같은 세팅은 항상 같은 배치와 시드로 시작합니다.	The same setup always starts with the same placement and seed.
 적 추가	Add enemy
 {0}/{1}종 선택 · 보스는 한 종만 1마리 · 일반 몬스터 1~{2}마리	{0}/{1} kinds · one boss kind, always 1 · normal monsters 1–{2}
@@ -2902,9 +2877,6 @@ HP {0:N0} · 공격력 {1:N0}	HP {0:N0} · Attack {1:N0}
 제한 시간 {0}을 넘겼습니다 · 남은 적 {1}/{2}	The {0} time limit ran out · {1}/{2} enemies left
 이 세팅의 첫 기록	First clear with this setup
 직전과 같은 기록	Same time as the previous run
-직전보다 {0:0.0}초 빨라짐 ({1})	{0:0.0} s faster than the previous run ({1})
-직전보다 {0:0.0}초 느려짐 ({1})	{0:0.0} s slower than the previous run ({1})
-직전 기록 {0} · 최고 기록 {1}	Previous {0} · Best {1}
 최고 기록 갱신	New best
 비교 기준: 영웅 레벨·장비, 균열 단계, 적 구성과 사용 스킬이 같은 직전 성공 판	Compared with the previous successful run at the same hero level, equipment, rift tier, enemies and skills
 성공한 판만 클리어 시간을 기록하고 비교합니다.	Only successful runs record and compare a clear time.
@@ -2976,7 +2948,6 @@ HP 보호	HP shield
 옵션을 변경할 수 있는 장비만 표시합니다.	Only equipment with enchantable affixes is shown.
 이 옵션 위치를 고정할까요?	Lock this affix line?
 첫 실행에 골드가 사용되며, 선택한 줄이 이 아이템의 영구적인 변경 위치가 됩니다.	Your first paid roll spends gold and makes the selected line this item's permanent reroll slot.
-아이템 Lv.{0} · {1}	Item Lv.{0} · {1}
 변경할 위치	Reroll slot
 {0}번 옵션	Affix {0}
 현재 옵션	Current affix
@@ -2987,7 +2958,6 @@ HP 보호	HP shield
 원하는 옵션이 나올 때까지	Until the affix you want
 체크한 옵션 중 하나가 나오면 즉시 멈추고 결과를 보여 줍니다. 목표를 체크해도 출현 확률은 달라지지 않습니다.	Stops at once and shows the result when a checked affix comes up. Checking a target does not change its chance.
 최대 실행 횟수	Maximum rolls
-{0:N0}회 MAX	{0:N0} rolls MAX
 최대	Max
 1회부터 보유 골드로 가능한 {0:N0}회까지	From 1 up to the {0:N0} rolls your gold allows
 최대 사용 골드	Maximum gold spent
@@ -3039,8 +3009,6 @@ HP 보호	HP shield
 고유 효과 · 변경 불가	Unique effect · Fixed
 나올 수 있는 옵션	Possible affixes
 {0}종	{0} types
-자동 변경 진행 중	Auto reroll in progress
-{0:N0} / {1:N0}회 · 남은 횟수 {2:N0}	{0:N0} / {1:N0} rolls · {2:N0} left
 아이템 레벨 기준 · 반복해도 비용은 같습니다.	Based on item level · Cost never increases with rolls.
 강화할 장비	Equipment to enhance
 성장 미리보기	Growth preview
@@ -3601,6 +3569,128 @@ HP·MP 회복	HP · MP restored
 이렇게 하면 항상 기존보다 더 좋은 장비만 추천으로 나타나게 할 수 있어요.	This way, only gear better than what you have will be recommended.
 카드의 ×를 눌러 닫아 주세요.	Tap × on the card to close it.
 {0} 처치 · 금화·강화석·헬멧	{0} defeated · gold, enhancement stones and a helmet
+1.5배속으로 입장하시겠습니까?	Enter at 1.5× speed?
+{0}개 사용하고 입장	Spend {0} and enter
+{0}개 사용하고 회복	Spend {0} and restore
+{0}시간 {1:00}분	{0}h {1:00}m
+{0}초 지속	Lasts {0}s
+교체 가능한 궁극기	Available ultimates
+교체 가능한 활성화 스킬	Available learned skills
+균열에 참여한 실제 시간만큼 차감됩니다.	Only real time spent inside the rift is deducted.
+균열의 문	The Rift Gate
+기본 물약	Basic potion
+다음 날 이월 · {0}	Carries over · {0}
+매일 00:00에 일일 지급분이 2시간으로 초기화됩니다. 남은 일일 지급분은 누적되지 않습니다.	The daily allowance resets to 2 hours at 00:00. Unused daily time does not accumulate.
+보상 아이템은 추후 추가됩니다	Reward items will be added later
+보유한 등급을 누르면 바로 장착됩니다.	Choose an owned tier to equip it immediately.
+복귀·사망해도 이번 입장에 사용한 주화는 반환되지 않습니다.	The entry cost is not refunded after returning or dying.
+스킬 교체	Change skill
+스킬 상세	Skill details
+슬롯 {0}	Slot {0}
+실제 1분 참여 = 피로도 1분 사용 · 전투 1분 30초 진행	1 real minute = 1 minute of fatigue · 1 min 30 sec of combat
+심연 주화 500개를 사용합니다. 회복분은 보라색으로 표시되며, 남은 시간은 다음 날에도 유지됩니다.	Spend 500 Abyssal Coins. Restored fatigue is purple, and any unused time carries into the next day.
+아래 효과가 함께 적용됩니다.	All effects below apply together.
+아직 클리어하지 않은 단계	Tier not yet cleared
+오늘 회복 횟수를 모두 사용했습니다.	All of today's restores have been used.
+유료 회복분	Restored reserve
+이번 균열의 전투가 1.5배속으로 진행됩니다. 입장을 확정하면 심연 주화 200개가 한 번 차감됩니다.	Combat runs at 1.5× for this rift. Confirming entry spends 200 Abyssal Coins once.
+일일 지급분	Daily allowance
+일일 지급분을 먼저 사용합니다. 유료 회복분은 그다음에 사용하며, 남은 시간은 다음 날의 2시간에 더해집니다.	Daily time is spent first, followed by restored time. Unused restored time is added to the next day's 2 hours.
+중도 복귀·사망 시에도 사용한 시간은 반환되지 않습니다.	Time spent is not returned after leaving or dying.
+초기화까지	Resets in
+최고 돌파	Highest cleared
+최단 클리어	Best clear
+클리어 완료 · 미수령	Cleared · Unclaimed
+피로도 20분을 회복합니다	Restore 20 minutes of fatigue
+피로도 이용 안내	How fatigue works
+피로도가 0일 때 500개로 20분을 회복합니다. 하루 3회까지 가능하며, 횟수는 매일 00:00에 초기화됩니다.	At zero fatigue, restore 20 minutes for 500 coins, up to 3 times daily. The count resets at 00:00.
+한국 시간	KST
+현재 장착 중	Currently equipped
+회복분 12분이 남았다면 → 다음 날 2시간 12분	12 restored minutes left → 2 hours 12 minutes next day
+{0} · 레벨 {1}	{0} · Level {1}
+고정 저항	Fixed resistance
+기본 · {0}	Base · {0}
+보조무기에 장착	Equip to off hand
+오른쪽 반지에 장착	Equip to right ring
+왼쪽 반지에 장착	Equip to left ring
+점수	Score
+주무기에 장착	Equip to main hand
+추천 후보	Recommended
+적을 한 종 이상 추가하세요.	Add at least one enemy.
+체크한 스킬이 없어 기본 공격만 사용합니다.	No skills are checked, so only basic attacks are used.
+최고 기록 {0} · 직전 기록 {1}	Best {0} · Previous {1}
+{0}/{1} 사용	{0}/{1} in use
+{0}/{1}종	{0}/{1} kinds
+칙령 수정	Edit edict
+실제 균열과 같은 몬스터 능력치 · 열린 단계 1~{0}	Monster stats of a real rift at this tier · open tiers 1–{0}
+직전보다 {0:0.0}초 빨라짐	{0:0.0} s faster than the previous run
+직전보다 {0:0.0}초 느려짐	{0:0.0} s slower than the previous run
+사용 {0}회	Used {0}×
+이번 훈련에서 사용하지 않음	Not used in this training
+자동 사용이 꺼져 쓰지 않음	Not used: automatic use is off
+직전 성공한 판과 같은 사냥 칙령입니다.	The Hunt Edict matches the previous successful run.
+훈련장 로비로 돌아가기	Back to the training lobby
+지금 세팅 그대로	With this setup
+최고 DPS	Peak DPS
+평균 DPS	Average DPS
+만	10K
+억	100M
+조	T
+피해량은 {0}단계 일반 기준 예상치	Estimated damage at tier {0}, Normal
+피해량은 {0}단계 보스 기준 예상치	Estimated damage at tier {0}, Boss
+피해량은 {0}단계 정예 기준 예상치	Estimated damage at tier {0}, Elite
+사용 기술 기준	From its skills
+최고 {0}	Best {0}
+속박·기절·빙결 면역, 둔화는 적용	Root, stun and freeze. Slow still applies.
+가득 차면 {0}초 무력화, 이후 {1}초 면역	Full gauge: incapacitated {0} s, then immune {1} s
+Lv.{0} · 깨어난 룬	Lv.{0} · Awakened rune
+Lv.{0} 조건 · {1} / {2}개	Next: Lv.{0} · {1} / {2} copies
+Lv.{0}로 레벨업	Level up to Lv.{0}
+{0} · {1} · 아이템 레벨 {2}	{0} · {1} · Item level {2}
+{0} 분해	Salvaging {0}
+{0}개 표시	{0} shown
+{0}에 {1} 위상을 각인했습니다.	Imprinted the {1} aspect on {0}.
+각인 가능	Eligible
+각인 가능 {0} / {1}	{0} / {1} eligible
+각인 대상 변경	Change imprint target
+각인 완료	Imprint complete
+각인 확인하기	Confirm imprint
+각인된 위상 없음	No aspect imprinted
+검색·필터 지우기	Clear search and filters
+기본 능력치·일반 옵션·보석은 그대로 유지됩니다.	Base stats, regular affixes and gems are preserved.
+기존 위상은 지워지고 새 위상으로 교체됩니다.	The new aspect replaces the existing aspect.
+도감 계속 보기	Keep browsing the codex
+돌에 남은 힘을, 장비에 새기다.	A power remembered. A new mark forged.
+등록한 위상	Aspects collected
+등록한 위상은 소모되지 않습니다.	Collected aspects are never consumed.
+레벨업 가능	Ready to level up
+레벨업해도 누적 수량은 줄어들지 않습니다.	Leveling up does not reduce your collected count.
+모든 직업이 쓸 수 있는 위상입니다.	Any class can use this aspect.
+미등록 위상도 이름과 효과를 볼 수 있습니다. 등록한 위상은 횟수 제한 없이 사용할 수 있습니다.	You can read the name and effect of uncollected aspects. Collected aspects can be used without limit.
+새로운 힘을 새깁니다.	Inscribe a new power.
+선택한 장비 · {0}	Selected item · {0}
+아직 모으지 못한 룬	Not collected yet
+위상 1개는 레벨 1, 2개는 레벨 2, 4개는 레벨 3, 8개는 레벨 4, 16개는 레벨 5의 조건입니다.	One aspect unlocks level 1, 2 unlock level 2, 4 level 3, 8 level 4 and 16 level 5.
+위상 레벨	Aspect level
+위상 선택하기	Choose aspect
+위상 이름·효과·ID 검색	Search names, effects, IDs
+이 위상으로 교체할까요?	Replace with this aspect?
+이 전설을 분해하면 위상이 등록됩니다.	Salvage this legendary to collect its aspect.
+이미 같은 레벨 이상의 위상이 새겨져 있습니다.	An aspect of the same or a higher level is already imprinted.
+장비 하나에는 위상 하나만 남습니다. 새 위상을 각인하면 기존 위상을 덮어씁니다.	Each item keeps only one aspect. Imprinting a new one overwrites the old.
+장비에 위상을 새길까요?	Imprint this aspect on the item?
+장비와 위상을 선택하세요.	Choose an item and an aspect.
+전설 아이템을 분해하면 위상이 각인석에 자동으로 보관됩니다. 같은 위상은 수량이 누적됩니다.	Salvaging a legendary item stores its aspect in the runestone automatically. Copies of the same aspect add up.
+전설 아이템을 분해해 위상을 모으고, 레벨을 올린 뒤 착용 장비에 원하는 힘을 새기세요.	Salvage legendary items to collect aspects, level them up, then imprint the power you want on your worn gear.
+전체 {0}종	{0} aspects
+첫 위상은 레벨 1로 활성화됩니다. 이후 빨간 점이 표시된 위상을 눌러 직접 레벨업하세요. 레벨업해도 누적 수량은 유지됩니다.	The first copy awakens level 1. Tap an aspect marked with a red dot to level it up yourself. Leveling up keeps your collected count.
+한 번 등록하면 계속 사용할 수 있습니다.	Collect once. Imprint as often as you wish.
+현재 위상 효과 보기	Inspect current aspect
+획득처	Found by
+희귀 장비는 전설로 바뀌며 다른 옵션은 유지됩니다.	A Rare item becomes Legendary; its other affixes are kept.
+희귀·전설 등급의 장비만 각인할 수 있습니다.	Only Rare and Legendary gear can be imprinted.
+희귀·전설 장비에 각인할 수 있습니다.	Imprint on Rare or Legendary gear.
+희귀와 전설에 각인할 수 있습니다. 일반·마법·고유·세트 장비에는 각인할 수 없습니다.	You can imprint Rare and Legendary gear. Normal, Magic, Unique and Set gear cannot be imprinted.
 # --- composed at runtime; no source literal holds these ---
 Lv.{0} → {1} · HP 비율 유지{2}	Lv.{0} → {1} · HP ratio kept{2}
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
@@ -5456,9 +5546,9 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 왕관의 수호의 물약	Crowned Warding Elixir
 모든 저항력 +75 · CC기 저항 −50% · 보호막 생성 +최대 생명력의 30% · 30초	All resistances +75 · Crowd control resistance −50% · Shield +30% max life · 30 s
 # Rift entry
-균열 입장	Rift entry
+균열 입장	Enter Rift
 균 열	R I F T
-어둠을 넘어, 더 깊은 곳으로.	Beyond the dark, into the depths.
+어둠을 넘어, 더 깊은 곳으로.	Beyond the dark. Into the depths.
 최초 보상	First-clear rewards
 도전 단계	Challenge tier
 최고 돌파 {0}단계	Highest clear: tier {0}
@@ -5496,7 +5586,7 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 피로도 회복	Restore fatigue
 심연 주화 500개로 피로도 20분을 회복합니다. 사용하지 않은 회복분은 다음 날에도 유지됩니다.	Restore 20 minutes for 500 Abyssal Coins. Unused restored time carries over to the next day.
 회복하기	Restore
-물약 교체	Replace potion
+물약 교체	Change potion
 사용 중	In use
 슬롯 {0} · 보유한 등급을 눌러 바로 교체	Slot {0} · Tap an owned tier to equip
 눌러서 교체	Tap to equip
@@ -5505,7 +5595,7 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 사용 스킬 교체	Replace active skill
 활성화된 스킬을 선택하세요.	Select an unlocked skill.
 교체할 수 있는 활성화된 스킬이 없습니다.	No unlocked replacement skill is available.
-교체하기	Replace
+교체하기	Replace skill
 단계를 눌러 보상을 확인하고 수령하세요. · 1–1000단계	Select a tier to inspect and claim rewards. · Tiers 1–1000
 입장할 균열을 확인하세요.	Check the rift selected for entry.
 남은 피로도가 없습니다.	No fatigue remains.
@@ -7888,3 +7978,178 @@ HP 3배, 0.9초 예고 발구르기 고리 2겹, 엄니 돌진 6m	HP ×3, 0.9 s 
 영혼 수확	Soul harvest
 영혼 수확(부하를 흡수해 회복, 부하를 먼저 정리)	Soul harvest (absorbs minions to heal; clear them first)
 대검 회전	Greatsword spin
+주화	coins
+하루 총 보상	Daily total
+매일 00:00 KST 초기화	Resets daily at 00:00 KST
+진행	Progress
+하루 총 {0}개	{0} coins per day
+추가 전체 완료 보상 없음	No extra all-complete bonus
+
+# Equipment shop (casual)
+0개: 능력치 조건으로 제외하지 않음	0: do not exclude by stats
+1. 등급 필터	1. Rarity filter
+2. 장비 필터	2. Equipment filter
+{0} 회/초	{0} attacks/s
+개 선택	selected
+개 이상 맞으면 제외	or more conditions match
+걸작 {0}단계	Masterwork {0}
+계정 공용 보관 · 소지품에는 없습니다.	Shared account stock · Not stored in the bag.
+구매 · 판매 · 되사기를 선택하세요.	Choose Buy, Sell or Buyback.
+구매가격	Purchase price
+구매에서는 상품과 현재 장착 장비를 비교합니다. 판매에서는 소지품을 눌러 정보를 보고 판매하거나, 다중 선택으로 일괄 판매할 수 있습니다. 되사기 목록의 장비를 누르면 판매 당시의 모든 정보를 확인할 수 있습니다.	Buy compares vendor gear with equipped gear. In Sell, select inventory gear to see its details and sell it, or use Multi-select to sell several items. Select a Buyback row to inspect the complete item as it was sold.
+구매하기	Purchase
+구매했습니다. 소지품에 보관됩니다.	Purchased and placed in inventory.
+다음 입고	Restock
+당시 판매가격	Original sale price
+되사기 금액	Buyback value
+되살 장비가 없습니다.	No gear to buy back.
+두 필터를 모두 만족한 장비를 선택합니다. 잠금·장착·프리셋 보호 장비는 항상 제외합니다.	Items must match both filters. Locked, equipped and preset gear is always excluded.
+무기 · 장비 상점	Arms & equipment
+보호된 장비	Protected gear
+사용하지 않으면 등급과 장비 종류만으로 선택합니다.	When off, only rarity and equipment type determine selection.
+상점	Shop
+선택 마치기	Finish selection
+설정 범위 0~{0}개	Allowed: 0–{0}
+설정 저장 후 자동 선택을 누르면 적용됩니다.	Save, then press Auto-select to apply.
+세부 설정 · 사용 중	Details · On
+소지품 {0}개	{0} in bag
+소지품 가득 참	Inventory full
+소지품 장비	Inventory item
+소폭 개선	Small upgrade
+아직 거래 기록이 없습니다.	No transactions yet.
+업그레이드 정보	Upgrade information
+요구 레벨	Required level
+이상 제외	or higher: exclude
+자동 선택 대상 {0}개	Items to auto-select: {0}
+자동 선택 설정에서 판매할 등급과 장비 종류를 선택하세요.	Choose rarities and equipment types in Auto-select settings.
+잠금·장착·프리셋 참조 장비는 판매할 수 없습니다.	Locked, equipped and preset gear cannot be sold.
+저장된 프리셋 장비가 없습니다.	No equipment is saved in this preset.
+정보	Details
+제외 조건이	Exclude when
+조건에 맞는 판매 장비가 없습니다.	No saleable gear matches your settings.
+조건에 맞는 판매 장비를 선택했습니다.	Matching gear selected for sale.
+종류	Type
+주 무기	Main weapon
+최근 판매	Recent sales
+추가 옵션 없음	No additional affixes
+판매 금액	Sale value
+판매 상품	Vendor item
+판매 완료	Sold
+판매 합계	Total sale value
+판매 후 최근 12개만 되살 수 있습니다. 오래된 장비 {0}개가 되사기 목록에서 제외됩니다.	Only the latest 12 items can be reclaimed. {0} older items will leave Buyback after this sale.
+판매하기	Sell item
+판매할 등급과 장비 종류를 체크하세요. 필요한 장비만 세부 설정을 켜서 남길 수 있습니다.	Choose rarities and equipment types to sell. Enable detailed rules only for gear you want to keep.
+판매했던 장비	Sold item
+판매했던 장비를 되샀습니다.	Your original item has been reclaimed.
+판매했습니다. 되사기에서 복구할 수 있습니다.	Sold. Reclaim it in Buyback.
+해당 조건의 판매 물품이 없습니다.	No offers match these filters.
+현재 장착	Equipped
+회/초	attacks/s
+＋ 제외 조건 추가	＋ Add exclusion
+
+# Blacksmith (casual)
+같은 옵션이나 더 낮은 수치가 나올 수도 있습니다.	The same affix or a lower value may appear.
+계속 돌리기	Keep rolling
+시작하기	Start auto reroll
+자동 돌리기	Auto reroll
+자동 돌리기 완료	Auto reroll complete
+자동 돌리기 진행 중	Auto reroll in progress
+({0:N0}회 남음)	({0:N0} remaining)
+{0:N0} / {1:N0}회 · {2:N0}회 남음	{0:N0} / {1:N0} rolls · {2:N0} remaining
+{0:N0}회를 모두 실행했습니다. 마지막 옵션을 유지합니다.	All {0:N0} attempts completed. The latest affix is kept.
+아이템 레벨 {0} · {1}	Item level {0} · {1}
+최소 {0} · 최대 {1}	Min {0} · Max {1}
+남은 횟수가 없습니다.	No attempts remaining.
+장비 부위와 접두·접미에 맞는 후보입니다.	Candidates match this slot and prefix/suffix type.
+
+# Blacksmith (casual)
+강화 시작	Start upgrade
+미리보기 레벨	Preview level
+선택한 부위	Selected slot
+심연 주화 1개당 +0.01% · 최대 8,000개 (80%)	1 abyssal coin = +0.01% · Up to 8,000 (80%)
+장비 상세 정보	Equipment details
+공격 속도와 정밀함	Speed & precision
+공격과 치명타	Attack & critical strikes
+기동성과 회피	Mobility & evasion
+능력치와 스킬 효율	Attributes & skill efficiency
+생명력과 방어	Life & protection
+인벤토리 + 창고 합산 · 전설·세트 장비 1개 분해 → 같은 부위 코어 1개	Bag + storage combined · 1 salvaged legendary/set item → 1 core of the same slot
+자원 순환	Resource sustain
+자원과 스킬 운용	Resources & skill uptime
+치명타 공격	Critical offense
+피해 경감과 생존	Mitigation & sustain
+회복과 유지력	Recovery & endurance
+
+# Jeweler (casual)
+성소의 공방	SANCTUARY WORKSHOP
+보석에 깃든 힘을 한 병에	The power of a gemstone, bottled
+등급별 수치	Tier values
+적용 중인 물약이 없습니다	No active elixir
+한 병에 모든 효과가 함께 적용됩니다.	Every effect is included in a single elixir.
+모든 효과 30초	All effects last 30s
+보석 보기	View gems
+물약 보기	View elixirs
+보유 보석	Your gemstones
+보석 {0}개	{0} gems
+보석을 선택하면 같은 등급의 물약을 볼 수 있습니다.	Select a gemstone to view its matching elixir tier.
+보석의 등급이 높을수록 물약의 효과가 강해집니다.	Higher quality gemstones create more powerful elixirs.
+이 등급의 보석이 없습니다. 다른 등급을 선택하세요.	No gemstones of this tier. Select a different tier.
+최고 등급	Highest tier
+최저 등급	Lowest tier
+보석 {0}개 필요	{0} needed
+보유 한도 초과	Stack limit reached
+선택한 보석	SELECTED GEMSTONE
+변환 수량	Conversion amount
+업그레이드	Upgrade
+다운그레이드	Downgrade
+낮은 품질 → 높은 품질	LOWER QUALITY → HIGHER QUALITY
+보호막은 사용 시 최대 HP를 기준으로 한 번 생성됩니다. 30초가 지나거나 먼저 소진되면 사라지며, 재사용 시 중첩 없이 새 수치로 갱신됩니다.	Using this elixir creates a shield based on maximum HP. It expires after 30 seconds or when depleted. Reuse replaces the remaining shield with a fresh one; shields do not stack.
+보석 부족	No gems
+{0} {1}개를 제조했습니다.	Brewed {1} × {0}.
+{0} {1}개를 {2} {3}개로 변환했습니다.	Converted {1} × {0} into {3} × {2}.
+물약 {0}개 제조	Brew {0} elixir(s)
+필요 보석 {0}개 · 보유 {1}개	Needs {0} gem(s) · Owned {1}
+제조 수량	Quantity
+같은 종류·등급의 보석 1개 → 물약 1개	1 matching gemstone → 1 elixir of the same tier
+제조안	RECIPE
+물약 {0}개 보유	{0} elixir(s) owned
+계정 공유 보관함	Account-wide storage
+자동 저장	Saved automatically
+물약 효과는 한 종류만 유지됩니다. 새로 사용하면 교체됩니다.	Only one elixir is active at a time. A new one replaces it.
+효과	Effect
+%는 해당 능력치의 증가율, %p는 확률·흡수 비율의 추가분입니다. HP 회복속도는 초당 최대 HP 비율이며, CC기 저항은 제어 효과의 지속시간 감소율입니다. 루비의 완벽한 방어 확률은 2·3·5·7·10·14%p가 추가됩니다.	% increases the named stat; pp adds to a chance or damage-steal ratio. HP regeneration is a percentage of maximum HP per second. Crowd control resistance reduces control duration. Ruby adds 2, 3, 5, 7, 10 or 14 percentage points to perfect block chance.
+수치 해석	Reading the values
+행운의 물약	Fortune Elixir
+행운과 탐색	FORTUNE & DISCOVERY
+더 멀리, 더 빠르게. 황금빛 행운을 담습니다.	Go farther, move faster. Carry a little golden fortune.
+매직찬스 확률	Magic Find Chance
+아이템 획득 반경	Pickup Radius
+생명의 물약	Vitality Elixir
+힘과 생명	STRENGTH & VITALITY
+강인한 힘과 생명력을 보랏빛 한 방울에 담습니다.	Strength and vitality, distilled into a violet drop.
+생명력 훔침	Life Steal
+지혜의 물약	Wisdom Elixir
+마법과 마나	MAGIC & MANA
+깊고 맑은 마력으로 끊이지 않는 주문을 준비합니다.	Draw on a deep, clear well of magic for the battle ahead.
+마법력	Magic Power
+최대 마나	Maximum Mana
+마나 훔침	Mana Steal
+기민함의 물약	Agility Elixir
+민첩과 속공	AGILITY & PRECISION
+바람처럼 피하고, 빈틈보다 빠르게 공격합니다.	Slip past danger. Strike before the moment is gone.
+민첩력	Dexterity
+불굴의 물약	Fortitude Elixir
+방어와 회복	DEFENSE & RECOVERY
+붉은 힘으로 상처를 회복하고 적의 일격을 완벽히 막아 냅니다.	Crimson resolve mends wounds and turns aside an enemy’s strike.
+방어력	Armor
+HP 회복속도	HP Regeneration
+완벽한 방어 확률	Perfect Block Chance
+수호의 물약	Warding Elixir
+저항과 수호	RESISTANCE & RESOLVE
+속성 피해와 속박에 맞서고, 보호막으로 몸을 지킵니다.	Resist elements, recover from control sooner, and gain a shield.
+모든 저항력	All Resistances
+CC기 저항	Crowd Control Resistance
+보호막 생성	Shield
++{0}%/초	+{0}%/s
+최대 HP {0}%	{0}% max HP
+시간 −{0}%	Duration −{0}%

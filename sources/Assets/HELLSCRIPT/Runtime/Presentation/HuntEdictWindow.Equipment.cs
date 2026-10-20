@@ -92,6 +92,8 @@ namespace Hellscript
                     var check=HuntEdictDecor.Create(box,"Checkbox tick",0,0,26,26,"tick",skin).GetComponent<HuntEdictDecor>();
                     toggle.graphic=check;toggle.SetIsOnWithoutNotify(selected);
                     toggle.onValueChanged.AddListener(on=>{
+                        // The editor re-sends the current value when a toggle rebuilds; a no-change must not rewrite the draft and repaint (that loops).
+                        if(on==EquipmentRecommendation.Excluded(Session.Draft.edict,position))return;
                         var chosen=EquipmentRecommendation.Get(Session.Draft.edict,EquipmentRecommendation.ExcludedSlots).Split(',').Where(v=>v!="").ToHashSet();
                         if(on)chosen.Add(position.ToString());else chosen.Remove(position.ToString());
                         SetGlobal(EquipmentRecommendation.ExcludedSlots,string.Join(",",chosen));

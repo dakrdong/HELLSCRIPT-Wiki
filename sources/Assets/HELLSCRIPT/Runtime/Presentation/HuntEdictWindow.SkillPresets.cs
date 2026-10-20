@@ -53,35 +53,46 @@ namespace Hellscript
         {
             string scope=SkillPolicyScope,shown=VisibleSkillPreset,active=ActiveSkillPreset;
             bool custom=shown==HuntEdictQuickPresets.Custom,usingShown=shown==active&&HuntEdictSkillPresets.SamePolicy(Session.Draft,OwnedSkillPolicy,scope);
-            float heading=Look.SmallButton,backWidth=Mathf.Min(180,w*.31f);
-            Button(parent,"스킬 트리로",x,y,backWidth,heading,()=>SelectSkillPage(true),"button-idle",Look.SmallText).name="edict-policy-back";
+            // The mockup's .ph2 row: the back button (chevron, text), then either the basic/order switch or the mini socket and skill name, 12 px apart.
+            float mini=Look.Gem-4,btnHeight=Look.Button-14,heading=Mathf.Max(btnHeight,mini+8);
+            var back=Button(parent,"스킬 트리로",x,y+(heading-btnHeight)/2,100,btnHeight,()=>SelectSkillPage(true),"button-idle",Look.BodyText+1);back.name="edict-policy-back";
+            var backLabel=back.GetComponentInChildren<Text>();backLabel.alignment=TextAnchor.MiddleLeft;backLabel.horizontalOverflow=HorizontalWrapMode.Overflow;
+            float backWidth=2+14+20+8+backLabel.preferredWidth+14+2;Place((RectTransform)back.transform,x,y+(heading-btnHeight)/2,backWidth,btnHeight);Place(backLabel.rectTransform,2+14+20+8,0,backLabel.preferredWidth+4,btnHeight);
+            HuntEdictDecor.Create(back.transform,"Back chevron",2+14,(btnHeight-20)/2,20,20,"chevron",skin).localRotation=Quaternion.Euler(0,0,90);
             if(policySkill=="BASIC")
             {
-                float rest=w-backWidth-Look.Gap;
-                Button(parent,"기본 공격",x+backWidth+Look.Gap,y,rest*.47f,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",Look.SmallText).name="edict-policy-basic";
-                Button(parent,"공통 공격 순서",x+backWidth+Look.Gap+rest*.48f,y,rest*.52f,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",Look.SmallText).name="edict-policy-order";
+                float rest=w-backWidth-12;
+                Button(parent,"기본 공격",x+backWidth+12,y,(rest-6)/2,heading,()=>{previewAttackOrder=false;mainScroll=null;Repaint();},previewAttackOrder?"tab-idle":"tab-current",Look.BodyText+1).name="edict-policy-basic";
+                Button(parent,"공통 공격 순서",x+backWidth+12+(rest-6)/2+6,y,(rest-6)/2,heading,()=>{previewAttackOrder=true;mainScroll=null;Repaint();},previewAttackOrder?"tab-current":"tab-idle",Look.BodyText+1).name="edict-policy-order";
             }
-            else Text(parent,SkillName(policySkill),x+backWidth+Look.Gap,y,w-backWidth-Look.Gap,heading,Look.ChoiceTitle,gold);
-            var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+6,w,100);
+            else
+            {
+                float socketX=x+backWidth+12+4,outer=mini+20;
+                var socket=HuntEdictDecor.Create(parent,"Skill mini socket",socketX-10,y+(heading-outer)/2,outer,outer,"socket-0",skin);
+                var miniIcon=SkillIconView.Create(parent,false);float iconSize=mini*.84f;Place(miniIcon.Rect,socketX+(mini-iconSize)/2,y+(heading-iconSize)/2,iconSize,iconSize);miniIcon.SetSkill(policySkill);
+                Line(parent,SkillName(policySkill),socketX+mini+4+10,y,w-(socketX-x)-mini-14,Look.CardTitle,heading,textColor,true);
+            }
+            var tabs=Rect("Skill preset tabs",parent);Place(tabs,x,y+heading+10,w,100);
             var presets=HuntEdictQuickPresets.For(scope).Where(p=>SkillChoiceDisclosed(scope,p.id)).ToArray();
             var ids=presets.Select(p=>p.id).Concat(!ProgressivePrologue&&HasFeature(HuntEdictProgression.Details)?new[]{HuntEdictQuickPresets.Custom}:Array.Empty<string>()).ToArray();
             int columns=landscape?ids.Length:2,rows=(ids.Length+columns-1)/columns;
-            float cell=w/columns,tabHeight=Look.Chip;
+            float cell=(w-6*(columns-1))/columns,tabHeight=Look.Chip;
             var buttons=new List<Button>();
             for(int i=0;i<ids.Length;i++)
             {
-                string id=ids[i],name=id==HuntEdictQuickPresets.Custom?Loc.T("직접 설정"):presets.Single(p=>p.id==id).Name;
-                var b=Button(tabs,name,(i%columns)*cell,(i/columns)*tabHeight,cell-3,tabHeight,()=>PreviewSkillPreset(id),shown==id?"tab-current":"tab-idle",Look.BodyText+1);
-                b.name="edict-preset-tab-"+id;var t=b.GetComponentInChildren<Text>();Place(t.rectTransform,6,0,cell-46,1000);t.alignment=TextAnchor.MiddleLeft;
-                tabHeight=Mathf.Max(tabHeight,t.preferredHeight+12);buttons.Add(b);
+                string id=ids[i],name=id==HuntEdictQuickPresets.Custom?Loc.T("직접 설정"):presets.Single(p=>p.id==id).Name;bool on=shown==id;float border=on?3:2;
+                var b=Button(tabs,name,(i%columns)*(cell+6),(i/columns)*(tabHeight+6),cell,tabHeight,()=>PreviewSkillPreset(id),on?"tab-current":"tab-idle",Look.BodyText+1);
+                b.name="edict-preset-tab-"+id;var t=b.GetComponentInChildren<Text>();Place(t.rectTransform,border+14,0,cell-border-14-30-10-10-6,1000);t.alignment=TextAnchor.MiddleLeft;
+                tabHeight=Mathf.Max(tabHeight,t.preferredHeight+8+2*border);buttons.Add(b);
             }
             for(int i=0;i<buttons.Count;i++)
             {
-                var b=buttons[i];Place((RectTransform)b.transform,(i%columns)*cell,(i/columns)*(tabHeight+2),cell-3,tabHeight);
-                Place(b.GetComponentInChildren<Text>().rectTransform,6,0,cell-46,tabHeight);
-                string id=ids[i];bool selected=id==active;
+                var b=buttons[i];string id=ids[i];bool on=shown==id;float border=on?3:2;
+                Place((RectTransform)b.transform,(i%columns)*(cell+6),(i/columns)*(tabHeight+6),cell,tabHeight);
+                Place(b.GetComponentInChildren<Text>().rectTransform,border+14,0,cell-border-14-30-10-10-6,tabHeight);
+                bool selected=id==active;
                 float box=30;
-                var radio=Button(b.transform,"",cell-box-8,(tabHeight-box)/2,box,box,()=>
+                var radio=Button(b.transform,"",cell-border-10-box,(tabHeight-box)/2,box,box,()=>
                 {previewSkillPresets[scope]=id;offsets[ScrollKey]=0;ActivateSkillPreset();},selected?"preset-radio-on":"preset-radio-off",14);
                 radio.name=id==shown?"edict-preset-activate":"edict-preset-radio-"+id;
                 ((UiButton)radio).Configure(UiButtonRole.Icon,selected);radio.targetGraphic.canvasRenderer.SetAlpha(1);
@@ -89,12 +100,13 @@ namespace Hellscript
                 radio.interactable=!(selected&&HuntEdictSkillPresets.SamePolicy(Session.Draft,OwnedSkillPolicy,scope));
                 if(selected){radio.GetComponentInChildren<Text>().color=skin.GreenInk;radio.GetComponentInChildren<Text>().name="Active preset mark";}
             }
-            float tabTotal=rows*(tabHeight+2);Place(tabs,x,y+heading+6,w,tabTotal);
-            float plateY=y+heading+6+tabTotal,plateH=h-(plateY-y);
+            float tabTotal=rows*tabHeight+(rows-1)*6;Place(tabs,x,y+heading+10,w,tabTotal);
+            float plateY=y+heading+10+tabTotal+10,plateH=h-(plateY-y);
             var plate=Panel(parent,"Skill preset panel","skill-inspector");Place(plate,x,plateY,w,plateH);
             float actions=0;
-            float cp=Look.CardPadding;
-            mainScroll=Scroll(plate,"Skill preset content",cp,actions+cp,w-2*cp,Mathf.Max(24,plateH-actions-2*cp),out var list);float inner=w-2*cp-16;
+            float cp=Look.CardPadding,edge=2+cp;
+            // The mockup's .ppanel: 2 px border and the card padding, the content running the full inner width (the info column scrolls on its own).
+            mainScroll=Scroll(plate,"Skill preset content",edge,actions+edge,w-2*edge,Mathf.Max(24,plateH-actions-2*edge),out var list);list.sizeDelta=new Vector2(0,list.sizeDelta.y);float inner=w-2*edge;
             if(custom)
             {
                 ReleaseCombatPreview();
@@ -117,7 +129,7 @@ namespace Hellscript
                 var description=Text(row,preset.Description,5,5,descriptionWidth-10,1000,Look.BodyText,textColor,TextAnchor.UpperLeft);
                 float descriptionHeight=description.preferredHeight+12;
                 Place(description.rectTransform,5,5,descriptionWidth-10,descriptionHeight);
-                float artX=sideBySide?descriptionWidth+8:0,artY=sideBySide?0:descriptionHeight+4,artW=sideBySide?inner-descriptionWidth-8:inner;
+                float artX=sideBySide?descriptionWidth+Look.Gap:0,artY=sideBySide?0:descriptionHeight+4,artW=sideBySide?inner-descriptionWidth-Look.Gap:inner;
                 float artH=artW*.68f;
                 bool live=scope.StartsWith("skill/",StringComparison.Ordinal);
                 if(landscape&&!live)
@@ -130,26 +142,27 @@ namespace Hellscript
                 if(live)
                 {
                     Destroy(description.gameObject);description.gameObject.SetActive(false);
-                    var information=Rect("Preset information",row);Place(information,5,5,descriptionWidth-10,1);
+                    var information=Rect("Preset information",row);Place(information,0,0,descriptionWidth,1);
                     var layout=information.gameObject.AddComponent<VerticalLayoutGroup>();layout.spacing=4;
                     layout.childControlWidth=true;layout.childForceExpandWidth=true;layout.childControlHeight=true;layout.childForceExpandHeight=false;
-                    float badgeHeight=Lines(Look.SmallText,1)+8;
-                    var badge=Row(information,"Policy state",badgeHeight,usingShown?"policy-active":"policy-preview");
-                    var badgeText=Text(badge,usingShown?"변경 즉시 저장":"미리보기",8,0,descriptionWidth-26,badgeHeight,Look.SmallText,usingShown?skin.GreenInk:textColor);
-                    badgeText.font=UiFonts.CasualWeight(700);
-                    Paragraph(information,preset.Description,descriptionWidth-10,Look.BodyText,textColor);
-                    if(!ProgressivePrologue)DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth-10);
-                    else Paragraph(information,"실제 초반 영웅의 복사본 · 동일한 시작 조건 · 1배속 10초 · 연습 결과는 저장되지 않습니다.",descriptionWidth-10,10,muted);
-                    artH=sideBySide?Mathf.Max(150,plateH-actions-2*cp):300;
-                    DrawCombatPreview(row,information,descriptionWidth-10,policySkill,shown,artX,artY,artW,artH);
-                    DrawStarterControls(information,descriptionWidth-10);
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(information);descriptionHeight=LayoutUtility.GetPreferredHeight(information)+10;
-                    Place(information,5,5,descriptionWidth-10,descriptionHeight);
+                    // The mockup's .live pill hugs its text: 2 px border, 10 px side padding.
+                    float badgeHeight=Look.SmallText*JuaLine+8;
+                    var badgeRow=Row(information,"Policy state row",badgeHeight);var badge=Panel(badgeRow,"Policy state",usingShown?"policy-active":"policy-preview");
+                    var badgeText=Line(badge,usingShown?"변경 즉시 저장":"미리보기",12,0,400,Look.SmallText,badgeHeight,usingShown?skin.GreenInk:skin.Edge,true);
+                    Place(badge,0,0,badgeText.preferredWidth+24,badgeHeight);Place(badgeText.rectTransform,12,0,badgeText.preferredWidth+4,badgeHeight);
+                    Paragraph(information,preset.Description,descriptionWidth,Look.BodyText,skin.Navy);
+                    if(!ProgressivePrologue)DrawPreviewConditions(information,SkillPresetScenario.Find(policySkill,shown),descriptionWidth);
+                    else Paragraph(information,"실제 초반 영웅의 복사본 · 동일한 시작 조건 · 1배속 10초 · 연습 결과는 저장되지 않습니다.",descriptionWidth,Look.SmallText,muted);
+                    artH=sideBySide?Mathf.Max(150,plateH-actions-2*edge):300;
+                    DrawCombatPreview(row,information,descriptionWidth,policySkill,shown,artX,artY,artW,artH);
+                    DrawStarterControls(information,descriptionWidth);
+                    LayoutRebuilder.ForceRebuildLayoutImmediate(information);descriptionHeight=LayoutUtility.GetPreferredHeight(information);
+                    Place(information,0,0,descriptionWidth,descriptionHeight);
                     if(!sideBySide)
                     {
                         // Narrow screens read top to bottom: what to do and the progress button, then the example it refers to.
                         artY=descriptionHeight+4;Place(row.Find("Actual skill combat preview") as RectTransform,artX,artY,artW,artH);
-                        Place(information,5,5,descriptionWidth-10,descriptionHeight);descriptionHeight+=artH+8;
+                        Place(information,0,0,descriptionWidth,descriptionHeight);descriptionHeight+=artH+8;
                     }
                 }
                 else {ReleaseCombatPreview();SkillPresetExampleView.Create(row,scope,shown,Session.Draft,font,artX,artY,artW,artH,lastScale,skin);}

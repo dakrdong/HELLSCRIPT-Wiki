@@ -175,11 +175,11 @@ namespace Hellscript
                     var icon=s.icon.rectTransform;icon.anchorMin=icon.anchorMax=icon.pivot=Vector2.one*.5f;
                     icon.anchoredPosition=Vector2.zero;icon.sizeDelta=Vector2.one*(r.width*.66f*Layout.scale);
                 }
-                SetRect(s.caption.rectTransform,new Rect(0,Layout.landscape?-style.captionHeight*Layout.scale:r.height*Layout.scale,r.width*Layout.scale,style.captionHeight*Layout.scale));
+                SetRect(s.caption.rectTransform,new Rect(0,-style.captionHeight*Layout.scale,r.width*Layout.scale,style.captionHeight*Layout.scale));
                 float gs=style.potionGlyph*Layout.scale;SetRect(s.glyph.rectTransform,new Rect(6*Layout.scale,6*Layout.scale,gs,gs));
-                s.number.fontSize=FontSize(s.potion?style.potionCooldownFont:style.cooldownFont);s.caption.fontSize=FontSize(style.captionFont,(int)style.minimumFont);
+                s.number.fontSize=s.potion?FontSize(style.potionCooldownFont):HudFont(26,15,17);s.caption.fontSize=HudFont(15,11);
             }
-            hpLabel.fontSize=resourceLabel.fontSize=FontSize(style.valueFont,(int)style.minimumValueFont);levelLabel.fontSize=FontSize(style.levelFont,(int)style.minimumLevelFont);xpLabel.fontSize=FontSize(style.captionFont,(int)style.minimumFont);shieldLabel.fontSize=FontSize(style.shieldFont,(int)style.minimumFont);
+            hpLabel.fontSize=resourceLabel.fontSize=HudFont(13,10);levelLabel.fontSize=HudFont(17,13);xpLabel.fontSize=HudFont(15,11);shieldLabel.fontSize=FontSize(style.shieldFont,(int)style.minimumFont);
             for(int i=0;i<ticks.Count;i++)
             {
                 var t=ticks[i];float h=(i==4?style.xpMajorTickHeight:style.xpTickHeight)*Layout.scale;
@@ -187,6 +187,7 @@ namespace Hellscript
             }
             StatusStrip.Configure(Layout,style);
         }
+        public int HudFont(float pc,float phone,float landscapePhone=-1)=>Layout!=null?Layout.HudFont(pc,phone,landscapePhone):Mathf.Max(1,Mathf.RoundToInt(pc));
         public int FontSize(float basis,int minimum=11)=>Layout!=null?Layout.FontSize(basis,minimum):Mathf.Max(minimum,Mathf.RoundToInt(basis));
         public Sprite Portrait(HeroClass heroClass)=>Portrait(heroClass,Snapshot?.gender??HeroGender.Male);
         public Sprite Portrait(HeroClass heroClass,HeroGender gender)=>Sprite("seal-"+(heroClass==HeroClass.Warrior?"warrior":heroClass==HeroClass.Ranger?"ranger":"mage")+"-"+(gender==HeroGender.Female?"f":"m"));

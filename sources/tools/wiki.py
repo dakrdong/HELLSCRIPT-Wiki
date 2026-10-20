@@ -997,6 +997,8 @@ def link_target(target, source, page_paths):
     # Retain the retired v3 runner for immutable history links without putting it back in the game.
     if dest=='Assets/HELLSCRIPT/Runtime/Presentation/RuntimeTutorialSmoke.Progression.cs' and not (ROOT/dest).exists():
         dest='Docs/Implementation/TutorialReplaySmokeEvidence20261005/RuntimeTutorialSmoke.Progression.cs.txt'
+    if dest=='Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Dialogs.cs' and not (ROOT/dest).exists():
+        dest='Docs/Implementation/CoreCraftingUiLegacy20261021/BlacksmithWindow.Cores.Dialogs.cs.txt'
     archive_root='Docs/Implementation/D4LegacyArchive20261013/'
     if not (ROOT/dest).exists() and source.startswith(archive_root):
         return link_target(target,source[len(archive_root):],page_paths)

@@ -41,11 +41,12 @@ namespace Hellscript
             {
                 float changedWidth=Mathf.Min(Look.ValueMin,w*.45f),queryWidth=Mathf.Max(1,w-changedWidth-gap);
                 var query=Input(body,searchQuery,0,0,queryWidth,Look.Chip);query.gameObject.name="edict-search";
-                var hint=Text(query.transform,"옵션 이름·설명 검색",32,0,Mathf.Max(1,queryWidth-40),Look.Chip,Look.SmallText,muted);query.placeholder=hint;hint.gameObject.SetActive(searchQuery.Length==0);
-                Place(query.textComponent.rectTransform,32,3,Mathf.Max(1,queryWidth-40),Look.Chip-6);
-                Glyph(query.transform,"search",9,(Look.Chip-18)/2,18,18,muted);
+                // The mockup's .search: 2 px border, 14 px padding, an 18 px glyph, 8 px, then the field.
+                var hint=Text(query.transform,"옵션 이름·설명 검색",42,0,Mathf.Max(1,queryWidth-56),Look.Chip,Look.BodyText,skin.Edge);query.placeholder=hint;hint.gameObject.SetActive(searchQuery.Length==0);
+                query.textComponent.alignment=TextAnchor.MiddleLeft;Place(query.textComponent.rectTransform,42,0,Mathf.Max(1,queryWidth-56),Look.Chip);
+                Glyph(query.transform,"search",16,(Look.Chip-18)/2,18,18,muted);
                 query.onEndEdit.AddListener(value=>{if(value!=searchQuery){searchQuery=value;Repaint();}});
-                Button(body,changedOnly?"✓ 변경된 항목":"변경된 항목",w-changedWidth,0,changedWidth,Look.Chip,()=>{changedOnly=!changedOnly;Repaint();},changedOnly?"tab-current":"tab-idle",Look.SmallText).name="edict-changed-only";
+                Button(body,changedOnly?"✓ 변경된 항목":"변경된 항목",w-changedWidth,0,changedWidth,Look.Chip,()=>{changedOnly=!changedOnly;Repaint();},changedOnly?"tab-current":"tab-idle",Look.BodyText+1).name="edict-changed-only";
                 chipTop=Look.Chip+gap;
             }
             var groups=HuntEdictUiCatalog.Data.groups.Where(g=>g.tab==SelectedTab&&GroupDisclosed(g)).ToArray();
@@ -54,48 +55,59 @@ namespace Hellscript
             selectedGroup=groupMemory.TryGetValue(SelectedTab,out var kept)&&groups.Any(g=>HuntEdictSummary.Key(g)==kept)?kept:HuntEdictSummary.Key(groups[0]);
             // The specification fixes the profile's maximum column count; only the selected content scrolls.
             int columns=Mathf.Min(groups.Length,Look.GroupColumns),rows=Mathf.CeilToInt(groups.Length/(float)columns);
-            float cell=Mathf.Max(1,(w-gap*(columns-1))/columns),gem=Look.Gem-4,left=gem+14,textWidth=Mathf.Max(1,cell-left-8);
-            float tabHeight=Look.GroupChip;var subtitles=groups.Select(QuickSubtitle).ToArray();var baseline=Session.Baseline.edict;
+            float chipGap=8,cell=Mathf.Max(1,(w-chipGap*(columns-1))/columns),gem=Look.Gem-4;
+            bool tight=Look.Landscape&&!Look.Pc;float padX=tight?6:10,padY=tight?4:6;
+            // The mockup draws the title through a span the .gtx rule shrinks, so both lines are the small size; the title line box keeps the larger strut.
+            float lineSize=Look.SmallText-1,titlePitch=(Look.BodyText+1)*1.2f,subPitch=lineSize*1.3f;
+            var subtitles=groups.Select(QuickSubtitle).ToArray();var baseline=Session.Baseline.edict;
+            var rowHeights=new float[rows];var blocks=new float[groups.Length,2];
             for(int i=0;i<groups.Length;i++)
             {
-                var measure=Text(body,groups[i].title,0,0,textWidth,1000,Look.BodyText+1);skin.ApplyLabel(measure,true,textColor);float need=measure.preferredHeight+2;measure.gameObject.SetActive(false);Destroy(measure.gameObject);
-                if(subtitles[i]!=""){var line=Text(body,subtitles[i],0,0,textWidth,1000,Look.SmallText-1);skin.ApplyLabel(line,false,muted);need+=line.preferredHeight+2;line.gameObject.SetActive(false);Destroy(line.gameObject);}
-                tabHeight=Mathf.Max(tabHeight,need+12);
+                bool on=HuntEdictSummary.Key(groups[i])==selectedGroup;float textWidth=Mathf.Max(1,cell-2*(on?3:2)-2*padX-gem-padX);
+                var host=Rect("Measure host",canvasRoot);Place(host,-3000,-3000,2000,400);
+                Body(host,groups[i].title,0,0,textWidth,lineSize,titlePitch/lineSize,textColor,out blocks[i,0],true);
+                if(subtitles[i]!="")Body(host,subtitles[i],0,0,textWidth,lineSize,1.3f,muted,out blocks[i,1]);
+                host.gameObject.SetActive(false);if(Application.isPlaying)Destroy(host.gameObject);else DestroyImmediate(host.gameObject);
+                float need=2*(on?3:2)+2*padY+Mathf.Max(gem,blocks[i,0]+blocks[i,1]);rowHeights[i/columns]=Mathf.Max(rowHeights[i/columns],Mathf.Max(Look.GroupChip,need));
             }
+            float[] rowTops=new float[rows];float chipsHeight=0;for(int r=0;r<rows;r++){rowTops[r]=chipTop+chipsHeight;chipsHeight+=rowHeights[r]+(r<rows-1?chipGap:0);}
             for(int i=0;i<groups.Length;i++)
             {
-                var group=groups[i];string key=HuntEdictSummary.Key(group);bool active=key==selectedGroup;
+                var group=groups[i];string key=HuntEdictSummary.Key(group);bool active=key==selectedGroup;int row=i/columns;float h=rowHeights[row],border=active?3:2;
                 bool changed=group.ids.Where(Disclosed).Any(id=>HuntEdictSummary.Changed(Session.Draft.edict,baseline,id));
-                var b=Button(body,group.title,(i%columns)*(cell+gap),chipTop+(i/columns)*(tabHeight+gap),cell,tabHeight,()=>SelectGroup(key),active?"tab-current":"tab-idle",Look.BodyText+1);
-                b.name="edict-group-"+key;var label=b.GetComponentInChildren<Text>();Place(label.rectTransform,left,0,textWidth,1000);label.alignment=TextAnchor.UpperLeft;
-                float titleHeight=label.preferredHeight+2,subHeight=0;Text sub=null;
-                if(subtitles[i]!=""){sub=Text(b.transform,subtitles[i],left,0,textWidth,1000,Look.SmallText-1,active?skin.GuideInk:muted);skin.ApplyLabel(sub,false,active?skin.GuideInk:muted);subHeight=sub.preferredHeight+2;}
-                float inset=(tabHeight-titleHeight-subHeight)/2;Place(label.rectTransform,left,inset,textWidth,titleHeight);
-                if(sub!=null)Place(sub.rectTransform,left,inset+titleHeight,textWidth,subHeight);
-                HuntEdictDecor.Create(b.transform,"Group gem",6,(tabHeight-gem)/2,gem,gem,"gem",skin);
-                GroupGlyph(b.transform,group.icon,10,(tabHeight-gem+8)/2,gem-8,active?skin.Navy:skin.SkyInk);
-                if(changed){var dot=Panel(b.transform,"Changed dot","changed-dot");dot.GetComponent<Image>().raycastTarget=false;Place(dot,cell-17,6,9,9);}
-                if(!active&&newGroups.Contains(key))NewDot(b.transform,cell-(changed?31:18),6,10);
+                var b=Button(body,"",(i%columns)*(cell+chipGap),rowTops[row],cell,h,()=>SelectGroup(key),active?"tab-current":"tab-idle",lineSize);
+                b.name="edict-group-"+key;b.GetComponentInChildren<Text>().gameObject.SetActive(false);
+                float tx=border+padX+gem+padX,textWidth=Mathf.Max(1,cell-tx-border-padX),top=(h-blocks[i,0]-blocks[i,1])/2;Color ink=active?skin.GuideInk:muted;
+                Body(b.transform,group.title,tx,top,textWidth,lineSize,titlePitch/lineSize,ink,out _,true).name="Group title";
+                if(subtitles[i]!="")Body(b.transform,subtitles[i],tx,top+blocks[i,0],textWidth,lineSize,1.3f,ink,out _).name="Group subtitle";
+                HuntEdictDecor.Create(b.transform,"Group gem",border+padX,(h-gem)/2,gem,gem,"gem",skin);
+                float glyph=gem*.62f;GroupGlyph(b.transform,group.icon,border+padX+(gem-glyph)/2,(h-glyph)/2,glyph,active?skin.Navy:skin.SkyInk);
+                if(changed){var dot=Panel(b.transform,"Changed dot","changed-dot");dot.GetComponent<Image>().raycastTarget=false;Place(dot,cell-border-17,border+6,9,9);}
+                if(!active&&newGroups.Contains(key))NewDot(b.transform,cell-border-(changed?32:32),border+6,10);
             }
-            float top=chipTop+rows*(tabHeight+gap);top+=DrawBeatStrip(0,top,w);
-            float cardHeight=Mathf.Max(1,bodyHeight-top),cp=Look.CardPadding;
-            var card=Panel(body,"Selected group card","skill-inspector");Place(card,0,top,w,cardHeight);
-            float contentWidth=Mathf.Max(1,w-cp*2-12);
-            editorScroll=Scroll(card,"Selected edict group",cp,cp,Mathf.Max(1,w-cp*2),Mathf.Max(1,cardHeight-cp*2),out var editor);mainScroll=null;
+            float top2=chipTop+chipsHeight+gap;top2+=DrawBeatStrip(0,top2,w);
+            float cp=Look.CardPadding;
+            editorScroll=MockScroll(body,"Selected edict group",0,top2,w,Mathf.Max(1,bodyHeight-top2),out var editor);mainScroll=null;
+            // The mockup's .sec: a white card that is as tall as its content, laid out as a column with the window gap.
+            var sec=Panel(editor,"Selected group card","skill-inspector");
+            var secLayout=sec.gameObject.AddComponent<VerticalLayoutGroup>();int pad=Mathf.RoundToInt(2+cp);secLayout.padding=new RectOffset(pad,pad,pad,pad);secLayout.spacing=gap;
+            secLayout.childControlWidth=secLayout.childControlHeight=true;secLayout.childForceExpandWidth=true;secLayout.childForceExpandHeight=false;
+            float contentWidth=Mathf.Max(1,w-4-2*pad);
             if(searchQuery.Length>0)
             {
                 var matches=HuntEdictSummary.Groups(Session.Draft.edict,Session.Baseline.edict,SelectedTab,searchQuery,changedOnly,Disclosed).ToArray();
-                if(matches.Length==0)Paragraph(editor,"조건에 맞는 설정이 없습니다.",contentWidth,Look.BodyText,muted);
-                foreach(var group in matches)Card(editor,contentWidth,"edict-search-result-"+HuntEdictSummary.Key(group),Loc.T(group.title),group.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed)?group.Description:Loc.T("현재 공개된 설정으로 사냥 규칙을 정하세요."),()=>SelectGroup(HuntEdictSummary.Key(group)),"tab-idle",textColor);
+                if(matches.Length==0)Paragraph(sec,"조건에 맞는 설정이 없습니다.",contentWidth,Look.BodyText,muted);
+                foreach(var group in matches)Card(sec,contentWidth,"edict-search-result-"+HuntEdictSummary.Key(group),Loc.T(group.title),group.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed)?group.Description:Loc.T("현재 공개된 설정으로 사냥 규칙을 정하세요."),()=>SelectGroup(HuntEdictSummary.Key(group)),"tab-idle",textColor);
             }
             else
             {
                 var selected=groups.Single(g=>HuntEdictSummary.Key(g)==selectedGroup);
-                Paragraph(editor,selected.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed)?selected.Description:"현재 공개된 설정으로 사냥 규칙을 정하세요.",contentWidth,Look.BodyText,muted);
-                if(changedOnly&&!selected.ids.Where(Disclosed).Any(id=>HuntEdictSummary.Changed(Session.Draft.edict,Session.Baseline.edict,id)))Paragraph(editor,"조건에 맞는 설정이 없습니다.",contentWidth,Look.BodyText,muted);
-                else DrawSelectedGroup(editor,contentWidth,selected);
+                var descRow=Row(sec,"Group description",1);
+                var description=Body(descRow,selected.ids.Where(id=>id!="autoEquip.preserveEffects").All(Disclosed)?selected.Description:"현재 공개된 설정으로 사냥 규칙을 정하세요.",0,0,contentWidth,Look.BodyText,1.55f,UiTheme.MockBody,out float descHeight);description.name="Group description text";
+                descRow.GetComponent<LayoutElement>().minHeight=descRow.GetComponent<LayoutElement>().preferredHeight=descHeight;
+                if(changedOnly&&!selected.ids.Where(Disclosed).Any(id=>HuntEdictSummary.Changed(Session.Draft.edict,Session.Baseline.edict,id)))Paragraph(sec,"조건에 맞는 설정이 없습니다.",contentWidth,Look.SmallText,muted);
+                else DrawSelectedGroup(sec,contentWidth,selected);
             }
-            EndList(editor,Look.Gap);
         }
         void DrawSelectedGroup(RectTransform list,float w,HuntEdictUiGroup group)
         {
@@ -106,36 +118,42 @@ namespace Hellscript
             }
             string scope=HuntEdictQuickPresets.GlobalScope(group);var baseline=Session.Baseline.edict;
             if(QuickAllowed(group)&&!DrawQuickPresetPicker(list,w,scope))return;
+            // The mockup's .olist: option rows run edge to edge with no gap between them.
+            var olist=Rect("Option list",list);var olayout=olist.gameObject.AddComponent<VerticalLayoutGroup>();olayout.spacing=0;olayout.childControlWidth=olayout.childControlHeight=true;olayout.childForceExpandWidth=true;olayout.childForceExpandHeight=false;
             foreach(string id in group.ids.Where(Disclosed))
             {
-                if(id=="survival.potion")GroupSection(list,"사용 조건",w);
-                if(id=="potion.autoBuy")GroupSection(list,"자동 구매",w);
+                if(id=="survival.potion")GroupSection(olist,"사용 조건",w);
+                if(id=="potion.autoBuy")GroupSection(olist,"자동 구매",w);
                 var d=EdictOptions.Global.Single(o=>o.id==id);bool available=HuntEdictUiCatalog.Visible(Session.Draft.edict,id)&&DirectDisclosed(id);
-                DrawCompactOption(list,w,d,HuntEdictSummary.Value(Session.Draft.edict,id),available,HuntEdictSummary.Changed(Session.Draft.edict,baseline,id));
+                DrawCompactOption(olist,w,d,HuntEdictSummary.Value(Session.Draft.edict,id),available,HuntEdictSummary.Changed(Session.Draft.edict,baseline,id));
                 if(!available)
                 {
-                    var rule=HuntEdictUiCatalog.Data.conditions.SingleOrDefault(c=>c.id==id);if(rule==null){Paragraph(list,"세부 설정은 균열 6단계부터 공개됩니다.",w,Look.SmallText,muted);continue;}var parent=EdictOptions.Global.Single(o=>o.id==rule.parent);
-                    Paragraph(list,Loc.F("{0}: {1} 선택 시 적용",HuntEdictUiCatalog.Label(parent),HuntEdictSummary.Display(parent,rule.value,SkillName)),w,Look.SmallText,muted);
+                    string note;var rule=HuntEdictUiCatalog.Data.conditions.SingleOrDefault(c=>c.id==id);
+                    if(rule==null)note=Loc.T("세부 설정은 균열 6단계부터 공개됩니다.");
+                    else{var parent=EdictOptions.Global.Single(o=>o.id==rule.parent);note=Loc.F("{0}: {1} 선택 시 적용",HuntEdictUiCatalog.Label(parent),HuntEdictSummary.Display(parent,rule.value,SkillName));}
+                    var cond=Row(olist,"Option condition",1);var line=Body(cond,note,14,4,w-28,Look.SmallText,1.5f,muted,out float noteHeight);line.name="Option condition text";
+                    cond.GetComponent<LayoutElement>().minHeight=cond.GetComponent<LayoutElement>().preferredHeight=noteHeight+12;
                 }
             }
         }
-        // One line per option: the label (and its "?") on the left, the value pill on the right. A changed row gets a gold bar.
+        // The mockup's .orow: 14 px lead, the label (and its "?"), the value pill at the right edge, a dashed rule under; a changed row gets a gold bar.
         void DrawCompactOption(RectTransform list,float w,EdictOptionDefinition d,string value,bool available,bool changed)
         {
-            string title=HuntEdictUiCatalog.Label(d),help=HuntEdictUiCatalog.Help(d.id);float baseHeight=Look.Button-4;
-            var row=Row(list,"Option "+d.id,baseHeight,"option-card");
-            var pill=Button(row,HuntEdictSummary.Display(d,value,SkillName),0,0,Look.ValueMin,Look.Button-14,()=>EditGlobal(d,value),available?(changed?"changed-value":"input-well"):"disabled-value",Look.BodyText+1);pill.name="edict-option-"+d.id;pill.interactable=available;
+            string title=HuntEdictUiCatalog.Label(d),help=HuntEdictUiCatalog.Help(d.id);float fs=Look.BodyText,pillFont=fs+1,minPill=Look.ValueMin;
+            var row=Row(list,"Option "+d.id,1,"option-card");
+            var pill=Button(row,HuntEdictSummary.Display(d,value,SkillName),0,0,minPill,Look.Button-14,()=>EditGlobal(d,value),available?(changed?"changed-value":"input-well"):"disabled-value",pillFont);pill.name="edict-option-"+d.id;pill.interactable=available;
             SurfaceChoice(pill,changed&&available,"changed-value",available?"input-well":"disabled-value");
-            var shown=pill.GetComponentInChildren<Text>();shown.alignment=TextAnchor.MiddleLeft;
-            // Keep the authored minimum until the 58% cap is reached; the value then wraps.
-            float maxPill=Mathf.Max(1,w*.58f),pillWidth=Mathf.Min(maxPill,Mathf.Max(Look.ValueMin,shown.preferredWidth+40));
-            Place(shown.rectTransform,8,0,Mathf.Max(1,pillWidth-34),1000);float pillHeight=Mathf.Max(Look.Button-14,shown.preferredHeight+8);
-            float lead=14,helpWidth=help!=""?32:0,labelWidth=Mathf.Max(1,w-pillWidth-8-helpWidth-lead);
-            var caption=Text(row,title,lead,0,labelWidth,1000,Look.BodyText,available?textColor:skin.Edge);skin.ApplyLabel(caption,false,available?textColor:skin.Edge);
-            float h=Mathf.Max(baseHeight,caption.preferredHeight+12,pillHeight+12);
-            Place(caption.rectTransform,lead,0,labelWidth,h);Place((RectTransform)pill.transform,w-pillWidth,(h-pillHeight)/2,pillWidth,pillHeight);Place(shown.rectTransform,8,0,Mathf.Max(1,pillWidth-34),pillHeight);
-            HuntEdictDecor.Create(pill.transform,"Value chevron",Mathf.Max(0,pillWidth-25),(pillHeight-18)/2,18,18,"chevron",skin);
-            if(help!="")Button(row,"?",lead+labelWidth+2,(h-28)/2,28,28,()=>ShowOptionHelp(title,help),"help-round",15).name="edict-help-"+d.id;
+            var shown=pill.GetComponentInChildren<Text>();shown.alignment=TextAnchor.MiddleLeft;shown.horizontalOverflow=HorizontalWrapMode.Overflow;
+            float maxPill=Mathf.Max(1,w*.58f),pillWidth=Mathf.Min(maxPill,Mathf.Max(minPill,shown.preferredWidth+54));
+            shown.horizontalOverflow=HorizontalWrapMode.Wrap;Place(shown.rectTransform,16,0,Mathf.Max(1,pillWidth-16-38),1000);
+            float pillHeight=Mathf.Max(Look.Button-14,shown.preferredHeight+12);
+            float helpWidth=help!=""?28+10:0,labelWidth=Mathf.Max(1,w-14-2-pillWidth-10-helpWidth);
+            var caption=Body(row,title,14,0,labelWidth,fs,1.4f,available?textColor:skin.Edge,out float labelHeight);caption.name="Option label";
+            float content=Mathf.Max(labelHeight,pillHeight),h=Mathf.Max(Look.Button-4,12+content+2),top=(h-2-content)/2;
+            Place(caption.rectTransform,14,top+(content-labelHeight)/2+(fs*1.4f-NaturalLine(caption.font,caption.fontSize))/2,labelWidth,caption.preferredHeight);
+            Place((RectTransform)pill.transform,w-2-pillWidth,top+(content-pillHeight)/2,pillWidth,pillHeight);Place(shown.rectTransform,16,0,Mathf.Max(1,pillWidth-16-38),pillHeight);
+            HuntEdictDecor.Create(pill.transform,"Value chevron",pillWidth-2-10-18,(pillHeight-18)/2,18,18,"chevron",skin);
+            if(help!="")Button(row,"?",14+labelWidth+10,top+(content-28)/2,28,28,()=>ShowOptionHelp(title,help),"help-round",15).name="edict-help-"+d.id;
             if(changed){var mark=Panel(row,"Changed mark","gold-bar");mark.GetComponent<Image>().raycastTarget=false;Place(mark,0,9,5,Mathf.Max(0,h-18));}
             var layout=row.GetComponent<LayoutElement>();layout.minHeight=layout.preferredHeight=h;
         }

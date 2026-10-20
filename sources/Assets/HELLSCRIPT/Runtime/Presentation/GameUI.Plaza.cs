@@ -64,10 +64,11 @@ namespace Hellscript
             var trim=Rect("Town card stitch and gem",plazaAction);Stretch(trim);trim.gameObject.AddComponent<TownPlazaDecoration>().raycastTarget=false;
             plazaServiceSource=null;plazaServiceName=Label(plazaAction,"",22,skin.Navy);plazaServiceName.name="Service name";Place(plazaServiceName.rectTransform,15,10,222,28);skin.ApplyLabel(plazaServiceName);plazaServiceName.horizontalOverflow=HorizontalWrapMode.Overflow;
             plazaNpcName=Label(plazaAction,"",14,skin.PlazaSecondaryInk);plazaNpcName.name="NPC name";Place(plazaNpcName.rectTransform,15,39,222,20);plazaNpcName.font=UiFonts.CasualWeight(700);
-            plazaServiceDetail=Label(plazaAction,"",15,skin.PlazaDetailInk);plazaServiceDetail.name="Service detail";Place(plazaServiceDetail.rectTransform,15,64,222,42);plazaServiceDetail.font=skin.BodyFont;
+            plazaServiceDetail=Label(plazaAction,"",15,skin.PlazaDetailInk);plazaServiceDetail.name="Service detail";Place(plazaServiceDetail.rectTransform,15,64,222,42);plazaServiceDetail.font=skin.BodyFont;plazaServiceDetail.alignment=TextAnchor.UpperLeft;
             // The shared font measurer uses two local units per point: reserve exactly 21 here.
             SkillTreeD4Wrap.SetLineHeight(plazaServiceDetail,10.5);
             plazaTalk=Button(plazaAction,"대화하기",game.TalkTown);plazaTalk.name="town-talk";Place((RectTransform)plazaTalk.transform,12,112,226,44);PlazaButton(plazaTalk);
+            var talkIcon=Rect("Talk icon",plazaTalk.transform);var talkGlyph=talkIcon.gameObject.AddComponent<StorageGlyph>();talkGlyph.symbol="talk";talkGlyph.color=skin.Navy;talkGlyph.raycastTarget=false;
             var interact=Button(plazaAction,"대화하기",game.InteractTown);interact.name="town-interact";Place((RectTransform)interact.transform,12,168,226,52);PlazaButton(interact,true);plazaActionText=interact.GetComponentInChildren<Text>();
             plazaInteract=interact;
             plazaBuy=Button(plazaAction,"구매",()=>game.InteractEquipmentMerchant(EquipmentShopTab.Buy));plazaBuy.name="town-merchant-buy";Place((RectTransform)plazaBuy.transform,12,168,110,52);PlazaButton(plazaBuy,true);
@@ -167,11 +168,19 @@ namespace Hellscript
             var bounds=TownPlazaLayout.GuideBounds(layout);var position=new Vector2(bounds.x*unit,-bounds.y*unit);var zoom=Vector3.one*unit;
             if(plazaGuide.sizeDelta==bounds.size&&plazaGuide.anchoredPosition==position&&plazaGuide.localScale==zoom)return;
             Place(plazaGuide,bounds.x*unit,bounds.y*unit,bounds.width,bounds.height);plazaGuide.localScale=zoom;
-            bool mobile=!layout.landscape||layout.compact;float row=mobile?(layout.landscape?30:40):46,gap=mobile?5:7;
+            bool mobile=!layout.landscape||layout.compact;float row=mobile?(layout.landscape?30:40):46,gap=mobile?5:7,inset=mobile?8:11;
             var buttons=plazaGuide.GetComponentsInChildren<Button>(true);
             for(int i=0;i<buttons.Length;i++)
-            {Place((RectTransform)buttons[i].transform,8,8+i*(row+gap),bounds.width-16,row);buttons[i].GetComponentInChildren<Text>().fontSize=mobile?(layout.landscape?13:15):18;}
+            {Place((RectTransform)buttons[i].transform,inset,inset+i*(row+gap),bounds.width-2*inset,row);buttons[i].GetComponentInChildren<Text>().fontSize=mobile?(layout.landscape?13:15):18;}
             plazaGuideSurface.SetSkin(UiSkin.Casual,radius:16,borderWidth:mobile?2:3,shadow:4);
+        }
+        // The mockup's talk button is a centred row: a 1.05em chat glyph, 6px, then the label.
+        void ReflowPlazaTalk()
+        {
+            var label=plazaTalk.GetComponentInChildren<Text>();var icon=plazaTalk.transform.Find("Talk icon") as RectTransform;if(label==null||icon==null)return;
+            var button=(RectTransform)plazaTalk.transform;float size=label.fontSize*1.05f,gap=6,group=size+gap+label.preferredWidth;
+            label.rectTransform.offsetMin=new Vector2((size+gap)/2,label.rectTransform.offsetMin.y);label.rectTransform.offsetMax=new Vector2((size+gap)/2,label.rectTransform.offsetMax.y);
+            Place(icon,(button.rect.width-group)/2,(button.rect.height-size)/2,size,size);
         }
         string plazaServiceSource;
         void PlazaService(string value)
@@ -230,7 +239,7 @@ namespace Hellscript
                 headerTitle.fontSize=Mathf.Max(1,Mathf.RoundToInt((mobile?14:18)*titleScale));
                 float titleHeight=(mobile?28:32)*titleScale,padding=12*titleScale;
                 float titleWidth=Mathf.Min(headerTitle.preferredWidth+padding*2,root.rect.width-iconSize-36*titleScale);
-                Place(plazaTitlePlate,8*titleScale,4*titleScale,titleWidth,titleHeight);Place(headerTitle.rectTransform,8*titleScale+padding,4*titleScale,titleWidth-2*padding,titleHeight);
+                Place(plazaTitlePlate,8*titleScale,4*titleScale,titleWidth,titleHeight+3*titleScale);Place(headerTitle.rectTransform,8*titleScale+padding,4*titleScale,titleWidth-2*padding,titleHeight);
                 RefreshTownQuest(iconSize,edge,titleScale,mobile,!layout.landscape);
                 float cardScale=TownPlazaLayout.CardScale(layout,portal)/Mathf.Max(.001f,scale);
                 plazaEntrance.SetRestingScale(Vector3.one*cardScale);
@@ -244,7 +253,7 @@ namespace Hellscript
             bool showCard=(portal||near.HasValue||npc!=null)&&!TownNavigationOpen&&!CommonPanelOpen;
             if(showCard&&!plazaAction.gameObject.activeSelf&&Application.isPlaying)plazaEntrance.Restart();
             plazaAction.gameObject.SetActive(showCard);
-            plazaTalk.gameObject.SetActive(!portal&&npc!=null);
+            plazaTalk.gameObject.SetActive(!portal&&npc!=null);ReflowPlazaTalk();
             bool merchant=!portal&&(near==TownStation.Merchant||near==TownStation.Gambler);
             plazaInteract.gameObject.SetActive(portal||near.HasValue&&!merchant);
             plazaBuy.gameObject.SetActive(merchant);plazaSell.gameObject.SetActive(merchant);

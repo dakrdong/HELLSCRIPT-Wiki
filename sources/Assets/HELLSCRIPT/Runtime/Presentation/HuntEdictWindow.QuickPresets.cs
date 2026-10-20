@@ -44,22 +44,25 @@ namespace Hellscript
             }
             catch(Exception e){Error(e.Message);}
         }
+        // The mockup's .stack: the small "Quick preset" label, the picker button, then the preset's own note, 8 px apart.
         bool DrawQuickPresetPicker(RectTransform list,float w,string scope)
         {
             string selected=QuickPresetSelection(scope);bool custom=selected==HuntEdictQuickPresets.Custom;
             bool expanded=customQuickScopes.Contains(scope);
             var preset=custom?null:HuntEdictQuickPresets.For(scope).Single(p=>p.id==selected);
-            Paragraph(list,"간편 프리셋",w,Look.SmallText,muted);
-            var row=Row(list,"Quick preset selector",Look.Button);
-            var button=Button(row,(preset?.Name??Loc.T(expanded?"직접 설정":"현재 설정")),0,0,w,Look.Button,()=>QuickPresetDialog(scope),"input-well",Look.CardTitle-1);
-            button.name="edict-quick-picker-"+scope;
+            var stack=Row(list,"Quick preset stack",1);
+            float labelLine=Look.SmallText*JuaLine;Line(stack,Loc.T("간편 프리셋"),0,0,w,Look.SmallText,labelLine,muted,true);
+            float y=labelLine+8,titleSize=Look.CardTitle-1;
+            var button=Button(stack,preset?.Name??Loc.T(expanded?"직접 설정":"현재 설정"),0,y,w,Look.Button,()=>QuickPresetDialog(scope),"input-well",titleSize);
+            button.name="edict-quick-picker-"+scope;((UiButton)button).SetCasualAppearance(radius:14,borderWidth:2,shadow:3,edge:skin.Navy);
             var label=button.GetComponentInChildren<Text>();label.alignment=TextAnchor.MiddleLeft;
-            Place(label.rectTransform,14,0,Mathf.Max(1,w-48),1000);
+            float labelWidth=Mathf.Max(1,w-18-2-14-18-10);Place(label.rectTransform,18,0,labelWidth,1000);
             float h=Mathf.Max(Look.Button,label.preferredHeight+16);
-            row.GetComponent<LayoutElement>().minHeight=row.GetComponent<LayoutElement>().preferredHeight=h;
-            Place((RectTransform)button.transform,0,0,w,h);Place(label.rectTransform,14,0,Mathf.Max(1,w-48),h);
-            SurfaceChoice(button,false,idleSkin:"input-well");HuntEdictDecor.Create(button.transform,"Picker chevron",w-30,(h-18)/2,18,18,"chevron",skin);
-            Paragraph(list,preset?.Description??Loc.T(expanded?"현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다.":"프리셋을 고르거나 직접 설정을 선택해 세부 옵션을 조정하세요."),w,Look.SmallText,muted);
+            Place((RectTransform)button.transform,0,y,w,h);Place(label.rectTransform,18,0,labelWidth,h);
+            SurfaceChoice(button,false,idleSkin:"input-well");HuntEdictDecor.Create(button.transform,"Picker chevron",w-2-14-18,(h-18)/2,18,18,"chevron",skin);
+            y+=h+8;
+            var note=Body(stack,preset?.Description??Loc.T(expanded?"현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다.":"프리셋을 고르거나 직접 설정을 선택해 세부 옵션을 조정하세요."),0,y,w,Look.SmallText,1.5f,muted,out float noteHeight);note.name="Quick preset note";
+            var layout=stack.GetComponent<LayoutElement>();layout.minHeight=layout.preferredHeight=y+noteHeight;
             return expanded&&HasFeature(HuntEdictProgression.Details);
         }
         void QuickPresetDialog(string scope)

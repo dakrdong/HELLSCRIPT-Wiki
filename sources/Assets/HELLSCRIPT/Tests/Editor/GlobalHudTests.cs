@@ -119,8 +119,8 @@ namespace Hellscript.Tests
             var style=GlobalHudStyle.Load();
             { const float factor=1f;
                 var p=new GlobalHudLayout(width,height,factor,style);
-                float baseline=(!p.landscape?124:p.compact?37:54)*p.presentationScale;
-                Assert.That(p.Pixels(p.actives[0]).yMin,Is.EqualTo(baseline).Within(.001),"The face must reserve its caption above the XP line.");
+                float baseline=(!p.landscape?147:p.compact?37:54)*p.presentationScale;
+                Assert.That(p.Pixels(p.actives[0]).yMin,Is.EqualTo(baseline).Within(.001),"The face must reserve its caption (below it, as in the mockup) above the XP line.");
                 if(p.landscape)Assert.That(p.actives[0].yMin-style.captionHeight,Is.GreaterThan(p.xp.yMax),"Skill captions must clear the XP line.");
                 Assert.That(p.potionBounds.xMax,Is.LessThan(p.ultimate.xMin));
                 Assert.That(p.potions[0].center.y,Is.EqualTo(p.actives[0].center.y).Within(.001));
