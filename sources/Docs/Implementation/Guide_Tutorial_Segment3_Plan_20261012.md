@@ -111,7 +111,7 @@
   - `BossFight`: 보스 체력 80% 미만 → 고블린 소환 + `GoblinAppear`.
   - `GoblinAppear`: 고블린이 정해진 지점을 지나면 → `GoblinTalk` + 정지. "화면에서 사라지기 전"은 카메라 기준이므로, 세로(440×956)와 가로(956×440) 모두에서 고블린이 아직 화면 안에 있는 월드 지점을 스모크 스크린샷으로 정한다.
   - `GoblinChase`: 고블린이 죽으면 → `ReturnToBoss`.
-  - `ReturnToBoss`: 고블린이 죽은 뒤 영웅이 보스 쪽으로 3초(`GuideTutorial.LootLessonSeconds`, 2026-10-20 변경; 이전에는 0.5~1.5초라 보상 바로 옆에서 시작했다) 더 나아간 다음 → `LootTalk` + 정지. 보상이 아직 남아 있어야 한다.
+  - `ReturnToBoss`: 영웅이 고블린 보상 위치에서 3m 이상 멀어지거나 고블린이 죽은 지 1.5초가 지나면 → `LootTalk` + 정지. 보상이 아직 남아 있어야 한다.
   - `Pickup`: 고블린 보상이 모두 회수되면 → `LootDoneTalk` + 정지.
   - `FinalBoss`: 보스가 죽으면 → `Cleared` + `Finish(true,...)` + 정지.
 - `ContinueGuide`: 각 대화 단계는 해당 수업의 완료 조건이 참일 때만 다음으로 간다(`TargetTalk`→`TargetFight`: 등급·타입 둘 다 완료, `GoblinTalk`→`GoblinChase`: `TREASURE`가 등급 1순위, `LootTalk`→`Pickup`: `common.order` 첫 항목이 `PRIORITY_LOOT`, `LootDoneTalk`→`FinalBoss`: 조건 없음).

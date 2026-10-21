@@ -2,8 +2,6 @@
 
 Updated: 2026-10-12 · For: Codex implementation work · [한국어](D4_Skill_Tree_Combat_Spec_20261012.md)
 
-User correction, 2026-10-21: area damage and control affect every enemy inside the footprint. Preserve designed projectile pierce, chain, fork and scatter counts. This rule supersedes the earlier area target caps below.
-
 Author: Claude (specification and research). Codex implements, verifies and commits.
 
 This document expands section 8 (combat) of the plan document [`D4_Skill_Tree_Plan_20261012.en.md`](D4_Skill_Tree_Plan_20261012.en.md) to a level at which it can be implemented. Its basis is the research notes, written by reading the code only (`Docs/Design/D4SkillTree/research/combat_{warrior,ranger,mage}.md`, `save_migration.md`, `dependents.md`). **Line numbers are against `main` `a3fe67c5`**, so they drift when the code changes. Find the code again by function and class name. The source of the numeric values is `skill_tree_d4.json` and `golden/rank_values.json`; for rules and decisions, the plan document takes precedence.
@@ -202,7 +200,7 @@ int HitsOnSide(int modifier){
 | `M06-2` | Rift Ward | Damage taken −10% → −20% | **B** | Skip the freeze loop and use `Placement(..,"ward")` with the M14 values. Turn the `ClassGuard` literal .1 into the modifier value (−10→−20%) | `Fx("M14")` does not look at the kind. The CONTROL purpose still believes 'Nova freezes' (EdN:35-41) |
 | `M06-3` | Ice Armor | Shield per enemy 2% → 4% | **B** | `AreaHit` returns the hit count → `AddShield("M06",hp*min(n*pct,.2),dur,root)` | Duration undecided. The 20% cap is only in behaviourKo |
 | `M04-1` | Flame Afterburn | Departure blast D80% → D120% | **B** | `AreaHit(origin,r,coef,1)` before `State.position=destination` | The "M04" label takes the base rank (Dmg:66). The design uses the modifier rank |
-| `M04-2` | Lightning Blink | Arrival stun 0.3s → 0.7s | **B** | After landing, `Nearby(dest,r)`+`ApplyStatus(Stun)` controls every enemy in the area | `EdictEscapePoint` picks quiet spots, so there are almost no enemies. The damage value is not in the design |
+| `M04-2` | Lightning Blink | Arrival stun 0.3s → 0.7s | **B** | After landing, `Nearby(dest,r,3)`+`Hit`+`ApplyStatus(Stun)` | `EdictEscapePoint` picks quiet spots, so there are almost no enemies. The damage value is not in the design |
 | `M04-3` | Elemental Shield | Shield HP 25% → 35% | **B** | `AddShield` on arrival (25→35%, 4s). Move every M05 literal (reaction Id:72-90, LM03 mana, REF_SM01 +30%, `OwnElementalShield`, `BuffSkill`, survival `defenseSkill`) | Keep the `lastElement` record (Id:74) (M17-1 and M18-2 read it) |
 | `M08-1` | Ring of Fire | Ring radius 2.5m → 3.5m | **B** | `InFirewall` → a circle around the hero (2.5→3.5), position `a.origin`. Also `ClassAimContains` |  |
 | `M08-2` | Advancing Flames | Advance 1.5 → 2.5 m/s | **B** | Move `f.position` along `f.direction` (1.5→2.5 m/s), clipped with `Map.MoveDirect` |  |
@@ -316,7 +314,7 @@ if(Passive("MP21")&&element>=1&&element<=3&&!enemy.dead){enemy.elements|=1<<(ele
 |---|---|---|---|---|
 | W17 | War of the Ancestors | 2 ancestors, secondary damage to the nearest enemy every 1s, 8s | Rank +20%, cooldown 60/55/50 | W17-1 A (ancestor count, duration, ticks), W17-2 C |
 | W18 | Titan's Judgment | 4m radius strike D600%, stun 2s, `prepare` .9 | Rank +20%, cooldown | W18-1 A, W18-2 C |
-| A17 | Killing Rain | Fixed 4m radius, 6 pulses D80%, every enemy in the area | Rank +20%, cooldown | A17-1 B, A17-2 A |
+| A17 | Killing Rain | Fixed 4m radius, 6 pulses D80%, 8 targets | Rank +20%, cooldown | A17-1 B, A17-2 A |
 | A18 | Afterimage March | Afterimage markers; a direct hit consumes the oldest afterimage to fire a D60% secondary arrow | Rank +20%, cooldown | A18-1 C, A18-2 B |
 | M17 | Triune Collapse | 3 steps (fire, cold, lightning), radius 4m | D200%→280% (×1.4) | M17-1 B, M17-2 B |
 | M18 | Sage Incarnate | 8s, shield 25%, damage +20%, cost −20%, 3-element blast D40% | Shield 25→35%, damage 20→30 | The shield does not receive the rank scale in `Fx:161`. Damage 20→30: ×1.4 gives 28, so use from/to. The design's base text has neither the cost −20% nor the 3-element blast (question M-9) |
@@ -396,7 +394,7 @@ You can proceed on the defaults. If the user decides differently, change the def
 | M-3 | Does M04-3 keep M05's last-element reaction | Keep it (the `lastElement` record is needed by M17-1 and M18-2) |
 | M-4 | Is the M08-1 circle a disc or a ring, and does it follow the hero | A disc that follows the hero |
 | M-5 | `lastElement = 0` in M17-1 | Substitute fire |
-| M-6 | The radius, cap and targets of MP20 Shatter | Every enemy within 2.5m; bosses burst on stun (stagger) |
+| M-6 | The radius, cap and targets of MP20 Shatter | Radius 2.5m, 5 targets, and bosses burst on stun (stagger) |
 | M-7 | The window and reset of MP21 Align the Elements | When all three elements have touched one enemy once each, it bursts and resets. No time window. Damage over time and `EXTRA:` hits do not count |
 | M-9 | M18's cost −20% and 3-element blast | Keep them (they are in the code but not in the design's base text: the design owner fills in the text) |
 | M-12 | MP07 and MP09 12→20, MP16 8→12 | The design values (from→to) |

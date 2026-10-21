@@ -160,15 +160,13 @@ namespace Hellscript
                     if(d.hpLoss<=0&&d.absorbed<=0)return;
                     var f=FigureOf(hero);f.flash=f.flashTotal=HeroFlashTime;f.flashColor=new Color(1,.28f,.2f);FlinchRig(hero,false);
                     strongest=Mathf.Max(strongest,Mathf.Max(d.hpLoss,d.absorbed*.5f)/maxHealth);
-                    // A shield that takes the blow flares in the hero's colour.
-                    if(d.absorbed>0&&library!=null)library.Burst("star",hero.transform.position+Vector3.up*1.2f,.9f,Combat.Hero.heroClass==HeroClass.Warrior?GoldTint:ColdTint);
                     if(library!=null)library.Burst(d.element>0&&d.element<6?ElementBurst[d.element]:"blood",hero.transform.position+Vector3.up*1.3f,.8f);
                     return;
                 }
                 if(!actors.TryGetValue(d.targetId,out var actor)||!actor.activeInHierarchy)return;
                 var enemy=run.enemies.Find(e=>e.id==d.targetId);if(enemy==null||!CanDisplayEnemyMarker(run,enemy.position))return;
                 var fig=FigureOf(actor);fig.flash=fig.flashTotal=EnemyFlashTime;fig.flashColor=d.critical?new Color(1,.9f,.55f):Color.white;if(d.kind!=DamageKind.Periodic)FlinchRig(actor,d.critical);
-                if(library!=null&&d.kind!=DamageKind.Periodic){library.Hit(enemy,d.element,d.critical,actor.transform.position+Vector3.up*(enemy.boss?2.4f:1.4f));SkillHitJuice(library,run,d,enemy,actor);}
+                if(library!=null&&d.kind!=DamageKind.Periodic)library.Hit(enemy,d.element,d.critical,actor.transform.position+Vector3.up*(enemy.boss?2.4f:1.4f));
             },(a,b)=>a.id==b.id&&a.time==b.time);
             // Share of max health: a scratch nudges the camera, a quarter of the bar or more hits hard.
             if(strongest>0)lighting.Shake(Mathf.Clamp(.18f+strongest*2.6f,.18f,.75f),Mathf.Clamp(.16f+strongest*.8f,.16f,.42f));
@@ -207,7 +205,7 @@ namespace Hellscript
                 if(d.age>=total){figures.Remove(d.go);rigs.Remove(d.go);rigPositions.Remove(d.go);Destroy(d.go);dying.RemoveAt(i);}
             }
         }
-        void ClearActorMotion(){figures.Clear();dying.Clear();enragedAuras.Clear();lastDamageSeen=null;lastGrowthShown=null;}
-        void SeedCombatFeedback(RunState run){lastDamageSeen=run.damageEvents.Count>0?run.damageEvents[run.damageEvents.Count-1]:null;SeedGrowthFeedback(run);}
+        void ClearActorMotion(){figures.Clear();dying.Clear();enragedAuras.Clear();lastDamageSeen=null;}
+        void SeedCombatFeedback(RunState run){lastDamageSeen=run.damageEvents.Count>0?run.damageEvents[run.damageEvents.Count-1]:null;}
     }
 }

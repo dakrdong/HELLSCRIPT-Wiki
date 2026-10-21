@@ -270,20 +270,3 @@ body{background:white;color:black}
 .prose{max-width:none;padding:0;border:0}
 .table-scroll{overflow:visible}
 }
-
-/* Exact multi-art records: keep every grant visible; single artwork keeps its existing layout. */
-.db-art-gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,52px),1fr));gap:10px 8px;width:100%;min-width:0;align-items:start}
-.db-art-gallery-item{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;margin:0}
-.db-art-gallery-image{display:block;width:100%;height:64px;object-fit:contain;flex:none}
-.db-art-gallery-item figcaption{display:flex;justify-content:center;align-items:baseline;flex-wrap:wrap;gap:2px 4px;max-width:100%;font-size:.7rem;line-height:1.35;text-align:center;white-space:normal;overflow-wrap:anywhere;color:var(--edge)}
-.db-art-gallery-count{font-weight:700;white-space:nowrap}
-.db-art-gallery-large{grid-template-columns:repeat(auto-fit,minmax(min(100%,104px),1fr));gap:12px}
-.db-art-gallery-large .db-art-gallery-image{height:104px}
-.preview.preview-gallery{height:auto;min-height:160px;padding:10px;overflow:visible;box-sizing:border-box}
-.resource-card .db-art-gallery{grid-template-columns:repeat(auto-fit,minmax(min(100%,52px),1fr));gap:8px}
-.resource-card .db-art-gallery-image{height:64px}
-.db-table .db-art-gallery{width:220px}
-@media(max-width:650px){.db-art-gallery-large{grid-template-columns:repeat(auto-fit,minmax(min(100%,90px),1fr))}.db-art-gallery-large .db-art-gallery-image{height:90px}.resource-card .db-art-gallery{grid-template-columns:repeat(auto-fit,minmax(min(100%,52px),1fr))}.resource-card .db-art-gallery-image{height:64px}}
-
-/* A declared missing exact preview is text, never a substitute artwork. */
-.db-art-missing{max-width:100%;min-width:0;padding:12px;font-size:.75rem;line-height:1.5;white-space:normal;overflow-wrap:anywhere;text-align:center;color:var(--muted)}

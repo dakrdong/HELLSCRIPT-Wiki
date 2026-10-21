@@ -78,7 +78,7 @@ namespace Hellscript.Tests
             Assert.That(p.xp,Is.EqualTo(new Rect(32,12,1536,8)));
             Assert.That(p.Pixels(p.edict),Is.EqualTo(new Rect(1516,766,60,60)));
         }
-        [TestCase(440,956,46)] [TestCase(956,440,48)] [TestCase(1600,900,76)]
+        [TestCase(440,956,44)] [TestCase(956,440,48)] [TestCase(1600,900,76)]
         public void OrientationOwnsItsCompositionAndUsesOneScale(int width,int height,int slot)
         {
             var p=new GlobalHudLayout(width,height);Assert.That(p.Pixels(p.actives[0]).width,Is.EqualTo(slot).Within(.001));
@@ -120,7 +120,7 @@ namespace Hellscript.Tests
             { const float factor=1f;
                 var p=new GlobalHudLayout(width,height,factor,style);
                 float baseline=(!p.landscape?147:p.compact?37:54)*p.presentationScale;
-                Assert.That(p.Pixels(p.actives[0]).yMin,Is.EqualTo(baseline).Within(.001),"The face must reserve its caption (below it, as in the mockup) above the XP line.");
+                Assert.That(p.Pixels(p.actives[0]).yMin,Is.EqualTo(baseline).Within(.001),"The face must reserve its caption above the XP line.");
                 if(p.landscape)Assert.That(p.actives[0].yMin-style.captionHeight,Is.GreaterThan(p.xp.yMax),"Skill captions must clear the XP line.");
                 Assert.That(p.potionBounds.xMax,Is.LessThan(p.ultimate.xMin));
                 Assert.That(p.potions[0].center.y,Is.EqualTo(p.actives[0].center.y).Within(.001));

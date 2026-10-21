@@ -128,9 +128,3 @@ Edit Mode 결과 원본은 [editmode-focused.xml](PlayContentDockEvidence/editmo
 ## 전투 화면 크기 — 2026-10-08
 
 전투 화면의 설정 톱니, 콘텐츠 바로가기, 이벤트 아이콘이 마을과 같은 식(`GlobalHudLayout.ShortcutIcon`: 스킬 아이콘 화면 크기 × 1.15, 최소값은 마을 44화면 픽셀·전투 44 페이지 단위)으로 스킬 아이콘 크기가 된다. 가로 16:9에서는 해상도와 관계없이 88.3 페이지 단위다. 지도 패널·관찰 메뉴·절전·탈출은 이 열의 너비만큼 물러난다. 자세한 내용은 [튜토리얼 대기실 후속 정리와 영웅별 튜토리얼](Tutorial_Hub_Followup_20261008.md)에 있다.
-
-## 마을 설정·콘텐츠 세로 정렬 (2026-10-18)
-
-마을에서 표시하지 않는 전투 칙령 미리보기 영역을 콘텐츠 묶음 위에 예약하지 않는다. 설정·접기 화살표·콘텐츠는 같은 크기와 오른쪽 정렬, 6단위 간격을 사용한다. 월드 HUD 설정은 알파가 보존된 은색·금색 톱니 그림으로 표시하고 마을의 기존 크림색 원과 안쪽 축소를 제거한다. 전투의 콘텐츠·미니맵 위치는 유지한다. [제작 프롬프트·출처](../Art/SettingsCog20261018/manifest.json). 정확한 생성 모델은 미확인으로, gpt-image-2 사용이나 출시 아트 승인을 주장하지 않는 개발용 자산이다.
-
-[검증: 관련 Edit Mode 19개·UI 계약 15개와 macOS 실제 게임의 다섯 화면 비율 통과](TownShortcutStackEvidence20261018/validation.json) · [세로 화면](TownShortcutStackEvidence20261018/portrait.png) · [가로 화면](TownShortcutStackEvidence20261018/landscape.png). 모바일 실기기와 GPU 성능은 미검증이다.

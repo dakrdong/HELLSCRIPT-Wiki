@@ -1,8 +1,8 @@
 {
   "game_id": "M42",
   "art": "Characters/Hero_Mage",
-  "source_path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/AssetDeliverables/Hunyuan/2026-10-15/heroes_text/raw/HW05R2_2_a2.glb",
-  "source_sha256": "f22d5e3647915e9366ce2461b73d2e245c9d0cafb4bdc36b79ed256a8dc29624",
+  "source_path": "/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/HELLSCRIPT/AssetDeliverables/Hunyuan/2026-10-15/heroes_text/raw/HW05R2_2_a.glb",
+  "source_sha256": "50516c0d559287f958aab2deb99439deb40ea2a8265aec3efdb5f5e652e97bea",
   "source_triangles": 49986,
   "prompt": null,
   "pipeline": "tools/hunyuan_monster_ready.py",
@@ -12,63 +12,9 @@
     "boss": false,
     "yaw": null,
     "glow": "#ff8a3a",
-    "hand_capture": true,
-    "joints": {
-      "Pivot_Spine": [
-        0.0,
-        0.85,
-        -0.04
-      ],
-      "Pivot_Chest": [
-        0.0,
-        0.95,
-        -0.04
-      ],
-      "Pivot_Neck": [
-        0.0,
-        1.03,
-        -0.05
-      ],
-      "Pivot_Head": [
-        0.0,
-        1.12,
-        -0.07
-      ],
-      "Pivot_ArmUpper_R": [
-        0.24,
-        0.97,
-        -0.03
-      ],
-      "Pivot_ArmLower_R": [
-        0.33,
-        0.77,
-        -0.03
-      ],
-      "Pivot_Hand_R": [
-        0.385,
-        0.62,
-        -0.02
-      ],
-      "Pivot_ArmUpper_L": [
-        -0.24,
-        0.97,
-        -0.03
-      ],
-      "Pivot_ArmLower_L": [
-        -0.33,
-        0.77,
-        -0.03
-      ],
-      "Pivot_Hand_L": [
-        -0.385,
-        0.62,
-        -0.02
-      ]
-    },
-    "moving_arms": true
+    "hand_capture": false
   },
   "blender": "Blender 5.2.0 LTS",
-  "recipe_sha256": "f8f6895abd2efe25e5a14e4b733f5aec85f06de90066eddafa806d8ac837f3f1",
-  "productionApproved": false,
-  "source_prep": "blender -b --factory-startup -P tools/art3d/tpose_to_apose.py -- HW05R2_2.glb HW05R2_2_a2.glb --angle 62 --xs .11 --blend .06 (arms bent about the shoulder; the older HW05R2_2_a.glb used the default pivot at .2H)"
+  "recipe_sha256": "8867e19b1f85869e32b6ce011d6515600ba70eacc9253a3b902d023378fc5202",
+  "productionApproved": false
 }

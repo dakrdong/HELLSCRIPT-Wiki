@@ -66,6 +66,4 @@ Run `python3 tools/hunyuan_monster_ready.py --glb raw/<ID>.glb --id <ID> --arche
 
 ## 8. Report
 
-Report briefly in Korean: IDs and names added today, chosen candidates and why, failures and retries, check results (pass and fail counts), PR, merge and wiki state, remaining allowance and tomorrow's targets, and what was not verified (physical devices, performance). Public distribution approval of Hunyuan output is still open (`productionApproved: false`).> **Proportion change (2026-10-19, user decision):** For a hack-and-slash action game, stubby chibi (3.5-4 heads) is out. New monsters are at least 5 heads tall for humanoids (prompts ask for 5.5+), with a smaller head, long limbs, a lean agile build and a dynamic ready stance. Applied in `monster_specs.json` and `portrait_prompt.txt`. Results already made earlier that day at 3.5-4 heads are kept but not installed; those IDs are regenerated with the new prompts.
-
-
+Report briefly in Korean: IDs and names added today, chosen candidates and why, failures and retries, check results (pass and fail counts), PR, merge and wiki state, remaining allowance and tomorrow's targets, and what was not verified (physical devices, performance). Public distribution approval of Hunyuan output is still open (`productionApproved: false`).

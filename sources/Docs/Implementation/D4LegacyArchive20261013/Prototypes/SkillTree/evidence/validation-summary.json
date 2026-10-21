@@ -1,0 +1,145 @@
+{
+  "result": "pass",
+  "date": "2026-09-23",
+  "baselineCommit": "790d6d853642e003c1e69eb99260d80d18f7f7bf",
+  "modelTests": {
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0
+  },
+  "graph": {
+    "result": "pass",
+    "nodes": 111,
+    "classes": 3,
+    "cyclicEdges": 0,
+    "unreachableNodes": 0,
+    "directSourceGroups": 10,
+    "drawnEdges": 26,
+    "detailOnlyEdges": 22,
+    "levelOnlyNodes": 70,
+    "extraPrerequisiteRanks": 0,
+    "ultimateGate": {
+      "level": 40,
+      "from": 30,
+      "to": 39,
+      "requiredUnlockedSkills": 1,
+      "appliesTo": [
+        "W17",
+        "W18",
+        "A17",
+        "A18",
+        "M17",
+        "M18"
+      ]
+    },
+    "directDependencyNodes": 35,
+    "auditedSkills": 111
+  },
+  "browser": {
+    "checks": 321,
+    "layouts": 10,
+    "icons": 111,
+    "method": "Isolated local Chromium headless shell; no external user browser or public internet",
+    "displayNames": {
+      "skills": 111,
+      "languages": [
+        "ko",
+        "en"
+      ],
+      "inspectedDetails": 222,
+      "translatedReferences": 50,
+      "visibleCodeLeaks": 0
+    }
+  },
+  "unityEditMode": {
+    "passed": 352,
+    "failed": 0,
+    "skipped": 0,
+    "scope": "ClassSkillRuntimeTests fixture; full project suite not rerun",
+    "evidence": "ultimate-split-editmode.xml",
+    "finishedAtUtc": "2026-09-23 03:31:45Z",
+    "durationSeconds": 191.1657982,
+    "sourceHashes": {
+      "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json": "d4367852e759b2e0d741db0e47b17bb81670637886720f36e9a9de14ac3dae26",
+      "Assets/HELLSCRIPT/Runtime/Core/ClassSkillCodec.cs": "c48fb458f4f4da28b7f4bf011618ada00874f7fb05af81a0ebb258956cd3b6b8",
+      "Assets/HELLSCRIPT/Runtime/Core/ClassSkillNativeSmoke.cs": "f5c814b6397019a8d37fd4972ecc78978a0d2429e6234f8c0c0d66b72cb9a352",
+      "Assets/HELLSCRIPT/Runtime/Core/ClassSkills.cs": "d433b5c7e5e9df85af9796714c54ae70d0b69d2a78b1051a6a8927392a4c68c5",
+      "Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.ClassSkillEffects.cs": "25d02a7c6bed913369063a15132f13e2b975a85b914cefe9c21add25cc28a414",
+      "Assets/HELLSCRIPT/Runtime/Presentation/SkillIconView.cs": "d050dff66291a0c99f9c706b875da6b9bc67ecd8051f6db35dd0de7f22453d89",
+      "Assets/HELLSCRIPT/Tests/Editor/ClassSkillBoundaryTests.cs": "9db5835efa3ec37193abc58dd3aa51071a77c056d3eecb2b3f3ae8398b51f3cf",
+      "Assets/HELLSCRIPT/Tests/Editor/ClassSkillPassiveTests.cs": "31d220c3688de858ba7d3bc2339cefc5ba7b86928162623b87529061c38b8423",
+      "Assets/HELLSCRIPT/Tests/Editor/ClassSkillRuntimeTests.cs": "b3dec58fedca15287c229e87f75a23f610b33ad812074326c9ed60d212b4e933",
+      "Docs/Design/ClassSkills/catalog.json": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
+      "Docs/Design/ClassSkills/runtime_parameters.json": "356f3bd9c028ebdf6387aabde5bec4f9eb2c787d38b6936cde83ca781b33ae9b"
+    }
+  },
+  "macOSNative": {
+    "buildErrors": 0,
+    "ultimateSupportCases": 6,
+    "restartCases": 7,
+    "evidence": "native/manifest.json",
+    "mode": "batchmode nographics; separate initial and resumed processes"
+  },
+  "assets": {
+    "added": [
+      "WP19",
+      "AP19",
+      "MP19"
+    ],
+    "total": 111,
+    "validated": 111,
+    "globalErrors": 0,
+    "warnings": 319,
+    "model": "unknown",
+    "approval": "candidate"
+  },
+  "sharedUiContract": {
+    "check": "pass",
+    "tests": 9
+  },
+  "wiki": {
+    "build": "pass",
+    "check": "pass",
+    "pythonTests": 10,
+    "uiRouteChecks": "pass",
+    "pages": 305,
+    "databases": 28,
+    "records": 2719,
+    "publicMirror": true,
+    "publicDateOnly": true
+  },
+  "sourcePreservation": {
+    "baseCommit": "790d6d853642e003c1e69eb99260d80d18f7f7bf",
+    "existingIconsPreserved": 108,
+    "existingIconMetadataPreserved": 108,
+    "trackedMetadataOrProjectSettingsChanged": [],
+    "sourceHashes": {
+      "runtime": "Assets/HELLSCRIPT/Resources/Data/ClassSkills.json",
+      "runtimeSha256": "d4367852e759b2e0d741db0e47b17bb81670637886720f36e9a9de14ac3dae26",
+      "design": "Docs/Design/ClassSkills/catalog.json",
+      "designSha256": "385f682a78b85d191a0b362b1da997b83869f0daa8f8e9e73422d0cee68616dc",
+      "gameEnabled": false
+    }
+  },
+  "savedAllocations": {
+    "accepted": 240,
+    "migrated": 5
+  },
+  "gameRelease": "playerEnabled=false; progression prerequisites remain an HTML proposal; split passive effects are implemented in development runtime",
+  "physicalMobile": "not performed",
+  "publicDeployment": "pending main merge; no branch deployment",
+  "historicalWikiEvidence": "Previously restored Artifacts dependencies are historical, not new executions; this task produced separate Edit Mode and native evidence.",
+  "latestChange": {
+    "baseCommit": "e760416139a41e69c5290b08f22d4f85cccdbc4b",
+    "scope": "Localized display names in HTML only; removed visible development IDs and adjusted Korean particles",
+    "browserChecks": 321,
+    "inspectedDetails": 222,
+    "gameDataAndRulesChanged": false,
+    "unityAndNative": "No new execution for this display-only change; previous combat and save evidence remains historical",
+    "sourceHashes": {
+      "Prototypes/SkillTree/app.js": "371d0ceff4e5871b04b76afe71f514236f92f8a550414432bc52ac4ea58c3dbc",
+      "Prototypes/SkillTree/page.html": "61bf5ef58228f2e0c485da58370202414fab48aba7128e6b0fabc933762adc7b",
+      "Prototypes/SkillTree/browser.test.cjs": "054a782629e322f530d7a03694be247b7fd26372e2f2bf033f7255e6469702ec"
+    }
+  }
+}

@@ -91,8 +91,8 @@
       "setId": "",
       "name": "상처를 거두는 손",
       "nameEn": "Wound Reaper's Grasp",
-      "description": "찢어낸 상처가 출혈을 만들면 그 출혈의 총량이 20% 증가합니다. 피의 회수가 실제 잔여 출혈을 정산하면 해당 적을 1초 기절시킵니다. 범위 안의 모든 대상에게 적용하며 보스에게는 제압 수치를 줍니다.",
-      "descriptionEn": "Increase new Raking Wound bleed totals by 20%. Blood Reclamation stuns every enemy whose remaining bleed it actually cashes out for 1s; bosses receive stagger credit."
+      "description": "찢어낸 상처가 출혈을 만들면 그 출혈의 총량이 20% 증가합니다. 피의 회수가 실제 잔여 출혈을 정산하면 해당 적을 1초 기절시킵니다. 시전당 최대 5명이며 보스에게는 제압 수치를 줍니다.",
+      "descriptionEn": "Increase new Raking Wound bleed totals by 20%. Blood Reclamation stuns each enemy whose remaining bleed it actually cashes out for 1s, up to 5 per cast; bosses receive stagger credit."
     },
     {
       "id": "DES_LW43",
@@ -211,8 +211,8 @@
       "setId": "",
       "name": "유리빙하 지팡이",
       "nameEn": "Glassglacier Staff",
-      "description": "빙하창으로 실제 빙결시킨 적에게 3초 안에 귀환 서리를 맞히면 반경 2m 안의 모든 적에게 D60% 냉기 추가 폭발을 줍니다. 같은 구체는 한 번만 폭발하며 3초 간격입니다. 빙결이 풀려도 연계 시간은 유지하며 보스 제압만으로는 준비되지 않습니다.",
-      "descriptionEn": "Hitting a target with Returning Frost within 3s of actually freezing it with Glacial Spear adds a D60% cold explosion to every enemy within 2m. Once per orb, 3s interval. The window survives thawing; boss stagger alone cannot prepare it."
+      "description": "빙하창으로 실제 빙결시킨 적에게 3초 안에 귀환 서리를 맞히면 반경 2m·최대 5명에게 D60% 냉기 추가 폭발을 줍니다. 같은 구체는 한 번만 폭발하며 3초 간격입니다. 빙결이 풀려도 연계 시간은 유지하며 보스 제압만으로는 준비되지 않습니다.",
+      "descriptionEn": "Hitting a target with Returning Frost within 3s of actually freezing it with Glacial Spear adds a D60% cold explosion within 2m, up to 5 targets. Once per orb, 3s interval. The window survives thawing; boss stagger alone cannot prepare it."
     },
     {
       "id": "DES_LM43",
@@ -1251,8 +1251,8 @@
       "setId": "REF_SA08",
       "name": "그림자 추적자의 병기",
       "nameEn": "Sightless Shadow Armament",
-      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape."
+      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape."
     },
     {
       "id": "REF_SA08_P02",
@@ -1261,8 +1261,8 @@
       "setId": "REF_SA08",
       "name": "그림자 추적자의 관",
       "nameEn": "Sightless Shadow Crown",
-      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape."
+      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape."
     },
     {
       "id": "REF_SA08_P03",
@@ -1271,8 +1271,8 @@
       "setId": "REF_SA08",
       "name": "그림자 추적자의 갑옷",
       "nameEn": "Sightless Shadow Armor",
-      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape."
+      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape."
     },
     {
       "id": "REF_SA08_P04",
@@ -1281,8 +1281,8 @@
       "setId": "REF_SA08",
       "name": "그림자 추적자의 손아귀",
       "nameEn": "Sightless Shadow Grasp",
-      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape."
+      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape."
     },
     {
       "id": "REF_SA08_P05",
@@ -1291,8 +1291,8 @@
       "setId": "REF_SA08",
       "name": "그림자 추적자의 걸음",
       "nameEn": "Sightless Shadow Treads",
-      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape."
+      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape."
     },
     {
       "id": "REF_SA08_P06",
@@ -1301,8 +1301,8 @@
       "setId": "REF_SA08",
       "name": "그림자 추적자의 목걸이",
       "nameEn": "Sightless Shadow Amulet",
-      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape."
+      "description": "2: 후퇴 도약 재사용 대기시간 감소 +15%p.\n4: 후퇴 도약을 마치면 6초간 A01·A02 직접 피해 +20%.\n6: 후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "2: Retreat cooldown reduction +15 percentage points.\n4: Completing Retreat grants 20% A01/A02 direct damage for 6 seconds.\n6: For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape."
     }
   ],
   "bonuses": [
@@ -2393,8 +2393,8 @@
       "id": "REF_SA08_B6",
       "setId": "REF_SA08",
       "count": 6,
-      "description": "후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 범위 안의 모든 적에게 적용되며 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
-      "descriptionEn": "For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Hits every enemy in the area, once per cast, 2s interval; applies independently of the selected shot shape.",
+      "description": "후퇴 후 6초 동안 A01·A02의 첫 직접 적중 위치에 0.25초 뒤 반경 2.5m, D70% 물리 잔영 폭발을 줍니다. 최대 5명, 시전당 1회, 2초 간격이며 보조 스킬 형상과 무관합니다.",
+      "descriptionEn": "For 6s after retreating, the first direct A01/A02 hit creates a D70% physical afterimage explosion after 0.25s within 2.5m. Up to 5 targets, once per cast, 2s interval; applies independently of the selected shot shape.",
       "parameters": [
         {
           "key": "durationSeconds",
@@ -4415,6 +4415,10 @@
         "value": 1
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.35
       },
@@ -4455,6 +4459,10 @@
       {
         "key": "period",
         "value": 0
+      },
+      {
+        "key": "targets",
+        "value": 5
       },
       {
         "key": "prepare",
@@ -4703,6 +4711,10 @@
         "value": 1
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.2
       },
@@ -4928,6 +4940,10 @@
         "value": 0
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.15
       },
@@ -5010,6 +5026,10 @@
         "value": 0
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.35
       },
@@ -5054,6 +5074,10 @@
       {
         "key": "period",
         "value": 0
+      },
+      {
+        "key": "targets",
+        "value": 5
       },
       {
         "key": "prepare",
@@ -5161,6 +5185,10 @@
       {
         "key": "period",
         "value": 0
+      },
+      {
+        "key": "targets",
+        "value": 8
       },
       {
         "key": "prepare",
@@ -5415,6 +5443,10 @@
         "value": 0
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.3
       },
@@ -5546,6 +5578,10 @@
         "value": 0
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.3
       },
@@ -5594,6 +5630,10 @@
       {
         "key": "period",
         "value": 0
+      },
+      {
+        "key": "targets",
+        "value": 5
       },
       {
         "key": "prepare",
@@ -6251,6 +6291,10 @@
         "value": 1
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.4
       },
@@ -6457,6 +6501,10 @@
         "value": 1
       },
       {
+        "key": "targets",
+        "value": 5
+      },
+      {
         "key": "prepare",
         "value": 0.4
       },
@@ -6508,6 +6556,10 @@
       {
         "key": "period",
         "value": 1
+      },
+      {
+        "key": "targets",
+        "value": 3
       },
       {
         "key": "prepare",
@@ -6567,6 +6619,10 @@
         "value": 0.5
       },
       {
+        "key": "targets",
+        "value": 8
+      },
+      {
         "key": "prepare",
         "value": 0.5
       },
@@ -6617,6 +6673,10 @@
       {
         "key": "period",
         "value": 0
+      },
+      {
+        "key": "targets",
+        "value": 5
       },
       {
         "key": "prepare",

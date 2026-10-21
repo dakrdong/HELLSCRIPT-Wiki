@@ -8,21 +8,11 @@ namespace Hellscript
     public sealed class StorageGlyph : MaskableGraphic
     {
         public string symbol;
-        // Four small technical controls keep their exact action shape and the owner's hit rectangle.
-        internal static bool TryDrawControl(RectTransform rect,string id,Color ink)
-        {
-            string symbol=id switch {"collapse"=>"right","expand"=>"chevron","drag-grip"=>"drag-grip","plus"=>"plus",_=>null};
-            if(symbol==null)return false;
-            var glyph=rect.gameObject.AddComponent<StorageGlyph>();glyph.symbol=symbol;glyph.color=ink;glyph.raycastTarget=false;return true;
-        }
-
         protected override void OnPopulateMesh(VertexHelper mesh)
         {
             mesh.Clear();
             switch(symbol)
             {
-                case "calendar":Path(mesh,3,5,21,5,21,21,3,21,3,5);Path(mesh,3,10,21,10);Path(mesh,8,3,8,7);Path(mesh,16,3,16,7);break;
-                case "talk":Path(mesh,4,5,20,5,20,16,9,16,4,20,4,5);break;
                 case "play":Path(mesh,7,3,21,12,7,21,7,3);break;
                 case "pause":Path(mesh,7,3,7,21);Path(mesh,17,3,17,21);break;
                 case "hint-up":
@@ -55,15 +45,6 @@ namespace Hellscript
                     Path(mesh,14,7,10,7,8,10,8,14,10,17,14,17);break;
                 case "gem":
                     Path(mesh,5,4,19,4,23,10,12,23,1,10,5,4);Path(mesh,1,10,23,10);Path(mesh,8,4,6,10,12,23,18,10,16,4);break;
-                // The jeweler mockup's own line icons (flask, tier arrows, price book, cut gem).
-                case "flask":
-                    Path(mesh,8,3,16,3);Path(mesh,9,3,9,9,4,18,3.7f,19.3f,4.2f,20.5f,6,21,18,21,19.3f,21,20.2f,19.9f,20,18,15,9,15,3);Path(mesh,7,15,17,15);Path(mesh,9,18,10,18);Path(mesh,14,17,15,17);break;
-                case "upgrade":Path(mesh,12,20,12,4);Path(mesh,5,11,12,4,19,11);break;
-                case "downgrade":Path(mesh,12,4,12,20);Path(mesh,5,13,12,20,19,13);break;
-                case "ledger":
-                    Path(mesh,4,4,11,4,12,6,13,4,20,4,20,19,13,19,12,20,11,19,4,19,4,4);Path(mesh,12,6,12,20);Path(mesh,7,8,9,8);Path(mesh,7,12,9,12);Path(mesh,15,8,17,8);Path(mesh,15,12,17,12);break;
-                case "gem-cut":
-                    Path(mesh,3,7,7,3,17,3,21,7,12,21,3,7);Path(mesh,3,7,21,7);Path(mesh,7,3,12,21,17,3);Path(mesh,7,3,6,7);Path(mesh,17,3,18,7);break;
                 case "chevron":Path(mesh,6,9,12,15,18,9);break;
                 case "check":Path(mesh,5,12,10,17,19,6);break;
                 case "search":Path(mesh,16,10,15.5f,7.7f,14.2f,5.8f,12.3f,4.5f,10,4,7.7f,4.5f,5.8f,5.8f,4.5f,7.7f,4,10,4.5f,12.3f,5.8f,14.2f,7.7f,15.5f,10,16,12.3f,15.5f,14.2f,14.2f,15.5f,12.3f,16,10);Path(mesh,14.2f,14.2f,21,21);break;
@@ -73,10 +54,6 @@ namespace Hellscript
                 case "range":
                     Path(mesh,7,3,3,3,3,21,7,21);Path(mesh,17,3,21,3,21,21,17,21);
                     Path(mesh,6,12,18,12);Path(mesh,9,9,6,12,9,15);Path(mesh,15,9,18,12,15,15);break;
-                case "left":Path(mesh,14,5,7,12,14,19);break;
-                case "hourglass":Path(mesh,6,3,18,3);Path(mesh,6,21,18,21);Path(mesh,7,3,7,7,17,17,17,21);Path(mesh,17,3,17,7,7,17,7,21);break;
-                case "gate":Path(mesh,5,21,5,10,6,6,12,2,18,6,19,10,19,21);Path(mesh,9,21,9,10,12,6,15,10,15,21);Path(mesh,3,21,21,21);Path(mesh,12,9,12,17);break;
-                case "bolt":Path(mesh,13,2,5,14,11,14,10,22,19,9,12,9,13,2);break;
                 case "info":
                     Path(mesh,6,3,18,3,22,8,22,16,18,21,6,21,2,16,2,8,6,3);Path(mesh,12,11,12,17);Path(mesh,12,6,12,7);break;
                 // Daily quest activities, traced from the approved 24-unit HTML paths.
@@ -100,7 +77,6 @@ namespace Hellscript
                 case "gift":Path(mesh,3,8,21,8,21,12,3,12,3,8);Path(mesh,5,12,5,21,19,21,19,12);Path(mesh,12,8,12,21);Path(mesh,12,8,7.7f,7,5.6f,5.3f,5.2f,3.9f,6.4f,3.3f,8.8f,4.5f,12,8);Path(mesh,12,8,16.3f,7,18.4f,5.3f,18.8f,3.9f,17.6f,3.3f,15.2f,4.5f,12,8);break;
                 case "clock":Path(mesh,12,2,8.2f,2.8f,4.9f,4.9f,2.8f,8.2f,2,12,2.8f,15.8f,4.9f,19.1f,8.2f,21.2f,12,22,15.8f,21.2f,19.1f,19.1f,21.2f,15.8f,22,12,21.2f,8.2f,19.1f,4.9f,15.8f,2.8f,12,2);Path(mesh,12,6,12,12,16,14);break;
                 case "crown":Path(mesh,3,6,7,11,12,4,17,11,21,6,19,19,5,19,3,6);Path(mesh,5,16,19,16);break;
-                case "warning":Path(mesh,12,3.5f,21.5f,20,2.5f,20,12,3.5f);Path(mesh,12,10,12,14.5f);Path(mesh,12,17.5f,12,18);break;
                 case "stop":Path(mesh,6,6,18,6,18,18,6,18,6,6);break;
                 case "chest":Path(mesh,3,10,21,10,21,21,3,21,3,10);Path(mesh,3,10,3,6,4.3f,4.8f,7.7f,4,12,3.8f,16.3f,4,19.7f,4.8f,21,6,21,10);Path(mesh,3,10,21,10);Path(mesh,10,10,10,15,14,15,14,10);Path(mesh,6,4,6,21);Path(mesh,18,4,18,21);break;
                 // Forge window icons, from the 24-unit paths of the forge HTML prototype.
@@ -109,8 +85,6 @@ namespace Hellscript
                 case "craft":Path(mesh,3,8,21,8,18,13,13,13,13,17,17,17,17,20,6,20,6,17,9,17,9,13,6,13,3,8);Path(mesh,13,3,15,2,19,6,17,8,13,3);break;
                 case "spark":Path(mesh,12,2,15,9,22,12,15,15,12,22,9,15,2,12,9,9,12,2);break;
                 case "plus":Path(mesh,12,5,12,19);Path(mesh,5,12,19,12);break;
-                case "drag-grip":
-                    foreach(float x in new[]{8f,16f})foreach(float y in new[]{5f,12f,19f})Path(mesh,x,y-.5f,x,y+.5f);break;
                 case "auto":Path(mesh,5,4,13,12,5,20,5,4);Path(mesh,14,4,22,12,14,20,14,4);break;
                 case "list":Path(mesh,8,6,21,6);Path(mesh,8,12,21,12);Path(mesh,8,18,21,18);Path(mesh,3,6,4,6);Path(mesh,3,12,4,12);Path(mesh,3,18,4,18);break;
                 case "reroll":Path(mesh,19,7,17.5f,4.5f,15,3,12,3,8.5f,3.6f,6,6,3,9);Path(mesh,3,4,3,9,8,9);Path(mesh,5,17,6.5f,19.5f,9,21,12,21,15.5f,20.4f,18,18,21,15);Path(mesh,21,20,21,15,16,15);break;

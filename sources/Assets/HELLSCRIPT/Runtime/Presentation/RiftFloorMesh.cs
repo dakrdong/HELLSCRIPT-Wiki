@@ -43,52 +43,6 @@ namespace Hellscript
             }
         }
 
-        // Rectangular passage slabs must not share coplanar area with a room or an earlier slab.
-        public static List<Rect> UncoveredRectangles(Rect floor,IEnumerable<Rect> covered)
-        {
-            var pieces=new List<Rect>{floor};
-            foreach(var other in covered)
-            {
-                var next=new List<Rect>();
-                foreach(var piece in pieces)
-                {
-                    float x0=Mathf.Max(piece.xMin,other.xMin),x1=Mathf.Min(piece.xMax,other.xMax);
-                    float y0=Mathf.Max(piece.yMin,other.yMin),y1=Mathf.Min(piece.yMax,other.yMax);
-                    if(x0>=x1||y0>=y1){next.Add(piece);continue;}
-                    if(piece.xMin<x0)next.Add(Rect.MinMaxRect(piece.xMin,piece.yMin,x0,piece.yMax));
-                    if(x1<piece.xMax)next.Add(Rect.MinMaxRect(x1,piece.yMin,piece.xMax,piece.yMax));
-                    if(piece.yMin<y0)next.Add(Rect.MinMaxRect(x0,piece.yMin,x1,y0));
-                    if(y1<piece.yMax)next.Add(Rect.MinMaxRect(x0,y1,x1,piece.yMax));
-                }
-                pieces=next;if(pieces.Count==0)break;
-            }
-            return pieces;
-        }
-
-        // A rectangular passage slab (top at floor level, .5 m deep) with UV = world xz / 4 m like the organic floor. A primitive
-        // cube would stretch one whole tile over its top, so tiles shrink and clash wherever neighbouring slabs differ in size.
-        public static GameObject CreateSlab(string label,Transform parent,Vector3 offset,Rect r,Material ground)
-        {
-            var vertices=new List<Vector3>();var uv=new List<Vector2>();var triangles=new List<int>();
-            // mode 0 maps the top by (x,z), 1 a wall along x by (x,y), 2 a wall along z by (z,y); corners run clockwise seen from outside.
-            void Face(int mode,Vector3 a,Vector3 b,Vector3 c,Vector3 d)
-            {
-                int v=vertices.Count;
-                foreach(var p in new[]{a,b,c,d}){vertices.Add(p);uv.Add((mode==0?new Vector2(p.x,p.z):mode==1?new Vector2(p.x,p.y):new Vector2(p.z,p.y))*.25f);}
-                triangles.AddRange(new[]{v,v+1,v+2,v,v+2,v+3});
-            }
-            float x0=r.xMin,x1=r.xMax,z0=r.yMin,z1=r.yMax,d0=-.5f;
-            Face(0,new Vector3(x0,0,z0),new Vector3(x0,0,z1),new Vector3(x1,0,z1),new Vector3(x1,0,z0));
-            Face(1,new Vector3(x0,0,z0),new Vector3(x1,0,z0),new Vector3(x1,d0,z0),new Vector3(x0,d0,z0));
-            Face(2,new Vector3(x1,0,z0),new Vector3(x1,0,z1),new Vector3(x1,d0,z1),new Vector3(x1,d0,z0));
-            Face(1,new Vector3(x1,0,z1),new Vector3(x0,0,z1),new Vector3(x0,d0,z1),new Vector3(x1,d0,z1));
-            Face(2,new Vector3(x0,0,z1),new Vector3(x0,0,z0),new Vector3(x0,d0,z0),new Vector3(x0,d0,z1));
-            var mesh=new Mesh{name=label};mesh.SetVertices(vertices);mesh.SetUVs(0,uv);mesh.SetTriangles(triangles,0);
-            mesh.RecalculateNormals();mesh.RecalculateTangents();mesh.RecalculateBounds();
-            var go=new GameObject(label);go.transform.SetParent(parent,false);go.transform.localPosition=offset;go.AddComponent<MeshFilter>().sharedMesh=mesh;
-            go.AddComponent<MeshRenderer>().sharedMaterial=ground;go.AddComponent<RiftFloorMesh>().ownedMesh=mesh;return go;
-        }
-
         public static GameObject Create(string label,Transform parent,IEnumerable<RiftFloorPatch> patches,RiftSurface surface,Material ground,Material edge,
             Material wall=null,uint seed=0,List<WallAnchor> anchors=null)
         {

@@ -64,18 +64,6 @@ namespace Hellscript
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
             var hud=globalHud?.Layout;
             dockIcon=hud==null?44:DockIconSize(root.rect.height-(LiveJournalHudInset+hud.potionBounds.yMax*hud.scale)/BattleCanvasScale,false);
-            float settingsSize=dockIcon,dockTop=14+dockIcon;
-            if(hud!=null&&!hud.compact)
-            {
-                // The legacy content rail starts below the fixed Hunt Edict in both orientations.
-                var edict=hud.Pixels(hud.edict);
-                if(hud.landscape)
-                {
-                    float edictTop=(safe.height-edict.yMax)/BattleCanvasScale;
-                    settingsSize=Mathf.Min(settingsSize,Mathf.Max(44,edictTop-14));
-                }
-                dockTop=Mathf.Max(dockTop,(safe.height-edict.yMin)/BattleCanvasScale+6);
-            }
             var mini=riftMinimapPanel;var panel=default(Rect);float map=0;if(mini!=null)panel=ReflowRiftMinimap(mini,narrow,float.MaxValue,out map);
             var medals=ReflowBattleMedallions(w,panel);
             // Header lines that share rows with a landscape map panel or the medallions stop short of them.
@@ -87,9 +75,9 @@ namespace Hellscript
             Place(timerText.rectTransform,18,63,narrow?w-36:90,22);
             Place(meterText.rectTransform,narrow?18:112,narrow?87:63,narrow?w-36:Mathf.Max(100,Mathf.Min(w-240,End(63,24)-112)),24);meterText.fontSize=narrow?13:15;
             Place(actionText.rectTransform,18,narrow?112:88,Mathf.Min(w-36,End(narrow?112:88,22)-18),22);
-            // Gear and content dock share one column around the fixed Hunt Edict button.
-            var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Right((RectTransform)settings.transform,12,8,settingsSize,settingsSize);CompactGear(settings,settingsSize);
-            Right((RectTransform)contentDock.transform,12,dockTop,dockIcon,dockIcon);contentDock.Reflow(dockIcon,6);ReflowEventButton();
+            // Gear and content dock fold out beneath each other in one column, the size of the skill icons.
+            var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Right((RectTransform)settings.transform,12,8,dockIcon,dockIcon);CompactGear(settings,dockIcon);
+            Right((RectTransform)contentDock.transform,12,14+dockIcon,dockIcon,dockIcon);contentDock.Reflow(dockIcon,6);ReflowEventButton();
             var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,medals.width>0?medals.xMin-52:w-64-dockIcon,8,44,44);
             // Boss status owns the top centre. On phones it gets the first clear row under the header,
             // with symmetric width beside the map; neither the map nor a moved graph may push it downward.

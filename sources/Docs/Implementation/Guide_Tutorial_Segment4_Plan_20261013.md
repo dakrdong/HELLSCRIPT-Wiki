@@ -6,8 +6,6 @@
 
 [English](Guide_Tutorial_Segment4_Plan_20261013.en.md)
 
-> **상태 (2026-10-19): 구현됨.** 단계 번호·고정 보상·카드 흐름은 이 계획과 달라진 부분이 있으므로 실제 결과는 [실제 규칙 개편의 「장비 수업」](Guide_Tutorial_Real_Rules_20261019.md)을 따른다. 이 문서는 당시 계획으로 남긴다.
-
 ## 0. 전제와 기준
 
 - 기준 코드는 **2·3구간이 들어간 `origin/main`**(PR #101, `a5596519` 이후)이다. 단계 상수는 `GuideTutorial.cs`의 `Entrance=0 … FinalBoss=24, Cleared=25, Last=Cleared`.

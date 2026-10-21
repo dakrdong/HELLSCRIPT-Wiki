@@ -92,9 +92,11 @@ namespace Hellscript
         {
             var policy=exact?.version==EdictTargetPolicy.CurrentVersion?exact:global.HasValue?null:TargetPolicy;
             var candidates=policy!=null?sensed.Where(EdictTargetEligible).ToList():sensed;
+            if(DodgeOwnsEdictAction&&(r.action==RuleAction.Basic||r.action==RuleAction.Skill))
+            {float range=r.action==RuleAction.Basic?BasicReach:r.skill>=0&&r.skill<catalog.skills.Count?SkillRange(r.skill):0;if(range>0)candidates=candidates.Where(e=>DodgeTargetInRange(e,range,r.action==RuleAction.Basic&&Hero.heroClass!=HeroClass.Warrior?.2f:0)).ToList();}
             if(policy!=null&&r.target==RuleTarget.Default)
                 return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,DangerousEdictCast,(a,b)=>Map.LineClear(a,b));
-            var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId);
+            var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId)??(DodgeOwnsEdictAction?candidates.OrderBy(e=>(e.position-State.position).sqrMagnitude).ThenBy(e=>e.id).FirstOrDefault():null);
             float Score(EnemyState e)
             {
                 float score=Vector2.Distance(State.position,e.position);
@@ -149,7 +151,7 @@ namespace Hellscript
         RuleCandidate InspectRule(Rule r,int row)
         {
             var c=InspectRuleCore(r,row);
-            if(DodgeOwnsEdictAction&&(r.action!=RuleAction.Basic&&r.action!=RuleAction.Skill||
+            if(DodgeOwnsEdictAction&&(r.action!=RuleAction.Basic&&r.action!=RuleAction.Skill||c.code=="APPROACH"||
                 !DodgeCanAttack(r.action==RuleAction.Basic?"BASIC":CombatTelemetry.SkillId(r.skill))))
             {c.ready=false;c.code="DODGE_HOLD";c.detail="회피한 공격이 끝날 때까지 안전 위치를 유지합니다.";}
             return c;

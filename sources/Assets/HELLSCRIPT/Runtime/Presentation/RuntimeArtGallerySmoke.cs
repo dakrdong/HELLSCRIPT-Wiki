@@ -248,9 +248,8 @@ namespace Hellscript
                 case "fx-loot":
                 {
                     for(int g=0;g<5;g++)fx.LootBeam(Anchor("Gallery drop "+g,At(new Vector2((g-2)*2.6f,3)),PrimitiveType.Cube,new Vector3(.35f,.6f,.2f),true).transform,g);
-                    fx.GoldGlint(Anchor("Gallery gold",At(new Vector2(-1.2f,.8f)),null,Vector3.one).transform);
-                    fx.StoneGlow(Anchor("Gallery stone",At(new Vector2(1.2f,.8f)),null,Vector3.one).transform);
-                    Advance(1);what="loot beams for grades common, magic, rare, legendary and set left to right, gold glint (left) and enhancement stone glow (right) in front";break;
+                    fx.GoldGlint(Anchor("Gallery gold",At(new Vector2(0,.8f)),null,Vector3.one).transform);
+                    Advance(1);what="loot beams for grades common, magic, rare, legendary and set left to right, gold glint in front";break;
                 }
                 case "fx-fire":
                 {

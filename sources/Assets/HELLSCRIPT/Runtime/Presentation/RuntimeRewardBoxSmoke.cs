@@ -61,7 +61,7 @@ namespace Hellscript
             game.EnterPlaza(true);var a=game.Store.Data;
             foreach(int stage in new[]{1,10,30,100,1000})a.Hero.riftProgress.best.Add(new RiftBestTime{stage=stage,milliseconds=123000});
             a.Hero.highestClear=1000;Require(game.Store.Save(),game.Store.Error);game.SelectedStage=10;game.UI.ShowRiftKeeper();yield return null;yield return null;
-            yield return Tap("rift-first-rewards");int built=RuntimeRiftEntrySupport.RewardRows(Top()).Length;Require(built>0&&built<40,"First-clear list not bounded");
+            yield return Tap("rift-first-rewards");var list=FindAnyObjectByType<RiftRewardList>();Require(list!=null&&list.RowPoolCount<30,"First-clear list not bounded");
             yield return Tap("rift-reward-tier-10");Require(Find("reward-box-claim-10").interactable,"Normal clear not claimable");yield return Capture("first-clear-10");
             int gold=a.gold,materials=a.materials;yield return Tap("reward-box-claim-10");
             Require(a.rewardBoxes.claimedStages.Contains(10)&&a.rewardBoxes.owned.Sum(b=>b.count)==5,"R10 claim did not persist its five boxes");
@@ -99,7 +99,7 @@ namespace Hellscript
                 if(language=="ko"&&size[0]==440||language=="en"&&size[0]==956)yield return Capture($"boxes-{size[0]}-{language}-{scale}");
             }
             yield return ClosePopup();game.UI.ClosePlayInventory();yield return Resize(440,956,"ko");game.SelectedStage=1000;game.UI.ShowRiftKeeper();yield return null;yield return Tap("rift-first-rewards");
-            Require(RuntimeRiftEntrySupport.RewardRows(Top()).Length<40&&Find("rift-reward-tier-1000")!=null,"Cannot reach tier 1000");yield return Tap("rift-reward-tier-1000");yield return Capture("first-clear-1000");yield return Tap("reward-box-claim-1000");
+            list=FindAnyObjectByType<RiftRewardList>();Require(list.LastVisible==1000&&list.RowPoolCount<30,"Cannot reach tier 1000");yield return Tap("rift-reward-tier-1000");yield return Capture("first-clear-1000");yield return Tap("reward-box-claim-1000");
             Require(a.rewardBoxes.owned.Any(b=>b.boxId=="gem-choice-t6"&&b.count==2),"T6 packs missing");Require(a.rewardBoxes.owned.Any(b=>b.boxId=="awakened-weapon"&&b.minimumQuality==9000),"Completion weapon missing");
             var loaded=new GameStore(args[save+1],game.catalog);Require(JsonUtility.ToJson(a.rewardBoxes)==JsonUtility.ToJson(loaded.Data.rewardBoxes),"Boxes did not survive reload");
             checks.Add("PASS tier-1000 view + claim, two ten-gem T6 boxes, 90% awakened weapon, save/reload preserves unopened contents.");

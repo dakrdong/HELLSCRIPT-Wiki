@@ -150,9 +150,8 @@ namespace Hellscript
             var numbers=IncomingDamageNumbers(damage,element,IncomingReduction(attacker,element,blocked),kind==DamageKind.Periodic);
             RecordProtection(damage,element,attacker,skillBlock,numbers,kind==DamageKind.Periodic);
             if(blocked)EffectEvent(definition,"BLOCKED",instance,root,value:numbers.final);
-            float before=State.health,absorbed=AbsorbDamage(numbers.final),floor=GuideHealthFloor(before);
-            State.health=Mathf.Max(floor,State.health-(numbers.final-absorbed));
-            float hpLoss=floor>0?Mathf.Max(0,before-State.health):Mathf.Min(Mathf.Max(0,before),Mathf.Max(0,numbers.final-absorbed));
+            float before=State.health,absorbed=AbsorbDamage(numbers.final);State.health=Mathf.Max(0,State.health-(numbers.final-absorbed));
+            float hpLoss=Mathf.Min(Mathf.Max(0,before),Mathf.Max(0,numbers.final-absorbed));
             if(D4Combat&&Hero.heroClass==HeroClass.Ranger&&numbers.final>0&&CSStationary&&CS.action?.id=="A05")CancelClassSkill("HURT");
             State.receivedDamage.Add(new DamageReceived{time=State.time,hp=hpLoss,absorbed=absorbed});
             RecordDamage(new DamageEvent{id=State.nextDamageId++,incoming=true,kind=kind,rootCastId=root,effectInstanceId=instance,definitionId=definition,casterId=caster,element=element,tick=EffectTick,time=State.time,

@@ -12,7 +12,6 @@ namespace Hellscript
         PotionPolicy potionPolicy;
         HuntEdictV2Document potionPolicySource;
         float potionPolicyThreshold=-1;
-        bool guidePotionCommit;
         public HeroStats Stats
         {
             get
@@ -117,29 +116,9 @@ namespace Hellscript
             }
             ConsumePotion(def);return true;
         }
-        // Invoked only by a prepared guide-policy commit: the preview is detached until Write succeeds.
-        bool CompleteGuidePotionLesson()
-        {
-            if(!GuideTutorial.PotionLesson(State)||!State.paused||State.potions.version==0||State.potions.uses!=0||
-                !CurrentPotionPolicy.hp||!GuideTutorial.PotionLessonThreshold(CurrentPotionPolicy.hpThreshold)||ReadyPotion("hp")?.id!=GuideTutorial.HealingPotion)return false;
-            var visual=Visual;Visual=null;guidePotionCommit=true;
-            // Demonstrate one real potion immediately without lowering HP or changing the chosen automatic threshold.
-            // The paused lesson may still be above that threshold, including migrated SkillSummary checkpoints.
-            try{if(!TryUsePotion(100))return false;}
-            finally{guidePotionCommit=false;Visual=visual;}
-            State.tutorialPhase=GuideTutorial.SkillSummary;State.paused=true;return true;
-        }
-        internal void PresentGuidePotionLesson()
-        {
-            var listeners=Visual;if(listeners==null)return;
-            // Presentation cannot turn an already saved potion use into a failed transaction.
-            foreach(Action<Vector2,Vector2,int,float> listener in listeners.GetInvocationList())
-                try{listener(State.position,State.position,20,1);}
-                catch(Exception error){Debug.LogWarning("Guide potion presentation listener failed: "+error.Message);}
-        }
         void ConsumePotion(PotionDefinition def)
         {
-            if(IsTutorial&&!(GuideTutorial.PotionTeaching(State)&&def.id==GuideTutorial.HealingPotion))return;
+            if(IsTutorial)return;
             var slots=ActivePotionSlots;int index=Array.IndexOf(ResolvedPotionSlots,def.id);
             bool newest=index>=0&&slots[index].id!=def.id&&Hero.potions.SharedFallback==PotionFallback.Newest;
             Hero.potions.Consume(def.id,newest);Hero.potions.revision++;State.potions.uses++;

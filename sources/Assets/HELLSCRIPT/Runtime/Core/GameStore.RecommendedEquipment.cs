@@ -35,8 +35,6 @@ namespace Hellscript
                 return true;
             });
             if(!saved)return eligible?EquipmentLootResult.SaveFailed:EquipmentLootResult.Rejected;
-            // The staged copy decided whether a card is offered; the guide stage's live drops take that decision over (a rift run is synced in Transact).
-            if(GuideTutorial.Running(run))RiftGearRecommendations.Sync(run,Data.guide.tutorialRun);
             AdoptTutorialRun(run);
             // Keep the live run and drop objects: the loot loop and presentation own their identities.
             drop.item=CombatJournal.Copy(drop.item);drop.claimed=true;drop.outcome=RiftLootOutcome.Kept;run.lootCount++;run.health=health;run.resource=resource;

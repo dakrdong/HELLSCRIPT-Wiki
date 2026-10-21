@@ -100,12 +100,12 @@ namespace Hellscript
             float k=presentationScale,unit=k/scale,w=pixelsWide/k,h=pixelsHigh/k;
             textScale=k*(landscape&&!compact?1:.72f);
             Rect R(float x,float y,float rw,float rh)=>new Rect(x*unit,y*unit,rw*unit,rh*unit);
-            float margin=!landscape?16:compact?66:32,slot=!landscape?50:compact?48:76;
-            float gap=!landscape?4:compact?8:12,group=!landscape?16:compact?14:24;
-            // Keep each portrait group compact; use spare width for bounded icons, never wider gaps.
-            if(!landscape)slot=Mathf.Min(slot,(w-2*margin-6*gap-group)/8);
+            float margin=!landscape?16:compact?66:32,slot=!landscape?44:compact?48:76;
+            float gap=!landscape?5:compact?8:12,group=!landscape?10:compact?14:24;
             float row3=3*slot+2*gap,row8=8*slot+6*gap+group;
-            float first=!landscape?(w-row8)*.5f:w-margin-row8,slotY=!landscape?147:compact?37:54;
+            float first=!landscape?16:w-margin-row8,slotY=!landscape?147:compact?37:54;
+            if(!landscape)gap=Mathf.Max(5,(w-32-8*slot-group)/6);
+            row3=3*slot+2*gap;
             for(int i=0;i<3;i++)potions[i]=R(first+i*(slot+gap),slotY,slot,slot);
             potionBounds=R(first,slotY-18,row3,slot+18);
             float start=first+row3+group;
@@ -146,8 +146,6 @@ namespace Hellscript
             return Mathf.Min(Mathf.Max(minimum,skill*1.15f*card),(hudTop-3*12*card-5*UiTheme.Gap*card)/6);
         }
         public Rect Pixels(Rect r)=>new Rect(r.x*scale,r.y*scale,r.width*scale,r.height*scale);
-        // The casual HUD mockup sets its own text sizes per board (PC / phone), in board pixels at the HUD's presentation scale.
-        public int HudFont(float pc,float phone,float landscapePhone=-1)=>Mathf.Max(1,Mathf.RoundToInt((landscape&&!compact?pc:landscape&&landscapePhone>0?landscapePhone:phone)*presentationScale));
         public int FontSize(float basis,int minimum)=>Mathf.Max(1,Mathf.RoundToInt(Mathf.Max(basis,minimum)*textScale));
         public static float ContentWidth(int count,float icon=44,float gap=8)=>Mathf.Max(0,count)*icon+Mathf.Max(0,count-1)*gap;
         public static float EdgeAlpha(float distance,float width)

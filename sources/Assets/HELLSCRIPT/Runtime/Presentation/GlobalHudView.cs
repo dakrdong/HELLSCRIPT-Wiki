@@ -13,9 +13,7 @@ namespace Hellscript
         public Action<HudEffectState> EffectSelected;
         public Action<HudSlotState> SlotSelected;
         public Action AllEffectsSelected;
-        public Action EdictSelected,PotionSettingsSelected,SealSelected;
-        RectTransform edictAnchor;
-        public void BindEdictAnchor(RectTransform anchor){edictAnchor=anchor;edict.gameObject.SetActive(false);}
+        public Action EdictSelected,PotionSettingsSelected;
         public Action<int> SkillTapped,SkillHeld,PotionTapped,PotionHeld;
         readonly Dictionary<string,Sprite> sprites=new Dictionary<string,Sprite>();
         readonly Dictionary<int,Sprite> atlasSprites=new Dictionary<int,Sprite>();
@@ -43,14 +41,12 @@ namespace Hellscript
             gameObject.AddComponent<GraphicRaycaster>();
             safe=Rect("HUD safe area",transform);
             seal=CreateSeal(safe,"Class seal",out face,out sealFrame);sealState=Picture("Seal health ring",seal,"ring-state");Stretch(sealState.rectTransform);
-            var sealHit=seal.gameObject.AddComponent<Image>();sealHit.color=Color.clear;
-            var sealButton=seal.gameObject.AddComponent<Button>();sealButton.targetGraphic=sealHit;sealButton.transition=Selectable.Transition.None;sealButton.onClick.AddListener(()=>SealSelected?.Invoke());
             edict=Rect("Hunt edict",safe);edictEmblem=Picture("Emblem",edict,"menu-hunt-edict");Stretch(edictEmblem.rectTransform);edictEmblem.preserveAspect=true;
             var edictHit=edict.gameObject.AddComponent<Image>();edictHit.color=Color.clear;var edictButton=edict.gameObject.AddComponent<Button>();edictButton.targetGraphic=edictHit;edictButton.transition=Selectable.Transition.None;
             edictButton.onClick.AddListener(()=>EdictSelected?.Invoke());edict.gameObject.SetActive(false);
             // A painted push-button (potion and settings cog), not a potion slot.
             potionSettings=Rect("Threshold potion button",safe);
-            var settingsIcon=Picture("Icon",potionSettings,"menu-potion-settings");Stretch(settingsIcon.rectTransform);settingsIcon.preserveAspect=true;CasualBattleHudStyle.IconOutline(settingsIcon);
+            var settingsIcon=Picture("Icon",potionSettings,"menu-potion-settings");Stretch(settingsIcon.rectTransform);settingsIcon.preserveAspect=true;
             var settingsHit=potionSettings.gameObject.AddComponent<Image>();settingsHit.color=Color.clear;var settingsButton=potionSettings.gameObject.AddComponent<Button>();settingsButton.targetGraphic=settingsHit;settingsButton.transition=Selectable.Transition.None;
             settingsButton.onClick.AddListener(()=>PotionSettingsSelected?.Invoke());potionSettings.gameObject.SetActive(false);
             level=Rect("Level",safe);Stretch(Picture("Level badge",level,"badge-level").rectTransform);levelLabel=Text("Level text",level,20);levelLabel.color=UiSkin.Casual.Navy;levelLabel.font=UiFonts.CasualDisplay;levelLabel.GetComponent<SkillTreeD4TextShadow>().enabled=false;Stretch(levelLabel.rectTransform);
@@ -97,7 +93,6 @@ namespace Hellscript
             }
             slot.glyph=Picture("Potion kind",slot.root,"");slot.glyph.enabled=potion;
             slot.number=Text("Cooldown time",slot.root,25);slot.number.font=UiFonts.CasualDisplay;Stretch(slot.number.rectTransform);
-            CasualBattleHudStyle.IconOutline(slot.frame);
             slot.caption=Text("Caption",slot.root,16);
             var target=slot.root.gameObject.AddComponent<Image>();target.color=Color.clear;
             // A slot is a tap (swap list) or a hold (details); the gauge rings the icon while the hold fills.
@@ -135,8 +130,8 @@ namespace Hellscript
             SetRect(edict,new Rect(Layout.edict.x*Layout.scale,Layout.edict.y*Layout.scale-BottomInset,Layout.edict.width*Layout.scale,Layout.edict.height*Layout.scale));
             StatusStrip.SetEffects(data.ObservationEffects());
         }
-        public RectTransform EdictButton=>edictAnchor!=null?edictAnchor:edict;
-        public void SetEdictButton(bool visible){visible&=edictAnchor==null;if(edict.gameObject.activeSelf!=visible)edict.gameObject.SetActive(visible);}
+        public RectTransform EdictButton=>edict;
+        public void SetEdictButton(bool visible){if(edict.gameObject.activeSelf!=visible)edict.gameObject.SetActive(visible);}
         // Slot 0-3 are the four actives, 4 the ultimate.
         public RectTransform SkillSlot(int index)=>slots[3+index].root;
         public HudSlotState SkillState(int index)=>slots[3+index].data;
@@ -177,9 +172,9 @@ namespace Hellscript
                 }
                 SetRect(s.caption.rectTransform,new Rect(0,-style.captionHeight*Layout.scale,r.width*Layout.scale,style.captionHeight*Layout.scale));
                 float gs=style.potionGlyph*Layout.scale;SetRect(s.glyph.rectTransform,new Rect(6*Layout.scale,6*Layout.scale,gs,gs));
-                s.number.fontSize=s.potion?FontSize(style.potionCooldownFont):HudFont(26,15,17);s.caption.fontSize=HudFont(15,11);
+                s.number.fontSize=FontSize(s.potion?style.potionCooldownFont:style.cooldownFont);s.caption.fontSize=FontSize(style.captionFont,(int)style.minimumFont);
             }
-            hpLabel.fontSize=resourceLabel.fontSize=HudFont(13,10);levelLabel.fontSize=HudFont(17,13);xpLabel.fontSize=HudFont(15,11);shieldLabel.fontSize=FontSize(style.shieldFont,(int)style.minimumFont);
+            hpLabel.fontSize=resourceLabel.fontSize=FontSize(style.valueFont,(int)style.minimumValueFont);levelLabel.fontSize=FontSize(style.levelFont,(int)style.minimumLevelFont);xpLabel.fontSize=FontSize(style.captionFont,(int)style.minimumFont);shieldLabel.fontSize=FontSize(style.shieldFont,(int)style.minimumFont);
             for(int i=0;i<ticks.Count;i++)
             {
                 var t=ticks[i];float h=(i==4?style.xpMajorTickHeight:style.xpTickHeight)*Layout.scale;
@@ -187,7 +182,6 @@ namespace Hellscript
             }
             StatusStrip.Configure(Layout,style);
         }
-        public int HudFont(float pc,float phone,float landscapePhone=-1)=>Layout!=null?Layout.HudFont(pc,phone,landscapePhone):Mathf.Max(1,Mathf.RoundToInt(pc));
         public int FontSize(float basis,int minimum=11)=>Layout!=null?Layout.FontSize(basis,minimum):Mathf.Max(minimum,Mathf.RoundToInt(basis));
         public Sprite Portrait(HeroClass heroClass)=>Portrait(heroClass,Snapshot?.gender??HeroGender.Male);
         public Sprite Portrait(HeroClass heroClass,HeroGender gender)=>Sprite("seal-"+(heroClass==HeroClass.Warrior?"warrior":heroClass==HeroClass.Ranger?"ranger":"mage")+"-"+(gender==HeroGender.Female?"f":"m"));
@@ -195,19 +189,16 @@ namespace Hellscript
         {
             var root=Rect(name,parent);var clipping=Picture("Circle",root,"mask-circle");Stretch(clipping.rectTransform);
             clipping.gameObject.AddComponent<Mask>().showMaskGraphic=false;
-            portrait=Picture("Selected class",clipping.transform,"seal-mage-m");Stretch(portrait.rectTransform);
+            portrait=Picture("Selected class",clipping.transform,"portrait-mage");Stretch(portrait.rectTransform);
             frame=Picture("Seal frame",root,"frame-seal");Stretch(frame.rectTransform);return root;
         }
-        // Shared source lookup only; callers retain frame roles, crops and existing caches.
-        public static Sprite LoadArt(string id)
-            =>string.IsNullOrEmpty(id)?null:Resources.Load<Sprite>("Art/GlobalHUD/Casual/"+id)??Resources.Load<Sprite>("Art/GlobalHUD/"+id);
         public Sprite Sprite(string id)
         {
             if(string.IsNullOrEmpty(id))return null;
             if(id=="potion-hp"||id=="potion-mp"||id=="potion-utility"||id.StartsWith("elixir-",StringComparison.Ordinal))return PotionArt.Bottle(id,casualHud:true);
             if(!sprites.TryGetValue(id,out var value))
             {
-                value=LoadArt(id);
+                value=Resources.Load<Sprite>("Art/GlobalHUD/Casual/"+id)??Resources.Load<Sprite>("Art/GlobalHUD/"+id);
                 sprites[id]=value;
             }
             return value;
@@ -224,7 +215,7 @@ namespace Hellscript
         {
             var r=Rect(name,parent);var t=r.gameObject.AddComponent<Text>();t.font=font;t.fontSize=size;t.color=Pale;t.alignment=TextAnchor.MiddleCenter;
             t.horizontalOverflow=HorizontalWrapMode.Overflow;t.verticalOverflow=VerticalWrapMode.Overflow;t.raycastTarget=false;
-            CasualBattleHudStyle.WorldOutline(t);return t;
+            CasualBattleHudStyle.Outline(t);return t;
         }
         public static RectTransform Rect(string name,Transform parent)
         {var r=new GameObject(name,typeof(RectTransform)).GetComponent<RectTransform>();r.SetParent(parent,false);r.anchorMin=r.anchorMax=r.pivot=Vector2.zero;return r;}

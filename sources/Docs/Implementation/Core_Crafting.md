@@ -48,6 +48,6 @@
 
 근거: [검사 XML](BlacksmithEvidence/core-crafting-editmode.xml), [검증 요약](CoreCraftingEvidence/validation.json), [실행 결과](CoreCraftingEvidence/result.txt), [재시작 결과](CoreCraftingEvidence/restart-result.txt), [세로 제작](CoreCraftingEvidence/portrait-ko-forge.png), [가로 영어](CoreCraftingEvidence/landscape-en-forge.png), [PC 장비 목록](CoreCraftingEvidence/pc-16x9-ko-catalogue.png), [확대 글자](CoreCraftingEvidence/large-text-portrait.png).
 
-구현: [규칙](../../Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs), [거래](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs), [탭](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs), [팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.CoreDialogs.cs), [자동 검사](../../Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs), [실행 검증](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs).
+구현: [규칙](../../Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs), [거래](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs), [탭](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs), [팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Dialogs.cs), [자동 검사](../../Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs), [실행 검증](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs).
 
 공개 위키는 이 브랜치를 `main`에 병합할 때 병합된 원본에서 재생성·검증한 뒤 게시한다.

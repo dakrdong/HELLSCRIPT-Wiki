@@ -37,6 +37,6 @@ Matched development-player measurements confirmed lower menu CPU/frame and town 
 
 - Review identifies changed presentation/update owners, removed repetition, restoration/invalidation conditions and preserved domain behavior.
 - Related regressions and actual-player checks cover menu/portal/power-saving transitions, continuously moving town HUD, portal/NPC/shop priority, stable button activation and transaction/save failure/retry. UI changes retain shared-contract, default-text-size, KO/EN and existing resolution checks.
-- Partial work runs only directly affected tests. Run full Edit Mode only after a combined validation batch explicitly designated by the user is complete. Compare failure names with a fresh baseline rather than treating historical failure counts as an allowlist. Never weaken checks to hide failures.
+- Follow the existing full-suite procedure once after the last code change and last `main` merge. Compare failure names with a fresh baseline rather than treating historical failure counts as an allowlist. Never weaken checks to hide failures.
 - Preserve matched raw measurements, hashes, repeat comparisons and unverified scope. If measurement is blocked, report the blocker and code-review findings without claiming improved performance.
 - Documentation/instruction-only changes require link/history/static checks rather than rebuilding or running the game. Wiki generation/publication and commit scope follow root instructions and the authorization for that request.

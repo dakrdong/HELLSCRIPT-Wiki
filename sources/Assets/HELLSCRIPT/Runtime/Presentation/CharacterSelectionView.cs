@@ -131,8 +131,8 @@ namespace Hellscript
             float w=logical.x,h=logical.y;
             Place(back,portrait?16:compact?16:24,portrait?Mathf.Min(56,h*.06f):12,100,44);
             UiLayout.Place(title.rectTransform,portrait?16:compact?120:0,portrait?Mathf.Min(108,h*.113f):compact?8:56,portrait?w-32:compact?w-240:w,portrait?44:46);title.fontSize=portrait?30:compact?26:38;
-            Place(start,(w-(portrait?220:compact?200:180))/2,h-(portrait?88:compact?52:78),portrait?220:compact?200:180,portrait?50:46);start.GetComponentInChildren<Text>().fontSize=compact?22:26;
-            var hintRect=(RectTransform)hint.transform.parent;float hintW=Mathf.Min(w-40,compact?320:400);UiLayout.Place(hintRect,(w-hintW)/2,h-(portrait?76:compact?28:27),hintW,portrait?26:22);Fill(hint);hint.fontSize=Mathf.RoundToInt(compact?12.5f:13);
+            Place(start,(w-(portrait?220:compact?200:180))/2,h-(portrait?88:compact?52:78),portrait?220:compact?200:180,portrait?50:46);
+            var hintRect=(RectTransform)hint.transform.parent;UiLayout.Place(hintRect,(w-Mathf.Min(w-40,400))/2,h-(portrait?76:compact?28:27),Mathf.Min(w-40,400),26);Fill(hint);
             LayoutCrests();
             UiLayout.Place(bottomFog.rectTransform,0,h-110,w,110);bottomFog.gameObject.SetActive(portrait);
             UiLayout.Place(entryFade.rectTransform,0,0,w,h);
@@ -150,7 +150,7 @@ namespace Hellscript
             for(int i=0;i<locks.Length;i++){var p=Stage.Head(i);UiLayout.Place((RectTransform)locks[i].transform.parent,p.x-12,p.y-30,24,24);}
             if(state.Selected<0)return;
             var head=Stage.Head(state.Selected);var feet=Stage.Feet(state.Selected);float bh=state.Busy?(compact?52:60):44;
-            float max=portrait?logical.x-188:logical.x-(compact?112:118),min=portrait?118:compact?112:118;
+            float max=portrait?logical.x-188:logical.x-118,min=portrait?118:compact?112:118;
             float cx=Mathf.Clamp(head.x,Mathf.Min(min,max),Mathf.Max(min,max));float y=Mathf.Clamp(head.y-bh-8,portrait?160:compact?60:108,logical.y-bh-104);
             UiLayout.Place(badge,cx-130,y,260,bh);
             float tagHeight=compact?22:24;

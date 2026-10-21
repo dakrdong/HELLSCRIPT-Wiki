@@ -8,12 +8,11 @@ namespace Hellscript
     // Resolve columns after the parent assigns width, before the vertical layout measures rows.
     public sealed class SettingsChoiceGrid : GridLayoutGroup
     {
-        public float MinimumCellHeight=46;
         public override void CalculateLayoutInputHorizontal(){base.CalculateLayoutInputHorizontal();SetLayoutInputForAxis(0,-1,0,-1,0);}
         public override void SetLayoutHorizontal()
         {
-            float width=rectTransform.rect.width,gap=SettingsLook.Gap/1.5f;constraint=Constraint.FixedColumnCount;constraintCount=5;
-            spacing=new Vector2(gap,gap);cellSize=new Vector2((width-(constraintCount-1)*gap)/constraintCount,MinimumCellHeight);base.SetLayoutHorizontal();
+            float width=rectTransform.rect.width;constraint=Constraint.FixedColumnCount;constraintCount=Mathf.Clamp(Mathf.FloorToInt((width+8)/92),2,5);
+            spacing=new Vector2(8,8);cellSize=new Vector2((width-(constraintCount-1)*8)/constraintCount,46);base.SetLayoutHorizontal();
         }
     }
     [RequireComponent(typeof(CanvasRenderer))]

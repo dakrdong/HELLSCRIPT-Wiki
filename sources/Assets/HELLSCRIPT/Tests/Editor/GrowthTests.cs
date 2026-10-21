@@ -38,12 +38,12 @@ namespace Hellscript.Tests
             Assert.IsTrue(sim.State.damageEvents.Any(d=>d.definitionId=="M01"&&d.hpLoss>0),string.Join("; ",sim.State.decisions.Where(d=>d.skill==12).Select(d=>d.code+": "+d.detail+" ×"+d.count)));
         }
         [TestCase(0)][TestCase(1)][TestCase(2)]
-        public void SeveralLevelsFullyRestoreHealthAndResourceWithOneGrowthRecord(int heroClass)
+        public void SeveralLevelsPreserveHealthRatioAndResourceWithOneGrowthRecord(int heroClass)
         {
             // The first-row actives open at level 1, so grow to level 10 where the next active unlocks.
             var sim=Fixture(heroClass);sim.Hero.xp=90;float old=sim.Stats.hp;sim.State.health=old*.4f;sim.State.resource=27;sim.State.pendingExperience=Enumerable.Range(1,9).Sum(Economy.XpRequired)-90+115;Flush(sim);
             Assert.AreEqual(10,sim.Hero.level);Assert.AreEqual(115,sim.Hero.xp);Assert.AreEqual(new HeroStats(sim.Hero).hp,sim.Stats.hp);
-            Assert.AreEqual(sim.Stats.hp,sim.State.health,.0001f);Assert.AreEqual(sim.Stats.maxResource,sim.State.resource);Assert.AreEqual(0,sim.State.pendingExperience);
+            Assert.AreEqual(sim.Stats.hp*.4f,sim.State.health,.0001f);Assert.AreEqual(27,sim.State.resource);Assert.AreEqual(0,sim.State.pendingExperience);
             var growth=sim.State.growthEvents.Single();Assert.AreEqual(old,growth.oldMaxHp);Assert.AreEqual(1,growth.fromLevel);Assert.AreEqual(10,growth.toLevel);CollectionAssert.AreEqual(new[]{heroClass*6+3},growth.unlockedSkills);
             Flush(sim);Assert.AreEqual(1,sim.State.growthEvents.Count);Assert.AreEqual(115,sim.Hero.xp);
         }
@@ -52,7 +52,7 @@ namespace Hellscript.Tests
         {
             var sim=Fixture();sim.Hero.xp=95;sim.State.health=sim.Stats.hp*.5f;var first=sim.State.enemies[0];first.health=0;first.dead=first.pendingDeath=true;
             sim.State.enemies.Add(new EnemyState{id=900,position=first.position,health=0,maxHealth=1,dead=true,pendingDeath=true,speed=0,attack=0,cooldown=1000});
-            sim.Tick(CombatSimulation.Step);Assert.AreEqual(2,sim.Hero.level);Assert.AreEqual(15,sim.Hero.xp);Assert.AreEqual(20,sim.State.growthEvents.Single().experience);Assert.AreEqual(sim.Stats.hp,sim.State.health,.001f);
+            sim.Tick(CombatSimulation.Step);Assert.AreEqual(2,sim.Hero.level);Assert.AreEqual(15,sim.Hero.xp);Assert.AreEqual(20,sim.State.growthEvents.Single().experience);Assert.AreEqual(sim.Stats.hp*.5f,sim.State.health,.001f);
         }
         [TestCase(false)][TestCase(true)]
         public void BossExperienceRefreshesStatsAndCannotResurrectADeadHero(bool deadHero)
@@ -60,7 +60,7 @@ namespace Hellscript.Tests
             var sim=Fixture(2);sim.Hero.xp=90;sim.State.health=deadHero?0:sim.Stats.hp*.5f;sim.State.pendingExperience=10;
             var boss=sim.State.enemies[0];boss.boss=true;boss.health=0;boss.dead=boss.pendingDeath=true;sim.State.bossId=boss.id;sim.State.phase=RunPhase.Boss;
             sim.Tick(CombatSimulation.Step);Assert.IsTrue(sim.State.bossRewarded);Assert.AreEqual(3,sim.Hero.level);Assert.AreEqual(125,sim.Hero.xp);
-            Assert.AreEqual(new HeroStats(sim.Hero).hp,sim.Stats.hp);Assert.AreEqual(deadHero?0:sim.Stats.hp,sim.State.health,.001f);Assert.AreEqual(310,sim.State.growthEvents.Single().experience);
+            Assert.AreEqual(new HeroStats(sim.Hero).hp,sim.Stats.hp);Assert.AreEqual(deadHero?0:sim.Stats.hp*.5f,sim.State.health,.001f);Assert.AreEqual(310,sim.State.growthEvents.Single().experience);
             sim.Tick(CombatSimulation.Step);Assert.AreEqual(1,sim.State.growthEvents.Count);Assert.AreEqual(125,sim.Hero.xp);
         }
         [Test]
@@ -73,7 +73,7 @@ namespace Hellscript.Tests
             string action=JsonUtility.ToJson(sim.State.heroAction),projectile=JsonUtility.ToJson(sim.State.projectiles[0]),shield=JsonUtility.ToJson(sim.State.shields[0]);
             sim.State.pendingExperience=175;Flush(sim);Assert.AreEqual(3,sim.Hero.level);
             Assert.AreEqual(action,JsonUtility.ToJson(sim.State.heroAction));Assert.AreEqual(projectile,JsonUtility.ToJson(sim.State.projectiles[0]));Assert.AreEqual(shield,JsonUtility.ToJson(sim.State.shields[0]));
-            Assert.AreEqual(sim.Stats.maxResource,sim.State.resource);Assert.AreEqual(5,sim.State.cooldowns[13]);Assert.AreEqual(17,sim.State.potionCd);Assert.AreEqual(3,sim.State.channelTime);
+            Assert.AreEqual(38,sim.State.resource);Assert.AreEqual(5,sim.State.cooldowns[13]);Assert.AreEqual(17,sim.State.potionCd);Assert.AreEqual(3,sim.State.channelTime);
         }
         [Test]
         public void PendingExperienceSurvivesSerializationAndLootingResumeWithoutDoublePayment()
@@ -81,7 +81,7 @@ namespace Hellscript.Tests
             var sim=Fixture();sim.Hero.xp=90;sim.State.health=sim.Stats.hp*.3f;sim.State.pendingExperience=100;sim.State.phase=RunPhase.Looting;
             var account=ContentTestAccounts.Training();account.heroes[0]=JsonUtility.FromJson<HeroSave>(JsonUtility.ToJson(sim.Hero));var state=JsonUtility.FromJson<RunState>(JsonUtility.ToJson(sim.State));GameStore.NormalizeRun(state);
             var restored=new CombatSimulation(account,catalog,1,restore:state);restored.Tick(CombatSimulation.Step);
-            Assert.AreEqual(2,account.Hero.level);Assert.AreEqual(90,account.Hero.xp);Assert.AreEqual(0,restored.State.pendingExperience);Assert.AreEqual(restored.Stats.hp,restored.State.health,.0001f);
+            Assert.AreEqual(2,account.Hero.level);Assert.AreEqual(90,account.Hero.xp);Assert.AreEqual(0,restored.State.pendingExperience);Assert.AreEqual(restored.Stats.hp*.3f,restored.State.health,.0001f);
             restored.Tick(CombatSimulation.Step);Assert.AreEqual(90,account.Hero.xp);Assert.AreEqual(1,restored.State.growthEvents.Count);
         }
         [Test]
