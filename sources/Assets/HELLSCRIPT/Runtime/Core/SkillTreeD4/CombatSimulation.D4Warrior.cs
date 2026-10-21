@@ -23,7 +23,7 @@ namespace Hellscript
             {
                 if(cast.mod==2)
                 {var form=Buff("W18:form",D4ModValue(cast.id,cast),1.5f,cast.root,"form");form.source=cast.id;form.mod=cast.mod;form.modRank=cast.modRank;form.snapshot=cast.snapshot;return true;}
-                int hits=0;foreach(var enemy in Nearby(State.position,N(cast.id,"radius",cast:cast)*cast.area,(int)N(cast.id,"targets",5,cast)))
+                int hits=0;foreach(var enemy in Nearby(State.position,N(cast.id,"radius",cast:cast)*cast.area))
                 {if(SkillHit(cast,enemy,D4BaseValue(cast.id,0,cast)/100,0,modifierValue:true)!=null)hits++;ApplyStatus(enemy,StatusKind.Stun,cast.id,N(cast.id,"stunSeconds",cast:cast),cast.root);}
                 if(hits>0&&Gear("DES_LW46"))Resource(20,cast.id,cast.root);
                 return true;
@@ -50,7 +50,7 @@ namespace Hellscript
             if(cast.id!="W09")return false;
             var rendArea=RakingWoundArea(cast);
             var targets=cast.mod==2?new[]{Enemy(cast.target)}.Where(e=>e!=null&&Visible(e,cast.origin,N(cast.id,"range",cast:cast))).ToArray():
-                AreaTargets(cast.origin,rendArea.radius,cast.aim-cast.origin,rendArea.angle).Take((int)N(cast.id,"targets",5)).ToArray();
+                AreaTargets(cast.origin,rendArea.radius,cast.aim-cast.origin,rendArea.angle); // every enemy inside the cone (or the spin's circle) bleeds, with no cap
             var count=Counter("W09:casts");bool reclaim=cast.mod==1&&++count.count%3==0;int cashed=0;
             foreach(var enemy in targets)
             {
@@ -190,7 +190,7 @@ namespace Hellscript
         EnemyState[] D4WarriorShape(string id,int mod,int modRank,Vector2 origin,Vector2 aim,float area=1)
         {
             float value=mod>0?(float)SkillTreeD4Values.Modifier(id+"-"+mod,modRank):0;
-            if(id=="W04"&&mod==2)return Line(origin,aim,value*area,.8f*area,5);
+            if(id=="W04"&&mod==2)return Line(origin,aim,value*area,.8f*area);
             float radius=id=="W03"&&mod==1?value:id=="W04"&&mod==1?value:3;
             return AreaTargets(origin,RuneSkillRadius(id=="W03"?2:3,radius)*area,aim-origin,id=="W03"&&mod!=1?100:360);
         }
@@ -204,7 +204,7 @@ namespace Hellscript
         void PushD4ChargePath(HeroActionState action)
         {
             var cast=Cast(action.id);var forward=(cast.destination-cast.origin).normalized;var side=new Vector2(-forward.y,forward.x);
-            foreach(var enemy in Line(cast.origin,State.position,Vector2.Distance(cast.origin,State.position)+.5f,.8f,100))
+            foreach(var enemy in Line(cast.origin,State.position,Vector2.Distance(cast.origin,State.position)+.5f,.8f))
             {
                 if(!Once("W02:push",cast.root,enemy.id))continue;
                 float sign=Vector2.Dot(enemy.position-cast.origin,side);if(Mathf.Abs(sign)<.01f)sign=enemy.id%2==0?1:-1;
@@ -246,7 +246,7 @@ namespace Hellscript
                         var copied=effect.copiedCast;float power=D4BaseValue(copied.id,0,copied)/100*D4ModValue("W17",cast)/100;
                         var victims=copied.id=="W03"||copied.id=="W04"?D4WarriorShape(copied.id,copied.mod,copied.modRank,State.position,target.position,copied.area):
                             copied.id=="W08"?new[]{target}:AreaTargets(State.position,(copied.id=="W01"?2.5f*(copied.mod==2?D4ModValue(copied.id,copied):1):copied.id=="W02"?2.5f:3)*copied.area,target.position-State.position,copied.id=="W09"&&copied.mod!=3?90:360);
-                        foreach(var enemy in victims.Take(5))SkillHit(cast,enemy,power,0,true,"W17",modifierValue:true);
+                        foreach(var enemy in victims)SkillHit(cast,enemy,power,0,true,"W17",modifierValue:true);
                     }
                     else SkillHit(cast,target,effect.value,0,true,"W17",modifierValue:true);
                     if(Gear("DES_LW46")&&Once("DES_LW46",cast.root))Buff("DES_LW46",4,.2f,cast.root);
@@ -257,7 +257,7 @@ namespace Hellscript
             while(effect.next<=State.time+.00001f&&effect.count<effect.limit)
             {
                 effect.next+=effect.period;effect.count++;
-                foreach(var enemy in Nearby(effect.position,effect.radius,5))
+                foreach(var enemy in Nearby(effect.position,effect.radius))
                 {
                     SkillHit(cast,enemy,effect.value,0,true,effect.source,modifierValue:true);
                     if(effect.count==effect.limit&&effect.extra>0)ApplyStatus(enemy,StatusKind.Stun,effect.source,effect.extra,effect.root);
@@ -301,7 +301,7 @@ namespace Hellscript
                 var stance=Fx(id+":stance");bool shield=id=="W05"?OwnIronWall:State.shields.Any(s=>s.definitionId=="W17:shield"&&s.amount>0);
                 if(stance==null||stance.count>=2||!shield||!Interval(id+":counter",1))continue;
                 var cast=Cast(stance.root);if(cast==null)continue;stance.count++;
-                foreach(var enemy in AreaTargets(State.position,3,attacker.position-State.position,90).Take(5))SkillHit(cast,enemy,stance.value,0,true,id,modifierValue:true);
+                foreach(var enemy in AreaTargets(State.position,3,attacker.position-State.position,90))SkillHit(cast,enemy,stance.value,0,true,id,modifierValue:true);
             }
         }
         bool ReflectD4IronWall(ShieldEffect shield,float absorbed)
@@ -309,7 +309,7 @@ namespace Hellscript
             var cast=Cast(shield.rootCastId);var reflection=Fx("W17:reflection");bool copied=shield.definitionId=="W17:shield"&&reflection?.root==shield.rootCastId;
             if(cast==null||absorbed<=0||!copied&&(shield.definitionId!="W05"||cast.mod!=3))return false;
             float amount=absorbed*(copied?reflection.value:D4ModValue("W05",cast)/100);
-            foreach(var enemy in Nearby(State.position,3,5))ApplyOutgoing(enemy,amount,0,1,1,false,0,cast.snapshot??CaptureDamage(),copied?"EXTRA:W17":"EXTRA:W05",cast.root,0,DamageKind.Set,attackResolved:true);
+            foreach(var enemy in Nearby(State.position,3))ApplyOutgoing(enemy,amount,0,1,1,false,0,cast.snapshot??CaptureDamage(),copied?"EXTRA:W17":"EXTRA:W05",cast.root,0,DamageKind.Set,attackResolved:true);
             return true;
         }
     }

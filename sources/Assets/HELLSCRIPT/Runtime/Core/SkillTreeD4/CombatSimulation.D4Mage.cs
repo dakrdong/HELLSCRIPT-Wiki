@@ -90,9 +90,9 @@ namespace Hellscript
                     if(cast.mod==3)Barrier("M06:armor",Mathf.Min(.2f,hits*D4ModValue(cast.id,cast)/100),4,cast.root);
                     return true;
                 case "M04":
-                    if(cast.mod==1)foreach(var enemy in Nearby(cast.origin,3*cast.area,5))D4MageHit(cast,enemy,D4ModValue(cast.id,cast)/100,1,true,origin:cast.origin);
+                    if(cast.mod==1)foreach(var enemy in Nearby(cast.origin,3*cast.area))D4MageHit(cast,enemy,D4ModValue(cast.id,cast)/100,1,true,origin:cast.origin);
                     State.position=State.destination=action.destination;LandingPassives(action);if(Stats.Rune(RuneBonus.MobilityGuard)>0)ItemEffects.runeMobilityGuardUntil=State.time+2;
-                    if(cast.mod==2)foreach(var enemy in Nearby(action.destination,3*cast.area,3))ApplyStatus(enemy,StatusKind.Stun,cast.id,D4ModValue(cast.id,cast),cast.root);
+                    if(cast.mod==2)foreach(var enemy in Nearby(action.destination,3*cast.area))ApplyStatus(enemy,StatusKind.Stun,cast.id,D4ModValue(cast.id,cast),cast.root);
                     if(cast.mod==3){AddShield("M04:shield",Stats.hp*D4ModValue(cast.id,cast)/100,4,cast.root);var reaction=D4MageEffect(cast,":reaction","d4reaction",4);reaction.element=CS.lastElement;}
                     return true;
             }
@@ -141,9 +141,9 @@ namespace Hellscript
             if(effect.kind=="d4conduit"||effect.kind=="d4ward"||effect.kind=="d4reaction")return true;
             if(effect.kind=="d4fireball"||effect.kind=="d4frost"||effect.kind=="d4split"){TickD4MageProjectile(effect,cast);return true;}
             if(effect.kind=="d4meteor"||effect.kind=="d4nova")
-            {if(!effect.consumed&&State.time+.00001f>=effect.next){effect.consumed=true;effect.count++;foreach(var enemy in Nearby(effect.position,effect.radius,5))D4MageHit(cast,enemy,effect.value,effect.kind=="d4meteor"?1:2,effect.kind=="d4nova");Visual?.Invoke(effect.position,effect.position,effect.kind=="d4meteor"?12:17,effect.radius);}return true;}
+            {if(!effect.consumed&&State.time+.00001f>=effect.next){effect.consumed=true;effect.count++;foreach(var enemy in Nearby(effect.position,effect.radius))D4MageHit(cast,enemy,effect.value,effect.kind=="d4meteor"?1:2,effect.kind=="d4nova");Visual?.Invoke(effect.position,effect.position,effect.kind=="d4meteor"?12:17,effect.radius);}return true;}
             if(effect.kind=="d4trail")
-            {while(effect.next<=State.time+.00001f&&effect.next<=effect.until+.00001f){effect.next+=effect.period;foreach(var enemy in Line(effect.origin,effect.position,Vector2.Distance(effect.origin,effect.position),.5f,5))D4MageHit(cast,enemy,effect.value,1,true,true,effect.origin);}return true;}
+            {while(effect.next<=State.time+.00001f&&effect.next<=effect.until+.00001f){effect.next+=effect.period;foreach(var enemy in Line(effect.origin,effect.position,Vector2.Distance(effect.origin,effect.position),.5f))D4MageHit(cast,enemy,effect.value,1,true,true,effect.origin);}return true;}
             if(effect.kind=="d4orb"&&cast.mod==1)effect.position=Map.MoveDirect(effect.position,effect.position+effect.direction*classDelta,classDelta,.1f);
             if(effect.kind=="d4firewall"&&cast.mod==2){float distance=D4ModValue("M08",cast)*classDelta;effect.position=Map.MoveDirect(effect.position,effect.position+effect.direction*distance,distance,.1f);}
             if(effect.kind!="d4orb"&&effect.kind!="d4firewall"&&effect.kind!="d4collapse")return false;
@@ -151,19 +151,19 @@ namespace Hellscript
             {
                 effect.next+=effect.period;effect.count++;
                 if(effect.kind=="d4orb"&&cast.mod==3)continue;
-                if(effect.kind=="d4firewall")foreach(var enemy in State.enemies.Where(e=>!e.dead&&D4FirewallContains(effect,e.position)&&Map.LineClear(effect.position,e.position)).OrderBy(e=>e.id).Take(5))D4MageHit(cast,enemy,effect.value,1,periodic:true);
-                else if(effect.kind=="d4orb")foreach(var enemy in Nearby(effect.position,effect.radius,3))D4MageHit(cast,enemy,effect.value,3,periodic:true);
+                if(effect.kind=="d4firewall")foreach(var enemy in State.enemies.Where(e=>!e.dead&&D4FirewallContains(effect,e.position)&&Map.LineClear(effect.position,e.position)).OrderBy(e=>e.id))D4MageHit(cast,enemy,effect.value,1,periodic:true);
+                else if(effect.kind=="d4orb")foreach(var enemy in Nearby(effect.position,effect.radius))D4MageHit(cast,enemy,effect.value,3,periodic:true);
                 else
                 {
                     if(cast.mod==2)
                     {float range=D4ModValue("M17",cast);var candidates=State.enemies.Where(e=>Perceived(e)&&Visible(e,State.position,range)).Select(e=>e.position).ToArray();effect.position=candidates.OrderByDescending(p=>State.enemies.Count(e=>Perceived(e)&&Visible(e,p,effect.radius))).ThenBy(p=>(p-effect.position).sqrMagnitude).DefaultIfEmpty(effect.position).First();}
                     int element=cast.mod==1?cast.element:effect.count;float power=effect.count==1?D4BaseValue("M17",0,cast)/100:N("M17","secondary",1.5f)*cast.rankScale;
                     if(cast.mod==1)power*=1+D4ModValue("M17",cast)/100;
-                    foreach(var enemy in Nearby(effect.position,effect.radius,8)){D4MageHit(cast,enemy,power,element);if(element==2)ApplyStatus(enemy,StatusKind.Freeze,"M17",N("M17","freezeSeconds",2),cast.root);}
+                    foreach(var enemy in Nearby(effect.position,effect.radius)){D4MageHit(cast,enemy,power,element);if(element==2)ApplyStatus(enemy,StatusKind.Freeze,"M17",N("M17","freezeSeconds",2),cast.root);}
                 }
             }
             if(effect.kind=="d4orb"&&State.time+.00001f>=effect.until&&!effect.consumed)
-            {effect.consumed=true;float power=(cast.mod==3?D4ModValue("M11",cast):D4BaseValue("M11",1,cast))/100+N("M11","chargeCoefficient",.3f)*cast.rankScale*effect.extra;foreach(var enemy in Nearby(effect.position,effect.radius,5))D4MageHit(cast,enemy,power,3,true);}
+            {effect.consumed=true;float power=(cast.mod==3?D4ModValue("M11",cast):D4BaseValue("M11",1,cast))/100+N("M11","chargeCoefficient",.3f)*cast.rankScale*effect.extra;foreach(var enemy in Nearby(effect.position,effect.radius))D4MageHit(cast,enemy,power,3,true);}
             return true;
         }
         void TickD4MageProjectile(ClassSkillEffect effect,ClassSkillCast cast)
@@ -171,7 +171,10 @@ namespace Hellscript
             float speed=effect.kind=="d4frost"?N("M02-3","speed",8):14;var from=effect.position;float distance=Mathf.Min(effect.extra,speed*classDelta);var to=ClipProjectile(from,from+effect.direction*distance,.25f,out bool wall);
             if(effect.kind=="d4fireball"&&cast.mod==3)
             {
-                foreach(var enemy in Line(from,to,Vector2.Distance(from,to),.5f,5).Where(e=>!effect.targets.Contains(e.id))){effect.targets.Add(enemy.id);D4MageHit(cast,enemy,effect.value,1);}
+                // Five pierces per flight, using the same collision footprint and order as the forecast.
+                var candidates=State.enemies.Where(e=>!e.dead&&!effect.targets.Contains(e.id)).ToArray();
+                foreach(var hit in ProjectileLineHits(from,to,.25f,candidates).Take(Math.Max(0,5-effect.targets.Count)))
+                {effect.targets.Add(hit.enemy.id);D4MageHit(cast,hit.enemy,effect.value,1);}
                 if(Vector2.Distance(from,to)>.01f){var trail=D4MageEffect(cast,":trail","d4trail",D4ModValue("M01",cast),N("M08","coefficient",.6f),.5f);trail.origin=from;trail.position=to;trail.value*=.5f;}
             }
             else if(effect.kind=="d4frost"||effect.kind=="d4split")
@@ -189,7 +192,7 @@ namespace Hellscript
             if(effect.kind=="d4frost"&&!wall&&Vector2.Distance(State.position,cast.origin)<=N("M02-3","pickupRadius",1))Resource(N("M02-3","resourceGain",10)*cast.rankScale,cast.id,cast.root);
             if(effect.kind=="d4fireball"&&cast.mod!=3)
             {
-                foreach(var enemy in Nearby(to,effect.radius,5))D4MageHit(cast,enemy,effect.value,1,origin:to);
+                foreach(var enemy in Nearby(to,effect.radius))D4MageHit(cast,enemy,effect.value,1,origin:to);
                 if(cast.mod==2)for(int n=0;n<3;n++){var split=D4MageEffect(cast,":split","d4split",1,D4ModValue("M01",cast)/100);split.position=split.origin=to;split.direction=RotateShot(Vector2.up,n*120);split.extra=3;}
             }
             CS.effects.Remove(effect);
@@ -211,7 +214,7 @@ namespace Hellscript
             if(shield.definitionId!="M04:shield"||absorbed<=0)return false;var reaction=CS.effects.FirstOrDefault(e=>e.kind=="d4reaction"&&e.root==shield.rootCastId);if(reaction==null||reaction.consumed)return true;
             reaction.consumed=true;var cast=Cast(reaction.root);if(cast==null)return true;
             if(reaction.element==3)Resource(N("M04-3","reactionResource",8)*cast.rankScale,"M04",cast.root);
-            else foreach(var enemy in Nearby(State.position,N("M04-3","reactionRadius",3),5))if(reaction.element==1)Dot("M04:burn",enemy,N("M04-3","reactionBurn",.6f),1,3,cast,modifierValue:true);else if(reaction.element==2)ApplyStatus(enemy,StatusKind.Root,"M04",N("M04-3","reactionRoot",1),cast.root);
+            else foreach(var enemy in Nearby(State.position,N("M04-3","reactionRadius",3)))if(reaction.element==1)Dot("M04:burn",enemy,N("M04-3","reactionBurn",.6f),1,3,cast,modifierValue:true);else if(reaction.element==2)ApplyStatus(enemy,StatusKind.Root,"M04",N("M04-3","reactionRoot",1),cast.root);
             return true;
         }
         bool D4MageFrozen(EnemyState enemy)=>CombatEffects.Has(enemy,StatusKind.Freeze)||enemy.boss&&enemy.bossControl.staggered>0;
@@ -223,12 +226,12 @@ namespace Hellscript
             if(!Passive("MP21")||enemy.dead||damage.element<1||damage.element>3)return;
             if(enemy.d4ElementUntil<=State.time)enemy.d4Elements=0;enemy.d4Elements|=1<<(damage.element-1);enemy.d4ElementUntil=State.time+4;
             if(enemy.d4Elements!=7)return;enemy.d4Elements=0;enemy.d4ElementUntil=0;
-            foreach(var other in Nearby(enemy.position,2.5f,5))ApplyOutgoing(other,snapshot.damage*PV("MP21"),0,1,1,false,0,snapshot,"EXTRA:MP21",damage.rootCastId,0,DamageKind.Set,attackResolved:true);
+            foreach(var other in Nearby(enemy.position,2.5f))ApplyOutgoing(other,snapshot.damage*PV("MP21"),0,1,1,false,0,snapshot,"EXTRA:MP21",damage.rootCastId,0,DamageKind.Set,attackResolved:true);
         }
         void ReleaseD4Shatter(EnemyState enemy)
         {
             if(enemy.d4Shatter<=0||D4MageFrozen(enemy))return;float amount=enemy.d4Shatter;enemy.d4Shatter=0;if(!Passive("MP20")||enemy.dead)return;
-            foreach(var other in Nearby(enemy.position,2.5f,5))ApplyOutgoing(other,amount*PV("MP20"),0,1,1,false,2,CaptureDamage(),"EXTRA:MP20",0,0,DamageKind.Set,attackResolved:true);
+            foreach(var other in Nearby(enemy.position,2.5f))ApplyOutgoing(other,amount*PV("MP20"),0,1,1,false,2,CaptureDamage(),"EXTRA:MP20",0,0,DamageKind.Set,attackResolved:true);
         }
     }
 }

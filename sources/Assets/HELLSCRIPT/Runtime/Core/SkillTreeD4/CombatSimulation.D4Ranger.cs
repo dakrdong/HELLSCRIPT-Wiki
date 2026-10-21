@@ -134,7 +134,7 @@ namespace Hellscript
         {
             if(effect.kind=="d4arrow"){TickD4Arrow(effect,cast);return true;}
             if(effect.kind=="d4decoy")
-            {if(State.time+.00001f>=effect.until&&!effect.consumed){effect.consumed=true;foreach(var enemy in Nearby(effect.position,effect.radius,5))SkillHit(cast,enemy,effect.value,0,true,"A04",modifierValue:true);}return true;}
+            {if(State.time+.00001f>=effect.until&&!effect.consumed){effect.consumed=true;foreach(var enemy in Nearby(effect.position,effect.radius))SkillHit(cast,enemy,effect.value,0,true,"A04",modifierValue:true);}return true;}
             if(effect.kind=="d4afterimage")
             {if(State.time+.00001f>=effect.until)FadeD4Afterimage(effect);return true;}
             if(effect.kind=="clone"){effect.position=State.position;return true;}
@@ -152,8 +152,8 @@ namespace Hellscript
             {
                 effect.next+=effect.period;effect.count++;
                 if(effect.kind=="turret")
-                {var enemy=Nearby(effect.position,effect.radius,100).Where(Perceived).FirstOrDefault();if(enemy!=null)D4Arrow(cast,effect.position,enemy.position,effect.value,0,true);}
-                else foreach(var enemy in Nearby(effect.position,effect.radius,8))Hit(enemy,effect.value,0,false,snapshot:effect.snapshot,canCrit:false,definition:"A17",root:effect.root,kind:DamageKind.Periodic);
+                {var enemy=Nearby(effect.position,effect.radius).Where(Perceived).FirstOrDefault();if(enemy!=null)D4Arrow(cast,effect.position,enemy.position,effect.value,0,true);}
+                else foreach(var enemy in Nearby(effect.position,effect.radius))Hit(enemy,effect.value,0,false,snapshot:effect.snapshot,canCrit:false,definition:"A17",root:effect.root,kind:DamageKind.Periodic);
             }
             return true;
         }
@@ -174,11 +174,11 @@ namespace Hellscript
                 {
                     if(direct)cast.receipts.Add("fork:"+enemy.id);
                     if(direct&&cast.mod==2)
-                    {foreach(var other in Nearby(enemy.position,D4ModValue("A14",cast),100).Where(e=>e.id!=enemy.id).Take(5))SkillHit(cast,other,D4BaseValue("A14",1,cast)/100,0,true,"A14",modifierValue:true);}
+                    {foreach(var other in Nearby(enemy.position,D4ModValue("A14",cast)).Where(e=>e.id!=enemy.id))SkillHit(cast,other,D4BaseValue("A14",1,cast)/100,0,true,"A14",modifierValue:true);}
                     else if(direct||cast.mod==1&&arrow.generation==1)
                     {
                         float power=D4BaseValue("A14",1,cast)/100*(direct?1:D4ModValue("A14",cast)/100);
-                        foreach(var other in Nearby(enemy.position,N("A14","radius",3),100).Where(e=>e.id!=enemy.id&&!cast.receipts.Contains("fork:"+e.id)).Take(direct&&Gear("DES_LA44")&&HasDot("A06:poison",enemy)?3:2))
+                        foreach(var other in Nearby(enemy.position,N("A14","radius",3)).Where(e=>e.id!=enemy.id&&!cast.receipts.Contains("fork:"+e.id)).Take(direct&&Gear("DES_LA44")&&HasDot("A06:poison",enemy)?3:2))
                         {cast.receipts.Add("fork:"+other.id);var split=D4Arrow(cast,enemy.position,other.position,power,0,true,generation:arrow.generation+1);split.targets.Add(enemy.id);}
                     }
                     if(!direct&&cast.mod==3&&arrow.leg==0){returnNow=true;arrow.leg=1;arrow.targets.Clear();arrow.targets.Add(enemy.id);arrow.count=0;arrow.value=D4ModValue("A14",cast)/100;arrow.direction=(arrow.origin-arrow.position).normalized;arrow.extra=Vector2.Distance(arrow.origin,arrow.position);break;}
@@ -199,7 +199,7 @@ namespace Hellscript
         void FadeD4Afterimage(ClassSkillEffect echo)
         {
             if(echo.consumed||echo.mod!=2)return;echo.consumed=true;var cast=Cast(echo.root);if(cast==null)return;
-            foreach(var enemy in Nearby(echo.position,2.5f,5))SkillHit(cast,enemy,D4ModValue("A18",cast)/100,5,true,"A18",modifierValue:true);
+            foreach(var enemy in Nearby(echo.position,2.5f))SkillHit(cast,enemy,D4ModValue("A18",cast)/100,5,true,"A18",modifierValue:true);
         }
         void AfterD4RangerHit(EnemyState enemy,DamageEvent hit,ClassSkillCast cast,int flags)
         {
@@ -220,7 +220,7 @@ namespace Hellscript
             {Resource(N("A05-2","resourceGain",25),"A05",cast.root);if(Gear("DES_LA45"))Buff("DES_LA45",6,root:cast.root,kind:"charge");D4RangerEffect(cast,":preparation","charge",N("A05-2","duration",6),-D4ModValue("A05",cast)/100);}
             if(mark.mod==3&&mark.chainRemaining>0)
             {
-                var next=Nearby(enemy.position,10,100).Where(e=>e.id!=enemy.id).FirstOrDefault();if(next==null)return;
+                var next=Nearby(enemy.position,10).Where(e=>e.id!=enemy.id).FirstOrDefault();if(next==null)return;
                 ApplyStatus(next,StatusKind.Mark,"A05",mark.remaining,mark.rootCastId,mark.strength);var moved=next.statuses.Single(s=>s.definitionId=="A05"&&s.rootCastId==mark.rootCastId);moved.mod=mark.mod;moved.modRank=mark.modRank;moved.chainRemaining=mark.chainRemaining-1;
             }
         }
@@ -230,7 +230,7 @@ namespace Hellscript
             int element=cast.mod==1?5:cast.mod==2?4:cast.mod==3?2:0;
             bool ownPoison=CombatEffects.OwnTrapPoison(enemy,State.heroId)||HasDot("A06:poison",enemy);
             if(!enemy.dead)SpreadImbuement(enemy,ApplyOutgoing(enemy,snapshot.damage*coefficient*D4BaseValue("A06",0,cast)/100,AttackBonus(enemy,element,snapshot,0,DamageKind.Shadow),1,critMultiplier,critical,element,snapshot,"A06",root,instance,DamageKind.Shadow),snapshot,root,instance,ownPoison);
-            if(cast.mod==1&&enemy.dead&&Once("A06:blast",root,enemy.id))foreach(var other in Nearby(enemy.position,3,5))SkillHit(cast,other,D4ModValue("A06",cast)/100,5,true,"A06",modifierValue:true);
+            if(cast.mod==1&&enemy.dead&&Once("A06:blast",root,enemy.id))foreach(var other in Nearby(enemy.position,3))SkillHit(cast,other,D4ModValue("A06",cast)/100,5,true,"A06",modifierValue:true);
             if(cast.mod==2&&!enemy.dead)Dot("A06:poison",enemy,D4ModValue("A06",cast)/100,4,4,cast,modifierValue:true);
             if(cast.mod==3&&!enemy.dead)
             {ApplyStatus(enemy,StatusKind.Slow,"A06",3,cast.root,D4ModValue("A06",cast)/100);if(++enemy.d4ColdStacks>=3){enemy.d4ColdStacks=0;ApplyStatus(enemy,StatusKind.Freeze,"A06",N("A03-2","freezeSeconds",.75f),cast.root);}}
@@ -244,7 +244,7 @@ namespace Hellscript
         void BounceD4Multi(CombatProjectile projectile,EnemyState victim)
         {
             var cast=Cast(projectile.actionId);if(projectile.extra||projectile.bounced||cast?.id!="A02"||cast.mod!=2)return;
-            projectile.bounced=true;var target=Nearby(victim.position,3,100).FirstOrDefault(e=>e.id!=victim.id&&!projectile.hitIds.Contains(e.id));if(target==null)return;
+            projectile.bounced=true;var target=Nearby(victim.position,3).FirstOrDefault(e=>e.id!=victim.id&&!projectile.hitIds.Contains(e.id));if(target==null)return;
             var action=new HeroActionState{id=cast.root,skill=7,origin=victim.position,snapshot=projectile.snapshot};
             var bounce=Shot(action,target.position-victim.position,Vector2.Distance(target.position,victim.position),18,.2f,D4BaseValue("A02",0,cast)/100*D4ModValue("A02",cast)/100,0);
             bounce.extra=true;bounce.definitionId="EXTRA:A02";bounce.hitIds.Add(victim.id);
