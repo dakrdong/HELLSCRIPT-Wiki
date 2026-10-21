@@ -1,0 +1,120 @@
+{
+  "editor": "Unity 6000.6.0f1 Editor Game View",
+  "base": "af716fba66cfeb2cb210c5a549779eb68bc5efe2",
+  "fullEditModeRuns": 0,
+  "nativeBuilds": 0,
+  "nativeSmokeRuns": 0,
+  "focusedInitial": {
+    "jobId": "7d35739f1e804f6691c0e377c26e2705",
+    "total": 27,
+    "passed": 27,
+    "failed": 0,
+    "note": "Initial focused UI pass before final visual fixes"
+  },
+  "focusedRelated": {
+    "jobId": "f3527b35f93244cd820cdc2cf60137ce",
+    "completed": 106,
+    "reportedFailures": [
+      {
+        "full_name": "Hellscript.Tests.LocalizationTests.EveryEnglishEntryLeavesNoKoreanBehindAndKeepsItsPlaceholders",
+        "message": "  key without Korean: Lv.{0}\nkey without Korean: UID\nkey without Korean: HP {0:0} / {1:0}\n  Expected: <empty>\n  But was:  < \"key without Korean: Lv.{0}\", \"key without Korean: UID\", \"key without Korean: HP {0:0} / {1:0}\" >\n"
+      },
+      {
+        "full_name": "Hellscript.Tests.LocalizationTests.EveryKoreanLiteralInTheRuntimeHasAnEntry",
+        "message": "  1 untranslated:\nGameUI.ScreenSettings.cs has no entry for: 한\n  Expected: <empty>\n  But was:  < \"GameUI.ScreenSettings.cs has no entry for: 한\" >\n"
+      },
+      {
+        "full_name": "Hellscript.Tests.LocalizationTests.NoEntryIsLeftBehindByARewordedLine",
+        "message": "  1 entries no longer match a line in the source:\nHP {0:0} / {1:0} · 보호막 {2:0}\n자원 {3:0} / {4:0} · {5:0.#}배\n{6}\n  Expected: <empty>\n  But was:  < \"HP {0:0} / {1:0} · 보호막 {2:0}\n자원 {3:0} / {4:0} · {5:0.#}배\n{6}\" >\n"
+      }
+    ],
+    "note": "Successful unaffected coverage reused; only the three failing localization checks rerun after the string-table fix."
+  },
+  "failedCoverageRetry": {
+    "jobId": "aa2b1c23f04b452bae59589313bf3dc9",
+    "summary": {
+      "total": 3,
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "durationSeconds": 0.8520744,
+      "resultState": "Passed"
+    }
+  },
+  "inputs": [
+    "uGUI raycast tabs, mute, language choice, close and backdrop",
+    "Actual on-device write failures and the three existing retry callbacks",
+    "Rift character change refused; tutorial four-tab composition"
+  ],
+  "unverified": [
+    "Full integrated EditMode and native smoke batch are owned by UI integrator after approved inputs freeze",
+    "Physical phones, WebGL and Google authentication/HTTP not exercised here",
+    "CPU/GC/before-after performance not measured",
+    "Image model version unknown"
+  ],
+  "transients": [
+    "Two initial Editor-context captures raced window reflow; rejected, recaptured after Game View frame completion",
+    "An early language assertion ran before queued pointer input; repeated after capture completion and passed",
+    "Final audio evidence fixture created the blocker after CloseCommonPanel had saved dirty preferences; corrected by creating the blocker before Change/SavePreferences",
+    "Capture helper now waits two game frames and visual fixtures pause combat; final affected captures passed after these harness fixes."
+  ],
+  "finalAudio": {
+    "result": "PASS",
+    "checks": [
+      "Checked and unchecked checkbox follows muted preference",
+      "Muted/unmuted bars fade to 0.45/1",
+      "Ten final AudioSaveError captures assert actual IO failure, visible retry and paused combat",
+      "Existing retry clears NeedsSave and message"
+    ],
+    "editorPid": 95912,
+    "editorExit": 0,
+    "sourceFix": "Wait two game frames before capture; pause visual fixtures between resizes"
+  },
+  "maps": {
+    "revision": "character-free v2",
+    "sprites": [
+      "map-corner",
+      "map-overlay",
+      "map-hidden"
+    ],
+    "model": "unknown",
+    "editorReview": {
+      "result": "PASS",
+      "captures": 20,
+      "shapes": 5,
+      "locales": [
+        "ko",
+        "en"
+      ],
+      "states": [
+        "Screen",
+        "SaveError"
+      ],
+      "assertions": [
+        "Layout/clipping/44px tab and close hit targets",
+        "Actual map and view-distance IO failures; both existing retries clear failure"
+      ],
+      "editorPid": 8519,
+      "editorExit": 0
+    }
+  },
+  "finalFocusedEvidence": {
+    "captures": 112,
+    "referencePairs": 24
+  },
+  "staticContract": {
+    "result": "passed",
+    "key": "60c8a51081eeebb4d085fa61d0e2a54995f154003c0e6a279e43686dc0cfed42",
+    "exitCode": 0,
+    "seconds": 24.457,
+    "logSha256": "c7b28f8de5c61a4005fb329efdbe0c47d15e781df6fe5eb2ff7278052ddac0a6"
+  },
+  "art": {
+    "runtimePngBytes": 1029406,
+    "rgbaEquivalentBytes": 2142208,
+    "estimatedCompressedBytes": 535552,
+    "model": "unknown",
+    "nativeOriginals": 31,
+    "runtimeSprites": 28
+  }
+}

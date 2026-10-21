@@ -87,7 +87,11 @@ namespace Hellscript
                 if(EnemyCombat.Trait(e,2))
                 {
                     var other=run.enemies.Find(x=>x.id==e.elitePartner&&!x.dead&&x.elite>=0&&Vector2.Distance(x.position,e.position)<=5&&Vector2.Distance(run.position,x.position)<=12&&Combat.Map.LineClear(run.position,x.position));
-                    if(other!=null)EnemyOutline("link-"+e.id,new[]{e.position,other.position},library==null?purple:library.Tether,library==null?.1f:.22f,activeThreats,library!=null);
+                    if(other!=null)
+                    {
+                        threatOutline[0]=e.position;threatOutline[1]=other.position;
+                        EnemyOutline("link-"+e.id,threatOutline,2,library==null?purple:library.Tether,library==null?.1f:.22f,activeThreats,library!=null);
+                    }
                 }
                 if(EnemyCombat.Trait(e,3)||e.brain.rearWindow>0)
                 {

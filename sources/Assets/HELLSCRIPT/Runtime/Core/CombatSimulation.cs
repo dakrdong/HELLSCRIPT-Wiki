@@ -100,6 +100,7 @@ namespace Hellscript
                 if(State.training<0)Log("LIVEOPS_VERSION","Balance release "+State.liveOps.version+" / "+State.liveOps.configHash);
                 Log("RUN_START",training>=0?"훈련 시작 · 실제 재화와 성장에 반영하지 않습니다.":Loc.F("균열 {0}단계 진입", stage));
             }
+            if(IsGuide)RefreshGuideEnemyBalance();
             State.paused=TutorialWaiting;
         }
         void SpawnDungeon()
@@ -358,12 +359,33 @@ namespace Hellscript
         }
         void MoveHero(float dt)
         {
-            if(DodgeOwnsEdictAction)
+            if(!DodgeOwnsEdictAction){MoveHeroTowardGoal(dt);return;}
+            if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
+            // Standing clear of a warned attack, the hero fights on: he closes in on his target, but only by steps that stay out of it.
+            var before=State.position;
+            if(!State.edictResponse.walking)MoveHeroTowardGoal(dt);
+            if(State.position!=before)KeepDodgeStepClear(before);
+            if(State.position==before&&!HeroActionBusy){ObserveActivity(CombatActivity.Evasion);State.action=Loc.T("공격이 끝날 때까지 안전 위치에서 대기");}
+        }
+        // A step taken after a dodge must not walk back into the attack that was dodged. A blocked step slides along the edge of the
+        // danger when that still gets the hero closer to where he is heading; otherwise he holds.
+        void KeepDodgeStepClear(Vector2 before)
+        {
+            var d=edictSource;var after=State.position;if(d==null)return;
+            var values=d.global.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);
+            bool Clear(Vector2 p){var risk=AssessEdictSurvival(d,null,p,values);return !risk.DodgeRequested&&!risk.lethal;}
+            if(Clear(after))return;
+            var step=after-before;float length=step.magnitude;var goal=State.destination;
+            foreach(float angle in new[]{35f,-35f,70f,-70f})
             {
-                if(MoveEdictResponse(dt)){ObserveActivity(CombatActivity.Evasion);journalMovementTrigger="SURVIVAL_RESPONSE";return;}
-                if(!HeroActionBusy){ObserveActivity(CombatActivity.Evasion);State.action=Loc.T("공격이 끝날 때까지 안전 위치에서 대기");}
-                return;
+                var next=Map.MoveDirect(before,before+EnemyCombat.Rotate(step/length,angle)*length,length,.45f);
+                if(Vector2.Distance(next,before)<length*.5f||Vector2.Distance(next,goal)>=Vector2.Distance(before,goal)-.0001f||!Clear(next))continue;
+                State.position=next;State.moveDistance+=Vector2.Distance(before,next)-length;return;
             }
+            State.position=before;State.moveDistance-=length;
+        }
+        void MoveHeroTowardGoal(float dt)
+        {
             if(MoveGuideWalk(dt))return;
             if(CSStationary)return;
             if(HeroActionBusy&&State.heroAction.phase!=HeroActionPhase.Channeling)return;
@@ -416,7 +438,7 @@ namespace Hellscript
                 else
                 {
                     if(!State.layout.legacy)
-                    {var remembered=TargetPolicy==null?RiftExploration.RememberedTarget(State,Map):null;goal=remembered??RiftExploration.Goal(State,Map,Policy.exploration);State.action=remembered.HasValue?"마지막으로 발견한 적의 위치 확인":"미탐색 지점으로 이동";}
+                    {var remembered=TargetPolicy==null?RiftExploration.RememberedTarget(State,Map):null;goal=remembered??RiftExploration.Goal(State,Map,Policy.exploration);State.action=remembered.HasValue?"마지막으로 발견한 적의 위치 확인":"미탐색 지점으로 이동";if(IsGuide)goal=GuideForward(goal);}
                     else
                     {
                     if(Vector2.Distance(State.position,RiftMap.Rooms[State.exploreRoom])<2)
@@ -457,7 +479,7 @@ namespace Hellscript
             State.channelTime+=dt;State.channelTick-=dt;if(State.channelTick>.00001f)return;
             if(action.exitChannelForBuild){CompleteHeroAction(action,"설정 변경 · 유지 구간 종료");return;}
             if(action.exitChannelForSurvival){CompleteHeroAction(action,"전역 회피 · 유지 구간 종료");return;}
-            float cost=Cost(catalog.skills[0]);if(State.resource<cost){InterruptHeroAction("회오리 자원 부족");return;}
+            float cost=Cost(catalog.skills[0]);if(State.resource<cost){CompleteHeroAction(action,"회오리 자원 소진");return;}
             if(EndEdictWhirlwindBeforeTick(action,cost))return;
             if(D4Combat&&!action.released){action.released=true;action.snapshot=CaptureDamage(action.id);OriginalClassRelease(action);}
             State.channelTick+=D4WhirlInterval;State.resource-=cost;ConsumeCostEffects(cost,action);action.cost+=cost;State.lastAttackTime=State.time;RecordFeedbackChannelTick(action);AreaHit(State.position,RuneSkillRadius(0,2.5f)*ClassArea(State.heroAction.id),.5f,0);Visual?.Invoke(State.position,State.position,0,RuneSkillRadius(0,2.5f));
@@ -505,9 +527,6 @@ namespace Hellscript
             if(e.dead)return;
             // A shield ally's ward (data monsters) soaks damage first.
             if(e.ward>0&&damage>0){float soaked=Mathf.Min(e.ward,damage);e.ward-=soaked;damage-=soaked;}
-            // The tutorial boss survives the intervening lessons; residual Whirlwind cannot erase the goblin entrance.
-            if(IsGuide&&e.boss&&State.tutorialPhase<GuideTutorial.FinalBoss)damage=GuideTreasureScene?0:Mathf.Min(damage,Mathf.Max(0,e.health-e.maxHealth*(State.tutorialPhase<GuideTutorial.BossFight?.81f:.6f)));
-            if(IsGuide&&e.goblin&&State.tutorialPhase==GuideTutorial.GoblinAppear)damage=0;
             float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             // Rooted at stage two the charger bends but never breaks, so the defeat does not depend on a class's damage.
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;

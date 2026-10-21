@@ -20,7 +20,7 @@ This design implements the approved flow: the *Voice of the Edict* prologue on a
 - Both Hunt Edict setups on the mandatory map are forced steps where only the named control can be pressed. The next control is derived from the real saved state.
 - Finishing the first map pays a one-time 1,000 gold completion reward. The reward and the account's completion are saved in one transaction, and no equipment is granted. Apart from that reward, tutorial combat grants no XP, gold, random loot, fatigue, rift records, first clears or offline baseline.
 - Other characters use per-hero core guidance. Replay uses a separate level 1 account copy and transfers no rewards.
-- First-practice support is account-wide, ten kinds, one use each. Support is added only inside the staged execution transaction and committed with the result. Cancelling, invalid selection or failed disk saving retains the entitlement.
+- First-practice support is account-wide, nine kinds, one use each. Support is added only inside the staged execution transaction and committed with the result. Cancelling, invalid selection or failed disk saving retains the entitlement.
 - Normal domain prerequisites, prices, probabilities, capacities, protection and NPC proximity remain enforced. No prerequisite legendary, aspect, level, enhancement or sweep attempts are invented.
 - Existing accounts are exempt from the mandatory map. Old read/skip acknowledgements migrate as read only; semantically equivalent actual first-play facts are preserved. Existing account guidance is contextual.
 
@@ -74,7 +74,6 @@ Guide names and texts are the English values the game shows for `Tutorials.All`,
 | UL01_TRAIN | Training ground | Pick a rift tier and enemies, change a skill's Hunt Edict and fight the same setup again. The result compares clear time and DPS with the previous run. | None |
 | UL02_ENHANCE | Equipment enhancement | Choose an owned +0 item, review the cost and enhance it to +1. First practice covers gold for this one step. | Yes |
 | UL03_OFFLINE | Offline Supplies | Review supplies settled from actual rift performance. Tutorial combat never creates an offline reward baseline. | None |
-| UL04_RARE_CRAFT | Rare equipment crafting | Choose a slot and craft one rare item. First practice covers its gold and material cost. | Yes |
 | UL10_SLOT_ENHANCE | Equipment slot upgrade | Upgrade a level 1 equipment slot to level 2. First practice covers stones; the normal five-minute duration still applies. | Yes |
 | UL05_GEM | Synthesize gems | Fuse five tier 1 gems of the same kind into one tier 2 gem. First practice supplies the five selected tier 1 gems. | Yes |
 | UL11_RUNE | Rune purchase and placement | Buy one G0 single-cell rune, then inspect its placement on the rune board. First practice covers one rune purchase. | Yes |
@@ -112,7 +111,6 @@ The current new-account unlock schedule is below. Migrated accounts retain previ
 | UL01_TRAIN | Training ground | Town arrival |
 | UL02_ENHANCE | Equipment enhancement | Stage 1 |
 | UL03_OFFLINE | Offline Supplies | Stage 1 |
-| UL04_RARE_CRAFT | Slot-based rare crafting | Stage 3 |
 | UL10_SLOT_ENHANCE | Slot upgrades | Stage 5 |
 | UL05_GEM | Gem socketing, replacement and synthesis | Stage 10 |
 | UL11_RUNE | Rune boards, fusion and weapon mastery | Stage 15 |

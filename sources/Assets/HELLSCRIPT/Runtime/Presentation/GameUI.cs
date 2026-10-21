@@ -14,7 +14,8 @@ namespace Hellscript
         GameController game;
         RectTransform root,shell,headerApron,footerApron,content,header,footer,overlay,toastFrame;
         Font font;
-        Texture2D background,atlas,equipmentAtlas;
+        Texture2D background,equipmentAtlas;
+        RawImage pageBackdrop;
         Text status,hpText,resourceText,timerText,actionText,meterText,toast,headerTitle,headerSubtitle;
         Image hpFill,resourceFill,meterFill;
         List<Text> skillLabels=new List<Text>();
@@ -25,7 +26,6 @@ namespace Hellscript
         // argument to be drawn keep it in the delegate instead of in another field.
         Action pageRepaint;
         bool RiftLoadoutLocked=>game.Active&&game.Combat.State.training<0;
-        int selectedSlot;
         bool portalBag;
         const float TouchHeight=80;
         readonly Color ink=UiTheme.Background,panel=UiTheme.Panel,gold=UiTheme.Gold,pale=UiTheme.Text,muted=UiTheme.Muted;
@@ -37,8 +37,8 @@ namespace Hellscript
             game=controller;
             windowHost=gameObject.AddComponent<ContentWindowHost>();windowHost.Initialize(()=>game.Active?game.Combat.State:null);
             font=CreateFont();
-            background=Resources.Load<Texture2D>("Art/Sanctuary");atlas=Resources.Load<Texture2D>("Art/SkillAtlas");
-            equipmentAtlas=Resources.Load<Texture2D>("Art/EquipmentAtlas");
+            background=Resources.Load<Texture2D>("Art/CharacterPlaza/landscape_bg");
+            equipmentAtlas=null;
             var canvasObject=new GameObject("HELLSCRIPT UI",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));
             canvasObject.transform.SetParent(transform,false);var canvas=canvasObject.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=100;canvas.pixelPerfect=true;
             ApplyScaler(canvasObject.GetComponent<CanvasScaler>(),false);
@@ -49,6 +49,10 @@ namespace Hellscript
             var stage=new GameObject("Tutorial staging",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));stage.transform.SetParent(transform,false);
             var stageCanvas=stage.GetComponent<Canvas>();stageCanvas.renderMode=RenderMode.ScreenSpaceOverlay;stageCanvas.sortingOrder=130;
             cinematic=stage.AddComponent<TutorialCinematic>();cinematic.Initialize(()=>InterfaceFactor);
+            // The level-up show draws above the staging (130) and below every content window (400+); only its confirm button takes taps.
+            var show=new GameObject("Level-up celebration",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));show.transform.SetParent(transform,false);
+            var showCanvas=show.GetComponent<Canvas>();showCanvas.renderMode=RenderMode.ScreenSpaceOverlay;showCanvas.sortingOrder=135;
+            celebration=show.AddComponent<LevelUpCelebration>();celebration.Initialize(show.GetComponent<CanvasScaler>());celebration.Sound=id=>game.Audio?.Play(id);celebration.Closed+=LevelUpClosed;
             InitializeGlobalHud();
             if(game.Store==null)
             {Base("recovery","저장 복구가 필요합니다","진행 기록을 덮어쓰지 않고 게임을 멈췄습니다");Note(content,game.Notice,22,360,pale);FooterButton(0,1,"게임 종료",()=>Application.Quit());}
@@ -63,9 +67,16 @@ namespace Hellscript
             if(ReserveGlobalHudSpace&&globalHud?.Layout!=null)
             {float inset=globalHud.Layout.occupiedHeight*globalHud.Layout.scale+12;s.yMin+=inset;}
             float w=Mathf.Max(1,Screen.width),h=Mathf.Max(1,Screen.height);
+            CoverUV();
             root.anchorMin=new Vector2(s.x/w,s.y/h);root.anchorMax=new Vector2(s.xMax/w,s.yMax/h);root.offsetMin=root.offsetMax=Vector2.zero;
             if(headerApron!=null){headerApron.anchorMin=new Vector2(0,s.yMax/h);headerApron.anchorMax=Vector2.one;headerApron.offsetMin=headerApron.offsetMax=Vector2.zero;}
             if(footerApron!=null){footerApron.anchorMin=Vector2.zero;footerApron.anchorMax=new Vector2(1,s.y/h);footerApron.offsetMin=footerApron.offsetMax=Vector2.zero;}
+        }
+        // The backdrop fills the screen canvas; cropping keeps the painting's aspect.
+        void CoverUV()
+        {
+            if(pageBackdrop==null||background==null)return;
+            pageBackdrop.uvRect=TitleAtmosphere.Cover(Mathf.Max(1,Screen.width)/(float)Mathf.Max(1,Screen.height),(float)background.width/background.height);
         }
         // Shared adapters retain their layout callback; the player reading-size preference is retired.
         public float InterfaceFactor=>1f;
@@ -83,6 +94,7 @@ namespace Hellscript
         public void RefreshCanvasLayout()
         {
             if(root==null)return;
+            CoverUV();
             var pageScaler=root.parent.GetComponent<CanvasScaler>();
             ApplyScaler(pageScaler,pageScaler.uiScaleMode==CanvasScaler.ScaleMode.ConstantPixelSize);
             if(commonModal!=null){ApplyScaler(commonModal.GetComponent<CanvasScaler>(),true);commonScreenSize=Vector2.zero;ReflowCommonPanel();}
@@ -93,6 +105,7 @@ namespace Hellscript
             // the periodic HUD refresh would otherwise leave the old portrait inset here.
             RefreshGlobalHud();ReflowBattleHud();Canvas.ForceUpdateCanvases();
             ReflowEdictSheet();
+            ReflowCasualNotices();
         }
         void RefreshCanvasScale()
         {
@@ -166,11 +179,14 @@ namespace Hellscript
         {
             if(index>=0&&index<18)
             {var skill=SkillIconView.Create(parent,false);Place(skill.Rect,x,y,size,size);skill.SetSprite(SkillIconAssets.Active(index));return;}
-            var r=Rect("Generated art",parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();raw.texture=atlas;
-            int col=index%6,row=index/6;raw.uvRect=new Rect(col/6f,1-(row+1)/4f,1/6f,1/4f);raw.raycastTarget=false;
+            if(index<18||index>20)return;
+            string hero=index==18?"warrior":index==19?"ranger":"mage";
+            var r=Rect("Class crest",parent);Place(r,x,y,size,size);var raw=r.gameObject.AddComponent<RawImage>();
+            raw.texture=Resources.Load<Texture2D>("Art/CharacterPlaza/crest_"+hero);raw.raycastTarget=false;
         }
         void Base(string page,string title,string subtitle,bool art=false,bool battle=false,bool responsive=false)
         {
+            ClearCasualConfirmations();
             CloseCharacterSelectionPage();
             if(combatLogView!=null){combatLogView.Close();combatLogView=null;}
             CloseRiftVictory();CloseTrainingResult();CloseNpcDialogue();CloseAttendance();CloseBlacksmith();CloseEquipmentShop();CloseRuneMaster();CloseAspectStone();CloseJeweler();
@@ -182,11 +198,11 @@ namespace Hellscript
             if(Page=="edict"&&content!=null)edictScrollOffset=content.anchoredPosition.y;
             targetRanks.Clear();targetTags.Clear();targetLinks.Clear();targetLabelBounds.Clear();orderHeroLabel=null;orderLootLabels.Clear();orderLootPoints.Clear();targetLabelIds.Clear();Array.Clear(targetNotes,0,targetNotes.Length);
             Page=page;foreach(Transform child in root){child.gameObject.SetActive(false);Destroy(child.gameObject);}skillLabels.Clear();status=hpText=null;
-            foreach(Transform child in shell){child.gameObject.SetActive(false);Destroy(child.gameObject);}headerApron=footerApron=null;
+            foreach(Transform child in shell){child.gameObject.SetActive(false);Destroy(child.gameObject);}headerApron=footerApron=null;pageBackdrop=null;
             if(!battle)
             {
                 var back=Box("Backdrop",shell,ink);Stretch(back);
-                if(art&&background!=null){var image=Rect("Generated Sanctuary",shell);Stretch(image);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=background;raw.color=new Color(1,1,1,.8f);raw.raycastTarget=false;}
+                if(art&&background!=null){var image=Rect("Generated Sanctuary",shell);Stretch(image);var raw=image.gameObject.AddComponent<RawImage>();raw.texture=background;pageBackdrop=raw;raw.color=new Color(1,1,1,.8f);raw.raycastTarget=false;var veil=Box("Artwork reading scrim",shell,UiTheme.Scrim);Stretch(veil);}
             }
             header=Box("Header",root,UiTheme.Background);header.anchorMin=new Vector2(0,1);header.anchorMax=Vector2.one;header.pivot=new Vector2(.5f,1);header.sizeDelta=new Vector2(0,80);
             var top=Label(header,title,30,gold);Place(top.rectTransform,20,6,650,38);headerTitle=top;
@@ -200,11 +216,11 @@ namespace Hellscript
             footerApron=Box("Footer apron",shell,UiTheme.Background);
             headerApron.GetComponent<Image>().raycastTarget=footerApron.GetComponent<Image>().raycastTarget=false;
             RefreshGlobalHud();ApplySafeArea();
-            overlay=Rect("Overlay",root);Stretch(overlay);
+            overlay=Rect("Overlay",shell);Stretch(overlay);
             var noticeCanvas=overlay.gameObject.AddComponent<Canvas>();noticeCanvas.overrideSorting=true;noticeCanvas.sortingOrder=3000;
-            toastFrame=Box("Notice",overlay,ink);toastFrame.GetComponent<Image>().raycastTarget=false;
-            toastFrame.anchorMin=new Vector2(.05f,0);toastFrame.anchorMax=new Vector2(.95f,0);toastFrame.pivot=new Vector2(.5f,0);toastFrame.anchoredPosition=new Vector2(0,battle?325:112);toastFrame.sizeDelta=new Vector2(0,battle?80:62);
-            toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);Inset(toast.rectTransform,16,16,8,8);toastTime=0;toastFrame.gameObject.SetActive(false);
+            toastFrame=Rect("Notice",overlay);
+            toast=Label(toastFrame,"",20,pale,TextAnchor.MiddleCenter);toastTime=0;
+            InitializeCasualToast();toastFrame.gameObject.SetActive(false);
             if(!battle)
             {
                 var scroll=Rect("Scroll",root);scroll.SetSiblingIndex(root.childCount-2);scroll.anchorMin=new Vector2(0,0);scroll.anchorMax=Vector2.one;scroll.offsetMin=new Vector2(24,124);scroll.offsetMax=new Vector2(-24,-94);
@@ -262,7 +278,6 @@ namespace Hellscript
             ContentButton(ContentUnlocks.Train,"훈련장",ShowTraining);
             BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);
             ContentButton(ContentUnlocks.Gem,"보석 장착·교체·합성",ShowGemMenu);
-            BigButton(content,"장비 제작",ShowShop);
             ContentButton(ContentUnlocks.Sweep,"최고 단계 소탕",SweepAction(ShowTown));
             Note(content,"개발용 로컬 플레이 · 계정 연동과 결제는 연결 전입니다.",17,54);
             FooterButton(0,2,"전투 기록",ShowRecords);FooterButton(1,2,"게임 안내",ShowHelp);
@@ -387,7 +402,6 @@ namespace Hellscript
         public void ShowBag(bool portal=false)=>RenderEquipment(portal);
         Color RarityColor(int r)=>StorageSurface.Hex(EquipmentGradePalette.Hex[Mathf.Clamp(r,0,4)]);
         void ShowWarehouse(bool portal)=>RenderWarehouse(portal);
-        public void ShowShop()=>RenderItemShop();
         public void ShowRecords(){game.CancelRiftEntry();OpenCombatRecords();}
         public void ShowResult()
         {
@@ -472,12 +486,7 @@ namespace Hellscript
         void Confirm(string message,Action action)
         {
             game.ExitIdle();
-            var modal=Box("Confirm",root,new Color(0,0,0,.83f));Stretch(modal);var card=Box("Dialog",modal,panel);card.anchorMin=new Vector2(.08f,.35f);card.anchorMax=new Vector2(.92f,.65f);card.offsetMin=card.offsetMax=Vector2.zero;
-            var text=Label(card,message,25,pale,TextAnchor.MiddleCenter);text.rectTransform.anchorMin=new Vector2(.06f,.35f);text.rectTransform.anchorMax=new Vector2(.94f,.94f);text.rectTransform.offsetMin=text.rectTransform.offsetMax=Vector2.zero;
-            void Close(){ContentWindowHost.Detach(modal);modal.gameObject.SetActive(false);Destroy(modal.gameObject);}
-            ContentWindowHost.Attach(modal,Close);
-            var cancel=Button(card,"취소",Close);var ok=Button(card,"확인",()=>{Close();action();},new Color(.45f,.28f,.12f));
-            foreach(var b in new[]{cancel,ok}){var r=(RectTransform)b.transform;r.anchorMin=new Vector2(b==cancel?.05f:.52f,.05f);r.anchorMax=new Vector2(b==cancel?.48f:.95f,.27f);r.offsetMin=r.offsetMax=Vector2.zero;}
+            OpenCasualConfirmation(message,action);
         }
         public void ShowToast(string text)=>ShowToast(text,5);
         public void ShowToast(string text,float seconds)=>ShowToast(text,seconds,false);
@@ -485,12 +494,10 @@ namespace Hellscript
         {
             if(game.DisplayDimmed){RefreshIdleSummary(true);return;}
             if(toast==null)return;toast.text=Loc.T(text);toastTime=seconds;toastFrame.gameObject.SetActive(!string.IsNullOrEmpty(text));overlay.SetAsLastSibling();
-            bool compact=seconds<=2;
-            toastFrame.anchorMin=new Vector2(compact?.5f:.05f,0);toastFrame.anchorMax=new Vector2(compact?.5f:.95f,0);
-            toastFrame.sizeDelta=new Vector2(compact?Mathf.Min(root.rect.width*.9f,toast.preferredWidth+32):0,62);
+            bool compact=seconds<=2;noticeCompact=compact;noticeMessage=toast.text;
             // Routine long notices stay hidden in battle; tutorial refusals and explicit save errors remain visible.
             if(Page=="battle"&&!compact&&!game.TutorialActive&&!showDuringBattle){toastFrame.gameObject.SetActive(false);UpdateBattleBrief();return;}
-            Canvas.ForceUpdateCanvases();var size=toastFrame.sizeDelta;size.y=Mathf.Max(Page=="battle"?80:62,toast.preferredHeight+16);toastFrame.sizeDelta=size;
+            ReflowCasualToast();if(toastFrame.gameObject.activeSelf)noticeEntrance.Restart();
         }
         void LateUpdate()
         {
@@ -504,7 +511,7 @@ namespace Hellscript
             if(gearRecommendationStrip!=null)
             {bool visible=GearRecommendationsVisible;if(gearRecommendationStrip.gameObject.activeSelf!=visible)gearRecommendationStrip.gameObject.SetActive(visible);}
             PositionEdictLabels();PositionTargetLabels();PositionOrderLabels();
-            if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";toastFrame.gameObject.SetActive(false);}}
+            if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";noticeMessage="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){gearShownAt.Clear();RefreshIdleSummary();return;}
             TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();

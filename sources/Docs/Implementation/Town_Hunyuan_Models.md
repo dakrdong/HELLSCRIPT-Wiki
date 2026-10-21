@@ -164,3 +164,67 @@ ARGS=(-hellscriptTownModelsSmoke -hellscriptOfflineQa -hellscriptSavePath "$SAVE
 - 되돌리기: `Resources/World/Town/`을 지우면 코드가 기존 도형으로 돌아간다(`WorldArt.Has` 확인).
 - 다시 만들기: `python3 tools/import_hunyuan_town.py --source <납품 폴더>/optimized/game` (Blender 5.2 필요). 이어서 `python3 tools/generate_world_art.py --check`.
 - 출처 기록: [임시 리소스 출처](Asset_Provenance.md)의 '훈위안 생성 마을 3D 모델 (2026-10-06)' 절.
+
+## 캐주얼 시안 교체 (2026-10-15)
+
+마을 시안(`Docs/Art/CasualConcept/2026-10-13/Town/`)의 건물·소품 12종을 시안에서 뽑은 입력 이미지(`HunyuanInput/`)로 훈위안 이미지→3D(HY3D-V3.1)에 넣어 만들고, 같은 경량화·가져오기 도구로 게임 등급에 구워 교체했다. 대장간·창고·무기 가판대·균열 아치·돌우물·룬 제단·가로등·허수아비 8종은 기존 이름 그대로 바뀌고, 갬블·보석·룬 상점과 룬 공방 4채(`Building_Gambler`, `Building_GemMerchant`, `Building_RuneMerchant`, `Building_RuneMaster`)는 어두운 환경 묶음의 모델을 대신한다(`manifest_town_env.json`에서 빠지고 `manifest_town_hunyuan.json`이 갖는다). 건물 충돌 사각형 7개를 새 풋프린트에 맞췄다(앞쪽 가장자리 유지). 마을 모델 스모크가 새 입장 흐름(`EntrySession`)을 기다리도록 고쳤다.
+
+환경(바닥·울타리·나무·성벽)은 아직 어두운 묶음이다. 시안의 활엽수·소나무·꽃덤불·바위·화분이 같은 방식으로 생성 중이며 다음 단계에서 환경 코드와 함께 교체한다. 생성된 원본 GLB·경량화 보고서는 저장소 밖 `AssetDeliverables/Hunyuan/2026-10-15-town/`에 있다. 라이선스 검토·출시 승인 전의 개발용 후보다.
+
+## 캐주얼 환경 연결 후보 (2026-10-16)
+
+PR137의 기존 4개 커밋은 `main`에 이미 포함됐다. 이번 단계는 그 모델을 다시 가져오지 않고, 실제 런타임 환경을 연결하는 소스 변경이다. `TownWalk`의 시설·NPC 위치·충돌·이동·저장 키는 유지한다.
+
+- `WorldView.TownEnvironment`는 등록된 활엽수·소나무·꽃덤불·바위·화분을 배치한다. 어두운 성벽·탑·관문 건물·대성당·죽은 나무·화로·수레·장작·구 배너의 배치를 중지한다. 원본 리소스와 `.meta`는 보존한다.
+- 경계는 낮은 목재 울타리로, 남쪽 상점 앞은 삼색 깃발 가랜드로 구성한다. 표지판은 문자 없는 방향 도형이다. 통·상자·배너는 기존 캐주얼 `Fields/F1` 모델 3종을 재사용한다. 전용 훈위안 통·상자 더미·배너 기둥·표지판·울타리 모델이 완성됐다는 뜻은 아니다.
+- 마을만 주간 조명으로 바꾸고, 기존 도로·광장·훈련장 마스크에 `Fields/F4/Floor` 잔디를 연결한다. 낡은 성벽 접촉 암영과 중앙 모닥불 흔적을 제거하고, 관문 효과는 보라·파랑으로 맞춘다. 전투 필드·Legacy 조명은 바꾸지 않는다.
+- 새 모델·PNG·가져오기 설정·패키지·씬·프리팹·Budget 변경은 없다. 캐주얼 치비 NPC 12종은 아직 없으므로 기존 2026-10-06 모델을 유지한다. 초상화/provider·`NpcProfiles` 변경은 통합 담당 소유로 보호한다.
+
+### 남은 실물과 검증
+
+| 범위 | 상태 |
+|---|---|
+| 기존 캐주얼 모델 17종 | 기존 main 등록 완료. 이번 후보는 환경 5종 배치와 기존 시설 12종 유지 |
+| 통·상자·배너 | 기존 필드 모델 재사용. 전용 이미지 입력은 있으나 전용 새 3D 실물은 미완료 |
+| 울타리·표지판·가랜드 | 기존 마을 도형/메시 생성 방식으로 구현. 전용 훈위안 모델은 미완료 |
+| 캐주얼 치비 NPC 12종 | 신규 실물 미완료. 기존 모델·서비스·대화 보존 |
+| 무료 생성 | 개인 Chrome 프로필의 HY3D 화면에서 하루 2회 혜택·크레딧 0 표시 확인. 문서의 20회와 달라 실제 잔여 무료 횟수 확정 전 제출 보류. 추가 결제·자동 충전 0회 |
+| 집중 검증 | 후보 정적 검사와 diff 검토 진행. Unity 슬롯 인수 전 컴파일/Edit Mode/Play Mode 미실행 |
+| 최종 전체 검사·네이티브 | 통합 담당이 최종 마을 입력까지 인수한 뒤 각각 한 번 실행. 이 단계에서 실행하지 않음 |
+| 원격 push·CI·WebGL | 비용 조건으로 원격/CI 보류. WebGL 취소 유지 |
+
+`RuntimeTownModelsSmoke`에 신규 환경 5종 배치, 구 환경 부재, 울타리·가랜드와 주간 프리셋 단언을 더했다. 기존 10개 서비스 도달·모델·페이드 검증을 유지한다. 실제 시각 비교와 가로·세로 기능 결과는 통합 검증 뒤 별도로 기록하며, 소스 단언만으로 시안 전체 완성을 판정하지 않는다.
+
+
+## 환경 연결 집중 검수·종료 기록 (2026-10-15 UTC, 2026-10-16 후보 후속)
+
+이 절은 위의 「캐주얼 환경 연결 후보 (2026-10-16)」에 남겨 둔 미실행 상태를 실제 결과로 갱신한다. 기준 소스는 로컬 `main`의 `00aa6c91d50dbf0c14fef8c8bf868b6ca2ea1579`, Editor는 Unity `6000.6.0f1`이다. 앞선 2026-10-06 모델 검증·전체 검사·네이티브 스모크 기록은 당시 기준의 역사이며, 이번 통합 전체를 다시 검증했다는 뜻이 아니다.
+
+| 실제 수행 범위 | 결과와 한계 |
+|---|---|
+| 집중 Edit Mode 5개 fixture | `TownEnvironmentTests`, `TownGroundMaskTests`, `TownModelTests`, `TownWalkTests`, `WorldLightingTests` 합계 **56/56 PASS**, 실패 0. 한 번 실행, 95.564초, 종료 코드 0 |
+| Editor 런타임 스모크 | **PASS**. `runtime-town-models-smoke.txt`와 `HELLSCRIPT_TOWN_MODELS_SMOKE_OK` 마커 보존. 가로 실제 카메라 1600×900에서 10개 서비스 도착 지점, 모델·신규 환경·구 환경 부재·울타리·가랜드·주간 프리셋·상점 뒤 페이드를 확인 |
+| 가로 화면 근거 | 스모크 PNG 16장. 전경 1장은 전용 렌더 1280×720이고, 나머지 15장은 1600×900. 통합 담당이 전경과 도착 화면을 직접 열어 확인 |
+| 세로 화면 근거 | 실제 카메라 900×1600에서 PNG 2장(마을 화면·중앙 이동 후 화면)을 통합 담당이 직접 확인. **시각 확인만 수행했으며 세로 10개 서비스 경로 스모크는 재실행하지 않음** |
+| 실제 모델 구성 | 캐주얼 Town 모델 17종(기존 시설 12 + 환경 5)과 `Fields/F1` 재사용 3종의 메시 이름 확인. 환경 5종은 17종에 포함된다. 기존 NPC 모델 12명은 유지 |
+| 실제 importer readback | 환경 5종의 FBX 5개 + 알베도/법선 텍스처 10개, 합계 15개를 Editor API로 확인. 텍스처 API의 top/default 상한 모두 1024, Android ASTC 6×6·WebGL ETC2 RGBA8 override 모두 1024 |
+
+서비스 도달 검사는 기존 `RequestStation`/`Tick` 경로를 프로그램으로 실행한 것이다. 물리 조이스틱 입력이나 각 서비스의 구매·강화 등 거래 동작을 모두 검수한 결과로 확대하지 않는다. Editor eval의 일반 `Screen` 값 1893×1351은 Editor 문맥의 값이며, 이번 화면 크기는 실제 카메라와 PNG 치수로 판정했다. 전투·Legacy 조명 보존은 소스 범위와 집중 테스트 근거이며, 별도 전투 플레이 전체를 다시 실행한 결과는 아니다.
+
+### 메타·저장·Editor 원상복구
+
+지정된 Town 환경 메타 15개는 이전 인수 관측과 **SHA-256·바이트 수가 15/15 동일**하고 GUID도 모두 보존됐다. 텍스처 원문 YAML의 top `maxTextureSize: 2048`/default platform 1024 표기는 그대로다. 이번 실제 Editor API의 top/default 1024 결과를 별도로 보존하며, YAML을 이번 실행에서 1024로 다시 썼다고 기록하지 않는다. 이 15개는 HEAD의 GUID 전용 메타에 importer 직렬화가 추가된 기존 변경이며 단순 공백 변경이 아니다. Standalone override는 비활성이므로 별도 BC7 override가 적용됐다고 주장하지 않는다.
+
+QA는 별도 폐기용 저장 경로만 사용했다. Editor PID `81151`은 정상 종료(코드 0)했고, 원래 GameView 8개 프리셋·선택 0·`Options review (2100x900)`를 복원했다. GameView preferences 파일은 기존 627바이트 및 SHA-256까지 동일하다. 원래의 빈 깨끗한 Scene과 Play Mode 옵션도 복원했다. QA 소유 seed 파일 3개를 원상복구하고 생성된 QA 저장물은 TASK 증거 폴더에 분리 보존했다. 실제 사용자 세이브 접근은 0이다. Play 시작 전 기존 AI Assistant 모델 선택기 패키지 오류는 기록에 남겼으며, 새 Town 런타임 예외는 관측되지 않았다.
+
+검수 정본은 `task-23/validation/cleanup-20261015/main-canonical-resources/new-art/` 아래 `town-focused-tests/receipt.json`, `town-focused-editor/closure-receipt.json`, `town-focused-editor/actual-importers-15.json`과 해당 실행·화면 근거다. 문서 후보의 before/after SHA와 메타 15개 대조는 `town-focused-editor-docs-candidate/manifest.json`에 기록한다. 제품 저장소에 이 TASK 근거를 모두 등록·배포했다는 뜻은 아니다.
+
+### 여전히 미완료·미실행인 범위
+
+- 전용 소품 **6종**(통·상자 더미·배너 기둥·표지판·울타리 모듈·가랜드)과 신규 캐주얼 정적 NPC **12종**은 미완료다. 현재의 F1 재사용·도형 표현·기존 NPC 유지가 전용 실물 완성을 대신하지 않는다.
+- 이번 단계의 **전체 통합 NUnit, 네이티브 빌드·플레이어 검증은 NOT_RUN**이다. 추가 실기기·성능 측정도 수행하지 않았다. 이전 날짜의 전체 검사나 네이티브 결과를 이번 입력에 재사용해 PASS로 표기하지 않는다.
+- 새 원화·3D 생성, 유료 제출·결제·자동 충전은 수행하지 않았다. 원격 push·CI는 비용 HOLD, WebGL은 취소 상태를 유지한다. 이 집중 검수만으로 시안 전체·최종 출시 검증 완료를 선언하지 않는다.
+
+## 캐주얼 NPC 7종·상자 더미 재제작 (2026-10-17)
+
+품질 보류였던 NPC 7종과 상자 더미를 새 UV·재굽기로 다시 만들어 적용했다. 원인·수치·근거는 [재제작 기록](TownNpcRebake_20261017.md)에 있다.

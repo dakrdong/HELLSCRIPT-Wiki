@@ -1,8 +1,10 @@
 # ElevenLabs game audio
 
-Updated: 2026-10-14 · Written: 2026-09-27 · [한국어](ElevenLabs_Game_Audio.md)
+Updated: 2026-10-18 · Written: 2026-09-27 · [한국어](ElevenLabs_Game_Audio.md)
 
 On 2026-09-27 the user accepted the then-adopted audio as the final version (454 sound effects and four music tracks: 458 files). On 2026-10-14 the art direction changed to bright casual fantasy, so **the four music tracks were replaced by six**. The current set is **456 sound effects (including the two title-flight effects merged the same day) and six music tracks: 462 files**. It covers all SFX identifiers and six music contexts. Nine SFX actions share suitable existing final clips. No additional SFX generation is planned. The 458-file and four-track statements and the evidence below describe the 2026-09-27 state.
+
+**Added 2026-10-18:** the 62 D4 skill modifiers without a sound got new sound effects, so the current set is **518 sound effects and 347 sound identifiers** (by the catalog). The 456-file and 285-identifier statements below describe the state just before. Details: [Skill sound effects: prompts and wiring](Skill_Sfx_Prompts_20261018.en.md).
 
 Final acceptance of the SFX is based on the user's instruction of 2026-09-27. It does not claim a new human listening test or physical mobile validation.
 
@@ -128,3 +130,63 @@ Two new sound effects for the [title login flight](Title_Screen.en.md) were gene
 The original MP3s are kept in `AudioSources/ElevenLabs/Sources/` and were mastered with `elevenlabs_audio.py`. The set is now 456 sound effect files plus the four music tracks of that moment (the same day's music replacement above made it six), with 285 SFX identifiers. The eight generations cost 54.7 credits (the estimate said 180). No human listening check was done.
 
 Note: on the same day `main`'s `sfx-catalog.json` and `bank.json` disagree because of the D4 skill identifier migration, so `generate_sfx.py --check` and `elevenlabs_audio.py --check` fail (they already did before this change). The two new bank rows match the generator's format, and `test_elevenlabs_audio.py` passes.
+
+## Replacement: title login flight sounds (2026-10-20)
+
+The camera-advance flight now lasts 4.4 s, so the two sounds above were regenerated with ElevenLabs `eleven_text_to_sound_v2` (prompt influence 0.7). The rift burst had 4 takes and the wind rush 4 takes for each of two prompts; one of each was chosen by loudness curve, stereo phase and per-band energy. The first wind takes held almost all their energy below 150 Hz and would be weak on phone speakers, so the pick came from the second prompt, which asked for mid and high air noise.
+
+| Cue | Use | Adopted generation ID | Length |
+|---|---|---|---|
+| `flow.title_flight` | Wind rush from 0.7 s into the flight | `HZZ0h5dxgqSkhnqFzUfR` | 2.25 s |
+| `flow.title_rift` | Rift light burst at 3.12 s | `pt9OkWNTHt50Vuwc420D` | 2.20 s |
+
+The previous sources `PmH0ZtJAEtC86aHk2V7O` and `e9C3rrKPb3aFTcuHuWXP` (table above) are no longer used; their MP3s were moved to `Artifacts/ElevenLabs/Replaced/title-flight-20261020/` and remain in Git history. The new originals are kept in `AudioSources/ElevenLabs/Sources/` and were mastered with `elevenlabs_audio.py --index/--selection`. The 12 candidates cost about 101 credits as reported by the provider. There has been no human listening review yet.
+
+## Addition: 62 skill modifier sound effects (2026-10-18)
+
+Only 22 of the 84 D4 skill modifiers had a sound; the others sounded like their skill. The 62 without one were made with ElevenLabs `eleven_text_to_sound_v2` (MCP, prompt influence 0.65, one take per modifier). Three (`A18-1`, `M08-1`, `M11-2`) were nearly silent or ended without a decay on the first take and were re-prompted once. Prompts, generation ids and hashes are in the [provenance manifest](../../AudioSources/ElevenLabs/manifest.json); the cost was 354.6 credits (flow `tcHr1hKn6p0at4pzyUOg`). The originals are kept in `AudioSources/ElevenLabs/Sources/`.
+
+`GameAudio` plays the cast modifier's own cue (`skill.<skill>-<number>`) at the moment its moment table gives (69 of the 84 modifiers replace the skill's cue at the cast; 15 sound at the wind-up start, the landing, the follow-up hit slot or a simulation event). Prompts, moments and deferred items are in [Skill sound effects: prompts and wiring](Skill_Sfx_Prompts_20261018.en.md). The 62 new clips pass the provenance and signal rules (no clipping, silent edges), and fourteen Unity Edit Mode `SkillModifierAudioTests` (rerun with `SoundBankTests` after the moment table was added), `SoundBankTests`, `NewContentAudioTests` and eight offline tool tests pass. Nobody has listened to them.
+
+The 11 replace-existing masters (14 clips) deferred the same day were regenerated and replaced under the same clip file names (flow `81oyAOAv3bzfGC0fFupM`, 64.0 credits). The new audio passes the provenance and signal rules; 29 Unity Edit Mode tests (`SoundBankTests`, `SkillModifierAudioTests`) and the eight offline tool tests pass. The 14 old original MP3s that left the manifest were deleted after the user confirmed (recoverable from git history).
+
+Note: the `--check` failure of the 2026-10-14 section (catalog and bank disagree on D4 ids) remains; the 62 new catalog and bank rows use the generator's format.
+
+## Addition: ground drop landing and pickup sound effects, 30 clips (2026-10-20)
+
+Ground drops only had grade sounds (`loot.drop.*`) and the pickup sounds of currency. Currency such as gold and enhancement stones made no sound when it appeared on the floor, and gear sounded by grade regardless of material. The pickup sound picked its material from the slot alone, so cloth and chain mail armor sounded like plate or leather, plate gauntlets, boots and belts sounded like leather, and leather helmets and vests like plate. Fifteen new playback IDs (two variations each, 30 clips) were generated with ElevenLabs `eleven_text_to_sound_v2` (MCP, prompt influence 0.65); the bank now has 360 playback IDs.
+
+| Playback ID | Used when | Prompt gist (English; each ends with "isolated with a clear attack and controlled natural decay.") |
+|---|---|---|
+| `loot.land.gold` | gold appears on the floor | Three old gold coins dropped onto a stone floor, bright light metallic clinks with a short bounce and settle |
+| `loot.land.stone` | enhancement stone | One rough enhancement stone dropped onto a stone floor, a hard mineral knock with a small gritty skid |
+| `loot.land.gem` | gem | One cut gemstone dropped onto a stone floor, a bright glassy tink with a short pure crystalline ring |
+| `loot.land.core` | core | One dense crystal core dropped onto stone, a solid heavy thud with a low resonant crystalline hum |
+| `loot.land.material` | crafting material | A few small crafting fragments dropped onto stone, a dry gritty clatter of small bits skipping and settling |
+| `loot.land.cloth` | cloth armor, scrolls | One folded cloth garment dropped onto a stone floor, a soft muffled fabric thump with a light rustle |
+| `loot.land.leather` | leather armor, quivers | One heavy leather armor piece thrown onto a stone floor, a solid dull slap with a short leathery creak |
+| `loot.land.iron` | chain mail armor | One chainmail shirt dropped onto a stone floor, a heap of small iron links jingling and settling with a dull clank |
+| `loot.land.plate` | plate armor | One heavy steel plate armor piece dropped onto a stone floor, a loud metallic clang with overlapping plates rattling |
+| `loot.land.wood` | bows, staves, crossbows, round shields | One wooden staff dropped onto a stone floor, a hollow wooden clack with a short bounce |
+| `loot.land.metal` | swords, axes, daggers, metal shields | One steel sword dropped onto a stone floor, a bright metallic clatter with a short ringing blade decay |
+| `loot.land.jewelry` | necklaces, rings, orbs | One small gold necklace dropped onto a stone floor, a delicate chain jingle with a tiny metallic tick |
+| `item.pick.cloth` | cloth armor picked up | One folded cloth garment lifted, a soft fabric rustle with a light tactile slide |
+| `item.pick.iron` | chain mail armor picked up | One chainmail shirt lifted, small iron links chiming and sliding over each other |
+| `item.pick.wood` | crossbow or round shield picked up | One wooden crossbow lifted from the floor, a dry wooden knock with a faint creak |
+
+### Playback
+
+- **Landing:** plays when a drop is first "discovered" (within 12 tiles and in line of sight). Gear plays the `loot.land.*` cue that `GameAudio.LandSound` picks by material; common gear plays only that, magic and higher add the existing grade sound (`loot.drop.*`) on top. Currency plays `loot.land.<kind>`. Currency first seen in the frame it is picked up skips the landing sound.
+- **Overlap protection:** at most three landing sounds start per frame, and each cue keeps its own cooldown and limit (gold 0.07 s and 3, the rest 0.08 s and 2). The existing 16-voice pool, priorities and final limiter are unchanged; the priority is 55, below the pickups (60–65).
+- **Pickup:** `GameAudio.Handling` reads the gear base's `material` (cloth, leather, iron, plate) and picks `item.pick.<material>`. The old bases B10–B19, which carry no material value, use a table; the crossbow and the round shields (B06, B31, B32) are wood. Lifting gear in the inventory or storage (`GameAudio.Pick`) makes the same sound. Equip sounds were not newly made; they borrow the closest existing one (cloth to leather, iron to plate, wood to shield).
+- The existing `Material()` (material by slot) stays as the reference of the equip sounds and their test.
+
+### How it was made, and the cost
+
+In generation flow `BWSDiTUStD3dPj6fWW9C`, each sound got one node, generated twice for its two variations. The up-front estimate was 246.4 credits; the sum of the actual costs reported by the generation responses is about 81.0 credits. Two leather landing takes (peak -48 and -41 dBFS) and one wood pickup take (-33.5 dBFS) were nearly silent, so the leather landing was re-prompted and generated twice more and the wood pickup once more (6.3 credits included); the three rejected takes were not kept. The original MP3s are in `AudioSources/ElevenLabs/Sources/`, and prompts, generation IDs and hashes are in the [source manifest](../../AudioSources/ElevenLabs/manifest.json). The new clips got `.meta` files with the same import settings as the existing effects (mono, ADPCM, compressed in memory, preloaded, normalize off).
+
+### Validation
+
+- The 30 new clips pass the provenance record and the signal rules (clipping 0, both ends 0, true peak -2 dBTP). The full `--check` fails before it starts because of the D4 id mismatch above, so only the 15 new cues were checked separately. Clips below their target loudness because of the peak ceiling: `loot_land_core_1` (-25.3 LUFS, target -23), `loot_land_core_2` (-28.6), `loot_land_leather_1` (-25.5), `loot_land_leather_2` (-24.5), `loot_land_stone_2` (-23.8).
+- Unity Edit Mode `GroundLootAudioTests` (5: material mapping of every base, landing once then pickup, common and rare gear, the three-per-frame cap) and `SoundBankTests` (23) pass, as do `SkillModifierAudioTests` and `NewContentAudioTests` (17) and the 8 offline tool tests.
+- Nobody has listened to the clips. They were not heard in a real fight or on a physical mobile device, and the full Edit Mode suite was not run.

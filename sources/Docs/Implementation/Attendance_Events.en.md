@@ -1,6 +1,6 @@
 # Weekly and monthly attendance events
 
-Updated: 2026-10-03
+Updated: 2026-10-17
 Korean: [7일·28일 출석 이벤트](Attendance_Events.md)
 
 Attendance uses **00:00 Korea Standard Time (UTC+9)**. Weekly attendance resets every Monday; monthly attendance resets on the first day of each calendar month. Both tracks grant independently and share account progress across characters.
@@ -52,16 +52,22 @@ At the default text size every day is visible without scrolling. The player text
 
 | State | Tile | Altar panel text | Per-day button |
 | --- | --- | --- | --- |
-| Claimable | Green light behind the item, persistent green border and dot | Ready to claim | **Collect** |
-| Claimed | Darkened, crimson wax seal | Claimed | None |
+| Claimable | Pale green-to-white face, Navy border, green light and dot | Ready to claim | **Collect** |
+| Claimed | Pale gray face, art alpha .42/saturation .5, check seal | Claimed | None |
 | Later day | Plain tile | Check-ins needed: N | None |
 | Out of reach this period | Plain tile | Out of reach before the reset | None |
 
-"Out of reach" means the day cannot be earned even by checking in on every remaining day before the reset. For example, with three check-ins on a Sunday, days 4 to 7 are out of reach. Legendary-chest days (7, 14, 21 and 28) have a gold top rule and a warmer background. Tiles show compact amounts (10,000 → 10K); the altar panel shows the exact amount. Stored legendary chests appear under the reward grid and open there.
+"Out of reach" means the day cannot be earned even by checking in on every remaining day before the reset. For example, with three check-ins on a Sunday, days 4 to 7 are out of reach. Legendary-chest days (7, 14, 21 and 28) have a gold top rule and a warmer background. Claimable styling takes priority and claimed tiles hide the gold rule. The selected day has a sky-blue outline. Tiles show compact amounts (10,000 → 10K); the altar panel shows the exact amount. Stored legendary chests appear under the reward grid and open there.
 
 The fixed action area holds **Claim all rewards** for the current track and **Do not show again today**, on one row in landscape and two rows in portrait. The left/right arrow buttons were removed because tabs and swipes cover the same paging.
 
 The shared `ContentWindowView` provides safe area, title, navigation, scrolling body and fixed actions. Reward tiles describe attendance days, not owned equipment. Existing theme, fonts and coin/gem art are reused; `AttendanceArt` loads the gold, core, legendary-chest, altar and seal images. Compact amounts reuse the jeweler's `JewelerSession.Compact`, the pulse reuses `ForgeWorkingPulse` and the round glow reuses `TownCircleGraphic`. `ContentWindowHost` pauses combat and restores its previous state when closed.
+
+## 2026-10-17 casual design ② source handoff
+
+Applied explicit `UiSkin.Casual` from the actual 38-artboard handoff, including eleven attendance examples and two specification boards. The existing 900×820 maximum, landscape feature/grid and portrait order, weekly 3×2 plus day 7, monthly 7×4 calculations, control names and hit rectangles remain. Presentation changes cover cream fades, rounded surfaces, state colors, Jua display/Noto body roles, sky-blue selection, green claim actions, stash/information panels and check marks. Claimed art uses the existing `SkillTreeD4Tone` shader at saturation .5 and alpha .42, with one material shared per window and released on destruction. Art bytes, GUIDs, Core, transactions, saves, automatic popups and swipe ownership remain unchanged.
+
+New shared dependencies are `StorageSurface.SetSkin(...,fill:,fillEnd:)` and `UiSkin.AttendanceReadyFill/AttendanceMilestoneEdge`, supplied by the integration owner. `AttendanceSkinTests` covers actual mesh colors, selection, claim commands, device suppression and unchanged account state for weekly/monthly mixed states. Static source proof and Unity/visual acceptance remain separate; task-2 receipts record execution results and frozen hashes. Ten screen-source invariants, 15 UI-contract regressions and refresh checks for 14 bindings/195 source files passed. Roslyn typechecking with five pinned common-source hashes reported zero errors across 852 runtime and two focused test source files; 52 runtime warnings came from unchanged files. This does not execute tests. This screen task runs no Unity, build or physical-device validation. Integrated acceptance must cover KO/EN, portrait/landscape/PC, touch, scrolling, failed saves, nested pause restoration and full-bag chest behavior.
 
 ## Popup redesign references
 

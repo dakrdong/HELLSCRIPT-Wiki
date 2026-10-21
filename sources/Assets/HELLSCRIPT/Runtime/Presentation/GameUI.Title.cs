@@ -19,7 +19,7 @@ namespace Hellscript
             content.parent.gameObject.SetActive(false);
             titleSession.CancelEntry();
             // The vista animates on its own canvas so the controls are not rebatched; pixel snapping would step the slow drift.
-            var backdrop=Rect("Title vista",shell);Stretch(backdrop);var layer=backdrop.gameObject.AddComponent<Canvas>();layer.overridePixelPerfect=true;layer.pixelPerfect=false;
+            var backdrop=Rect("Title vista",shell);var frame=UiSafeArea.FrameNormalized;backdrop.anchorMin=frame.min;backdrop.anchorMax=frame.max;backdrop.offsetMin=backdrop.offsetMax=Vector2.zero;var layer=backdrop.gameObject.AddComponent<Canvas>();layer.overridePixelPerfect=true;layer.pixelPerfect=false;
             titleVista=backdrop.gameObject.AddComponent<TitleVista>();titleVista.Initialize(titleSession);
             var page=Rect("Title screen",root);Stretch(page);
             TitleScreen=page.gameObject.AddComponent<TitleScreenView>();
@@ -29,10 +29,10 @@ namespace Hellscript
         // Leaving the title flies its camera into the rift on a canvas above every page and window, below notices.
         void DepartTitle()
         {
-            if(Page!="title"||!titleSession.MotionEnabled||titleVista==null||!titleVista.Ready)return;
+            if(Page!="title"||titleVista==null||!titleVista.Ready)return;
             titleFlight=new GameObject("Title flight",typeof(RectTransform),typeof(Canvas));titleFlight.transform.SetParent(transform,false);
             var canvas=titleFlight.GetComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=2500;
-            game.Audio?.Play("flow.title_flight");titleVista.Impact=()=>game.Audio?.Play("flow.title_rift");
+            titleVista.Rush=()=>game.Audio?.Play("flow.title_flight");titleVista.Impact=()=>game.Audio?.Play("flow.title_rift");
             titleVista.Depart(titleFlight.transform);
         }
     }

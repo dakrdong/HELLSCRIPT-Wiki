@@ -114,6 +114,7 @@ namespace Hellscript
         {
             if(Active||liveOpsAdmissionPending)return;
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
+            if(training<0&&!resume&&TownQuest.RiftLocked(Store.Data.guide)){Notify(Loc.T(TownQuest.LockLine(Store.Data.guide)));return;}
             if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
             {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,replaceRunId));return;}
             if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}
@@ -155,6 +156,8 @@ namespace Hellscript
                 BlockRepeat(RepeatBlock.Save,Store.Error);Notify(Store.Error);return;
             }
             UI.CloseRiftEntry();
+            // The last errand: the first rift entered after the hero has put on his armor.
+            if(training<0&&!resume)Store.AdvanceTownQuest(TownQuest.RiftOne);
             if(previous!=null)previous.Visual-=World.Effect;
             repeatRestored=false;portalCleanupTried=false;repeatClock=Time.realtimeSinceStartupAsDouble;
             FirstPlayGuide.Enter(Store.Data,Combat.State,resume);TutorialProgress.Enter(Store.Data,Combat.State,resume);

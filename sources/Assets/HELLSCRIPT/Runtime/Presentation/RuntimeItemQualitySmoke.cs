@@ -114,9 +114,9 @@ namespace Hellscript
                 Require(!game.UI.GetComponentsInChildren<Button>().Any(b=>b.name=="Inventory item "+candidate.id),"Awakened filter retained the plain candidate");
                 Require(game.UI.GetComponentsInChildren<Button>().Any(b=>b.name=="Inventory item "+itemId),"Awakened filter hid its matching equipment");
                 yield return Capture("awakened-filter-en",720,1280);
-                int previousClear=hero.highestClear;hero.highestClear=100;game.UI.ShowShop();yield return null;
-                Require(Texts.Contains(Loc.F("골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준",account.gold,account.materials,60)),"Shop advertised a level above the generation cap");
-                yield return Capture("shop-level-cap-en",1280,720);hero.highestClear=previousClear;game.Save();
+                int previousClear=hero.highestClear;hero.highestClear=100;game.UI.ShowEquipmentShop(EquipmentShopTab.Buy,true);yield return null;Click("gamble-slot-0");yield return null;
+                Require(Texts.Contains(Loc.F("아이템 레벨 {0} · 부위별 고정 가격",60)),"The gambler advertised a level above the generation cap");
+                yield return Capture("shop-level-cap-en",1280,720);game.UI.CloseEquipmentShop();hero.highestClear=previousClear;game.Save();
                 File.WriteAllText(Path.Combine(directory,"expected-items.json"),Json(new Equipment{items=hero.inventory}));
             }
             else

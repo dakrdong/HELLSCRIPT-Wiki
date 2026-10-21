@@ -26,7 +26,7 @@ namespace Hellscript.Tests
             Assert.DoesNotThrow(()=>new CombatSimulation(a,catalog,1,0,seed:90,ownedTraining:true));
         }
         [TestCase(ContentUnlocks.Enhance,1)] [TestCase(ContentUnlocks.Offline,1)]
-        [TestCase(ContentUnlocks.RareCraft,3)] [TestCase(ContentUnlocks.Gem,10)]
+        [TestCase(ContentUnlocks.Gem,10)]
         [TestCase(ContentUnlocks.Reroll,35)] [TestCase(ContentUnlocks.Shop,25)]
         [TestCase(ContentUnlocks.Sweep,60)] [TestCase(ContentUnlocks.CoreCraft,50)]
         [TestCase(ContentUnlocks.SlotEnhance,5)] [TestCase(ContentUnlocks.Rune,15)]

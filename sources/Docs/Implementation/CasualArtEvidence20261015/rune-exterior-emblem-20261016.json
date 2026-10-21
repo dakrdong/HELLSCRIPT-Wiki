@@ -1,0 +1,192 @@
+{
+  "schemaVersion": 1,
+  "status": "PASS",
+  "scope": "Remove only the 9x9 exterior type-emblem draw call shared by RuneGemView.Piece; preserve shape, cell spacing, rotation, FitIcon, glyphs, palettes and state behavior.",
+  "sourceSha256": "4b89efc1515f11c06e3759cee3075c2b293ab9f8acae1381c58c121819ea96e9",
+  "checkerSha256": "db92ed36992c734a04e7575968eca99766d8877b503c3a02094d6dbc06ad0be7",
+  "actualEditor": {
+    "version": "6000.6.0f1",
+    "graphicsDevice": "Metal",
+    "colorSpace": "Linear",
+    "samples": 150,
+    "rotations": 6,
+    "types": 5,
+    "states": [
+      "stored",
+      "selected",
+      "dim",
+      "preview",
+      "invalid"
+    ],
+    "representativeShape": "rune-5-22",
+    "isolatedPreviewScene": true,
+    "playModeRuns": 0,
+    "gameStoreAccesses": 0,
+    "consoleErrors": 0,
+    "consoleWarnings": 0,
+    "closureMethod": "graceful",
+    "exitCode": 0,
+    "pid": 61103
+  },
+  "previewPixels": {
+    "count": 34,
+    "bodyScaleCenterCellsRotationPreserved": true,
+    "changedPixelsOutsideRetiredEmblemFootprints": 0,
+    "newImageGeneration": 0,
+    "sourceTextureEdits": 0,
+    "pngBytes": 5377227
+  },
+  "checks": {
+    "focusedWiki": 65,
+    "uiContract": 15,
+    "uiRefresh": "PASS",
+    "wholeGameNUnitRuns": 0,
+    "nativeBuilds": 0
+  },
+  "captures": [
+    {
+      "file": "icons-rotation-0.png",
+      "sha256": "e4a1713aa28cd8aba731af705485c6426586eea507a825d85b7a734beecabb6b",
+      "bytes": 719505,
+      "rotationCW": 0,
+      "width": 1200,
+      "height": 1320,
+      "columns": [
+        "stored",
+        "selected",
+        "dim",
+        "preview",
+        "invalid"
+      ],
+      "rows": [
+        "attack",
+        "magic",
+        "support",
+        "critical",
+        "skill"
+      ]
+    },
+    {
+      "file": "icons-rotation-1.png",
+      "sha256": "7379abad1a6bd27aa36ced110b40106b3a824cd16dfea7e8a182b8a7e82424be",
+      "bytes": 730996,
+      "rotationCW": 1,
+      "width": 1200,
+      "height": 1320,
+      "columns": [
+        "stored",
+        "selected",
+        "dim",
+        "preview",
+        "invalid"
+      ],
+      "rows": [
+        "attack",
+        "magic",
+        "support",
+        "critical",
+        "skill"
+      ]
+    },
+    {
+      "file": "icons-rotation-2.png",
+      "sha256": "5ebfce00c547aa2ccd93280f604fe7d37d6a5ba0637d6eb940553f08dc3df5ef",
+      "bytes": 733234,
+      "rotationCW": 2,
+      "width": 1200,
+      "height": 1320,
+      "columns": [
+        "stored",
+        "selected",
+        "dim",
+        "preview",
+        "invalid"
+      ],
+      "rows": [
+        "attack",
+        "magic",
+        "support",
+        "critical",
+        "skill"
+      ]
+    },
+    {
+      "file": "icons-rotation-3.png",
+      "sha256": "966a22390248f0da1d181831f90c0487c97c27878089589aed3f46f6b2555a92",
+      "bytes": 719577,
+      "rotationCW": 3,
+      "width": 1200,
+      "height": 1320,
+      "columns": [
+        "stored",
+        "selected",
+        "dim",
+        "preview",
+        "invalid"
+      ],
+      "rows": [
+        "attack",
+        "magic",
+        "support",
+        "critical",
+        "skill"
+      ]
+    },
+    {
+      "file": "icons-rotation-4.png",
+      "sha256": "8ca5d0c95b9ef7324f5693e408a3f6785f78751cc1f17a3bdc445ff0c9a879c5",
+      "bytes": 733507,
+      "rotationCW": 4,
+      "width": 1200,
+      "height": 1320,
+      "columns": [
+        "stored",
+        "selected",
+        "dim",
+        "preview",
+        "invalid"
+      ],
+      "rows": [
+        "attack",
+        "magic",
+        "support",
+        "critical",
+        "skill"
+      ]
+    },
+    {
+      "file": "icons-rotation-5.png",
+      "sha256": "1e1a3ceac756890039c353d1eed4660067fad195d11dd96305a8779b734a70fe",
+      "bytes": 733849,
+      "rotationCW": 5,
+      "width": 1200,
+      "height": 1320,
+      "columns": [
+        "stored",
+        "selected",
+        "dim",
+        "preview",
+        "invalid"
+      ],
+      "rows": [
+        "attack",
+        "magic",
+        "support",
+        "critical",
+        "skill"
+      ]
+    }
+  ],
+  "evidenceLocation": "Task23 wiki-content-preview39-town8/protrusion-removal; original attachment, before PNGs and all six actual captures preserved.",
+  "firstEditorAttempt": {
+    "sourceCompile": "PASS",
+    "actualRendererProof": "NOT_RUN",
+    "processLifetimeExitCode": null,
+    "retryReason": "CLI-opened process disappeared before Pipeline connection; second attempt used a long-lived owned direct execution session."
+  },
+  "limits": [
+    "Editor renderer evidence is not a whole-game input/save test or physical-mobile test",
+    "Existing separate RuneMaster in-icon AddTypeBadge is outside the attached exterior Gem stamp scope and is preserved"
+  ],
+  "publication": "This renderer receipt does not claim publication; verify the exact final public commit/Pages/anonymous HTTP separately."
+}

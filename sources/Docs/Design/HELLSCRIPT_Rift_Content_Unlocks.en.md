@@ -10,7 +10,6 @@ The first-clear reward list now shows which gameplay services unlock at each rif
 |---:|---|---|
 | Start | Training, equipment management, Hunt Edict, basic recovery potions, selling, salvaging and storage | Keep essential controls available. Skills retain their hero-level and tree prerequisites. |
 | 1 | Equipment enhancement and offline rewards | Introduce the first gear improvement. Gold is required; offline accrual begins at activation. |
-| 3 | Slot-targeted rare crafting | Fill missing equipment slots using the existing gold and material costs. |
 | 5 | Equipment-slot upgrades | Persistent growth independent of gear replacement. Stones and a free workstation are required. |
 | 10 | Gem purchase, sockets, fusion and downgrade | Align with the first legendary weapon and gem boxes. Fusion remains 5:1; downgrading returns five of the preceding tier. |
 | 15 | Rune placement, reshape, fusion, purchase and weapon mastery | Introduce boards; kill-based mastery XP starts here. |
@@ -21,7 +20,7 @@ The first-clear reward list now shows which gameplay services unlock at each rif
 | 60 | Sweep and gem-potion crafting | Add repeat rewards and consumables. Sweeps still require the selected hero's clear record and daily allowance; potions consume matching gems. |
 | 80 | Masterworking | Requires enhancement +5, materials, gold and the account masterwork cap. |
 
-The catalog contains 14 permanent service entitlements. R100 awakened boxes, R200 set boxes, R300/500/650 rune boxes and R750/1000 gem boxes are item milestones, not new menu gates. Natural awakening and rune drop curves, masterwork caps and combat stats remain outside this change.
+The catalog contains 13 permanent service entitlements. R100 awakened boxes, R200 set boxes, R300/500/650 rune boxes and R750/1000 gem boxes are item milestones, not new menu gates. Natural awakening and rune drop curves, masterwork caps and combat stats remain outside this change.
 
 Latest update: [introductory rifts and rarity gates](HELLSCRIPT_Early_Rift_Balance.en.md). Unidentified purchases open at R25 and can award Legendary/Set items; natural rift rewards begin at R30; rerolls open at R35.
 

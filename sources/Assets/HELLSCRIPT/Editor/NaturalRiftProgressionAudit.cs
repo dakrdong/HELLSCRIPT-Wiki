@@ -73,7 +73,6 @@ namespace Hellscript.Editor
             public Header header=new Header();
             public long clock;
             public int attempt;
-            public uint craftRandom=0x715517u;
             public System.Diagnostics.Stopwatch wall=System.Diagnostics.Stopwatch.StartNew();
             public string Request()=>"natural-audit-"+Guid.NewGuid().ToString("N");
             public void Require(bool success){if(!success)throw new InvalidOperationException(store.Error);}
@@ -170,15 +169,6 @@ namespace Hellscript.Editor
             s.Require(s.store.SettleForgeJobs());EquipUpgrades(s);Cleanup(s);ClaimAndOpen(s);EquipUpgrades(s);Cleanup(s);Skills(s);
             s.Require(s.store.PreparePotions(s.store.Data.Hero.id,visit));s.Event("prepare-potions",visit);
             var a=s.store.Data;
-            if(ContentUnlocks.Has(a,ContentUnlocks.RareCraft)&&a.materials>=50&&a.gold>=500*Math.Max(1,a.Hero.highestClear)+700)
-            {
-                int slot=Enumerable.Range(1,7).FirstOrDefault(n=>!a.Hero.inventory.Any(i=>i.equipped&&i.slot==n));
-                if(slot>0)
-                {
-                    s.Require(s.store.Transact(s.Request(),"audit-rare-craft:"+slot,x=>ContentServices.Purchase(x,slot,1,ref s.craftRandom,out _)));
-                    s.Event("rare-craft",slot.ToString());EquipUpgrades(s);
-                }
-            }
             if(ContentUnlocks.Has(s.store.Data,ContentUnlocks.Enhance))
             {
                 int cap=s.store.Data.Hero.highestClear<5?1:2;

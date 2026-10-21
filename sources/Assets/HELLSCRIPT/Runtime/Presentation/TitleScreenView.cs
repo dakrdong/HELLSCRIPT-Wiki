@@ -11,7 +11,7 @@ namespace Hellscript
     {
         GameController game;Font font,displayFont;TitleVista vista;Action settings;
         RectTransform root,home,logoGroup,toolbar,footline;CanvasGroup homeGroup;
-        Button login,guest,server,enter,motion,language,options;
+        Button login,guest,server,enter,language,options;
         Text logo,eyebrow,tagline,chapter,footnote,version,entryHint;
         Vector2 lastSize;float scale=1;bool wasSettingsOpen;
         public TitleSession Session {get;private set;}
@@ -24,15 +24,14 @@ namespace Hellscript
 
         public void Initialize(GameController owner,Font bodyFont,TitleSession state,TitleVista backdrop,Action openSettings)
         {
-            game=owner;font=bodyFont;Session=state;vista=backdrop;settings=openSettings;root=(RectTransform)transform;
+            game=owner;font=bodyFont;Session=state;Session.MotionEnabled=true;vista=backdrop;settings=openSettings;root=(RectTransform)transform;
             displayFont=UiFonts.Display;
             if(displayFont==null)displayFont=font;
             toolbar=Rect("Title tools",root);
-            motion=ActionButton(toolbar,"title-motion","연출 켜짐",()=>{Session.MotionEnabled=!Session.MotionEnabled;Refresh();},false,13);
             language=ActionButton(toolbar,"title-language",LanguageOptions.Find(Loc.Language).NativeName,()=>game.ApplyLanguage(Loc.Language=="ko"?"en":"ko"),false,13);
             options=ActionButton(toolbar,"설정·안내","",()=>{CloseDialog();settings();},false,13);
             var gearRect=Rect("Settings gear",options.transform);Fill(gearRect);gearRect.offsetMin=Vector2.one*12;gearRect.offsetMax=-Vector2.one*12;
-            var gear=gearRect.gameObject.AddComponent<SettingsGearGraphic>();gear.color=Bone;gear.raycastTarget=false;
+            var gear=gearRect.gameObject.AddComponent<SettingsGearGraphic>();gear.color=UiSkin.Casual.Navy;gear.raycastTarget=false;
             chapter=Caption(root,"chapter","잿빛 성소",12,Gold,TextAnchor.MiddleLeft);
             logoGroup=Rect("Title identity",root);
             eyebrow=Caption(logoGroup,"eyebrow","금지된 기록이 깨어난다",13,Bone);
@@ -44,7 +43,7 @@ namespace Hellscript
             login=GoogleButton(home,"title-login","Google 연동",GoogleAction,15,1);
             guest=ActionButton(home,"title-guest","게스트로 시작",GuestAction,false,15);
             server=ActionButton(home,"title-server","서버 선택",ShowServers,false,16);
-            enter=ActionButton(home,"title-enter","캐릭터 선택하기",Enter,true,22);
+            enter=ActionButton(home,"title-enter","로그인",Enter,true,22);
             entryHint=Caption(home,"entry-hint","로그인하거나 게스트로 시작하세요.",12,Muted);
             footline=Rect("Title footer",root);
             footnote=Caption(footline,"demo-note","진행 상황은 현재 기기에 저장됩니다.",11,Muted,TextAnchor.MiddleLeft);
@@ -58,8 +57,7 @@ namespace Hellscript
             SetCaption(guest,Session.SignedIn?Loc.T("로그아웃"):Loc.T("게스트로 시작"));
             guest.onClick.RemoveAllListeners();guest.onClick.AddListener(GuestAction);
             SetCaption(server,Loc.F("{0}   ·   {1}   ›",TitleSession.ServerNames[Session.Server],TitleSession.ServerStates[Session.Server]));
-            SetCaption(motion,Loc.T(Session.MotionEnabled?"연출 켜짐":"연출 멈춤"));
-            SetCaption(enter,Loc.T("캐릭터 선택하기"));
+            SetCaption(enter,Loc.T("로그인"));
             entryHint.text=Loc.T("게스트로 시작하거나 Google을 연동하세요.");
         }
         public Button Find(string id)
@@ -85,7 +83,7 @@ namespace Hellscript
             if(game.AccountOwnershipBusy)return;
             if(!Session.SignedIn){ShowLogin();return;}
             if(!game.AccountStorageReady){game.UI.ShowToast(game.Notice);return;}
-            // The login flight brings its own sound; the stone door only plays when motion is paused.
+            // The flight owns its entry sound; use the standard cue only when no flight is available.
             game.UI.OpenCharacterSelection();if(game.UI.TitleFlight==null)game.Audio?.Play("flow.title_start");
         }
         void Update()
@@ -140,9 +138,9 @@ namespace Hellscript
                 tagline.gameObject.SetActive(false);
             }
             else tagline.gameObject.SetActive(true);
-            float toolsW=274;Fit(toolbar,w-toolsW-20,12,toolsW,46);toolbar.localScale=Vector3.one*scale;
+            float toolsW=158;Fit(toolbar,w-toolsW-20,12,toolsW,46);toolbar.localScale=Vector3.one*scale;
             if(toolbar.GetComponent<CanvasGroup>()==null)toolbar.gameObject.AddComponent<CanvasGroup>();
-            Put((RectTransform)motion.transform,0,0,106,46);Put((RectTransform)language.transform,116,0,102,46);Put((RectTransform)options.transform,228,0,46,46);
+            Put((RectTransform)language.transform,0,0,102,46);Put((RectTransform)options.transform,112,0,46,46);
             chapter.gameObject.SetActive(w>700);Fit(chapter.rectTransform,28,17,210,38);chapter.rectTransform.localScale=Vector3.one*scale;
             Fit(footline,20,h-27,w-40,20);footline.localScale=Vector3.one*scale;
             Put(footnote.rectTransform,0,0,(w-40)*.65f,20);Put(version.rectTransform,(w-40)*.65f,0,(w-40)*.35f,20);
@@ -171,7 +169,8 @@ namespace Hellscript
             var r=Plate(id,parent,primary?Red:Slate,false);var button=r.gameObject.AddComponent<UiButton>();button.targetGraphic=r.GetComponent<Image>();
 
             var label=Caption(r,"Caption",text,fontSize,primary?Bone:Muted);Fill(label.rectTransform);label.rectTransform.offsetMin=new Vector2(12,3);label.rectTransform.offsetMax=new Vector2(-12,-3);
-            UiTheme.Button(button,primary);button.onClick.AddListener(()=>action());return button;
+            UiTheme.Button(button,primary);UiSkin.Casual.ApplyChrome(button,close:id=="title-dialog-close");UiSkin.Casual.ApplyLabel(label);
+            button.onClick.AddListener(()=>action());return button;
         }
         Button GoogleButton(Transform parent,string id,string text,Action action,int fontSize,float read)
         {

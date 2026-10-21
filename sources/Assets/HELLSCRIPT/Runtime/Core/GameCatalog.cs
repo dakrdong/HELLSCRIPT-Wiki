@@ -327,9 +327,16 @@ namespace Hellscript
         public bool tutorial;
         public int tutorialPhase;
         public int tutorialFlowVersion,tutorialLessonStep;
+        public int guidePotionLessonVersion;
         // The guide tutorial's next point in the current road segment.
         public int guideWaypoint;
-        public float guideGoblinKilledAt;
+        public float guideGoblinKilledAt,guideSwarmStartedAt;
+        public float guideFrontSpawnAt;
+        public bool guideFrontSpawnStopped;
+        // Hazard lessons: when the current encounter began, and which enemy groups were already brought in (bit per group).
+        public float guidePhaseAt;
+        public int guideSpawned;
+        public int guideGear;
         public float pitStageTime;
         public string guideSetup="";
         public CombatJournalData journal;

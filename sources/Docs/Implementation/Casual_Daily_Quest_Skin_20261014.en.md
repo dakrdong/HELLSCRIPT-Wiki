@@ -2,6 +2,10 @@
 
 2026-10-14 · [Korean](Casual_Daily_Quest_Skin_20261014.md)
 
+## 2026-10-17 design ② follow-up
+
+Resolved the differences verified in the latest 38-artboard handoff. `UiButton.SetCompleted(q.claimed)` opts into a white completed face while retaining disabled input, roles, label alpha, the check mark and transactions. Each state panel now uses one `StorageSurface.SetSkin(...,fill:)`, preserving white/claimed/information fills and geometry. The integration owner supplies both shared APIs; global fonts and the shared Jua policy remain unchanged. `DailyQuestSkinTests` now covers mixed-state mesh fills/face colors, real disabled submit rejection, post-claim state, repaint and unchanged account data. Existing rules, midnight/clock rollback, failed-save and attendance-tab paths are preserved. Unity and visual acceptance belong to the integration owner. Static UI-contract regressions and refresh guards passed, and the focused test sources typechecked against the shared APIs with zero errors or warnings. No tests were executed. The unsupported-API notes below describe the earlier 10/14 state and are resolved by this follow-up source.
+
 ## Final handoff superseding the individual queue
 
 The user switched all screens to one integrated validation effort. The individual Daily Quest Unity/build plan is closed. Integration owner `01a13790-39bc-7062-a516-b83a354000a8` will use a separate integration branch in task-6/skill-skin and its existing Library in place. After saving this handoff, the screen owner stops source edits until the integrator requests a concrete defect fix. Branches, source, art, evidence and the recovery stash are retained.

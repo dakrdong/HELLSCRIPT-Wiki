@@ -146,11 +146,11 @@ namespace Hellscript
                 {
                     if(!portalBag&&GearServiceAvailable)
                     {
-                        if(!ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Enhance))InventoryNote(inventoryDetail.content,ContentUnlocks.Condition(ContentUnlocks.Enhance),18,muted);
-                        if(ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Enhance))InventoryButton(inventoryDetail.content,"대장간에서 장비 강화",()=>ShowBlacksmith(2,id));
-                        if(!ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Reroll))InventoryNote(inventoryDetail.content,ContentUnlocks.Condition(ContentUnlocks.Reroll),18,muted);
-                        if(item.rolls.Count>0&&ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Reroll))InventoryButton(inventoryDetail.content,"한 줄 재설정",()=>ShowBlacksmith(0,id));
-                        if(ContentUnlocks.Has(a,ContentUnlocks.Enhance))InventoryButton(inventoryDetail.content,"걸작 · 진행과 초기화",()=>ShowInventoryMasterwork(id));
+                        if(!ContentUnlocks.ForgeHas(game.Store.Data,ContentUnlocks.Enhance))InventoryNote(inventoryDetail.content,ContentUnlocks.Condition(ContentUnlocks.Enhance),18,muted);
+                        if(ContentUnlocks.ForgeHas(game.Store.Data,ContentUnlocks.Enhance))InventoryButton(inventoryDetail.content,"대장간에서 장비 강화",()=>ShowBlacksmith(2,id));
+                        if(!ContentUnlocks.ForgeHas(game.Store.Data,ContentUnlocks.Reroll))InventoryNote(inventoryDetail.content,ContentUnlocks.Condition(ContentUnlocks.Reroll),18,muted);
+                        if(item.rolls.Count>0&&ContentUnlocks.ForgeHas(game.Store.Data,ContentUnlocks.Reroll))InventoryButton(inventoryDetail.content,"한 줄 재설정",()=>ShowBlacksmith(0,id));
+                        if(ContentUnlocks.ForgeHas(a,ContentUnlocks.Enhance))InventoryButton(inventoryDetail.content,"걸작 · 진행과 초기화",()=>ShowInventoryMasterwork(id));
                     }
                     if(!item.equipped)
                     {

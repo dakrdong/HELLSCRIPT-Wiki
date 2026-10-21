@@ -14,13 +14,14 @@ namespace Hellscript
         void BuildGeneratedGeometry(RunState run)
         {
             var layout=run.layout;int field=layout.Field;
-            // The field's own floor art when it exists; otherwise the shared rift stone tinted per field.
+            // The field's own floor art when it exists; otherwise the field-coloured ground material.
             Material ground=FieldTile(field,"Floor");
-            if(ground==null){ground=FieldGround(field);var paving=Resources.Load<Texture2D>("Art/RiftStone");if(paving!=null)ground.mainTexture=paving;}
+            if(ground==null)ground=FieldGround(field);
             var edge=FieldTile(field,"Trim")??FieldWall(field);var wall=FieldTile(field,"Wall")??FieldWall(field);
             if(layout.rooms.Any(r=>r.outline!=null&&r.outline.Count>=3))BuildOrganicFloor(run,ground,edge,wall);
             else
             {
+            var coveredFloor=layout.rooms.Select(room=>room.Bounds).ToList();
             foreach(var corridor in layout.corridors)for(int n=1;n<corridor.points.Count;n++)
             {
                 Vector2 a=corridor.points[n-1],b=corridor.points[n];int pieces=Mathf.Max(1,Mathf.CeilToInt(Vector2.Distance(a,b)/4));
@@ -28,8 +29,13 @@ namespace Hellscript
                 {
                     Vector2 from=Vector2.Lerp(a,b,part/(float)pieces),to=Vector2.Lerp(a,b,(part+1f)/pieces),middle=(from+to)*.5f;
                     Vector2 size=new Vector2(Mathf.Abs(from.x-to.x),Mathf.Abs(from.y-to.y))+Vector2.one*corridor.width;
-                    var piece=Shape("Passage "+corridor.index+" part "+part,PrimitiveType.Cube,world.transform,Position(middle)-Vector3.up*.25f,new Vector3(size.x,.5f,size.y),ground);
-                    passageGeometry.Add(new PassageView{go=piece,roomA=corridor.roomA,roomB=corridor.roomB,center=middle});piece.SetActive(false);
+                    var footprint=new Rect(middle-size*.5f,size);
+                    foreach(var floor in RiftFloorMesh.UncoveredRectangles(footprint,coveredFloor))
+                    {
+                        var piece=RiftFloorMesh.CreateSlab("Passage "+corridor.index+" part "+part,world.transform,Position(Vector2.zero),floor,RiftMaterial(ground));
+                        passageGeometry.Add(new PassageView{go=piece,roomA=corridor.roomA,roomB=corridor.roomB,center=floor.center});piece.SetActive(false);
+                    }
+                    coveredFloor.Add(footprint);
                 }
             }
             foreach(var room in layout.rooms)

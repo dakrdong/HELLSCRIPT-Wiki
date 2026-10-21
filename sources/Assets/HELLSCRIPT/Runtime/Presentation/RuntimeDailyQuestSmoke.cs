@@ -42,6 +42,7 @@ namespace Hellscript
         {Screen.SetResolution(w,h,FullScreenMode.Windowed);float until=Time.realtimeSinceStartup+8;while((Screen.width!=w||Screen.height!=h)&&Time.realtimeSinceStartup<until)yield return null;Require(Screen.width==w&&Screen.height==h,"Native resolution mismatch");yield return new WaitForSecondsRealtime(.3f);}
         IEnumerator Capture(string name)
         {
+            Debug.developerConsoleVisible=false;
             yield return new WaitForEndOfFrame();var image=ScreenCapture.CaptureScreenshotAsTexture();
             Require(image.width==Screen.width&&image.height==Screen.height,"Daily capture/render pixel mismatch");
             File.WriteAllBytes(Path.Combine(output,name+".png"),image.EncodeToPNG());

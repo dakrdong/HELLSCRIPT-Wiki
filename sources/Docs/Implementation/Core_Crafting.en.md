@@ -4,7 +4,7 @@ Updated: 2026-09-23 · [한국어](Core_Crafting.md)
 
 ## Rules
 
-The fourth forge tab selects a core category and a specific legendary/set recipe. Existing town blacksmith access and content unlock rules apply. Rare crafting, enchanting, equipment enhancement and slot mastery remain available.
+The fourth forge tab selects a core category and a specific legendary/set recipe. Existing town blacksmith access and content unlock rules apply. Enchanting, equipment enhancement and slot mastery remain available.
 
 - Salvaging one legendary/set item grants one matching core through existing single, bulk and automatic salvage paths. Materials, enhancement stones and aspect rewards are preserved.
 - `AccountSave.cores[8]` already stores account-wide balances. “Shared across bag and storage” reads that total once, without fictitious stacks or double counting. Both ring positions share ring cores.
@@ -48,6 +48,6 @@ Screens covered portrait 440×956, landscape 956×440 and PC 1600×900 / 1440×9
 
 Evidence: [test XML](BlacksmithEvidence/core-crafting-editmode.xml), [summary](CoreCraftingEvidence/validation.json), [runtime](CoreCraftingEvidence/result.txt), [restart](CoreCraftingEvidence/restart-result.txt), [portrait forge](CoreCraftingEvidence/portrait-ko-forge.png), [English landscape](CoreCraftingEvidence/landscape-en-forge.png), [PC catalogue](CoreCraftingEvidence/pc-16x9-ko-catalogue.png), [large text](CoreCraftingEvidence/large-text-portrait.png).
 
-Implementation: [domain](../../Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs), [transaction](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs), [tab](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs), [dialogs](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Dialogs.cs), [tests](../../Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs), [native acceptance](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs).
+Implementation: [domain](../../Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs), [transaction](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs), [tab](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs), [dialogs](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.CoreDialogs.cs), [tests](../../Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs), [native acceptance](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs).
 
 The merge owner regenerates, verifies and publishes the wiki from merged `main`.

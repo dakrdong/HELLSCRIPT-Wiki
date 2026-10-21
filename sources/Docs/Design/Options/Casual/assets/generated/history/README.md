@@ -1,0 +1,1 @@
+Superseded native map originals are retained for provenance. The user requested character-free backgrounds and clearer corner / translucent central / hidden map modes on 2026-10-15. Runtime derivatives use only the current top-level PNG files. No permanent deletion was performed.

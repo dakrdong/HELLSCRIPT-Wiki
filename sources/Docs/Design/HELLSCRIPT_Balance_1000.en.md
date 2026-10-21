@@ -81,7 +81,7 @@ Actual rotations, resource costs, ultimate uptime, conditional passives, summons
 
 | Rift | Unlock / milestone |
 |---|---|
-| Start–3 | Training, Hunt Edict, equipment management; enhancement/offline at R1; targeted rare crafting at R3. |
+| Start–3 | Training, Hunt Edict, equipment management; enhancement/offline at R1. |
 | 5 / 10 / 15 | Slot tutorial; gem services; runes/mastery. |
 | 25 / 35 / 40 | Unidentified shop; reroll; aspect-imprint tutorial. Preserve aspect collection from the first salvage. |
 | 50 / 60 / 80 | Selected core crafting; sweep and gem elixirs; masterwork. |

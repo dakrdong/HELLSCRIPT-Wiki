@@ -119,7 +119,11 @@ namespace Hellscript
             if(Legacy(a))return;
             // Re-entry from a retired tutorial uses only the exact guide baseline; locked options stay locked.
             if(Tutorials.Mandatory(a)&&hero.id==a.Hero.id&&hero.heroClass==HeroClass.Warrior&&(a.guide.mapHero==""||a.guide.mapHero==hero.id))
-            {var starter=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(starter,GuideTutorial.BarePowers(hero));if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(starter)))return;}
+            {
+                var starter=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(starter,GuideTutorial.BarePowers(hero));var baseline=HuntEdictLoadout.FromHero(starter);
+                if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(baseline))return;
+                if(a.guide.tutorialRun==null&&JsonUtility.ToJson(candidate)==JsonUtility.ToJson(GuideTutorial.PotionStartingPowers(baseline)))return;
+            }
             if(Tutorials.Mandatory(a)&&a.guide.mapHero=="")
             {
                 var initial=RuneGrowth.Copy(hero);GameStore.ApplyHuntEdict(initial,GameStore.ProloguePowers(hero,true));
@@ -129,6 +133,7 @@ namespace Hellscript
                 if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(HuntEdictLoadout.FromHero(initial)))return;
             }
             var original=new HuntEdictEditSession(hero);if(candidate.UsesTree)original.UseSkillTree(hero);
+            if(GuideTutorial.PotionPreparationPhase(a.guide.tutorialRun)&&JsonUtility.ToJson(candidate)==JsonUtility.ToJson(GuideTutorial.PotionStartingPowers(original.Draft)))return;
             // No permission delta in an identical document. GameStore.Write still validates owned skills and commits the save.
             if(JsonUtility.ToJson(candidate)==JsonUtility.ToJson(original.Draft))return;
             var expected=original.Draft;
@@ -151,7 +156,7 @@ namespace Hellscript
                 if(HuntEdictSummary.Value(original.Draft.edict,o.id)!=o.value&&!Direct(a,hero,o.id)&&HuntEdictSummary.Value(expected.edict,o.id)!=o.value)
                     throw new ArgumentException(Condition(o.id));
             if(!candidate.UsesTree)return;
-            var first=Tutorials.StarterComparison(hero.heroClass).skill;
+            var first=GuideTutorial.SkillLessons(a.guide.tutorialRun)&&a.guide.tutorialRun.heroId==hero.id&&a.guide.tutorialRun.tutorialPhase==GuideTutorial.FirstTalk?GuideTutorial.Hook:Tutorials.StarterComparison(hero.heroClass).skill;
             if(hero.level<2&&(candidate.classSkills.actives.Any(id=>id!=""&&id!=first&&!original.Draft.classSkills.Equipped(id))||
                 candidate.classSkills.ranks.Any(r=>r.id!=first&&r.rank>original.Draft.classSkills.Rank(r.id))))
                 throw new ArgumentException(Loc.T("배우고 장착한 스킬의 공개된 사용 방식만 저장할 수 있습니다."));

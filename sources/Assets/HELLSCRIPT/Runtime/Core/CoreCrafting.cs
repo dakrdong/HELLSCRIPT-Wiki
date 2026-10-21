@@ -72,7 +72,7 @@ namespace Hellscript
         static string Error(AccountSave a,Item definition,int investment)
         {
             if(definition==null)return "제작할 장비를 선택해 주세요.";
-            if(!ContentUnlocks.Has(a,ContentUnlocks.CoreCraft))return ContentUnlocks.Condition(ContentUnlocks.CoreCraft);
+            if(!ContentUnlocks.ForgeHas(a,ContentUnlocks.CoreCraft))return ContentUnlocks.Condition(ContentUnlocks.CoreCraft);
             if(!string.IsNullOrEmpty(a.coreCraft?.pendingId))return "이전 제작 결과를 먼저 확인해 주세요.";
             if(investment<0||investment>MaximumInvestment)return "심연 주화는 0~8,000개까지 사용할 수 있습니다.";
             if(a.cores[definition.slot]<CoreCost)return "해당 부위의 코어가 10개 필요합니다.";

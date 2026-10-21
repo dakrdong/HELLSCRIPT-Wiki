@@ -46,7 +46,6 @@
 | 콘텐츠 | 지원하는 한 번의 실행 | 기존 실행 경로 |
 | --- | --- | --- |
 | 장비 강화 | 소유 +0 장비 → +1의 골드 | `GearEnhancement.Quote/Apply` |
-| 희귀 제작 | 선택 부위 장비 1개의 골드·재료 | `ContentServices.Purchase` |
 | 부위 강화 | 1 → 2의 강화석, 정상 5분 대기 | `BlacksmithCatalog.Start` |
 | 보석 합성 | 선택 T1 보석 5개 → T2 1개 | `Jeweler.Convert` |
 | 룬 구입 | G0 한 칸 룬 1개의 골드 | `TownTrade.BuyRune` |

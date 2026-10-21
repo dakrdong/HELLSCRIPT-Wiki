@@ -37,8 +37,8 @@ namespace Hellscript
             Require(ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Train),"Fresh account must have training.");
             game.ApplyLanguage("ko");game.UI.ShowContentUnlocks();yield return Capture("new-ko",720,1280);
             game.ApplyLanguage("en");game.UI.ShowContentUnlocks();yield return Capture("new-en",1280,720);
-            game.UI.ShowShop();yield return Capture("shop-locked-en",720,1280);
-            Require(game.UI.GetComponentsInChildren<Button>().Count(b=>!b.interactable)>=3,"Individual shop functions not locked.");
+            game.UI.ShowTownMenu();yield return Capture("menu-locked-en",720,1280);
+            Require(game.UI.GetComponentsInChildren<Button>().Count(b=>!b.interactable)>=3,"Individual town menu functions not locked.");
             game.Begin(seed:849);game.Combat.Abandon();game.ReturnTown();
             Require(ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Train),"Failed first attempt did not unlock training.");
             Require(!ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Enhance),"Failure unlocked enhancement.");

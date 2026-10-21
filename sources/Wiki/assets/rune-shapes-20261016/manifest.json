@@ -1,0 +1,3169 @@
+{
+  "schemaVersion": 1,
+  "role": "derived-rune-shape-preview",
+  "scope": "Derived2D shape previews, not runtime screenshots/new paintings",
+  "renderContract": "RuneGemView.Icon/Piece(board=null,selected=false,type=0,state=stored), current painted PNG/UV and exact axial geometry/storage default rotation",
+  "paletteQualification": "Attack palette example only; shape IDs support five types and no type is assigned by shape",
+  "runtimePixelEqualityClaim": false,
+  "presentation": {
+    "omitDetachedOffsetGlint": true,
+    "omittedRuntimeCall": "Layer(9).Outline(Inset(loop,2.4) + (0,3) + (-.5,.6), 1, white alpha .6)",
+    "omitExteriorTypeEmblem": true,
+    "framingPreserved": true,
+    "framingOnlyPoints": "Retired 9x9 type-emblem corners preserve prior Wiki body scale/centre; never rendered or texture-sampled",
+    "preserved": [
+      "exact cells",
+      "storage rotation",
+      "painted tile UV",
+      "shared ink rims",
+      "shadow",
+      "Wiki body scale and centre"
+    ]
+  },
+  "framing": "Rendered geometry plus retired exterior type-emblem corner bounds define framingBounds with24px Wiki padding; geometryBounds describes rendered geometry only; original cell-based game FitIcon is unchanged",
+  "gpuDifferences": [
+    "Source PNG vs Unity imported/compressed texture",
+    "CPU sRGB blend/bilinear/supersample vs GPU color-space/shader sampling",
+    "Wiki framing uses framingBounds including retired-emblem corners, not original FitIcon crop",
+    "The offset outer glint is omitted for derived presentation; the retired exterior type emblem is absent from both current runtime and previews"
+  ],
+  "primitiveWhiteRgba": [
+    255,
+    255,
+    255,
+    255
+  ],
+  "sourcePins": [
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Runes/shapes.json",
+      "sha256": "fafd73f9a8e60a1b566b52cb324d6b33ff8dd179736b9aeaceafd72f1c5d43f4",
+      "bytes": 49465
+    },
+    {
+      "path": "Docs/Implementation/Rune_Mastery_Catalog.json",
+      "sha256": "c3c63b0b87d6277c620a1570f7ab349319793d89fced6da5f071d48d87172bf1",
+      "bytes": 834232
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Runes/V13/catalog.json",
+      "sha256": "4ab84e950bcec2a7a7e6796d85e40ac1e5f6fc56baf6e5225d51ac312d2d231c",
+      "bytes": 353535
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneGemView.cs",
+      "sha256": "46d9a72e922c0c20c8a4236342f0f3539640f996efb09f3c81ee74283850b3eb",
+      "bytes": 16413
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneGemMesh.cs",
+      "sha256": "51886c63be94ea7c4c8e84223c36da118d3eb8e4291b277ea11bc4c8cd042596",
+      "bytes": 6490
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardArt.cs",
+      "sha256": "51b83cdf5c10ff5f7907cb3297b35dfa066da5166c8ab780242557fc151735df",
+      "bytes": 7815
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/UiTheme.cs",
+      "sha256": "b4b68d7e0bcfa54a1d65812bdd45386c1513a28b6fa46861e9f780e059595a4a",
+      "bytes": 28566
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneV13Art.cs",
+      "sha256": "00defd6cb9842212786f57ac30c7e1c3d36c8261ba0d82ff5231da44ba1b25d6",
+      "bytes": 1457
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Runes/RuneDefinitions.cs",
+      "sha256": "5ec7844a1f6b315fc7d9425b72fd73e691ec7ecbee899ac552ce4bd1b0ec1f94",
+      "bytes": 11125
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Runes/RuneMasteryCatalog.cs",
+      "sha256": "6b9dfc97afa2c4c422d3c95620681e3b5a7fbedd5f902339b8d1cfbd17e49609",
+      "bytes": 6964
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Runes/RuneBoardSession.cs",
+      "sha256": "91007502e3cd863baed0f224f397365c9bcf182e655ad291765a1c2ac7d51a46",
+      "bytes": 12098
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.Panels.cs",
+      "sha256": "849a0b9d70704f5d23bfa19ce2b188916a57fc286548872f364e30329f216d00",
+      "bytes": 21717
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Runtime/Presentation/RuneBoardWindow.cs",
+      "sha256": "a42884293d55bbdf7b0502bff59c33be5c51a1160ec2c780de36985cfd24b0ca",
+      "bytes": 12190
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Art/RuneBoard/Casual/Tiles/gem-attack-a.png",
+      "sha256": "e73ce15791f84a47e40f7533b93687101fac6bc9027b618ec8c3471257a2fd45",
+      "bytes": 341026
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Runes/V13/glyphs.json",
+      "sha256": "0880f6e5c576c351532c302154988b8d0af8f7a6bb185dd952e4a28093f0c812",
+      "bytes": 4723
+    },
+    {
+      "path": "Assets/HELLSCRIPT/Resources/Runes/V13/glyph-atlas.png",
+      "sha256": "fedb163fdb765a3fd2e5565d159b4ee056374d0419f1dc9ace26f25f95d6fde4",
+      "bytes": 316035
+    },
+    {
+      "path": "tools/wiki_rune_shape_previews.py",
+      "sha256": "b127c5531449c89ed21fc21d3a7864198c594a0fe9746134a59063547e936c3d",
+      "bytes": 20790
+    }
+  ],
+  "textureUV": {
+    "Assets/HELLSCRIPT/Resources/Art/RuneBoard/Casual/Tiles/gem-attack-a.png": [
+      0.0,
+      0.078125,
+      1.0,
+      0.876953125
+    ]
+  },
+  "records": [
+    {
+      "id": "rune-1-01",
+      "size": 1,
+      "number": 1,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-1-01.png",
+      "file": "evidence/rune-shapes/rune-1-01.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "b41a1d54b2700e917b99ee1fbbd8834ee2dba6ff83f7c399a77179b42f525be5",
+      "bytes": 180851,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        46,
+        46,
+        466,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -27.084609690826525
+          ],
+          [
+            24.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -27.084609690826525
+          ],
+          [
+            24.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 8.63985424475131,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 54,
+      "textureApplications": 1,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-2-01",
+      "size": 2,
+      "number": 1,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        }
+      ],
+      "rotationCW": 2,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-2-01.png",
+      "file": "evidence/rune-shapes/rune-2-01.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "4e80d8fa63491e014133da124e65073b1b3fa8ea51041ebe300a6e6699085739",
+      "bytes": 178894,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        21,
+        55,
+        490,
+        455
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -60.0,
+            -27.084609690826525
+          ],
+          [
+            24.0,
+            44.56921939082653
+          ]
+        ],
+        "framingBounds": [
+          [
+            -60.0,
+            -27.084609690826525
+          ],
+          [
+            24.0,
+            44.56921939082653
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 5.523809523809524,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 96,
+      "textureApplications": 2,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-3-01",
+      "size": 3,
+      "number": 1,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        }
+      ],
+      "rotationCW": 2,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 0
+        },
+        {
+          "q": -2,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-3-01.png",
+      "file": "evidence/rune-shapes/rune-3-01.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "5715067de2b8b09c41e7e6a0940e8b0793e9d9b40eed45bbb8d915c490d58409",
+      "bytes": 149815,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        21,
+        75,
+        491,
+        437
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -96.0,
+            -27.084609690826525
+          ],
+          [
+            24.0,
+            65.35382909082652
+          ]
+        ],
+        "framingBounds": [
+          [
+            -96.0,
+            -27.084609690826525
+          ],
+          [
+            24.0,
+            65.35382909082652
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.8666666666666667,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 138,
+      "textureApplications": 3,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-3-02",
+      "size": 3,
+      "number": 2,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ],
+      "rotationCW": 1,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-3-02.png",
+      "file": "evidence/rune-shapes/rune-3-02.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "9dd821bbcf4fad839c4e64fbfc1724e7ce9f2af4144084ed7211e343b8b79741",
+      "bytes": 218084,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        49,
+        35,
+        463,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -60.0,
+            -68.65382909082653
+          ],
+          [
+            24.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -60.0,
+            -68.65382909082653
+          ],
+          [
+            24.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 4.870172684648363,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 120,
+      "textureApplications": 3,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-3-03",
+      "size": 3,
+      "number": 3,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-3-03.png",
+      "file": "evidence/rune-shapes/rune-3-03.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "47a2d1d85b2f1aa262291fccaa57223abd4919188c424cd0b22bac32022851b6",
+      "bytes": 160641,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        86,
+        33,
+        426,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.9979858839586195,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 138,
+      "textureApplications": 3,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-01",
+      "size": 4,
+      "number": 1,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-01.png",
+      "file": "evidence/rune-shapes/rune-4-01.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "33d10640f0afe9446cee593821bba45ed0e8326b07ea1cecc6c52daf31090e79",
+      "bytes": 110117,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        191,
+        29,
+        321,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            24.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            24.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 180,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-02",
+      "size": 4,
+      "number": 2,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-02.png",
+      "file": "evidence/rune-shapes/rune-4-02.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "62e5f7fad8688d1c2344882b4e542b6f9ac4e9ba397c8c7e670ca72605c29608",
+      "bytes": 163353,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        111,
+        31,
+        401,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.3907458589765698,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 162,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-03",
+      "size": 4,
+      "number": 3,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-03.png",
+      "file": "evidence/rune-shapes/rune-4-03.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "82dbc67d86c443de55b7d01370bfabaa004feb6895a6c0ae32eb52f10ca58932",
+      "bytes": 132084,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        130,
+        30,
+        382,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 180,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-04",
+      "size": 4,
+      "number": 4,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-04.png",
+      "file": "evidence/rune-shapes/rune-4-04.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "f589661538ec145fb54d712f4fb15de1655995c767f8fcfaf36cea8025e61239",
+      "bytes": 211181,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        86,
+        33,
+        427,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.9979858839586195,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 144,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-05",
+      "size": 4,
+      "number": 5,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-05.png",
+      "file": "evidence/rune-shapes/rune-4-05.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "3ac6be42540be3d616b07a0629feb504a7e9e29d11ff38a0465fac4efb447ba6",
+      "bytes": 132176,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        130,
+        30,
+        382,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 180,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-06",
+      "size": 4,
+      "number": 6,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "rotationCW": 4,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": -2
+        },
+        {
+          "q": 0,
+          "r": -2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-06.png",
+      "file": "evidence/rune-shapes/rune-4-06.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "2a30fed7717890c657bb780fea6435840478401176be32d9564f9353bce674b6",
+      "bytes": 167647,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        108,
+        21,
+        404,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -27.084609690826525
+          ],
+          [
+            60.0,
+            106.92304849082653
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -27.084609690826525
+          ],
+          [
+            60.0,
+            106.92304849082653
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.462488683826027,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 180,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-4-07",
+      "size": 4,
+      "number": 7,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-4-07.png",
+      "file": "evidence/rune-shapes/rune-4-07.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "6e412cdfd1c38902f993486859cda7b3c0f1a29f79f4428422236b1389ba2c28",
+      "bytes": 197231,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        21,
+        40,
+        491,
+        483
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.8666666666666667,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 180,
+      "textureApplications": 4,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-01",
+      "size": 5,
+      "number": 1,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": 4
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 0,
+          "r": 4
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-01.png",
+      "file": "evidence/rune-shapes/rune-5-01.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "9794d7f31958cee2ccadc59742b02fd7cc1f170c0badafb42f9a6e32e5829018",
+      "bytes": 98073,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        203,
+        27,
+        309,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -193.36148729082655
+          ],
+          [
+            24.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -193.36148729082655
+          ],
+          [
+            24.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.1092684012385496,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-02",
+      "size": 5,
+      "number": 2,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-02.png",
+      "file": "evidence/rune-shapes/rune-5-02.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "0236164fe4ac683ae1615958b9080bada85f07b0dff05b2c06a9d2b2b79ce5da",
+      "bytes": 134172,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        144,
+        29,
+        368,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 204,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-03",
+      "size": 5,
+      "number": 3,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-03.png",
+      "file": "evidence/rune-shapes/rune-5-03.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "9fabb1febb9a883f73baf30033cba640aaba098fedabc44c89750c86fc8745c6",
+      "bytes": 134200,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        144,
+        29,
+        368,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 204,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-04",
+      "size": 5,
+      "number": 4,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 3
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 3
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-04.png",
+      "file": "evidence/rune-shapes/rune-5-04.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "e3f4943be327455d7c04d3a0cc7f5bf45a06e02e52ae6695ad10abdf6cdce225",
+      "bytes": 113120,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        156,
+        28,
+        356,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -172.57687759082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -172.57687759082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.3293537811024816,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-05",
+      "size": 5,
+      "number": 5,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        }
+      ],
+      "rotationCW": 1,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": -1,
+          "r": 1
+        },
+        {
+          "q": -2,
+          "r": 2
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": -1,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-05.png",
+      "file": "evidence/rune-shapes/rune-5-05.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "b927f398ff0cb1937631ed9bbcacbd58ba48ebf23c5a23f035220eb1e75393c7",
+      "bytes": 244812,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        22,
+        40,
+        491,
+        483
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -96.0,
+            -89.43843879082654
+          ],
+          [
+            24.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -96.0,
+            -89.43843879082654
+          ],
+          [
+            24.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.8666666666666667,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 168,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-06",
+      "size": 5,
+      "number": 6,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-06.png",
+      "file": "evidence/rune-shapes/rune-5-06.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "088548275b5d019497e1156d511e5a85a751300e5ba751e814d1d657b32c9ea5",
+      "bytes": 161370,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        130,
+        30,
+        382,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 204,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-07",
+      "size": 5,
+      "number": 7,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-07.png",
+      "file": "evidence/rune-shapes/rune-5-07.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "869d5e18ff3d8561d9e4bf6fbc62d2fe2dab3a4c68b397a19c76edd5dbb1c221",
+      "bytes": 198563,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        50,
+        31,
+        462,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.3907458589765698,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 204,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-08",
+      "size": 5,
+      "number": 8,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-08.png",
+      "file": "evidence/rune-shapes/rune-5-08.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "f90dcb012c7e064ae2cf9e1c8566ddc5994d2db0ba509a9a28a8561f0c5dee3b",
+      "bytes": 162049,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        130,
+        30,
+        382,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 186,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-09",
+      "size": 5,
+      "number": 9,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-09.png",
+      "file": "evidence/rune-shapes/rune-5-09.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "599c703365defed62a43597fc5befbe2aad328d0f6d08d3684af14fee72df553",
+      "bytes": 198089,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        50,
+        31,
+        462,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.3907458589765698,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 204,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-10",
+      "size": 5,
+      "number": 10,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 3
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 3
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-10.png",
+      "file": "evidence/rune-shapes/rune-5-10.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "b94641309d2f019c0600415f819814248d942d98b0f6f69087510934bca60bdb",
+      "bytes": 112995,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        156,
+        28,
+        356,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -172.57687759082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -172.57687759082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.3293537811024816,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-11",
+      "size": 5,
+      "number": 11,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-11.png",
+      "file": "evidence/rune-shapes/rune-5-11.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "99e05ebec6e82229d07114dfdd0a8fdfe06419927579c172adbd49cab0954633",
+      "bytes": 159371,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        77,
+        30,
+        435,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-12",
+      "size": 5,
+      "number": 12,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 2
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-12.png",
+      "file": "evidence/rune-shapes/rune-5-12.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "f0b3383dcd384379d59a11205b9b147033089941269bed109c29bede47987008",
+      "bytes": 133866,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        97,
+        29,
+        415,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-13",
+      "size": 5,
+      "number": 13,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 0,
+          "r": 3
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-13.png",
+      "file": "evidence/rune-shapes/rune-5-13.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "883c578d164669995a1427d374ea95e03c4e52c2d34280ba23a246de96a08494",
+      "bytes": 133998,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        144,
+        29,
+        368,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            60.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            60.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-14",
+      "size": 5,
+      "number": 14,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-14.png",
+      "file": "evidence/rune-shapes/rune-5-14.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "934c56c06e35b9704c1f1ece820626584d0cddee18748af40eab1ae300207646",
+      "bytes": 159245,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        77,
+        30,
+        435,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-15",
+      "size": 5,
+      "number": 15,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-15.png",
+      "file": "evidence/rune-shapes/rune-5-15.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "2b7aa84a4abd412229f25ba3f4ff2715adc580ae856328887705ec7decf261f9",
+      "bytes": 161409,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        77,
+        30,
+        435,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 204,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-16",
+      "size": 5,
+      "number": 16,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-16.png",
+      "file": "evidence/rune-shapes/rune-5-16.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "322009423a9f51fa35520d337a11ec65691eb45e1e48af3defa0fcef4a3be29f",
+      "bytes": 133861,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        97,
+        29,
+        415,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-17",
+      "size": 5,
+      "number": 17,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 2
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-17.png",
+      "file": "evidence/rune-shapes/rune-5-17.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "998403d5d21702b9b40e7929d0c0271564e6bbdbda759ca7cb5781d7080bbbd3",
+      "bytes": 133859,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        97,
+        29,
+        415,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -151.79226789082654
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.6007180194801927,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-18",
+      "size": 5,
+      "number": 18,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": 1
+        },
+        {
+          "q": 3,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-18.png",
+      "file": "evidence/rune-shapes/rune-5-18.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "b3914f09436185a8d830ea0a067c641ac09ce23d948135d33320acf8082248bd",
+      "bytes": 161382,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        21,
+        58,
+        490,
+        462
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            132.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -110.22304849082654
+          ],
+          [
+            132.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.9743589743589745,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-19",
+      "size": 5,
+      "number": 19,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-19.png",
+      "file": "evidence/rune-shapes/rune-5-19.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "539b1f42101c7d389a8a5c376a70c1cc848fefe11a6ed2f046d1c1ba1673c5ed",
+      "bytes": 243369,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        21,
+        34,
+        491,
+        477
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -68.65382909082653
+          ],
+          [
+            96.0,
+            44.56921939082653
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -68.65382909082653
+          ],
+          [
+            96.0,
+            44.56921939082653
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.8666666666666667,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 186,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-20",
+      "size": 5,
+      "number": 20,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": -1
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-20.png",
+      "file": "evidence/rune-shapes/rune-5-20.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "9c881f30f2ed67e587266d62ffdf4e9ee7b5fcf230be0378e8d0ed52c5709054",
+      "bytes": 204352,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        46,
+        21,
+        466,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            96.0,
+            44.56921939082653
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -89.43843879082654
+          ],
+          [
+            96.0,
+            44.56921939082653
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.462488683826026,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-21",
+      "size": 5,
+      "number": 21,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 0,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 2,
+          "r": -1
+        },
+        {
+          "q": 2,
+          "r": 0
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-21.png",
+      "file": "evidence/rune-shapes/rune-5-21.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "1d3f1ea5fa30e125db53fa4c611616ff0d5c3df91a084de275117f5230200354",
+      "bytes": 239611,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        21,
+        80,
+        491,
+        441
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -68.65382909082653
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -68.65382909082653
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 3.8666666666666667,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 186,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    },
+    {
+      "id": "rune-5-22",
+      "size": 5,
+      "number": 22,
+      "cells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "rotationCW": 0,
+      "displayCells": [
+        {
+          "q": 0,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 0
+        },
+        {
+          "q": 1,
+          "r": 1
+        },
+        {
+          "q": 1,
+          "r": 2
+        },
+        {
+          "q": 2,
+          "r": -1
+        }
+      ],
+      "source": "Wiki/assets/rune-shapes-20261016/rune-5-22.png",
+      "file": "evidence/rune-shapes/rune-5-22.png",
+      "role": "derived-rune-shape-preview",
+      "sha256": "0256198ee151a5aee863bdefeb4cf2e72d0d04192eed60b744ff5307de54d9b3",
+      "bytes": 158592,
+      "width": 512,
+      "height": 512,
+      "alphaBounds": [
+        77,
+        30,
+        435,
+        489
+      ],
+      "frame": {
+        "geometryBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            23.784609690826528
+          ]
+        ],
+        "framingBounds": [
+          [
+            -24.0,
+            -131.00765819082653
+          ],
+          [
+            96.0,
+            26.62
+          ]
+        ],
+        "canvas": 512,
+        "padding": 24,
+        "scale": 2.943645838081755,
+        "sampling": "CPU bilinear,2x supersampling,LANCZOS downsample; sRGB alpha blend; not GPU-compressed pixels"
+      },
+      "meshTriangles": 222,
+      "textureApplications": 5,
+      "typeIdExample": "attack",
+      "gradeExample": 0,
+      "state": "stored-unselected-lit"
+    }
+  ]
+}

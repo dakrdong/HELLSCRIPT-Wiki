@@ -57,7 +57,6 @@
  + 강화 재료 {0}개	 + {0} enhancement materials
  / 장비 드롭	 / gear dropped
  / 환류 기준 {0:0}{1}	 / feedback threshold {0:0}{1}
- · HP 비율을 유지했습니다.	 · your HP ratio was kept.
  · {0:0.00}초 뒤 실행	 · runs in {0:0.00}s
  · {0} 해금 · 성장에서 설정 확인	 · {0} unlocked · check the settings under growth
  · 공격	 · attack
@@ -124,14 +123,12 @@ B 훈련을 마치면 결과에서 저장할 수 있습니다.	Once the B trial 
 B에서 바꿀 내용\n{0}	What B will change\n{0}
 CD 대기	On cooldown
 HP 20% 이하에서 물약 사용 시 최대 HP 25% 보호막을 3초 얻습니다. 20초 간격.	Drinking a potion at 20% HP or below grants a shield worth 25% of max HP for 3 seconds, once every 20 seconds.
-HP {0:0} / {1:0} · 보호막 {2:0}\n자원 {3:0} / {4:0} · {5:0.#}배\n{6}	HP {0:0} / {1:0} · Shield {2:0}\nResource {3:0} / {4:0} · {5:0.#}×\n{6}
 HP 손실	HP lost
 HP가 30% 이하인 적에게 가산 피해 +35%를 적용합니다.	Adds +35% damage against enemies at or below 30% HP.
 HP가 30% 이하인 적에게 치명 확률 +20%p를 적용합니다. 최종 상한은 75%입니다.	Adds +20%p critical chance against enemies at or below 30% HP, capped at 75%.
 LM01이 없어 새 눈보라는 위치 고정으로 판단합니다.	Without LM01 a new blizzard is judged as staying in place.
 LM04가 없어 고유 대상 수로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
 LM04가 없어 고유 대상 수를 기준으로 판단합니다.	Without LM04 it is judged by the number of distinct targets.
-Lv.{0} → {1} · HP 비율 유지{2}	Lv.{0} → {1} · HP ratio kept{2}
 Lv.{0} 달성{1}	Reached Lv.{0}{1}
 Lv.{0} 해금 예정	Unlocks at Lv.{0}
 Lv.{0} 해금 전 · 규칙 꺼짐	Before Lv.{0} unlocks it · rule off
@@ -147,6 +144,7 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 {0:0.00}초 · {1}\n{2}	{0:0.00}s · {1}\n{2}
 {0:0.00}초 · {1}\n{2} {3} 피해{4}\n방어 전 {5:0.##} · 방어 감소 {6:P0}\n추가 피해 감소 {7:P0}\n{8}	{0:0.00}s · {1}\n{2} {3} damage{4}\nBefore defenses {5:0.##} · reduced by armor {6:P0}\nFurther reduction {7:P0}\n{8}
 {0:0.0}초	{0:0.0}s
+{0:0.0}초 · {1}%	{0:0.0}s · {1}%
 {0:0.0}초 · Lv.{1} → {2}\nHP {3:0.0}/{4:0.0} → {5:0.0}/{6:0.0}{7}	{0:0.0}s · Lv.{1} → {2}\nHP {3:0.0}/{4:0.0} → {5:0.0}/{6:0.0}{7}
 {0:00}번 · {1} ×{2}\n{3:0.0}–{4:0.0}초 / {5}	Rule {0:00} · {1} ×{2}\n{3:0.0}–{4:0.0}s / {5}
 {0} Lv.{1} · 장비와 능력치가 만든 값입니다	{0} Lv.{1} · Gear and attribute totals
@@ -192,7 +190,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 {0} 코어 1개	1 {0} core
 {0} 프리셋 {1}	{0} preset {1}
 {0} 한 줄을 재설정합니다.\n비용 {1:N0} 골드 · 수치가 낮아질 수 있습니다.	Rerolls one {0} line.\nCost {1:N0} gold · the value can come out lower.
-{0} 획득	Got {0}
 {0}: 값이 없거나 너무 깁니다.	{0}: the value is missing or too long.
 {0}: 범위를 확인하세요.	{0}: check the range.
 {0}: 복수 선택 설정이 아닙니다.	{0}: this is not a multi-select setting.
@@ -353,7 +350,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 고유 장비는 전설 등급이어야 합니다.	A unique has to be legendary.
 곡선 장례길	Curving Funeral Road
 골드 {0:N0}    일반 재료 {1:N0}    가방 {2}/{3}	Gold {0:N0}    Materials {1:N0}    Bag {2}/{3}
-골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준	Gold {0:N0} · Materials {1:N0}\nItems are made at level {2}, based on your best clear
 공격	Attacking
 공격 강화 오라	Attack buff aura
 공격 강화 적용	Attack buff applied
@@ -706,7 +702,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 모든 스킬과 기본 행동의 사용 상태를 한 번씩 보관해야 합니다.	Every skill and the basic action has to store its use state exactly once.
 모든 원소 저항	All Resistance
 모든 접사 효과	All affixes
-모든 제작 경로에서 전설·세트를 발견할 수 있습니다	Every crafting path can turn up a legendary or set piece
 모든 직업	All classes
 모든 특수 효과	All special effects
 목걸이	Amulet
@@ -790,7 +785,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 번개의 사슬	Chain of Lightning
 범위	in range
 범위 안 적이 없을 때 종료	End when no enemy is in range
-베이스와 옵션은 확정 시 생성됩니다. 직업·부위에 맞는 접두/접미와 수치 티어를 적용합니다.	The base and the affixes are rolled when you confirm, using prefixes, suffixes and value tiers that fit the class and the slot.
 변경한 조건 보기	See the changed conditions
 별도의 행동 토글·규칙 대신 복사한 전역 방침을 사용합니다. 기존 사용 상태와 새 회수·상호작용 방침의 차이를 확인하세요.	Instead of its own toggle and rules, it uses the global policy that was copied. Check how the old use state differs from the new collection and interaction policy.
 보관 {0}/{1} · 필터 결과 {2}개	Stored {0}/{1} · {2} match the filter
@@ -1012,7 +1006,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 선택	Choice
 선택 대상을 포함하며 지정한 조준 조건을 만족하는 방향이 없습니다.	No direction covers the chosen target while also meeting the aiming condition you set.
 선택 대상이 스킬 사거리 밖에 있습니다.	The chosen target is beyond the skill's range.
-선택 부위	Chosen slot
 선택 스킬 예상 영역 / 	Predicted area of the chosen skill / 
 선택 스킬의 예상 명중 영역	Predicted hit area of the chosen skill
 선택 없음	Nothing chosen
@@ -1385,7 +1378,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 장비 · 대장간 · 창고	Gear · Forge · Warehouse
 장비 기본 데이터가 올바르지 않습니다: {0}	The base data for this piece is not valid: {0}
 장비 목록으로	Back to the gear list
-장비 보기	View the gear
 장비 부위	Gear slots
 장비 비교	Compare gear
 장비 상세로	Back to the gear details
@@ -1399,7 +1391,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 장비를 분해했습니다.	The gear was salvaged.
 장비를 잠갔습니다.	The gear is locked.
 장비를 판매했습니다.	The gear was sold.
-장비를 획득했습니다.	The gear was acquired.
 장비와 가방	Gear and bag
 장송 사제	Funeral Priest
 장착	Equip
@@ -2027,7 +2018,7 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 회오리 · 유지	Whirlwind · holding
 회오리 감시자	Whirlwind Watcher
 회오리 생존	Whirlwind survival
-회오리 자원 부족	Not enough resource for Whirlwind
+회오리 자원 소진	Whirlwind ran out of resource
 회오리 자원 소모 감소 +15% (합산 상한 50%).	Whirlwind costs 15% less resource (50% combined cap).
 회오리 중 4m 이동하면 다음 도약 착지에 D180% 물리 추가 피해.	Moving 4m during Whirlwind adds D180% physical damage to the next leap landing.
 회오리 충격 · {0:0.0}초\n다음 도약의 이동 시작에 예약합니다.	Whirlwind Impact · {0:0.0}s\nQueued for the start of the next leap's travel.
@@ -2095,7 +2086,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 흑철 석궁병	Blackiron Crossbowman
 흡혈	Bloodletting
 희귀	Rare
-희귀 제작 · 재료 50 / {0:N0} 골드	Rare craft · 50 materials / {0:N0} gold
 힘	Strength
 단계별 등급 확률	Rarity by rift stage
 진행 중인 균열 단계에 적용되는 보상입니다.	Rewards use the stage of your active rift.
@@ -2311,13 +2301,13 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 장비 구매 · 판매	Buy and sell equipment
 장비 상인	Equipment merchant
 장비 재련 · 강화 · 제작	Reforge · Enhance · Craft
-장비 제작	Craft equipment
 잿빛 숲 · 정착민 마을	Ashwood · Settlers' village
 잿빛 숲 너머, 당신의 이야기가 시작됩니다	Beyond the ashen woods, your story begins.
 조이스틱으로 이동 · 주민에게 가까이 가서 대화하세요	Move with the joystick · Approach a resident to interact
 진행 중인 균열을 먼저 완료하면 거래할 수 있습니다.	Finish your current rift before trading.
 창고 열기	Open storage
 캐릭터 선택하기	Select a character
+로그인	Login
 훈련 교관	Training instructor
 훈련하기	Train
 가로 비율	Landscape ratios
@@ -2605,8 +2595,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 혼잡	Busy
 점검 중	Maintenance
 방랑자	Wanderer
-연출 켜짐	Motion on
-연출 멈춤	Motion off
 금지된 기록이 깨어난다	THE FORBIDDEN SCRIPT AWAKENS
 재가 된 성소에서, 다시 깨어나라.	Awaken once more in a sanctuary of ash.
 서버 선택	Select server
@@ -2718,31 +2706,11 @@ CC 지속시간 -{0:0.##}%	CC duration -{0:0.##}%
 보석상	Jeweler
 물약 제조	Elixirs
 소켓 관리	Sockets
-{0}개 제조	Craft {0}
-{0}\n보석 1개 → 물약 1개	{0}\n1 gem → 1 elixir
-보석 보관함 · {0}/{1}칸	Gems · {0}/{1} slots
-보유 {0:N0}개 · 계정 공유	Owned: {0:N0} · Shared by account
-합성 5 → 1 · 분해 1 → 5 · 한 단계씩 변환	Upgrade 5 → 1 · Split 1 → 5 · One tier at a time
 부서진 보석 구매 · {0:N0} 골드	Buy chipped gem · {0:N0} gold
 보석을 구매했습니다.	Gem purchased.
-작업 수량	Batch size
-1개	1
-5개	5
-등급 올리기	Upgrade
-등급 내리기	Downgrade
-{0:N0}개 → {1:N0}개	{0:N0} → {1:N0}
-보석 등급을 변환했습니다.	Gem conversion complete.
-보석 물약 · 30초	Gem elixirs · 30 seconds
-보조 물약 효과는 하나만 유지됩니다. 새 물약을 사용하면 이전 효과를 교체합니다.	Only one utility elixir remains active. Using a new elixir replaces the previous effect.
-재료 {0:N0}개 · 물약 {1:N0}개	Gems: {0:N0} · Elixirs: {1:N0}
-제조한 물약은 현재 캐릭터의 인벤토리 물약 슬롯에 장착할 수 있습니다.	Equip crafted elixirs in this character’s inventory potion slots.
-보호막은 사용 시 한 번 생성되며, 소진되거나 30초가 지나면 사라집니다.	The shield forms once on use and disappears when depleted or after 30 seconds.
-물약 제조를 완료했습니다.	Elixir crafting complete.
 보석상 가까이에서 이용하세요.	Move closer to the jeweler.
 같은 보석 5개 → {0}	5 matching gems → {0}
 보석 5개를 사용해 한 단계 합성합니다.	Use 5 gems to upgrade by one tier.
-매직찬스는 일반 등급의 드롭 확률을 매직으로 전환합니다. 희귀·전설 확률은 유지됩니다.	Magic chance shifts common drops to magic. Rare and legendary probabilities remain unchanged.
-마법력은 지능에 더해지며, 마나 효과는 각 직업의 전투 자원에 적용됩니다.	Magic power adds intelligence. Mana effects apply to each class’s combat resource.
 {0} 공격	{0} attack
 {0} · {1} 예고: {2:0.0}초 후 · 목표 위치 ({3:0.0}, {4:0.0})	{0} telegraphs {1}: in {2:0.0}s · aim ({3:0.0}, {4:0.0})
 {0} 격노: 강화된 공격에 주의하세요.	{0} enrages: watch for empowered attacks.
@@ -2869,23 +2837,18 @@ Google 로그인을 취소했습니다.	Google sign-in was cancelled.
 정예 특성: {0}	Elite traits: {0}
 사냥 칙령 설정	Hunt Edict settings
 균열 {0}단계 · 적 {1}종 · {2}마리 · 총 HP {3:N0}	Rift tier {0} · {1} kinds · {2} enemies · {3:N0} total HP
-스킬 {0}/{1}개	{0}/{1} skills
 체크한 스킬만 전투에서 사용합니다.	Only checked skills are used in combat.
 장착한 궁극기가 없습니다.	No ultimate is equipped.
 기본 공격과 공격 순서는 사냥 칙령 설정의 공통 공격 설정에서 바꿉니다.	Change basic attacks and the attack order under Attack settings in Hunt Edict settings.
 훈련 제외	Excluded
 자동 사용 꺼짐 · 전투에서 쓰지 않음	Automatic use off · not used in combat
 등장 적	Enemies
-적 {0}/{1}종	{0}/{1} kinds
-+ 적 추가	+ Add enemy
 적을 추가해 훈련을 구성하세요. 보스와 일반 몬스터를 합쳐 5종까지 넣을 수 있습니다.	Add enemies to build the training. Up to 5 kinds, bosses and normal monsters combined.
 균열 단계	Rift tier
 {0}단계	Tier {0}
 HP {0:N0} · 공격력 {1:N0}	HP {0:N0} · Attack {1:N0}
 마리당 HP {0:N0} · 공격력 {1:N0}	Each: HP {0:N0} · Attack {1:N0}
 실제 전투처럼 능력치는 일반과 같고 등급 효과만 다릅니다.	As in real combat, stats match Normal; only the tier effect differs.
-이 세팅의 기록이 아직 없습니다.	No clear with this setup yet.
-최고 {0} · 직전 {1}	Best {0} · Previous {1}
 같은 세팅은 항상 같은 배치와 시드로 시작합니다.	The same setup always starts with the same placement and seed.
 적 추가	Add enemy
 {0}/{1}종 선택 · 보스는 한 종만 1마리 · 일반 몬스터 1~{2}마리	{0}/{1} kinds · one boss kind, always 1 · normal monsters 1–{2}
@@ -2906,9 +2869,6 @@ HP {0:N0} · 공격력 {1:N0}	HP {0:N0} · Attack {1:N0}
 제한 시간 {0}을 넘겼습니다 · 남은 적 {1}/{2}	The {0} time limit ran out · {1}/{2} enemies left
 이 세팅의 첫 기록	First clear with this setup
 직전과 같은 기록	Same time as the previous run
-직전보다 {0:0.0}초 빨라짐 ({1})	{0:0.0} s faster than the previous run ({1})
-직전보다 {0:0.0}초 느려짐 ({1})	{0:0.0} s slower than the previous run ({1})
-직전 기록 {0} · 최고 기록 {1}	Previous {0} · Best {1}
 최고 기록 갱신	New best
 비교 기준: 영웅 레벨·장비, 균열 단계, 적 구성과 사용 스킬이 같은 직전 성공 판	Compared with the previous successful run at the same hero level, equipment, rift tier, enemies and skills
 성공한 판만 클리어 시간을 기록하고 비교합니다.	Only successful runs record and compare a clear time.
@@ -2980,7 +2940,6 @@ HP 보호	HP shield
 옵션을 변경할 수 있는 장비만 표시합니다.	Only equipment with enchantable affixes is shown.
 이 옵션 위치를 고정할까요?	Lock this affix line?
 첫 실행에 골드가 사용되며, 선택한 줄이 이 아이템의 영구적인 변경 위치가 됩니다.	Your first paid roll spends gold and makes the selected line this item's permanent reroll slot.
-아이템 Lv.{0} · {1}	Item Lv.{0} · {1}
 변경할 위치	Reroll slot
 {0}번 옵션	Affix {0}
 현재 옵션	Current affix
@@ -2991,7 +2950,6 @@ HP 보호	HP shield
 원하는 옵션이 나올 때까지	Until the affix you want
 체크한 옵션 중 하나가 나오면 즉시 멈추고 결과를 보여 줍니다. 목표를 체크해도 출현 확률은 달라지지 않습니다.	Stops at once and shows the result when a checked affix comes up. Checking a target does not change its chance.
 최대 실행 횟수	Maximum rolls
-{0:N0}회 MAX	{0:N0} rolls MAX
 최대	Max
 1회부터 보유 골드로 가능한 {0:N0}회까지	From 1 up to the {0:N0} rolls your gold allows
 최대 사용 골드	Maximum gold spent
@@ -3043,8 +3001,6 @@ HP 보호	HP shield
 고유 효과 · 변경 불가	Unique effect · Fixed
 나올 수 있는 옵션	Possible affixes
 {0}종	{0} types
-자동 변경 진행 중	Auto reroll in progress
-{0:N0} / {1:N0}회 · 남은 횟수 {2:N0}	{0:N0} / {1:N0} rolls · {2:N0} left
 아이템 레벨 기준 · 반복해도 비용은 같습니다.	Based on item level · Cost never increases with rolls.
 강화할 장비	Equipment to enhance
 성장 미리보기	Growth preview
@@ -3562,7 +3518,164 @@ UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 
 첫 교전은 이동 스킬 없이 걸어서 접근합니다.	Walk into the first engagement without a movement skill.
 공격·생존·이동 등 행동을 판단하는 순서를 정합니다.	Set the order for attack, survival, movement and other actions.
 
+영웅은 칙령에 적힌 기준대로만 피해요. 지금 기준이 높아서 이 장판은 피하지 않고 맞고 있는 거예요.	The hero only dodges by the threshold in the edict. It is set too high for this zone, so he stands in it and takes the hits.
+투사체 회피도 기준이 따로 있어요. 지금 기준이 높아서 이 화살은 피하지 않고 맞고 있어요.	Projectiles have their own dodge threshold. It is set too high for these arrows, so he takes the hits.
+가만히 서서 맞고만 있으면 위험해요. 맞지 않도록 피해 봐요!	Standing still and taking hits is dangerous. Let's dodge so nothing lands!
+이번에는 활을 든 적들이에요! 날아오는 화살에 맞지 않도록 피해 봐요!	This time they carry bows! Let's dodge the arrows so none of them land!
+HP·MP 회복	HP · MP restored
+스킬 포인트 +1	Skill point +1
+'보물 몬스터' 카드를 끌어서 맨 위로 옮겨 주세요.	Drag the 'Treasure monster' card to the very top.
+'원거리 마법 공격 타입' 카드를 끌어서 2순위로 옮겨 주세요.	Drag the 'Ranged magic attack' card to second place.
+'원거리 물리 공격 타입' 카드를 끌어서 맨 위로 옮겨 주세요.	Drag the 'Ranged physical attack' card to the very top.
+'일반 몬스터' 카드를 끌어서 맨 위로 옮겨 주세요.	Drag the 'Normal monster' card to the very top.
+'보스 몬스터' 카드를 끌어서 맨 아래로 내려 주세요.	Drag the 'Boss monster' card to the very bottom.
+'소환된 적' 카드를 끌어서 2순위로 옮겨 주세요.	Drag the 'Summoned enemy' card to second place.
+'회수' 카드를 끌어서 맨 위로 올려 주세요.	Drag the 'Loot' card to the very top.
+보물 고블린에게서 새로운 장비가 떨어졌어요!	New gear dropped from the treasure goblin!
+입을 수 있는 장비를 얻으면, 이렇게 바로 입을 수 있도록 추천 팝업이 나타난답니다.	When you get gear you can wear, a recommendation pops up like this so you can put it on right away.
+살펴본다	Take a look
+이것 보세요! 희귀 등급 장비를 얻었어요!	Look at this! You got rare gear!
+이번에도 추천 장비로 빠르게 장비를 바꿔 볼까요?	Shall we swap gear quickly with the recommendation again?
+바꿔 본다	Swap it
+어? 이번엔 더 낮은 등급의 검이 표시됐네요. 카드의 점수 옆 숫자가 마이너스예요.	Huh? This time a lower-grade sword is showing. The number next to its score is negative.
+이렇게 기존 장비보다 낮은 등급의 아이템은 굳이 확인할 필요가 없죠.	There is no need to check items lower than your current gear like this.
+설정을 바꾼다	Change the settings
+목표 · 추천 장비 살펴보기	Goal · Look at the recommended gear
+목표 · 희귀 장비로 교체하기	Goal · Swap to the rare gear
+목표 · 추천 설정 바꾸기	Goal · Change the recommendation settings
+목표 · 보스가 남긴 장비 회수	Goal · Pick up the gear the boss left
+빛나는 곳을 따라 추천 장비를 다뤄 주세요.	Follow the glowing spot to handle the recommended gear.
+추천 장비 착용	Recommended gear worn
+희귀 장비 착용	Rare gear worn
+추천 설정 변경	Recommendation settings changed
+잘 어울려요! 남은 보상도 마저 챙겨요.	It suits you! Let's gather the rest of the rewards too.
+훨씬 든든해졌어요!	Much sturdier now!
+'장착'을 눌러 헬멧을 써 보세요.	Tap 'Equip' to put on the helmet.
+'장착'을 눌러 희귀 검을 써 보세요.	Tap 'Equip' to wield the rare sword.
+잘됐네요! 지금은 헬멧이 없었는데, 이 장비로 방어력을 더 보강할 수 있겠어요!	Great! You had no helmet until now, so this will shore up your defense!
+추천 장비의 아이콘을 눌러 자세히 살펴보세요.	Tap the recommended gear's icon to take a closer look.
+카드의 '장착'을 눌러 주세요.	Tap 'Equip' on the card.
+카드의 톱니바퀴를 눌러 주세요.	Tap the gear icon on the card.
+'현재 착용중인 장비보다 점수가 높은 장비'를 골라 주세요.	Choose 'Gear with a higher score than what is worn'.
+'저장'을 눌러 주세요.	Tap 'Save'.
+이렇게 하면 항상 기존보다 더 좋은 장비만 추천으로 나타나게 할 수 있어요.	This way, only gear better than what you have will be recommended.
+카드의 ×를 눌러 닫아 주세요.	Tap × on the card to close it.
+{0} 처치 · 금화·강화석·헬멧	{0} defeated · gold, enhancement stones and a helmet
+1.5배속으로 입장하시겠습니까?	Enter at 1.5× speed?
+{0}개 사용하고 입장	Spend {0} and enter
+{0}개 사용하고 회복	Spend {0} and restore
+{0}시간 {1:00}분	{0}h {1:00}m
+{0}초 지속	Lasts {0}s
+교체 가능한 궁극기	Available ultimates
+교체 가능한 활성화 스킬	Available learned skills
+균열에 참여한 실제 시간만큼 차감됩니다.	Only real time spent inside the rift is deducted.
+균열의 문	The Rift Gate
+기본 물약	Basic potion
+다음 날 이월 · {0}	Carries over · {0}
+매일 00:00에 일일 지급분이 2시간으로 초기화됩니다. 남은 일일 지급분은 누적되지 않습니다.	The daily allowance resets to 2 hours at 00:00. Unused daily time does not accumulate.
+보상 아이템은 추후 추가됩니다	Reward items will be added later
+보유한 등급을 누르면 바로 장착됩니다.	Choose an owned tier to equip it immediately.
+복귀·사망해도 이번 입장에 사용한 주화는 반환되지 않습니다.	The entry cost is not refunded after returning or dying.
+스킬 교체	Change skill
+스킬 상세	Skill details
+슬롯 {0}	Slot {0}
+실제 1분 참여 = 피로도 1분 사용 · 전투 1분 30초 진행	1 real minute = 1 minute of fatigue · 1 min 30 sec of combat
+심연 주화 500개를 사용합니다. 회복분은 보라색으로 표시되며, 남은 시간은 다음 날에도 유지됩니다.	Spend 500 Abyssal Coins. Restored fatigue is purple, and any unused time carries into the next day.
+아래 효과가 함께 적용됩니다.	All effects below apply together.
+아직 클리어하지 않은 단계	Tier not yet cleared
+오늘 회복 횟수를 모두 사용했습니다.	All of today's restores have been used.
+유료 회복분	Restored reserve
+이번 균열의 전투가 1.5배속으로 진행됩니다. 입장을 확정하면 심연 주화 200개가 한 번 차감됩니다.	Combat runs at 1.5× for this rift. Confirming entry spends 200 Abyssal Coins once.
+일일 지급분	Daily allowance
+일일 지급분을 먼저 사용합니다. 유료 회복분은 그다음에 사용하며, 남은 시간은 다음 날의 2시간에 더해집니다.	Daily time is spent first, followed by restored time. Unused restored time is added to the next day's 2 hours.
+중도 복귀·사망 시에도 사용한 시간은 반환되지 않습니다.	Time spent is not returned after leaving or dying.
+초기화까지	Resets in
+최고 돌파	Highest cleared
+최단 클리어	Best clear
+클리어 완료 · 미수령	Cleared · Unclaimed
+피로도 20분을 회복합니다	Restore 20 minutes of fatigue
+피로도 이용 안내	How fatigue works
+피로도가 0일 때 500개로 20분을 회복합니다. 하루 3회까지 가능하며, 횟수는 매일 00:00에 초기화됩니다.	At zero fatigue, restore 20 minutes for 500 coins, up to 3 times daily. The count resets at 00:00.
+한국 시간	KST
+현재 장착 중	Currently equipped
+회복분 12분이 남았다면 → 다음 날 2시간 12분	12 restored minutes left → 2 hours 12 minutes next day
+적을 한 종 이상 추가하세요.	Add at least one enemy.
+체크한 스킬이 없어 기본 공격만 사용합니다.	No skills are checked, so only basic attacks are used.
+최고 기록 {0} · 직전 기록 {1}	Best {0} · Previous {1}
+{0}/{1} 사용	{0}/{1} in use
+{0}/{1}종	{0}/{1} kinds
+칙령 수정	Edit edict
+실제 균열과 같은 몬스터 능력치 · 열린 단계 1~{0}	Monster stats of a real rift at this tier · open tiers 1–{0}
+직전보다 {0:0.0}초 빨라짐	{0:0.0} s faster than the previous run
+직전보다 {0:0.0}초 느려짐	{0:0.0} s slower than the previous run
+사용 {0}회	Used {0}×
+이번 훈련에서 사용하지 않음	Not used in this training
+자동 사용이 꺼져 쓰지 않음	Not used: automatic use is off
+직전 성공한 판과 같은 사냥 칙령입니다.	The Hunt Edict matches the previous successful run.
+훈련장 로비로 돌아가기	Back to the training lobby
+지금 세팅 그대로	With this setup
+최고 DPS	Peak DPS
+평균 DPS	Average DPS
+만	10K
+억	100M
+조	T
+피해량은 {0}단계 일반 기준 예상치	Estimated damage at tier {0}, Normal
+피해량은 {0}단계 보스 기준 예상치	Estimated damage at tier {0}, Boss
+피해량은 {0}단계 정예 기준 예상치	Estimated damage at tier {0}, Elite
+사용 기술 기준	From its skills
+최고 {0}	Best {0}
+속박·기절·빙결 면역, 둔화는 적용	Root, stun and freeze. Slow still applies.
+가득 차면 {0}초 무력화, 이후 {1}초 면역	Full gauge: incapacitated {0} s, then immune {1} s
+Lv.{0} · 깨어난 룬	Lv.{0} · Awakened rune
+Lv.{0} 조건 · {1} / {2}개	Next: Lv.{0} · {1} / {2} copies
+Lv.{0}로 레벨업	Level up to Lv.{0}
+{0} · {1} · 아이템 레벨 {2}	{0} · {1} · Item level {2}
+{0} 분해	Salvaging {0}
+{0}개 표시	{0} shown
+{0}에 {1} 위상을 각인했습니다.	Imprinted the {1} aspect on {0}.
+각인 가능	Eligible
+각인 가능 {0} / {1}	{0} / {1} eligible
+각인 대상 변경	Change imprint target
+각인 완료	Imprint complete
+각인 확인하기	Confirm imprint
+각인된 위상 없음	No aspect imprinted
+검색·필터 지우기	Clear search and filters
+기본 능력치·일반 옵션·보석은 그대로 유지됩니다.	Base stats, regular affixes and gems are preserved.
+기존 위상은 지워지고 새 위상으로 교체됩니다.	The new aspect replaces the existing aspect.
+도감 계속 보기	Keep browsing the codex
+돌에 남은 힘을, 장비에 새기다.	A power remembered. A new mark forged.
+등록한 위상	Aspects collected
+등록한 위상은 소모되지 않습니다.	Collected aspects are never consumed.
+레벨업 가능	Ready to level up
+레벨업해도 누적 수량은 줄어들지 않습니다.	Leveling up does not reduce your collected count.
+모든 직업이 쓸 수 있는 위상입니다.	Any class can use this aspect.
+미등록 위상도 이름과 효과를 볼 수 있습니다. 등록한 위상은 횟수 제한 없이 사용할 수 있습니다.	You can read the name and effect of uncollected aspects. Collected aspects can be used without limit.
+새로운 힘을 새깁니다.	Inscribe a new power.
+선택한 장비 · {0}	Selected item · {0}
+아직 모으지 못한 룬	Not collected yet
+위상 1개는 레벨 1, 2개는 레벨 2, 4개는 레벨 3, 8개는 레벨 4, 16개는 레벨 5의 조건입니다.	One aspect unlocks level 1, 2 unlock level 2, 4 level 3, 8 level 4 and 16 level 5.
+위상 레벨	Aspect level
+위상 선택하기	Choose aspect
+위상 이름·효과·ID 검색	Search names, effects, IDs
+이 위상으로 교체할까요?	Replace with this aspect?
+이 전설을 분해하면 위상이 등록됩니다.	Salvage this legendary to collect its aspect.
+이미 같은 레벨 이상의 위상이 새겨져 있습니다.	An aspect of the same or a higher level is already imprinted.
+장비 하나에는 위상 하나만 남습니다. 새 위상을 각인하면 기존 위상을 덮어씁니다.	Each item keeps only one aspect. Imprinting a new one overwrites the old.
+장비에 위상을 새길까요?	Imprint this aspect on the item?
+장비와 위상을 선택하세요.	Choose an item and an aspect.
+전설 아이템을 분해하면 위상이 각인석에 자동으로 보관됩니다. 같은 위상은 수량이 누적됩니다.	Salvaging a legendary item stores its aspect in the runestone automatically. Copies of the same aspect add up.
+전설 아이템을 분해해 위상을 모으고, 레벨을 올린 뒤 착용 장비에 원하는 힘을 새기세요.	Salvage legendary items to collect aspects, level them up, then imprint the power you want on your worn gear.
+전체 {0}종	{0} aspects
+첫 위상은 레벨 1로 활성화됩니다. 이후 빨간 점이 표시된 위상을 눌러 직접 레벨업하세요. 레벨업해도 누적 수량은 유지됩니다.	The first copy awakens level 1. Tap an aspect marked with a red dot to level it up yourself. Leveling up keeps your collected count.
+한 번 등록하면 계속 사용할 수 있습니다.	Collect once. Imprint as often as you wish.
+현재 위상 효과 보기	Inspect current aspect
+획득처	Found by
+희귀 장비는 전설로 바뀌며 다른 옵션은 유지됩니다.	A Rare item becomes Legendary; its other affixes are kept.
+희귀·전설 등급의 장비만 각인할 수 있습니다.	Only Rare and Legendary gear can be imprinted.
+희귀·전설 장비에 각인할 수 있습니다.	Imprint on Rare or Legendary gear.
+희귀와 전설에 각인할 수 있습니다. 일반·마법·고유·세트 장비에는 각인할 수 없습니다.	You can imprint Rare and Legendary gear. Normal, Magic, Unique and Set gear cannot be imprinted.
 # --- composed at runtime; no source literal holds these ---
+Lv.{0} → {1} · HP 비율 유지{2}	Lv.{0} → {1} · HP ratio kept{2}
 같은 보석 3개 + {0:N0}골드 → {1}	3 identical gems + {0:N0} gold → {1}
 보석 3개와 {0:N0}골드를 사용해 합성합니다.	Fuse 3 gems for {0:N0} gold.
 1단계 보석을 판매합니다. 구매한 보석은 계정 보관함에 들어가며, 같은 보석을 모아 합성할 수 있습니다.	Tier 1 gems are available here. Purchases go to shared storage; combine matching gems to upgrade them.
@@ -3968,7 +4081,6 @@ HP는 남은 비율로 비교합니다. 추적 시간은 접근·관측 위치 �
 # Content unlock test draft
 장비 강화	Equipment enhancement
 오프라인 보상	Offline rewards
-부위 선택 기본 제작	Slot-based rare crafting
 보석 장착·교체·합성	Gem socketing, replacement and synthesis
 옵션 재설정	Affix reroll
 미확인 장비 상점	Unidentified equipment shop
@@ -3977,10 +4089,8 @@ HP는 남은 비율로 비교합니다. 추적 시간은 접근·관측 위치 �
 같은 세팅에서 사냥 칙령만 바꿔 클리어 시간과 DPS를 비교하세요.	Keep the setup, change only the Hunt Edict and compare clear time and DPS.
 강화에는 골드와 재료가 필요합니다. 분해와 장비 보호는 처음부터 이용할 수 있습니다.	Enhancement costs gold and materials. Dismantling and item protection are available from the start.
 활성화 이후의 미실행 시간만 최대 12시간 정산합니다.	Only time after activation earns idle rewards, up to 12 hours.
-희귀 장비를 부위별로 제작합니다. 훈련장과 프리셋으로 변경 전후를 비교하세요.	Craft a rare item for a chosen slot. Compare changes with training and presets.
 보석·소켓·합성 데이터가 아직 없어 실제 이용은 준비 중입니다. 무료 보석은 지급하지 않습니다.	Gems, sockets and synthesis data are not implemented yet. No free gems are granted.
 한 줄을 지정하면 해당 줄로 고정됩니다. 같은 아이템 레벨에서는 반복 횟수와 무관하게 비용이 같습니다.	Choose one affix line; subsequent rerolls stay on that line. At the same item level, every attempt costs the same.
-부위를 선택하고 골드로 구매합니다. 확정 희귀 제작과 등급 추첨 구매는 다릅니다.	Choose a slot and spend gold. Guaranteed rare crafting differs from a random-grade purchase.
 선택 영웅의 최고 실제 클리어 단계로 보상합니다. 개인 기록·일일 잔여 횟수·가방 3칸이 필요합니다.	Rewards use the selected hero’s highest actual clear. A personal clear, daily use and three bag slots are required.
 같은 부위 코어 10개를 제작할 때 소비합니다. 전설 분해는 해금 전에도 코어를 지급합니다.	Crafting consumes ten cores from the same slot. Dismantling legendary gear grants cores even before this unlock.
 또는 첫 보석 정상 획득	Or legitimately acquire your first gem
@@ -4820,7 +4930,7 @@ M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 
 포인트 {0}	Points {0}
 최고 레벨	Maximum level
 {0} 숙련도	{0} mastery
-룬 보관함	Rune Storage
+룬 보관함	Rune storage
 전부	All
 보관 {0}개 · 표시 {1}개 · 8열	Stored {0} · Shown {1} · 8 columns
 미저장 변경	Unsaved changes
@@ -4998,7 +5108,6 @@ M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 
 연출 제거	Skip animation
 장비 획득	Equipment acquired
 {0:N0} 골드	{0:N0} gold
-갬블 상인 찾아가기	Visit the gambler
 # Blacksmith runtime
 +10레벨 강화	Enhance +10
 +1레벨 강화	Enhance +1
@@ -5416,9 +5525,9 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 왕관의 수호의 물약	Crowned Warding Elixir
 모든 저항력 +75 · CC기 저항 −50% · 보호막 생성 +최대 생명력의 30% · 30초	All resistances +75 · Crowd control resistance −50% · Shield +30% max life · 30 s
 # Rift entry
-균열 입장	Rift entry
+균열 입장	Enter Rift
 균 열	R I F T
-어둠을 넘어, 더 깊은 곳으로.	Beyond the dark, into the depths.
+어둠을 넘어, 더 깊은 곳으로.	Beyond the dark. Into the depths.
 최초 보상	First-clear rewards
 도전 단계	Challenge tier
 최고 돌파 {0}단계	Highest clear: tier {0}
@@ -5456,7 +5565,7 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 피로도 회복	Restore fatigue
 심연 주화 500개로 피로도 20분을 회복합니다. 사용하지 않은 회복분은 다음 날에도 유지됩니다.	Restore 20 minutes for 500 Abyssal Coins. Unused restored time carries over to the next day.
 회복하기	Restore
-물약 교체	Replace potion
+물약 교체	Change potion
 사용 중	In use
 슬롯 {0} · 보유한 등급을 눌러 바로 교체	Slot {0} · Tap an owned tier to equip
 눌러서 교체	Tap to equip
@@ -5465,7 +5574,7 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 사용 스킬 교체	Replace active skill
 활성화된 스킬을 선택하세요.	Select an unlocked skill.
 교체할 수 있는 활성화된 스킬이 없습니다.	No unlocked replacement skill is available.
-교체하기	Replace
+교체하기	Replace skill
 단계를 눌러 보상을 확인하고 수령하세요. · 1–1000단계	Select a tier to inspect and claim rewards. · Tiers 1–1000
 입장할 균열을 확인하세요.	Check the rift selected for entry.
 남은 피로도가 없습니다.	No fatigue remains.
@@ -5506,7 +5615,6 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 최소 보장 품질	Minimum quality
 투입 심연 주화	Invest Abyssal Coins
 해당 부위의 코어가 10개 필요합니다.	You need 10 cores for this equipment slot.
-대장간 코어 제작	Core crafting at the forge
 코어 제작	Core crafting
 해골 보석을 같은 단계와 수량의 금강석으로 바꿨습니다. 원본 저장 파일은 보존했습니다.	Skull gems were converted to Diamonds of the same tier and quantity. The original save file was preserved.
 보상 상자	Reward Boxes
@@ -5729,8 +5837,6 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 균열 단계와 적을 고르고, 스킬별 사냥 칙령을 바꿔 가며 같은 세팅으로 다시 싸워 보세요. 결과에서 직전 판과 클리어 시간·DPS를 비교합니다.	Pick a rift tier and enemies, change a skill's Hunt Edict and fight the same setup again. The result compares clear time and DPS with the previous run.
 소유한 +0 장비를 고르고 비용을 확인한 뒤 +1로 강화하세요. 최초 실습은 이 한 단계의 골드를 지원합니다.	Choose an owned +0 item, review the cost and enhance it to +1. First practice covers gold for this one step.
 실제 균열 기록을 바탕으로 정산된 보급을 확인하세요. 튜토리얼 전투는 보급 기준을 만들지 않습니다.	Review supplies settled from actual rift performance. Tutorial combat never creates an offline reward baseline.
-희귀 장비 제작	Rare equipment crafting
-원하는 부위를 고르고 희귀 장비 1개를 제작하세요. 최초 실습은 필요한 골드와 재료를 지원합니다.	Choose a slot and craft one rare item. First practice covers its gold and material cost.
 장비 부위 강화	Equipment slot upgrade
 1레벨 부위를 2레벨로 강화하세요. 최초 실습은 강화석을 지원하며, 정상 제작 시간 5분은 그대로 적용됩니다.	Upgrade a level 1 equipment slot to level 2. First practice covers stones; the normal five-minute duration still applies.
 같은 종류의 1단계 보석 5개를 2단계 1개로 합성하세요. 최초 실습은 선택한 1단계 보석 5개를 지원합니다.	Fuse five tier 1 gems of the same kind into one tier 2 gem. First practice supplies the five selected tier 1 gems.
@@ -6689,6 +6795,7 @@ HP와 자원이 이 위치와 같거나 낮아지면 물약을 자동으로 사�
 프리셋은 곧 이 화면에서 설정할 수 있습니다.	Presets will be set from this screen soon.
 튜토리얼을 시작할 수 없습니다.	The tutorial cannot start.
 길을 따라 이동	Following the road
+다음 적을 찾아 이동	Heading for the next foe
 포위를 뚫었습니다.	You broke through the encirclement.
 벨리나	Velina
 칙령의 길	The Edict's Road
@@ -6726,6 +6833,43 @@ HP와 자원이 이 위치와 같거나 낮아지면 물약을 자동으로 사�
 목표 · 길을 따라 첫 적 처치	Goal · Follow the road and defeat the first foe
 레벨 올리기 (남은 포인트 {0})	Level Up ({0} left)
 칙령의 여신	Goddess of the Edict
+균열지기 안톤에게 말을 걸어 보세요	Talk to Anton, the rift keeper
+대장간에서 무기를 강화하세요	Enhance your weapon at the blacksmith
+새 퀘스트	New quest
+퀘스트 갱신	Quest updated
+대장간으로 간다	Head to the blacksmith
+아직 장비를 갖추지 못했군. 어서 대장간을 다녀오게.	You're not geared up yet. Hurry to the blacksmith and come back.
+알겠습니다	Understood
+오, 촌장님께 환영 인사를 받고 오는 길인가? 얼굴을 보니 환대 끝에 세금 이야기까지 듣고 온 표정이로군.	Oh, on your way back from the chief's welcome? By the look on your face, you got the tax talk along with it.
+너무 미워하진 말게. 그 양반, 원래부터 저런 사람은 아니었다네. 예전엔 마을 사람들 끼니부터 챙기던 인심 좋은 촌장이었지.	Don't hate him too much. He wasn't always like this. He used to be a generous chief who made sure the villagers were fed first.
+달라진 건 아내와 두 딸이 공부를 시키겠다고 큰 도시로 떠난 뒤부터일세. 집이 텅 비고 나니, 남은 건 편지와 학비 청구서뿐이었던 모양이야.	It started when his wife and two daughters left for a big city so the girls could study. Once the house went quiet, all that was left were letters and tuition bills.
+딸 둘을 제대로 가르치려면 돈이 어마어마하게 든다더군. 그때부터 촌장님 눈엔 균열에서 올라오는 장비마다 금화로 보이기 시작한 거지.	Raising two daughters properly costs a fortune, they say. Ever since, every piece of gear that comes up out of the rift looks like gold coins to him.
+그래서 균열에서 나온 장비엔 어김없이 세금이 붙는다네. 한 푼도 놓치지 않으려고 악착같이 말일세.	So gear from the rift is always taxed. Not one coin escapes him; he grinds out every last one.
+나라고 남 말 할 처지는 아닐세. 내가 이 안내 일을 하며 받는 월급도 결국 그 세금에서 나오니까. 쓴웃음이 절로 나오지.	Who am I to talk? The salary I get for this guide work comes out of that very tax. It leaves me with a bitter smile.
+그래도 아무것도 모르고 목숨을 걸고 균열로 뛰어드는 용사들을 보면 마음이 영 편치 않다네. 세금이야 내면 그만이지만, 목숨은 낼 수도 돌려받을 수도 없으니 말이야.	Still, it sits badly with me to watch heroes throw their lives into the rift knowing nothing. Taxes you can pay and be done, but a life can neither be paid nor refunded.
+…잠깐, 자네 그 장비는 뭔가? 아니, 이 장비로 균열에 들어가겠다고?!	…Wait, what is that gear of yours? You're going into the rift with THIS?!
+내가 이 일을 오래 해서 하는 말인데, 균열에서 사고가 가장 많이 나는 곳은 1층일세. 자네처럼 자신감 하나만 믿고 뛰어든 용사들 중 절반 넘게가 1층도 넘지 못하고 쓰러졌다네.	I say this from long years in the job: most accidents in the rift happen on the first floor. More than half of the heroes who rushed in on nothing but confidence, like you, fell before they even cleared it.
+저기 위쪽 오른편에 대장간이 있으니, 일단 그 무기부터 강화하고 오게나. 대장장이 마르크가 거들어 줄 걸세.	Up there to the right is the blacksmith. For now, go and enhance that weapon first. Marc the smith will lend a hand.
+어서 오게, 새내기. 안톤 영감이 보냈다고? 그 양반이 남 걱정을 다 하다니, 오늘은 해가 서쪽에서 뜨겠군.	Welcome, rookie. Old Anton sent you? For that man to worry about anyone, the sun must be rising in the west today.
+손에 든 그 무기를 보게나. 날은 번듯해도 한 번도 두드려 본 적 없는 쇠붙이일세. 대장장이 눈엔 덜 익은 고기나 마찬가지지.	Look at the weapon in your hand. Handsome edge, but it has never once been hammered. To a smith's eye, that's as good as half-cooked meat.
+장비 강화는 간단하네. 무기를 고르고, 금화를 내고, 망치로 한 번 더 두드리는 걸세. 한 단계 오를 때마다 공격력이 조금씩, 하지만 확실히 올라가지.	Enhancing is simple. Pick the weapon, pay the gold, and hit it with the hammer once more. Every step raises its attack a little, but surely.
+어디 한번 해 보게. 아래쪽 '+1레벨 강화' 단추를 누르면 되네. 금화가 모자라도 이번 한 번은 외상으로 해 주지.	Go on, try it. Press the 'Enhance +1' button below. Even if you're short on gold, I'll put this one on your tab.
+강화해 본다	Try enhancing
+대장장이	Blacksmith
+'+1레벨 강화' 단추를 눌러 보세요.	Press the 'Enhance +1' button.
+퀘스트 완료	Quest complete
+무기를 강화했다	Weapon enhanced
+제발 그 돈이 노잣돈이 되지 않도록, 거기서 몸채비를 단단히 하고 돌아오게!	Please, don't let that money turn into your funeral expenses. Gear up properly there and come back!
+던 카스	Dun Kas
+촌장	Village chief
+오오, 어서 오게나, 용사여! 이 먼 길을 오느라 얼마나 힘들었겠나!	Ohh, welcome, welcome, hero! What a long road you must have walked to get here!
+나는 이 마을의 촌장, 던 카스라 하네. 고생이 많았네, 정말 고생이 많았어!	I am Dun Kas, chief of this village. You've been through so much, truly so much!
+다음 전투는 언제인가? 아니, 아니, 서두를 것 없네. 푹 쉬면서 우리 마을에 오래오래 머물러 주게나.	When is your next battle? No, no, there is no rush. Rest well, and do stay in our village for a long, long time.
+먹고, 자고, 사고, 파는 건 마을이 전부 준비해 두었으니 말일세. 껄껄.	Eating, sleeping, buying, selling: the village has it all ready for you. Heh heh.
+그리고 절대, 절대 다쳐서는 안 되네! 자네는 이 마을의 보배… 아니, 아니, 소중한 손님이니 말일세.	And you must never, ever get hurt! You are this village's treasure... no, no, I mean our dear guest.
+아, 그리고 하나만 잊지 말게나.	Ah, and one thing you must not forget.
+균열에서 나온 장비는 모두 우리 마을의 것이네. 마을의 용사에게는 세금을 낼 의무가 있다는 것, 부디 잊지 말게나. 껄껄껄.	Every piece of gear that comes out of the rift belongs to our village. The village's heroes owe it taxes, so please never forget that. Heh heh heh.
+…명심하겠습니다	…I'll remember that.
 자동 행동 설정	Auto Actions
 전선 이탈	Retreat
 재 참전	Rejoin
@@ -7119,16 +7263,10 @@ HP 2.5배, 반경 3m 고리 충격파(1.5초 예고), 사망 시 구더기 3마�
 '행동 우선순위'를 눌러 주세요.	Please press 'Action priority'.
 '공격 대상 선택'을 눌러 주세요.	Please press 'Target selection'.
 창을 닫아 주세요.	Please close the panel.
-'회수'를 맨 위로 올려 주세요.	Move 'Gathering' to the top.
 '우선 순위'를 눌러 주세요.	Please press 'Priority'.
 '몬스터 타입'을 눌러 주세요.	Please press 'Type'.
 '몬스터 등급'을 눌러 주세요.	Please press 'Rank'.
 몬스터 등급에서 '보물 몬스터'를 최우선 처치 순위로 올려 봐요.	Move 'Treasure monster' to the top of the Rank priorities.
-'원거리 마법 공격 타입'을 2순위로 올려 주세요.	Move 'Ranged magic' to second place.
-'원거리 물리 공격 타입'을 맨 위로 올려 주세요.	Move 'Ranged physical' to the top.
-'일반 몬스터'를 맨 위로 올려 주세요.	Move 'Normal monster' to the top.
-'보스 몬스터'를 아래로 내려 주세요.	Move 'Boss monsters' down.
-'소환된 적'을 위로 올려 주세요.	Move 'Summoned enemy' up.
 눌러서 계속	Tap to continue
 목표 · 광장으로 전진	Goal · advance into the plaza
 목표 · 협동 공격에 맞서 싸우기	Goal · face the coordinated attack
@@ -7177,11 +7315,11 @@ Lv{n} 해금	Unlocked Lv{n}
 핵심 · 	Key ·
 궁극기 · Lv.41에 해금	Ultimate · unlocks at Lv.41
 원소 주입	Elemental Imbuement
-빛나는 곳을 따라 {0}을 익히고 장착하세요.	Follow the highlight to learn and equip {0}.
-이렇게 하면 {0}이 적을 좀 더 효율적으로 공격할 수 있습니다.	This helps {0} attack enemies more effectively.
+빛나는 곳을 따라 {0}을(를) 익히고 장착하세요.	Follow the highlight to learn and equip {0}.
+이렇게 하면 {0}이(가) 적을 좀 더 효율적으로 공격할 수 있습니다.	This helps {0} attack enemies more effectively.
 목표 · 영웅에게 {0} 가르치기	Objective · teach {0} to your hero
-스킬 포인트가 1점 있어요. '레벨 올리기'를 눌러 영웅이 {0}을 익히게 해 주세요.	You have one skill point. Press 'Level up' to teach your hero {0}.
-{0}을 눌러 첫 번째 칸에 장착해 주세요.	Press {0} to equip it in the first slot.
+스킬 포인트가 1점 있어요. '레벨 올리기'를 눌러 영웅이 {0}을(를) 익히게 해 주세요.	You have one skill point. Press 'Level up' to teach your hero {0}.
+{0}을(를) 눌러 첫 번째 칸에 장착해 주세요.	Press {0} to equip it in the first slot.
 찢어낸 상처예요. 앞의 적에게 짧은 출혈을 남기고 자원을 얻는 기술이죠. 눌러서 살펴보세요.	This is Rend. It applies a short bleed to enemies in front and generates resource. Press it to inspect.
 
 필수 스킬 장착·학습 완료: {0}	Required skill learned and equipped: {0}
@@ -7216,3 +7354,806 @@ Lv{n} 해금	Unlocked Lv{n}
 평균	Average
 최고	Peak
 {0:0}초	{0:0}s
+
+보호막 {0:0}	Shield {0:0}
+
+# Guide tutorial skill lessons (2026-10-17)
+원거리 적이 나타났어요. 가까이 다가가기 전에 먼저 공격해 오네요.	A ranged enemy has appeared. It is attacking before we can get close.
+꿰뚫는 갈고리를 사용하면 멀리 있는 적을 끌어와 쉽게 처치할 수 있어요.	Piercing Hook pulls distant enemies to you, making them easy to defeat.
+스킬창에서 꿰뚫는 갈고리에 1포인트를 투자하고 장착해 볼까요?	Shall we spend 1 point on Piercing Hook in the skill tree and equip it?
+스킬을 배운다	Learn a skill
+작은 몬스터들이 전방에서 몰려왔어요. 하나씩 상대하니 체력이 많이 줄었네요.	Tiny monsters rushed in from the front. Fighting them one by one has cost you a lot of health.
+이번에는 갈고리에 쓴 1포인트를 회수하고, 찢어낸 상처에 다시 투자해 보세요.	Refund the point spent on Piercing Hook and invest it in Rend instead.
+찢어낸 상처는 전방의 여러 적에게 출혈을 입혀요. 몰려오는 적들을 한 번에 상대하기 좋죠.	Rend makes several enemies in front of you bleed. It is useful against a charging group.
+스킬을 바꾼다	Change skills
+이번에는 사방에서 둘러쌌어요. 전방만 공격하는 찢어낸 상처만으로는 역부족이에요.	Now they have surrounded you. Rend only attacks in front, so it is not enough on its own.
+아까 레벨이 올랐으니, 새로 얻은 포인트로 스킬을 강화해 볼까요?	You just leveled up. Shall we improve your skill with that new point?
+찢어낸 상처의 보조 스킬 '회전 베기'에 1포인트를 투자해 주세요. 이제 주변의 적을 모두 벨 수 있어요.	Invest 1 point in Rend's Spinning Rend modifier. You can now slash enemies all around you.
+보조 스킬을 배운다	Learn a modifier
+이렇게 적의 약점을 파악하고, 가장 효율적인 스킬을 골라 장착하는 것이 중요해요.	Study your enemies and equip the skill that works best against their weaknesses.
+똑같은 장비를 입더라도 적의 약점을 파악하느냐에 따라 승패가 갈릴 수 있답니다.	Even with the same equipment, understanding enemy weaknesses can decide whether you win or lose.
+이제 길을 따라가며, 적을 상대할 위치와 공격 순서도 정해 볼까요?	As we follow the road, let us decide where to fight and which enemies to attack first.
+계속 나아간다	Continue onward
+목표 · 꿰뚫는 갈고리 배우고 장착하기	Goal · Learn and equip Piercing Hook
+목표 · 전방의 작은 몬스터 처치	Goal · Defeat the tiny monsters in front
+목표 · 갈고리 포인트를 회수하고 찢어낸 상처 배우기	Goal · Refund Piercing Hook and learn Rend
+목표 · 포위한 작은 몬스터 처치	Goal · Defeat the surrounding tiny monsters
+목표 · 회전 베기에 1포인트 투자하기	Goal · Invest 1 point in Spinning Rend
+목표 · 상황에 맞는 스킬 선택하기	Goal · Choose skills for the situation
+빛나는 곳을 따라 스킬 포인트를 변경해 주세요.	Follow the highlighted controls to change your skill points.
+스킬창을 열어 주세요.	Open the skill tree.
+꿰뚫는 갈고리의 포인트 1점을 회수해 주세요.	Refund the point spent on Piercing Hook.
+회전 베기를 선택하고 1포인트를 투자해 주세요.	Select Spinning Rend and invest 1 point.
+{0}을(를) 선택하고 1포인트를 투자해 주세요.	Select {0} and invest 1 point.
+ · HP를 모두 회복했습니다.	 · HP fully restored.
+Lv.{0} → {1} · HP 모두 회복{2}	Lv.{0} → {1} · HP fully restored{2}
+
+Lv.{0} → {1} · HP·MP 모두 회복{2}	Lv.{0} → {1} · HP/MP fully restored{2}
+ · HP·MP를 모두 회복했습니다.	 · HP/MP fully restored.
+보조 스킬은 연결된 주스킬을 먼저 배워야 투자할 수 있어요.	You must learn the linked main skill before spending points on a support skill.
+각 주스킬에는 보조 스킬을 한 가지만 선택해 투자할 수 있어요.	You can choose and invest in only one support skill for each main skill.
+보조 스킬마다 주스킬의 효과나 공격 형태가 달라져요. 상황에 맞는 하나를 골라 보세요.	Each support skill changes the main skill's effects or attack form. Choose one that fits the situation.
+
+먼저 세 보조 스킬을 하나씩 눌러 효과를 비교해 볼까요?	First, let's select each of the three modifiers and compare their effects.
+피의 회수를 눌러 효과를 살펴보세요.	Select Blood Reclaim to examine its effect.
+깊은 상처를 눌러 효과를 살펴보세요.	Select Deep Wound to examine its effect.
+회전 베기를 눌러 효과를 살펴보세요.	Select Spinning Rend to examine its effect.
+피의 회수는 찢어낸 상처를 세 번 시전할 때마다 남은 출혈 피해를 한꺼번에 터뜨려요. 쌓인 출혈로 순간적인 피해를 주고 체력도 회복할 수 있어요.	Blood Reclaim detonates the remaining bleed every third cast of Rend. It deals the stored bleed damage at once and also restores your health.
+깊은 상처로 강화하면 여러 적 대신 한 명만 공격해요. 대신 출혈이 최대 세 번까지 중첩되고 중첩마다 더 강해져서, 한 적에게 큰 피해를 줄 수 있어요.	Deep Wound makes Rend hit one enemy instead of several. Bleed can stack up to three times and grows stronger with each stack, dealing more damage to that enemy.
+회전 베기는 전방 공격을 360도 회전 공격으로 바꿔 주변의 적을 함께 베어요. 출혈 시간은 짧아지지만, 지금처럼 적들에게 둘러싸였을 때 효과적이에요.	Spinning Rend turns the frontal attack into a full-circle slash that hits enemies around you. Bleed lasts less time, but it is effective when surrounded, just like now.
+적들이 사방을 둘러싸고 있으니 회전 베기가 알맞아요. 1포인트를 투자해 주변의 적을 물리쳐 보세요.	Enemies surround you, so Spinning Rend is the right choice. Invest one point and defeat the enemies around you.
+
+주변의 적은 모두 물리쳤지만 상처가 났으니 어서 치료해야 해요. 처음이니까 제가 회복 물약 열 개를 드릴게요.	You've beaten every enemy nearby, but you're hurt and need healing right away. Since this is your first time, I'll give you ten healing potions.
+물약은 직접 마시지 않아도 돼요. 물약 설정에서 정한 HP 아래로 체력이 떨어졌을 때 물약이 남아 있으면 자동으로 마신답니다.	You don't have to drink potions yourself. When your HP drops below the level set in potion settings and you still have potions, you drink one automatically.
+그런데 지금은 HP가 1% 이하가 되어야만 마시도록 되어 있어서 위험해요. 왼쪽 아래 물약 설정에서 HP 사용 기준을 30% 이상으로 정한 뒤 저장해 주세요.	But right now it only drinks at 1% HP or lower, which is dangerous. Open potion settings at the lower left, set the HP threshold to 30% or higher, then save.
+물약 사용 시점을 바꾼다	Change potion timing
+목표 · 물약 사용 기준을 HP 30% 이상으로 저장하기	Goal · Save an HP potion threshold of at least 30%
+왼쪽 아래 물약 설정 버튼을 눌러 주세요.	Press the potion settings button at the lower left.
+안전한 운영을 위해 HP 물약 사용 기준을 30% 이상으로 설정해 보세요.	For safer play, set the HP potion threshold to 30% or higher.
+변경 버튼을 눌러 설정을 저장해 주세요. 저장하면 회복 물약을 마셔요.	Press Apply to save your setting. A healing potion will be used once it is saved.
+물약 안내를 완료할 수 없습니다. 설정과 보유 수량을 확인해 주세요.	Unable to complete the potion lesson. Check the settings and potion stock.
+해골 술사	Skeletal Mage
+뼈 창	Bone Spear
+1초 예고 후 12m 관통 뼈 창	1 s telegraph, 12 m piercing bone spear
+사슬 망령	Chain Specter
+제어	Control
+영혼 사슬	Soul Chain
+1초 예고 후 10m 사슬, 맞으면 2.5m 끌려감	1 s telegraph, 10 m chain, pulls 2.5 m on hit
+시체 인형사	Corpse Puppeteer
+시체 조종	Puppet Corpse
+8초마다 10초 이내 사체에서 해골 1구를 일으킴(최대 3)	Every 8 s raises a skeleton from a corpse under 10 s old (max 3)
+지하묘지의 리치	Crypt Lich
+영혼 등불에 생명을 묶은 마법사	Mage who bound his life to soul lanterns
+영혼 등불 3개 설치	Places 3 soul lanterns
+영혼 등불 3개 설치(켜진 동안 리치 받는 피해 75% 감소)	Places 3 soul lanterns (75% damage reduction while any burns)
+서리 구체	Frost orb
+죽음 광선	Death ray
+죽음 광선(10m 직선 1.5초 유지)	Death ray (10 m line held 1.5 s)
+등불 재점화	Relights a lantern every 10 s
+등불 재점화(10초마다 하나)	Relights a lantern every 10 s
+서리 회오리 고리	Frost vortex ring
+망자 일으키기	Raise dead
+망자 일으키기(N26 2구)	Raise dead (2 × N26)
+영혼 등불	Soul Lantern
+익사한 노예	Drowned Thrall
+익사자	Drowned
+붙잡기	Grab
+물웅덩이에서 솟아나 붙잡기(이동속도 40% 감소 2초)	Rises from puddles and grabs (40% slow for 2 s)
+조수 부름꾼	Tidecaller
+장판(밀치기)	Zone (knockback)
+물결	Tidal Wave
+1.3초 예고 후 길이 7m 물결, 맞으면 3m 밀림	1.3 s telegraph, 7 m wave, knocks back 3 m
+동굴 박쥐 떼	Cave Bat Swarm
+떼(흡혈)	Swarm (leech)
+동굴 짐승	Cave beast
+흡혈 물기	Draining Bite
+불규칙 비행, 물 때 피해 50% 흡혈	Erratic flight, bites heal it for 50% of damage
+눈먼 동굴 트롤	Blind Cave Troll
+맹목 돌진	Blind Charge
+영웅이 마지막으로 기술을 쓴 위치로 1초 예고 후 돌진, 벽에 부딪히면 2초 기절	Charges (1 s telegraph) to where the hero last cast a skill; stunned 2 s if it hits a wall
+균류 주술사	Fungal Shaman
+지팡이 치기	Staff Strike
+버섯 토템 설치(이동 불가, 반경 4m 아군 초당 4% 회복)	Plants a mushroom totem (stationary, heals allies within 4 m by 4% per second)
+버섯 토템	Mushroom Totem
+포자 덩굴	Spore Creeper
+고정 포탑	Stationary turret
+포자탄	Spore Shot
+이동 불가, 1.2초 예고 후 포물선 포자탄(반경 2m)	Cannot move; 1.2 s telegraph, lobbed spore shot (2 m radius)
+피 거머리	Blood Leech
+부착	Attacher
+영웅에게 붙어 0.5초마다 공격력 20% 흡혈, 이동기를 쓰면 떨어짐	Latches on and drains 20% of attack every 0.5 s; a movement skill shakes it off
+식인귀 도살자	Ghoul Butcher
+근접(광폭)	Melee (frenzy)
+도살 베기	Butcher Cleave
+주변 아군이 죽을 때마다 공격 속도 30% 증가 5초(중첩 3)	Each nearby ally death gives +30% attack speed for 5 s (stacks 3)
+피의 광폭	Blood Frenzy
+지속 피해 장판 회피 여부	Whether to dodge lingering damage zones
+투사체 회피 여부	Whether to dodge projectiles
+피해량에 따른 회피 여부 설정	Dodge by amount of damage
+아래 설정된 초당 피해량보다 더 큰 데미지를 입을 경우 회피합니다.	Dodges when the damage you would take is greater than the per-second damage set below.
+회피 판단을 위한 초당 HP 손실 % 설정	Set the HP loss per second (%) that triggers a dodge
+0% 피하지 않음	0% Never dodge
+100% 무조건 피함	100% Always dodge
+피하지 않음	Never dodges
+무조건 피함	Always dodges
+초당 HP 손실 {0}% 초과 시 회피	Dodges when HP loss exceeds {0}% per second
+우선 회피를 적용할 특수 위험 선택	Choose special threats to dodge first
+고른 특수 위험의 예고를 감지하면 회피를 시도합니다. 회피 수단은 사냥 칙령 창에서 바꿀 수 있습니다.	When a chosen special threat is announced, the hero tries to dodge it. The dodge method can be changed in the Hunt Edict window.
+특수 위험을 고르면 회피 방식이 여기에 표시됩니다.	Pick a special threat to see how you will dodge it.
+{0} → 회피 수단: {1}	{0} → dodge method: {1}
+빛나는 곳을 따라 {0}을(를) 익히고 장착해 주세요.	Follow the glow to learn and equip {0}.
+빛나는 곳을 따라 회피 기준을 정해 주세요.	Follow the glow to set the dodge threshold.
+{0} 습득	{0} learned
+회전 베기 습득	Spinning Rend learned
+물약 사용 기준 설정	Potion threshold set
+첫 교전 위치 설정	Opening position set
+전투 중 위치 설정	Combat position set
+지속 피해 장판 회피 설정	Ground-zone dodge set
+투사체 회피 설정	Projectile dodge set
+영웅은 칙령에 적힌 대로만 움직여요. 지금은 장판을 피하지 않도록 되어 있어서, 가만히 서서 맞고 있는 거예요.	The hero only moves as the edict says. Right now it says not to avoid zones, so he stands there and takes it.
+투사체 회피도 기준이 따로 있어요. 지금은 피하지 않도록 되어 있어서, 화살을 그대로 맞고 있어요.	Projectiles have their own dodge threshold. It is set not to dodge right now, so he takes every arrow.
+좋아요! 이제 장판이 깔리는 게 보이면 영웅이 스스로 비켜설 거예요.	Good! Now the hero will step aside on his own when he sees a zone coming down.
+잘했어요! 이제 화살이 날아와도 영웅이 길목에서 벗어날 거예요.	Well done! Now the hero will get out of the way when arrows fly in.
+좋아요! 회오리로 보스를 몰아붙여 봐요!	Good! Let's push the boss back with Whirlwind!
+새로운 적	New enemy
+작은 몬스터 무리가 몰려온다	A swarm of small monsters rushes in
+몬스터들이 사방을 둘러쌌다	Monsters have surrounded you
+장판을 뿌리는 마법사가 나타났다	A zone-casting mage appears
+화살을 쏘는 궁수 세 명이 나타났다	Three archers appear
+이 길 끝을 지키는 수문장	The gatekeeper at the end of the road
+'생존' 아이콘을 눌러 주세요.	Please press the 'Survival' icon.
+'피해 유형별 회피'를 눌러 주세요.	Please press 'Avoidance by damage type'.
+오른쪽 + 버튼을 눌러 회피 기준을 올려 주세요. 초당 HP 손실 1~7%면 돼요.	Press the + button on the right to raise the threshold. Anything from 1% to 7% HP loss per second works.
+왼쪽 − 버튼을 눌러 회피 기준을 7% 이하로 낮춰 주세요.	Press the − button on the left to lower the threshold to 7% or less.
+오른쪽 + 버튼을 눌러 회피 기준을 올려 주세요. HP 손실 1~5%면 돼요.	Press the + button on the right to raise the threshold. Anything from 1% to 5% HP loss works.
+왼쪽 − 버튼을 눌러 회피 기준을 5% 이하로 낮춰 주세요.	Press the − button on the left to lower the threshold to 5% or less.
+레벨 업!	LEVEL UP!
+HP·MP를 모두 회복했습니다.	HP and MP fully restored.
+공격 우선순위 설정	Attack priority set
+보물 몬스터 우선 설정	Treasure priority set
+회수 우선 설정	Gathering priority set
+저 앞쪽에서 또 다른 적들의 기척이 느껴져요. 천천히 다가가 볼까요?	I sense more enemies up ahead. Shall we approach carefully?
+당신이 지켜보는 영웅은 적을 만나면 스스로 싸워요. 다만 어떻게 싸울지는 당신이 '사냥 칙령'에 적은 대로, 한 글자도 어김없이 따라요.	The hero you are watching fights on his own when he meets an enemy. But how he fights is exactly what you write in the 'Hunt Edict', word for word.
+조심하세요! 바닥에 깔린 붉은 원이 지속 피해 장판이에요. 그 안에 서 있는 동안 피해가 계속 쌓여요.	Careful! The red circle on the ground is a lingering damage zone. The damage keeps stacking up as long as you stand in it.
+사냥 칙령의 '피해 유형별 회피'에서 지속 피해 장판 회피 기준을 7% 이하로 정해 주세요. 그러면 영웅이 장판을 알아보고 스스로 비켜서요.	In the Hunt Edict's 'Avoidance by damage type', set the lingering-zone dodge threshold to 7% or less. Then the hero will spot the zone and step out of it himself.
+회피 기준을 정한다	Set the dodge threshold
+'피해 유형별 회피'에서 투사체 회피 기준을 5% 이하로 정해 주세요. 그러면 영웅이 화살이 날아오는 길목에서 벗어나요.	In 'Avoidance by damage type', set the projectile dodge threshold to 5% or less. Then the hero will move out of the arrows' path.
+해냈어요! 레벨이 올랐어요. HP와 MP도 가득 채워졌답니다.	You did it! You leveled up, and your HP and MP are full again.
+새 스킬 포인트도 하나 생겼어요. 아껴 두었다가, 곧 만날 보스를 위해 쓸 거예요.	You also gained a new skill point. We will save it for the boss we are about to meet.
+이 길 끝에서 강한 기운이 느껴져요. 이제 보스를 만나러 가요.	I sense a powerful presence at the end of this road. Let's go meet the boss.
+보스를 만나러 간다	Go meet the boss
+저기 보스가 있어요! 호위하는 마물들까지 함께예요. 지금 가진 기술만으로는 쉽지 않아요.	The boss is right there, with his guards! The skills you have now won't be enough.
+그래서 영웅에게 전사의 메인 스킬, 회오리를 가르쳐 줄 거예요.	So we will teach the hero the Warrior's main skill, Whirlwind.
+회오리는 몸을 돌리며 주변의 모든 적을 계속 베는 기술이에요. 가장 효율적으로, 가장 빠르게 몬스터를 정리할 수 있죠.	Whirlwind spins the hero around, cutting every enemy nearby without a pause. It is the most efficient and fastest way to clear monsters.
+방금 얻은 포인트를 회오리에 쓰고 장착해 주세요. 이 기술로 보스를 잡아 봐요!	Spend the point you just earned on Whirlwind and equip it. Let's take down the boss with it!
+회오리를 배운다	Learn Whirlwind
+목표 · 장판 마법사와 싸우기	Goal · fight the zone mage
+목표 · 지속 피해 장판 회피 기준을 7% 이하로 정하기	Goal · set the zone dodge threshold to 7% or less
+목표 · 장판을 피하며 마법사 처치	Goal · defeat the mage while dodging zones
+목표 · 궁수들과 싸우기	Goal · fight the archers
+목표 · 투사체 회피 기준을 5% 이하로 정하기	Goal · set the projectile dodge threshold to 5% or less
+목표 · 화살을 피하며 궁수 처치 {0}/{1}	Goal · defeat archers while dodging arrows {0}/{1}
+목표 · 레벨 업!	Goal · level up!
+목표 · 보스를 만나러 전진	Goal · advance to meet the boss
+목표 · 회오리를 배우고 장착하기	Goal · learn and equip Whirlwind
+{0}을(를) 눌러 두 번째 칸에 장착해 주세요.	Press {0} to equip it in the second slot.
+영웅의 두 번째 기술 칸을 눌러 주세요.	Please press the hero's second skill slot.
+서막	Prologue
+세계는 갈라졌다	The world was torn apart
+갈라진 틈마다 마물이 기어 나왔다	Monsters crawled out of every crack
+그 틈을 균열이라 불렀다	They called the cracks Rifts
+균열 앞에 선 영웅에게는 길을 일러 주는 목소리가 있었다	A voice showed the way to every hero who stood before a Rift
+칙령	Edict
+그 목소리는, 당신	That voice is you
+당신이 쓰는 칙령이 영웅의 길이 된다	The edict you write becomes the hero's path
+…으윽. 머리가 울린다. 여기가… 어디지?	…Ugh. My head is ringing. Where… am I?
+분명 마을 성문을 나서던 길이었는데. 이런 곳은 지도에 없었어.	I was just leaving the town gate. This place isn't on any map.
+발밑의 돌이 차갑다. 오래된 묘역 냄새… 그리고 누군가, 나를 지켜보고 있어.	The stone under my feet is cold. It smells of an old graveyard… and someone is watching me.
+몸을 일으킨다	Rise to your feet
+확인 ({0})	OK ({0})
+목표 · 눈을 뜨고 주변 살피기	Goal · open your eyes and look around
+황혼 늑대	Dusk Wolf
+근접(포위)	Melee (flank)
+늑대	Wolf
+3마리 무리, 영웅 뒤쪽에서 물면 피해 30% 증가	Packs of 3, bites from behind deal 30% more
+썩은 까마귀 떼	Carrion Crow Flock
+비행 돌진	Flying charge
+급강하	Dive
+지형 무시 비행, 0.6초 예고 후 6m 급강하	Flies over terrain, 0.6 s telegraph, 6 m dive
+수의 처녀	Shroud Maiden
+수의 보호막	Shroud Ward
+8초마다 아군 하나에 최대 HP 20% 보호막	Every 8 s shields one ally for 20% of max HP
+묘비 골렘	Tombstone Golem
+묘비 솟구치기	Tombstone Rise
+1.2초 예고 후 직선 6m에 4초 동안 묘비 벽 생성(이동 차단)	1.2 s telegraph, a 6 m line of tombstone walls for 4 s (blocks movement)
+묘비 벽	Tombstone Wall
+참회의 채찍질꾼	Penitent Flagellant
+근접(지원)	Melee (support)
+채찍질	Lash
+받은 피해의 30%를 반경 4m 아군 회복으로 돌림	30% of damage it takes heals allies within 4 m
+참회의 피	Penitent Blood
+방패벽 미늘창병	Bulwark Halberdier
+미늘창 휘두르기	Halberd Sweep
+정면 투사체 무효, 1초 예고 후 길이 3.5m 미늘창 휘두르기	Immune to frontal projectiles, 1 s telegraph, 3.5 m halberd sweep
+방패벽	Shield Wall
+잿불 임프	Ember Imp
+불씨 할퀴기	Ember Claw
+5마리씩, 짧은 순간이동, 지나간 자리에 1초 불씨	Packs of 5, short blinks, leaves 1 s embers
+성당 가고일	Cathedral Gargoyle
+성당 석상	Cathedral statue
+석상(무적)으로 있다가 지나가면 급강하, HP 50%에서 2초 석화(무적)	A statue (invulnerable) until the hero passes, then dives; turns to stone for 2 s at 50% HP
+공성 노포조	Siege Ballista Crew
+고정 원거리	Stationary ranged
+관통 볼트	Piercing Bolt
+이동 불가, 2초 예고 후 16m 관통 볼트(3배 피해)	Cannot move; 2 s telegraph, 16 m piercing bolt (×3 damage)
+심문관	Inquisitor
+낙인 사슬	Branding Chain
+1.2초 예고 후 사슬 낙인: 2초 속박 + 화상	1.2 s telegraph, branding chain: 2 s root plus burn
+철처녀 운반자	Iron Maiden Bearer
+근접(붙잡기)	Melee (grab)
+철처녀 잡기	Maiden Grab
+1.5초 예고 후 잡기, 맞으면 1초 행동 불가 + 피해	1.5 s telegraph grab: 1 s loss of control plus damage
+지옥불 사냥개	Hellfire Hound
+화염 돌진	Hellfire Charge
+0.9초 예고 후 8m 돌진, 지나간 자리 3초 화염	0.9 s telegraph, 8 m charge, 3 s fire trail
+타락한 기수	Fallen Standard-Bearer
+깃대 치기	Banner Strike
+깃발 설치: 반경 6m 아군 받는 피해 30% 감소(깃발은 파괴 가능 물체)	Plants a banner: allies within 6 m take 30% less damage (the banner is a breakable object)
+타락한 깃발	Fallen Banner
+용광로 골렘	Forge Golem
+근접(사망 장판)	Melee (death zone)
+용광로 강타	Forge Slam
+느린 강타, 사망 시 반경 3m 3초 용암 웅덩이	Slow slams; leaves a 3 m lava pool for 3 s on death
+용암 웅덩이	Lava Pool
+화형대 사제	Pyre Priest
+지원(부활)	Support (revive)
+부활 의식	Rite of Return
+2초 시전(끊김)으로 쓰러진 아군 하나 부활	2 s cast (interruptible) revives one fallen ally
+균열 촉수	Rift Tendril
+고정 장판	Stationary zone
+촉수 휩쓸기	Tentacle Sweep
+바닥 균열에서 솟아 1초 예고 후 길이 6m 휩쓸기	Bursts from a floor crack, 1 s telegraph, 6 m sweep
+악마 감독관	Demon Overseer
+채찍	Whip
+채찍(길이 5m), 아군을 채찍질해 이동속도 40% 증가	5 m whip; whips allies for +40% move speed
+감독관의 채찍질	Overseer's Lash
+영혼 약탈 기사	Soulreaver Knight
+근접(순간이동)	Melee (teleport)
+배후 베기	Backstab
+0.7초 예고 후 영웅 뒤로 순간이동해 베기	0.7 s telegraph, teleports behind the hero and slashes
+강철 심문관	Iron Inquisitor
+탑 방패를 든 기사단장	Order commander with a tower shield
+방패 돌진	Shield charge
+방패 강타(1페이즈 동안 정면에서 받는 피해 80% 감소)	Shield bash (in phase 1 it takes 80% less damage from the front)
+방패를 버림 → 쌍철퇴 연타	Drops the shield → twin flail flurry
+화형 고리	Pyre ring
+심문관 소환	Summons 2 × N76
+심문관 소환(N76 2명)	Summons 2 × N76
+용광로 군주	Forge Lord
+지옥 대장간의 악마 대장장이	Demon smith of the hell forge
+모루 내려찍기	Anvil slam
+모루 내려찍기(반경 3.5m)	Anvil slam (3.5 m)
+용암 줄기 3줄	Three lava streams
+쇠사슬 끌기	Chain drag
+용광로 폭발	Furnace burst
+용광로 폭발(바닥 절반 용암 4초)	Furnace burst (half the floor is lava for 4 s)
+골렘 주조	Casts golems
+골렘 주조(N80 2구)	Casts golems (2 × N80)
+불티 폭풍	Spark storm
+갑충	Beetle
+6마리씩, 모래 속에서 튀어나옴	Packs of 6, burst out of the sand
+사막 전갈	Dune Scorpion
+집게 2연타	Double Pincer
+집게 2연타 + 0.8초 예고 꼬리 찌르기(독 중첩)	Double pincer plus a 0.8 s telegraphed tail sting (poison stacks)
+꼬리 찌르기	Tail Sting
+무덤 미라	Tomb Mummy
+근접(부활)	Melee (revive)
+미라	Mummy
+미라 할퀴기	Mummy Claw
+처음 쓰러지면 3초 뒤 HP 50%로 일어남(그 사이 공격하면 완전 파괴)	Rises with 50% HP 3 s after first falling (hitting it meanwhile destroys it)
+다시 일어나기	Rise Again
+약탈자 화살꾼	Raider Fire Archer
+불화살	Fire Arrow
+1초 예고 후 불화살, 떨어진 자리 2초 화염	1 s telegraph, fire arrow that leaves 2 s of flame
+약탈자 투창병	Raider Javelineer
+원거리(포물선)	Ranged (lob)
+투창	Javelin
+1.3초 예고 후 영웅 위치에 투창(반경 1.2m, 2배 피해)	1.3 s telegraph, javelin at the hero (1.2 m, ×2 damage)
+뱀 교단 전사	Serpent Cult Warrior
+근접(돌진)	Melee (dash)
+뱀 교단	Serpent cult
+독 베기	Venom Slash
+0.6초 예고 후 3m 측면 미끄러짐 + 독 베기	0.6 s telegraph, 3 m side slither plus venom slash
+뱀 교단 예언자	Serpent Cult Seer
+모래 장막	Sand Veil
+아군 하나에 2초 모래 장막(투사체 반사)	Gives one ally a 2 s sand veil (reflects projectiles)
+모래 독사	Sand Viper
+매복 떼	Ambush swarm
+모래 속 물기	Ambush Bite
+3마리, 모래 속에서 0.6초 예고 후 물기	Three of them, 0.6 s telegraph bites from the sand
+썩은고기 독수리	Carrion Vulture
+비행	Flying
+HP 낮은 영웅을 노려 급강하, 사체를 먹어 회복	Dives at a low-HP hero, eats corpses to heal
+사체 먹기	Carrion Feast
+모래 망령	Sand Wraith
+이동 장판	Moving zone
+모래 회오리	Sand Twister
+1초 예고 후 3초 동안 움직이는 모래 회오리(반경 1.5m)	1 s telegraph, a sand twister (1.5 m) that moves for 3 s
+태양 숭배자	Sun Cultist
+태양 광선	Sunbeam
+1.6초 동안 줄어드는 원(반경 4→1.5m) 끝에 태양 광선	A circle shrinking from 4 m to 1.5 m over 1.6 s ends in a sunbeam
+사암 거상	Sandstone Colossus
+근접(분열)	Melee (splitter)
+정령	Spirit
+모래 강타	Sand Slam
+HP 2배, 사망 시 작은 모래 정령 3개로 부서짐	HP ×2, breaks into 3 small sand spirits on death
+부서지기	Crumble
+잿불 진	Ember Djinn
+원거리(순간이동)	Ranged (blink)
+나선 불꽃	Spiral Flames
+피격되면 4m 순간이동, 나선 불꽃 구체 6발	Blinks 4 m when hit, 6-orb fire spiral
+불꽃 도약	Flame Blink
+자칼 묘지기	Jackal Tombguard
+근접(정예급)	Melee (elite-grade)
+3연속 찌르기	Triple Thrust
+5m 창 도약 + 3연속 찌르기, 석관 근처에서 공격 20% 증가	5 m spear leap plus 3 thrusts; +20% attack near a sarcophagus
+창 도약	Spear Leap
+저주받은 석관	Cursed Sarcophagus
+고정 소환	Stationary spawner
+석관 열기	Open Sarcophagus
+이동 불가, 6초마다 열려 미라 1구	Cannot move; opens every 6 s to release a mummy
+약탈자 두목	Raider Chieftain
+지원(소환)	Support (summoner)
+소집 함성	Rallying Cry
+함성: 반경 6m 아군 공격 25% 증가 + 사구 약탈자 2명 호출	War cry: allies within 6 m +25% attack, calls 2 dune marauders
+두목의 함성	Chief's Shout
+개미귀신 구덩이	Antlion Pit
+고정 제어	Stationary control
+개미지옥	Sand Pit
+반경 4m 모래 구덩이가 중심으로 천천히 끌어당김, 중심에서 큰턱 물기	A 4 m sand pit slowly drags inward; mandible bite at the centre
+물집 딱정벌레	Blister Beetle
+사망 0.6초 뒤 반경 2.5m 산성 웅덩이 3초	0.6 s after death, a 2.5 m acid pool for 3 s
+산성 웅덩이	Acid Pool
+모래의 파라오	Sand Pharaoh
+황금 가면을 쓴 미라 왕	Mummy king in a golden mask
+저주 낙인	Curse brand
+저주 낙인(4초 뒤 영웅 위치 폭발, 아군에게서 떨어지기)	Curse brand (explodes on the hero after 4 s; move away from allies)
+모래 장벽 2줄	Two sand walls
+미라 일으키기	Raise mummies
+미라 일으키기(N87 2구)	Raise mummies (2 × N87)
+태양 원반 광선	Sun-disk beams
+태양 원반 광선(보스 주위 회전 2줄 4초)	Sun-disk beams (2 lines rotating around him for 4 s)
+모래폭풍	Sandstorm
+모래폭풍(시야 감소, 회오리 3개)	Sandstorm (reduced vision, 3 twisters)
+석관 봉인	Sarcophagus seal
+석관 봉인(4초 무적, 석관 2개 파괴로 해제)	Sarcophagus seal (4 s invulnerable, ended by breaking 2 sarcophagi)
+봉인 석관	Sealing Sarcophagus
+태양을 삼킨 마신	Sun-Eater Djinn
+불꽃과 신기루의 거대 진	Giant djinn of flame and mirage
+불꽃 구체 3연발	Triple fire orb
+신기루 분신 2개	2 mirage clones
+신기루 분신 2개(분신 처치 시 폭발)	2 mirage clones (explode when killed)
+불기둥 직선	Fire pillar line
+운석 비	Meteor rain
+운석 비(6곳 순차)	Meteor rain (6 sequential)
+줄어드는 안전 원	Shrinking safe circle
+줄어드는 안전 원(밖은 화염)	Shrinking safe circle (fire outside)
+태양 흡수	Sun absorption
+태양 흡수(4초 시전, 끊지 못하면 광역 큰 피해)	Sun absorption (4 s cast; heavy area damage unless interrupted)
+신기루 분신	Mirage Clone
+거미줄 직조자	Webweaver
+거미줄 발사	Web Shot
+0.9초 예고 후 9m 거미줄 투사체, 맞으면 1초 속박	0.9 s telegraph, 9 m web shot, roots for 1 s
+독니 잠복 거미	Venomfang Lurker
+낙하 물기	Drop Bite
+천장에서 0.8초 원형 예고 후 낙하, 물면 독 3중첩	Drops from the ceiling after a 0.8 s circle telegraph; bite adds 3 poison stacks
+거미 알주머니	Spider Egg Sac
+부화	Hatch
+이동 불가, 5초마다 새끼 거미 2마리 부화	Cannot move; hatches 2 spiderlings every 5 s
+따개비 갑각귀	Barnacle Brute
+정면 피해 50% 감소, 후방 피해 30% 증가, 집게 2연타	50% less damage from the front, 30% more from behind, double pincer
+따개비 껍질	Barnacle Shell
+결정 가시등	Crystal Shardback
+근접(반격)	Melee (retaliation)
+균열 결정	Rift crystal
+결정 할퀴기	Crystal Claw
+피격 3회마다 0.6초 예고 후 반경 2m 결정 가시	Every third hit taken, 0.6 s telegraph, 2 m crystal spikes
+결정 가시	Crystal Spikes
+동굴 점액	Cave Ooze
+점액 튀기기	Ooze Splash
+사망 시 작은 점액 2개로 분열(2번까지)	Splits into 2 smaller oozes on death (twice)
+익사한 마녀	Drowned Hag
+익사의 저주	Drowning Curse
+1.4초 시전(기절로 끊김), 영웅이 받는 피해 20% 증가 6초	1.4 s cast (stun interrupts): hero takes 20% more damage for 6 s
+수정 감시자	Crystal Sentinel
+수정 광선	Crystal Beam
+이동 불가, 90도를 2초 동안 훑는 광선(1초 예고)	Cannot move; a beam sweeps 90° over 2 s (1 s telegraph)
+포자 운반 딱정벌레	Sporebearer Beetle
+포자 돌진	Spore Charge
+1초 예고 후 8m 돌진, 지나간 자리에 4초 독 포자 줄	1 s telegraph, 8 m charge, leaves a 4 s poison spore trail
+심연의 익사왕	Drowned Abyss King
+해저에서 올라온 왕관 쓴 익사자 거인	Crowned drowned giant risen from the deep
+작살 던지기	Harpoon throw
+작살 던지기(직선, 2m 끌기)	Harpoon throw (line, 2 m pull)
+조수 내려찍기	Tidal slam
+조수 내려찍기(고리)	Tidal slam (ring)
+익사자 소환	Summon drowned
+밀물	Flood tide
+밀물(높은 바위 3곳만 안전, 5초)	Flood tide (only 3 high rocks are safe, 5 s)
+소용돌이	Whirlpool
+소용돌이(중심으로 끌림)	Whirlpool (pulls inward)
+해일 3줄	Three tidal waves
+가시뿔 졸개	Thornhorn Runt
+4마리씩, 짧은 창 찌르기	Packs of 4, short spear jabs
+가시뿔 투석꾼	Thornhorn Slinger
+투석	Sling Stone
+1.1초 예고 후 영웅 위치에 포물선 돌(반경 1.5m)	1.1 s telegraph, lobbed stone at the hero (1.5 m)
+가시뿔 들이받기꾼	Thornhorn Gorer
+들이받기	Ram
+0.9초 예고 후 7m 들이받기, 맞으면 0.6초 넘어짐	0.9 s telegraph, 7 m gore, knocks down 0.6 s
+가시뿔 북잡이	Thornhorn Drummer
+전쟁 북	War Drums
+전쟁 북 오라: 반경 6m 아군 이동·공격 속도 25% 증가	War drum aura: allies within 6 m gain 25% move and attack speed
+가시뿔 주술사	Thornhorn Shaman
+번개 기둥	Lightning Pillars
+번개 기둥 3개를 0.4초 간격으로 영웅 진행 방향에 떨어뜨림	Drops 3 lightning pillars 0.4 s apart along the hero's path
+늑대인간	Werewolf
+근접(가속)	Melee (ramp)
+연속으로 맞힐 때마다 공격 속도 10% 증가(최대 5), 5m 도약	Each consecutive hit adds 10% attack speed (max 5), 5 m leap
+사냥의 열기	Hunting Fervour
+울부짖는 늑대인간	Howling Werewolf
+울부짖기	Howl
+1.2초 울부짖기(기절로 끊김): 황혼 늑대 2마리 소환, 주변 아군 광폭	1.2 s howl (stun interrupts): summons 2 dusk wolves and frenzies allies
+가시덤불 기는 것	Briar Crawler
+매복(제어)	Ambush (control)
+덩굴 속박	Vine Snare
+땅속에 숨어 있다가 4m 안에서 1초 예고 후 덩굴 속박 1초	Hidden underground; within 4 m, 1 s telegraph then a 1 s vine root
+금빛 도깨비불	Gilded Wisp
+공격하지 않고 도망, 8초 뒤 사라짐. 처치하면 골드·재료 보너스	Never attacks, flees and vanishes after 8 s; drops bonus gold and materials
+선돌 파수꾼	Menhir Warden
+선돌	Menhir
+룬 균열	Rune Fissure
+1.3초 예고 후 십자 4방향 룬 균열(길이 6m)	1.3 s telegraph, rune cracks in a 4-way cross (6 m)
+가시등 멧돼지	Thornback Boar
+1초 예고 후 9m 돌진, 피격 시 주변 1.5m 가시 털	1 s telegraph, 9 m charge, sheds 1.5 m quills when hit
+가시 털	Quill Burst
+독초 마녀	Hemlock Witch
+독 플라스크	Poison Flask
+1.2초 예고 후 포물선 독 플라스크(반경 2.5m, 3초)	1.2 s telegraph, lobbed poison flask (2.5 m, 3 s)
+꽃가루 정령	Pollen Sprite
+꽃잎 치기	Petal Slap
+사망 0.5초 뒤 반경 2.5m 졸음 꽃가루(둔화 60% 2초)	0.5 s after death, 2.5 m drowsy pollen (60% slow for 2 s)
+졸음 꽃가루	Sleep Pollen
+들판 허수아비	Field Scarecrow
+낫 회전	Scythe Spin
+서 있는 허수아비로 위장, 3m 안에서 깨어나 0.8초 예고 후 낫 회전	Poses as a scarecrow; wakes within 3 m, 0.8 s telegraph then a scythe spin
+가시뿔 광전사	Thornhorn Berserker
+광폭 베기	Berserk Cleave
+HP 50% 이하에서 피해 50%·이동속도 30% 증가	Below 50% HP: +50% damage, +30% move speed
+광폭화	Berserk
+황혼 사냥꾼	Dusk Huntsman
+화살비	Arrow Rain
+1.4초 예고 후 반경 1.2m 화살비 5곳	1.4 s telegraph, 5 arrow-rain circles (1.2 m)
+고목 정령	Elder Treant
+지원(방어)	Support (guard)
+뿌리 내려찍기	Root Slam
+뿌리 연결: 반경 6m 아군 받는 피해 25% 감소, 2.5m 뿌리 내려찍기	Root link: allies within 6 m take 25% less damage; 2.5 m root slam
+뿌리 연결	Root Link
+황혼의 늑대왕	Dusk Wolf King
+노을이 질수록 사나워지는 늙은 늑대인간	Old werewolf that grows fiercer as dusk falls
+연속 도약 3회	Three chained leaps
+할퀴기 연타	Claw flurry
+무리 부르기	Call the pack
+무리 부르기(N58 3마리)	Call the pack (3 × N58)
+그림자 분신 2개	Two shadow clones
+그림자 분신 2개(분신은 예고만 하고 피해 없음, 진짜는 색이 다름)	Two shadow clones (they telegraph but deal no damage; the real one has a different colour)
+달 울음	Moon howl
+달 울음(둔화 고리)	Moon howl (slowing ring)
+사냥 돌진	Hunting charge
+그림자 분신	Shadow Clone
+가시덤불 어머니	Briar Mother
+초원 한가운데 뿌리내린 마녀 나무	Witch tree rooted in the middle of the grassland
+가시 벽 성장	Thorn walls grow
+가시 벽 성장(경기장 일부 차단 5초)	Thorn walls grow (block part of the arena for 5 s)
+씨앗 뿌리기	Scatters seeds
+씨앗 뿌리기(N61 소환)	Scatters seeds (summons N61)
+가시 창 부채꼴	Thorn lance cone
+뿌리 심장 3개 노출	Exposes 3 root hearts
+뿌리 심장 3개 노출(모두 부수면 6초 무력화)	Exposes 3 root hearts (breaking all stuns her for 6 s)
+덩굴 채찍 회전	Vine whip spin
+가시 비	Thorn rain
+가시 벽	Thorn Wall
+뿌리 심장	Root Heart
+서리 늑대	Frost Wolf
+근접(중첩)	Melee (stacks)
+설원 짐승	Snow beast
+한기 물기	Chilling Bite
+3마리 무리, 물 때마다 한기 1중첩, 3중첩이면 1초 빙결	Packs of 3; each bite adds a chill stack, 3 stacks freeze for 1 s
+설인	Yeti
+눈덩이	Snowball
+1.2초 예고 후 큰 눈덩이(반경 2m), 근접하면 내려찍기	1.2 s telegraph, big snowball (2 m); slams when close
+빙하 골렘	Glacier Golem
+근접(사망 효과)	Melee (death effect)
+얼음 정령	Ice spirit
+빙하 강타	Glacier Slam
+HP 2배, 사망 시 0.8초 뒤 얼음 파편 8방향	HP ×2, 0.8 s after death fires ice shards in 8 directions
+얼음 파편	Ice Shards
+서리 도깨비불	Frost Wisp
+서리 접촉	Frost Touch
+6개씩, 닿으면 둔화 20%	Packs of 6, touch slows by 20%
+망자 도끼 투척병	Revenant Axe Thrower
+원거리(왕복)	Ranged (returning)
+회전 도끼	Spinning Axe
+1초 예고 후 10m 회전 도끼, 되돌아오며 한 번 더 판정	1 s telegraph, 10 m spinning axe that hits again on its way back
+서리 교단 광신도	Frost Cult Zealot
+서리 베기	Frost Cut
+얼음 갑옷: 처음 받는 공격 3번 무효	Ice armour: ignores the first 3 hits taken
+얼음 갑옷	Ice Armor
+눈사태 정령	Avalanche Spirit
+눈사태 구르기	Avalanche Roll
+1.2초 예고 후 구르며 커지는 눈덩이 돌진 10m	1.2 s telegraph, a rolling, growing snowball charge of 10 m
+서리 매머드	Frost Mammoth
+발구르기	Stomp
+HP 3배, 0.9초 예고 발구르기 고리 2겹, 엄니 돌진 6m	HP ×3, 0.9 s telegraphed stomp with two rings, 6 m tusk charge
+엄니 돌진	Tusk Charge
+설원 사냥꾼	Snowfield Huntress
+원거리(덫)	Ranged (trap)
+1초 예고 후 화살, 3m 앞에 얼음 덫 설치(밟으면 1초 속박)	1 s telegraph arrow; places an ice trap 3 m ahead (1 s root when stepped on)
+얼음 덫	Ice Trap
+서리 마녀	Rime Witch
+눈보라 오라	Blizzard Aura
+눈보라 오라: 반경 5m 아군 받는 피해 25% 감소, 안의 영웅 둔화 20%	Blizzard aura: allies within 5 m take 25% less damage, the hero inside is slowed 20%
+얼어붙은 기사	Frozen Knight
+대검 베기	Greatsword Cleave
+얼음 속에 갇혀(무적) 있다가 4m 안에서 깨어남, 1.2초 예고 대검 220도 베기	Encased in ice (invulnerable) until the hero is within 4 m; 1.2 s telegraph, 220° greatsword slash
+서리 하피	Frost Harpy
+비행 원거리	Flying ranged
+얼음 깃털	Ice Feathers
+공중에서 얼음 깃털 3발 부채꼴, 0.7초 예고 급강하	3-feather fan from the air, 0.7 s telegraphed dive
+망자 나팔수	Revenant Hornblower
+망자의 나팔	Revenant Horn
+1.5초 나팔(끊김): 눈 속에서 서리 망자 2명	1.5 s horn (interruptible): 2 frostbitten revenants rise from the snow
+산악 오우거	Mountain Ogre
+몽둥이 휩쓸기	Club Sweep
+1.1초 예고 후 180도 몽둥이 휩쓸기, 포효 둔화 30%	1.1 s telegraph, 180° club sweep; roar slows 30%
+빙결 수정탑	Rime Crystal Pylon
+냉기 광선	Frost Beam
+이동 불가, 수정탑 2개가 서로 냉기 광선으로 연결(통과 시 둔화·피해)	Cannot move; two pylons are linked by a frost beam (slow and damage when crossed)
+연결 광선	Linked Beam
+눈보라 망령	Blizzard Wraith
+눈보라 베기	Blizzard Slash
+눈보라 속에서 보이지 않다가 공격 0.8초 전에 드러남	Invisible in the blizzard until 0.8 s before it attacks
+서리 부풀이	Frost Bloater
+서리 할퀴기	Frost Scratch
+사망 0.8초 뒤 반경 2.5m 빙결 폭발(1초 속박)	0.8 s after death, a 2.5 m freezing burst (1 s root)
+빙결 폭발	Freezing Burst
+얼음송곳니 표범	Icefang Leopard
+덮치기	Pounce
+6m 밖에서 0.7초 예고 후 덮치기, 맞추면 뒤로 물러남	From beyond 6 m, 0.7 s telegraph pounce, backs off after hitting
+설산의 거인왕	Frost Giant King
+바위 왕관을 쓴 서리 거인	Frost giant with a crown of rock
+바위 던지기	Boulder throw
+바위 던지기(포물선 3개)	Boulder throw (3 lobs)
+발구르기 고리	Stomp ring
+얼음 몽둥이 휩쓸기	Ice club sweep
+눈사태	Avalanche
+눈사태(경기장을 가로지르는 바위 3줄 굴러옴)	Avalanche (3 lines of boulders roll across the arena)
+눈보라(시야 감소)	Blizzard (reduced vision)
+설인 소환	Summon yetis
+설인 소환(N104 2마리)	Summon yetis (2 × N104)
+얼음 왕관의 망자왕	Revenant King of the Ice Crown
+얼어붙은 군대를 거느린 망자 왕	Revenant king with a frozen army
+얼음 검기	Ice sword waves
+얼음 검기(직선 3줄)	Ice sword waves (3 lines)
+망자 군대 일으키기	Raise the army
+망자 군대 일으키기(N19 3명)	Raise the army (3 × N19)
+얼음 무덤	Ice tomb
+얼음 무덤(영웅 2초 감금, 이동기 탈출)	Ice tomb (encases the hero 2 s, blink out)
+서리 왕좌	Frost throne
+서리 왕좌(경기장 가장자리부터 빙결 확산)	Frost throne (freeze spreads from the arena edge)
+영혼 수확	Soul harvest
+영혼 수확(부하를 흡수해 회복, 부하를 먼저 정리)	Soul harvest (absorbs minions to heal; clear them first)
+대검 회전	Greatsword spin
+주화	coins
+하루 총 보상	Daily total
+매일 00:00 KST 초기화	Resets daily at 00:00 KST
+진행	Progress
+하루 총 {0}개	{0} coins per day
+추가 전체 완료 보상 없음	No extra all-complete bonus
+
+# Equipment shop (casual)
+0개: 능력치 조건으로 제외하지 않음	0: do not exclude by stats
+1. 등급 필터	1. Rarity filter
+2. 장비 필터	2. Equipment filter
+{0} 회/초	{0} attacks/s
+개 선택	selected
+개 이상 맞으면 제외	or more conditions match
+걸작 {0}단계	Masterwork {0}
+계정 공용 보관 · 소지품에는 없습니다.	Shared account stock · Not stored in the bag.
+구매 · 판매 · 되사기를 선택하세요.	Choose Buy, Sell or Buyback.
+구매가격	Purchase price
+구매에서는 상품과 현재 장착 장비를 비교합니다. 판매에서는 소지품을 눌러 정보를 보고 판매하거나, 다중 선택으로 일괄 판매할 수 있습니다. 되사기 목록의 장비를 누르면 판매 당시의 모든 정보를 확인할 수 있습니다.	Buy compares vendor gear with equipped gear. In Sell, select inventory gear to see its details and sell it, or use Multi-select to sell several items. Select a Buyback row to inspect the complete item as it was sold.
+구매하기	Purchase
+구매했습니다. 소지품에 보관됩니다.	Purchased and placed in inventory.
+다음 입고	Restock
+당시 판매가격	Original sale price
+되사기 금액	Buyback value
+되살 장비가 없습니다.	No gear to buy back.
+두 필터를 모두 만족한 장비를 선택합니다. 잠금·장착·프리셋 보호 장비는 항상 제외합니다.	Items must match both filters. Locked, equipped and preset gear is always excluded.
+무기 · 장비 상점	Arms & equipment
+보호된 장비	Protected gear
+사용하지 않으면 등급과 장비 종류만으로 선택합니다.	When off, only rarity and equipment type determine selection.
+상점	Shop
+선택 마치기	Finish selection
+설정 범위 0~{0}개	Allowed: 0–{0}
+설정 저장 후 자동 선택을 누르면 적용됩니다.	Save, then press Auto-select to apply.
+세부 설정 · 사용 중	Details · On
+소지품 {0}개	{0} in bag
+소지품 가득 참	Inventory full
+소지품 장비	Inventory item
+소폭 개선	Small upgrade
+아직 거래 기록이 없습니다.	No transactions yet.
+업그레이드 정보	Upgrade information
+요구 레벨	Required level
+이상 제외	or higher: exclude
+자동 선택 대상 {0}개	Items to auto-select: {0}
+자동 선택 설정에서 판매할 등급과 장비 종류를 선택하세요.	Choose rarities and equipment types in Auto-select settings.
+잠금·장착·프리셋 참조 장비는 판매할 수 없습니다.	Locked, equipped and preset gear cannot be sold.
+저장된 프리셋 장비가 없습니다.	No equipment is saved in this preset.
+정보	Details
+제외 조건이	Exclude when
+조건에 맞는 판매 장비가 없습니다.	No saleable gear matches your settings.
+조건에 맞는 판매 장비를 선택했습니다.	Matching gear selected for sale.
+종류	Type
+주 무기	Main weapon
+최근 판매	Recent sales
+추가 옵션 없음	No additional affixes
+판매 금액	Sale value
+판매 상품	Vendor item
+판매 완료	Sold
+판매 합계	Total sale value
+판매 후 최근 12개만 되살 수 있습니다. 오래된 장비 {0}개가 되사기 목록에서 제외됩니다.	Only the latest 12 items can be reclaimed. {0} older items will leave Buyback after this sale.
+판매하기	Sell item
+판매할 등급과 장비 종류를 체크하세요. 필요한 장비만 세부 설정을 켜서 남길 수 있습니다.	Choose rarities and equipment types to sell. Enable detailed rules only for gear you want to keep.
+판매했던 장비	Sold item
+판매했던 장비를 되샀습니다.	Your original item has been reclaimed.
+판매했습니다. 되사기에서 복구할 수 있습니다.	Sold. Reclaim it in Buyback.
+해당 조건의 판매 물품이 없습니다.	No offers match these filters.
+현재 장착	Equipped
+회/초	attacks/s
+＋ 제외 조건 추가	＋ Add exclusion
+
+# Blacksmith (casual)
+같은 옵션이나 더 낮은 수치가 나올 수도 있습니다.	The same affix or a lower value may appear.
+계속 돌리기	Keep rolling
+시작하기	Start auto reroll
+자동 돌리기	Auto reroll
+자동 돌리기 완료	Auto reroll complete
+자동 돌리기 진행 중	Auto reroll in progress
+({0:N0}회 남음)	({0:N0} remaining)
+{0:N0} / {1:N0}회 · {2:N0}회 남음	{0:N0} / {1:N0} rolls · {2:N0} remaining
+{0:N0}회를 모두 실행했습니다. 마지막 옵션을 유지합니다.	All {0:N0} attempts completed. The latest affix is kept.
+아이템 레벨 {0} · {1}	Item level {0} · {1}
+최소 {0} · 최대 {1}	Min {0} · Max {1}
+남은 횟수가 없습니다.	No attempts remaining.
+장비 부위와 접두·접미에 맞는 후보입니다.	Candidates match this slot and prefix/suffix type.
+
+# Blacksmith (casual)
+강화 시작	Start upgrade
+미리보기 레벨	Preview level
+선택한 부위	Selected slot
+심연 주화 1개당 +0.01% · 최대 8,000개 (80%)	1 abyssal coin = +0.01% · Up to 8,000 (80%)
+장비 상세 정보	Equipment details
+공격 속도와 정밀함	Speed & precision
+공격과 치명타	Attack & critical strikes
+기동성과 회피	Mobility & evasion
+능력치와 스킬 효율	Attributes & skill efficiency
+생명력과 방어	Life & protection
+인벤토리 + 창고 합산 · 전설·세트 장비 1개 분해 → 같은 부위 코어 1개	Bag + storage combined · 1 salvaged legendary/set item → 1 core of the same slot
+자원 순환	Resource sustain
+자원과 스킬 운용	Resources & skill uptime
+치명타 공격	Critical offense
+피해 경감과 생존	Mitigation & sustain
+회복과 유지력	Recovery & endurance
+
+# Jeweler (casual)
+성소의 공방	SANCTUARY WORKSHOP
+보석에 깃든 힘을 한 병에	The power of a gemstone, bottled
+등급별 수치	Tier values
+적용 중인 물약이 없습니다	No active elixir
+한 병에 모든 효과가 함께 적용됩니다.	Every effect is included in a single elixir.
+모든 효과 30초	All effects last 30s
+보석 보기	View gems
+물약 보기	View elixirs
+보유 보석	Your gemstones
+보석 {0}개	{0} gems
+보석을 선택하면 같은 등급의 물약을 볼 수 있습니다.	Select a gemstone to view its matching elixir tier.
+보석의 등급이 높을수록 물약의 효과가 강해집니다.	Higher quality gemstones create more powerful elixirs.
+이 등급의 보석이 없습니다. 다른 등급을 선택하세요.	No gemstones of this tier. Select a different tier.
+최고 등급	Highest tier
+최저 등급	Lowest tier
+보석 {0}개 필요	{0} needed
+보유 한도 초과	Stack limit reached
+선택한 보석	SELECTED GEMSTONE
+변환 수량	Conversion amount
+업그레이드	Upgrade
+다운그레이드	Downgrade
+낮은 품질 → 높은 품질	LOWER QUALITY → HIGHER QUALITY
+보호막은 사용 시 최대 HP를 기준으로 한 번 생성됩니다. 30초가 지나거나 먼저 소진되면 사라지며, 재사용 시 중첩 없이 새 수치로 갱신됩니다.	Using this elixir creates a shield based on maximum HP. It expires after 30 seconds or when depleted. Reuse replaces the remaining shield with a fresh one; shields do not stack.
+보석 부족	No gems
+{0} {1}개를 제조했습니다.	Brewed {1} × {0}.
+{0} {1}개를 {2} {3}개로 변환했습니다.	Converted {1} × {0} into {3} × {2}.
+물약 {0}개 제조	Brew {0} elixir(s)
+필요 보석 {0}개 · 보유 {1}개	Needs {0} gem(s) · Owned {1}
+제조 수량	Quantity
+같은 종류·등급의 보석 1개 → 물약 1개	1 matching gemstone → 1 elixir of the same tier
+제조안	RECIPE
+물약 {0}개 보유	{0} elixir(s) owned
+계정 공유 보관함	Account-wide storage
+자동 저장	Saved automatically
+물약 효과는 한 종류만 유지됩니다. 새로 사용하면 교체됩니다.	Only one elixir is active at a time. A new one replaces it.
+효과	Effect
+%는 해당 능력치의 증가율, %p는 확률·흡수 비율의 추가분입니다. HP 회복속도는 초당 최대 HP 비율이며, CC기 저항은 제어 효과의 지속시간 감소율입니다. 루비의 완벽한 방어 확률은 2·3·5·7·10·14%p가 추가됩니다.	% increases the named stat; pp adds to a chance or damage-steal ratio. HP regeneration is a percentage of maximum HP per second. Crowd control resistance reduces control duration. Ruby adds 2, 3, 5, 7, 10 or 14 percentage points to perfect block chance.
+수치 해석	Reading the values
+행운의 물약	Fortune Elixir
+행운과 탐색	FORTUNE & DISCOVERY
+더 멀리, 더 빠르게. 황금빛 행운을 담습니다.	Go farther, move faster. Carry a little golden fortune.
+매직찬스 확률	Magic Find Chance
+아이템 획득 반경	Pickup Radius
+생명의 물약	Vitality Elixir
+힘과 생명	STRENGTH & VITALITY
+강인한 힘과 생명력을 보랏빛 한 방울에 담습니다.	Strength and vitality, distilled into a violet drop.
+생명력 훔침	Life Steal
+지혜의 물약	Wisdom Elixir
+마법과 마나	MAGIC & MANA
+깊고 맑은 마력으로 끊이지 않는 주문을 준비합니다.	Draw on a deep, clear well of magic for the battle ahead.
+마법력	Magic Power
+최대 마나	Maximum Mana
+마나 훔침	Mana Steal
+기민함의 물약	Agility Elixir
+민첩과 속공	AGILITY & PRECISION
+바람처럼 피하고, 빈틈보다 빠르게 공격합니다.	Slip past danger. Strike before the moment is gone.
+민첩력	Dexterity
+불굴의 물약	Fortitude Elixir
+방어와 회복	DEFENSE & RECOVERY
+붉은 힘으로 상처를 회복하고 적의 일격을 완벽히 막아 냅니다.	Crimson resolve mends wounds and turns aside an enemy’s strike.
+방어력	Armor
+HP 회복속도	HP Regeneration
+완벽한 방어 확률	Perfect Block Chance
+수호의 물약	Warding Elixir
+저항과 수호	RESISTANCE & RESOLVE
+속성 피해와 속박에 맞서고, 보호막으로 몸을 지킵니다.	Resist elements, recover from control sooner, and gain a shield.
+모든 저항력	All Resistances
+CC기 저항	Crowd Control Resistance
+보호막 생성	Shield
++{0}%/초	+{0}%/s
+최대 HP {0}%	{0}% max HP
+시간 −{0}%	Duration −{0}%
+방어구 구입 후 착용하기	Buy and put on armor
+균열 1레벨 진행	Clear rift level 1
+무기만 손봐서는 아직 부족하네. 무기 상점에 들러 방어구부터 갖추고 오게나.	A better weapon alone won't do. Stop by the weapon shop and get some armor first.
+'구매' 탭을 눌러 주세요.	Press the 'Buy' tab.
+맨 위에 놓인 방어구를 눌러 살펴보세요.	Press the armor at the top to take a look.
+'구매하기'를 눌러 방어구를 받아 가세요. 값은 0골드입니다.	Press 'Buy' to take the armor. It costs 0 gold.
+이제 상점을 닫고 방어구를 입어 보세요.	Now close the shop and put the armor on.
+'캐릭터'를 눌러 받은 방어구를 입어 보세요.	Press 'Character' to put on the armor you were given.
+'장착'을 눌러 방어구를 입어 보세요.	Press 'Equip' to put the armor on.
+방금 받은 방어구를 눌러 자세히 살펴보세요.	Press the armor you just got to look at it closely.
+무기 상점으로 간다	Head to the weapon shop
+진열대를 본다	Look at the display
+균열로 향한다	Head for the rift
+오오, 소리 한번 좋구나! 방금 그 한 방으로 무기가 한결 단단해졌네. 불꽃이 튀는 걸 보니 나도 모르게 흥이 나는군.	Ha, what a sound! That one blow made your weapon a good deal sturdier. Seeing the sparks fly, I can't help getting excited.
+…허나 솔직히 말하겠네. 그 정도로는 균열 1레벨도 버티기 힘들 걸세. 무기만 번듯하고 몸을 못 지키면 칼날 한 번 휘두르기도 전에 쓰러지는 법이니까.	…But let me be honest. That won't get you through even rift level 1. A fine weapon with nothing to guard your body drops its owner before the blade swings once.
+무기 상점의 제이크 보쿤을 찾아가 보게. 내가 미리 말해 두지. 방어구 하나쯤은 거저 얻을 수 있을 걸세. 그 친구, 입은 거칠어도 신입에겐 약하거든.	Go see Jake Bokun at the weapon shop. I'll put in a word. You should get a piece of armor for free. The man talks rough, but he's soft on newcomers.
+가서 방어구를 하나 더 걸치고 균열로 가게나. 그래야 비로소 이 무기도 제값을 하지. 몸조심하게, 새내기!	Put on one more piece of armor, then head for the rift. Only then does this weapon earn its keep. Take care, rookie!
+오오, 자네가 마르크 영감이 말한 그 신입이로군! 쯧쯧… 잠깐, 그 몰골로 균열에 들어갈 생각이었다고? 맨몸으로 칼 한 자루 들고 불판에 뛰어드는 꼴이잖나!	Oh, so you're the newcomer old Marc told me about! Tsk… wait, you meant to walk into the rift looking like that? That's jumping onto a hot griddle with nothing but a blade!
+제육볶음도 불이 세다고 아무 생각 없이 덤비면 입천장이 홀랑 데는 법이야. 균열도 마찬가지지. 방어구 없이 갔다간 1층에서 바로 양념이 되고 말걸세.	Even spicy stir-fry burns the roof of your mouth if you dive in without thinking. The rift is the same. Go without armor and you'll be seasoning on the first floor.
+그래도 자네 같은 용사들이 오래오래 균열에서 버텨 줘야, 나도 우리 식구들 배불리 먹이고 가게 문을 열 수 있다 이 말씀이야. 자네는 우리 가게의 미래라고!	Still, it's heroes like you holding out in the rift for a long time that let me feed my family and keep this shop open. You're the future of my store!
+좋아, 결심했어! 오늘은 이 제이크 형님이 화끈하게 한 턱 쏘지. 내 진열대에서 쓸 만한 방어구 하나를 공짜로 주겠네!	All right, decided! Big brother Jake is treating you today, no holding back. I'll give you one decent piece of armor from my shelves, free!
+진열대 맨 위에 올려 뒀으니 가져가 보게. 값은 0골드, '구매하기'만 누르면 되네!	I've put it right at the top of the display. The price is 0 gold. Just press 'Buy'!
+좋아, 아주 잘 어울리는군! 이제 균열 1레벨쯤은 어찌 해볼 만하겠어. 입은 거칠어도 자네를 응원하는 마음은 진짜라네.	Good, that suits you well! Now rift level 1 looks doable. My mouth is rough, but my cheering for you is real.
+부디 살아서 돌아와서, 다음에도 우리 상점을 또 이용해 주게나. 단골이 죽으면 장사가 안 되거든! 화끈하게 다녀오라고!	Make sure you come back alive and shop with us again. A dead regular is bad for business! Now go give it everything you've got!
+오른쪽 위의 메뉴 단추를 눌러 주세요.	Press the menu button at the upper right.
+숙련도 경험치	Mastery experience
+전체 배치 프리셋	Global layout presets
+능력 색	Ability colours

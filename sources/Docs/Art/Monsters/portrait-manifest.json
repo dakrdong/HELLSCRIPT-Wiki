@@ -1,0 +1,681 @@
+{
+ "backgroundPolicy": {
+  "boss": "pale lavender #d9d2f3",
+  "normal": "ivory #fff7e4",
+  "note": "Target palette; native generated pixels have slight color variation."
+ },
+ "generationSurface": "built-in image_gen",
+ "items": {
+  "B01": {
+   "designReference": "B01_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B01.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named B01_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque pale lavender #d9d2f3; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi massive hulking executioner boss, brute in a leather hood mask, bare muscular arms, melted candles on iron shoulder plates, old iron chains around the torso, giant cleaver axe in one hand, iron hook on a chain in the other.\nAccent: pale teal (#7fd1c7).\nInput roles: B01_model.png is the sole official creature design reference; style_0.png and style_1.png are rendering-style references only. Generate exactly one image.\nInterpret the exposed-flesh exclusion as no wounded or raw flesh; preserve the official design's healthy bare muscular arms and torso.",
+   "sha256": "3d9cbcc41a87fa76f86d84bffc0b7160380185c3c29064ba24bdf01d7b9f2457",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "B02": {
+   "background": "pale lavender",
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B02.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "a00f72b09a31ae9b701f29ecefa2d7d2c2c26f48116fa98fff11e5448e613457",
+   "portraitReady": true,
+   "prompt": "Use case: precise-object-edit. Asset type: existing HELLSCRIPT StyleD boss portrait, opaque square PNG. Image 1 is the mandatory approved warrior sheet, image 2 is the mandatory approved StyleD title; image 3 is the EXACT existing boss portrait to edit. Preserve image 3 completely: same creature, silhouette, face and expression, placement and scale, outlines, colors, props, clothes, crown/flames/spikes and all framing. CHANGE ONLY THE BACKDROP: replace every ivory/cream BACKGROUND area around the subject and in internal negative spaces with a single flat opaque pale lavender #d9d2f3 (RGB 217,210,243). Do not recolor any cream bone, white robe, face, candle or subject surface. Keep the entire head, chin, horn/crown/flame tips visible in the existing generous margins; no crop, zoom or pose change. No gradient, glow, scenery, floor, shadow, texture, vignette, border, UI, lettering or extra subjects. Keep the current clean bold outlines and hard cel shading. Return exactly one opaque square PNG, same framing and 1254x1254 size if supported. Use gpt-image-2 if the built-in surface supports model selection; expose verifiable model provenance if available.\nImage 4 is only the pale lavender BACKGROUND COLOR reference (not a character reference). Match that backdrop. Target boss: B02. Preserve his ivory hood and robe, face, raised hands, the entire candle halo and all flames exactly. Do not turn white robes or candles purple.",
+   "sha256": "eaef84cb9fbc164b9b89a4ec084eb611f2ca885c0540b5d46d9bf72c2a02c35f",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-0fbb7d70-9de5-40da-b089-9d451404acf3.png"
+  },
+  "B03": {
+   "background": "pale lavender",
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B03.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "8d5bf1a5ade2eaecedbf24ab66f6e8b0b76a32156924babe9d78f27fe1d4ccb5",
+   "portraitReady": true,
+   "prompt": "Use case: precise-object-edit. Asset type: existing HELLSCRIPT StyleD boss portrait, opaque square PNG. Image 1 is the mandatory approved warrior sheet, image 2 is the mandatory approved StyleD title; image 3 is the EXACT existing boss portrait to edit. Preserve image 3 completely: same creature, silhouette, face and expression, placement and scale, outlines, colors, props, clothes, crown/flames/spikes and all framing. CHANGE ONLY THE BACKDROP: replace every ivory/cream BACKGROUND area around the subject and in internal negative spaces with a single flat opaque pale lavender #d9d2f3 (RGB 217,210,243). Do not recolor any cream bone, white robe, face, candle or subject surface. Keep the entire head, chin, horn/crown/flame tips visible in the existing generous margins; no crop, zoom or pose change. No gradient, glow, scenery, floor, shadow, texture, vignette, border, UI, lettering or extra subjects. Keep the current clean bold outlines and hard cel shading. Return exactly one opaque square PNG, same framing and 1254x1254 size if supported. Use gpt-image-2 if the built-in surface supports model selection; expose verifiable model provenance if available.\nImage 4 is only the pale lavender BACKGROUND COLOR reference (not a character reference). Match that backdrop. Target boss: B03. Preserve the violet crystal beast, broad crystal shoulders, vertical expressive mouth and entire claw tips exactly. Background must stay pale so the darker violet subject remains clearly distinct. Do not alter crystal colors.",
+   "sha256": "81404d3a34cfa6e1aaa67f77b077cdade2f681001d250f35ce4eb323e3786061",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-665991de-3d58-4b99-9063-e329d69a0066.png"
+  },
+  "B04": {
+   "designReference": "B04_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B04.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named B04_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque pale lavender #d9d2f3; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi giant desert boss monster, armored scorpion with a long segmented worm-like body half rising, two huge serrated pincers, high arched tail with a hooked stinger, sand-colored chitin with glowing amber venom sacs.\nAccent: desert amber (#e0a040).\nReference roles: B04_model.png is the official creature design reference. style_0.png and style_1.png are rendering-style references only.",
+   "sha256": "1b8567bb41eaebbd3f84c0ea132090b6df0eaff00a6fcd60e3b9aebbc3a4b60f",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "B05": {
+   "designReference": "B05_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B05.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named B05_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque pale lavender #d9d2f3; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi tall ice priestess boss, regal pale woman with a tall crown of jagged ice spikes, long flowing grey-blue robes cold iron with frost, ornate ice staff in one hand, small ice crystals floating around her.\nAccent: ice blue (#9fe6ff).\nReference roles: B05_model.png is the official creature design reference. style_0.png and style_1.png are rendering-style references only.",
+   "sha256": "2ebfec39ba6547b852138509c592c5c51151adb2e5dd2639f4014d7132c91963",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "B06": {
+   "designReference": "B06_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B06.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named B06_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque pale lavender #d9d2f3; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi tall skeletal queen boss, regal crown of bones, long narrow ribbed bone gown closed at the hem, elongated arms with long finger bones, both hands empty, small skulls woven into the dress, faint teal glow.\nAccent: pale teal (#7fd1c7). Design reference: B06_model.png. Input roles: B06_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "9bd9ab76fb67963ee1e47f88cc69fdfb3576404061f3d0ca65b3be993cb0a67f",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "B07": {
+   "designReference": "B07_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/B07.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named B07_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque pale lavender #d9d2f3; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi lich boss, skeletal sorcerer king in fitted black and teal robes ending above the ankles, tall horned crown, a glowing soul lantern gripped tightly in the left fist and a short bone scepter in the right fist, cold blue light in the eye sockets. Accent: pale teal (#7fd1c7). Design reference: B07_model.png. Input roles: B07_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Produce exactly ONE image.",
+   "sha256": "5aa27d7ce63ad27bef24e5481bd3143fc70568dd9294f1f8539b22938cb219e1",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N01": {
+   "designReference": "N01_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N01.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N01_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi shambling green zombie, grey-green skin, wrapped in old iron chains and patched rags, hunched posture, a short chain with a spiked iron ball hanging from one wrist.\nAccent: pale teal (#7fd1c7).\nReference roles: N01_model.png is the official creature design reference. style_0.png and style_1.png are rendering-style references only.",
+   "sha256": "7726bb01b7eaa294bb7255f0eaffb1726775d3685b7c39dab1fb5870f3a6526a",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N02": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N02.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "9955eeb4eaab0b9d71fe2cc92064536edb7d11dbe2687e1a703e32dc0897f155",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write any text in the image): N02. Authored identity: Undead grave hound, large pointed ears, elongated canine skull-like cream face, pale teal eyes, bone plates along the back and tattered brown wrappings. Keep the hound species, remove exposed flesh and turn it into a cheeky stylized bone-armored dog.\nRespect the no-horror rendering rules over any old horror adjectives in this identity description.",
+   "sha256": "4b8d8362506238ef812b2528b2997fbd903ef8e23f7d059d8d444a6c5fafe084",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-5a8bc2e2-48ed-4852-8ad9-1418e2dee16b.png"
+  },
+  "N03": {
+   "designReference": "N03_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N03.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N03_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi skeleton archer in a patchy black hooded cloak, a melted candle on top of the hood, bone longbow in one hand, leather quiver of arrows on the back, bony feet.\nAccent: pale teal (#7fd1c7).\nInput image roles: N03_model.png is the official creature design reference. style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "85842881d78607c0e65b13de7f3b790683f8fd6fe4f0feca00102a887c951a06",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N04": {
+   "designReference": "N04_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N04.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N04_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi hooded plague acolyte in patched dark green robes, sunken face, carrying a bronze censer on a chain leaking glowing green smoke, small old bells hanging from the belt.\nAccent: pale teal (#7fd1c7).\nReference roles: N04_model.png is the official creature design reference. style_0.png and style_1.png are rendering-style references only.",
+   "sha256": "d0911381ca8e790a4097d1526f4c40fa9c97c1baa122fc67b3d4b33741ee2f81",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N05": {
+   "designReference": "N05_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N05.png",
+   "installedAt": "2026-10-16",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N05_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi very tall faceless funeral priest in long black hooded robes reaching the ground, a shepherd crook staff with a hanging iron lantern with a warm candle light, rope belt with prayer beads.\nAccent: pale teal (#7fd1c7).\nInput images: N05_model.png is the official creature design reference; style_0.png and style_1.png are rendering-style references only. The creature's stated equipment are part of its design and are allowed; no unrelated props.",
+   "sha256": "443de9b6f842e60d6f8e3c98571e7f722e33f0679693627ca35508a7f1e4cdcd",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N06": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N06.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "8716591d25e254c8590332710d439cde9cb5896fb94ca9a161b60918b099507a",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N06. Identity: grotesquely obese pilgrim with a huge round belly under a grey patched robe, wide-brimmed pilgrim hat, rope belt with a wooden holy symbol and a pouch, short thick arms.\nThis is a plump grey-green undead pilgrim with a broad round face, NOT a skeleton. Give a friendly determined face, roomy grey robe, round belly and the wide-brim hat, all in clean broad cel shapes.\nThe casual no-horror drawing rules override old horror adjectives.",
+   "sha256": "8d54a127e2eb6015bc9b0a14c1f19073b3f86ed289afcae72a87eba07f468da3",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-74bedd6f-fce8-44dd-a31b-59f4f2ef8386.png"
+  },
+  "N07": {
+   "designReference": "N07_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N07.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N07_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi spectral armored knight, dark spiked iron plate armor with a horned helm, pale blue ghostly mist leaking from the joints and visor, patched cloak, longsword in one hand.\nAccent: ember orange (#ff8a3d).\nInput image roles: N07_model.png is the official creature design reference. style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "a31d31c4c81c9f91d45f8d57fd2ad19f452f029e83f40456aa62284b52defc7a",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N08": {
+   "designReference": "N08_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N08.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N08_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi fanatic soldier in a spiked bucket great helm, short dark red tabard belted tight over chainmail with bare mail sleeves, large spiked round wooden shield on the left arm held out to the side, short sword in the right hand held away from the body.\nAccent: ember orange (#ff8a3d).\nInput image roles: N08_model.png is the official creature design reference. style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "16424bcfcee91c0b7e5c6b41b2f0d2f232b9d39b30e28656508d18a7ff5ee431",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N09": {
+   "designReference": "N09_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N09.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N09_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi heavy soldier in black iron plate armor and a hooded helm, holding a large heavy crossbow with both hands, bolt quiver at the hip, dark cloak. Accent: ember orange (#ff8a3d). Design reference: N09_model.png. Generate exactly ONE image.",
+   "sha256": "1f6f4c5742141cd291ba78b1f0134dcbcb1f8ccd804ee787a846f35148a1adf9",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N10": {
+   "designReference": "N10_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N10.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N10_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi bald skinny fire cultist in dark red robes, glowing ember patterns on the skin, both hands burning with orange flame, ash-grey face. Accent: ember orange (#ff8a3d). Design reference: N10_model.png. Generate exactly ONE image.",
+   "sha256": "68f9ac63de9f9c2568324bdcf961cb19a42d1a5147732dff1311e5b58d291aca",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N11": {
+   "designReference": "N11_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N11.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N11_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi hunched hooded cultist in patchy brown robes carrying a heavy wooden yoke on his back with a large cracked bronze bell hanging from it, small bells on his belt, tall iron staff in one hand.\nAccent: ember orange (#ff8a3d).\nInput roles: N11_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "0fce7fa67dbd0ad3a71eb8d53af3a188771e611e7c13031337e3a1d0a286843f",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N12": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N12.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "e615bda65e3c8f117f08c4446d844020164563319a88018b08db07abe67a7061",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture. STRICT MATERIAL RULE: clean smooth matte light blue-grey steel with just flat color and one broad hard shadow, like image 1. NO rust, scratches, corrosion, cracks, dirt, mottling, speckles, realistic grain or many tiny polygon patches. Any moss is a few simple broad green leaf shapes, never a mottled coating.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N12. Authored identity: Nonhuman rift shard creature assembled from angular violet crystals, birdlike pointed head, shoulder and forearm shards, and a clearly visible bright lavender chest crystal core. It is a crystal creature, not a human or skeleton; keep the head and crystal core visible.\nNONHUMAN violet crystal creature. Keep the birdlike crystal head fully visible above the lavender chest core. Use broad clear purple crystal planes and a clean dark outline; preserve the clawed crystal arms. No human face, skeleton, leather costume, chains, realistic chipped-grain texture or fog.\nThe bright casual no-horror drawing rules override old horror adjectives. Keep the subject's own anatomy; DO NOT copy the N01 skull or chains unless authored for this monster.",
+   "sha256": "0ea2de52c166a2d8342c9005aac53b6af86d9591dca0db09a3c731e3ebf55503",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-5d2b9e08-c489-4da4-b575-3362843776c3.png"
+  },
+  "N13": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N13.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "8d3f24de77ca93885da26d4968373d4a6f2ec56463559c16b47df0da147651e1",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture. STRICT MATERIAL RULE: clean smooth matte light blue-grey steel with just flat color and one broad hard shadow, like image 1. NO rust, scratches, corrosion, cracks, dirt, mottling, speckles, realistic grain or many tiny polygon patches. Any moss is a few simple broad green leaf shapes, never a mottled coating.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N13. Authored identity: Skeletal sand raider wrapped in tan bandages and beige turban, bright cream skull face, two recognizable curved sabers and warm amber desert accents. Preserve the wrapped raider silhouette.\nA cream skull with large readable eyes under the beige turban and tan bandages; both curved sabers below the chin. Clean warm beige cloth and matte light steel blades, no grave grime or horror decay.\nThe bright casual no-horror drawing rules override old horror adjectives. Keep the subject's own anatomy; DO NOT copy the N01 skull or chains unless authored for this monster.",
+   "sha256": "f528276e31fe8a4a179a24468f7d9d0cd045d98751ab1f504840e569bcc9f053",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-99bbcf2d-7f73-46e1-a74a-02ef5e618d22.png"
+  },
+  "N14": {
+   "designReference": "N14_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N14.png",
+   "installedAt": "2026-10-16",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N14_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi giant desert sandworm rearing up from a coiled base, thick ringed segmented body of sand-colored armored plates, round gaping mouth lined with rings of hooked teeth, small spines along the back.\nAccent: desert amber (#e0a040).\nInput images: N14_model.png is the official creature design reference; style_0.png and style_1.png are rendering-style references only. The creature's stated equipment are part of its design and are allowed; no unrelated props.",
+   "sha256": "15c057e52ae41bcb8f6a4420b0bc8e84b6752d8467575e2b8707ba11a6cf6b93",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N15": {
+   "designReference": "N15_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N15.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N15_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi emaciated cave ghoul, hairless pale grey wet skin, crouched hunched posture, very long arms with hooked black claws, wide jaw full of needle teeth, milky blind eyes, patched loincloth.\nAccent: fungal teal (#5fe0d0).\nInput roles: N15_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "ddb3b292ac5b69f61ffea385d18f37cc1cfba61289471d0310323b7dec8cf44d",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N16": {
+   "designReference": "N16_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N16.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N16_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi four-legged fungal beast, stocky body covered in bark-like hide and moss, a large mushroom cap growing as its head, swollen glowing teal spore sacs clustered on its back, stubby clawed legs.\nAccent: fungal teal (#5fe0d0).\nInput roles: N16_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "ac294cd9e71d7caf90028f3e83063abb658508f6dd57c3a7e0bb92f700322fe5",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N17": {
+   "designReference": "N17_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N17.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N17_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi goat-headed beastman warrior, large curved ram horns, shaggy dark brown fur, digitigrade hoofed legs, crude leather and bone armor with thorny vines, spiked wooden flail in one hand.\nAccent: dusk rose (#d9798f).\nInput roles: N17_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "94077d7080e9b398dd9a8c4d7ea723c8048e11875721e1159ec1234c245a2732",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N18": {
+   "designReference": "N18_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N18.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N18_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi upright swamp witch in a fitted mossy green robe with a few roots wrapped tightly around it, short tidy hair under a small pointed hat with a narrow brim, a short thick wooden staff gripped firmly in the right fist and held close to the body with a small skull lantern fused onto its top glowing green, symmetric shoulders, short sturdy legs with flat feet.\nAccent: dusk rose (#d9798f). Design reference: N18_model.png. Input roles: N18_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "6e333ed182b6798e5dbe42e32e23c89b8dc56449dca041f006e77432f081cc4d",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N19": {
+   "designReference": "N19_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N19.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N19_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi undead frost warrior. Gaunt draugr with frost-cold iron grey beard, spiked iron crown helm, patchy fur cloak over old iron chainmail, long jagged ice blade in one hand. Pale blue frost glow in the eyes and joints.\nAccent: ice blue (#9fe6ff).\nInput roles: N19_model.png is the sole official creature design reference; style_0.png and style_1.png are rendering-style references only. Generate exactly one image.",
+   "sha256": "45d8709b3855d5283650b85dfcff0e40c8a3af68b905b55bbbe29d39589dc43e",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N20": {
+   "designReference": "N20_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N20.png",
+   "installedAt": "2026-10-15",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N20_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi hooded ice sorcerer, faceless shadow under a deep patched dark grey hood, long patchy robe cold iron with frost, crown of small ice shards over the hood, both hands open and wreathed in cold blue mist.\nAccent: ice blue (#9fe6ff).\nInput roles: N20_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly one image.",
+   "sha256": "320d3c7f4867725234c39f108cc66fc5623de78abff38c82871f174f0a1917f0",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N21": {
+   "designReference": "N21_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N21.png",
+   "installedAt": "2026-10-16",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N21_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: A writhing cluster of five large pale grave grubs fused on a mound of loose grave soil, segmented bodies, small dark mandibles, smooth grey-white skin with teal tint.\nAccent: pale teal (#7fd1c7).\nInput images: N21_model.png is the official creature design reference; style_0.png and style_1.png are rendering-style references only. The creature's stated equipment and fused soil mound are part of its design and are allowed; no unrelated props.",
+   "sha256": "643ecf35fb70fc9c68428143475d50ac69ae3771152d40fc31563b6ac47a9baa",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N22": {
+   "designReference": "N22_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N22.png",
+   "installedAt": "2026-10-16",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image. Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N22_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi skeleton soldier with a huge old iron tower shield held in front and a short notched sword, dented open helmet, patched teal-grey tabard, cracked old bones.\nAccent: pale teal (#7fd1c7).\nInput images: N22_model.png is the official creature design reference; style_0.png and style_1.png are rendering-style references only. The creature's stated equipment are part of its design and are allowed; no unrelated props.",
+   "sha256": "7ae43164b107ecd7f6e18e5959bf782d91581d8341af7771c26e2eee92bdc760",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N23": {
+   "designReference": "N23_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N23.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N23_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi skeleton warrior gripping a medium-length old iron spear upright in the right fist, shaft held close along the body, patchy hooded cloak, broken leather armor pieces, old yellowed bones. Accent: pale teal (#7fd1c7). Design reference: N23_model.png. Generate exactly ONE image.",
+   "sha256": "fd3b60dc8c75cae6849b62a6227c9e1329e7eeb6ffdbd783ea0b6549b592484a",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N24": {
+   "designReference": "N24_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N24.png",
+   "installedAt": "2026-10-16",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image for monster N24.\nUse case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself.\nSubject: cute chibi towering undead knight in heavy corroded plate armor covered in grave moss, closed great helm with a faint teal glow, giant two-handed stone maul held low. Accent: pale teal (#7fd1c7).\nInput images: N24_model.png is the official creature DESIGN reference. style_0.png and style_1.png are rendering STYLE references only.\nRendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects.\nDESIGN: the attached 3D model render named N24_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look).\nFraming: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square.\nBackground: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures.\nLighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful.\nStrict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.",
+   "sha256": "a518364e11853ffc904caee2b7d2c6ed5dbc419f8917c907cc724b63d1a3e019",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N25": {
+   "designReference": "N25_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N25.png",
+   "installedAt": "2026-10-17",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: exactly one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself.\nSubject N25: cute chibi floating female wraith in long patched pale grey burial shroud trailing into wisps, skinny hollow face with mouth open in a scream, long thin arms reaching forward, faint teal ghost glow. Accent: pale teal (#7fd1c7).\nInput images: N25_model.png is the official creature design reference. style_0.png and style_1.png are rendering style references ONLY.\nRendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects.\nDESIGN: the attached 3D model render named N25_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look).\nFraming: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square.\nBackground: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures.\nLighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful.\nStrict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency. Generate exactly ONE image.",
+   "sha256": "d78180e72c45bba7427de64e8ca942bcc047f0005b15ae41de4ff2280ea6028c",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N26": {
+   "designReference": "N26_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N26.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself.\nInput images: N26_model.png is the official creature design reference. style_0.png and style_1.png are rendering style, palette and lighting references ONLY; never copy their subjects.\nSubject: cute chibi skeleton sorcerer in a patchy dark robe with a high collar, a short solid bone staff gripped firmly in the right fist with a small skull and teal crystal fused onto its top, the staff one solid piece, small bone charms hanging from the belt.\nAccent: pale teal (#7fd1c7).\nRendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects.\nDESIGN: the attached 3D model render named N26_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look).\nFraming: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square.\nBackground: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures.\nLighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful.\nStrict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nGenerate exactly ONE image.",
+   "sha256": "51beec40b05ab21d7e43b7891ea628543de40927b01f269874b8f44648779eea",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N27": {
+   "designReference": "N27_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N27.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N27_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi hunched necromancer cultist in a black hooded robe, a short wooden cross-bar puppet control gripped in both bony hands in front of the chest with a few short taut dark threads, robe sleeves fitted at the wrists, small skulls on the belt. Accent: pale teal (#7fd1c7). Design reference: N27_model.png. Input roles: N27_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Produce exactly ONE image.",
+   "sha256": "1b8908ceceed8ee9e397359b975f53cb72607003299d5481c93ba5088714c58a",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N28": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N28.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "d26679265b94cac1eeff5272d4bbed603756eec57d7833247219a2a8893ce08e",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture. STRICT MATERIAL RULE: clean smooth matte light blue-grey steel with just flat color and one broad hard shadow, like image 1. NO rust, scratches, corrosion, cracks, dirt, mottling, speckles, realistic grain or many tiny polygon patches. Any moss is a few simple broad green leaf shapes, never a mottled coating.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N28. Authored identity: Broad-shouldered hunched undead gravedigger, rounded grey-green face and crooked friendly grin, broad-brim warm brown hat, simple leather apron and a recognizable large clean iron shovel with plain wooden handle. Head and hat prominently shown in upper third.\nNO rust, mottling, grave-soil clumps or tiny material facets: plain bright steel shovel, clean brown apron and large flat cel color regions.\nThe bright casual no-horror drawing rules override old horror adjectives. Keep the subject's own anatomy; DO NOT copy the N01 skull or chains unless authored for this monster.",
+   "sha256": "b897d88b67aefa1cc0eac36e91918575cf20d9c71a89d2a74d380fbbe492f344",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-ec343cef-97f9-4279-80a6-07b72fd99280.png"
+  },
+  "N29": {
+   "designReference": "N29_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N29.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N29_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4 for this normal monster; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi floating hooded specter with no legs, patchy dark cloak fading into smoke, heavy old iron chains wrapped tightly around both forearms, a short chain end with an iron hook gripped in each fist, faint teal glow under the hood. Accent: pale teal (#7fd1c7). Input roles: N29_model.png = official creature design reference; style_0.png and style_1.png = rendering style only. Generate exactly one image.",
+   "sha256": "e78474f1f13913b3385f51ca641349cd94c2bc4c1feaf0c9f967037c38e7d9c2",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N31": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N31.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "7fae1c0a5de472197380e13bb4a4e2d84c49aa420816d219a024f62ab4ec0239",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture. STRICT MATERIAL RULE: clean smooth matte light blue-grey steel with just flat color and one broad hard shadow, like image 1. NO rust, scratches, corrosion, cracks, dirt, mottling, speckles, realistic grain or many tiny polygon patches. Any moss is a few simple broad green leaf shapes, never a mottled coating.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N31. Authored identity: Massive grey-green undead giant with huge rounded hunched shoulders, oversized long arms, brown burial rags and simple rope bindings. Crop to a face-first close upper-body portrait so its small authored head stays clearly visible at the top; playful proud face, no wounds or exposed muscles.\nKeep the giant identity as huge shoulders relative to its head, but show a CLOSE BUST so the FACE itself is large enough to read. Cream backdrop and clean smooth sage skin, no realistic skin texture.\nThe bright casual no-horror drawing rules override old horror adjectives. Keep the subject's own anatomy; DO NOT copy the N01 skull or chains unless authored for this monster.",
+   "sha256": "d5bc1c696414b74baf9b2464849489a6ca61e127c823c3d2e140b0f6601dd354",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-bee68a03-ff25-4535-bcc7-adf85a5124d0.png"
+  },
+  "N33": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N33.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "a1acb9284dc30a015f904d2d413d2ebcb75a195be0035eaf005f900c975d87fc",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture. STRICT MATERIAL RULE: clean smooth matte light blue-grey steel with just flat color and one broad hard shadow, like image 1. NO rust, scratches, corrosion, cracks, dirt, mottling, speckles, realistic grain or many tiny polygon patches. Any moss is a few simple broad green leaf shapes, never a mottled coating.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N33. Authored identity: Small cream-bone skeleton bomber with expressive skull and teal eyes, a large terracotta funeral urn bomb strapped to the back and a short lit fuse. Simple brown loincloth, compact lively running pose. Show the skull large and urn recognizable, full compact figure inside frame.\nSkull/chin, urn and fuse all fully inside the square, with outer margin. The warm terracotta urn stays behind/beside the shoulder, never blocking the face.\nThe bright casual no-horror drawing rules override old horror adjectives. Keep the subject's own anatomy; DO NOT copy the N01 skull or chains unless authored for this monster.",
+   "sha256": "df19022378fb4680351249f16ced458a5d3d35a8415f81afeb2fa52a8abe545e",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-247e4620-4f0b-453d-bd4f-7e76ebbd50b8.png"
+  },
+  "N35": {
+   "designReference": "Existing portrait / authored monster spec, warrior sheet and StyleD title",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N35.png",
+   "installedAt": "2026-10-14",
+   "mode": "RGB",
+   "model": "unknown",
+   "modelPending": false,
+   "originalSha256": "413b28ebf87ec5f4ac84e1d66c4a5fef1f60239d3ee261b4c5762e20d95136c0",
+   "portraitReady": true,
+   "prompt": "Use case: style-transfer. Asset type: one HELLSCRIPT monster codex portrait, opaque SQUARE PNG, requested 1024x1024, displayed at 48–64 px and 200 px.\nInput roles: image 1 is the approved warrior sheet: match its clean bold outlines, simplified anatomy and crisp CEL shadow shapes. Image 2 is the approved StyleD title: use its cheerful casual fantasy color treatment. Image 3 is the EXISTING MONSTER identity to redraw, NOT a rendering/style reference. Image 4 is the newly redrawn N01 portrait: keep the same plain warm cream backdrop and a coherent casual codex series, but do not copy its skull or chains onto a different species.\nPrimary request: redraw the specified monster from image 3 in bright casual StyleD. Preserve its SPECIES, anatomy, recognizable silhouette, identity colours, outfit family and identifying props. Remove old horror rendering: no gore, raw flesh, wounds, decay, rust, grime, photoreal texture, smoky mist, dark vignette or dramatic lighting. Bring old dark colors into readable medium values of the same color family. Make it appealing and expressive for an age 12+ casual fantasy game.\nStyle: bold clean dark outline, flat local colors and just ONE clear hard-edged shadow tone. Large readable shapes, matte materials, modest highlights like the warrior reference. Compact exaggerated anatomy, larger face/head, playful or proud expression, never horror. No excessive facets or metallic texture. STRICT MATERIAL RULE: clean smooth matte light blue-grey steel with just flat color and one broad hard shadow, like image 1. NO rust, scratches, corrosion, cracks, dirt, mottling, speckles, realistic grain or many tiny polygon patches. Any moss is a few simple broad green leaf shapes, never a mottled coating.\nComposition: ONE square portrait, face-first centered bust / upper body to hips for humanoids. For beasts, worms, fungi, swarms and spiders show their compact recognizable whole shape with the HEAD or MOUTH prominently centered in the upper-middle. No tiny head hidden near the bottom; no headless body. Keep the complete face/chin, ear tips, crown, horns and identifying prop tips inside the image; at least 6–8% clear outer margin. Humanoid face center x=50%, y=32% FROM TOP. Low nonhumanoids may put head/mouth at y=40%. Face/defining feature must read at 48 px. Use an enlarged close composition, not a full-body far-away character. Slight three-quarter view.\nBackdrop: flat opaque pale warm cream #fff7e4; no scenery, floor, border, frame, UI, other subjects or outside shadow. No text, letters, numbers, labels, runes that look like writing, logos or watermark.\nReturn exactly one opaque SQUARE PNG. Use gpt-image-2 if the built-in surface supports model selection; expose actual model provenance if available.\nSubject ID (do not write): N35. Authored identity: A single dog-sized cave spider, glossy black chitin with teal fungal spots, eight long thin legs, cluster of small glowing eyes, raised front legs.\nOne playful compact CAVE SPIDER with EXACTLY eight legs, clean dark charcoal body, big bright teal eye cluster at the FRONT, and simple rounded teal spots. The face and all leg tips inside square. No realistic hairs, glossy horror texture, fog, web or ground. No bones, human face, clothing or chains.\nThe bright casual no-horror drawing rules override old horror adjectives. Keep the subject's own anatomy; DO NOT copy the N01 skull or chains unless authored for this monster.",
+   "sha256": "cab56bee2e68cac05fbf9c45fb2ef95f3b27c830eae5b09bd7376435ff269997",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": "/Users/t8g-2410-pn-005/.codex/generated_images/01a13817-009c-7f61-8171-b6207cbbc94f/exec-0558fc55-d5e0-4ef1-a716-5d9e94f16546.png"
+  },
+  "N39": {
+   "designReference": "N39_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N39.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N39_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: N39, cute chibi drowned zombie sailor, pale blue-grey skin with seaweed and barnacles on patched sailor clothes, long wet hair, reaching big hands. Accent: fungal teal (#5fe0d0). Design reference: attached Image #1 N39_model.png. Images #2 style_0.png and #3 style_1.png are rendering style references only. Generate exactly ONE image.",
+   "sha256": "72725b81e9a1355d3162e15d5c7e9a5d3e06225f92f8379bb4c59ac994b9359d",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N40": {
+   "designReference": "N40_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N40.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait (stylized-concept). Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). Generate exactly one image.\nInput images: N40_model.png is the official subject design reference; style_0.png and style_1.png are rendering-style references only.\nSubject: N40, cute chibi drowned tidecaller priest in a soggy hooded robe of kelp, coral growths on the shoulders, holding a staff made of driftwood with a glowing teal pearl. Accent: fungal teal (#5fe0d0).\nIt is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N40_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.",
+   "sha256": "608c4ccc960a0fad58a554eee888b694fc8d34ab26f666a7f19087425d74a7cb",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N42": {
+   "designReference": "N42_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N42.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait (stylized-concept). Generate exactly ONE image, 1024x1024.\nAsset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself.\nSubject: N42 — cute chibi giant cave bat with leathery wings fully spread, small furry body, large ears, fanged mouth, dark brown fur with teal glowing eyes. Accent: fungal teal (#5fe0d0).\nInput images: attached N42_model.png is the official creature design reference; attached style_0.png and style_1.png are rendering style references only.\nRendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects.\nDESIGN: the attached 3D model render named N42_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look).\nFraming: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Show this small bat's whole body and both fully spread wings within the image with clear margins.\nBackground: flat opaque ivory #fff7e4 for this normal monster N42; no gradient, vignette, scenery, floor, props or other creatures.\nLighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful.\nStrict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.",
+   "sha256": "1ef17bad84ac6314587737a72bb31d166cd59399fea6c4fdd645a6bd2cb665ec",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N43": {
+   "designReference": "N43_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N43.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N43_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi blind cave troll, hulking grey-skinned brute with eyeless face, huge jaw with tusks, long arms with stone-like knuckles, moss and lichen on its back.\nAccent: fungal teal (#5fe0d0).\nInput roles: N43_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly ONE image.",
+   "sha256": "8af03ad00a02f099ed0bbf4acc170f8ff2b08ceb6f8a9a97ac4e837f9097161b",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N44": {
+   "designReference": "N44_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N44.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N44_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi fungal shaman, short hunched humanoid overgrown with mushrooms and teal glowing caps, bark-like skin, holding a gnarled staff topped with a glowing mushroom.\nAccent: fungal teal (#5fe0d0).\nInput roles: N44_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly ONE image.",
+   "sha256": "014c4641093afe79b38964a3d83d8dcf7e9a381daac7ccb83dd52c3bbefa73cc",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N45": {
+   "designReference": "N45_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N45.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N45_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nSubject: cute chibi spore creeper, a stationary bulbous fungal plant with a thick stalk, a wide bulb that opens like a mouth, teal glowing spore pods, roots spreading at the base.\nAccent: fungal teal (#5fe0d0).\nInput image roles: N45_model.png is the official creature design reference; style_0.png and style_1.png are rendering style references only. Generate exactly ONE image for N45.",
+   "sha256": "63a48fbcc3f7940c9b41700ddde6a46042c43d08021ad124e4697511c1f49580",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N48": {
+   "designReference": "N48_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N48.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Generate exactly ONE image.\nUse case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself.\nSubject: N48, cute chibi giant red leech, segmented slick dark red-brown body, round sucker mouth ringed with tiny teeth, shiny smooth skin.\nAccent: fungal teal (#5fe0d0).\nInput images: N48_model.png is the official creature design reference. style_0.png and style_1.png are rendering style references only.\nRendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects.\nDESIGN: the attached 3D model render named N48_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Preserve the model's big rounded coral-red head, small dark eyes, friendly toothy mouth, red segmented belly, dark brown segmented arms and legs and tapering tail. Let the official model determine anatomy.\nFraming: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square.\nBackground: flat opaque ivory #fff7e4 for this normal monster N48; no gradient, vignette, scenery, floor, props or other creatures.\nLighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful.\nStrict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.",
+   "sha256": "2bd66ab71d613978119623bf6c5db9f4e86bec6ae8e9a406a781465444fb0a8f",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N49": {
+   "designReference": "N49_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N49.png",
+   "installedAt": "2026-10-18",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait. Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself. Rendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects. DESIGN: the attached 3D model render named N49_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look). Subject: cute chibi ghoul cook, large pale hunched ghoul wearing a stained leather apron, holding a big wooden ladle, small pots and hooks on its belt. Accent: fungal teal (#5fe0d0). Framing: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square. Background: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures. Lighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful. Strict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency. Input roles: N49_model.png is the design reference; style_0.png and style_1.png are rendering style references only. Exactly one image.",
+   "sha256": "1fcf1ad92d8ac0b27e2cd3d78617d336344931331c4e69f6d4159dbfbd3ac8f5",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  },
+  "N58": {
+   "designReference": "N58_model.png (chosen Hunyuan candidate render)",
+   "file": "Assets/HELLSCRIPT/Resources/Art/TrainingGround/Portraits/N58.png",
+   "installedAt": "2026-10-19",
+   "model": "unknown",
+   "prompt": "Use case: game UI portrait (stylized-concept). Asset type: one opaque square monster portrait, 1024x1024, for HELLSCRIPT, a bright cute casual fantasy action RPG (StyleD). It is shown at 48-64 px in an enemy list box and at about 200 px in a detail card, inside a frame the UI draws itself.\nSubject: N58, cute chibi dusk wolf, lean grey wolf with dark violet-tinted fur, bared fangs, glowing amber eyes, bushy tail. Accent: dusk rose (#d9798f).\nInput images: Image #1 N58_model.png is the official creature design reference. Image #2 style_0.png and Image #3 style_1.png are rendering style references ONLY.\nRendering: bright cute casual illustration in the StyleD shonen-manga chibi look of the attached style references: thick clean outlines, flat saturated base colours with one hard-edged cel shadow, smooth matte materials, friendly goofy expression, 3.5 to 4 heads tall proportions. Use the style references ONLY for rendering style, palette and lighting; never copy their subjects.\nDESIGN: the attached 3D model render named N58_model.png is this creature's official design — match its silhouette, anatomy, head, costume, weapon and colours closely, but paint it as an illustration (never a 3D render look).\nFraming: bust / upper-body portrait, the creature centered and turned slightly toward the viewer's left in a 3/4 view, head in the upper-middle third, the creature fills about 80% of the frame height, and its silhouette must read clearly at 48 px (small or low creatures: show the whole body). Keep a small clear margin: nothing important touches the edges, because the UI crops a rounded square.\nBackground: flat opaque ivory #fff7e4; no gradient, vignette, scenery, floor, props or other creatures.\nLighting: bright even key light from the upper left with a light rim in the creature's accent colour; values stay bright and cheerful.\nStrict exclusions: no text, letters, numbers, runes or glyphs that look like writing, no logo, no watermark, no UI, no border, no frame, no ring vignette, no gore, blood, wounds, exposed flesh or scary look. Opaque PNG without transparency.\nGenerate exactly ONE image.",
+   "sha256": "24d454a698c51faee9b3912e6c1f4edd00027ad181867c9c3a7d329415e02ee2",
+   "size": [
+    1254,
+    1254
+   ],
+   "source": ""
+  }
+ },
+ "modelProvenanceAvailable": false,
+ "productionApproved": false,
+ "purpose": "Monster codex portraits redrawn in the approved bright casual StyleD",
+ "sourceCommit": "53d6a3e13304a781f9823134ba0f497bafb78621",
+ "style": "StyleD shonen chibi"
+}

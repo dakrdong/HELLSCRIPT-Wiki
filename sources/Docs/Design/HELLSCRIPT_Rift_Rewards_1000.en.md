@@ -83,7 +83,7 @@ Assume 80% salvage of common/magic/rare and legendary salvage fractions 0/40/75/
 | Non-set legendary | 0 | 15 | 1 |
 | Set legendary | 0 | 10 | 1 |
 
-Retain automatic aspect collection on eligible legendary salvage; do not count it as another item drop. Exclude invested-material refunds, item sales and recycling crafted outputs. A targeted legendary costs ten same-slot cores; rare crafting costs 50 materials plus `500×highest clear` gold. These are optional expenses. Natural salvage earns approximately 7,810 cores through R1000, or 976 per slot in expectation. This is gross income before spending; crafted items are not added to the natural legendary forecast.
+Retain automatic aspect collection on eligible legendary salvage; do not count it as another item drop. Exclude invested-material refunds, item sales and recycling crafted outputs. A targeted legendary costs ten same-slot cores, an optional expense. Natural salvage earns approximately 7,810 cores through R1000, or 976 per slot in expectation. This is gross income before spending; crafted items are not added to the natural legendary forecast.
 
 ## 5. First-clear rewards
 

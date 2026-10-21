@@ -95,8 +95,8 @@ namespace Hellscript.Tests
             }
             Assert.AreEqual(left,right);
         }
-        [TestCase(0)][TestCase(1)][TestCase(2)]
-        public void ShopAndBothCraftingServicesNeverAwakenHighStageItems(int mode)
+        [TestCase(0)][TestCase(2)]
+        public void ShopAndCoreCraftingNeverAwakenHighStageItems(int mode)
         {
             account.Hero.highestClear=100;ContentUnlocks.Reconcile(account);
             for(int n=0;n<50;n++)

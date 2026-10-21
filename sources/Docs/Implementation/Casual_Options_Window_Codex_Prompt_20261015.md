@@ -1,0 +1,105 @@
+# 옵션(설정) 창 캐주얼 스킨 — Codex 작업 지시
+
+작성일: 2026-10-15 · [English](Casual_Options_Window_Codex_Prompt_20261015.en.md)
+
+아래 코드 블록 전체를 Codex에 그대로 붙여 넣는다. 시안 자료는 `claude/casual-options` 브랜치(원격에 올라가 있음)에 있다.
+
+| 전달할 것 | 위치 |
+|---|---|
+| 디자인 캔버스(대지 24장, 비공개) | https://claude.ai/artifact/ARTvBnCWdj5yPkCovn6XFo. Codex가 열려면 사용자가 공유해야 한다. 열 수 없어도 아래 저장소 사본으로 충분하다 |
+| 시안 정본(소스·참조 화면 24장·치수 표·아이콘 SVG 25개·검사 도구) | `Docs/Design/Options/Casual/` ([README](../Design/Options/Casual/README.md)) |
+| 이 지시 | 이 문서 |
+
+```text
+HELLSCRIPT 공통 설정 창(톱니바퀴로 여는 옵션창)을 캐주얼 StyleD 시안대로 다시 만들어 줘. 시안 정본은 Docs/Design/Options/Casual/ 이다(README, 참조 화면 24장, 시안 소스, 아이콘 SVG, 검사 도구). 설정 값의 의미·저장·적용 규칙은 그대로 두고, 모양·구성(탭 한 줄, 카드, 아이콘, 썸네일, 영웅 카드)을 바꾸는 작업이다.
+
+## 배경
+- 게임 아트가 어두운 고딕에서 밝은 캐주얼(StyleD, 12세 이상)로 바뀐다. 화면별 스킨 적용이 승인되어 있고, 이 작업은 공통 설정 창 차례다. 스킬 창, 전투 HUD, 훈련장, 물약 설정 등은 이미 캐주얼 스킨이 들어갔다(Docs/Implementation/Casual_UI_Skin_Rules_20261014.md, Casual_UI_Integration_20261014.md).
+- 시안은 물약·전선 이탈 설정 창의 양식(크림 판 + 남색 외곽선 + 노랑 선택 탭 + 막대·마커 슬라이더 + 초록 확정 단추 + 코랄 닫기·경고)을 이 창의 모든 탭에 퍼뜨린 것이다. 색·글꼴 규칙은 README "양식"이 정본이다.
+- 이 작업의 대상은 GameUI.ScreenSettings 가 여는 공통 설정 창뿐이다. 칙령 옵션(HuntEdictWindow.Options), 장비 추천 설정(RiftGearSettingsWindow), 상점 자동 옵션(EquipmentShopWindow.Settings)은 다른 화면이다.
+
+## 먼저 할 것
+1. 규칙: AGENTS.md, CLAUDE.md, AgentRules/(Shared_UI, UI_Refresh, Workflow, CPU_Performance, Unity_MCP, Wiki_Publish, Artifact_Cleanup), Docs/Implementation/Casual_UI_Skin_Rules_20261014.md. 한 작업·한 에이전트로 한다. 대화·개발 기록은 한국어, 코드 주석·커밋 메시지·로그는 영어로 쓴다.
+2. 최신 origin/main 에서 새 worktree 와 브랜치 codex/casual-options 를 만든다(다른 세션이 같은 체크아웃을 쓴다). 시안은 다음처럼 가져온다:
+   git fetch origin claude/casual-options && git checkout origin/claude/casual-options -- Docs/Design/Options/Casual Docs/Implementation/Casual_Options_Window_Codex_Prompt_20261015.md Docs/Implementation/Casual_Options_Window_Codex_Prompt_20261015.en.md
+3. Docs/Design/Options/Casual/README.md 를 끝까지 읽고 reference/ 의 24장을 열어 본다. 치수·부품 상태·탭 본문 순서는 그 문서와 canvas/Main.dc.html 의 CSS 변수가 정본이고, 아래는 요약이다. node Docs/Design/Options/Casual/tools/smoke.js 는 시안 규칙 검사이며, 게임 시험으로 옮길 규칙의 원본이다.
+
+## 확인한 현재 상태 (main af716fba 기준, 직접 읽은 코드)
+- 소유 파일(Assets/HELLSCRIPT/Runtime/Presentation):
+  - GameUI.ScreenSettings.cs: 창 틀, 탭, 화면·언어·캐릭터 변경 본문, ReflowCommonPanel(배치), CloseCommonPanel.
+  - GameUI.Audio.cs(소리, VolumeSlider), GameUI.ViewDistance.cs, GameUI.OverlayMap.cs(BuildMapDisplayControl), GameUI.Accounts.cs(계정), GameUI.SettingsInformation.cs(게임 안내·전투 상태).
+  - SettingsControls.cs(SettingsChoiceGrid, SettingsGearGraphic, SettingsStepSlider), GameUI.SettingsFrame.cs(화면 비율 검은 띠, MakeSettingsIcon), WorldView.Settings.cs(가로 화면 왼쪽에 실제 마을·사냥터를 보이게 하는 ShowSettingsWorld·RestoreSettingsWorld).
+  - 진입: 타이틀·마을·전투의 톱니바퀴가 ShowScreenSettings, ShowHelp, ShowCombatOverview 를 부른다.
+- 틀: ShowCommonPanel 이 ScreenSpaceOverlay Canvas(정렬 120) + CanvasScaler + ContentWindowHost.Attach 로 모달을 만든다.
+  - settings-backdrop 단추, 왼쪽 절반 안내 글자("배경을 누르면 닫힙니다."), 판(commonCard), 제목(26pt), 탭 5개(settings-tab-Screen/Sound/Language/Character/Account), 닫기 settings-close(UiButtonRole.Quiet, "×").
+  - 본문은 CommonScroll(ScrollRect + VerticalLayoutGroup, 간격 14, 안쪽 18)이고 글자는 CommonNote 로 18~24pt 이다.
+  - 튜토리얼 중(EntryPage 가 아니고 Tutorials.Mandatory)에는 캐릭터 탭과 본문이 없고, 타이틀로 이동 단추가 계정 본문 맨 위에 온다.
+- 배치: ReflowCommonPanel 이 제목 56, 탭 높이 48(창 높이 400 미만이면 40), 탭 열 수(폭 620 미만이면 2열, 아니면 4열 → 탭 5개는 두 줄)를 정하고, 가로면 판을 안전 영역의 오른쪽 절반(왼쪽 절반은 실제 화면), 세로면 전체로 놓는다.
+  - 키보드 영역·안전 영역을 빼고, DialogReadingAnchor 로 읽던 위치를 복원하고, 잘렸던 슬라이더 손잡이를 다시 그린다.
+- 색·글꼴: 기존 Obsidian & Gilt 값(gold, pale, muted, panel, ink)과 UiFonts 기본 글꼴. BigButton 은 Button + LayoutElement(TouchHeight 80)이다. 선택 상태는 UiTheme.Choice 가 UiButton 역할(Tab, Option)로 표시한다.
+- 시험·스모크가 쓰는 이름(바꾸지 않는다): settings-backdrop, settings-close, settings-tab-<Section>, settings-aspect-auto, settings-aspect-<비율>, settings-language-<코드>, settings-character-<번호>, settings-title, settings-copy-uid, settings-google-link, settings-distance-slider(SettingsStepSlider), settings-distance-up, settings-distance-down, settings-map-<모드>, settings-map-retry. 소리 슬라이더 이름은 "전체 음량", "음악", "효과음"이고 전체 음소거 단추 이름은 "전체 음소거"(글자와 같다).
+- 설정 규칙 소유자(건드리지 않는다): game.ApplyAspect, ApplyLanguage, ApplyViewDistance, MapDisplay, Audio(Preferences, Change, Defaults, SavePreferences), CanChangeCharacterFromSettings, ChangeCharacterFromSettings, ReturnToTitle, GoogleLogin, SupportUid, 기기 저장 파일과 재시도.
+- 캐주얼 공통 부품(이미 main 에 있다):
+  - UiSkin.Casual: 색 토큰(Cream, CreamShade, Gold, GoldShade, Green, GreenShade, Navy, Muted, Edge, Disabled, Coral, White), 글꼴(CasualDisplay=Jua, CasualBody=Noto Sans KR), ApplyChrome(UiButton, close), ApplyLabel, Clip, OnLight(작은 글자 대비 보정), 버튼 팔레트(기본 흰색, Primary 초록, close·Destructive 코랄, chosen 노랑, locked 회색).
+  - UiButtonChrome.Casual / CasualClose. CasualBattleHudStyle: Outline(Text)(글자 외곽선, SkillTreeD4TextShadow), Orange·Sky 토큰, Panel(Resources Art/GlobalHUD/Casual/panel-cream·panel-white 9-slice).
+  - 영웅 인장: GlobalHudView.Portrait(heroClass, gender) = Art/GlobalHUD/Casual/seal-*. 둥근 단추 그림: Art/GlobalHUD/Casual/control-minus·control-plus. 글꼴: Resources/Fonts/CasualSkill(Jua-SkillSubset, NotoSansKR-Skill400/700/900).
+  - 번들 글꼴에는 ♂♀ 글리프가 없다(직접 확인). 지금 캐릭터 변경 단추는 글자에 ♂♀를 넣는다. 캐주얼 글꼴로 그리면 빠지므로 시안처럼 아이콘으로 그린다.
+  - 다른 창은 ContentWindowView.Open(..., skin:) 에 UiSkin.Casual 을 명시 전달한다. 설정 창은 ContentWindowView 가 아니라 GameUI 가 직접 만들므로, 같은 방식으로 인스턴스 스킨을 명시 전달하고 전역 UiTheme 값은 바꾸지 않는다(다른 창이 영향을 받는다).
+- 관련 시험: SettingsRevisionTests(SettingsChoiceGrid 배치, 비율·가시거리·캐릭터 변경 저장), CasualUiSkinTests, LocalizationTests, StoreViewBindingTests(UI 갱신), UI 계약 검사.
+- 관련 스모크(grep ShowScreenSettings, commonModal, settings- 로 전체 목록을 확인): RuntimeScreenSettingsSmoke(.RiftTitle), RuntimeAudioSkillsSmoke, RuntimeLanguageSmoke, RuntimePlayerAccountSmoke, RuntimeMapDisplaySmoke, RuntimeCharacterSelectionSmoke, RuntimeTutorialSmoke, RuntimeTouchLayoutSmoke, RuntimeUiStyleSmoke.
+- 관련 기록: Docs/Implementation/Settings_Revision(.en).md(아직 "네 가지 설정"이라고 쓰여 있으나 지금은 탭 5개), Map_Display_Option, Screen_Settings_Expansion, Shared_UI_Contract.
+
+## 할 일 (요약, 숫자는 README)
+1. 양식 소유자: 시안의 색을 UiSkin 의 이름 붙은 값으로 쓴다. 이미 있는 토큰(Cream, Gold, Green, Coral, Navy, Muted, Edge, Disabled, CasualBattleHudStyle.Orange·Sky)을 먼저 재사용하고, 없는 값(카드 가장자리 #c9d0e2, 안내 상자 3종 색, 민트 등)만 같은 소유자에 이름을 붙여 추가한다. 색 숫자를 창 코드에 흩어 쓰지 않는다. UiSkin.Casual 을 이 창에 명시 전달하며 전역 UiTheme 는 바꾸지 않는다.
+2. 틀(GameUI.ScreenSettings):
+   - 판: panel-cream 9-slice 를 재사용하고, 바느질 안쪽 점선과 위 가운데 젬은 같은 소스의 변형이나 같은 생성기로 만든다. 판은 가장자리에서 8~12 안쪽에 뜬다(결정 3).
+   - 제목은 Jua 노랑 + CasualBattleHudStyle.Outline, 가운데. 닫기는 코랄 둥근 단추(ApplyChrome close:true), 터치 영역 44 이상.
+   - 탭은 한 줄에 같은 폭으로 놓는다(UiButtonRole.Tab 의 선택이 노랑). PC 는 아이콘+글자, 세로는 아이콘 위·글자 아래, 가로 화면은 글자만. 글자는 줄이지 않고 두 줄까지 감는다.
+   - 가로면 오른쪽 절반(왼쪽은 실제 화면), 세로면 전체, 안전 영역·키보드·읽던 위치 복원·슬라이더 손잡이 재그림은 지금 로직을 유지한다. 판 위치 규칙(ReflowCommonPanel)은 바꾸지 않고 모양만 바꾼다.
+3. 부품(재사용 가능한 작은 클래스나 헬퍼 한 곳에 모은다, 탭마다 복사하지 않는다):
+   - 카드(흰색 + 가장자리 + 아래 그림자)와 머리줄(아이콘 젬 + Jua 제목 + 값).
+   - 막대+마커 슬라이더: Slider·SettingsStepSlider 의 동작(5% 단계, 휠, 끌기, 손잡이 재그림)을 그대로 두고 그림만 바꾼다. 막대는 잉크 테두리 + 노랑·하늘·초록 채움, 손잡이는 노랑 마름모 마커. 눌러 잡는 영역은 지금 손잡이 이상이어야 한다.
+   - −/+ 둥근 단추(control-minus·control-plus 재사용을 먼저 검토), 선택 칩 + 비율 모양 아이콘(비율대로 크기를 잡은 사각형, 새 그림 없이 uGUI Image 로), 선택 카드(지도 표시·언어), 체크 줄, 안내 상자 3종, 알약, 영웅 카드.
+   - 새로 만든 그래픽은 한 번 만들고 상태가 바뀔 때만 갱신한다(AgentRules/UI_Refresh.md). UpdateCommonPanel 이 RefreshScreenSettings 를 창이 열려 있는 동안 계속 부르므로(호출 주기는 코드에서 확인) 스프라이트·색·글자를 값이 같을 때 다시 쓰지 않는다.
+4. 탭 본문을 시안 순서와 구성으로 다시 만든다: 화면(가시거리 → 지도 표시 방식 → 화면 비율), 소리, 언어, 캐릭터 변경, 계정, 게임 안내, 전투 상태. 이름 계약과 본문 안의 기능(누르면 일어나는 일, 비활성 조건, 저장 재시도)은 그대로다.
+   - 지도 표시 방식은 선택 카드 3장 + 썸네일(겹침 지도, 미니맵 창, 표시 안 함), 비율 칩은 비율 아이콘, 가시거리는 눈금(50·100·150%)과 100% 표시.
+   - 영웅 카드는 만들어진 영웅만 지금 순서(0,3,1,4,2,5)로 그린다. 인장은 GlobalHudView.Portrait, 직업 이름과 레벨은 기존 문구, 성별은 아이콘, 현재 영웅은 켜짐 + 체크(누를 수 없음 그대로), 균열 중에는 나머지가 잠금 + 자물쇠(CanChangeCharacterFromSettings 가 거짓).
+5. 그림:
+   - 아이콘 25개는 Docs/Design/Options/Casual/assets/icons/*.svg 가 원본이다. Docs/Design/GlobalHUD/Resources/v1/build-vectors.cjs 같은 기존 벡터 생성 방식으로 스프라이트를 만들거나 uGUI 메시로 그린다(결정 5). 손으로 그린 래스터는 금지다.
+   - 지도 썸네일 3개는 같은 방식(uGUI 도형 또는 벡터 스프라이트)으로 만든다. 시안의 SVG 모양이 정본이다.
+   - 새 텍스처는 Editor/ResourceTextureBudget.cs 에 행을 추가하고 용량 변화를 보고한다.
+6. 상태(참조 화면과 같게): 저장 실패(코랄 안내 + 저장 재시도, 기존 단추 재사용), 균열 사냥 중 캐릭터 변경 불가, 튜토리얼 중 캐릭터 탭 없음 + 계정 본문 맨 위 타이틀로 이동 + 안내.
+7. 문구: 시안의 모든 문구는 기존 키다. 새 키는 만들지 않는 것이 기본이다. 필요하면(예: 레벨 알약 "Lv.{0}") 기존 키를 먼저 찾고, 없을 때만 한국어·영어를 함께 추가한다. 누락 키는 한국어로 대신 표시하고 기록하며 빈 문자열·키 이름을 화면에 내지 않는다. 시안의 가시거리 저장 실패 문구는 시안용 가정이므로 게임의 ViewDistance.Message 를 그대로 쓴다.
+
+## 결정 (아래 기본값으로 진행하고 보고)
+- 결정 1 — 크기: 글자 크기와 터치 높이는 지금 코드 값을 기준으로 유지한다(스킬 창 승인 기준과 같다: 위치·크기·글자 크기·기능 유지, 색·선·모서리 변경). 시안 숫자는 구성·비율의 지시다. 시안이 허용하는 구성 변경은 탭 한 줄, 카드, 아이콘, 썸네일, 영웅 카드다. 가장 좁은 세로 화면에서 탭 5개가 한 줄에 글자를 줄이지 않고는 안 들어가면 두 줄 감기(글자 크기 유지)를 쓰고, 그래도 안 되면 지금의 2열 배치를 유지하고 사유와 실제 폭을 보고한다.
+- 결정 2 — 슬라이더: Slider·SettingsStepSlider 를 유지하고 그림만 바꾼다.
+- 결정 3 — 판 모양: 시안대로 가장자리에서 8~12 안쪽에 뜬 카드. 안전 영역·ContentWindowHost·배경 눌러 닫기 영역과 충돌하면 가장자리 간격을 0 으로 줄이고 보고한다.
+- 결정 4 — 왼쪽 실제 화면: 지금의 ShowSettingsWorld 를 유지하고 시안의 어두운 그라데이션(veil)은 넣지 않는다. 읽기 어려우면 알파 0.3 이하만 쓴다.
+- 결정 5 — 아이콘·썸네일 제작: SVG 원본에서 기존 벡터 생성 방식으로 스프라이트를 만든다. 도형이 단순한 것(비율 아이콘, 체크, 닫기)은 uGUI 도형으로 그려도 된다.
+- 결정 6 — 스크롤바: 지금 창에 없으면 만들지 않는다(시안의 노랑 스크롤바는 표현이다).
+
+## 하지 않을 것
+설정 값의 의미·저장 형식·적용 규칙 변경, 타이틀·마을·HUD 의 톱니바퀴 단추 모양(HUD 작업 소유), 칙령 옵션·장비 추천 설정·상점 자동 옵션 창, 화면 비율 검은 띠 모양, 계정·로그인·텔레메트리 로직, 새 글꼴(번들 글꼴에 없는 글리프는 아이콘으로), 제거된 글자 크기 조정 기능과 50~150% 검사·확대 글자 스모크, 전역 UiTheme 전환(다른 창 영향), 손으로 그린 그림.
+
+## 검증 (작업 중에는 관련 검사만)
+- 관련 EditMode: SettingsRevisionTests, CasualUiSkinTests, LocalizationTests, StoreViewBindingTests 를 실행한다. 다음을 시험으로 더한다.
+  - 탭 한 줄(5개와 4개) 배치가 다섯 화면 모양(세로 440×956, 가로 956×440, PC 1280×720·1600×900·21:9)과 한국어·영어에서 겹치지 않고 안전 영역 안에 있는지.
+  - 영웅 카드의 체크·자물쇠가 이름과 겹치지 않는지, UID 줄이 좁은 폭에서 줄바꿈되는지, 소리 막대 세 개가 겹치지 않는지(시안 제작 중 실제로 났던 결함이다).
+  - 카드·칩·선택 카드의 색이 UiSkin 값에서만 오는지(CasualUiSkinTests 방식), 선택·비활성·잠금 상태 색.
+  - 슬라이더 5% 단계·휠·−/+ 가 그대로인지, 저장 실패 안내·재시도, 튜토리얼 중 캐릭터 탭 없음, 균열 중 캐릭터 변경 거부.
+  - tools/smoke.js 의 규칙(탭 순서, 언어 전환, 음소거가 막대를 흐리게, 저장 재시도가 안내를 지움)을 EditMode 로 옮긴다.
+- 스모크: 위 관련 스모크를 새 배치에 맞게 고친다. 이름 계약을 바꾸지 않았다면 대부분 그대로 통과해야 한다. 닫기·탭·배경의 실제 입력(레이캐스트) 판정과 가로 반쪽·세로 전체 배치를 확인한다.
+- 화면: 세로 440×956, 가로 956×440, PC 1280×720·1600×900 에서 한국어·영어로 찍는다. 탭 5개 + 게임 안내 + 전투 상태, 상태 3종(저장 실패, 균열 중, 튜토리얼 중)이다. 찍은 화면을 reference/ 의 같은 상태와 나란히 놓고 비교한다. 안전 영역, 터치 44pt, 겹침, 문구 잘림을 확인한다. 휴대전화 비율은 Mac 창과 모의 여백 결과이므로 실기기 결과라고 하지 마라.
+- python3 tools/check_ui_contract.py --verify 와 python3 tools/check_ui_refresh.py 를 통과하고, 저장 후 UI 갱신 규칙(AgentRules/UI_Refresh.md)을 지킨다.
+- 전체 EditMode 와 macOS 개발 빌드 런타임 스모크는 마지막 코드 변경과 최신 main 병합 뒤 한 번만 실행한다. 이미 실패하던 검사와 새 실패를 구분한다. 문서만 바꾸면 게임 실행 검사를 다시 하지 않는다.
+- 성능: 창을 열 때 한 번 만들고 매 프레임 다시 만들지 않는다. 성능을 주장하려면 같은 조건의 이전·이후 실제 바이너리 각각 3회 이상 CPU·GC 원자료가 있어야 한다. 없으면 "미측정"으로 적는다. 텍스처 메모리 변화는 용량 숫자로 보고한다.
+
+## 산출물
+- PR 1개(codex/casual-options)를 만든다. 병합은 사용자 승인 뒤에 하므로 하지 않는다. 시안 패키지(Docs/Design/Options/Casual)를 포함하고, 관련 검사와 기록을 같은 커밋에 넣는다.
+- 한/영 기록 Docs/Implementation/Casual_Options_Window_20261015(.en).md 를 쓴다(바꾼 것, 결정 결과, 시안과 다르게 한 곳, 검사 결과, 확인하지 못한 것). Settings_Revision(.en).md 의 오래된 설명(탭 개수)도 고친다. 증거 스크린샷은 Docs/Implementation/CasualOptionsEvidence/ 에 jpg 로 두고 파일마다 링크한다.
+- 위키 원본이 바뀌면 AgentRules/Wiki_Publish.md 절차를 따르고, 산출물 정리는 AgentRules/Artifact_Cleanup.md 를 따른다.
+
+## 보고(한국어, 짧게)
+실제 변경, 결정 1~6 결과, 시안과 다르게 한 곳과 이유, 실제로 확인한 것과 미검증 범위(실기기, 성능), 용량 변화, 남은 일. macOS 결과를 실기기 결과로 말하지 마라.
+```

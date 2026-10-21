@@ -31,7 +31,6 @@ Save schema 17 preserves released live-operations schema 16 saves and adds tutor
 | Practice | One supported operation | Existing domain owner |
 | --- | --- | --- |
 | Enhance | Owned +0 → +1, gold | `GearEnhancement` |
-| Rare craft | One selected slot, gold and materials | `ContentServices.Purchase` |
 | Slot upgrade | Level 1 → 2, stones, normal 300 seconds | `BlacksmithCatalog.Start` |
 | Gem fusion | Five selected T1 → one T2 | `Jeweler.Convert` |
 | Rune | One G0 single-cell rune, gold | `TownTrade.BuyRune` |

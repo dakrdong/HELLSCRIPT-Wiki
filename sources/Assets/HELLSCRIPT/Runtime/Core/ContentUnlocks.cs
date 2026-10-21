@@ -28,7 +28,7 @@ namespace Hellscript
     }
     public static class ContentUnlocks
     {
-        public const string Train="UL01_TRAIN", Enhance="UL02_ENHANCE", Offline="UL03_OFFLINE", RareCraft="UL04_RARE_CRAFT",
+        public const string Train="UL01_TRAIN", Enhance="UL02_ENHANCE", Offline="UL03_OFFLINE",
             Gem="UL05_GEM", Reroll="UL06_REROLL", Shop="UL07_UNIDENTIFIED_SHOP", Sweep="UL08_SWEEP", CoreCraft="UL09_CORE_CRAFT",
             SlotEnhance="UL10_SLOT_ENHANCE", Rune="UL11_RUNE", Aspect="UL12_ASPECT", Elixir="UL13_ELIXIR", Masterwork="UL14_MASTERWORK";
         public const int Version=2;
@@ -56,7 +56,7 @@ namespace Hellscript
             if(legacy&&s.version==0)
             {
                 // These services and three passive slots were available to every schema-1/2 user.
-                foreach(string id in new[]{Train,Enhance,RareCraft,Reroll,Shop,Sweep,CoreCraft})Grant(s,id);
+                foreach(string id in new[]{Train,Enhance,Reroll,Shop,Sweep,CoreCraft})Grant(s,id);
                 foreach(var h in HeroSlots.Created(a))h.legacyPassiveSlots=3;
                 if(AccountClear(a)>0){Grant(s,Offline);s.offlineActivatedUtc=a.lastSeenUtc;}
                 s.firstRunEnded=a.records.Count>0||AccountClear(a)>0;
@@ -69,8 +69,8 @@ namespace Hellscript
         {
             var s=a.contentUnlocks;int best=AccountClear(a);
             // Freeze the released v1 policy here: future balance edits must not rewrite migration.
-            string[] ids={Enhance,Offline,RareCraft,Gem,Reroll,Shop,Sweep,CoreCraft};
-            int[] stages={1,1,3,5,8,10,12,15};
+            string[] ids={Enhance,Offline,Gem,Reroll,Shop,Sweep,CoreCraft};
+            int[] stages={1,1,5,8,10,12,15};
             for(int i=0;i<ids.Length;i++)if(best>=stages[i])Grant(s,ids[i]);
             if(s.gemAcquired||(a.gems?.Count??0)>0)Grant(s,Gem);
             if(s.coreReady||a.cores.Any(c=>c>=10))Grant(s,CoreCraft);
@@ -107,6 +107,15 @@ namespace Hellscript
             }
         }
         public static bool Has(AccountSave a,string id){Reconcile(a);return a.contentUnlocks.unlocked.Contains(id);}
+        // The forge keeps each service's rift level even where the guide stage has opened everything: such an account uses a forge service once it has
+        // cleared the service's stage. The one exception is the town errand, which teaches the first enhancement before any rift is cleared.
+        public static bool ForgeHas(AccountSave a,string id)
+        {
+            if(!Has(a,id))return false;
+            if(a.guide==null||!a.guide.everythingOpen)return true;
+            var f=Rules.features.FirstOrDefault(x=>x.id==id);
+            return f==null||AccountClear(a)>=f.stage||id==Enhance&&a.guide.townQuest==TownQuest.EnhanceWeapon;
+        }
         public static string Condition(string id)
         {
             var f=Rules.features.Single(x=>x.id==id);

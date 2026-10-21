@@ -10,7 +10,7 @@ namespace Hellscript
         {
             if(aspectMask==null)
             {
-                aspectMask=Rect("Aspect frame",transform);var canvas=aspectMask.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=110;
+                aspectMask=Rect("Aspect frame",transform);var canvas=aspectMask.gameObject.AddComponent<Canvas>();canvas.renderMode=RenderMode.ScreenSpaceOverlay;canvas.sortingOrder=2600;
                 foreach(string name in new[]{"Left","Right","Bottom","Top"}){var bar=Box(name,aspectMask,Color.black);bar.GetComponent<Image>().raycastTarget=false;}
             }
             var f=UiSafeArea.FrameNormalized;
@@ -21,8 +21,9 @@ namespace Hellscript
         void MakeSettingsIcon(Button button)
         {
             button.GetComponentInChildren<Text>().text="";
-            var icon=Rect("Settings gear",button.transform);Stretch(icon);icon.offsetMin=Vector2.one*12;icon.offsetMax=-Vector2.one*12;
-            var graphic=icon.gameObject.AddComponent<SettingsGearGraphic>();graphic.color=pale;graphic.raycastTarget=false;
+            var icon=Rect("Settings gear",button.transform);Stretch(icon);
+            var graphic=icon.gameObject.AddComponent<Image>();graphic.sprite=GlobalHudView.LoadArt("menu-settings");graphic.preserveAspect=true;graphic.raycastTarget=false;
+            button.targetGraphic=graphic;
         }
     }
 }

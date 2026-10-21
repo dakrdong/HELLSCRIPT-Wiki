@@ -83,7 +83,7 @@ namespace Hellscript
         // skill's chosen purpose is not met right now, so the candidate is passed over and reads EDICT_AIM.
         bool EdictAimGate(RuleCandidate c,bool countCast=true)
         {
-            if(DodgeOwnsEdictAction&&(c.code=="APPROACH"||!DodgeCanAttack(c.rule.action==RuleAction.Basic?"BASIC":CombatTelemetry.SkillId(c.rule.skill))))
+            if(DodgeOwnsEdictAction&&(!DodgeCanAttack(c.rule.action==RuleAction.Basic?"BASIC":CombatTelemetry.SkillId(c.rule.skill))))
             {c.ready=false;c.code="DODGE_HOLD";c.detail="회피한 공격이 끝날 때까지 안전 위치를 유지합니다.";return false;}
             bool compiled=EdictRuleOrder.IsCompiledRule(c.rule.id);
             if(edictSource==null)

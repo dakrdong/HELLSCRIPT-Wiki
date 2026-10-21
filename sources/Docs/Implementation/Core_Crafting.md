@@ -4,7 +4,7 @@
 
 ## 게임 규칙
 
-대장간의 네 번째 **코어 제작** 탭에서 부위와 제작할 전설·세트 장비를 선택한다. 기존 마을 대장장이의 접근 범위와 콘텐츠 해금 판정을 사용한다. 희귀 제작·옵션 변경·장비 강화·슬롯 강화는 유지한다.
+대장간의 네 번째 **코어 제작** 탭에서 부위와 제작할 전설·세트 장비를 선택한다. 기존 마을 대장장이의 접근 범위와 콘텐츠 해금 판정을 사용한다. 옵션 변경·장비 강화·슬롯 강화는 유지한다.
 
 - 전설·세트 장비 1개를 분해하면 같은 부위 코어 1개를 지급한다. 기존 단건·일괄·자동 분해의 `Economy.Dismantle` 경로와 일반 재료·강화석·위상 보상을 유지한다.
 - 코어는 기존 `AccountSave.cores[8]`의 계정 공용 재화다. **인벤토리·창고 공용**은 이 실제 합계를 한 번 읽는다는 뜻이며 별도 스택이나 중복 잔액을 만들지 않는다. 두 반지 위치는 반지 코어를 공유한다.
@@ -48,6 +48,6 @@
 
 근거: [검사 XML](BlacksmithEvidence/core-crafting-editmode.xml), [검증 요약](CoreCraftingEvidence/validation.json), [실행 결과](CoreCraftingEvidence/result.txt), [재시작 결과](CoreCraftingEvidence/restart-result.txt), [세로 제작](CoreCraftingEvidence/portrait-ko-forge.png), [가로 영어](CoreCraftingEvidence/landscape-en-forge.png), [PC 장비 목록](CoreCraftingEvidence/pc-16x9-ko-catalogue.png), [확대 글자](CoreCraftingEvidence/large-text-portrait.png).
 
-구현: [규칙](../../Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs), [거래](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs), [탭](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs), [팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.Dialogs.cs), [자동 검사](../../Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs), [실행 검증](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs).
+구현: [규칙](../../Assets/HELLSCRIPT/Runtime/Core/CoreCrafting.cs), [거래](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.CoreCrafting.cs), [탭](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.Cores.cs), [팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/BlacksmithWindow.CoreDialogs.cs), [자동 검사](../../Assets/HELLSCRIPT/Tests/Editor/CoreCraftingTests.cs), [실행 검증](../../Assets/HELLSCRIPT/Runtime/Presentation/RuntimeCoreCraftingSmoke.cs).
 
 공개 위키는 이 브랜치를 `main`에 병합할 때 병합된 원본에서 재생성·검증한 뒤 게시한다.

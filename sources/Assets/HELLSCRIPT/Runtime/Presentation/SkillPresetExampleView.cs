@@ -22,8 +22,8 @@ namespace Hellscript
         };
         public Scenario Example {get;private set;}
         public string Scope {get;private set;}
-        SkillTreeGraphic g;Font font;float scale;RectTransform root;
-        Color enemy=>UiTheme.Danger;
+        SkillTreeGraphic g;Font font;float scale;RectTransform root;UiSkin skin;
+        Color enemy=>skin?.Coral??UiTheme.Danger;
         Color effect=>UiTheme.Resource;
         static Color A(Color color,float alpha){color.a=alpha;return color;}
         public static Scenario Describe(string scope,string preset)
@@ -97,10 +97,10 @@ namespace Hellscript
             }
             return s;
         }
-        public static SkillPresetExampleView Create(Transform parent,string scope,string preset,HuntEdictLoadout load,Font font,float x,float y,float w,float h,float reading)
+        public static SkillPresetExampleView Create(Transform parent,string scope,string preset,HuntEdictLoadout load,Font font,float x,float y,float w,float h,float reading,UiSkin skin=null)
         {
             var rect=UiLayout.Rect("Preset example "+scope+"/"+preset,parent);UiLayout.Place(rect,x,y,w,h);
-            var v=rect.gameObject.AddComponent<SkillPresetExampleView>();v.root=rect;v.font=font;v.scale=w/400;v.Scope=scope;v.Example=Describe(scope,preset);
+            var v=rect.gameObject.AddComponent<SkillPresetExampleView>();v.root=rect;v.font=font;v.scale=w/400;v.Scope=scope;v.Example=Describe(scope,preset);v.skin=skin;
             v.g=SkillTreeGraphic.Create(rect,"Tactical diagram",0,0,w,h);v.Draw(load);return v;
         }
         void Line(Vector2 a,Vector2 b,Color c,float width=2)=>g.Line(a*scale,b*scale,width*scale,c);
@@ -174,7 +174,7 @@ namespace Hellscript
                 g.Box((e.x-14)*scale,(e.y-size-10)*scale,28*scale,3*scale,UiTheme.Background,UiTheme.Background);
                 g.Box((e.x-14)*scale,(e.y-size-10)*scale,28*hp*scale,3*scale,enemy,enemy);
             }
-            Disc(hero,19,UiTheme.Background);Ring(hero,19,UiTheme.Success,3);Disc(hero,13,A(UiTheme.Success,.7f));
+            Disc(hero,19,UiTheme.Background);Ring(hero,19,skin?.Gold??UiTheme.Success,3);Disc(hero,13,A(skin?.Gold??UiTheme.Success,.7f));
             Arrow(hero+new Vector2(-6,4),hero+new Vector2(9,-3),UiTheme.Text);
             if(s.value>0&&new[]{"LOW_RESOURCE","LOW_HEALTH","RESERVE","HOLD","RETREAT_CHARGE"}.Contains(s.rule))
             {

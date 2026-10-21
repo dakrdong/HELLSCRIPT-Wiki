@@ -50,33 +50,6 @@ namespace Hellscript
         void CompareStat(StatDefinition stat,float before,float after)
         {float delta=after-before;Note(content,Loc.F("{0}   {1} → {2}   ({3})",stat.Name,stat.Format(before),stat.Format(after),stat.Signed(delta)),20,44,Mathf.Abs(delta)<.001f?muted:delta>0?setGreen:gold);}
         void RenderWarehouse(bool portal) => OpenInventory(true,portal);
-        void RenderItemShop()
-        {
-            var a=game.Store.Data;var h=a.Hero;pageRepaint=()=>RenderItemShop();Base("shop","장비 제작","모든 제작 경로에서 전설·세트를 발견할 수 있습니다");
-            int level=Mathf.Max(1,h.highestClear),slot=selectedSlot;Note(content,Loc.F("골드 {0:N0} · 재료 {1:N0}\n생성 아이템 레벨 {2} · 최고 실클리어 기준", a.gold, a.materials, Mathf.Min(level,ItemQuality.MaximumItemLevel)),22,90,pale);
-            Cycle(content,"선택 부위",GameCatalog.Slots,slot,i=>{selectedSlot=i;ShowShop();});
-            ContentButton(ContentUnlocks.Shop,"갬블 상인 찾아가기",()=>{ShowTown();game.RequestStation(TownStation.Gambler);});
-            content.GetComponentsInChildren<UnityEngine.UI.Button>().Last().name="gamble-route";
-            ContentButton(ContentUnlocks.RareCraft,Loc.F("희귀 제작 · 재료 50 / {0:N0} 골드", 500L*level),PurchaseAction(slot,level,1,500*level,50));
-            ContentButton(ContentUnlocks.CoreCraft,"대장간 코어 제작",()=>{ShowTown();if(CanUseBlacksmith)ShowBlacksmith(3);else game.RequestStation(TownStation.Blacksmith);},true);
-            Note(content,"베이스와 옵션은 확정 시 생성됩니다. 직업·부위에 맞는 접두/접미와 수치 티어를 적용합니다.",20,95);
-            BigButton(content,"전설·세트 도감",ShowItemCollection);
-            FooterButton(0,2,"장비 보기",()=>ShowBag());FooterButton(1,2,"성소로",ShowTown);
-        }
-        Action PurchaseAction(int slot,int level,int mode,int goldCost,int materials)
-        {
-            string request=Guid.NewGuid().ToString("N"),operation=$"purchase:{game.Store.Data.Hero.id}:{slot}:{level}:{mode}";
-            return ()=>
-            {
-                uint rng=(uint)DateTime.UtcNow.Ticks;string acquired="";
-                ItemTransaction(request,operation,staged=>
-                {
-                    bool ok=ContentServices.Purchase(staged,slot,mode,ref rng,out var item);
-                    if(ok)acquired=item.DisplayName;return ok;
-                },ShowShop,"장비를 획득했습니다.");
-                if(acquired!=""&&game.Store.Error=="")ShowToast(Loc.F("{0} 획득", acquired));
-            };
-        }
         void ShowItemCollection()
         {
             var a=game.Store.Data;var h=a.Hero;pageRepaint=()=>ShowItemCollection();Base("collection","전설·세트 도감",Loc.F("{0} 전용 장비와 공용 장비", game.catalog.classNames[(int)h.heroClass]));

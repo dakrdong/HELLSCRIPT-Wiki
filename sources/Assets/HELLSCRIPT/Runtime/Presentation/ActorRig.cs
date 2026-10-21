@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Hellscript
 {
     public enum ActorArchetype{Biped,Quadruped,Hover,Blob,Worm,Spider,Serpent}
-    public enum ActorAction{Idle,Windup,Release,Recover,Channel,Charge,Travel,Cast,Stagger,Hit,Dead,Despair,Offer}
+    public enum ActorAction{Idle,Windup,Release,Recover,Channel,Charge,Travel,Cast,Stagger,Hit,Dead,Despair,Offer,HookWindup,HookPull}
     // Presentation state the caller derives each frame. speed in m/s (model units), progress 0..1 through the action,
     // time = presentation clock (add a per-actor offset to desync packs), aimLocal = target direction in the actor's space.
     public struct ActorPose{public float speed;public ActorAction action;public float progress;public float time;public Vector3 aimLocal;}
@@ -26,11 +26,14 @@ namespace Hellscript
         Bone[] bones=Array.Empty<Bone>();
         Vector3[] rot=Array.Empty<Vector3>(),move=Array.Empty<Vector3>(),grow=Array.Empty<Vector3>();
         int hips,spine,chest,neck,head,jaw,cape,belly,body;
-        readonly int[] armU={-1,-1},armL={-1,-1},legU={-1,-1},legL={-1,-1},foot={-1,-1},legF={-1,-1},legFL={-1,-1},legB={-1,-1},legBL={-1,-1};
+        readonly int[] armU={-1,-1},armL={-1,-1},hand={-1,-1},legU={-1,-1},legL={-1,-1},foot={-1,-1},legF={-1,-1},legFL={-1,-1},legB={-1,-1},legBL={-1,-1};
+        // Roll (deg about the root's Z axis) that closes a generated model's A-pose: legs toward standing under the hips, arms toward the torso.
+        readonly float[] legClose=new float[2],armClose=new float[2];
+        const float LegCloseShare=.85f,ArmCloseShare=.5f;
         int[] tail=Array.Empty<int>(),shard=Array.Empty<int>(),seg=Array.Empty<int>(),spiderLeg=Array.Empty<int>(),spiderLower=Array.Empty<int>(),spiderIndex=Array.Empty<int>();
         float size=1,phase,crawl,gait,flinch,flinchVelocity,deathTime;
         ActorAction last;
-        const int Lean=0,Twist=1,ArmRP=2,ArmRR=3,ElbowR=4,ArmLP=5,ArmLR=6,ElbowL=7,Crouch=8,HeadP=9,Jaw=10,Tuck=11,Squash=12,Tilt=13,Wave=14,Channels=15;
+        const int Lean=0,Twist=1,ArmRP=2,ArmRR=3,ElbowR=4,ArmLP=5,ArmLR=6,ElbowL=7,Crouch=8,HeadP=9,Jaw=10,Tuck=11,Squash=12,Tilt=13,Wave=14,WristR=15,WristL=16,Kick=17,Lunge=18,Channels=19;
         readonly float[] target=new float[Channels],ch=new float[Channels];
         public ActorArchetype Archetype{get;private set;}
         public int BoneCount=>bones.Length;
@@ -48,18 +51,32 @@ namespace Hellscript
                 bones[i]=new Bone{t=t,rest=t.localRotation,pos=t.localPosition,scale=t.localScale,q=q,qi=Quaternion.Inverse(q),parentInv=Quaternion.Inverse(parent),at=root.InverseTransformPoint(t.position)};
             }
             hips=Find("Hips");spine=Find("Spine");chest=Find("Chest");neck=Find("Neck");head=Find("Head");jaw=Find("Jaw");cape=Find("Cape");belly=Find("Belly");body=Find("Body");
-            Pair(armU,"ArmUpper");Pair(armL,"ArmLower");Pair(legU,"LegUpper");Pair(legL,"LegLower");Pair(foot,"Foot");
+            Pair(armU,"ArmUpper");Pair(armL,"ArmLower");Pair(hand,"Hand");Pair(legU,"LegUpper");Pair(legL,"LegLower");Pair(foot,"Foot");
+            for(int side=0;side<2;side++)
+            {
+                legClose[side]=-LegCloseShare*Splay(legU[side],foot[side]>=0?foot[side]:legL[side]);
+                armClose[side]=-ArmCloseShare*Splay(armU[side],hand[side]>=0?hand[side]:armL[side]);
+            }
             Pair(legF,"LegFront");Pair(legFL,"LegFrontLower");Pair(legB,"LegBack");Pair(legBL,"LegBackLower");
             tail=Series("Tail");shard=Series("Shard");seg=Series("Seg");
             var legs=new List<int>();var lowers=new List<int>();var index=new List<int>();
             for(int n=0;n<8;n++)for(int side=0;side<2;side++){int leg=Find("Leg"+n+(side==0?"_L":"_R"));if(leg<0)continue;legs.Add(leg);lowers.Add(Find("Leg"+n+"Lower"+(side==0?"_L":"_R")));index.Add(n*2+side);}
             spiderLeg=legs.ToArray();spiderLower=lowers.ToArray();spiderIndex=index.ToArray();
             int based=Base();size=based>=0?Mathf.Clamp(bones[based].at.y,.25f,10):1;if(size<.3f&&seg.Length>0)size=Mathf.Max(.3f,bones[seg[seg.Length-1]].at.magnitude*.5f);
-            phase=crawl=gait=flinch=flinchVelocity=deathTime=0;last=ActorAction.Idle;Array.Clear(ch,0,Channels);
+            phase=crawl=gait=flinch=flinchVelocity=deathTime=0;last=ActorAction.Idle;carryHand=-1;Array.Clear(ch,0,Channels);
             Write();
         }
         int Find(string name){name="Pivot_"+name;for(int i=0;i<bones.Length;i++)if(bones[i].t.name==name)return i;return -1;}
         void Pair(int[] pair,string name){pair[0]=Find(name+"_L");pair[1]=Find(name+"_R");}
+        // Signed degrees the limb from top to tip leans away from the body's midline in the front view (0 when it hangs straight or inward).
+        // A limb that does not hang down in the rest pose (a quadruped's, a spider's, a raised arm) has nothing to close; the lean is capped at 30 degrees.
+        float Splay(int top,int tip)
+        {
+            if(top<0||tip<0)return 0;
+            var d=bones[tip].at-bones[top].at;float side=Mathf.Sign(bones[top].at.x);
+            if(d.y>-.5f*d.magnitude)return 0;
+            return side*Mathf.Clamp(Mathf.Atan2(d.x*side,-d.y)*Mathf.Rad2Deg,0,30);
+        }
         // Chains sort base to tip: by depth, then by trailing number (Seg2 before Seg10).
         int[] Series(string prefix)
         {
@@ -73,6 +90,16 @@ namespace Hellscript
         int Base()=>hips>=0?hips:body>=0?body:belly>=0?belly:seg.Length>0?seg[0]:-1;
 
         public void Flinch(float strength=1)=>flinchVelocity+=12*Mathf.Clamp(strength,0,2);
+
+        // A prop held in one hand pulls that arm into the carrying pose its grip was authored for (forearm raised toward the front, degrees
+        // at shoulder and elbow) whenever the actor is not acting; the arm then swings little while walking. Settle takes that pose at once,
+        // so a prop can be seated against the hand as it will rest.
+        int carryHand=-1;float carryShoulder,carryElbow;
+        bool Armed=>carryHand>=0;
+        public void Carry(bool rightHand,float shoulder,float elbow){carryHand=rightHand?1:0;carryShoulder=shoulder;carryElbow=elbow;}
+        public void Settle(){for(int i=0;i<12;i++)Tick(.1f,default(ActorPose));}
+        // For a model whose arm bones carry no skin weight (the arms move with the chest), moving them would only pull a held prop off the hand.
+        public void FreezeArms(){carryHand=-1;Array.Clear(armClose,0,2);}
 
         public void Tick(float dt,ActorPose pose)
         {
@@ -93,7 +120,7 @@ namespace Hellscript
             phase=Mathf.Repeat(phase+dt*speed/(size*(1.4f+.25f*Mathf.Min(pace,6))),1);
             crawl=Mathf.Repeat(crawl+dt*(.35f+.45f*Mathf.Min(pace,6)),1);
             Targets(pose);
-            float rate=pose.action==ActorAction.Release?30:dead?6:12,k=1-Mathf.Exp(-rate*dt);
+            float rate=pose.action==ActorAction.Release?45:dead?6:12,k=1-Mathf.Exp(-rate*dt);
             for(int i=0;i<Channels;i++)ch[i]+=(target[i]-ch[i])*k;
             for(int i=0;i<bones.Length;i++){rot[i]=Vector3.zero;move[i]=Vector3.zero;grow[i]=Vector3.zero;}
             float run=Mathf.Clamp01((pace-1.5f)/2.5f),a=phase*Mathf.PI*2,idle=1-gait;
@@ -116,11 +143,36 @@ namespace Hellscript
         void Targets(ActorPose pose)
         {
             Array.Clear(target,0,Channels);float p=Mathf.Clamp01(pose.progress),s=Smooth(p),time=pose.time;
+            if(carryHand>=0&&(pose.action==ActorAction.Idle||pose.action==ActorAction.Hit))
+            {
+                if(carryHand==1){target[ArmRP]=carryShoulder;target[ElbowR]=carryElbow;}
+                else{target[ArmLP]=carryShoulder;target[ElbowL]=carryElbow;}
+            }
             switch(pose.action)
             {
-                case ActorAction.Windup:Set(-10*s,20*s,-155*s,20*s,-55*s,-25*s,-15*s,-10*s,.35f*s,-6*s,25*s,0,.12f*s);break;
-                case ActorAction.Release:{float r=1-(1-p)*(1-p)*(1-p);Released(r);break;}
-                case ActorAction.Recover:{Released(1);float r=1-s;for(int i=0;i<Channels;i++)target[i]*=r;break;}
+                case ActorAction.Windup:
+                {
+                    // Anticipation: the arm first dips against the direction of the blow, the body coils and sinks, and the tension shows
+                    // as a tremble at the top. An arm that carries a prop leaves its carrying pose rather than the actor's side.
+                    float dip=Mathf.Sin(Mathf.PI*Mathf.Clamp01(p/.3f)),tremble=Mathf.Clamp01((p-.8f)/.2f);
+                    float shoulderFrom=carryHand==1?carryShoulder:0,elbowFrom=carryHand==1?carryElbow:0;
+                    Set(-12*s,26*s,Mathf.Lerp(shoulderFrom,-155,s)+14*dip,20*s,Mathf.Lerp(elbowFrom,-55,s),Mathf.Lerp(carryHand==0?carryShoulder:0,-25,s),-15*s,Mathf.Lerp(carryHand==0?carryElbow:0,-10,s),.4f*s+.05f*dip,-6*s,25*s,0,.12f*s);
+                    if(Armed){target[WristR]=-35*s;target[Lunge]=-.3f*s;}
+                    target[Twist]+=Mathf.Sin(time*55)*1.8f*tremble;target[ArmRR]+=Mathf.Sin(time*47)*2.5f*tremble;
+                    break;
+                }
+                case ActorAction.HookWindup:Set(-8*s,28*s,-65*s,25*s,-100*s,-15*s,-20*s,-25*s,.2f*s,-5*s,0,0,0);break;
+                case ActorAction.HookPull:
+                {float reel=Smooth(Mathf.InverseLerp(.2f,1,p));Set(Mathf.Lerp(14,-12,reel),Mathf.Lerp(-25,22,reel),Mathf.Lerp(-100,-35,reel),12,Mathf.Lerp(-10,-110,reel),-25,-15,-30,.22f,-5,0,0,0);break;}
+                case ActorAction.Release:Released(p,time);break;
+                // The arm that carries a prop settles back to its carrying pose rather than dropping to the actor's side first.
+                case ActorAction.Recover:
+                {
+                    Released(1,time);float r=1-s;for(int i=0;i<Channels;i++)target[i]*=r;
+                    if(carryHand==1){target[ArmRP]+=carryShoulder*s;target[ElbowR]+=carryElbow*s;}
+                    else if(carryHand==0){target[ArmLP]+=carryShoulder*s;target[ElbowL]+=carryElbow*s;}
+                    break;
+                }
                 case ActorAction.Channel:Set(6,Mathf.Sin(time*20)*4,-15,80,-5,-15,-80,-5,.3f,0,10,0,0);target[Wave]=1;break;
                 case ActorAction.Charge:Set(22,0,30,8,-25,30,-8,-25,.25f,-12,12,0,-.06f);break;
                 case ActorAction.Travel:{float t=Mathf.Sin(p*Mathf.PI);Set(12*t,0,-70*t,20*t,-30*t,-70*t,-20*t,-30*t,0,0,0,t,.1f*t);break;}
@@ -133,7 +185,31 @@ namespace Hellscript
                 case ActorAction.Offer:Set(-12*s,0,-172*s,-6*s,-6*s,-168*s,6*s,-6*s,0,-30*s,8*s,0,.06f*s);break;
             }
         }
-        void Released(float r)=>Set(Mathf.Lerp(-10,16,r),Mathf.Lerp(20,-35,r),Mathf.Lerp(-155,-30,r),Mathf.Lerp(20,-10,r),Mathf.Lerp(-55,-10,r),Mathf.Lerp(-25,15,r),-15,-10,Mathf.Lerp(.35f,.55f,r),Mathf.Lerp(-6,6,r),25*(1-r),0,Mathf.Lerp(.12f,-.18f,r));
+        // The blow over the release (p 0..1): 0 at the top of the windup, ImpactShare as the weapon lands, 1 at the end of the follow-through. It
+        // accelerates into the hit, freezes on contact (an action game's hit-stop), carries on past it, then settles back a little.
+        const float StrikeHit=.22f,StrikeHold=.34f,StrikeCarry=.66f,ImpactShare=.88f,SettleShare=.94f;
+        static float Strike(float p)
+        {
+            p=Mathf.Clamp01(p);
+            if(p<StrikeHit){float q=p/StrikeHit;return ImpactShare*q*q;}
+            if(p<StrikeHold)return ImpactShare;
+            if(p<StrikeCarry){float q=(p-StrikeHold)/(StrikeCarry-StrikeHold);return Mathf.Lerp(ImpactShare,1,1-(1-q)*(1-q));}
+            return Mathf.Lerp(1,SettleShare,Smooth((p-StrikeCarry)/(1-StrikeCarry)));
+        }
+        // Each channel runs from its windup pose to its follow-through pose along that curve, but the body leads the arm and the head trails it, so
+        // the blow travels hips, shoulders, arm, hand: the wrist is cocked back at the top and snaps through just as the weapon lands, like a whip.
+        void Released(float p,float time)
+        {
+            float hip=Strike(p+.05f),arm=Strike(p),wrist=Strike(p+.02f),head=Strike(p-.1f);
+            Set(Mathf.Lerp(-12,14,hip),Mathf.Lerp(26,-38,hip),Mathf.Lerp(-155,-30,arm),Mathf.Lerp(20,-10,arm),Mathf.Lerp(-55,-14,arm),Mathf.Lerp(-25,15,arm),-15,-10,Mathf.Lerp(.4f,.6f,hip),Mathf.Lerp(-6,8,head),25*(1-hip),0,Mathf.Lerp(.12f,-.18f,hip));
+            // On contact the body shudders for the length of the freeze and sinks a little deeper as the weight lands.
+            float freeze=p>=StrikeHit&&p<StrikeHold+.04f?1:0;
+            target[Twist]+=Mathf.Sin(time*80)*2.2f*freeze;target[Crouch]+=.06f*freeze;
+            // An actor that holds a weapon also snaps the wrist, steps into the blow and throws its cape back with the acceleration. Without a held prop
+            // these stay at zero: the recipes' motion bounds (the renderers' culling boxes) were recorded without them.
+            if(!Armed)return;
+            target[WristR]=Mathf.Lerp(-35,82,wrist);target[Lunge]=hip;target[Kick]=Mathf.Clamp((Strike(p+.03f)-Strike(p-.03f))/.06f,0,7);
+        }
         void Set(float lean,float twist,float armRP,float armRR,float elbowR,float armLP,float armLR,float elbowL,float crouch,float headP,float jawOpen,float tuck,float squash)
         {target[Lean]=lean;target[Twist]=twist;target[ArmRP]=armRP;target[ArmRR]=armRR;target[ElbowR]=elbowR;target[ArmLP]=armLP;target[ArmLR]=armLR;target[ElbowL]=elbowL;target[Crouch]=crouch;target[HeadP]=headP;target[Jaw]=jawOpen;target[Tuck]=tuck;target[Squash]=squash;}
         static float Smooth(float x)=>x*x*(3-2*x);
@@ -148,25 +224,33 @@ namespace Hellscript
             float lean=ch[Lean]+flinchLean;
             R(spine,lean*.4f+breathe*.5f,ch[Twist]*.4f,ch[Tilt]*.5f);R(chest,lean*.6f-breathe,ch[Twist]*.6f,0);
             R(neck,-lean*.2f,0,0);R(head,ch[HeadP]-lean*.5f+sway*.3f-flinch*6,-ch[Twist]*.6f+sway*6,-ch[Tilt]*.4f);R(jaw,ch[Jaw],0,0);
-            R(armU[1],ch[ArmRP]-flinch*10,0,ch[ArmRR]+flinch*8);R(armL[1],ch[ElbowR],0,0);
-            R(armU[0],ch[ArmLP]-flinch*10,0,ch[ArmLR]-flinch*8);R(armL[0],ch[ElbowL],0,0);
+            // An arm hanging in the generated A-pose is drawn in toward the torso; raised for an action it keeps the pose it was given.
+            float closeR=1-Mathf.Clamp01(Mathf.Abs(ch[ArmRP])/45),closeL=1-Mathf.Clamp01(Mathf.Abs(ch[ArmLP])/45);
+            R(armU[1],ch[ArmRP]-flinch*10,0,ch[ArmRR]+flinch*8+armClose[1]*closeR);R(armL[1],ch[ElbowR],0,0);
+            R(armU[0],ch[ArmLP]-flinch*10,0,ch[ArmLR]-flinch*8+armClose[0]*closeL);R(armL[0],ch[ElbowL],0,0);
+            R(hand[1],ch[WristR],0,0);R(hand[0],ch[WristL],0,0);
         }
         void Biped(float a,float run,float time,float idle)
         {
             float sw=Mathf.Sin(a),cw=Mathf.Cos(a),w=gait,amp=w*(22+14*run),breathe=Mathf.Sin(time*1.76f)*1.2f;
+            float c=ch[Crouch],t=ch[Tuck];
             for(int side=0;side<2;side++)
             {
-                float dir=side==0?1:-1,swing=-sw*amp*dir,knee=w*(5+(35+30*run)*Mathf.Max(0,cw*dir));
-                R(legU[side],swing,0,0);R(legL[side],knee,0,0);R(foot[side],-(swing+knee)*.5f,0,0);
-                R(armU[side],sw*amp*.8f*dir,0,0);R(armL[side],-w*(8+22*run),0,0);
+                float dir=side==0?1:-1,swing=-sw*amp*dir,knee=w*(5+(35+30*run)*Mathf.Max(0,cw*dir)),bend=knee+80*c+95*t;
+                // The A-pose is closed first, then the leg swings about that stance. The foot undoes the leg's roll through the knee's bend, so its
+                // sole stays flat on the ground. Legs pulled up in a leap or a tuck need no stance, so the closing fades out with Tuck.
+                float close=legClose[side]*(1-Mathf.Clamp01(3*t)),k=bend*Mathf.Deg2Rad;
+                R(legU[side],swing-40*c-60*t,0,close);R(legL[side],bend,0,0);R(foot[side],-(swing+knee)*.5f-40*c-20*t,-close*Mathf.Sin(k),-close*Mathf.Cos(k));
+                R(armU[side],sw*amp*.8f*dir*(side==carryHand?.3f:1),0,0);R(armL[side],-w*(8+22*run)*(side==carryHand?.4f:1),0,0);
             }
-            float c=ch[Crouch],t=ch[Tuck];
-            for(int side=0;side<2;side++){R(legU[side],-40*c-60*t,0,0);R(legL[side],80*c+95*t,0,0);R(foot[side],-40*c-20*t,0,0);}
-            M(hips,Vector3.up*size*(w*(.025f+.03f*run)*Mathf.Cos(2*a)-.22f*c+.004f*breathe));
-            R(hips,0,sw*6*w,sw*3*w+Mathf.Sin(time*.9f)*1.2f*idle+ch[Tilt]);
-            R(chest,w*(4+10*run),-sw*9*w,0);R(head,-w*(4+10*run)*.6f,sw*3*w,0);
+            // The pelvis rides over the leg that is planted and drops on the side of the leg swinging through; the spine levels the torso again.
+            // The body's weight shifts back on the heels while winding up and forward into the strike (only those two actions drive it, so every other
+            // pose stays inside the motion bounds the recipes recorded).
+            M(hips,Vector3.up*size*(w*(.025f+.03f*run)*Mathf.Cos(2*a)-.22f*c+.004f*breathe)+Vector3.right*size*.035f*w*cw+Vector3.forward*size*.09f*ch[Lunge]);
+            R(hips,0,sw*6*w,cw*3.5f*w+Mathf.Sin(time*.9f)*1.2f*idle+ch[Tilt]);R(spine,0,0,-cw*2.2f*w);
+            R(chest,w*(4+10*run),-sw*9*w,-cw*1.2f*w);R(head,-w*(4+10*run)*.6f,sw*3*w,0);
             Upper(breathe,Mathf.Sin(time*.43f)*idle,-flinch*14);
-            R(cape,w*(10+25*run)+Mathf.Sin(time*3)*3+ch[Wave]*25+flinch*10,0,0);
+            R(cape,w*(10+25*run)+Mathf.Sin(time*3)*3+ch[Wave]*25+flinch*10+ch[Kick]*4.5f,0,0);
         }
         void Quadruped(float a,float run,float time,float idle)
         {

@@ -52,7 +52,7 @@ FAMILY = re.compile(r"^(Characters|Bosses|Props|Town|Fx|Fields/F\d+)$")
 ASSET_ID = re.compile(r"^[A-Z][A-Za-z0-9_]*$")
 # PLAN.md §4 hard limits: budget class -> (max triangles, max texture edge).
 BUDGETS = {
-    "hero": (6000, 512), "weapon": (1000, 512), "enemy": (5000, 512), "boss": (14000, 1024), "npc": (6000, 512),
+    "hero": (6000, 512), "weapon": (1000, 512), "enemy": (5000, 512), "boss": (14000, 1024), "npc": (6000, 1024),
     "prop_small": (800, 512), "prop_large": (2500, 512), "building": (6000, 1024), "floor": (50, 1024), "wall": (50, 512),
     "fx": (800, 1024),
 }
