@@ -1,14 +1,14 @@
 # 전투 선계산과 기록 재생 / Combat recording and playback
 
-구현·검증: 전투 선계산과 기록 재생, 결과 일치를 유지한 준비 비용 최적화. 통합 기준은 `ad3bbdffc959a8f67793c40c9f15e5986799a453`이다. 모든 리뷰 수정 후 마지막 3회 측정에서 5분 전투 준비 중앙값은 12.75초, 유지 관리 메모리는 27.25MB다. 앞선 9초대 측정도 아래에 보존하며 10초를 보장하지 않는다. 사용자 테스트본과 기존 저장은 변경하지 않았다.
+전투 선계산과 기록 재생, 결과 일치를 유지한 준비 비용 최적화 기록이다. 2026-10-25 후속 변경은 전체 준비 완료를 기다리지 않는 점진 기록이다. 기존 전체 선계산 방식의 마지막 3회 측정은 5분 준비 중앙값 12.75초, 유지 관리 메모리 27.25MB이며 아래에 역사적 근거로 보존한다. 최신 동작과 검증은 마지막 절을 따른다. 사용자 테스트본과 기존 저장은 변경하지 않는다.
 
 ## 동작 계약
 
 - `GameController.Combat`에 연결된 일반 균열, 훈련, 튜토리얼은 복제된 계정·런·RNG·진행 중 행동으로 미래를 계산한다. 기존 `CombatSimulation.Tick(0.05)`가 유일한 규칙 엔진이다.
-- 전투 종료까지 준비한 뒤에만 실제 재생을 시작한다. 포털 정리, 튜토리얼 선택, 이동 오류처럼 사용자 결정이 필요한 경계에서는 그 지점까지 기록한다. 결정 이후 새 구간을 준비한다. 무한 스킬 미리보기는 별도의 기존 경로를 유지한다.
+- 준비된 다음 기록부터 즉시 재생한다. 기록이 부족하면 다음 한 틱만 계산·기록해 적용하고, 여유 시간에 뒤를 준비한다. 포털 정리, 튜토리얼 선택, 이동 오류처럼 사용자 결정이 필요한 경계에서는 그 지점까지 기록한다. 결정 이후 현재 지점부터 이어 간다. 무한 스킬 미리보기는 별도의 기존 경로를 유지한다.
 - 실제 프레임은 `Recording.PlayNext()`로 상태 차이, 가시 영역, 연출·스킬·문 열림 이벤트를 적용한다. 재생 과정에서 공격 판단, 이동 경로 결정, 피해량, 드롭 난수는 다시 계산하지 않는다. 모델 이동·카메라·UI·오디오의 표시 비용은 남는다.
-- 사냥칙령/빌드/장비/물약/직접 스킬 입력과 저장소 변경은 미래 구간을 무효화한다. 이미 재생한 프레임은 유지하고 **현재** RNG·체력·쿨다운·투사체·진행 중 시전에서 다시 계산한다. 준비 중 직접 모델 변경도 공개 직전 확인한다. 프레임 전제 상태가 다르면 적용하지 않고 다시 준비한다.
-- 준비는 Unity 메인 스레드에서 프레임당 기본 8ms를 목표로 나누어 수행한다. 한 규칙 틱과 초기 복제는 중간에 끊을 수 없으므로 실제 호출 시간이 이 예산을 넘을 수 있다. 준비 중에는 전투 시계와 사냥 피로도를 진행시키지 않는다.
+- 사냥칙령/빌드/장비/물약/직접 스킬 입력과 저장소 변경은 미래 구간을 무효화한다. 이미 재생한 프레임은 유지하고 **현재** RNG·체력·쿨다운·투사체·진행 중 시전에서 다시 계산한다. 첫 기록 적용 전에는 준비 시작 상태를 확인한다. 프레임 전제 상태가 다르면 적용하지 않고 다시 준비한다.
+- 현재 전투·표시·저장을 먼저 처리하고, Unity 메인 스레드의 남은 프레임 예산에서 최대 2ms를 목표로 추가 준비한다. 직전 프레임이 느리거나 여유가 없으면 추가 준비만 생략한다. 한 규칙 틱과 초기 복제는 중간에 끊을 수 없으므로 실제 호출 시간이 이 예산을 넘을 수 있다. 준비와 동시에 실제 사냥이 진행되며 기존 경과 시간·피로도 규칙을 적용한다.
 - 일시정지는 기록을 소비하거나 남은 전투를 다시 계산하지 않는다. 일시정지·재개 등 실제 조작 로그는 해당 시점의 관찰 기록에 합친다. 언어를 바꾸면 이미 재생한 구간은 유지하고 새 언어로 남은 구간을 다시 준비한다. 전투 포기는 미래를 버리고 실제 종료 상태를 체크포인트로 남긴다.
 
 ## 저장·보상·관찰
@@ -25,7 +25,7 @@
 
 타입 번호는 현재 프로세스 안에서만 유효하다. 외부 파일을 가져오거나 네트워크 기록을 신뢰해 보상을 지급하는 API는 없다. 리플레이 공유에는 버전·규칙/콘텐츠 식별자·입력 검증을 가진 별도 포맷이 필요하다. 비동기 PvP에는 신뢰할 수 있는 서버 판정과 참가자 모델이 추가로 필요하다. 16:16/32:1 모드와 리플레이 화면은 이번 변경 범위가 아니다.
 
-한 구간은 전투 시간 제한과 추가 12,000틱으로 제한한다. 차이 데이터와 가시 영역 합계는 128MiB를 넘기면 부분 기록을 재생하지 않고 오류로 멈춘다. 이 수치는 전체 관리 메모리 한도가 아니다. 체크포인트·공유 객체·이벤트·엔진 메모리는 별도로 필요하다. 큰 전투의 성능은 아직 입증하지 않았다.
+한 구간은 전투 시간 제한과 추가 12,000틱으로 제한한다. 차이 데이터와 가시 영역 합계가 128MiB를 넘기면 미재생 예측을 버리고 오류로 멈추며, 이미 반영된 실제 진행은 보존한다. 이 수치는 전체 관리 메모리 한도가 아니다. 체크포인트·공유 객체·이벤트·엔진 메모리는 별도로 필요하다. 큰 전투의 성능은 아직 입증하지 않았다.
 
 ## 검증 근거
 
@@ -81,17 +81,17 @@
 
 ## English
 
-The production controller now prepares a complete recording on a detached account/run before playback. The existing 50ms rules tick remains the single combat authority. Playback applies sparse state deltas, recorded visibility and ordered presentation events instead of evaluating combat rules again. Portals, tutorial decisions and navigation faults end a segment; resuming creates the next segment. Editing combat inputs preserves the played prefix and recalculates from the exact current RNG, cooldowns, active cast and projectiles.
+The production controller incrementally records on a detached account/run and plays available frames immediately. If no frame is buffered, it calculates and commits only the next tick. The existing 50ms rules tick remains the single combat authority. Playback applies sparse state deltas, recorded visibility and ordered presentation events instead of evaluating combat rules again. Portals, tutorial decisions and navigation faults end a segment; resuming creates the next segment. Editing combat inputs preserves the played prefix and recalculates from the exact current RNG, cooldowns, active cast and projectiles.
 
 Forecasting never writes the real save or grants live rewards. Reward-bearing frames settle through the existing transaction boundary at playback time; failed saves retain the frame for retry. Daily quests use the actual playback day and completion history uses actual elapsed attendance. Existing saves gain a default-zero tick counter; reopening regenerates the remaining future from the saved live checkpoint.
 
-The recorder cooperates on the Unity main thread with an 8ms target budget per call. Initial copies and individual ticks are indivisible. A frame/encoded-payload bound stops malformed or excessive forecasts rather than playing partial results. Rendering and presentation still cost CPU/GPU time. This trades preparation time and memory for cheaper playback; it does not eliminate load.
+After current combat, presentation and saving, the recorder uses spare Unity main-thread time with a 2ms target. Slow previous frames skip optional forecasting. Initial copies and individual ticks are indivisible. A frame/encoded-payload bound stops malformed or excessive forecasts while preserving already committed progress. Rendering and presentation still cost CPU/GPU time. This trades preparation time and memory for cheaper playback; it does not eliminate load.
 
 The tape is session-local, with a detached `StateAt(frame)` inspection API. Portable replay files/UI, server authority, asynchronous multiplayer and 16v16/32v1 participant models are separate work. No cross-platform determinism or large-battle performance claim is made.
 
 Initial validation: 337 affected Edit Mode cases plus five focused reward cases passed (340 unique cases; two were rerun after adding the receipt-conflict guard). The three 60-second current-tree fixtures retained 12.4–20.6 MB and spent 0.31–0.49 seconds in playback, compared with 0.89–1.92 seconds in the rules ticks. Preparing a 300-second rift took 37.93 seconds and retained 68.8 MB in that initial single Editor measurement. These exclude rendering and are not device or large-battle benchmarks; the cooperative in-game wait can be longer. Full suites, builds and mobile validation were not run.
 
-Native controller acceptance also passed in an isolated offline QA Editor Play Mode run: preparation status and frozen live time/RNG, pause, edict replanning with preserved past frames, and completion of 160 frames over two revisions. The fixture begins at training time 52 seconds; full 60/300-second correctness is covered separately above. The first attempt was stopped by an unrelated Unity SearchDatabase startup exception, narrowly excluded on the successful attempt. No rendered/device result is claimed.
+Initial-version native controller acceptance also passed in an isolated offline QA Editor Play Mode run: preparation status and frozen live time/RNG, pause, edict replanning with preserved past frames, and completion of 160 frames over two revisions. The fixture begins at training time 52 seconds; full 60/300-second correctness is covered separately above. The first attempt was stopped by an unrelated Unity SearchDatabase startup exception, narrowly excluded on the successful attempt. No rendered/device result is claimed.
 
 ### Follow-up optimization
 
@@ -252,3 +252,28 @@ The fourth local review found two errors: completed-rift inspection decoded full
 Five regression cases failed before the fix and now pass: two full-state codec cases, two actual completion/seek cases, and an owned-training rune commit. The final six-fixture batch contained 156 cases; 146 passed initially and ten result-window cases failed because direct test component construction first loaded UI resources inside a constructor. Initializing that static UI type before construction, as the static Open entry path does, resolved all **31 cases in the result fixture**. Product UI code is unchanged. The other five fixtures' 125 successful cases and twelve measurements were reused with identical inputs, giving **156 unique passing cases**. Failed evidence is retained.
 
 The table contains the final four-scenario, three-repeat medians. All twelve frame/state/hero/ordered-event hashes match the original baseline. Across 2,562 pinned source files, only the result-window test fixture changed after measurement. Five-minute preparation is **12.75s** (12.71–13.02s), down **64.4%** from the same-fixture original 35.79s. Retained managed memory is **27.25MB** (25.96–27.26MB), down **61.1%** from 70.08MB; payload is 5.62MB, down 86.6%. Median GC count is 63, sampled peak managed delta 62.56MB and total playback 1.60s. The earlier timing variation is retained and not attributed to these correctness fixes. These are Mac Editor development measurements, not a universal duration guarantee. Full Edit Mode, player builds, real cooperative UI wait, rendered/mobile/IL2CPP performance and 16v16/32v1 scale remain unverified.
+
+
+## 전투를 멈추지 않는 점진 기록 — 2026-10-25
+
+구현·검증: `codex/combat-streaming`, 기준 `1f1887d1148d99e5b5f42f9a899d8945c6209259`. 포탈 복귀·사냥칙령/빌드 변경 뒤에도 전체 미래가 준비되기를 기다리지 않고 전투를 계속 진행한다. 영향 범위는 기록 생산/재생, 컨트롤러의 시간·예산 처리, HUD의 준비 표시와 직접 연결된 검사다.
+
+현재 틱의 기록이 있으면 바로 적용하고, 없으면 기존 규칙 엔진으로 그 한 틱만 계산·기록한 뒤 같은 저장/보상 경로로 적용한다. 별도의 실제 전투와 예측 전투가 같은 틱을 이중 실행하지 않는다. 실제 전투·표시·저장을 우선한 뒤 남은 프레임 예산에서 최대 2ms를 목표로 다음 구간을 준비한다. 직전 프레임이 느리거나 여유가 없으면 추가 준비를 건너뛰되 실제 전투 시간은 유지한다. 초기 복제와 규칙 한 틱은 나눌 수 없으므로 실제 호출이 이 시간을 넘을 수 있다.
+
+기록을 소비해도 진행 중인 예측을 유지한다. 시작 상태 검사와 프레임 적용 전제 검증, 고정 50ms 틱과 RNG 순서, 기록 보존과 StateAt, 거래/저장 실패 재시도, 실제 재생 시점의 보상·일일 퀘스트는 유지한다. 설정·언어 변경은 아직 재생하지 않은 미래만 버린다. 일시정지·포탈·튜토리얼 선택·종료 경계는 진행을 멈춘다. 실제 사냥이 진행되는 동안 경과 시간과 피로도를 반영한다. 사용자 테스트본과 기존 세이브는 변경하지 않는다.
+
+검증 근거는 기존 검증 폴더의 `streaming-20261025/`에 모은다. `affected-3/tests.xml`에서 직접 영향 영역 **154/154 통과**. 5분 균열과 세 직업 1분 훈련을 각각 3회 실행한 12개 비교에서 프레임 수·전체 상태/영웅·순서 있는 연출/스킬 이벤트 해시가 기존 완전 기록 방식과 일치했다. 균열은 6,000틱 중 5,670–5,755틱을 준비된 기록으로, 245–330틱을 필요 시 계산해 처리했다. 최초 한 틱 계산·반영은 중앙값 **130.47ms**(125.70–138.57ms). 이는 초기 복제를 포함한 렌더링 제외 Editor 측정이며 전체 선계산 시간이나 실기기 화면 반응 수치가 아니다. 처음 두 검사는 다른 Unity 작업과의 경합으로 중단했으며 통과/성능 근거로 쓰지 않았다. 전체 Edit Mode, 게임 빌드, 모바일·대규모 전투 성능은 이번 검증 범위에 포함하지 않는다.
+
+실제 컨트롤러 수용 검사 `playmode-1/result.txt`도 통과했다. 소유 훈련의 첫 진행 577.916ms, 칙령 변경 후 재개 53.865ms, 마을 포탈 복귀 후 재개 168.983ms를 관찰했다. 실제 Update에서 종료 전 부분 기록의 재생, 일시정지, 변경 전 기록 보존, 포탈 복귀의 동일 틱, 경과 시간·피로도와 1회 종료 정산을 확인했다. 이는 화면 렌더링 없는 Editor 단일 수용 검사이며 기기별 로딩/프레임시간 보장이 아니다. 154개 검사 이후 측정 fixture의 출력 문구만 수정했고, 런타임 입력은 같으므로 결과를 재사용했다. Unity가 자동으로 바꾼 기존 메타 7개는 관찰본을 보존한 후 원래 내용으로 복원했다.
+
+### English
+
+Implemented and validated on `codex/combat-streaming`, based on `1f1887d1148d99e5b5f42f9a899d8945c6209259`. Battle playback consumes available frames immediately. When the buffer is empty, the existing rules engine records exactly the next tick and commits it through the same transactional playback path. Spare foreground time prepares subsequent frames with a 2ms target and skips optional work after slow frames. Initial cloning and one indivisible rules tick can exceed that target. This is cooperative scheduling on Unity's thread, not a worker-thread or device-performance claim.
+
+The prediction survives buffer exhaustion. Played history, fixed steps/RNG, start/frame validation, reward settlement and save retry remain intact; edits invalidate only the unplayed future. Combat time and fatigue advance while the battle is running. Pauses, portals, tutorial decisions and completion retain their existing boundaries. Scoped validation is recorded under `streaming-20261025/`: 154/154 affected cases passed. All twelve 300s-rift/60s-training comparisons retained the baseline frame counts and complete state/hero/ordered-event hashes. Rift first-tick computation/commit, including cloning, had a 130.47ms median (125.70–138.57ms); 5,670–5,755 of 6,000 ticks used the buffer and 245–330 were computed on demand. These rendering-free Editor measurements are not total preparation time or device frame-pacing claims. Two earlier runs were stopped for Unity resource contention and provide no pass/timing evidence. Full-suite/build/mobile/large-party checks are excluded.
+
+The native controller acceptance also passed: first progress 577.916ms, edict-edit resume 53.865ms and town-portal resume 168.983ms in one rendering-free Editor run. It verified partial playback before endpoint preparation, pause, preserved history, the resumed tick, attendance and exactly-once settlement. These are acceptance observations, not per-device latency/FPS guarantees. Only diagnostic output text in the measurement fixture changed after the 154-case batch; runtime inputs are unchanged. Seven importer-generated metadata changes were backed up and restored.
+
+위키의 직업 문장 출처 검사는 HUD의 준비 문구 한 줄 변경을 감지했다. 직업 문장 PNG/meta 6개와 전체 `Icon`/`Rect`/`Place` 함수가 동일함을 확인하고 [커밋된 소스 갱신 근거](CasualArtEvidence20261015/class-glyph-source-freeze-20261025-combat-streaming.json)로 소스 핀만 갱신했다. 기존 아트·승인·검증기는 유지한다.
+
+The wiki source guard detected the one-line preparation-caption removal. All six crest PNG/meta files and complete `Icon`/`Rect`/`Place` methods are byte-identical; the linked committed-source evidence renews only their source pins. Existing artwork, approvals and validators are unchanged.

@@ -358,6 +358,7 @@ namespace Hellscript
         float forgeSettlementTick;
         void Update()
         {
+            double frameStarted=Time.realtimeSinceStartupAsDouble;
             if(!backgroundPaused&&Store!=null&&Time.unscaledTime>=forgeSettlementTick){forgeSettlementTick=Time.unscaledTime+1;Store.SettleForgeJobs();}
             double elapsed=combatClock.Sample(Time.realtimeSinceStartupAsDouble);
             UpdateDisplaySettings();
@@ -371,22 +372,6 @@ namespace Hellscript
             if(IdleHunting && UI.CommonPanelOpen)
             { combatClock.Pause(); UpdateIdlePresentation(); return; }
             TickTutorial();
-            if(Active&&!Combat.State.paused&&!Combat.State.portal&&!backgroundPaused&&!foregroundResumeRequired&&!UI.CommonPanelOpen&&string.IsNullOrEmpty(Combat.State.navigationError))
-            {
-                var recording=Combat.Playback;
-                if(!recording.Ready)
-                {
-                    bool completed=recording.Prepare();
-                    combatClock.Reset(Time.realtimeSinceStartupAsDouble);elapsed=0;
-                    if(recording.Error!="")
-                    {
-                        Debug.LogError("Combat recording failed: "+recording.Error);
-                        Combat.State.paused=true;Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");
-                    }
-                    else if(!completed)
-                    {if(!DisplayDimmed)World.Present(Combat.State,0);UpdateIdlePresentation();return;}
-                }
-            }
             SettleRiftAttendance(elapsed);
             if(UI.CommonPanelOpen&&Active&&!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}
             var run=Combat.State;float real=(float)elapsed;bool wasActive=Active;
@@ -395,8 +380,8 @@ namespace Hellscript
             {
                 combatClock.Accumulate(elapsed,EffectiveSpeed);int guard=0;
                 while(guard++<ForegroundCombatClock.TickBudget&&Active&&!run.paused&&!run.portal&&string.IsNullOrEmpty(run.navigationError)&&combatClock.TakeTick())
-                {using var sample=PresentationMetrics.Combat.Auto();PresentationMetrics.CombatTicks++;if(!Combat.Playback.PlayNext())
-                    {combatClock.Pause();if(Combat.Playback.Error!="")Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");break;}}
+                {using var sample=PresentationMetrics.Combat.Auto();PresentationMetrics.CombatTicks++;if(!Combat.Playback.Advance())
+                    {combatClock.Pause();if(Combat.Playback.Error!=""){run.paused=true;Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");}break;}}
                 if(Active&&combatClock.CheckBacklog(elapsed,EffectiveSpeed))PauseForForeground("기기 상태로 사냥이 일시정지되었습니다. 계속하려면 재개를 눌러 주세요.");
             }
             else combatClock.Pause();
@@ -411,10 +396,16 @@ namespace Hellscript
             if(!Active&&!wasActive&&!backgroundPaused&&!foregroundResumeRequired&&!UI.BlocksRepeat&&(IdleHunting||UI.Page=="result")&&run.training<0)TickRepeat(repeatReal);
             if(!backgroundPaused){saveClock+=real;if(saveClock>=3){saveClock=0;Save();}}
             UpdateIdlePresentation();
+            if(Active&&!run.paused&&!run.portal&&!backgroundPaused&&!foregroundResumeRequired&&!UI.CommonPanelOpen&&string.IsNullOrEmpty(run.navigationError))
+            {
+                double budget=ForegroundCombatClock.ForecastBudget(Time.realtimeSinceStartupAsDouble-frameStarted,Time.unscaledDeltaTime,Application.targetFrameRate);
+                Combat.Playback.Prepare(budget);
+                if(Combat.Playback.Error!=""){run.paused=true;Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");}
+            }
         }
         void SettleRiftAttendance(double elapsed)
         {
-            if(!Active||Combat.State.training>=0||backgroundPaused||foregroundResumeRequired||Combat.Playback!=null&&!Combat.Playback.Ready&&!Combat.State.paused&&!Combat.State.portal)return;
+            if(!Active||Combat.State.training>=0||backgroundPaused||foregroundResumeRequired)return;
             double charged=Store.AttendRift(Combat.State,elapsed*1000);
             Combat.State.realTime=(float)(Combat.State.riftAttendance.elapsedMs/1000);
             if(charged+0.001<elapsed*1000||Store.Data.riftFatigue.Total<=0)Combat.ExhaustFatigue();

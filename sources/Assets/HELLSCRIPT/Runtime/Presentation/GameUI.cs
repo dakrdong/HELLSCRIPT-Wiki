@@ -310,7 +310,7 @@ namespace Hellscript
             int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-game.Combat.State.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
             meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));
             if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
-            fullBattleAction=run.paused?Loc.T("일시정지"):game.Active&&!run.portal&&game.Combat.Playback!=null&&!game.Combat.Playback.Ready?Loc.T("전투 준비 중…"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
+            fullBattleAction=run.paused?Loc.T("일시정지"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
             RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));RefreshTrainingHud(run);RefreshRiftActivityHud(run);ReflowBattleHud();UpdateBattleBrief();
             if(riftMinimap!=null)riftMinimap.RefreshMarkers();
             if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);

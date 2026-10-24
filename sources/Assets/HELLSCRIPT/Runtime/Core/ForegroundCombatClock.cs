@@ -14,6 +14,13 @@ namespace Hellscript
         public double Pending { get; private set; }
         public bool Overloaded { get; private set; }
 
+        public static double ForecastBudget(double usedSeconds,double previousFrameSeconds,int targetFrameRate)
+        {
+            double frame=1d/(targetFrameRate>0?targetFrameRate:60);
+            // Leave time for the remaining UI/render work; skip optional forecasting after a slow frame.
+            return previousFrameSeconds>frame*1.25?0:Math.Max(0,Math.Min(2,(frame-usedSeconds)*1000-4));
+        }
+
         public double Sample(double now)
         {
             if (double.IsNaN(now) || double.IsInfinity(now)) throw new ArgumentOutOfRangeException(nameof(now));
