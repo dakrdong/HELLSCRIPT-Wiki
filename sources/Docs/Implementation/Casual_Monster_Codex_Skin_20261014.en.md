@@ -55,3 +55,8 @@ The proposed shared casual opt-in is now supplied by cdb9c140 and wired. Suggest
 Integration: with art57bba034 and shared0ccba80e already present, apply screen330d30ff,549939ee and this TextColor wiring commit in order; do not repeat the art preservation27d41bc1. Equipment B01 and monster B01 are separate domains, so the equipment provider is intentionally not attached to codex portraits.
 
 No remote push, public sharing, main merge, web build or Unity process was started. Pending action: parent assigns one validation project and slot. The parent reports external Unity PID30116 in scratchpad/proj-final was still running at07:50 UTC, so Unity was not attempted during this migration. No action was denied or has an uncertain execution outcome.
+
+
+## 2026-10-23 short-board integration correction
+
+Long English defense titles/values and multi-element captions reserve separate space. Only when a short, narrow board cannot retain the skills minimum does the detail body scroll; the title and rift-tier controls remain fixed. Default font sizes and the existing 44px acceptance minimum remain. Actual native validation is recorded by candidate SHA in the integration evidence.

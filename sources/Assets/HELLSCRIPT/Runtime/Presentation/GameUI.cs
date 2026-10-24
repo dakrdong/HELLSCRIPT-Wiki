@@ -53,6 +53,10 @@ namespace Hellscript
             var show=new GameObject("Level-up celebration",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler),typeof(GraphicRaycaster));show.transform.SetParent(transform,false);
             var showCanvas=show.GetComponent<Canvas>();showCanvas.renderMode=RenderMode.ScreenSpaceOverlay;showCanvas.sortingOrder=135;
             celebration=show.AddComponent<LevelUpCelebration>();celebration.Initialize(show.GetComponent<CanvasScaler>());celebration.Sound=id=>game.Audio?.Play(id);celebration.Closed+=LevelUpClosed;
+            // The gear swap show draws above the play HUD (105) and below the tutorial staging (130); it takes no taps.
+            var swap=new GameObject("Gear swap show",typeof(RectTransform),typeof(Canvas),typeof(CanvasScaler));swap.transform.SetParent(transform,false);
+            var swapCanvas=swap.GetComponent<Canvas>();swapCanvas.renderMode=RenderMode.ScreenSpaceOverlay;swapCanvas.sortingOrder=125;
+            gearSwap=swap.AddComponent<GearSwapShow>();gearSwap.Initialize(swap.GetComponent<CanvasScaler>());
             InitializeGlobalHud();
             if(game.Store==null)
             {Base("recovery","저장 복구가 필요합니다","진행 기록을 덮어쓰지 않고 게임을 멈췄습니다");Note(content,game.Notice,22,360,pale);FooterButton(0,1,"게임 종료",()=>Application.Quit());}
@@ -306,7 +310,7 @@ namespace Hellscript
             int remaining=Mathf.CeilToInt(Mathf.Max(0,game.Combat.TimeLimit-game.Combat.State.time));timerText.text=$"{remaining/60:00}:{remaining%60:00}";
             meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));
             if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
-            fullBattleAction=run.paused?Loc.T("일시정지"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
+            fullBattleAction=run.paused?Loc.T("일시정지"):game.Active&&!run.portal&&game.Combat.Playback!=null&&!game.Combat.Playback.Ready?Loc.T("전투 준비 중…"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
             RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));RefreshTrainingHud(run);RefreshRiftActivityHud(run);ReflowBattleHud();UpdateBattleBrief();
             if(riftMinimap!=null)riftMinimap.RefreshMarkers();
             if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);

@@ -78,7 +78,7 @@ namespace Hellscript
             float next=Mathf.Min(Stats.maxResource,State.resource+Stats.maxResource*def.magnitude);
             if(next<=State.resource)return false;
             CombatTelemetry.Support(State.statistics,def.id,SkillResultMetric.Resource,next-State.resource);
-            State.resource=next;ConsumePotion(def);state.resourceCooldown=state.resourceTotal=RunePotionCooldown(def.cooldown);return true;
+            InvalidateRecording();State.resource=next;ConsumePotion(def);state.resourceCooldown=state.resourceTotal=RunePotionCooldown(def.cooldown);return true;
         }
         void TryUseUtilityPotion(bool moved)
         {
@@ -105,7 +105,7 @@ namespace Hellscript
             if(state.version==0||State.health<=0||state.utilityCooldown>0||Hero.potions.Count(id)<=0)return false;
             var def=PotionCatalog.Get(id);if(state.utilityRemaining>0&&(!def.Crafted&&!upkeep||upkeep&&state.utilityId!=id))return false;var changed=baseStats.WithPotion(def,EffectiveLevel);
             if(!def.Crafted&&!baseStats.PotionChanges(changed))return false;
-            state.utilityId=def.id;state.utilityRemaining=state.utilityDuration=def.duration;
+            InvalidateRecording();state.utilityId=def.id;state.utilityRemaining=state.utilityDuration=def.duration;
             state.utilityCooldown=state.utilityTotal=RunePotionCooldown(def.cooldown);
             State.shields.RemoveAll(s=>s.definitionId=="GEM_ELIXIR_SHIELD");MirrorShields();
             State.health=Mathf.Min(State.health,Stats.hp);State.resource=Mathf.Min(State.resource,Stats.maxResource);
@@ -155,7 +155,7 @@ namespace Hellscript
                 if(index<0||slots.Where((s,n)=>n!=index).Any(s=>s.id==id))return false;
                 slots[index].id=id;Hero.potions.slots=slots;
             }
-            State.potions.equippedUtility=id;return true;
+            InvalidateRecording();State.potions.equippedUtility=id;return true;
         }
     }
 }

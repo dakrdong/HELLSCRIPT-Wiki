@@ -1,0 +1,34 @@
+# Casual Hunt Edict Explore tab — 2026-10-21
+
+[한국어](Casual_Explore_Sheet_20261021.md)
+
+Basis: spec sections g–m of the canvas "HELLSCRIPT 사냥 칙령 · 탐색 · 캐주얼" (98a2LCvDqd1ftBG8uGt4CW). Started from `origin/main` `c6354cbf`. Only **how the Explore tab looks** in the battle HUD's Hunt Edict sheet (`GameUI.EdictSheet`) changed, from the dark legacy sheet to a casual compact-card popup. Option meaning, save keys (`explore.*`), saving, revert, play and transactions (`SheetApply`/`SheetCommit`/`CommitHuntEdict`), tutorials, battle pause rules and the full window (`HuntEdictWindow`) are unchanged. The Repeat tab still uses the legacy sheet and Presets still shows its notice toast.
+
+## What changed
+
+- Tapping Explore in the tab column opens a compact card (`BuildCompactEdictSurface`, the same plate, name pill, ×, revert and play as the Survival popups). Inside: group chips (Exploration & rift progress / Normal & sealed chests / Cursed chests / Shrines), a one-line group description and scrolling option cards. There is no sub-menu step (the tab already worked with group chips, unlike Combat and Survival).
+- New `GameUI.EdictExplore.cs`: `ExplorePanel`, `BuildExplorePanel`, `BuildExploreBody`; two branch lines for `sheetTab=="explore"` in `BuildEdictSheet`/`BuildSheetRows`.
+- New `GameUI.EdictCasualRows.cs` (for the next tasks to reuse): `BuildCasualSheetFrame` (name plate, ×, body, revert, play), `BuildCasualGroupChips`, `AddCasualRow` (one card), `AddCasualChips` (choice, switch, set and skill chips; a chip grows to the lines its text needs), `AddCasualNumber` (`AddSheetNumber` plus min/max text), `AddCasualOrder` (**drag-to-reorder cards** with rank circle, name, one-line note, ▲▼ and ≡, using the same `HuntEdictOrderList`/`HuntEdictOrderCard` as the Combat action order), `CasualSheetHeight` (the card height the screen allows). The `attached` argument of `AddCasualRow` puts a setting of the same feature inside the parent card, under a divider.
+- Existing code touched: `AddSheetNumber` treats Explore as compact (`ExplorePanel`) and picks the suffix (s, m, %) through `CompactNumberSuffix`; `SurvivalSection` accepts a parent (to indent child options; default unchanged).
+- User feedback (2026-10-21, Exploration & rift progress group): ① Order of discoveries is a title plus drag-to-reorder cards with no wrapping card (notes: heads to where the enemy was last seen / handled before the enemy / handled after the enemy) ② the low-time threshold shares the low-time switch’s card ③ `Collection exceptions when time runs short` is left out of the popup (saved value, simulation and the Hunt Edict window unchanged) ④ `Stop detours when time runs short` → `Prioritize clearing when time runs short`. Chests group: `Open chests after the boss too` → `Search for chests during the boss fight too`. The names are the option-definition labels, so the full window uses them too (`en.txt` updated).
+- Card names match the legacy ones (`edict-sheet-row-*`, `edict-sheet-choice-*`, `edict-sheet-minus/plus/value-*`, `edict-sheet-up/down-*`, `edict-sheet-group-*`).
+- New texts (English in `en.txt`): three order-card notes and two renames. Everything else is an existing key.
+
+## Differences from the mockup and open decisions
+
+- **The chests group changed only in the mockup (m-7).** At your request the mockup replaces the three-way choice for ordinary and sealed chests and the shared `Chest detour distance` with one `Search radius` slider per kind (0–50 m, 0 m = ignore). The game needs new saved options, a per-kind radius in the simulation, migration of existing values and changes to share codes, presets and reveal rules, so it is left as a separate task; the game’s group still shows the old chips plus the detour distance (only the rename is in).
+
+- The mockup’s annotations (option explanations) are not in the game (m-2). They need 19 HUD-only Korean sentences plus translations, and adding them to `HuntEdictUi.json` help would also add `?` to the full Hunt Edict window.
+- Reading the code showed three value pairs with different labels but identical behaviour (m-1): exploration method `Detected enemies` = `Nearest unexplored area`, chests `Open along the path` = `Open as soon as one is found` (ordinary and sealed), shrine `Use when found` = `Use when the effect is needed`. They are left as they are because meaning is out of scope.
+- Cursed chests “Open after combat” also applies the saved “Minimum time left”, but that row only shows for “Open under conditions” (m-3, unchanged).
+- The portrait card keeps today’s compact-card spot (416 wide, centred). The tab column position is a separate task (m-5).
+- Group chips and option cards have no icons (text only). A child option card has the same paint, only indented by 14.
+
+## Validation
+
+- 32 focused EditMode tests passed (batch, `-nographics`, Unity 6000.6.0f1, last run): `EdictExploreMenuTests` (14 new), `EdictSurvivalMenuTests` 14, `HuntEdictHudRowsTests` 4. The new tests cover the four group chips and a card for every shown option (the loot exceptions are left out), one transaction per chip tap and revert, the switch showing and hiding its threshold inside the same card, the hidden loot exceptions keeping their saved value, the order cards (drag components for all four entries, one transaction per `KeyboardMove`, notes following the order) and ▲▼ moves, number units (s, m, %), chip names, controls staying inside the indented child card, the renames, and the initial play/revert state. An earlier run also passed the 34 `LocalizationTests` (including the new en.txt lines).
+- The first run also included `CasualEdictSurfaceTests`; two cases of `GuideTreasureRevealKeepsFadeAndScaleWithOptionalLegacyBorder` failed (`GameUI.GuideTreasureReveal.Awake` uses `GetComponent<CanvasGroup>()??AddComponent`, i.e. `??` on a Unity object — existing code). This change touches neither that code nor that test (`GameUI.GuideTargetLesson.cs` is unchanged) and it was not re-run on a clean baseline. It needs a separate look.
+- The capture exposed child cards overflowing to the right by their indent; fixed (`AddCasualRow` measures controls against the child card width) and covered by a test.
+- Static checks: UI contract `check_ui_contract.py --verify` 15 tests passed, `check_ui_refresh.py` 14 bindings passed.
+- Rendered the real popup to PNG in the Editor (`Assets/HELLSCRIPT/Editor/EdictExploreEvidence.cs`, 640×480, Korean) for PC, landscape and portrait: all four groups plus low-time on and cursed chests off/conditional, and looked at them.
+- Not verified: the real battle screen and development-player smokes (the explore path of `RuntimeBattleQuickEditSmoke`), saving and play during a live fight, a macOS build, a physical device/touch, long English text clipping (no English capture was made), and how the card entrance feels. Full EditMode was not run.

@@ -164,6 +164,7 @@ namespace Hellscript
         public MonsterCodexSave monsterCodex=new MonsterCodexSave();
         public DailyQuestState dailyQuests;
         [NonSerialized] internal Func<long> dailyQuestClock;
+        [NonSerialized] internal Action<DailyQuestActivity,int> deferQuestActivity;
         public string telemetryAccountId;
         public PlayerObservations playerObservations;
         public long combatSequence,combatTelemetryLossCount;
@@ -321,6 +322,8 @@ namespace Hellscript
     [Serializable]
     public sealed class RunState
     {
+        public long recordedTicks;
+        [NonSerialized] internal Action<CombatJournalEvent> recordingJournal;
         public MonsterCodexSave monsterKills=new MonsterCodexSave();
         public bool monsterKillsCommitted;
         public LiveOpsRunSnapshot liveOps;

@@ -66,10 +66,15 @@ namespace Hellscript
         {
             using var sample=PresentationMetrics.Journal.Auto();PresentationMetrics.JournalCalls++;
             var journal=run.journal;if(journal==null||journal.version!=1||run.training>=0||journal.archived)return;
-            journal.events.Add(new CombatJournalEvent{sequence=++journal.sequence,seconds=run.time,kind=kind,message=message,
+            Append(run,new CombatJournalEvent{seconds=run.time,kind=kind,message=message,
                 source=source,trigger=trigger,target=target,actionId=actionId,hp=run.health,resource=run.resource,
                 position=run.position,destination=run.destination,damageEvents=damage==null?Array.Empty<DamageEvent>():new[]{Copy(damage)},
                 builds=kind=="BUILD_CHANGED"||kind=="HUNT_EDICT_CHANGED"?new[]{run.build.Copy()}:Array.Empty<BuildConfig>()});
+        }
+        internal static void Append(RunState run,CombatJournalEvent entry)
+        {
+            var journal=run.journal;if(journal==null||journal.version!=1||run.training>=0||journal.archived)return;
+            entry.sequence=++journal.sequence;journal.events.Add(entry);run.recordingJournal?.Invoke(entry);
             if(journal.events.Count>EventLimit){journal.events.RemoveAt(1);journal.omittedEvents++;}
         }
         public static bool ShowsInPreview(CombatJournalEvent e)=>e.kind!="HIT_DEALT"&&e.kind!="ACTION_COMPLETE"&&e.kind!="ACTION_RELEASE";

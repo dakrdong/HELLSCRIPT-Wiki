@@ -25,35 +25,35 @@ namespace Hellscript
         }
         public void ShowDetail(string id)
         {
-            var item=FindItem(id);if(item==null)return;if(!store.ReviewInventoryItem(id))Toast(store.Error);
+            var item=FindItem(id);if(item==null)return;
+            // An unequipped item always opens beside what it would replace, in every window shape; the compare view owns the ring/hand choice.
+            if(!store.ReviewInventoryItem(id,!item.equipped))Toast(store.Error);
             item=FindItem(id);if(item==null)return;// Review commits replace inventory item instances.
-            // Landscape opens an unequipped item beside what it would replace, like Diablo IV's hover comparison.
-            bool compare=landscape&&!item.equipped&&Hero.inventory.Any(i=>i.equipped&&i.slot==item.slot);
+            bool compare=!item.equipped;
             float w=landscape?(compare?width-16:Mathf.Min(width-16,640)):width-16,h=height-16;
             Modal("detail","아이템 정보",w,h);detailId=id;Place(dialog,width-w-8,8,w,h);
-            // The shared shell remains legacy; clip its edge without recolouring its children.
             dialog.GetComponent<StorageSurface>().SetSkin(Skin,radius:12,shadow:0);
             var popupHost=Skin.Clip(dialog,radius:12,inset:2);
-            var detail=ItemDetailPopup.Create(popupHost,w,h,textScale,Dismiss,"inventory-dialog-close",BodyFont,RangeToggle);
-            var actions=new System.Collections.Generic.List<ItemDetailPopup.FooterAction>
+            var detail=ItemDetailPopup.Create(popupHost,w,h,textScale,Dismiss,"inventory-dialog-close",BodyFont,RangeToggle,Skin,compare?"장비 비교":"아이템 정보");
+            EquipmentComparisonView view=null;bool choose=compare&&EquipmentSlots.Targets(Hero,item).Length>1;
+            // The primary button names the position it will swap, so a ring/hand picked in the compare view is what gets equipped.
+            void Footer()
             {
-                new ItemDetailPopup.FooterAction("inventory-equip",item.equipped?"장착 해제":"장착",()=>{if(item.equipped)Unequip(id);else RequestEquip(id);},true),
-                new ItemDetailPopup.FooterAction("inventory-lock",item.locked?"잠금 해제":"잠금",()=>
+                var actions=new System.Collections.Generic.List<ItemDetailPopup.FooterAction>
                 {
-                    if(store.SetInventoryLock(Guid.NewGuid().ToString("N"),id,!item.locked)){selected.Remove(id);Repaint();ShowDetail(id);}else Toast(store.Error);
-                },selected:item.locked)
-            };
-            if(!item.equipped)actions.Add(new ItemDetailPopup.FooterAction("inventory-compare","장착 비교",()=>ShowComparison(id)));
-            actions.Add(new ItemDetailPopup.FooterAction("inventory-detail-close","닫기",Dismiss));
-            detail.SetFooter(null,!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item)?"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.":null,actions.ToArray());
-            if(compare)EquipmentComparisonView.Create(detail.Body,EquipmentPreviewHero(Hero),item,store.Data.runes,BodyFont,atlas,textScale,skin:Skin);
+                    new ItemDetailPopup.FooterAction("inventory-equip",item.equipped?"장착 해제":choose?Loc.F("{0}에 장착",Loc.T(EquipmentSlots.Label(item.slot,view.TargetIndex))):"장착",
+                        ()=>{if(item.equipped)Unequip(id);else Equip(id,choose?view.TargetIndex:-1);},true),
+                    new ItemDetailPopup.FooterAction("inventory-lock",item.locked?"잠금 해제":"잠금",()=>
+                    {
+                        if(store.SetInventoryLock(Guid.NewGuid().ToString("N"),id,!item.locked)){selected.Remove(id);Repaint();ShowDetail(id);}else Toast(store.Error);
+                    },selected:item.locked)
+                };
+                actions.Add(new ItemDetailPopup.FooterAction("inventory-detail-close","닫기",Dismiss));
+                detail.SetFooter(view?.Context,!item.equipped&&!InventorySalvagePlan.Eligible(store.Data,item)?"잠금·장착·보석·프리셋 보호 장비는 분해에서 제외됩니다.":null,actions.ToArray());
+            }
+            if(compare){view=EquipmentComparisonView.Create(detail.Body,EquipmentPreviewHero(Hero),item,store.Data.runes,BodyFont,atlas,textScale,skin:Skin);view.Changed+=Footer;}
             else ItemDetailView.Create(detail.Body,item,EquipmentViewSource.Owned,BodyFont,textScale,hero:Hero,skin:Skin);
-        }
-        void RequestEquip(string id)
-        {
-            var item=FindItem(id);if(item==null)return;var choices=EquipmentSlots.Targets(Hero,item);
-            if(choices.Length>1&&choices.All(index=>EquipmentSlots.At(Hero,item.slot,index)!=null)){ShowComparison(id);return;}
-            Equip(id);
+            Footer();
         }
         public bool Equip(string id,int index=-1)
         {
@@ -71,17 +71,8 @@ namespace Hellscript
             GameAudio.Refuse();Toast(value);
             if(dialog!=null){ClosePopover();popover=Panel(overlays,"Inventory notice",UiTheme.SelectedHex,UiTheme.RaisedHex,UiTheme.GoldDeepHex);float w=Mathf.Min(width-32,330);Place(popover,(width-w)/2,height/2-75,w,150);Txt(popover,value,14,12,w-28,84,12,red);Btn(popover,"확인",w-91,106,77,31,ClosePopover,true).name="inventory-notice-close";}
         }
-        public void ShowComparison(string id)
-        {
-            var item=FindItem(id);if(item==null||item.equipped)return;if(!store.ReviewInventoryItem(id,true))Toast(store.Error);
-            item=FindItem(id);if(item==null)return;
-            float w=width-16,h=landscape?422:height-32;Modal("compare","장착 비교",w,h);detailId=id;
-            var targets=EquipmentSlots.Targets(Hero,item);
-            var host=Rect("Inventory comparison body",dialog);Place(host,12,46,w-24,h-99);
-            EquipmentComparisonView.Create(host,EquipmentPreviewHero(Hero),item,store.Data.runes,BodyFont,atlas,textScale,skin:Skin);
-            float bw=(w-24-(targets.Length-1)*8)/targets.Length;
-            for(int n=0;n<targets.Length;n++){int index=targets[n];Btn(dialog,Loc.F("{0}에 장착",EquipmentSlots.Label(item.slot,index)),12+n*(bw+8),h-43,bw,32,()=>Equip(id,index),true,11).name="inventory-equip-"+index;}
-        }
+        // The detail window opens as the comparison for any unequipped item; kept for the saved dialog kind and existing callers.
+        public void ShowComparison(string id)=>ShowDetail(id);
         public void ShowStats()
         {
             float w=landscape?630:width-16,h=height-24;Modal("stats","전체 능력치",w,h);

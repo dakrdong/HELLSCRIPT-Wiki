@@ -97,6 +97,9 @@ namespace Hellscript
         public static Color MockScrollThumb {get;}=StorageSurface.Hex("c1c1c1");
         public static Color MockCoin {get;}=StorageSurface.Hex("f08a00");
         public static Color MockOrange {get;}=StorageSurface.Hex("e08a00");
+        // The rift entry state tag on its pill (ready): brown ink on pale gold keeps 4.5:1 where the orange does not.
+        public static Color MockReadyInk {get;}=StorageSurface.Hex("a85d00");
+        public static Color MockReadyFill {get;}=StorageSurface.Hex("fff1b8");
         public static Color MockVacantEdge {get;}=StorageSurface.Hex("dde2ee");
         public static Color MockNoticeFill {get;}=StorageSurface.Hex("e8f4ff");
         public static Color MockRareInk {get;}=StorageSurface.Hex("c48d00");
@@ -108,6 +111,8 @@ namespace Hellscript
         public static Color MockGradeSoft2 {get;}=StorageSurface.Hex("fff1d6");
         public static Color MockLegendRing {get;}=StorageSurface.Hex("ff9f1c");
         public static Color MockPlateTop {get;}=StorageSurface.Hex("fffdf8");
+        // Equipment comparison strips, plates and score bands (EquipmentComparisonView); hex form because its plates take hex strings.
+        public const string CompareStripHex="e9edf9",CompareOutgoingHex="ffe9e6",CompareTieHex="eceff7",CompareChosenHex="fff1b8",CompareGoldHex="ffe26b",CompareEmptyHex="f6f8fc";
         public static Color MockDimInk {get;}=StorageSurface.Hex("9aa1b0");
         public static Color MockSkyMid {get;}=StorageSurface.Hex("bfe7ff");
         public static Color MockSkyBottom {get;}=StorageSurface.Hex("fff3d6");

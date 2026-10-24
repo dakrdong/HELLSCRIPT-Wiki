@@ -119,6 +119,12 @@ namespace Hellscript
         }
         public bool Contains(Vector2 p)
         {if(buckets.TryGetValue(Bucket(p),out var list))foreach(int i in list)if(patches[i].Contains(p))return true;return false;}
+        internal void OriginPatches(Vector2 p,List<RiftFloorPatch> result)
+        {
+            result.Clear();
+            if(buckets.TryGetValue(Bucket(p),out var list))
+                foreach(int i in list)if(patches[i].Contains(p))result.Add(patches[i]);
+        }
         public bool RoomContains(int room,Vector2 p)
         {if(buckets.TryGetValue(Bucket(p),out var list))foreach(int i in list)if(patches[i].room==room&&patches[i].Contains(p))return true;return false;}
         public bool SegmentOnFloor(Vector2 a,Vector2 b)

@@ -18,7 +18,7 @@ namespace Hellscript
         public const float CellSize = .35f, Radius = 12f;
         // The walled pit of the tutorial is lit end to end, so both fighters are in view from the first frame.
         float Sight => Run.tutorial ? 40f : Radius;
-        public readonly RiftNavigation Navigation;
+        public RiftNavigation Navigation { get; private set; }
         public readonly RunState Run;
         public readonly Vector2 Origin;
         public readonly int Width, Height;
@@ -27,8 +27,11 @@ namespace Hellscript
         public int Revision { get; private set; }
         public int ExploredCount => Run.discovery.cells.Count;
         readonly bool[] floor;
+        readonly bool[] sightFloor;
         readonly List<int> visible = new List<int>();
         readonly List<RiftObstacle> nearbyOccluders = new List<RiftObstacle>();
+        readonly List<RiftFloorPatch> originFloor = new List<RiftFloorPatch>();
+        bool originOnFloor;
         Vector2 lastPosition;
         bool initialized, lastGateOpen;
         int lastObstacleCount;
@@ -38,6 +41,7 @@ namespace Hellscript
             if (run?.layout == null || run.layout.legacy) return null;
             if (run.visibility == null || !ReferenceEquals(run.visibility.Navigation.Layout, run.layout))
                 run.visibility = new RiftVisibility(run, navigation ?? new RiftNavigation(run.layout), run.discovery == null);
+            else if (navigation != null) run.visibility.Navigation = navigation;
             return run.visibility;
         }
         public static void Initialize(RunState run, RiftNavigation navigation, bool restored)
@@ -54,7 +58,7 @@ namespace Hellscript
             Origin = new Vector2(Mathf.Floor(bounds.xMin / CellSize) * CellSize - 1, Mathf.Floor(bounds.yMin / CellSize) * CellSize - 1);
             Width = Mathf.CeilToInt((bounds.xMax + 1 - Origin.x) / CellSize);
             Height = Mathf.CeilToInt((bounds.yMax + 1 - Origin.y) / CellSize);
-            floor = new bool[Width * Height]; Pixels = new Color32[floor.Length];
+            floor = new bool[Width * Height]; sightFloor = new bool[floor.Length]; Pixels = new Color32[floor.Length];
             foreach (var patch in navigation.Surface.patches)
             {
                 int x0 = X(patch.bounds.xMin), x1 = X(patch.bounds.xMax), y0 = Y(patch.bounds.yMin), y1 = Y(patch.bounds.yMax);
@@ -72,6 +76,9 @@ namespace Hellscript
                     }
                 }
             }
+            // Sample positions and floor geometry stay fixed for this visibility instance.
+            for(int y=0;y<Height;y++)for(int x=0;x<Width;x++)
+                if(floor[y*Width+x])sightFloor[y*Width+x]=navigation.Surface.Contains(Position(x,y));
             run.discovery ??= new RiftDiscovery { fingerprint = run.layout.fingerprint };
             // Cell indices belong to the saved layout, never to a seed regenerated on resume.
             if (run.discovery.version != 1 || run.discovery.fingerprint != run.layout.fingerprint)
@@ -121,7 +128,12 @@ namespace Hellscript
         bool SampleVisible(Vector2 p)
         {
             var a = Run.position; var delta = p - a;
-            if (delta.sqrMagnitude > Sight * Sight || !Navigation.Surface.SegmentOnFloor(a, p)) return false;
+            if (!originOnFloor || delta.sqrMagnitude > Sight * Sight) return false;
+            // These patches are in SegmentOnFloor's first bucket, so its identical full-cover test is sufficient.
+            float tolerance=Mathf.Max(.000001f,.00001f/Mathf.Max(.01f,delta.magnitude));bool covered=false;
+            foreach(var patch in originFloor)
+                if(patch.Clip(a,p,out float first,out float last)&&first<=tolerance&&last>=1-tolerance){covered=true;break;}
+            if(!covered&&!Navigation.Surface.SegmentOnFloor(a,p))return false;
             // Same exact floor clipping and obstacle intersections as navigation. Only the broad
             // phase is cached per update, so distant props cannot multiply thousands of LOS tests.
             foreach (var obstacle in nearbyOccluders)
@@ -161,17 +173,49 @@ namespace Hellscript
             for (int dy = -2; dy <= 2; dy++) for (int dx = -2; dx <= 2; dx++)
             { int xx = x + dx, yy = y + dy; if (Inside(xx, yy) && !floor[yy * Width + xx]) Mark(yy * Width + xx, current); }
         }
+        int[] recordedVisible;
+        int recordedDiscovery;
+        readonly List<int> recordingRanges=new List<int>();
+        // Consecutive visible cells share a start/count pair instead of retaining one int per pixel.
+        internal int[] RecordVisibleRanges(int[] previous)
+        {
+            recordingRanges.Clear();int first=Pixels.Length,last=-1;
+            foreach(int cell in visible){first=Math.Min(first,cell);last=Math.Max(last,cell);}
+            for(int i=first;i<=last;)
+            {
+                if(Pixels[i].g==0){i++;continue;}
+                int start=i++;while(i<=last&&Pixels[i].g!=0)i++;
+                recordingRanges.Add(start);recordingRanges.Add(i-start);
+            }
+            bool same=previous!=null&&previous.Length==recordingRanges.Count;
+            for(int i=0;same&&i<previous.Length;i++)same=previous[i]==recordingRanges[i];
+            return same?previous:recordingRanges.ToArray();
+        }
+        // Playback updates the fog texture from recorded cells without exploring or running line-of-sight rules.
+        internal void PlayRecordedRanges(int[] cells)
+        {
+            if(ReferenceEquals(recordedVisible,cells)&&recordedDiscovery==Run.discovery.cells.Count)return;
+            recordedVisible=cells;
+            foreach(int i in visible)Pixels[i].g=0;visible.Clear();
+            if(recordedDiscovery>Run.discovery.cells.Count){for(int i=0;i<Pixels.Length;i++)Pixels[i].r=0;recordedDiscovery=0;}
+            for(int i=recordedDiscovery;i<Run.discovery.cells.Count;i++)Pixels[Run.discovery.cells[i]].r=255;
+            recordedDiscovery=Run.discovery.cells.Count;
+            for(int range=0;range<cells.Length;range+=2)
+                for(int i=cells[range],end=i+cells[range+1];i<end;i++){Pixels[i].g=255;visible.Add(i);}
+            lastPosition=Run.position;lastGateOpen=Run.layout.gateOpen;lastObstacleCount=Run.layout.obstacles.Count;initialized=true;Revision++;
+        }
         public bool Update(bool force = false)
         {
             using var sample=PresentationMetrics.Visibility.Auto();PresentationMetrics.VisibilityCalls++;
             if (!force && initialized && (Run.position - lastPosition).sqrMagnitude < .000001f && lastGateOpen == Run.layout.gateOpen && lastObstacleCount == Run.layout.obstacles.Count) return false;
             foreach (int i in visible) Pixels[i].g = 0; visible.Clear();
             CollectOccluders();
+            Navigation.Surface.OriginPatches(Run.position,originFloor);originOnFloor=originFloor.Count>0;
             lastPosition = Run.position; lastGateOpen = Run.layout.gateOpen; lastObstacleCount = Run.layout.obstacles.Count; initialized = true;
             int x0 = Mathf.Max(0, X(Run.position.x - Sight)), x1 = Mathf.Min(Width - 1, X(Run.position.x + Sight));
             int y0 = Mathf.Max(0, Y(Run.position.y - Sight)), y1 = Mathf.Min(Height - 1, Y(Run.position.y + Sight));
             for (int y = y0; y <= y1; y++) for (int x = x0; x <= x1; x++)
-                if (floor[y * Width + x] && SampleVisible(Position(x, y))) Reveal(x, y, true);
+                if (sightFloor[y * Width + x] && SampleVisible(Position(x, y))) Reveal(x, y, true);
             Revision++; return true;
         }
     }

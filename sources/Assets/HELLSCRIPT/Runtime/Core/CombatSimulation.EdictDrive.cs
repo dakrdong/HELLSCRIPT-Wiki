@@ -31,11 +31,34 @@ namespace Hellscript
         // Navigation failures switch repeat off; the overlay must agree or the controller would restart anyway.
         void DisableAutoRepeat(){State.build.autoRepeat=false;if(edictPolicy!=null)edictPolicy.autoRepeat=false;}
 
+        // The detached recorder owns this canonical document; edits replace the entire recording fork.
+        // Caller-owned previews still copy and validate their input, and receiver checks remain per evaluation.
+        HuntEdictV2Document EdictForEvaluation(HuntEdictV2Document source)
+            =>recordingFork&&source!=null&&ReferenceEquals(source,edictSource)?source:HuntEdictV2.Canonical(source);
+        HuntEdictV2Document orderedEdict;
+        CombatRecordingState orderedRuleState;
+        Rule[] orderedRuleSources;
+        List<EdictOrderedRule> orderedRules;
+        List<EdictOrderedRule> SimulationEdictRules()
+        {
+            if(!recordingFork||edictSource==null)return EdictRuleOrder.ForSimulation(State.build.rules,edictSource);
+            var rules=State.build.rules;var state=CombatRecordingState.Capture(rules,orderedRuleState);
+            bool same=ReferenceEquals(orderedEdict,edictSource)&&ReferenceEquals(state,orderedRuleState)&&orderedRuleSources?.Length==rules.Count;
+            // Equal replacement values must still bind utility rows to the new mutable rule objects.
+            for(int i=0;same&&i<rules.Count;i++)same=ReferenceEquals(orderedRuleSources[i],rules[i]);
+            if(!same)
+            {
+                orderedRules=EdictRuleOrder.ForPreparedSimulation(rules,edictSource);
+                orderedEdict=edictSource;orderedRuleState=state;orderedRuleSources=rules.ToArray();
+            }
+            return orderedRules;
+        }
         public bool EdictActive=>edictSource!=null;
         // The editor calls this after saving so an in-progress run reads the new document instead of
         // the copy it prepared at start.
         public void RefreshEdict()
         {
+            InvalidateRecording();
             var before=edictSource;PrepareEdict();
             if(State.heroAction.phase==HeroActionPhase.Channeling&&State.heroAction.policy?.whirlwindEdict!=null&&
                 UnityEngine.JsonUtility.ToJson(before)!=UnityEngine.JsonUtility.ToJson(edictSource))State.heroAction.exitChannelForBuild=true;

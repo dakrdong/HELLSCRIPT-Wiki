@@ -18,8 +18,11 @@ namespace Hellscript
         readonly List<(Text text,MonsterCodexSkill skill)> damageRows=new List<(Text,MonsterCodexSkill)>();
         MonsterDefinition Definition=>selected==null?null:MonsterRegistry.ById(selected);
         AccountSave Account=>game.Store.Data;
+        // Editor tests pin the board size (the real one follows the screen); null in the game.
+        static Func<Rect,(float scale,Rect plate)> fitOverride;
         public static (float scale,Rect plate) Fit(Rect safe)
         {
+            if(fitOverride!=null)return fitOverride(safe);
             float s=UiMock.WindowScale(safe,956);return (s,new Rect(safe.x/s,safe.y/s,safe.width/s,safe.height/s));
         }
         public static ContentWindowView Open(Transform parent,GameController game,Func<float> reading=null,Action close=null)

@@ -9,7 +9,8 @@ namespace Hellscript
         bool compact,tight,veryTight;Color accent=UiTheme.Gold;string rarityHex=UiTheme.GoldHex;int grade;
         static Color Faded(Color c,float a){c.a=a;return c;}
         Color Ink(string value)=>Skin?.TextColor(value)??StorageSurface.Hex(value);
-        Color Ink(ItemTooltipLine line)=>Skin!=null&&(line.greater||line.key=="name"||line.key=="type"||line.key=="special")?Skin.OnLight(StorageSurface.Hex(line.color)):Ink(line.color);
+        static bool Delta(ItemTooltipLine line)=>line.key=="equipment-score"&&(line.color==ItemTooltip.Gain||line.color==ItemTooltip.Loss);
+        Color Ink(ItemTooltipLine line)=>Skin!=null&&Delta(line)?StorageSurface.Hex(line.color==ItemTooltip.Gain?"17641f":"a81d28"):Skin!=null&&(line.greater||line.key=="name"||line.key=="type"||line.key=="special")?Skin.OnLight(StorageSurface.Hex(line.color)):Ink(line.color);
         string Copy(string value)=>Skin?.RichText(value)??value;
         int TypeSize(int value)=>Mathf.RoundToInt(value*Mathf.Clamp(textScale,.5f,2.5f));
         sealed class Row{public ItemTooltipLine line,expanded;public string group;}
@@ -96,7 +97,7 @@ namespace Hellscript
         {
             var r=UiLayout.Rect(down?"Loss arrow":"Gain arrow",parent);UiLayout.Place(r,x,y,12,9);
             r.pivot=new Vector2(.5f,.5f);r.anchoredPosition=new Vector2(x+6,-(y+4.5f)); // rotate about the centre, not the corner
-            var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol="hint-up";glyph.color=Ink(down?ItemTooltip.Loss:ItemTooltip.Gain);glyph.raycastTarget=false;
+            var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol="hint-up";glyph.color=Skin!=null?StorageSurface.Hex(down?"a81d28":"17641f"):Ink(down?ItemTooltip.Loss:ItemTooltip.Gain);glyph.raycastTarget=false;
             if(down)r.localRotation=Quaternion.Euler(0,0,180);
         }
         // The item power sits on a plaque of the same filigree that stretches between its wing caps to hug the text.
@@ -116,7 +117,9 @@ namespace Hellscript
             }
             else
             {
-                var surface=plate.gameObject.AddComponent<StorageSurface>();surface.SetSkin(Skin,accent,radius:8,shadow:0);surface.raycastTarget=false;
+                var surface=plate.gameObject.AddComponent<StorageSurface>();surface.raycastTarget=false;
+                if(delta){var tone=ItemTooltip.ScoreTone.Of(0,score.color==ItemTooltip.Gain?1:-1);surface.SetSkin(Skin,StorageSurface.Hex(tone.edge),8,2,0,StorageSurface.Hex(tone.fill),StorageSurface.Hex(tone.fill));}
+                else surface.SetSkin(Skin,accent,radius:8,shadow:0);
             }
             plate.SetSiblingIndex(t.transform.GetSiblingIndex());
             UiLayout.Place(t.rectTransform,x+cap*.8f,y,pw-cap*1.6f,height);

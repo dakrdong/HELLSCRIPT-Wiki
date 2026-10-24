@@ -1,6 +1,7 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -8,6 +9,28 @@ namespace Hellscript.Tests
 {
     public sealed class RiftVisibilityTests
     {
+        [Test] public void RecordedRangesReplayEveryFogPixelAndReuseAnUnchangedView()
+        {
+            var run=Doorway();RiftVisibility.Initialize(run,new RiftNavigation(run.layout),false);
+            var live=Doorway();RiftVisibility.Initialize(live,new RiftNavigation(live.layout),false);
+            var flags=BindingFlags.Instance|BindingFlags.NonPublic;
+            var record=typeof(RiftVisibility).GetMethod("RecordVisibleRanges",flags);
+            var play=typeof(RiftVisibility).GetMethod("PlayRecordedRanges",flags);
+            int[] ranges=null;
+            foreach(var position in new[]{run.position,new Vector2(-13,4),new Vector2(13,4),new Vector2(500,500)})
+            {
+                run.position=position;run.visibility.Update(true);
+                ranges=(int[])record.Invoke(run.visibility,new object[]{ranges});
+                Assert.AreSame(ranges,record.Invoke(run.visibility,new object[]{ranges}));
+                live.position=position;live.discovery.cells=new System.Collections.Generic.List<int>(run.discovery.cells);
+                play.Invoke(live.visibility,new object[]{ranges});
+                CollectionAssert.AreEqual(run.visibility.Pixels,live.visibility.Pixels);
+                Assert.AreEqual(123u,run.rng);Assert.AreEqual(123u,live.rng);
+                var pixels=(Color32[])live.visibility.Pixels.Clone();play.Invoke(live.visibility,new object[]{ranges});
+                CollectionAssert.AreEqual(pixels,live.visibility.Pixels);
+            }
+            Assert.IsEmpty(ranges);
+        }
         public static RunState Doorway()
         {
             var layout = new RiftLayout { fingerprint = "visibility-doorway", gateOpen = true };
@@ -68,21 +91,35 @@ namespace Hellscript.Tests
             }
             finally { UnityEngine.Object.DestroyImmediate(catalog); }
         }
-        [Test] public void VisibilityRasterAgreesWithAuthoritativeSightAcrossOrganicRoomsAndBlockers()
+        [TestCase(7421u)][TestCase(18171u)][TestCase(91333u)]
+        public void VisibilityRasterAgreesWithAuthoritativeSightAcrossOrganicRoomsAndBlockers(uint seed)
         {
             var catalog = ScriptableObject.CreateInstance<GameCatalog>(); catalog.Populate();
             try
             {
-                var sim = new CombatSimulation(GameStore.NewAccount(), catalog, 1, seed: 7421); var sight = sim.State.visibility;
+                var sim = new CombatSimulation(GameStore.NewAccount(), catalog, 1, seed: seed); var sight = sim.State.visibility;
+                var positions=new System.Collections.Generic.List<Vector2>();uint rng=sim.State.rng;
                 foreach (var room in sim.State.layout.rooms)
                 {
-                    sim.State.position = room.position; sight.Update(true);
-                    for (int y = 0; y < sight.Height; y += 3) for (int x = 0; x < sight.Width; x += 3)
+                    positions.Add(room.position);
+                    if(room.outline?.Count>0)
+                    {
+                        positions.Add(room.outline[0]);positions.Add(room.outline[0]+Vector2.one*.00005f);
+                        positions.Add(room.outline[0]-Vector2.one*.00005f);
+                    }
+                }
+                foreach(var position in positions)
+                {
+                    sim.State.position = position; sight.Update(true);
+                    for (int y = 0; y < sight.Height; y++) for (int x = 0; x < sight.Width; x++)
                     {
                         var p = sight.Position(x, y); if ((p - sim.State.position).sqrMagnitude > RiftVisibility.Radius * RiftVisibility.Radius || !sim.Map.Surface.Contains(p)) continue;
                         Assert.AreEqual(sim.Map.LineClear(sim.State.position,p), sight.Pixels[y*sight.Width+x].g > 0, "LOS mismatch at " + p);
                     }
                 }
+                sim.State.position=new Vector2(5000,5000);sight.Update(true);
+                foreach(var pixel in sight.Pixels)Assert.AreEqual(0,pixel.g);
+                Assert.AreEqual(rng,sim.State.rng);
             }
             finally { UnityEngine.Object.DestroyImmediate(catalog); }
         }

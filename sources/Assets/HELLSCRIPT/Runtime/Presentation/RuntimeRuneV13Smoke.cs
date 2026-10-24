@@ -152,9 +152,9 @@ namespace Hellscript
             Click("rune-region-0");Click("rune-overview");yield return Capture("full-map-ko",1280,720);
             Click("rune-fit");game.ApplyLanguage("en");yield return Capture("reference-landscape-en",1280,720);yield return Capture("reference-portrait-en",720,1280);
             game.ApplyLanguage("ko");yield return Capture("portrait-ko",720,1280);yield return Resize(1280,720);Click("rune-effects-type-0");yield return Capture("attack-effects-ko",1280,720);Click("rune-dialog-close");
-            Click("rune-codex");Click("rune-codex-weapons");Click("지팡이");
+            Click("rune-codex");Click("rune-codex-weapon-staff");
             var search=game.UI.GetComponentsInChildren<InputField>().Single();search.text="연쇄";yield return Capture("codex-search-ko",1280,720);
-            Click("rune-codex-regions");Click("기교");yield return Capture("codex-region-ko",1280,720);Click("rune-dialog-close");
+            Click("rune-codex-region-4");yield return Capture("codex-region-ko",1280,720);Click("rune-dialog-close");
             yield return Resize(720,1280);Click("rune-codex");yield return Capture("codex-portrait-ko",720,1280);Click("rune-dialog-close");
             File.WriteAllText(Path.Combine(output,"result.txt"),"PASS: exact 259-cell boards; tap placement, account save, cross-weapon recovery, mastery slot unlock draft/save with tab points and undo, five global preset drafts/save/disk reload/load, undo; supplied v13 sample; landscape/portrait, map, region preview, per-color effects, codex weapon/region selection/search and English.\nMissing translations: "+string.Join(" | ",missing));
             Require(missing.Count==0,"Missing translations: "+string.Join(" | ",missing));Application.Quit(0);

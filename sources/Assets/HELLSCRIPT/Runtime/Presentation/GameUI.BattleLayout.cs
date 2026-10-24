@@ -61,6 +61,7 @@ namespace Hellscript
             BattleViewport=UiSafeArea.FrameNormalized;
             battleWorld.anchorMin=BattleViewport.min;battleWorld.anchorMax=BattleViewport.max;battleWorld.offsetMin=battleWorld.offsetMax=Vector2.zero;
             if(CasualCombatHud){ReflowCasualBattleHud();return;}
+            InkLegacyBattleText();
             float w=size.x;bool narrow=w<360;float textWidth=w-(narrow?132:170);
             var hud=globalHud?.Layout;
             dockIcon=hud==null?44:DockIconSize(root.rect.height-(LiveJournalHudInset+hud.potionBounds.yMax*hud.scale)/BattleCanvasScale,false);
@@ -102,6 +103,19 @@ namespace Hellscript
             PlaceDamageGraphs();
             PlaceRiftActivityHud(w);
             UpdateBattleBrief();
+        }
+        // The legacy battle HUD (guide stage, training ground) writes straight over the dungeon floor, pale or dark. Bright ink inside the
+        // casual HUD's navy rings reads on both and matches the ordinary battle HUD; the sizes stay as they were.
+        Text legacyInked;
+        void InkLegacyBattleText()
+        {
+            // Once per header build: the boss line reflows every refresh, and the ink and rings do not change in between.
+            if(headerTitle==null||legacyInked==headerTitle)return;legacyInked=headerTitle;
+            // Small lines take a thinner ring so their letter counters stay open (measured on pale, mid, dark and tiled floors).
+            void Ink(Text text,Color color){if(text==null)return;text.color=color;CasualBattleHudStyle.WorldOutline(text,text.fontSize>=17?1:.8f);}
+            var casual=UiSkin.Casual;
+            Ink(headerTitle,casual.Gold);Ink(headerSubtitle,casual.White);Ink(timerText,casual.Gold);Ink(meterText,casual.White);Ink(actionText,casual.Gold);
+            Ink(powerSavingCaption,casual.White);Ink(escapeCaption,casual.White);Ink(bossTitle,casual.Gold);Ink(bossActionLabel,casual.White);
         }
         // Keep the captioned shortcuts immediately left of Settings, with the observation menu to their left.
         Rect ReflowBattleMedallions(float w,Rect panel)

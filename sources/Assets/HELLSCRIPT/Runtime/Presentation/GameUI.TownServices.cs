@@ -37,7 +37,9 @@ namespace Hellscript
                 int size=n,cost=TownTrade.RunePrice(size);
                 TownPurchase("town-buy-rune-"+size,Loc.F("G0 · {0}칸 룬 블록 구매 · {1:N0} 골드",size,cost),cost,r=>game.Store.BuyTownRune(r,size),ShowTownRuneShop);
             }
-            BigButton(content,"룬 보드 · 배치와 합성",ShowRunes);
+            BigButton(content,"룬 보드 · 배치",ShowRunes);
+            BigButton(content,"룬 합성",()=>OpenTownRuneService(ShowRuneFusion)).name="town-rune-fusion";
+            BigButton(content,"룬 드롭 확률",()=>OpenTownRuneService(ShowRuneDropRates)).name="town-rune-drop-rates";
             FooterButton(0,1,"마을로 돌아가기",ShowTown);
         }
     }

@@ -44,6 +44,7 @@ namespace Hellscript
         {
             if(Page!="battle"||bossHud==null)return;
             if(CasualCombatHud){ReflowCasualBossText();return;}
+            InkLegacyBattleText();
             float width=bossHud.rect.width;
             bossTitle.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width);
             bossActionLabel.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal,width);

@@ -195,12 +195,15 @@ namespace Hellscript
         }
         public void Log(string kind,string text)
         {
+            int sequence=State.journal?.sequence??0;
             CombatJournal.Append(State,kind,text,target:State.targetId,actionId:State.heroAction.id);
             if(kind=="HUNT_EDICT_CHANGED"&&State.training<0&&State.journal!=null&&edictSource!=null)
                 State.journal.events.Last().edicts=new[]{edictSource.Copy()};
-            State.logs.Add($"{State.time:000.0}s [{kind}] {text}");
-            if(State.logs.Count>600)State.logs.RemoveAt(0);
+            string line=$"{State.time:000.0}s [{kind}] {text}";AppendLogLine(State,line);recordingLog?.Invoke(line);
+            Playback?.AnnotateLog(line,State.journal!=null&&State.journal.sequence>sequence?State.journal.events.Last():null);
         }
+        static void AppendLogLine(RunState state,string line)
+        {state.logs.Add(line);if(state.logs.Count>600)state.logs.RemoveAt(0);}
         EnemyState Target => State.enemies.Find(e=>e.id==State.targetId&&!e.dead);
         public void Tick(float dt)
         {
@@ -529,6 +532,7 @@ namespace Hellscript
             if(e.ward>0&&damage>0){float soaked=Mathf.Min(e.ward,damage);e.ward-=soaked;damage-=soaked;}
             float dealt=Mathf.Min(e.health,damage);State.dealt+=dealt;RecordGraphDamage(dealt);e.health-=damage;Visual?.Invoke(e.position,e.position,critical?31:30,damage);
             // Rooted at stage two the charger bends but never breaks, so the defeat does not depend on a class's damage.
+            if(GuideBossHeld(e))e.health=Mathf.Max(e.health,1);
             if(e.boss&&!e.brain.boss.enraged&&e.health<=e.maxHealth*.5f)e.brain.boss.enragePending=true;
             var data=e.health>0||!string.IsNullOrEmpty(e.objectType)?null:Data(e);if(data!=null&&DataSurvivesFall(e))return;
             if(e.health>0){if(!e.boss&&string.IsNullOrEmpty(e.objectType)){var d=Data(e);if(d!=null)OnDataDamaged(e,d,dealt);}return;}
@@ -641,7 +645,7 @@ namespace Hellscript
                 if(State.limitedLoot&&Policy.bagPolicy==BagPolicy.Portal){drop.ignored=true;continue;}
                 if(edictLoot!=null)
                 {
-                    var mode=edictLoot.Mode(drop.item,Hero.heroClass);
+                    var mode=DropMode(drop);
                     if(mode==EdictLootMode.Ignore||State.phase==RunPhase.Looting&&!edictLoot.collectAtEnd){drop.ignored=true;continue;}
                     if(mode==EdictLootMode.AfterCombat&&!combatClear)continue;
                     if(State.phase!=RunPhase.Looting&&!Map.LineClear(State.position,drop.position))continue;
@@ -706,7 +710,12 @@ namespace Hellscript
             CombatTelemetry.Finish(State.statistics,completion);
             RecordGraphCasts();
             CloseUnopenedChests();State.phase=won?RunPhase.Cleared:RunPhase.Failed;State.action=reason;Log("RUN_END",reason);
-            if(State.training>=0)return;
+            if(State.training>=0){Playback?.SealCurrentState();return;}
+            if(recordingFork){recordedFinish=new RecordedFinish(won,reason,completion);return;}
+            CompleteRun(won,reason,completion);Playback?.SealCurrentState();
+        }
+        void CompleteRun(bool won,string reason,CombatFinish completion)
+        {
             RiftResult.Complete(Hero,State,completion);
             RiftEntryRules.Complete(Hero,State,completion);
             if(won&&completion!=CombatFinish.Abandoned)RewardBoxes.CaptureClear(account,State);

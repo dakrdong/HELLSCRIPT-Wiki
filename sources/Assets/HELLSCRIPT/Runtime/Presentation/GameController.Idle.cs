@@ -154,6 +154,7 @@ namespace Hellscript
         }
         void OnDestroy()
         {
+            Combat?.Playback?.Dispose();
             if (Store != null) Store.Committed -= ObserveIdleCommit;
             if (!IdleHunting) return;
             Audio?.SetPowerSaving(false);

@@ -11,7 +11,7 @@ namespace Hellscript
     public sealed partial class RuneBoardWindow:MonoBehaviour
     {
         public RuneBoardSession Session {get;private set;}
-        ContentWindowView shell;GameStore store;Func<CombatSimulation> simulation;Action<int> service;Action closed;
+        ContentWindowView shell;GameStore store;Func<CombatSimulation> simulation;Action closed;
         RectTransform stage,storagePanel,inspector,overlays,modal;RuneGemView board;RuneBoardPointer pointer;
         float width,height,U;bool landscape,refresh,closing;int focus,color=-1;bool overview,cameraTouched;
         readonly HashSet<int> sizes=new HashSet<int>();
@@ -20,14 +20,14 @@ namespace Hellscript
         public RuneGemView Board=>board;public RectTransform FrameRect=>shell.Frame;public RectTransform StorageRect=>storagePanel;
         public RectTransform InspectorRect=>inspector;public RectTransform DialogRect=>modal;public bool Landscape=>landscape;
         public bool Blocked=>modal!=null;public RuneBoardPointer Pointer=>pointer;
-        public static RuneBoardWindow Open(Transform parent,GameStore store,Func<CombatSimulation> simulation,Action<int> service,Action closed,RuneBoardSession session=null)
+        public static RuneBoardWindow Open(Transform parent,GameStore store,Func<CombatSimulation> simulation,Action closed,RuneBoardSession session=null,Func<Rect,(float scale,Rect plate)> plate=null)
         {
             RuneBoardWindow owner=null;
             ContentWindowView.Open(parent,"룬 보드",EquipmentViewSource.Draft,()=>1,view=>
             {
-                if(owner==null){owner=view.gameObject.AddComponent<RuneBoardWindow>();owner.shell=view;owner.store=store;owner.simulation=simulation;owner.service=service;owner.closed=closed;owner.Session=session??new RuneBoardSession(store.Data.runes,RuneMasteryCatalog.EquippedWeapon(store.Data.Hero)??"sword",p=>RuneV13Art.StorageRotation(p.Shape.Id));owner.observedRevision=store.Data.runes.revision;StoreViewBinding.Attach(owner,store,owner.RefreshCommitted,()=>owner.modal==null&&owner.pointer?.Dragging!=true);}
+                if(owner==null){owner=view.gameObject.AddComponent<RuneBoardWindow>();owner.shell=view;owner.store=store;owner.simulation=simulation;owner.closed=closed;owner.Session=session??new RuneBoardSession(store.Data.runes,RuneMasteryCatalog.EquippedWeapon(store.Data.Hero)??"sword",p=>RuneV13Art.StorageRotation(p.Shape.Id));owner.observedRevision=store.Data.runes.revision;StoreViewBinding.Attach(owner,store,owner.RefreshCommitted,()=>owner.modal==null&&owner.pointer?.Dragging!=true);}
                 owner.Render();
-            },()=>{if(owner!=null&&!owner.closing){owner.closing=true;owner.closed?.Invoke();}},back:()=>owner?.Escape(),skin:UiSkin.Casual,fit:Fit);
+            },()=>{if(owner!=null&&!owner.closing){owner.closing=true;owner.closed?.Invoke();}},back:()=>owner?.Escape(),skin:UiSkin.Casual,fit:plate??Fit);
             return owner;
         }
         public Button Find(string name)=>GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name==name);
@@ -111,6 +111,7 @@ namespace Hellscript
         void SwitchWeapon(string weapon){pointer.Cancel();Session.SwitchWeapon(weapon);focus=0;overview=false;cameraTouched=false;cameraScale=0;RequestRefresh();}
         void SetMode(bool view){pointer.Cancel();Session.SetMode(view);RequestRefresh();}
         public void Preview(RuneCandidate candidate,string hidden=null){board.Board(Session,candidate,hidden,focus);if(hint!=null){hint.text=candidate==null?DefaultHint():candidate.Ok?T("note.canPlace")+" · "+T("note.active",candidate.ActiveCount,candidate.Size):candidate.Reason;hint.color=candidate!=null&&!candidate.Ok?RuneCasual.CoralInk:RuneCasual.Ink;LayoutHint();}}
-        string DefaultHint()=>Session.Viewing?T("note.view"):Session.Selected!=null&&!Session.SelectedPlaced?T("note.pickSlot"):PlayerPrefs.GetInt("rune-board-placed",0)==0&&Session.Editor.DraftPlacements.Count==0?T("note.pickBlock"):"";
+        // The portrait inspector row already says "pick a block", so only the state hints (view, pick a slot) show there.
+        string DefaultHint()=>Session.Viewing?T("note.view"):Session.Selected!=null&&!Session.SelectedPlaced?T("note.pickSlot"):!Port&&PlayerPrefs.GetInt("rune-board-placed",0)==0&&Session.Editor.DraftPlacements.Count==0?T("note.pickBlock"):"";
     }
 }

@@ -813,7 +813,7 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 보스 처치 · 전리품 정리	Boss killed · collecting loot
 보스 처치 후 전리품 정리	Collecting loot after the boss
 보스 해금 시	When the boss unlocks
-보스 후에도 상자 개봉	Open chests after the boss too
+보스전 중에도 상자 탐색	Search for chests during the boss fight too
 보스로 이동	Head for the boss
 보스에게 사용	Using it on a boss
 보스와 영웅이 동시에 사망했습니다.\n보스 처치를 우선하여 클리어 보상을 지급했습니다.	The boss and the hero died at the same moment.\nThe kill took precedence, so the clear reward was paid.
@@ -1109,7 +1109,7 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 슬롯 {0}{1}	Slot {0}{1}
 슬롯 {0}에 선택한 설정 저장	Save the chosen settings to slot {0}
 시간 부족 기준	Low time threshold
-시간 부족 시 우회 중단	Stop detours when time runs short
+시간 부족 시 클리어 우선	Prioritize clearing when time runs short
 시간 부족 시 회수 예외	Collection exceptions when time runs short
 시계 방향	clockwise
 시계 방향 선회	Orbit clockwise
@@ -2287,7 +2287,7 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 대장간	Blacksmith
 대장간 이용	Use forge
 대화하기	Talk
-룬 보드 · 배치와 합성	Rune board · Placement and fusion
+룬 보드 · 배치	Rune board · Placement
 룬 블록 구매 · 룬 배치	Buy rune blocks · Place runes
 룬 상인	Rune merchant
 룬 상점 열기	Open rune shop
@@ -3236,7 +3236,7 @@ JSON 불러오기	Import JSON
 프리셋 이름	Preset name
 각인 배치 {0}	Layout {0}
 영역	Region
-기존 정의와 신규 확장을 구분합니다. 모든 수치는 밸런스 초안입니다.	Existing definitions and new additions are marked. All numbers are balance drafts.
+모든 수치는 밸런스 초안입니다.	All numbers are balance drafts.
 {0}종 / {1}칸	{0} kinds / {1} slots
 블럭과 칸의 상태	Block and slot states
 상태 안내	State guide
@@ -3266,22 +3266,8 @@ JSON 불러오기	Import JSON
 엘리트 칸(금색 이중 테두리)은 모든 색으로 켜집니다.	Elite slots (double gold ring) switch on with any colour.
 꺼진 칸도 블럭의 일부입니다. 연결 통로로 쓸 수 있습니다.	Unlit cells are still part of the block and can carry connections.
 칸을 연다고 능력이 켜지지는 않습니다. 맞는 색 블럭을 놓아야 합니다.	Opening a slot does not turn it on. Place a block of the right colour.
-룬 보드 이용 안내	How the rune board works
 배치 연습 (5단계)	Practice placing (5 steps)
 배치 튜토리얼	Placement tutorial
-직접 해 보는 5단계 가이드	Hands-on 5-step guide
-같은 색 연결부터 회전과 능력 활성까지 연습합니다. 실제 룬과 저장에는 영향이 없고 언제든 넘길 수 있습니다.	Practise same-colour connections, rotation and ability activation. It never touches your real runes or save, and you can skip it at any time.
-숙련도와 개방	Mastery and unlocking
-Lv.1에 중앙 19칸이 열려 있고 레벨마다 6포인트를 받습니다. 1포인트로 열린 칸과 변으로 이어진 칸 하나를 엽니다. 중앙 37칸을 모두 열면 바깥 6개 영역 중 하나를 고를 수 있고, 그 영역의 중앙 엘리트 칸은 무료로 열립니다. 현재 영역을 모두 열기 전에는 다음 영역을 고를 수 없습니다.	Level 1 starts with 19 open slots in the centre and every level gives 6 points. One point opens one slot that touches an open slot along an edge. After all 37 centre slots are open you choose one of the six outer regions, and its elite centre slot opens for free. You cannot choose the next region until the current one is fully open.
-블럭 연결 규칙	Connection rules
-한 색의 블럭은 중앙 시작점 옆에서 시작하거나, 이미 연결된 같은 색 블럭에서 한 칸 간격을 두고 이어야 합니다. 같은 색 블럭끼리는 변이 닿으면 안 됩니다. 간격을 이루는 두 칸은 열려 있어야 하고, 다른 블럭 하나가 그 두 칸을 함께 덮으면 연결이 막힙니다. 다른 색은 붙을 수 있지만 겹칠 수 없습니다. 색이 맞지 않는 칸을 덮어도 놓을 수 있으며 그 칸은 능력이 꺼진 통로가 됩니다. 엘리트 칸은 모든 색으로 켜지지만 새 시작점은 아닙니다.	A block of one colour starts next to the centre stone, or links to a connected block of the same colour across a one-edge gap. Blocks of the same colour must not touch along an edge. Both cells that form the gap must be open, and a single other block covering both cancels the link. Different colours may touch but not overlap. You may cover a slot of another colour; that cell becomes a dark passage whose ability stays off. Elite slots switch on with any colour but are never a new starting point.
-조작	Controls
-블럭을 고른 뒤 빈 칸을 누르거나 끌어 놓습니다. 끄는 동안 블럭이 손가락 위로 떠오르고 착지 미리보기에 켜질 칸 수가 나옵니다. 보드에 놓인 블럭은 0.1초 안에 끌면 보드가 움직이고, 0.1초 이상 누른 뒤 끌면 블럭이 움직입니다. 보관함은 0.3초 눌러 끌어야 배치되고 짧게 쓸면 목록이 스크롤됩니다. 빈 곳 끌기·두 손가락 확대·마우스 휠로 보드를 움직입니다. R 회전 · Delete 회수 · Ctrl+Z 취소 · Ctrl+S 저장 · Esc 선택 해제.	Pick a block, then tap an empty slot or drag it onto the board. While dragging, the block floats above your finger and the landing preview shows how many cells will switch on. A placed block pans the board if you drag within 0.1 s and moves itself if you hold 0.1 s first. In storage, hold 0.3 s to drag a block; a short swipe scrolls the list. Drag empty space, pinch with two fingers or use the mouse wheel to move the board. R rotate · Delete recall · Ctrl+Z undo · Ctrl+S save · Esc deselect.
-같은 색·같은 모양의 블럭은 한 칸에 모아 개수를 보여 줍니다. 어느 무기에든 놓은 블럭은 보관함에서 빠지고 회수하면 돌아옵니다. 위의 색 탭과 1~5칸 필터를 함께 쓸 수 있습니다.	Blocks of the same colour and shape share one tile with a count. A block placed on any weapon leaves storage and comes back when recalled. The colour tabs and the 1-5 cell filters work together.
-저장과 프리셋	Saving and presets
-편집한 내용은 변경 저장을 눌러야 저장됩니다. 한 단계씩 취소(최대 50번)하거나 마지막 저장으로 되돌릴 수 있습니다. 프리셋 5칸은 여섯 무기의 블럭 배치를 함께 기록하며 숙련도와 개방한 칸은 바꾸지 않습니다. 무기 탭을 바꿔도 장착 무기는 바뀌지 않고 편집할 보드만 바뀝니다.	Edits are only kept when you press Save changes. You can undo step by step (up to 50) or revert to the last save. The 5 presets record the layouts of all six weapons together and never change mastery or opened slots. Switching the weapon tab changes the board you edit, not the weapon you wear.
-이 시안에 대해	About this mockup
-룬 보드 v13의 규칙과 데이터를 그대로 쓰고 화면만 게임 공통 UI로 다시 구성했습니다. 경험치와 룬 수량은 시연 값이며 전투와 연결되지 않습니다. 브라우저가 저장소를 막으면 JSON 내보내기로 보관하세요.	It uses the rules and data of rune board v13 unchanged; only the screen is rebuilt on the shared game UI. XP and rune counts are demo values and are not connected to combat. If the browser blocks storage, keep your work with JSON export.
 5단계 배치 연습	Five-step placement practice
 튜토리얼 단계	Tutorial steps
 연습 블럭	Practice blocks
@@ -3348,7 +3334,6 @@ C자	C-shape
 두 블럭을 번갈아 선택·회전해 보세요. 능력과 같은 색으로 덮어야 켜집니다.	Select and rotate the two blocks in turn. An ability only switches on when covered by its own colour.
 보드에서 각 색마다 능력을 2칸씩 켜세요.	Switch on two abilities of each colour.
 (능력과 같은 색 블럭이 올라가야 능력이 켜집니다)	(An ability switches on only under a block of the same colour.)
-같은 색·모양·획득 등급의 블럭을 한 칸에 모아 보여 줍니다. 어느 무기에든 배치하면 보관함에서 빠지고 회수하면 돌아옵니다. 색과 칸 수 필터를 함께 사용할 수 있습니다.	Blocks with the same colour, shape and acquisition grade share a tile. Placed blocks leave storage and return when recalled. Colour and size filters work together.
 모양 {0}	Shape {0}
 {0} 룬의 첫 블럭은 중앙 시작점 옆에 놓으세요.	The first {0} block must sit next to the centre start stone.
 {0} 룬이 중앙과 연결되지 않습니다. 중앙 옆 또는 연결된 같은 색 룬의 한 변 간격에 놓으세요.	{0} blocks are disconnected from the centre. Place them next to the centre or one edge-gap from a connected block of the same colour.
@@ -3386,7 +3371,6 @@ v3 저장 형식이 아닙니다.	Not a v3 save format.
 지원하지 않는 저장 형식입니다. v3/v4 또는 v5 JSON을 사용하세요.	Unsupported save format. Use v3/v4 or v5 JSON.
 알 수 없는 무기 또는 영역입니다.	Unknown weapon or region.
 현재 영역 37칸을 모두 개방한 뒤 선택할 수 있습니다.	Open all 37 slots of the current region first.
-여기서 편집한 배치는 변경 저장 후 해당 무기를 사용할 때 적용됩니다. 경험치·룬 합성·드롭은 기존 게임 규칙을 따릅니다.	Saved layouts apply when you use the corresponding weapon. Mastery XP, rune fusion and drops follow the existing game rules.
 먼저 보상을 받아 주세요. 그다음 룬 보드의 5단계 플레이어블 가이드를 함께 진행해요.	Claim your reward first. Then we will work through the Rune Board's five-step playable guide together.
 다섯 단계의 연습을 모두 마쳤어요. 이제 실제 무기의 룬 보드를 사용할 준비가 됐어요.	You finished all five practice steps. You are ready to use your weapons' actual rune boards.
 무기별 보드에서 받은 룬을 배치해 보세요. 편집한 배치는 저장을 눌러야 해당 무기에 적용돼요.	Place the runes you received on a weapon board. Press Save to apply your edited layout to that weapon.
@@ -5271,8 +5255,6 @@ G{0} {1}칸 → G{2} {3}칸	G{0} {1} cells → G{2} {3} cells
 상점과 분해가 같은 캐릭터의 자동 선택 설정을 사용합니다.	The shop and salvage share this character's auto-selection settings.
 1. 선택할 등급	1. Rarities to select
 2. 선택할 장비	2. Equipment to select
-기준값 이상인 옵션이 지정한 개수만큼 일치하면 분해 대상에서 제외합니다. 0개는 제외 조건을 적용하지 않습니다.	Exclude an item from salvage when the selected number of attributes meet their thresholds. Zero disables attribute exclusions.
-장착·잠금·프리셋 참조·보석 장착 장비는 항상 제외합니다. 설정 저장은 아이템을 분해하거나 선택하지 않습니다.	Equipped, locked, preset-referenced and gem-socketed items are always excluded. Saving settings does not salvage or select items.
 상점과 공유하는 자동 선택 설정	Shared shop auto-selection settings
 등급 {0}개 · 장비 종류 {1}개 · 제외 옵션 적용	{0} rarities · {1} equipment types · exclusions applied
 고정 부가 저항	Fixed bonus resistance
@@ -5541,7 +5523,6 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 1인 탐험	Solo expedition
 최고 돌파의 다음 단계까지 도전할 수 있습니다.	Challenge up to one tier above your highest clear.
 균열을 탐험하고 수호자를 처치하세요.	Explore the rift and defeat its guardian.
-사냥 칙령에 따라 자동 전투	Auto-battle follows your Hunt Edict
 눌러서 바로 교체	Tap to change
 눌러서 확인·교체	Inspect & replace
 균열 입장하기	Enter Rift
@@ -5928,7 +5909,8 @@ G0 한 칸 룬을 구입하고 룬 보드에서 배치를 확인하세요. 최�
 현재 효과 배율 {0:0}%	Current effect scale {0:0}%
 현재 사용 비용 {0:0.##}	Current resource cost {0:0.##}
 기본 등급 설명	Base-rank description
-사용 순서 {0} · 자동 사용 {1}	Priority {0} · automatic use {1}
+사용 순서 {0}	Priority {0}
+선택한 보조 스킬이 없습니다.	No modifier is chosen.
 기본 공격보다 뒤에 있습니다. 앞선 행동이 선택되면 이 기술을 검사하지 않을 수 있습니다.	This skill follows basic attack. When an earlier action is selected, this skill may not be evaluated.
 사용 조건 확인	Inspect activation conditions
 기본 공격 앞으로	Move before basic attack
@@ -7972,7 +7954,7 @@ HP 3배, 0.9초 예고 발구르기 고리 2겹, 엄니 돌진 6m	HP ×3, 0.9 s 
 계정 공용 보관 · 소지품에는 없습니다.	Shared account stock · Not stored in the bag.
 구매 · 판매 · 되사기를 선택하세요.	Choose Buy, Sell or Buyback.
 구매가격	Purchase price
-구매에서는 상품과 현재 장착 장비를 비교합니다. 판매에서는 소지품을 눌러 정보를 보고 판매하거나, 다중 선택으로 일괄 판매할 수 있습니다. 되사기 목록의 장비를 누르면 판매 당시의 모든 정보를 확인할 수 있습니다.	Buy compares vendor gear with equipped gear. In Sell, select inventory gear to see its details and sell it, or use Multi-select to sell several items. Select a Buyback row to inspect the complete item as it was sold.
+구매에서는 상품을 눌러 정보를 보고, '착용 장비 비교'로 현재 장착 장비와 나란히 비교합니다. 판매에서는 소지품을 눌러 정보를 보고 판매하거나, 다중 선택으로 일괄 판매할 수 있습니다. 되사기 목록의 장비를 누르면 판매 당시의 모든 정보를 확인할 수 있습니다.	In Buy, select vendor gear to see its details, then use Compare worn gear to see it beside your equipped item. In Sell, select inventory gear to see its details and sell it, or use Multi-select to sell several items. Select a Buyback row to inspect the complete item as it was sold.
 구매하기	Purchase
 구매했습니다. 소지품에 보관됩니다.	Purchased and placed in inventory.
 다음 입고	Restock
@@ -8006,6 +7988,7 @@ HP 3배, 0.9초 예고 발구르기 고리 2겹, 엄니 돌진 6m	HP ×3, 0.9 s 
 조건에 맞는 판매 장비를 선택했습니다.	Matching gear selected for sale.
 종류	Type
 주 무기	Main weapon
+착용 장비 비교	Compare worn gear
 최근 판매	Recent sales
 추가 옵션 없음	No additional affixes
 판매 금액	Sale value
@@ -8157,3 +8140,31 @@ CC기 저항	Crowd Control Resistance
 숙련도 경험치	Mastery experience
 전체 배치 프리셋	Global layout presets
 능력 색	Ability colours
+착용 중인 장비 기준	Equipped gear baseline
+빈 부위 기준	Empty slot baseline
+{0} 기준	{0} baseline
+무기 구성 점수	Weapon loadout score
+주 무기 + 보조 장비 합계 · 위 점수는 장비 한 개만 비교	Main hand + off hand total. The score above compares one item only.
+더 높음	Higher
+더 낮음	Lower
+같음	Equal
+장비 점수는 그대로입니다.	Gear score stays the same.
+장비 점수가 {0} 높아집니다.	Gear score goes up by {0}.
+장비 점수가 {0} 낮아집니다.	Gear score goes down by {0}.
+교체되는 장비: {0}	Replaces: {0}
+빈 부위에 장착합니다.	Goes into the empty slot.
+교체됨	Replaced
+함께 해제	Also removed
+유지	Kept
+일괄 분해 · 자동 선택 설정	Salvage auto-select
+분해 대상 {0}개	Salvage targets: {0}
+보호 장비 {0}개는 제외됨	{0} protected items excluded
+{0}종 중 {1}종 선택 · 소지품 {2}개	{1} of {0} types · {2} in bag
+설정 저장은 아이템을 분해하거나 선택하지 않습니다. 분해는 일괄 분해 창에서 확인한 뒤 실행됩니다.	Saving never salvages or selects items. Salvage runs only after you confirm in the bulk salvage window.
+마지막 적 위치를 찾아감	Heads to where the enemy was last seen
+적보다 먼저 챙김	Handled before the enemy
+적을 조사한 뒤 챙김	Handled after the enemy
+
+# Combat recording preparation
+전투 준비 중…	Preparing battle…
+전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.	Could not prepare the battle recording. Resume to try again.

@@ -12,7 +12,7 @@ namespace Hellscript
         public GameStore Store {get;private set;}
         public AttendancePopupSettings AttendancePopups {get;private set;}
         CombatSimulation combat;
-        public CombatSimulation Combat {get=>combat;private set {combat=value;Audio?.Bind(value);}}
+        public CombatSimulation Combat {get=>combat;private set {combat?.Playback?.Dispose();combat=value;value?.EnableRecording(Store);Audio?.Bind(value);}}
         public GameAudio Audio {get;private set;}
         public CombatTelemetryUploader Telemetry {get;private set;}
         public LiveOpsClient LiveOps {get;private set;}
@@ -191,7 +191,7 @@ namespace Hellscript
         {if(!Active)return;
             // A tutorial run that is waiting is resumed by its card (which checks the level's skills), not by the pause button.
             if(TutorialActive&&Combat.TutorialWaiting){UI.ShowTutorialPrompt();return;}
-            if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
+            if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;if(!Combat.State.paused&&!string.IsNullOrEmpty(Combat.Playback?.Error))Combat.Playback?.Invalidate();Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
         public void SetSpeed(float speed)
         {
             if(!CombatSpeedAccess.CanSelect(speed)){Notify(CombatSpeedAccess.LockedMessage);return;}
@@ -370,8 +370,24 @@ namespace Hellscript
             // or let portal automation touch the containers while the player is inspecting them.
             if(IdleHunting && UI.CommonPanelOpen)
             { combatClock.Pause(); UpdateIdlePresentation(); return; }
-            SettleRiftAttendance(elapsed);
             TickTutorial();
+            if(Active&&!Combat.State.paused&&!Combat.State.portal&&!backgroundPaused&&!foregroundResumeRequired&&!UI.CommonPanelOpen&&string.IsNullOrEmpty(Combat.State.navigationError))
+            {
+                var recording=Combat.Playback;
+                if(!recording.Ready)
+                {
+                    bool completed=recording.Prepare();
+                    combatClock.Reset(Time.realtimeSinceStartupAsDouble);elapsed=0;
+                    if(recording.Error!="")
+                    {
+                        Debug.LogError("Combat recording failed: "+recording.Error);
+                        Combat.State.paused=true;Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");
+                    }
+                    else if(!completed)
+                    {if(!DisplayDimmed)World.Present(Combat.State,0);UpdateIdlePresentation();return;}
+                }
+            }
+            SettleRiftAttendance(elapsed);
             if(UI.CommonPanelOpen&&Active&&!backgroundPaused){saveClock+=(float)elapsed;if(saveClock>=3){saveClock=0;Save();}return;}
             var run=Combat.State;float real=(float)elapsed;bool wasActive=Active;
             if(Active&&!backgroundPaused){if(run.riftAttendance?.version==1)run.realTime=(float)(run.riftAttendance.elapsedMs/1000);else run.realTime+=real;}
@@ -379,7 +395,8 @@ namespace Hellscript
             {
                 combatClock.Accumulate(elapsed,EffectiveSpeed);int guard=0;
                 while(guard++<ForegroundCombatClock.TickBudget&&Active&&!run.paused&&!run.portal&&string.IsNullOrEmpty(run.navigationError)&&combatClock.TakeTick())
-                {using var sample=PresentationMetrics.Combat.Auto();PresentationMetrics.CombatTicks++;Combat.Tick(CombatSimulation.Step);}
+                {using var sample=PresentationMetrics.Combat.Auto();PresentationMetrics.CombatTicks++;if(!Combat.Playback.PlayNext())
+                    {combatClock.Pause();if(Combat.Playback.Error!="")Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");break;}}
                 if(Active&&combatClock.CheckBacklog(elapsed,EffectiveSpeed))PauseForForeground("기기 상태로 사냥이 일시정지되었습니다. 계속하려면 재개를 눌러 주세요.");
             }
             else combatClock.Pause();
@@ -397,7 +414,7 @@ namespace Hellscript
         }
         void SettleRiftAttendance(double elapsed)
         {
-            if(!Active||Combat.State.training>=0||backgroundPaused||foregroundResumeRequired)return;
+            if(!Active||Combat.State.training>=0||backgroundPaused||foregroundResumeRequired||Combat.Playback!=null&&!Combat.Playback.Ready&&!Combat.State.paused&&!Combat.State.portal)return;
             double charged=Store.AttendRift(Combat.State,elapsed*1000);
             Combat.State.realTime=(float)(Combat.State.riftAttendance.elapsedMs/1000);
             if(charged+0.001<elapsed*1000||Store.Data.riftFatigue.Total<=0)Combat.ExhaustFatigue();

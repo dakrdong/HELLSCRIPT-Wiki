@@ -46,6 +46,7 @@ namespace Hellscript
             var previous=State.build;bool changed=BuildEditing.CombatSignature(previous)!=BuildEditing.CombatSignature(candidate);
             State.build=candidate;Stats=stats;if(State.training<0)Hero.build=persistentHeroBuild;
             if(!changed)return;
+            InvalidateRecording();
             StopEdictWalk();
             // The document may no longer match the equipped skills, so its eligibility is decided again.
             PrepareEdict();

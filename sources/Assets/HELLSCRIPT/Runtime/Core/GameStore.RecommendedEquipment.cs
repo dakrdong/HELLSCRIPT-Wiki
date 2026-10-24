@@ -7,6 +7,23 @@ namespace Hellscript
     public enum EquipmentLootResult { Rejected, Acquired, SaveFailed }
     public sealed partial class GameStore
     {
+        internal static bool ApplyRecommendedLoot(AccountSave a,RunState staged,string itemId,BagPolicy policy,bool rarityOnly)
+        {
+            var candidate=staged.drops.SingleOrDefault(d=>d.item.id==itemId);
+            if(candidate==null||candidate.claimed||candidate.ignored)return false;
+            var rewardSnapshot=CombatJournal.Copy(candidate.item);
+            if(!Economy.AddItem(a.Hero,candidate.item,policy,a,rarityOnly))return false;
+            candidate.claimed=true;candidate.outcome=RiftLootOutcome.Kept;staged.lootCount++;
+            candidate.gearRecommended=RiftGearRecommendations.CanOffer(a.Hero,candidate.item);
+            if(candidate.gearRecommended)candidate.gearOrder=staged.drops.Max(d=>d.gearOrder)+1;
+            if(candidate.item.equipped)
+            {
+                var hero=RuneGrowth.Copy(a.Hero);hero.build=staged.build;
+                hero.slotProgress=new SlotProgress{levels=(int[])staged.slotLevels.Clone()};var stats=new HeroStats(hero,false,a.runes).WithActivePotion(staged.potions,hero.level);
+                staged.health=Mathf.Min(staged.health,stats.hp);staged.resource=Mathf.Min(staged.resource,stats.maxResource);
+            }
+            candidate.item=rewardSnapshot;return true;
+        }
         // Pickup, displacement, and the claimed flag share one atomic save and idempotent receipt.
         public EquipmentLootResult CommitRecommendedLoot(RunState run,string itemId,BagPolicy policy,bool rarityOnly)
         {
@@ -18,21 +35,9 @@ namespace Hellscript
             bool eligible=false;float health=run.health,resource=run.resource;
             bool saved=Transact("recommended-loot:"+run.id+":"+itemId,"recommended-loot:"+run.id+":"+itemId,a=>
             {
-                var staged=StagedRun(a,run);var candidate=staged.drops.Single(d=>d.item.id==itemId);
-                if(candidate.claimed||candidate.ignored)return false;
-                var rewardSnapshot=CombatJournal.Copy(candidate.item);
-                if(!Economy.AddItem(a.Hero,candidate.item,policy,a,rarityOnly))return false;
-                eligible=true;candidate.claimed=true;candidate.outcome=RiftLootOutcome.Kept;staged.lootCount++;
-                candidate.gearRecommended=RiftGearRecommendations.CanOffer(a.Hero,candidate.item);
-                if(candidate.gearRecommended)candidate.gearOrder=staged.drops.Max(d=>d.gearOrder)+1;
-                if(candidate.item.equipped)
-                {
-                    var hero=RuneGrowth.Copy(a.Hero);hero.build=staged.build;
-                    hero.slotProgress=new SlotProgress{levels=(int[])staged.slotLevels.Clone()};var stats=new HeroStats(hero,false,a.runes).WithActivePotion(staged.potions,hero.level);
-                    health=staged.health=Mathf.Min(staged.health,stats.hp);resource=staged.resource=Mathf.Min(staged.resource,stats.maxResource);
-                }
-                candidate.item=rewardSnapshot;
-                return true;
+                var staged=StagedRun(a,run);
+                eligible=ApplyRecommendedLoot(a,staged,itemId,policy,rarityOnly);
+                health=staged.health;resource=staged.resource;return eligible;
             });
             if(!saved)return eligible?EquipmentLootResult.SaveFailed:EquipmentLootResult.Rejected;
             // The staged copy decided whether a card is offered; the guide stage's live drops take that decision over (a rift run is synced in Transact).
