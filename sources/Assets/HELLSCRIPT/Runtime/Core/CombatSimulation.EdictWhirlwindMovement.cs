@@ -13,7 +13,7 @@ namespace Hellscript
             if(action.skill!=0||action.phase!=HeroActionPhase.Channeling||d==null)return false;
             var seen=ForecastSeen().Where(EdictTargetEligible).ToArray();var target=seen.FirstOrDefault(e=>e.id==State.targetId);
             if(target==null)return true;
-            var values=d.global.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);
+            var values=EdictGlobals(d);
             string movement=HuntEdictV2.Value(d,"W01",3);Vector2 delta=State.position-target.position,goal=State.position;
             if(delta.sqrMagnitude<.0001f)delta=Vector2.down;
             float distance=Vector2.Distance(State.position,target.position);

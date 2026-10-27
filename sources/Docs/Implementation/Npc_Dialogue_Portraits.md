@@ -160,3 +160,17 @@ macOS 개발 빌드가 오류 0개로 완료됐고, 실제 실행 파일에서 �
 ![터크 가르비](../../Assets/HELLSCRIPT/Resources/Art/NpcPortraits/turk-garbi.png)
 ![구젤 판](../../Assets/HELLSCRIPT/Resources/Art/NpcPortraits/guzel-pan.png)
 ![미슈 카루](../../Assets/HELLSCRIPT/Resources/Art/NpcPortraits/mishu-karu.png)
+
+
+## 대화 구도와 안내 얼굴 자르기 수정 (2026-10-25)
+
+사용자 첨부 2/3과 주인공 남녀 6종·벨리나 원본을 실제 픽셀로 확인했다. 주인공 원본은 전신, NPC 원본은 허벅지 위 구도였으나 동일한 전체 UV로 표시되고 있었다. 주인공의 이야기 장면에만 위쪽 70%(`y=.3, height=.7`)를 사용하고 기존 남녀 원본 선택·좌우 마주보기 반전을 유지한다. 다른 NPC의 전체 UV·원본 PNG·가져오기 설정·meta는 바꾸지 않았다.
+
+`StoryDialogueWindow`는 화자와 청자 모두 잘라낸 영역의 비율(`textureAspect × abs(uv.width / uv.height)`)로 너비와 오른쪽 위치를 계산한다. 원본 2:3을 잘라낸 뒤에도 그대로 강제해 그림이 눌리던 가능성을 제거했다. 기존 좁은 화면의 화자 한 명, 청자 음영과 본문 공간 부족 시 청자 숨김, 안전 영역·버튼·대사 진행은 유지한다.
+
+균열 안내자의 실제 프로필은 `guide-goddess / 벨리나`다. 기존 작은 안내 얼굴 영역의 아래 경계 `.62`가 원본의 입·턱보다 높았다. `NpcProfile.FaceUvFor`에 벨리나 전용 영역(`x=.16, y=.50, width=.68, height=.68 × textureAspect`)을 두고 `PrologueGate.Restyle`가 화자가 바뀔 때마다 적용한다. 입·턱·머리 위 후광을 포함하며 정사각형 안내 칸에서 원본 픽셀 비율을 유지한다. 인물 이름·텍스트·진행·저장 키는 바꾸지 않았다.
+
+- C 작업 폴더의 절대경로 공통 UI 계약·검사기 회귀 15개 통과, receipt passed/exitCode 0 및 로그 해시 일치. UI refresh 정적 검사도 14 bindings/252 sources로 통과했다. `git diff --check` 통과.
+- 주인공 남녀 6종의 기존 방향 검사 기대값을 새 구도로 갱신했다. 새 이야기 구도 검사 6개 안에서 3개 화면 비율(440×956, 956×440, 16:9)과 화자/청자 36조합을 준비했고, 벨리나 얼굴 landmark 1개·안내 화자 교체 1개를 더해 새 회귀 사례는 8개다.
+- 원본 7장의 SHA256·PNG 크기·유효 자르기 비율은 작업 폴더 `Builds/Validation/PortraitFraming20261025/source-inspection.json`에 보존했다. 이는 원본 조사와 정적 구도 근거이며 실제 화면 렌더링 증거가 아니다.
+- Unity 컴파일·관련 Edit/Play Mode·KO/EN 네이티브 구도 검증·빌드는 통합 담당자에게 남겼다. C는 Unity·CUA·이미지 재생성·전체 Edit Mode·위키 생성/게시를 실행하지 않았다. 직접 영향 검사는 `NpcPortraitFacingTests`, `StoryDialogueTests`, `PrologueGateTests`, `PrologueTourTests`다.

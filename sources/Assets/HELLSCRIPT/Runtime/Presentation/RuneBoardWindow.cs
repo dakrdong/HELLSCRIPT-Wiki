@@ -16,7 +16,7 @@ namespace Hellscript
         float width,height,U;bool landscape,refresh,closing;int focus,color=-1;bool overview,cameraTouched;
         readonly HashSet<int> sizes=new HashSet<int>();
         Vector2 camera;float cameraScale;string lastWeapon,notice="",modalKind="";float noticeUntil;
-        Text hint,toast,zoomLabel;bool noticeError;float storageOffset;int observedRevision;
+        Text hint,toast,zoomLabel;bool noticeError;float storageOffset;int observedRevision;string observedEquippedWeapon;
         public RuneGemView Board=>board;public RectTransform FrameRect=>shell.Frame;public RectTransform StorageRect=>storagePanel;
         public RectTransform InspectorRect=>inspector;public RectTransform DialogRect=>modal;public bool Landscape=>landscape;
         public bool Blocked=>modal!=null;public RuneBoardPointer Pointer=>pointer;
@@ -25,7 +25,7 @@ namespace Hellscript
             RuneBoardWindow owner=null;
             ContentWindowView.Open(parent,"룬 보드",EquipmentViewSource.Draft,()=>1,view=>
             {
-                if(owner==null){owner=view.gameObject.AddComponent<RuneBoardWindow>();owner.shell=view;owner.store=store;owner.simulation=simulation;owner.closed=closed;owner.Session=session??new RuneBoardSession(store.Data.runes,RuneMasteryCatalog.EquippedWeapon(store.Data.Hero)??"sword",p=>RuneV13Art.StorageRotation(p.Shape.Id));owner.observedRevision=store.Data.runes.revision;StoreViewBinding.Attach(owner,store,owner.RefreshCommitted,()=>owner.modal==null&&owner.pointer?.Dragging!=true);}
+                if(owner==null){owner=view.gameObject.AddComponent<RuneBoardWindow>();owner.shell=view;owner.store=store;owner.simulation=simulation;owner.closed=closed;owner.Session=session??new RuneBoardSession(store.Data.runes,RuneMasteryCatalog.EquippedWeapon(store.Data.Hero)??"sword",p=>RuneV13Art.StorageRotation(p.Shape.Id));owner.observedRevision=store.Data.runes.revision;owner.observedEquippedWeapon=RuneMasteryCatalog.EquippedWeapon(store.Data.Hero);StoreViewBinding.Attach(owner,store,owner.RefreshCommitted,()=>owner.modal==null&&owner.pointer?.Dragging!=true,visibleState:()=>store.Data.runes.revision+"|"+RuneMasteryCatalog.EquippedWeapon(store.Data.Hero));}
                 owner.Render();
             },()=>{if(owner!=null&&!owner.closing){owner.closing=true;owner.closed?.Invoke();}},back:()=>owner?.Escape(),skin:UiSkin.Casual,fit:plate??Fit);
             return owner;
@@ -33,7 +33,13 @@ namespace Hellscript
         public Button Find(string name)=>GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name==name);
         static string T(string key,params object[] values)=>RuneBoardText.Get(key,values);
         float E(float value)=>value*U;int Z(float value)=>Mathf.Max(8,Mathf.RoundToInt(E(value)));
-        void RefreshCommitted(){if(observedRevision==store.Data.runes.revision)return;observedRevision=store.Data.runes.revision;if(!Session.Dirty)Session.Reload(store.Data.runes);RequestRefresh();}
+        void RefreshCommitted()
+        {
+            string equipped=RuneMasteryCatalog.EquippedWeapon(store.Data.Hero);bool runesChanged=observedRevision!=store.Data.runes.revision;
+            if(!runesChanged&&observedEquippedWeapon==equipped)return;
+            observedRevision=store.Data.runes.revision;observedEquippedWeapon=equipped;
+            if(runesChanged&&!Session.Dirty)Session.Reload(store.Data.runes);RequestRefresh();
+        }
         public void RequestRefresh()=>refresh=true;
         void OnDisable(){pointer?.Cancel();}
         void LateUpdate()

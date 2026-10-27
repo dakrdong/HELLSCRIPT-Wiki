@@ -9,7 +9,7 @@ namespace Hellscript
     {
         readonly Color setGreen=StorageSurface.Hex(EquipmentGradePalette.Hex[4]);
         bool GearServiceAvailable=>!game.Active&&game.Store.Data.suspendedRun==null;
-        void EquipmentIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size);
+        void EquipmentIcon(Transform parent,Item item,float x,float y,float size)=>EquipmentSlotView.Icon(parent,item,x,y,size,hero:comparisonEditing?comparisonHero:game.Store.Data.Hero);
         string Grade(Item item)=>!string.IsNullOrEmpty(ItemCatalog.Unique(item.special)?.setId)?"세트":GameCatalog.Rarities[item.rarity];
         Color ItemColor(Item item)=>EquipmentGradePalette.For(item);
         string Protection(Item item)

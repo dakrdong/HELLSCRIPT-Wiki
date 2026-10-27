@@ -93,3 +93,36 @@ Equipped identity is checked by item ID in the supplied hero, so a historical sn
 ![Empty position starts at zero](EquipmentScoreEvidence/worn-B11-440x956-ko.png)
 ![Equipped item shows its own score](EquipmentScoreEvidence/worn-B17-440x956-ko.png)
 ![English landscape ring comparison](EquipmentScoreEvidence/comparison-956x440-en.png)
+
+
+## Score upgrades in equipment slots and equipped result markers (2026-10-25)
+
+Shared `EquipmentScore.Improves` reuses `EquipmentSlots.Targets`/`Plan` and `EquipmentScore.Replacement`. `EquipmentSlotView` adds a green upward arrow when at least one legal target improves the score. Both rings and a warrior's hands are considered. Weapons compare the complete replacement configuration, including two-handed occupancy and removed offhands. No scoring formula or automatic-equip policy was added.
+
+Ties, the currently equipped instance ID, class/level failures and incompatible offhands remain neutral. Vacant positions start at zero. Locks protect selling and automation rather than manual equipping, so they do not suppress score hints. Bag capacity does not suppress a score hint; the actual transaction still checks capacity and ownership. External candidates use a read-only temporary equipment list without changing the inventory, warehouse or snapshot.
+
+The arrow is a separate badge at the artwork's middle-left. Rarity/selection borders, top lock/hand/selection states and bottom level/overflow states remain intact. Shape accompanies color, and every new graphic ignores raycasts. No Update/LateUpdate loop, score cache or save key was added. Scores are evaluated through existing display-dependency redraws.
+
+| Display surface | Application or exclusion |
+| --- | --- |
+| `InventoryWindow`, legacy `GameUI.InventoryLayout` | Receive the current hero. Currently worn instance IDs are automatically excluded. |
+| `StorageWindow.Layout` | Bag, warehouse, sorted and overflow cells share `Paint` and the current hero. |
+| `EquipmentShopWindow` and `MockPanels` | Buy, buyback and sell lists use the shared policy, replacing the merchant's separate `Improves` calculation. |
+| `EquipmentShopWindow.Gamble` | Only the confirmed foreground result receives a score hint. Unknown purchases and shadows have no invented score. |
+| Forge enhancement/enchant lists and selected art, tutorial practice equipment | Receive the owning hero. Core crafting applies it to the pending completed result. |
+| `GameUI.TrainingEquipment` | Shared candidate slots receive the B draft hero. Owned equipment is unchanged. |
+| `RiftVictoryWindow.Loot` | Applies to currently owned result gear. Salvaged, sold, discarded and no-longer-owned records are excluded. |
+| `GameUI.GearRecommendations` | The integration owner supplies `hero:hero` to the shared slot. Calculation occurs only when the card is created. |
+| `CharacterEquipmentView`, character-selection gear, storage preset placement, aspect imprinting | Show already equipped gear or a planned layout, rather than alternative upgrade candidates. |
+| `GameUI.IdleDashboard`, `GearSwapShow`, `TutorialCinematic`, core crafting history | Fixed before/after, historical or narrative artwork is excluded to avoid implying a current equip alternative. |
+| `ItemDetailView.Style`, equipment details in reward boxes | Existing score rows/comparison remain. Their artwork is not a selectable equipment slot. |
+| Core catalogs/recipes, unknown purchases, potion/resource/reward-box cells, drag ghosts | Unrolled definitions, non-equipment and moving duplicate artwork do not receive equipment scores. |
+
+The result list's existing `장착 중 / Equipped` key follows only the result hero's current equipped instance ID. Snapshot flags and template IDs are not used. Committed equipment changes update the existing non-interactive badges immediately, including while a nested detail window defers a page repaint. Unchanged saves retain existing indicators. The integration owner supplies `RefreshLootEquipment()` in `RiftVictoryWindow.Changed`. No localization key was added.
+
+### Validation for this change
+
+- The E worktree's absolute-path UI validator and all 15 validator regressions passed. Worktree `Builds/Validation/UIContract/receipt.json` and `receipt.log` retain result passed/exitCode 0. The first relative-path invocation inspected the primary checkout and is excluded from E proof.
+- `check_ui_refresh.py` passed with 14 guarded bindings/252 source files. `git diff --check` passed.
+- Eight score cases, four shared-UI cases and one committed result-instance case were prepared in `RecommendedEquipmentTests`, `CasualUiSkinTests` and `RiftResultTests`.
+- E did not run Unity compilation, Edit/Play Mode, builds or native input while the user's game was protected. Focused integration tests and KO/EN/screen-ratio acceptance remain with the integration owner after the game closes. No full Edit Mode, physical-mobile or performance-improvement proof is claimed. No wiki build, check or publication ran on this feature branch.

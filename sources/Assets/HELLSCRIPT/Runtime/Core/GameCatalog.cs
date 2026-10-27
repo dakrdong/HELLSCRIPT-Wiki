@@ -123,6 +123,7 @@ namespace Hellscript
     public sealed class HeroSave
     {
         public RiftEntryProgress riftProgress=new RiftEntryProgress();
+        public RepeatSettings repeatSettings;
         public SlotProgress slotProgress=new SlotProgress();
         public bool classSkillValidation;
         public D4SkillRefundNotice d4SkillRefund;

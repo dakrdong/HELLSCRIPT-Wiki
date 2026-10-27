@@ -12,7 +12,7 @@ namespace Hellscript
         public InventoryWindow window;public string itemId;public bool bag,inspectOnly;
         float pressedAt;ScrollRect scrolling;
         public void OnPointerDown(PointerEventData data){pressedAt=Time.unscaledTime;}
-        public void OnPointerClick(PointerEventData data){if(data.button!=PointerEventData.InputButton.Left||itemId==null)return;if(inspectOnly)window.Inspect(itemId);else window.SelectItem(itemId);}
+        public void OnPointerClick(PointerEventData data){if(data.button!=PointerEventData.InputButton.Left||itemId==null)return;if(inspectOnly)window.Inspect(itemId);else window.SelectItem(itemId,this);}
         public void OnBeginDrag(PointerEventData data)
         {
             bool touchScroll=data is ExtendedPointerEventData extended&&extended.pointerType==UIPointerType.Touch&&Time.unscaledTime-pressedAt<.18f;
@@ -29,6 +29,7 @@ namespace Hellscript
         RectTransform ghost;string draggingId;bool draggingEquipped;Vector2 dragOffset;float suppressClickUntil;
         internal void BeginDrag(InventoryCell cell,PointerEventData data)
         {
+            CloseItemMenu();
             if(selecting||dialog!=null||cell.itemId==null||data.button!=PointerEventData.InputButton.Left)return;
             var item=FindItem(cell.itemId);if(item==null)return;
             draggingId=item.id;draggingEquipped=item.equipped;

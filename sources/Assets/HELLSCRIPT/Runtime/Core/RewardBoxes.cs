@@ -159,13 +159,12 @@ namespace Hellscript
         public static void CaptureClear(AccountSave a,RunState run)
         {
             if(run.training>=0||run.phase!=RunPhase.Cleared||!Eligible(a,run.stage))return;
-            RuneBoardTutorial.Cleared(a,run);
             CapturePromise(a,run.stage,run.liveOps);
         }
         static void CapturePromise(AccountSave a,int stage,LiveOpsRunSnapshot snapshot)
         {
             if(a.rewardBoxes.claimedStages.Contains(stage)||a.rewardBoxes.firstClearPromises.Any(p=>p.stage==stage))return;
-            var grants=RuneBoardTutorial.WithStarter(a,stage,snapshot?.firstClearRewards??RewardBoxCatalog.FirstClear(stage));LiveOpsConfig.ValidateGrants(grants,stage);
+            var grants=snapshot?.firstClearRewards??RewardBoxCatalog.FirstClear(stage);LiveOpsConfig.ValidateGrants(grants,stage);
             a.rewardBoxes.firstClearPromises.Add(new RewardBoxPromise{stage=stage,itemLevel=RewardBoxCatalog.ItemLevel(stage),liveOpsVersion=snapshot?.version??0,
                 configHash=snapshot?.configHash??"",grants=grants.Select(CombatJournal.Copy).ToArray()});
         }

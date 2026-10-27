@@ -50,6 +50,7 @@ namespace Hellscript
         {
             // A data monster's skill seal stops every skill; basic attacks still start.
             if(index>=0&&HeroSealed)return;
+            if(index<0&&PackCentreWalk(target))return;
             if(index>=0)RememberSkillStart();
             ObserveActivity(escape?CombatActivity.Evasion:CombatActivity.Attack);
             StopEdictWalk();

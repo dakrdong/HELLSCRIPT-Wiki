@@ -29,8 +29,8 @@
 | 마을·마을 메뉴·NPC 대화·서비스 메뉴·콘텐츠 해금 | `GameUI.Plaza`, `.TownServices`, `.RiftKeeper`, `.ContentUnlocks`, `NpcDialogueWindow`, `StoryDialogueWindow` | HUD 0.15초/Revision, 서비스 활성화는 CPU 선행 작업 소유; 이번에는 수정하지 않음 |
 | 전투·포탈/탈출 확인·균열 지도·적 행동·효과·HUD 상태 팝업 | `GameUI.cs`, `.BattleLayout`, `.BattleEscape`, `.Rift`, `.Enemies`, `.Effects`, `.GlobalHud`, `GlobalHudView` | HUD 수치·지도·전투 상태 갱신은 정상; 슬롯은 실제 데이터 존재 여부에 따라 active 변경 |
 | 콘텐츠 dock·절전 안내·절전 요약·장비 상세 | `GameUI.ContentDock`, `.Idle`, `IdleEquipmentDetailWindow` | dock의 목표 변화 보간·절전 표시 정상; save 기반 전체 창 재생성 없음 |
-| 인벤토리; 장비 상세·비교·능력치·일괄/선택 분해·물약 설정/선택·전체 재화·필터·범위 도움말 | `InventoryWindow*`, `GameUI.PlayInventory` | **수정**: 장비/빌드/보호 참조/슬롯 레벨·재화 키; 드래그/modal 보류, 재화 sheet 수치는 기존 방식으로 갱신 |
-| 창고; 장비/보석/룬 보관, 5개 창고 탭·해금·확장·이름 변경·상세·분해/판매·프리셋·이용 안내·기록 | `StorageWindow*`, `GameUI.Storage` | **수정**: 보관/용량/이름/재화/장비·룬 상태 키; 드래그/modal 보류, 기존 각 panel 스크롤 복원 유지 |
+| 인벤토리; 아이템 행동 팝업·장비 상세·비교·능력치·일괄/선택 분해·물약 설정/선택·전체 재화·필터·범위 도움말 | `InventoryWindow*`, `ItemActionMenuView`, `GameUI.PlayInventory` | **수정**: 장비/빌드/보호 참조/슬롯 레벨·재화 키; 드래그/modal 보류, 재화 sheet 수치는 기존 방식으로 갱신. 아이템 메뉴는 ID 재획득·기존 버튼 유지·복원 스크롤 보존, 실제 스크롤/분류 변경/소멸 시 닫힘 |
+| 창고; 아이템 행동 팝업·장비/보석/룬 보관, 5개 창고 탭·해금·확장·이름 변경·상세·분해/판매·프리셋·이용 안내·기록 | `StorageWindow*`, `ItemActionMenuView`, `GameUI.Storage` | **수정**: 보관/용량/이름/재화/장비·룬 상태 키; 드래그/modal 보류, 기존 각 panel 스크롤 복원 유지. 메뉴는 현재 보이는 칸으로 재연결하며 소멸/잘린 칸에는 연결하지 않음 |
 | 장비 상점 구매·판매·되사기; 판매 확인·자동 선택 설정·보상 비교 | `EquipmentShopWindow*`, `GameUI.EquipmentShop` | **수정**: 장비/보호 참조·골드·상점 상태 키; 1초 stock 검사에서 실제 stock 교체는 유지 |
 | 갬블 구매/판매/되사기·공개 연출·획득 비교 | 같은 상점 adapter의 `Gamble` 경로, `.Gamble` | **수정**: 동일 키; 정상 공개 연출 및 거래 후 repaint 유지 |
 | 대장장이 옵션 변경·슬롯 강화·장비 강화·코어 제작; 자동 재련/완료·장비 선택·옵션 고정·안내·코어 결과 | `BlacksmithWindow*` | 기존 `StoreViewSignature`와 작업 ID 변화 guard 확인; 0.25초 timer 수치는 제자리 갱신; 정상 작업 완료/공지/재련 repaint 유지 |

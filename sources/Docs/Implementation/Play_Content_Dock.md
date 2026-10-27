@@ -134,3 +134,7 @@ Edit Mode 결과 원본은 [editmode-focused.xml](PlayContentDockEvidence/editmo
 마을에서 표시하지 않는 전투 칙령 미리보기 영역을 콘텐츠 묶음 위에 예약하지 않는다. 설정·접기 화살표·콘텐츠는 같은 크기와 오른쪽 정렬, 6단위 간격을 사용한다. 월드 HUD 설정은 알파가 보존된 은색·금색 톱니 그림으로 표시하고 마을의 기존 크림색 원과 안쪽 축소를 제거한다. 전투의 콘텐츠·미니맵 위치는 유지한다. [제작 프롬프트·출처](../Art/SettingsCog20261018/manifest.json). 정확한 생성 모델은 미확인으로, gpt-image-2 사용이나 출시 아트 승인을 주장하지 않는 개발용 자산이다.
 
 [검증: 관련 Edit Mode 19개·UI 계약 15개와 macOS 실제 게임의 다섯 화면 비율 통과](TownShortcutStackEvidence20261018/validation.json) · [세로 화면](TownShortcutStackEvidence20261018/portrait.png) · [가로 화면](TownShortcutStackEvidence20261018/landscape.png). 모바일 실기기와 GPU 성능은 미검증이다.
+
+## 룬 보드 칸 (2026-10-24)
+
+룬 보드 칸은 열리기 전에도 같은 자리(다섯 칸 중 네 번째)에 잠긴 아이콘(`menu-rune-board-locked`)으로 있다. 누르면 "균열 레벨 10 달성 시 오픈됩니다"(열린 뒤 안내 전에는 "마을에서 룬 보드 안내를 마치면 열립니다.")를 보여 주며 전투 독에서도 보인다. 마을 첫 도착의 열림 연출이 자물쇠를 깨고 인장을 그 칸에 안착시킨다. [변경 기록](Rune_Unlock_Rift10_20261024.md).

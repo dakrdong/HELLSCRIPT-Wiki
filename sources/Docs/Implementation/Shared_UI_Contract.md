@@ -124,7 +124,7 @@
 ## 균열 입장 어댑터
 
 `RiftEntryWindow`는 `ContentWindowView`의 실제 소유 데이터 진입점을 사용한다. 승인된 HTML 배치를 따르는 어댑터로, 본문 스크롤 없이 가로에서는 원화·피로도/물약·스킬/입장을 0.95 : 1 : 1.05 비율로 나누고 입장 행동을 오른쪽 아래에 고정한다. 세로에서는 항목을 쌓고 입장 행동을 하단에 나란히 둔다. 이 창의 제목·행동 영역 좌표만 조정하며 안전 영역·캔버스·입력 차단·뒤로가기는 공통 창이 소유한다. 선택 팝업은 공통 창의 선택적 최대 크기를 사용한다. `UiTheme`, `UiFonts`, `PotionArt`, 사각 프레임을 선택한 공통 `SkillIconView`, 기존 `GameStore` 거래를 공유한다. 최초 보상은 `RewardBoxCatalog`의 상자 지급과 `ContentUnlocks`의 개방 단계를 같은 재사용 목록에서 표시한다. 상세 팝업에서 기능 개방 상태와 상자 수령 상태를 분리하고, 실제 지급은 `GameStore` 거래로 실행한다. [구현과 검증](Rift_Entry.md)을 따른다.
-물약 선택은 공통 본문의 한 열 56 높이 행과 내용 높이 맞춤을 사용한다. 스킬 교체는 후보 격자와 전체 설명을 가로에서는 나란히, 세로에서는 연이어 배치하는 어댑터다. 이 팝업의 중첩 목록 스크롤은 제거하고 후보 수·공통 창의 가용 높이에 맞춰 모든 선택과 설명을 표시한다. 창 높이 맞춤·안전 영역·고정 닫기/교체 영역은 `ContentWindowView`가 소유한다.
+물약 선택은 공통 본문의 한 열 56 높이 행과 내용 높이 맞춤을 사용한다. (2026-10-24 개정) 균열 입장의 스킬 교체 팝업은 제거됐고 스킬 칸은 스킬 창의 착용 스킬 줄로 연결된다. 창 높이 맞춤·안전 영역·고정 닫기 영역은 `ContentWindowView`가 소유한다.
 
 ## 인벤토리 물약 배치
 
@@ -216,7 +216,7 @@
 
 `DailyQuestWindow`는 기존 `ContentWindowView`/`ContentWindowHost` 진입점과 공통 제목·탭·닫기·하단 행동·안전 영역을 유지한다. 다섯 목표의 상태와 개별 수령을 한 화면에서 확인해야 하므로 해당 본문만 자동 목록 배치·스크롤을 끄고 전체 내용을 비례 배치한다. 세로 한 열, 가로 3×2 배치는 [일일 퀘스트 구현](Daily_Quests.md)을 따른다. `UiTheme`/`UiFonts`, 공통 버튼, `CurrencyIconView` 및 `StorageGlyph`를 재사용하며 거래·저장은 기존 도메인이 소유한다. 검사는 모든 카드·수령 버튼의 노출·레이캐스트·잘림·드래그 후 위치 유지·저장 실패와 7일/28일 탐색을 포함한다. 공통 창의 스크롤 정책과 UI 검사 소유자 목록은 변경하지 않는다.
 
-균열 15단계 해방 안내는 같은 룬 어댑터에 `StoryDialogueWindow`, 기존 `PrologueGate`와 `TutorialAnchorRing`을 연결한다. `AccountGuide.runeBoard`의 진행·지급 룬 ID·완료한 실습 페이지는 `GameStore` 거래로 저장한다. 기존 5단계 `RunePracticeModel`의 완료 판정으로 다음을 열며 각 단계의 NPC 설명은 공통 대화창을 사용한다. 연습은 실제 룬 상태를 변경하지 않는다. 해방 전에는 바로가기를 숨기고 인장 착지 성공 후 등록한다. 전용 창 프레임이나 별도 배치·장비 계산을 추가하지 않는다. [해방 튜토리얼과 검증](Rune_Board_Unlock_Tutorial.md)을 따른다.
+균열 10단계 해방 안내(마을 첫 도착)는 같은 룬 어댑터에 `StoryDialogueWindow`, 기존 `PrologueGate`와 `TutorialAnchorRing`을 연결한다. `AccountGuide.runeBoard`의 진행·지급 룬 ID·완료한 실습 페이지는 `GameStore` 거래로 저장한다. 기존 5단계 `RunePracticeModel`의 완료 판정으로 다음을 열며 각 단계의 NPC 설명은 공통 대화창을 사용한다. 연습은 실제 룬 상태를 변경하지 않는다. 해방 전에는 같은 칸에 잠긴 바로가기(`menu-rune-board-locked`)를 두고 인장 착지 성공 후 열린 아이콘으로 바꾼다. 전용 창 프레임이나 별도 배치·장비 계산을 추가하지 않는다. [해방 튜토리얼과 검증](Rune_Board_Unlock_Tutorial.md)을 따른다.
 
 2026-10-02: 균열 활동 시간은 기존 전투 캔버스의 독립 HUD 어댑터다. `CombatFeedback`의 실제 행동 구간만 읽고 `TrainingDpsChart`, `DpsHudDrag`와 `DpsHudPosition`을 재사용한다. 그래프는 실제 경과 시간에 따른 누적 초를 표시하며 DPS와 별도의 접기·기기 위치를 유지한다. 일반 이동·전투 이동·회피·파밍 분류와 100% 막대의 근거 및 검증은 [균열 활동 시간](Rift_Activity_Time.md)을 따른다.
 

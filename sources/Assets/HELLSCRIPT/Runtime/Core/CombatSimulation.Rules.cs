@@ -88,13 +88,23 @@ namespace Hellscript
             if(r.target!=RuleTarget.Default)return r.target;
             switch(global??Policy.target){case TargetMode.Elite:return RuleTarget.Elite;case TargetMode.Support:return RuleTarget.Support;case TargetMode.LowHealth:return RuleTarget.LowHealth;case TargetMode.Dense:return RuleTarget.Dense;default:return RuleTarget.Nearest;}
         }
+        // Target selection runs for every rule on every decision. The eligible list is only read inside one call (no caller re-enters it), so it reuses a buffer.
+        readonly List<EnemyState> eligibleTargets=new List<EnemyState>();
+        static EnemyState TargetWithId(List<EnemyState> list,int id)
+        {for(int i=0;i<list.Count;i++)if(list[i].id==id)return list[i];return null;}
         EnemyState SelectRuleTarget(Rule r,TargetMode? global=null,EdictTargetPolicy exact=null)
         {
             var policy=exact?.version==EdictTargetPolicy.CurrentVersion?exact:global.HasValue?null:TargetPolicy;
-            var candidates=policy!=null?sensed.Where(EdictTargetEligible).ToList():sensed;
+            var candidates=sensed;
+            if(policy!=null)
+            {
+                eligibleTargets.Clear();
+                foreach(var enemy in sensed)if(EdictTargetEligible(enemy))eligibleTargets.Add(enemy);
+                candidates=eligibleTargets;
+            }
             if(policy!=null&&r.target==RuleTarget.Default)
-                return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,DangerousEdictCast,(a,b)=>Map.LineClear(a,b));
-            var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return candidates.Find(e=>e.id==State.targetId);
+                return policy.Select(candidates,State,State.edictTarget?.enemyId??-1,r.targetRadius,DangerousEdictCast,(a,b)=>Map.LineClear(a,b),PackTargetOrigin(r));
+            var mode=EffectiveTarget(r,global);if(mode==RuleTarget.Current)return TargetWithId(candidates,State.targetId);
             float Score(EnemyState e)
             {
                 float score=Vector2.Distance(State.position,e.position);
@@ -103,7 +113,14 @@ namespace Hellscript
                 if(mode==RuleTarget.Dense)score-=candidates.Count(x=>Vector2.Distance(e.position,x.position)<=r.targetRadius&&Map.LineClear(e.position,x.position))*3;
                 return score;
             }
-            var chosen=candidates.OrderBy(Score).ThenBy(e=>e.id).FirstOrDefault();var old=candidates.Find(e=>e.id==State.targetId);
+            // The lowest score wins and equal scores go to the lower id, exactly as OrderBy(Score).ThenBy(id).FirstOrDefault() ranked them.
+            EnemyState chosen=null;float chosenScore=0;
+            foreach(var enemy in candidates)
+            {
+                float score=Score(enemy);
+                if(chosen==null||score.CompareTo(chosenScore)<0||score.CompareTo(chosenScore)==0&&enemy.id<chosen.id){chosen=enemy;chosenScore=score;}
+            }
+            var old=TargetWithId(candidates,State.targetId);
             if(old!=null&&chosen!=null&&!r.escape&&State.targetRuleId==(r.id??"")&&(State.time-State.targetSelectedAt<.6f||mode==RuleTarget.Nearest&&Mathf.Abs(Score(old)-Score(chosen))<.75f))return old;
             return chosen;
         }

@@ -109,10 +109,11 @@ namespace Hellscript
                 Require(!cards.Any(r=>r.Overlaps(Bounds(rules))),"Rules overlap daily cards");Inside(Bounds(rules),viewport,"Masked rules");
             }
             var texts=Panel.GetComponentsInChildren<Text>();
-            Require(texts.Single(t=>t.name=="daily-quest-claimed-coins").text==DailyQuests.ClaimedCoins(A.dailyQuests)+" / 100","Claimed summary does not use actual state");
+            Require(texts.Single(t=>t.name=="daily-quest-claimed-coins").text==DailyQuests.ClaimedCoins(A.dailyQuests).ToString(),"Claimed summary does not use actual state");
+            Require(texts.Single(t=>t.name=="Daily total").text=="/ "+DailyQuests.DailyReward,"Daily total does not use the reward contract");
             Require(texts.Single(t=>t.name=="daily-quest-goals").text==Loc.F("목표 달성 {0} / {1}",A.dailyQuests.quests.Count(q=>q.progress>=q.target),A.dailyQuests.quests.Count),"Goal summary does not use actual state");
             int ready=A.dailyQuests.day==DailyQuests.Day(now)?A.dailyQuests.quests.Where(q=>!q.claimed&&q.progress>=q.target).Sum(q=>q.reward):0;
-            string status=DailyQuests.ClaimedCoins(A.dailyQuests)==100?Loc.T("오늘 보상 수령 완료"):ready>0?Loc.F("수령 가능 {0}개",ready):Loc.T("수령할 보상이 없습니다");
+            string status=DailyQuests.ClaimedCoins(A.dailyQuests)==DailyQuests.DailyReward?Loc.T("오늘 보상 수령 완료"):ready>0?Loc.F("수령 가능 {0}개",ready):Loc.T("수령할 보상이 없습니다");
             Require(texts.Single(t=>t.name=="daily-quest-ready-coins").text==status,"Ready summary does not use actual state");
             layouts++;
         }

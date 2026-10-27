@@ -65,7 +65,7 @@ Failed disk writes or stale revisions do not change the live account or combat. 
 
 ## Drops and fusion
 
-Normal enemies, elites and bosses drop no rune blocks in Rift stages 1–14. From the Rune Board unlock stage, Rift 15, ordinary enemies drop one rune at 2%; elites at 20%. Actual rift bosses grant four runes. This checks the current run stage even if the account has already unlocked the board. Training, summoned enemies and sweeps are excluded. Runes enter their dedicated storage automatically and use no equipment bag space. Each color has a 20% chance; shapes are uniform within the selected size.
+Normal enemies, elites and bosses drop no rune blocks in Rift stages 1–9. From the Rune Board unlock stage, Rift 10, ordinary enemies drop one rune at 2%; elites at 20%. Actual rift bosses grant four runes. This checks the current run stage even if the account has already unlocked the board. Training, summoned enemies and sweeps are excluded. Runes enter their dedicated storage automatically and use no equipment bag space. Each color has a 20% chance; shapes are uniform within the selected size.
 
 | Rift stage | Acquisition grade | 1 cell | 2 cells | 3 cells | 4 cells | 5 cells |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
@@ -75,7 +75,7 @@ Normal enemies, elites and bosses drop no rune blocks in Rift stages 1–14. Fro
 | 25–29 | G5 | 0% | 5% | 30% | 40% | 25% |
 | 30+ | G6 | 0% | 0% | 20% | 40% | 40% |
 
-These size probabilities are conditional on a successful drop. A stage 15–19 ordinary enemy therefore has a 0.7% chance to drop a three-cell rune. Existing grade and size distributions from Rift 15, owned runes, the first-clear Rune Block Set and mastery XP after unlock remain unchanged.
+These size probabilities are conditional on a successful drop. A stage 15–19 ordinary enemy therefore has a 0.7% chance to drop a three-cell rune. Existing grade and size distributions from the unlock stage, owned runes, the Rune Block Set of the unlock introduction and mastery XP after unlock remain unchanged.
 
 Fuse two runes of equal grade and size: sizes 1–4 become the next size at the same grade; two five-cell runes become a one-cell rune at the next grade. G6 five-cell runes are final. There is no failure or fee; batch up to 100 pairs. Equal colors are paired first and preserved; remaining mixed-color pairs produce each color with 20% probability. Results are saved pending claim and cannot be placed until claimed. Placed and unclaimed runes are ineligible materials.
 

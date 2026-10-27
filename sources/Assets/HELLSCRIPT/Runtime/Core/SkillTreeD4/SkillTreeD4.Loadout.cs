@@ -37,7 +37,7 @@ namespace Hellscript
             else d.legacyEdict=HuntEdictV2.Canonical(d.legacyEdict);
             if(d.legacyEdict!=null&&d.legacyEdict.heroClass!=HuntEdict.ClassId((HeroClass)d.heroClass))throw new ArgumentException("Different D4 edict class.");
             if(d.options==null||d.presetSelections==null||d.options.Any(o=>o==null||!KeptScope(d.heroClass,o.id.Split(':')[0]))||d.presetSelections.Any(p=>p==null||p.scope.StartsWith("skill/",StringComparison.Ordinal)&&!KeptScope(d.heroClass,p.scope.Substring(6))))throw new ArgumentException("A removed skill remains in a D4 policy.");
-            ClassSkillOptions.Validate(d);HuntEdictSkillPresets.ValidateSelections(d);return d;
+            SkillTacticsStorage.Validate(d);ClassSkillOptions.Validate(d);HuntEdictSkillPresets.ValidateSelections(d);return d;
         }
         public static bool KeptScope(int heroClass,string id)=>id=="BASIC"||SkillTreeD4.For((HeroClass)heroClass).actives.Any(a=>a.id==id)||SkillTreeD4.For((HeroClass)heroClass).passives.Any(p=>p.id==id);
         public static SkillTreeD4Alloc Allocation(ClassSkillLoadout load)

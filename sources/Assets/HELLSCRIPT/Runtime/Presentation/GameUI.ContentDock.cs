@@ -7,12 +7,15 @@ namespace Hellscript
     public sealed partial class GameUI
     {
         bool contentDockOpen;
+        string battleDockRun="";
         ContentDockView contentDock;
         Button contentDockEdict,contentDockRune;
         // Content shortcuts fold out beneath the settings gear on the play screens (plaza and battle).
         // Character opens the owned-equipment screen and remembers the play screen it came from.
         void AddContentDock(float top,float size)
         {
+            // This can run before the first tutorial tick after a profile switch.
+            if(runeLessonAccount!=game.Store.Data.telemetryAccountId)ResetRuneIntroductionPresentation(game.Store.Data.telemetryAccountId);
             const float gap=6;
             // Keep world shortcuts above the draggable battle graphs and below quick editors.
             var dock=ContentWindowView.FixedOverlay(header,"Content dock",106);Right(dock,12,top,size,size);
@@ -36,11 +39,10 @@ namespace Hellscript
             contentDockRune=null;
             if(!prologue)
             {
-                if(RuneBoardTutorial.IconVisible(game.Store.Data)||game.Store.Data.guide.runeBoard.step==RuneBoardLesson.Emblem)
-                {
-                    contentDockRune=Add("룬 보드","menu-rune-board",ShowRunes);
-                    if(!RuneBoardTutorial.IconVisible(game.Store.Data))contentDockRune.gameObject.AddComponent<CanvasGroup>().alpha=0;
-                }
+                // The rune slot is always there, so the dock keeps its shape when the board opens: locked art until the introduction lands its emblem.
+                bool rune=RuneBoardTutorial.IconVisible(game.Store.Data);
+                contentDockRune=Add("룬 보드",rune||runeLockBroken?"menu-rune-board":"menu-rune-board-locked",OnRuneShortcut);
+                if(!rune&&runeLockBroken)contentDockRune.gameObject.AddComponent<CanvasGroup>().alpha=0;
                 Add("창고","menu-storage",ShowStorage);
             }
             var toggle=Button(dock,"콘텐츠 메뉴",()=>{view.Set(!view.Open);contentDockOpen=view.Open;},Color.clear);toggle.targetGraphic=Emblem(toggle,"menu-toggle");
@@ -48,16 +50,28 @@ namespace Hellscript
             // Keep references available for reflow without exposing shortcuts during the tutorial.
             dock.gameObject.SetActive(!prologue);
         }
+        // A locked slot still takes the tap: it says why the board is closed instead of staying silent.
+        void OnRuneShortcut()
+        {
+            var a=game.Store.Data;
+            if(RuneBoardTutorial.IconVisible(a)){ShowRunes();return;}
+            // The battle dock only shows explicit refusals, which is what a tap on a locked slot is.
+            if(!ContentUnlocks.Has(a,ContentUnlocks.Rune))ShowToast(ContentUnlocks.LockedToast(ContentUnlocks.Rune),4,true);
+            else if(a.guide.runeBoard.step==RuneBoardLesson.Waiting)ShowToast(Loc.T("마을에서 룬 보드 안내를 마치면 열립니다."),4,true);
+            else ShowRunes(); // Reward and Emblem: it asks the player to follow the Rune Master first.
+        }
         // Gear and shortcuts keep their approved base size when the portrait slot row grows.
         float DockIconSize(float hudTop,bool minimumInPixels)
         {
             var layout=globalHud.Layout;float scale=root.parent.GetComponent<Canvas>().scaleFactor;
             return GlobalHudLayout.ShortcutIcon(layout.landscape?layout.actives[0].width:44*layout.presentationScale/layout.scale,layout.scale,scale,hudTop,minimumInPixels?44/scale:44);
         }
-        // The settings gear beside the shortcuts: no plate, its glyph inset in the square.
+        // The settings gear beside the shortcuts: no plate, its glyph inset in the square. The plate is the button's chrome face
+        // (the plaza hides it the same way); chrome applied to this button would bring the cream rounded border back.
         void CompactGear(Button settings,float size)
         {
             settings.GetComponent<Image>().color=Color.clear;
+            var face=((UiButton)settings).Face;if(face!=null&&face.gameObject.activeSelf)face.gameObject.SetActive(false);
             var border=settings.GetComponent<UIRectBorder>();if(border!=null)border.enabled=false;
             var gear=(RectTransform)settings.transform.Find("Settings gear");gear.offsetMin=gear.offsetMax=Vector2.zero;
         }

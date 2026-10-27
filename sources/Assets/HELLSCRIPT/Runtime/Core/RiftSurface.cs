@@ -23,8 +23,9 @@ namespace Hellscript
         public bool Contains(Vector2 p)
         {
             if(p.x<bounds.xMin-.0001f||p.x>bounds.xMax+.0001f||p.y<bounds.yMin-.0001f||p.y>bounds.yMax+.0001f)return false;
-            for(int n=0;n<points.Length;n++)
-                if(Cross(points[(n+1)%points.Length]-points[n],p-points[n])<-.0001f)return false;
+            var pts=points;int len=pts.Length;
+            for(int n=0;n<len;n++)
+                if(Cross(pts[n+1==len?0:n+1]-pts[n],p-pts[n])<-.0001f)return false;
             return true;
         }
         public bool Clip(Vector2 a,Vector2 b,out float begin,out float end)
@@ -36,7 +37,7 @@ namespace Hellscript
             double dx=(double)b.x-a.x,dy=(double)b.y-a.y,low=0,high=1;
             for(int n=0;n<points.Length;n++)
             {
-                var p=points[n];var q=points[(n+1)%points.Length];
+                var p=points[n];var q=points[n+1==points.Length?0:n+1];
                 double ex=(double)q.x-p.x,ey=(double)q.y-p.y;
                 double offset=ex*((double)a.y-p.y)-ey*((double)a.x-p.x),slope=ex*dy-ey*dx;
                 if(Math.Abs(slope)<1e-12){if(offset< -1e-10)return false;continue;}
@@ -101,6 +102,27 @@ namespace Hellscript
                 }
             }
             stamps=new int[patches.Count];
+            Seal();
+        }
+        // Buckets never change after construction, so queries read a dense array instead of hashing a Vector2Int.
+        List<int>[] grid;int gridX,gridY,gridW,gridH;
+        void Seal()
+        {
+            if(buckets.Count==0)return;
+            int minX=int.MaxValue,minY=int.MaxValue,maxX=int.MinValue,maxY=int.MinValue;
+            foreach(var key in buckets.Keys){minX=Mathf.Min(minX,key.x);minY=Mathf.Min(minY,key.y);maxX=Mathf.Max(maxX,key.x);maxY=Mathf.Max(maxY,key.y);}
+            long cells=(long)(maxX-minX+1)*(maxY-minY+1);
+            if(cells>1<<20)return;// absurdly sparse layout: keep the dictionary path
+            gridX=minX;gridY=minY;gridW=maxX-minX+1;gridH=maxY-minY+1;var built=new List<int>[gridW*gridH];
+            foreach(var pair in buckets)built[(pair.Key.y-gridY)*gridW+(pair.Key.x-gridX)]=pair.Value;
+            grid=built;
+        }
+        bool Find(Vector2Int key,out List<int> list)
+        {
+            if(grid==null)return buckets.TryGetValue(key,out list);
+            int x=key.x-gridX,y=key.y-gridY;
+            if((uint)x>=(uint)gridW||(uint)y>=(uint)gridH){list=null;return false;}
+            list=grid[y*gridW+x];return list!=null;
         }
         static bool Convex(List<Vector2> polygon)
         {
@@ -118,18 +140,20 @@ namespace Hellscript
             {var key=new Vector2Int(x,y);if(!buckets.TryGetValue(key,out var list)){list=new List<int>();buckets.Add(key,list);}list.Add(index);}
         }
         public bool Contains(Vector2 p)
-        {if(buckets.TryGetValue(Bucket(p),out var list))foreach(int i in list)if(patches[i].Contains(p))return true;return false;}
+        {if(Find(Bucket(p),out var list))foreach(int i in list)if(patches[i].Contains(p))return true;return false;}
         internal void OriginPatches(Vector2 p,List<RiftFloorPatch> result)
         {
             result.Clear();
-            if(buckets.TryGetValue(Bucket(p),out var list))
+            if(Find(Bucket(p),out var list))
                 foreach(int i in list)if(patches[i].Contains(p))result.Add(patches[i]);
         }
         public bool RoomContains(int room,Vector2 p)
-        {if(buckets.TryGetValue(Bucket(p),out var list))foreach(int i in list)if(patches[i].room==room&&patches[i].Contains(p))return true;return false;}
-        public bool SegmentOnFloor(Vector2 a,Vector2 b)
+        {if(Find(Bucket(p),out var list))foreach(int i in list)if(patches[i].room==room&&patches[i].Contains(p))return true;return false;}
+        public bool SegmentOnFloor(Vector2 a,Vector2 b)=>Contains(a)&&Contains(b)&&Coverage(a,b);
+        // RiftVisibility has already found the origin patches, so the origin test is not repeated for every sample.
+        internal bool SegmentOnFloorFromFloor(Vector2 a,Vector2 b)=>Contains(b)&&Coverage(a,b);
+        bool Coverage(Vector2 a,Vector2 b)
         {
-            if(!Contains(a)||!Contains(b))return false;
             // Movement uses short steps. A fixed parametric tolerance shrank to sub-micrometre
             // world gaps and could reject a 0.2 m prefix of an accepted 0.3 m path at a shared seam.
             // Keep a 0.01 mm world tolerance; this does not bridge meaningful floor gaps.
@@ -146,7 +170,7 @@ namespace Hellscript
             // every polygon in its bounding rectangle, especially across an empty central void.
             while(remaining-->0)
             {
-                if(!buckets.TryGetValue(cell,out var list))return false;
+                if(!Find(cell,out var list))return false;
                 foreach(int i in list)
                 {
                     if(stamps[i]==stamp)continue;stamps[i]=stamp;
@@ -157,7 +181,9 @@ namespace Hellscript
                 if(cell==goal)break;
                 if(nextX<nextY){cell.x+=stepX;nextX+=strideX;}else{cell.y+=stepY;nextY+=strideY;}
             }
-            intervals.Sort((x,y)=>x.x.CompareTo(y.x));float covered=0;
+            // Insertion sort: a handful of intervals, and ties cannot change the coverage result.
+            for(int i=1;i<intervals.Count;i++){var v=intervals[i];int j=i-1;while(j>=0&&intervals[j].x>v.x){intervals[j+1]=intervals[j];j--;}intervals[j+1]=v;}
+            float covered=0;
             foreach(var interval in intervals){if(interval.x>covered+tolerance)return false;covered=Mathf.Max(covered,interval.y);if(covered>=1-tolerance)return true;}
             return false;
         }

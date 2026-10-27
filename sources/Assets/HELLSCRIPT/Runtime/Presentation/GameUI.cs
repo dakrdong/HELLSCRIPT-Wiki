@@ -200,7 +200,7 @@ namespace Hellscript
             ApplyScaler(root.parent.GetComponent<CanvasScaler>(),battle||responsive);
             if(Page=="build"&&content!=null)buildScrollOffset=content.anchoredPosition.y;
             if(Page=="edict"&&content!=null)edictScrollOffset=content.anchoredPosition.y;
-            targetRanks.Clear();targetTags.Clear();targetLinks.Clear();targetLabelBounds.Clear();orderHeroLabel=null;orderLootLabels.Clear();orderLootPoints.Clear();targetLabelIds.Clear();Array.Clear(targetNotes,0,targetNotes.Length);
+            targetRanks.Clear();targetRankVisuals.Clear();targetRankChanges.Clear();targetRankFeedbackVisible=false;targetTags.Clear();targetLinks.Clear();targetLabelBounds.Clear();orderHeroLabel=null;orderLootLabels.Clear();orderLootPoints.Clear();targetLabelIds.Clear();Array.Clear(targetNotes,0,targetNotes.Length);
             Page=page;foreach(Transform child in root){child.gameObject.SetActive(false);Destroy(child.gameObject);}skillLabels.Clear();status=hpText=null;
             foreach(Transform child in shell){child.gameObject.SetActive(false);Destroy(child.gameObject);}headerApron=footerApron=null;pageBackdrop=null;
             if(!battle)
@@ -311,9 +311,9 @@ namespace Hellscript
             meterText.text=run.training>=0?Loc.F("표적 {0} / {1}",run.kills,run.enemies.Count):Loc.F("처치 {0} · 균열 {1}/100",run.kills,Mathf.Min(100,run.meter));
             if(run.training<0&&game.Combat.ObjectiveActive)meterText.text=ObjectiveProgress(run.layout);
             fullBattleAction=run.paused?Loc.T("일시정지"):Loc.F("{0} · {1:0.#}×",game.Combat.CurrentActionText,game.EffectiveSpeed);
+            RefreshChestCount(run);
             RefreshBossHud(run.enemies.Find(e=>e.boss&&!e.dead&&e.id==run.bossId));RefreshTrainingHud(run);RefreshRiftActivityHud(run);ReflowBattleHud();UpdateBattleBrief();
             if(riftMinimap!=null)riftMinimap.RefreshMarkers();
-            if(chestCountText!=null)chestCountText.text=Loc.F("상자 {0} / {1}",run.layout.chests.Count(c=>c.phase==ChestPhase.Opened),run.layout.chests.Count);
         }
         public void ShowBuild()
         {

@@ -13,7 +13,8 @@ namespace Hellscript
             if(game.Active)return;
             if(riftEntryWindow!=null)return;
             if(!game.Store.ActivateSkillTrees(game.catalog)||!game.Store.RefreshRiftDay()){ShowToast(game.Store.Error);return;}
-            riftEntryWindow=RiftEntryWindow.Open(transform,game,()=>InterfaceFactor,()=>{riftEntryWindow=null;RefreshHud();RefreshPlaza();});
+            riftEntryWindow=RiftEntryWindow.Open(transform,game,()=>InterfaceFactor,()=>{EndRiftEntryTour();riftEntryWindow=null;RefreshHud();RefreshPlaza();});
+            TickRiftEntryTour();
         }
         public void CloseRiftEntry(){if(riftEntryWindow!=null)riftEntryWindow.Close();}
         public void ShowRiftServices()

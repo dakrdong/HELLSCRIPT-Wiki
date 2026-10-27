@@ -2,16 +2,50 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
+using System;
 
 namespace Hellscript
 {
     [RequireComponent(typeof(CanvasRenderer))]
-    public sealed class RiftMinimap : MaskableGraphic
+    public sealed class RiftMinimap : MaskableGraphic,IBeginDragHandler,IDragHandler
     {
         public RunState run;
         public bool expanded;
         public RiftFogView fog;
         Material ownedMaterial;
+        public int ZoomLevel {get;private set;}
+        public Vector2 PanOffset {get;private set;}
+        public Action ViewChanged;
+        public bool SetZoom(int level)
+        {
+            level=Mathf.Clamp(level,0,1);if(level==ZoomLevel)return false;
+            ZoomLevel=level;ClampPan();SetVerticesDirty();ViewChanged?.Invoke();return true;
+        }
+        public void RestoreView(int level,Vector2 pan)
+        {ZoomLevel=Mathf.Clamp(level,0,1);PanOffset=pan;ClampPan();SetVerticesDirty();}
+        void EnsureSurface()
+        {if(run?.layout!=null&&!ReferenceEquals(surfaceLayout,run.layout)){surfaceLayout=run.layout;surface=new RiftSurface(run.layout);}}
+        float WorldScale()
+        {
+            var r=rectTransform.rect;EnsureSurface();
+            return (expanded&&surface!=null?Mathf.Min(r.width/(surface.Bounds.width+12),r.height/(surface.Bounds.height+12)):Mathf.Min(r.width,r.height)/55)*(ZoomLevel==0?1:2);
+        }
+        void ClampPan()
+        {
+            EnsureSurface();if(!expanded||ZoomLevel==0||surface==null){PanOffset=Vector2.zero;return;}
+            var r=rectTransform.rect;float k=Mathf.Max(.001f,WorldScale());
+            var limit=new Vector2(Mathf.Max(0,(surface.Bounds.width+12-r.width/k)/2),Mathf.Max(0,(surface.Bounds.height+12-r.height/k)/2));
+            PanOffset=new Vector2(Mathf.Clamp(PanOffset.x,-limit.x,limit.x),Mathf.Clamp(PanOffset.y,-limit.y,limit.y));
+        }
+        public void OnBeginDrag(PointerEventData e){if(expanded&&ZoomLevel>0)e.Use();}
+        public void OnDrag(PointerEventData e)
+        {
+            if(!expanded||ZoomLevel==0)return;
+            if(!RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform,e.position,e.pressEventCamera,out var now)||
+                !RectTransformUtility.ScreenPointToLocalPointInRectangle(rectTransform,e.position-e.delta,e.pressEventCamera,out var before))return;
+            PanOffset-=(now-before)/Mathf.Max(.001f,WorldScale());ClampPan();SetVerticesDirty();ViewChanged?.Invoke();e.Use();
+        }
         public void Configure(RunState state,RiftFogView view)
         {run=state;fog=view;if(fog!=null){ownedMaterial=RiftAutomap.CreateMapMaterial(fog);material=ownedMaterial;}SetVerticesDirty();}
         readonly List<(int type,int state,Vector2 position,Vector2 direction)> markers=new List<(int,int,Vector2,Vector2)>();
@@ -71,10 +105,8 @@ namespace Hellscript
         protected override void OnPopulateMesh(VertexHelper v)
         {
             using var sample=PresentationMetrics.Minimap.Auto();PresentationMetrics.MinimapCalls++;
-            v.Clear();if(run?.layout==null)return;var r=rectTransform.rect;center=expanded?Vector2.zero:run.position;
-            scale=Mathf.Min(r.width,r.height)/(expanded?155:55);
-            if(!ReferenceEquals(surfaceLayout,run.layout)){surfaceLayout=run.layout;surface=new RiftSurface(run.layout);}
-            if(expanded){center=surface.Bounds.center;scale=Mathf.Min(r.width/(surface.Bounds.width+12),r.height/(surface.Bounds.height+12));}
+            v.Clear();if(run?.layout==null)return;var r=rectTransform.rect;EnsureSurface();ClampPan();
+            center=expanded?surface.Bounds.center+PanOffset:run.position;scale=WorldScale();
             Color floor=new Color(.25f,.29f,.34f),gold=new Color(.96f,.67f,.3f),muted=new Color(.4f,.45f,.5f);
             foreach(var patch in surface.patches)
             {

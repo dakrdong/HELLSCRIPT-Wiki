@@ -8,16 +8,23 @@ namespace Hellscript
     [Serializable] public sealed class NpcProfile
     {
         public string id,name,station,residentId,country,gender,food,appearance,palette,greeting,portrait,portraitFacing,portraitMirror,role;
-        // The base portrait looks toward portraitFacing ("right" when empty); portraitMirror is the same art flipped to look the other way.
+        // The base portrait looks toward portraitFacing ("right" when empty); portraitMirror retains its authored mirror reference.
         // Two figures in a scene face each other: the one on the left looks right and the one on the right looks left.
         public bool IsHero=>id=="hero-warrior"||id=="hero-ranger"||id=="hero-mage";
-        public Rect PortraitUvFor(bool onLeft)=>IsHero&&portraitFacing!=(onLeft?"right":"left")?new Rect(1,0,-1,1):new Rect(0,0,1,1);
+        // Hero masters are full-body; their upper 70% matches the NPCs' thigh-up story composition.
+        public Rect PortraitUvFor(bool onLeft)
+        {
+            var frame=IsHero?new Rect(0,.3f,1,.7f):new Rect(0,0,1,1);
+            string facing=IsHero?portraitFacing:string.IsNullOrEmpty(portraitFacing)?"right":portraitFacing;
+            bool mirrored=(IsHero||!string.IsNullOrEmpty(portraitMirror))&&facing!=(onLeft?"right":"left");
+            return mirrored?new Rect(frame.xMax,frame.y,-frame.width,frame.height):frame;
+        }
+        // The guide's mouth and chin sit below the older narration crop. Keep the sampled pixels square.
+        public Rect FaceUvFor(float textureAspect)=>id==NpcProfiles.Guide?new Rect(.16f,.5f,.68f,.68f*textureAspect):new Rect(.25f,.62f,.5f,.5f*textureAspect);
         public string PortraitFor(bool onLeft,HeroGender gender=HeroGender.Male)
         {
-            // Hero masters are reused by gender; the renderer flips UVs instead of creating mirror files.
-            if(IsHero)return portrait+(gender==HeroGender.Female?"-f":"");
-            string baseFacing=string.IsNullOrEmpty(portraitFacing)?"right":portraitFacing;
-            return string.IsNullOrEmpty(portraitMirror)||baseFacing==(onLeft?"right":"left")?portrait:portraitMirror;
+            // Every figure reuses its base texture; the shared story renderer applies PortraitUvFor to either slot.
+            return IsHero?portrait+(gender==HeroGender.Female?"-f":""):portrait;
         }
         public TownStation? Station=>Enum.TryParse(station,out TownStation value)?value:(TownStation?)null;
         public Vector2 Position=>Station.HasValue?TownLayout.Station(Station.Value).NpcPosition:TownLayout.Residents.Single(r=>r.id==residentId).position;

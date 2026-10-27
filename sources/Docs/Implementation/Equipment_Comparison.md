@@ -93,3 +93,36 @@ PC에서 왼쪽·오른쪽 Ctrl을 누르고 있는 동안은 임시로 범위�
 ![빈 부위: 0부터 비교](EquipmentScoreEvidence/worn-B11-440x956-ko.png)
 ![착용품 자체: 단일 점수](EquipmentScoreEvidence/worn-B17-440x956-ko.png)
 ![영어·가로 반지 비교](EquipmentScoreEvidence/comparison-956x440-en.png)
+
+
+## 장비 칸의 점수 상승과 결과 장착 표시 (2026-10-25)
+
+공통 `EquipmentScore.Improves`가 `EquipmentSlots.Targets`·`Plan`과 `EquipmentScore.Replacement`를 사용한다. 한 곳이라도 장착 가능한 위치의 점수가 높아지면 `EquipmentSlotView`가 초록색 상승 화살표를 표시한다. 반지는 두 위치, 전사는 양쪽 손을 각각 검사하며, 무기는 양손 점유·함께 해제되는 보조 장비를 반영한 구성 점수로 판단한다. 새 점수식이나 자동 장착 설정은 추가하지 않았다.
+
+표시 점수가 같은 장비, 실제 장착 ID 자체, 직업·요구 레벨·보조 장비 조합이 맞지 않는 장비에는 표시하지 않는다. 빈 위치의 기준은 0이다. 잠금은 판매·자동 교체 보호이며 수동 장착을 막지 않으므로 점수 안내를 숨기지 않는다. 가방 공간 부족도 점수 안내를 숨기지 않으며, 실제 장착 거래는 기존 공간·소유권 검사를 그대로 수행한다. 외부 후보는 읽기 전용 임시 장착 목록에서 검사해 가방·창고·스냅샷을 바꾸지 않는다.
+
+화살표는 장비 그림 왼쪽 중앙에 별도로 표시한다. 등급·선택 테두리, 상단 잠금/손/선택과 하단 레벨/창고 초과 표시는 유지한다. 색과 상승 모양을 함께 사용하며 추가 raycast를 받지 않는다. 새 Update/LateUpdate·점수 캐시·저장 키는 추가하지 않았다. 기존 저장 의존 키에 따른 다시 그리기에서만 점수를 계산한다.
+
+| 실제 표시 경로 | 적용 또는 제외 근거 |
+| --- | --- |
+| `InventoryWindow`, 기존 `GameUI.InventoryLayout` | 실제 현재 캐릭터를 전달한다. 장착 중 자기 ID는 자동 제외한다. |
+| `StorageWindow.Layout` | 가방·창고·정렬·초과 칸이 같은 `Paint`와 캐릭터를 사용한다. |
+| `EquipmentShopWindow` 및 `MockPanels` | 구매·되사기·판매 목록에 적용한다. 기존 별도 `Improves` 계산도 공통 기준으로 교체한다. |
+| `EquipmentShopWindow.Gamble` | 실제 결과가 확정된 전경 그림만 적용한다. 구매 전 미확인 부위와 그림자에는 확정 점수를 만들지 않는다. |
+| 대장간 강화·옵션 변경 목록/선택 그림, 실습 장비 선택 | 실제 소유 캐릭터를 전달한다. 코어 제작은 미확인 제작 완료 결과에 적용한다. |
+| `GameUI.TrainingEquipment` | B 편집본 후보에 공통 장비 칸을 붙이고 B 캐릭터를 전달한다. 실제 소유 장비를 바꾸지 않는다. |
+| `RiftVictoryWindow.Loot` | 현재 보유한 결과 장비에 적용한다. 분해·판매·버림·보유하지 않은 기록에는 표시하지 않는다. |
+| `GameUI.GearRecommendations` | 통합 담당자가 공통 슬롯의 `hero:hero` 연결을 적용한다. 카드 생성 시에만 계산한다. |
+| `CharacterEquipmentView`, 캐릭터 선택 장비, 창고 프리셋 배치, 위상 각인석 | 이미 장착한 구성 또는 적용 전 배치의 자기 장비를 보여 주므로 상승 후보 표시 대상이 아니다. |
+| `GameUI.IdleDashboard`, `GearSwapShow`, `TutorialCinematic`, 코어 제작 기록 | 변경 전/후·과거 제작·이야기 연출의 고정 그림이다. 현재 장착 대안으로 오해시키지 않도록 제외한다. |
+| `ItemDetailView.Style`, 보상 상자 장비 상세 | 상세 본문은 기존 점수 행·비교를 유지한다. 이 그림은 선택 가능한 장비 칸이 아니다. |
+| 코어 도감/레시피, 미확인 구매, 물약/자원/보상 상자 칸, 드래그 그림 | 미확정 정의·장비가 아닌 표시·이동 중 복제 그림이므로 점수 표시 대상이 아니다. |
+
+결과 목록의 `장착 중 / Equipped`는 현재 결과 캐릭터의 장착 인스턴스 ID로만 판단한다. 획득 당시 `equipped` 플래그나 템플릿 ID를 신뢰하지 않는다. 장비 저장 변경은 기존 칸의 표시만 즉시 바꾸며, 중첩 상세창 때문에 전체 페이지 다시 그리기가 보류되어도 장착·교체·해제 표시가 갱신된다. 무변경 저장에는 표시를 다시 만들지 않는다. `RiftVictoryWindow.Changed`의 `RefreshLootEquipment()` 연결은 통합 담당자가 소유한다. 문구는 기존 공통 한국어/영어 키를 재사용한다.
+
+### 이번 변경의 검증 상태
+
+- E 작업 폴더의 절대경로 도구로 공통 UI 계약과 검사기 회귀 15개가 통과했다. 근거는 작업 폴더 `Builds/Validation/UIContract/receipt.json`·`receipt.log`이며 receipt의 결과는 passed/exitCode 0이다. 최초 상대경로 호출은 주 체크아웃을 검사했으므로 E 변경의 근거에서 제외했다.
+- `check_ui_refresh.py`는 14 guarded bindings/252 source files로 통과했고 `git diff --check`도 통과했다.
+- 점수 8개, 공통 표시 4개, 실제 결과 장착 거래와 인스턴스 ID 1개 회귀 사례를 준비했다. `RecommendedEquipmentTests`, `CasualUiSkinTests`, `RiftResultTests`가 직접 영향 검사 범위다.
+- 사용자 게임 보호를 위해 E는 Unity 컴파일·Edit/Play Mode·빌드·네이티브 조작을 실행하지 않았다. 테스트 종료 후 통합 담당자의 관련 검사와 KO/EN·화면 비율 확인이 남아 있다. 전체 Edit Mode·모바일 실기기·성능 개선은 검증하지 않았다. 작업 브랜치에서 위키 생성·검사·게시도 실행하지 않았다.

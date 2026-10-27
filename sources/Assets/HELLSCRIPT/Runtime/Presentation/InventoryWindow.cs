@@ -52,12 +52,13 @@ namespace Hellscript
             if(safe!=UiSafeArea.Current||language!=Loc.Language||Mathf.Abs(textScale-readingScale())>.001f)Reflow();
             if(messageUntil>0&&Time.unscaledTime>messageUntil){messageUntil=0;message="";UpdateStatus();}
         }
-        public void Close(){if(!ready)return;CancelDrag();ready=false;rewardBoxesWindow?.Close();if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
+        public void Close(){if(!ready)return;CloseItemMenu();CancelDrag();ready=false;rewardBoxesWindow?.Close();if(autoSettings!=null)autoSettings.Close();ContentWindowHost.Detach(this);closed?.Invoke();Destroy(gameObject);}
         public void RequestClose(){if(portalResume!=null){if(!portalResume()){string error=portalError();ShowError(error!=""?error:store.Error);}}else Close();}
-        public void Escape(){if(ghost!=null){CancelDrag();return;}if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){Dismiss();return;}if(selecting){ToggleSelection();return;}RequestClose();}
+        public void Escape(){if(ghost!=null){CancelDrag();return;}if(itemMenu!=null){CloseItemMenu();return;}if(rangeHelp!=null){CloseRangeHelp();return;}if(filterMenu!=null){CloseFilter();return;}if(popover!=null){ClosePopover();return;}if(dialog!=null){Dismiss();return;}if(selecting){ToggleSelection();return;}RequestClose();}
         void Reflow()
         {
-            string kind=dialogKind,id=detailId,filter=filterKind;RememberScroll();CancelDrag();
+            string kind=dialogKind,id=detailId,filter=filterKind,menuId=itemMenuId;int menuSlot=itemMenuSlot,menuIndex=itemMenuIndex;
+            var comparison=detailComparison;CloseItemMenu();RememberScroll();CancelDrag();
             safe=UiSafeArea.Current;language=Loc.Language;textScale=readingScale();landscape=safe.width>safe.height;
             width=landscape?800:405;height=landscape?450:720;scale=UiTheme.Scale(safe);
             var scaler=GetComponent<CanvasScaler>();scaler.uiScaleMode=CanvasScaler.ScaleMode.ConstantPixelSize;scaler.scaleFactor=scale;
@@ -70,18 +71,24 @@ namespace Hellscript
             edgeControls=Rect("Inventory edge controls",frame);Stretch(edgeControls);
             overlays=Rect("Inventory overlays",frame);Stretch(overlays);
             Draw();
-            if(kind=="detail"&&FindItem(id)!=null)ShowDetail(id);else if(kind=="compare"&&FindItem(id)!=null)ShowComparison(id);
+            if(kind=="detail"&&FindItem(id)!=null)ShowDetail(id,comparison);else if(kind=="compare"&&FindItem(id)!=null)ShowComparison(id);
             else if(kind=="stats")ShowStats();else if(kind=="bulk")ShowSalvage(true);else if(kind=="selected")ShowSalvage(false);
             else if(kind=="potion")ShowPotionSettings();else if(kind=="potion-picker")ShowPotionPicker(potionSlotIndex);
             else if(kind=="wallet")ShowWallet();
             else if(filter!=null)ShowFilter(filter);
+            else if(menuId!=null)ShowItemMenu(menuId,FindItemMenuCell(menuId,menuSlot,menuIndex));
             StoreViewBinding.Rendered(this);
         }
         void RememberScroll(){if(bagScroll!=null)bagOffset=bagScroll.content.anchoredPosition.y;}
         public void Repaint(){Repaint(false);}
-        void Repaint(bool resetScroll){CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Clear(edgeControls);Draw();StoreViewBinding.Rendered(this);}
+        void Repaint(bool resetScroll)
+        {
+            if(resetScroll)CloseItemMenu();restoringItemMenu=true;
+            try{CancelDrag();RememberScroll();if(resetScroll)bagOffset=0;Clear(body);Clear(edgeControls);Draw();RetainItemMenu();StoreViewBinding.Rendered(this);}
+            finally{restoringItemMenu=false;}
+        }
         string DisplayKey()=>string.Join("|",StoreViewBinding.EquipmentKey(store.Data),store.Data.gold,store.Data.premium,
-            store.Data.materials,store.Data.enhancementStones,StoreViewBinding.Key(store.Data.cores));
+            store.Data.materials,store.Data.enhancementStones,StoreViewBinding.Key(store.Data.cores),ItemActionMenu.LessonWaitsForDetail(store.Data,Hero));
         void Draw()
         {
             var header=Panel(body,"Header",UiTheme.RaisedHex,UiTheme.PanelHex,UiTheme.BorderHex);Place(header,0,0,width,34);UiHeaderRule.Attach(header);
@@ -149,6 +156,7 @@ namespace Hellscript
             FilterButton(panel,Loc.F("정렬 · {0}",OrderLabels[Array.IndexOf(Orders,order)]),22+filterWidth,52,filterWidth,"order");
             const float gridTop=84,bottom=42;float gh=h-gridTop-bottom;
             bagScroll=Scroll(panel,"Inventory slots",14,gridTop,w-28,gh,out var grid);
+            var menuScroll=bagScroll;menuScroll.onValueChanged.AddListener(_=>ItemMenuScrolled(menuScroll));
             int columns=UiTheme.Columns(w-32,landscape);float step=SlotSize+UiTheme.Gap,gridWidth=columns*step-UiTheme.Gap,left=(w-32-gridWidth)/2;
             var items=VisibleItems().ToArray();bool fixedPositions=category==0&&grades==31&&order==InventoryOrder.Equipment;
             int count=fixedPositions?Math.Max(Hero.capacity,items.Select(i=>i.storageSlot+1).DefaultIfEmpty(0).Max()):Math.Max(columns*3,items.Length);
@@ -187,18 +195,24 @@ namespace Hellscript
         }
         public void ToggleSelection(){selecting=!selecting;selected.Clear();Dismiss();Repaint();}
         Item FindItem(string id)=>Hero.inventory.Find(i=>i.id==id);
-        public void SelectItem(string id)
+        public void SelectItem(string id)=>SelectItem(id,null);
+        internal void SelectItem(string id,InventoryCell anchor)
         {
             if(Time.unscaledTime<suppressClickUntil)return;
             var item=FindItem(id);if(item==null)return;
-            if(!selecting||item.equipped){GameAudio.Pick(item);ShowDetail(id);return;}
+            if(!selecting||item.equipped)
+            {
+                GameAudio.Pick(item);
+                if(selecting)ShowDetail(id);else ShowItemMenu(id,anchor);
+                return;
+            }
             if(!InventorySalvagePlan.Eligible(store.Data,item)){GameAudio.Refuse();Toast("보호 중인 아이템은 분해할 수 없습니다.");return;}
             GameAudio.Pick(item);
             if(!selected.Remove(id))selected.Add(id);Repaint();
         }
         RectTransform DrawCell(Transform parent,Item item,float x,float y,float size,bool bag)
         {
-            var r=EquipmentSlotView.Create(parent,item,x,y,size,BodyFont,item!=null&&selected.Contains(item.id),!bag,bag&&selecting&&item!=null&&InventorySalvagePlan.Eligible(store.Data,item),skin:Skin);
+            var r=EquipmentSlotView.Create(parent,item,x,y,size,BodyFont,item!=null&&selected.Contains(item.id),!bag,bag&&selecting&&item!=null&&InventorySalvagePlan.Eligible(store.Data,item),skin:Skin,hero:Hero);
             var marker=r.gameObject.AddComponent<InventoryCell>();marker.window=this;marker.itemId=item?.id;marker.bag=bag;return r;
         }
         public Button Find(string name)=>GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name==name);

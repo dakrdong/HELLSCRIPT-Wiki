@@ -133,7 +133,7 @@ namespace Hellscript
             float tolerance=Mathf.Max(.000001f,.00001f/Mathf.Max(.01f,delta.magnitude));bool covered=false;
             foreach(var patch in originFloor)
                 if(patch.Clip(a,p,out float first,out float last)&&first<=tolerance&&last>=1-tolerance){covered=true;break;}
-            if(!covered&&!Navigation.Surface.SegmentOnFloor(a,p))return false;
+            if(!covered&&!Navigation.Surface.SegmentOnFloorFromFloor(a,p))return false;
             // Same exact floor clipping and obstacle intersections as navigation. Only the broad
             // phase is cached per update, so distant props cannot multiply thousands of LOS tests.
             foreach (var obstacle in nearbyOccluders)

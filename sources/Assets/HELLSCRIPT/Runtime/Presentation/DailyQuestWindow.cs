@@ -20,7 +20,7 @@ namespace Hellscript
     sealed partial class DailyQuestSession
     {
         readonly GameStore store;readonly Func<float> reading;readonly Action<AttendanceKind> attendance;
-        ContentWindowView view;Text timer;string notice="",language=Loc.Language;
+        ContentWindowView view;Text timer;string notice="",language=Loc.Language;float listOffset;
         public DailyQuestCountdown Countdown;
         public DailyQuestSession(GameStore store,Func<float> reading,Action<AttendanceKind> attendance)
         {this.store=store;this.reading=reading;this.attendance=attendance;}
@@ -78,9 +78,19 @@ namespace Hellscript
             }
             else if(board==UiBoard.Portrait)
             {
-                float rules=67,card=(gridBottom-gridTop-rules-5*gap)/5;
-                for(int i=0;i<quests.Count;i++)Quest(plate,quests[i],board,x,gridTop+i*(card+gap),w,card);
-                Rules(plate,board,x,gridTop+5*(card+gap),w,rules);
+                // A short portrait must scroll instead of shrinking cards below their reward and claim controls.
+                float rules=67,available=gridBottom-gridTop,card=Mathf.Max(104,(available-rules-5*gap)/5),listHeight=5*(card+gap)+rules;
+                Transform parent=plate;float left=x,first=gridTop,cardWidth=w;
+                if(listHeight>available+1)
+                {
+                    var scroll=new MockKit(plate,UiSkin.Casual,reading).Scroll(plate,"Daily quest list",x,gridTop,w,available,listHeight,out var body);
+                    view.Adopt(scroll,body);parent=body;left=0;first=0;cardWidth=body.rect.width;
+                    body.anchoredPosition=new Vector2(0,Mathf.Clamp(listOffset,0,listHeight-available));
+                    scroll.onValueChanged.AddListener(_=>listOffset=body.anchoredPosition.y);
+                }
+                else listOffset=0;
+                for(int i=0;i<quests.Count;i++)Quest(parent,quests[i],board,left,first+i*(card+gap),cardWidth,card);
+                Rules(parent,board,left,first+5*(card+gap),cardWidth,rules);
             }
             else
             {

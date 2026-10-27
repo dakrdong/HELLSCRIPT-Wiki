@@ -140,6 +140,84 @@ def resolve_path(api, historical_path):
     return alias['path'] if alias else historical_path
 
 
+
+def _class_glyph_code_mask(source):
+    """Keep byte offsets/newlines while masking C# comments and literals."""
+    # Based on the existing UI guard's literal/comment grammar, with fail-closed input.
+    token = re.compile(
+        rb'//[^\r\n]*|/\*[\s\S]*?\*/|(?:\$@|@\$|@)"(?:[^"]|"")*"'
+        rb'|\$?"(?:\\[^\r\n]|[^"\\\r\n])*"|\'(?:\\[^\r\n]|[^\'\\\r\n])*\'')
+    masked = bytearray(source); at = 0
+    while at < len(source):
+        if source.startswith((b'"""', b'$"""'), at):
+            raise ValueError('Ambiguous C# source: raw string literal')
+        match = token.match(source, at)
+        if match:
+            raw = match.group()
+            if raw.startswith((b'$"', b'$@"', b'@$"')):
+                depth = 0
+                for brace in re.findall(rb'\{\{|\}\}|[{}]', raw):
+                    if len(brace) == 2:
+                        continue
+                    depth += 1 if brace == b'{' else -1
+                    if depth < 0:
+                        break
+                if depth:
+                    raise ValueError('Ambiguous C# source: unsupported interpolation')
+            masked[at:match.end()] = re.sub(rb'[^\r\n]', b' ', raw)
+            at = match.end()
+        else:
+            if (source[at] in (34, 39) or source.startswith(
+                    (b'/*', b'@"', b'$"', b'$@"', b'@$"'), at)):
+                raise ValueError('Ambiguous C# source: unfinished comment or literal')
+            at += 1
+    code = bytes(masked)
+    if re.search(rb'(?m)^[ \t]*#', code):
+        raise ValueError('Ambiguous C# source: preprocessor directive')
+    return code
+
+
+def class_glyph_source_reuse(api, baseline, current):
+    """Prove complete code declarations before explicit source-pin renewal.
+
+    Unsupported lexical input fails closed. This does not approve art or relax
+    the strict seven-file current-source guard.
+    """
+    declarations = {
+        'Rect': rb'RectTransform Rect\(string name,Transform parent\)',
+        'Place': rb'void Place\(RectTransform r,float x,float y,float w,float h\)',
+        'Icon': rb'void Icon\(Transform parent,int index,float x,float y,float size\)',
+    }
+    def complete(source, code, name, declaration):
+        members = re.findall(rb'\b(?:RectTransform|void)\s+' + name.encode() + rb'\s*\(', code)
+        starts = list(re.finditer(rb'^        ' + declaration + rb'\n        \{', code, re.M))
+        if len(members) != 1 or len(starts) != 1:
+            raise ValueError('Missing or ambiguous committed class3 method: ' + name)
+        start = starts[0].start(); end = starts[0].end(); depth = 1
+        while end < len(code) and depth:
+            if code[end] == 123:
+                depth += 1
+            elif code[end] == 125:
+                depth -= 1
+            end += 1
+        if depth:
+            raise ValueError('Ambiguous C# source: unfinished method ' + name)
+        return source[start:end], source[:start].count(b'\n') + 1
+
+    before_code = _class_glyph_code_mask(baseline)
+    after_code = _class_glyph_code_mask(current)
+    proof = []
+    for name, declaration in declarations.items():
+        before, baseline_line = complete(baseline, before_code, name, declaration)
+        raw, current_line = complete(current, after_code, name, declaration)
+        if before != raw:
+            raise ValueError('Changed committed class3 method: ' + name)
+        proof.append(dict(name=name, sha256=api.digest(raw), bytes=len(raw),
+                          baselineLine=baseline_line, currentLine=current_line,
+                          completeMethodByteEquality=True, codeOnlyDeclaration=True))
+    return proof
+
+
 def _class_glyph_routes(api, receipt, approved):
     """Fresh-check exactly three committed crest reuses; never attest external art."""
     rows=receipt.get('classGlyphAliases',[]);freeze=receipt.get('classGlyphSourceFreeze',{})

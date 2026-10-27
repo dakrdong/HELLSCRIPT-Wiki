@@ -47,11 +47,18 @@ namespace Hellscript
         {
             vh.Clear(); if (fog == null) return;
             var visibility = fog.Visibility; var center = visibility.Navigation.Surface.Bounds.center;
+            var outline = UiSkin.Casual.Navy; outline.a = .94f;
+            Stroke(vh, visibility, center, 2f, outline);
+            Stroke(vh, visibility, center, .8f, new Color(.82f, .84f, .75f, .8f));
+        }
+        // One mesh keeps both strokes under the same exploration mask and existing invalidation budget.
+        void Stroke(VertexHelper vh, RiftVisibility visibility, Vector2 center, float halfWidth, Color color)
+        {
             foreach (var edge in visibility.Boundary)
             {
                 var a = new Vector2(edge.x, edge.y); var b = new Vector2(edge.z, edge.w);
-                var p = Point(a - center); var q = Point(b - center); var side = new Vector2(-(q - p).y, (q - p).x).normalized * .8f;
-                int n = vh.currentVertCount; var color = new Color(.82f, .84f, .75f, .60f);
+                var p = Point(a - center); var q = Point(b - center); var side = new Vector2(-(q - p).y, (q - p).x).normalized * halfWidth;
+                int n = vh.currentVertCount;
                 vh.AddVert(p - side, color, UV(visibility, a)); vh.AddVert(p + side, color, UV(visibility, a));
                 vh.AddVert(q + side, color, UV(visibility, b)); vh.AddVert(q - side, color, UV(visibility, b));
                 vh.AddTriangle(n, n + 1, n + 2); vh.AddTriangle(n, n + 2, n + 3);

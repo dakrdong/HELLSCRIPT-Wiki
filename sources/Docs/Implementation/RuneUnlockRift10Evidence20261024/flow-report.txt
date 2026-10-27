@@ -1,0 +1,2 @@
+flow pending=True step=Waiting slot=menu-rune-board-locked/alpha=1 | tick1 step=Reward active=True introduced=True story=True | claim step=Emblem runes+5 lessonBoxLeft=False claimedStages=0 | break1 burstEnds>=0=True slot=menu-rune-board-locked/alpha=0 burstObjects=1 | break2 lockBroken=True slot=menu-rune-board/alpha=0 | flight flying=True | landed step=OpenBoard iconVisible=True slot=menu-rune-board/alpha=1 burstObjects=2 ok
+DONE

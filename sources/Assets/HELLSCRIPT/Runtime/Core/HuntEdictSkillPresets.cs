@@ -78,6 +78,7 @@ namespace Hellscript
                 var options=ClassSkillOptions.For((HeroClass)next.classSkills.heroClass).Where(o=>o.skillId==skill).Select(o=>o.id).ToHashSet();
                 next.classSkills.options.RemoveAll(o=>options.Contains(o.id));
                 next.classSkills.options.AddRange(source.classSkills.options.Where(o=>options.Contains(o.id)).Select(o=>new ClassSkillOptionSelection{id=o.id,choice=o.choice}));
+                SkillTacticsStorage.CopyPolicy(source.classSkills,next.classSkills,skill);
                 if(next.classSkills.Equipped(skill))
                 {
                     if(!source.classSkills.automatic.Contains(skill))next.classSkills.automatic=next.classSkills.automatic.Where(id=>id!=skill).ToArray();

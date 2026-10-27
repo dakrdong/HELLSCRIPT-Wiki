@@ -19,7 +19,9 @@ namespace Hellscript
             if(run.training<0)
             {
                 var next=game.catalog.skills.Where(s=>s.heroClass==combat.Hero.heroClass&&s.unlock>level).OrderBy(s=>s.unlock).FirstOrDefault();
-                headerSubtitle.text=Loc.F("{0}{1} · 성장 보기", (level>=30?"최대 레벨":$"XP {combat.Hero.xp:N0} / {Economy.XpRequired(level):N0}"), (next!=null?Loc.F(" · 다음 스킬 Lv.{0}", next.unlock):""));
+                string xp=level>=30?"최대 레벨":$"XP {combat.Hero.xp:N0} / {Economy.XpRequired(level):N0}";
+                string withNext=Loc.F("{0}{1} · 성장 보기", xp, (next!=null?Loc.F(" · 다음 스킬 Lv.{0}", next.unlock):""));
+                SetXpLine(withNext,next!=null?Loc.F("{0}{1} · 성장 보기", xp, ""):withNext,Loc.F("{0}", xp));
             }
             else if(run.tutorial)headerSubtitle.text=TutorialObjective(run);
             var last=run.growthEvents.LastOrDefault();if(last==null)return;

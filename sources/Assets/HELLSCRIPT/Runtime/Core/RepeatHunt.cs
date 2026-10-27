@@ -5,7 +5,7 @@ using System.Linq;
 namespace Hellscript
 {
     public enum RepeatOutcome { Same, Next, Lower, Stop }
-    public enum RepeatStop { None, Disabled, Cancelled, Success, Failure, FailureLimit, CountLimit, TimeLimit, GoldGoal, EquipmentGoal, StageGoal }
+    public enum RepeatStop { None, Disabled, Cancelled, Success, Failure, FailureLimit, CountLimit, TimeLimit, GoldGoal, EquipmentGoal, StageGoal, ClearLimit, EntryLimit, Potions }
     public enum RepeatBlock { None, Save, Bag, Warehouse, Configuration, Navigation, Potions }
 
     [Serializable]
@@ -18,6 +18,7 @@ namespace Hellscript
         public float resultSeconds=5;
         public string[] effects=Array.Empty<string>(),sets=Array.Empty<string>();
         public EdictCleanupPolicy cleanup;
+        public RepeatSettings settings;
 
         public static RepeatHuntPolicy Compile(BuildConfig build,HuntEdictV2Document document=null)
         {
@@ -37,13 +38,14 @@ namespace Hellscript
     [Serializable]
     public sealed class RepeatHuntSession
     {
-        public int version=1;
+        public int version=2;
         public string id,heroId,runId,completedRunId;
         public int completed,consecutiveFailures,nextStage,cleanupAttempt;
+        public int entries,clears,firstStage;
         public double seconds;
         public long gold;
         public float delayElapsed;
-        public bool cancelled,cleanupDone;
+        public bool cancelled,cleanupDone,stopRequested;
         public RepeatStop stop;
         public RepeatBlock blocked;
         public string error="";
@@ -65,6 +67,7 @@ namespace Hellscript
             if(run==null||run.training>=0)return null;
             var s=previous??new RepeatHuntSession{id=Guid.NewGuid().ToString("N"),heroId=run.heroId};
             if(s.heroId!=run.heroId)throw new InvalidOperationException("반복 사냥의 캐릭터가 일치하지 않습니다.");
+            if(s.runId!=run.id){s.entries++;if(s.firstStage<=0)s.firstStage=run.stage;}
             s.runId=run.id;s.policy=policy;s.pendingResult=null;s.delayElapsed=0;s.stop=RepeatStop.None;s.blocked=RepeatBlock.None;
             s.cleanupDone=false;s.cleanup=null;s.error="";return s;
         }
@@ -75,12 +78,25 @@ namespace Hellscript
             // Time limits never terminate a live battle or alter its rewards.
             if(s.pendingResult!=null&&s.policy.enabled&&s.policy.minutes>0&&s.seconds>=60d*s.policy.minutes)s.stop=RepeatStop.TimeLimit;
         }
-        public static bool Complete(RepeatHuntSession s,RunState run,RepeatHuntPolicy policy,int highestClear)
+        public static bool Complete(RepeatHuntSession s,RunState run,RepeatHuntPolicy policy,int highestClear,HeroSave hero=null,PotionSlot[] equipped=null)
         {
             if(s==null||!Terminal(run)||run.training>=0||s.heroId!=run.heroId||s.runId!=run.id||s.completedRunId==run.id)return false;
+            if(RepeatSettings.Configured(policy.settings)&&policy.settings.stopCondition==RepeatStopCondition.Potions&&(hero==null||hero.id!=run.heroId))throw new ArgumentException("Missing repeat potion owner.");
             s.policy=policy;s.pendingResult=run;s.completedRunId=run.id;s.completed++;
             s.gold+=Math.Max(0,run.earnedGold);bool won=run.phase==RunPhase.Cleared;
+            if(won)s.clears++;
             s.consecutiveFailures=won?0:s.consecutiveFailures+1;
+            if(RepeatSettings.Configured(policy.settings))
+            {
+                var settings=policy.settings;s.nextStage=NextStage(s,run,highestClear);
+                s.stop=s.cancelled?RepeatStop.Cancelled:!policy.enabled?RepeatStop.Disabled:
+                    !won&&settings.stopCondition==RepeatStopCondition.Defeat?RepeatStop.Failure:
+                    settings.stopCondition==RepeatStopCondition.Potions&&RepeatSettings.PotionDepleted(hero,equipped)?RepeatStop.Potions:
+                    settings.goal==RepeatGoal.Clears&&s.clears>=settings.clears?RepeatStop.ClearLimit:
+                    settings.goal==RepeatGoal.Entries&&s.entries>=settings.entries?RepeatStop.EntryLimit:
+                    settings.goal==RepeatGoal.Minutes&&s.seconds>=60d*settings.minutes?RepeatStop.TimeLimit:RepeatStop.None;
+                return true;
+            }
             var outcome=won?policy.success:policy.failure;
             s.nextStage=Math.Max(1,Math.Min(highestClear+1,run.stage+(outcome==RepeatOutcome.Next?1:outcome==RepeatOutcome.Lower?-1:0)));
             s.stop=s.cancelled?RepeatStop.Cancelled:!policy.enabled?RepeatStop.Disabled:
@@ -93,6 +109,21 @@ namespace Hellscript
                 won&&policy.stage>0&&run.stage>=policy.stage?RepeatStop.StageGoal:RepeatStop.None;
             return true;
         }
+        public static int NextStage(RepeatHuntSession session,RunState run,int highestClear)
+        {
+            var settings=session.policy.settings;int maximum=Math.Min(1000,highestClear+1);
+            int stage=settings.progress==RepeatProgress.Highest?maximum:settings.progress==RepeatProgress.Fixed?session.firstStage:
+                run.stage+(run.phase==RunPhase.Cleared?1:-1);
+            return Math.Max(1,Math.Min(maximum,stage));
+        }
+        public static RepeatHuntSession FromResult(RepeatHuntSession previous,RepeatHuntPolicy policy,int highestClear)
+        {
+            var run=previous.pendingResult;
+            var session=new RepeatHuntSession{id=Guid.NewGuid().ToString("N"),heroId=run.heroId,runId=run.id,completedRunId=run.id,
+                firstStage=run.stage,pendingResult=run,policy=policy,cleanupDone=previous.cleanupDone,cleanup=previous.cleanup,
+                cleanupAttempt=previous.cleanupAttempt,stop=policy.enabled?RepeatStop.None:RepeatStop.Disabled};
+            session.nextStage=NextStage(session,run,highestClear);return session;
+        }
         static bool AcquiredGoal(RunState run,RepeatHuntPolicy policy)=>run.drops.Any(d=>d.claimed&&d.item!=null&&d.item.acquiredOrder>0&&
             (policy.effects.Contains(d.item.special)||policy.sets.Contains(ItemCatalog.Unique(d.item.special)?.setId??"")));
         public static RepeatBlock SpaceBlock(RepeatHuntSession s,HeroSave hero,AccountSave account=null)
@@ -104,24 +135,34 @@ namespace Hellscript
         public static bool Ready(RepeatHuntSession s)=>s?.pendingResult!=null&&s.stop==RepeatStop.None&&s.blocked==RepeatBlock.None&&!s.cancelled;
         public static void Normalize(AccountSave account)
         {
+            foreach(var hero in account.heroes)
+            {
+                if(hero.repeatSettings?.version>1||hero.repeatSettings?.version<0)throw new NotSupportedException("Unsupported repeat settings; the save is preserved.");
+                if(RepeatSettings.Configured(hero.repeatSettings))RepeatSettings.Validate(hero.repeatSettings);
+                else hero.repeatSettings=null;
+            }
             var s=account.repeatHunt;
             if(s==null||string.IsNullOrEmpty(s.id)){account.repeatHunt=null;return;}
-            if(s.version>1)throw new NotSupportedException("더 새로운 반복 사냥 버전이 필요합니다. 저장 파일은 보존했습니다.");
+            if(s.version>2)throw new NotSupportedException("더 새로운 반복 사냥 버전이 필요합니다. 저장 파일은 보존했습니다.");
             if(s.pendingResult!=null&&string.IsNullOrEmpty(s.pendingResult.id))s.pendingResult=null;
             // JsonUtility materializes absent nested classes. Legacy repetition never owns an
             // edict cleanup policy, and no cleanup report exists before a completed transaction.
             if(s.policy!=null&&!s.policy.edict)s.policy.cleanup=null;
+            if(s.policy?.settings?.version>1||s.policy?.settings?.version<0)throw new NotSupportedException("Unsupported repeat settings snapshot; the save is preserved.");
+            if(s.policy?.settings?.version==0)s.policy.settings=null;
+            if(s.version==1){s.entries=s.completed+(s.pendingResult==null?1:0);s.clears=s.pendingResult?.phase==RunPhase.Cleared?1:0;s.firstStage=s.pendingResult?.stage??Math.Max(1,s.nextStage);s.version=2;}
             if(!s.cleanupDone)s.cleanup=null;
-            if(s.version!=1||!Valid(s.policy)||!HeroSlots.Created(account).Any(h=>h.id==s.heroId)||double.IsNaN(s.seconds)||double.IsInfinity(s.seconds)||s.seconds<0||s.completed<0||s.gold<0||
+            if(s.version!=2||!Valid(s.policy)||!HeroSlots.Created(account).Any(h=>h.id==s.heroId)||double.IsNaN(s.seconds)||double.IsInfinity(s.seconds)||s.seconds<0||s.completed<0||s.gold<0||s.entries<s.completed||s.clears<0||s.clears>s.completed||s.firstStage<1||s.firstStage>1000||
                 float.IsNaN(s.delayElapsed)||float.IsInfinity(s.delayElapsed)||s.delayElapsed<0||s.consecutiveFailures<0||s.cleanupAttempt<0||
                 !Enum.IsDefined(typeof(RepeatStop),s.stop)||!Enum.IsDefined(typeof(RepeatBlock),s.blocked)||
                 s.pendingResult!=null&&(!Terminal(s.pendingResult)||s.pendingResult.training>=0||s.pendingResult.heroId!=s.heroId||s.pendingResult.id!=s.runId)||
                 account.suspendedRun!=null&&(s.pendingResult!=null||account.suspendedRun.id!=s.runId||account.suspendedRun.heroId!=s.heroId))
                 throw new System.IO.InvalidDataException("반복 사냥의 저장 상태가 일치하지 않습니다.");
             s.policy.effects??=Array.Empty<string>();s.policy.sets??=Array.Empty<string>();
+            if(s.policy.settings!=null)RepeatSettings.Validate(s.policy.settings);
             if(s.pendingResult!=null)GameStore.NormalizeRun(s.pendingResult);
         }
-        static bool Valid(RepeatHuntPolicy p)=>p!=null&&p.failures>0&&p.count>=0&&p.count<=10000&&p.minutes>=0&&p.minutes<=1440&&p.gold>=0&&p.gold<=100000000&&
+        static bool Valid(RepeatHuntPolicy p)=>p!=null&&p.failures>0&&p.count>=0&&p.count<=10000&&p.minutes>=0&&(RepeatSettings.Configured(p.settings)||p.minutes<=1440)&&p.gold>=0&&p.gold<=100000000&&
             p.stage>=0&&p.stage<=1000&&p.freeSlots>=0&&p.freeSlots<=100&&!float.IsNaN(p.resultSeconds)&&p.resultSeconds>=0&&p.resultSeconds<=30&&
             (p.success==RepeatOutcome.Same||p.success==RepeatOutcome.Next||p.success==RepeatOutcome.Stop)&&
             (p.failure==RepeatOutcome.Same||p.failure==RepeatOutcome.Lower||p.failure==RepeatOutcome.Stop)&&

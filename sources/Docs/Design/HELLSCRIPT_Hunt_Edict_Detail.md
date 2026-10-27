@@ -1,5 +1,9 @@
 # HELLSCRIPT 사냥 칙령: 저장·공유·프리셋·스킬 설정
 
+**2026-10-24 D4 범위:** 기존 18종·v0.2·최대 8개 기록은 이력이다. [스킬별 전술 계약](../Implementation/Skill_Edict_Pages_Contract_20261024.md)의 D4 카드는 자동 사용·선택 보조를 포함해 최대 7개다. 페이지의 명시적 저장은 해당 스킬 행만 현재 저장본에 합치며, 스킬 창의 미저장 슬롯 편집과 독립이다. 기존 원자적 저장·5개 프리셋을 재사용하고, 새 전술의 플레이어 진입과 전투 적용은 아직 제공하지 않는다.
+
+English: The 18-skill/v0.2/eight-control records below are historical. [Current D4 tactics](../Implementation/Skill_Edict_Pages_Contract_20261024.en.md) allow at most seven rows including automatic use and the selected modifier. An explicit page save merges only that skill's rows into the saved loadout, independently of unsaved slot edits. Existing atomic persistence and five preset slots are reused. Player entry and combat integration for new tactics remain unavailable.
+
 작성일: 2026-09-09 · 상태: 사용자 추가 요구를 반영한 설계안 · 게임 기능 구현 완료 기록이 아닙니다.
 
 사냥 칙령(Hunt Edict)은 캐릭터의 자동 사냥 행동을 정하는 기능입니다. **사용할 스킬의 선택·배치, 전역 설정, 개별 스킬 설정을 하나의 저장 대상으로 묶습니다.** 프리셋을 불러오면 연결된 스킬이 사용 스킬 칸에 함께 배치되고 그 스킬의 옵션도 복원됩니다. 저장한 구성은 다른 플레이어에게 코드로 전달할 수 있습니다. 화면의 보조 명칭은 ‘자동 사냥 행동 설정’입니다.

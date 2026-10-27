@@ -123,5 +123,30 @@ namespace Hellscript.Tests
             }
             finally { UnityEngine.Object.DestroyImmediate(catalog); }
         }
+
+        [Test] public void OverlayBoundaryHasContrastingStrokesWithIdenticalExplorationCoordinates()
+        {
+            var run=Doorway();RiftVisibility.Initialize(run,new RiftNavigation(run.layout),false);string before=JsonUtility.ToJson(run);
+            var root=new GameObject("Overlay contrast regression",typeof(RectTransform));
+            try
+            {
+                var fog=root.AddComponent<RiftFogView>();typeof(RiftFogView).GetProperty("Visibility").GetSetMethod(true).Invoke(fog,new object[]{run.visibility});
+                var map=root.AddComponent<RiftAutomap>();const System.Reflection.BindingFlags flags=System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic;
+                typeof(RiftAutomap).GetField("fog",flags).SetValue(map,fog);typeof(RiftAutomap).GetField("axisX",flags).SetValue(map,Vector2.right);typeof(RiftAutomap).GetField("axisY",flags).SetValue(map,Vector2.up);typeof(RiftAutomap).GetField("scale",flags).SetValue(map,1f);
+                using(var mesh=new UnityEngine.UI.VertexHelper())
+                {
+                    typeof(RiftAutomap).GetMethod("OnPopulateMesh",flags,null,new[]{typeof(UnityEngine.UI.VertexHelper)},null).Invoke(map,new object[]{mesh});int layer=run.visibility.Boundary.Count*4;
+                    Assert.Greater(layer,0);Assert.AreEqual(layer*2,mesh.currentVertCount);
+                    var dark=new UIVertex();var light=new UIVertex();var otherDark=new UIVertex();var otherLight=new UIVertex();
+                    for(int i=0;i<layer;i++){mesh.PopulateUIVertex(ref dark,i);mesh.PopulateUIVertex(ref light,layer+i);Assert.AreEqual(dark.uv0,light.uv0,"Both strokes must keep the fog mask.");}
+                    mesh.PopulateUIVertex(ref dark,0);mesh.PopulateUIVertex(ref otherDark,1);mesh.PopulateUIVertex(ref light,layer);mesh.PopulateUIVertex(ref otherLight,layer+1);
+                    Assert.Greater((dark.position-otherDark.position).magnitude,(light.position-otherLight.position).magnitude*2);
+                    Color dc=dark.color,lc=light.color;float outlineOnWhite=Color.Lerp(Color.white,dc,dc.a).grayscale,insideOnBlack=Color.Lerp(Color.black,lc,lc.a).grayscale;
+                    Assert.Less(outlineOnWhite,.35f,"The dark edge remains visible over bright terrain.");Assert.Greater(insideOnBlack,.5f,"The light center remains visible over dark terrain.");
+                }
+                Assert.AreEqual(before,JsonUtility.ToJson(run),"Presentation must not alter exploration, RNG or the run save.");
+            }
+            finally{UnityEngine.Object.DestroyImmediate(root);}
+        }
     }
 }

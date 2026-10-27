@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using NUnit.Framework;
 using UnityEngine;
 
@@ -50,6 +51,52 @@ namespace Hellscript.Tests
             var p=sim.PlanEdictSurvival(d);Assert.AreEqual("WALK",p.selected.role);Assert.IsFalse(EnemyCombat.Contains(EnemyCombat.HazardThreat(h),p.selected.destination));
             float maximum=shape==AttackShape.Circle?2.09f:shape==AttackShape.Ring?.19f:shape==AttackShape.Line?.79f:.79f;
             Assert.LessOrEqual(Vector2.Distance(sim.State.position,p.selected.destination),maximum,"Do not retreat to the old 1 m radial grid or a distant low-damage point.");
+        }
+        CombatSimulation ProjectileFight(out HuntEdictV2Document document)
+        {
+            var sim=Fixture(HeroClass.Warrior);document=DodgeDocument(sim,true);
+            Set(document,"position.mode","DISTANCE");Set(document,"position.distanceSource","BASIC_RANGE");Set(document,"dodge.direct.policy","ALWAYS");
+            sim.Hero.edict=document;sim.RefreshEdict();var enemy=sim.State.enemies[0];enemy.kind=2;enemy.position=sim.State.position+Vector2.up*7;enemy.attack=5;
+            enemy.brain.action=new EnemyActionState{id=800,kind=2,phase=EnemyActionPhase.Preparing,origin=enemy.position,aim=sim.State.position,direction=Vector2.down,preparation=.7f,remaining=.7f};
+            sim.State.targetId=enemy.id;return sim;
+        }
+        [Test]
+        public void AnOrdinaryProjectileDodgeAlsoMakesSafeProgressTowardAttackRange()
+        {
+            var sim=ProjectileFight(out var document);var target=sim.State.enemies[0];float before=Vector2.Distance(sim.State.position,target.position);
+            string state=JsonUtility.ToJson(sim.State);var plan=sim.PlanEdictSurvival(document);
+            Assert.AreEqual("WALK",plan.selected.role);Assert.IsTrue(plan.selected.timely);
+            Assert.Less(Vector2.Distance(plan.selected.destination,target.position),before-.25f,"A shortest sideways exit must not repeatedly give up the approach to the attacker.");
+            var risk=sim.AssessEdictSurvival(document,position:plan.selected.destination);
+            Assert.IsFalse(risk.DodgeRequested);Assert.AreEqual(0,risk.forecast.HpLossThrough(CombatSimulation.EdictSurvivalLookAhead));
+            Assert.AreEqual(state,JsonUtility.ToJson(sim.State),"Preview must not spend or remember a dodge.");
+        }
+        [TestCase("STAND")][TestCase("RETREAT")][TestCase("EMERGENCY")][TestCase("ATTACKS_OFF")]
+        public void ProjectileProgressDoesNotOverrideStationaryRetreatOrEmergencyPolicies(string policy)
+        {
+            var sim=ProjectileFight(out var document);
+            if(policy=="STAND")Set(document,"position.mode","STAND");
+            if(policy=="EMERGENCY"){Set(document,"survival.lowHp","ON");Set(document,"survival.order","WALK,DEFENSE,ESCAPE");sim.State.health=20;}
+            if(policy=="ATTACKS_OFF")document=HuntEdictV2.WithOption(document,"BASIC",1,"OFF");
+            sim.Hero.edict=document;sim.RefreshEdict();
+            if(policy=="RETREAT")
+            {sim.State.build.rules.Add(new Rule(-1){id="retreat-policy",action=RuleAction.Basic,overrideMovement=true,movement=MovementMode.Retreat});sim.State.movementRule=0;}
+            var selected=sim.PlanEdictSurvival(document).selected;Assert.AreEqual("WALK",selected.role);
+            Assert.Less(Vector2.Distance(sim.State.position,selected.destination),.74f,"Keep the existing nearest safe exit for this policy.");
+        }
+        [Test]
+        public void ProjectileDodgeHasTheSamePreparedAndStreamedRecordingFrames()
+        {
+            var expected=ProjectileFight(out _);
+            CombatSimulation Fork()=>(CombatSimulation)typeof(CombatSimulation).GetConstructor(BindingFlags.Instance|BindingFlags.NonPublic,null,new[]{typeof(CombatSimulation),typeof(bool)},null).Invoke(new object[]{expected,false});
+            var prepared=Fork();var streamed=Fork();using var full=prepared.EnableRecording();using var stream=streamed.EnableRecording();
+            full.Prepare(1000,60);Assert.Greater(full.BufferedFrames,0);
+            for(int i=0;i<60;i++)
+            {
+                expected.Tick(CombatSimulation.Step);Assert.IsTrue(full.Advance(),full.Error);Assert.IsTrue(stream.Advance(),stream.Error);
+                expected.State.recordedTicks=prepared.State.recordedTicks;Assert.AreEqual(JsonUtility.ToJson(expected.State),JsonUtility.ToJson(prepared.State),"prepared frame "+i);
+                Assert.AreEqual(JsonUtility.ToJson(prepared.State),JsonUtility.ToJson(streamed.State),"streamed frame "+i);
+            }
         }
         [Test]
         public void SafePositionStaysFixedThroughWarningAndZoneAndWaitingIsEvasionInTheGraph()

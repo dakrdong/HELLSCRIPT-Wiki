@@ -129,3 +129,17 @@ In a dialogue scene the speaker stands on the left and the listener on the right
 Not checked: the hero lines after the boss-fight intervention ("Ugh… like this…!", "…I will follow your command.") and the tutorial smoke's town-arrival section (not run because of the existing failure above; the earlier hero lines, and Anton with the hero listening in the NPC dialogue, were checked), the landscape screen where the Voice speaks and the hero listens on the right (the Voice art is the unchanged original), real mobile devices, the APK size and ASTC result of the 16 added images, and the full Edit Mode and smoke suite (planned once at the end).
 
 **Known limits.** Because they are mirrors, asymmetric details flip (which hand holds an item, the hair parting, Jake's left-eyebrow scar landing on the other eyebrow). The light direction flips too. For any character that does not look right, the opposite-facing art can be redrawn with Codex and saved under the same file name; no code needs to change.
+
+
+## Dialogue composition and tutorial face framing (2026-10-25)
+
+The supplied screenshots 2/3 and all six hero gender/class masters plus Bellina's source were visually inspected. Hero masters contain full bodies, while NPC masters already use thigh-up composition. Hero story portraits now sample only their upper 70% (`y=.3, height=.7`), retaining gender selection and the existing opposing horizontal flips. Other NPC UVs, source PNGs, import settings and metas are unchanged.
+
+`StoryDialogueWindow` calculates both speaker/listener widths and the listener's right position from the sampled aspect (`textureAspect × abs(uv.width / uv.height)`). Cropped artwork is no longer forced into the full source's 2:3 aspect. The existing narrow-screen speaker-only layout, listener tint, space-dependent listener hiding, safe area, actions and dialogue progression remain intact.
+
+The actual rift guide profile is `guide-goddess / Bellina`. The old narration crop's lower edge `.62` excluded her mouth and chin. Profile-owned `FaceUvFor` gives Bellina `x=.16, y=.50, width=.68, height=.68 × textureAspect`; `PrologueGate.Restyle` refreshes it whenever the speaker changes. The crop includes the mouth, chin and upper halo with square source-pixel proportions. No speaker name, text, progression or save key changed.
+
+- The C worktree's absolute-path shared UI validator and all 15 validator regressions passed; receipt passed/exitCode 0 and matching log hash were confirmed. UI refresh passed with 14 bindings/252 sources, and `git diff --check` passed.
+- Existing facing expectations were updated for all six hero variants. Six new story cases prepare 36 combinations of three screen ratios (440×956, 956×440, 16:9) and speaker/listener placement. One guide-landmark case and one narrator-switch case bring the new regression count to eight.
+- SHA256, PNG dimensions and sampled crop geometry for all seven masters are retained in worktree `Builds/Validation/PortraitFraming20261025/source-inspection.json`. This is source inspection and static geometry evidence, rather than a rendered-runtime proof.
+- Unity compilation, focused Edit/Play Mode, KO/EN native framing and builds remain with the integration owner. C ran no Unity, CUA, image regeneration, full Edit Mode or wiki generation/publication. Focused test owners are `NpcPortraitFacingTests`, `StoryDialogueTests`, `PrologueGateTests` and `PrologueTourTests`.

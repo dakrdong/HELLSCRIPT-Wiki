@@ -38,6 +38,8 @@ namespace Hellscript
             escapeButton.name="battle-escape";escapeButton.gameObject.SetActive(!run.tutorial);
             powerSavingCaption=Label(header,"절전 모드",13,pale,TextAnchor.UpperCenter);powerSavingCaption.gameObject.SetActive(powerSavingButton.gameObject.activeSelf);
             escapeCaption=Label(header,escapeLabel,13,pale,TextAnchor.UpperCenter);escapeCaption.gameObject.SetActive(escapeButton.gameObject.activeSelf);
+            // Each new battle starts with the content shortcuts folded; a rebuild of this battle (language, aspect) keeps what the player chose.
+            if(battleDockRun!=run.id){battleDockRun=run.id;contentDockOpen=false;}
             AddContentDock(58,44);AddEventButton();
             AddBossHud(header);bossHud.GetComponent<Image>().color=Color.clear;
             AddRiftMinimap(run);monsterGraph=bossGraph=null;
@@ -150,6 +152,7 @@ namespace Hellscript
         }
         void ClearBattleLayout()
         {
+            CloseRiftMap();
             ClearGearRecommendations();
             trainingHud=null;
             activityHud=null;

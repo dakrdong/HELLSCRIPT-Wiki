@@ -22,10 +22,7 @@
 자, 마법 쇼를 시작해 볼까?	Shall we start the magic show?
 다음 컨텐츠	Next Content
 그래프 위치를 기기에 저장하지 못했습니다. 다시 끌어 놓아 저장을 재시도해 주세요.	The graph position could not be saved on this device. Drag and drop it again to retry.
-균열 15단계를 넘어섰군요. 저는 룬 마스터, 인젤 미르예요.	You cleared Rift 15. I am Injel Mir, the Rune Master.
-첫 클리어 보상에 룬 블럭 세트를 준비했어요. 다섯 종류의 한 칸 룬이 실제 보관함에 들어가요.	Your first-clear reward includes a Rune Block Set. It adds five types of single-cell rune to your storage.
 룬 블럭 세트 받기	Claim Rune Block Set
-빛나는 보상 받기를 눌러 룬 블럭 세트를 받으세요.	Press the highlighted reward button to claim your Rune Block Set.
 룬 보드 아이콘이 등록됐어요. 우측 상단의 빛나는 아이콘을 눌러 보드를 여세요.	Your Rune Board icon is ready. Press the highlighted icon at the upper right to open the board.
 룬 보드 첫걸음	Your First Rune Board
 룬 블럭 세트를 저장하지 못했어요. 보상은 중복 지급되지 않으니 다시 받아 주세요.	The Rune Block Set could not be saved. Please try claiming it again; you will not receive duplicate rewards.
@@ -2568,7 +2565,7 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 보관함 이름을 변경했습니다.	Vault renamed.
 창고 이용 안내	Storage guide
 개별 이동	Move an item
-아이템을 눌러 상세 정보를 열고 꺼내기 또는 창고에 넣기를 선택하세요.	Select an item to inspect it, then choose Withdraw or Store.
+아이템을 누르면 옆에 기능 메뉴가 열립니다. 상세 정보, 이동, 잠금 또는 비교를 선택하세요.	Tap an item to open its action menu. Choose details, move, lock or compare.
 끌어서 배치	Drag to arrange
 빈칸에 놓으면 그 칸으로 이동하고, 아이템 위에 놓으면 자리를 교환합니다. 누른 채 움직이면 바로 집히며, 빈칸에서 쓸면 목록이 스크롤됩니다.	Drop on an empty slot to move there, or on an item to swap. Move while pressing to pick up immediately; swipe an empty slot to scroll.
 일괄 이동을 누른 뒤 한쪽 목록에서 아이템을 선택하세요. 목적지에 모두 들어갈 때 함께 이동합니다.	Choose Bulk move, then select items on one side. They move together only when the destination has room for all of them.
@@ -3371,7 +3368,6 @@ v3 저장 형식이 아닙니다.	Not a v3 save format.
 지원하지 않는 저장 형식입니다. v3/v4 또는 v5 JSON을 사용하세요.	Unsupported save format. Use v3/v4 or v5 JSON.
 알 수 없는 무기 또는 영역입니다.	Unknown weapon or region.
 현재 영역 37칸을 모두 개방한 뒤 선택할 수 있습니다.	Open all 37 slots of the current region first.
-먼저 보상을 받아 주세요. 그다음 룬 보드의 5단계 플레이어블 가이드를 함께 진행해요.	Claim your reward first. Then we will work through the Rune Board's five-step playable guide together.
 다섯 단계의 연습을 모두 마쳤어요. 이제 실제 무기의 룬 보드를 사용할 준비가 됐어요.	You finished all five practice steps. You are ready to use your weapons' actual rune boards.
 무기별 보드에서 받은 룬을 배치해 보세요. 편집한 배치는 저장을 눌러야 해당 무기에 적용돼요.	Place the runes you received on a weapon board. Press Save to apply your edited layout to that weapon.
 이곳의 플레이어블 가이드는 연습용 보드예요. 받은 룬과 실제 무기의 배치는 바뀌지 않아요.	This playable guide uses a practice board. It will not change your reward runes or your actual weapon layouts.
@@ -3550,8 +3546,6 @@ HP·MP 회복	HP · MP restored
 {0}개 사용하고 회복	Spend {0} and restore
 {0}시간 {1:00}분	{0}h {1:00}m
 {0}초 지속	Lasts {0}s
-교체 가능한 궁극기	Available ultimates
-교체 가능한 활성화 스킬	Available learned skills
 균열에 참여한 실제 시간만큼 차감됩니다.	Only real time spent inside the rift is deducted.
 균열의 문	The Rift Gate
 기본 물약	Basic potion
@@ -3560,8 +3554,6 @@ HP·MP 회복	HP · MP restored
 보상 아이템은 추후 추가됩니다	Reward items will be added later
 보유한 등급을 누르면 바로 장착됩니다.	Choose an owned tier to equip it immediately.
 복귀·사망해도 이번 입장에 사용한 주화는 반환되지 않습니다.	The entry cost is not refunded after returning or dying.
-스킬 교체	Change skill
-스킬 상세	Skill details
 슬롯 {0}	Slot {0}
 실제 1분 참여 = 피로도 1분 사용 · 전투 1분 30초 진행	1 real minute = 1 minute of fatigue · 1 min 30 sec of combat
 심연 주화 500개를 사용합니다. 회복분은 보라색으로 표시되며, 남은 시간은 다음 날에도 유지됩니다.	Spend 500 Abyssal Coins. Restored fatigue is purple, and any unused time carries into the next day.
@@ -5059,7 +5051,6 @@ M03 연쇄 번개의 연쇄 대상를 늘리는 신규 보너스. 새 스킬을 
 일괄 판매	Sell selected
 골드 {0:N0}	Gold {0:N0}
 {0} · 아이템 레벨 {1}	{0} · Item level {1}
-구매 완료	Purchased
 현재 판매할 장비가 없습니다.	No equipment is available.
 판매한 장비가 없습니다.	No sold equipment.
 자동 선택 설정에서 판매할 등급과 장비를 체크하세요.	Choose grades and equipment types in auto-select settings.
@@ -5554,8 +5545,6 @@ Lv.30~39 단계의 스킬 중 하나 활성화	Unlock any skill from the Lv.30�
 궁극기 교체	Replace ultimate
 사용 스킬 교체	Replace active skill
 활성화된 스킬을 선택하세요.	Select an unlocked skill.
-교체할 수 있는 활성화된 스킬이 없습니다.	No unlocked replacement skill is available.
-교체하기	Replace skill
 단계를 눌러 보상을 확인하고 수령하세요. · 1–1000단계	Select a tier to inspect and claim rewards. · Tiers 1–1000
 입장할 균열을 확인하세요.	Check the rift selected for entry.
 남은 피로도가 없습니다.	No fatigue remains.
@@ -5909,9 +5898,6 @@ G0 한 칸 룬을 구입하고 룬 보드에서 배치를 확인하세요. 최�
 현재 효과 배율 {0:0}%	Current effect scale {0:0}%
 현재 사용 비용 {0:0.##}	Current resource cost {0:0.##}
 기본 등급 설명	Base-rank description
-사용 순서 {0}	Priority {0}
-선택한 보조 스킬이 없습니다.	No modifier is chosen.
-기본 공격보다 뒤에 있습니다. 앞선 행동이 선택되면 이 기술을 검사하지 않을 수 있습니다.	This skill follows basic attack. When an earlier action is selected, this skill may not be evaluated.
 사용 조건 확인	Inspect activation conditions
 기본 공격 앞으로	Move before basic attack
 60초 A/B 실습 · 실제 계정은 유지됩니다	60-second A/B practice · Your account stays unchanged
@@ -8164,7 +8150,123 @@ CC기 저항	Crowd Control Resistance
 마지막 적 위치를 찾아감	Heads to where the enemy was last seen
 적보다 먼저 챙김	Handled before the enemy
 적을 조사한 뒤 챙김	Handled after the enemy
+옵션이 다양해서 비교하기 어렵다면, '장비 점수'가 오르는지 내려가는지 보세요. 가장 쉽게 판단할 수 있어요.	When different bonuses make comparison difficult, check whether the Equipment Score goes up or down. It is the easiest way to judge.
+점수가 낮은 장비는 추천만 하지 않을 뿐, 가방에는 그대로 들어와요.	Lower-scoring gear still goes into your bag; it simply does not appear as a recommendation.
+착용중	Equipped
 
 # Combat recording preparation
 전투 준비 중…	Preparing battle…
 전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.	Could not prepare the battle recording. Resume to try again.
+여기는 활동 시간이에요. 이동·공격·회피·파밍에 쓴 시간의 비율이고, 접어도 위쪽 막대로 볼 수 있어요.	This is activity time. It shows the share of time spent moving, attacking, dodging and looting, and a folded window keeps its bar on top.
+이건 실시간 DPS예요. 최근 3초 평균 피해를 보여 주고, 직전 판이 있으면 같은 시점과 비교해요.	This is live DPS. It shows your average damage over the last 3 seconds and compares it with the same moment of your previous run when there is one.
+여기는 몬스터 피해예요. 최근 나를 아프게 한 몬스터 5종의 초당 피해와 최대 체력 대비 비율을 보여 줘요.	This is monster damage. It shows the damage per second of the 5 monster kinds that hurt you most recently, and their share of your maximum HP.
+궁극기는 Lv.{0}에 해금돼요.	The ultimate unlocks at Lv.{0}.
+스킬을 저장하지 못했습니다.	Could not save the skills.
+스킬 구성이 바뀌었습니다. 스킬 창을 다시 열어 주세요.	The skill layout changed. Please reopen the skill window.
+착용 스킬	Equipped skills
+눌러서 트리 위치 보기	Tap to find it in the tree
+슬롯 {0} 선택됨	Slot {0} selected
+바꿀 액티브 스킬을 트리에서 누르세요	Tap an active skill in the tree to swap it in
+빈 슬롯	Empty slot
+궁극기 칸	Ultimate slot
+슬롯 {0}에서 빼기	Remove from slot {0}
+슬롯 {0}: {1} → {2}	Slot {0}: {1} → {2}
+슬롯 {0} ↔ {1} 맞교환 · {2} ↔ {3}	Slots {0} ↔ {1} swapped · {2} ↔ {3}
+슬롯 {0} 비움 · {1}	Slot {0} emptied · {1}
+{0} · 액티브가 아니라서 착용할 수 없어요 (설명만 표시)	{0} · not an active skill, so it cannot be equipped (details only)
+{0} · 스킬 포인트를 투자하면 착용할 수 있어요	{0} · invest a skill point to equip it
+{0} · 이미 슬롯 {1}에 있어요	{0} · already in slot {1}
+궁극기는 궁극기 칸에만 착용할 수 있어요	An ultimate fits only the ultimate slot
+궁극기 칸에는 궁극기만 착용할 수 있어요	Only an ultimate fits the ultimate slot
+
+상세 정보	Details
+소지품으로 이동	Move to bag
+창고로 이동	Move to warehouse
+착용 장비와 비교	Compare with worn gear
+들어가기 전에 잠깐 함께 살펴볼까요? 여기서 도전 단계를 고르고, 돌파한 단계에 다시 가거나 최초 보상을 확인할 수 있어요.	Shall we take a quick look together before you go? Choose a stage here, revisit cleared stages, or check your first-clear rewards.
+피로도는 매일 한국 시간 {0:00}:00(UTC+{6})에 {1}분 새로 받아요. 남은 일일분은 초기화되고, {2}로 {3}분씩 하루 {4}회(총 {5}분) 회복할 수 있으며, 회복분은 다음 날로 이어져요.	Each day at {0:00}:00 (Korea, UTC+{6}), you receive {1} minutes of fatigue; unused daily time resets. {2} restores {3} minutes, up to {4} times ({5} minutes) a day; restored time carries over.
+이곳에서 가져갈 물약을 골라요. 가진 수량과 부족한 물약을 살펴보고, 안내가 끝나면 슬롯을 눌러 바꿀 수 있어요.	Choose the potions to bring here. Check your quantities and empty supplies, then tap a slot to change potions after the tour.
+여기는 사용할 스킬이에요. 안내가 끝나면 눌러 확인·교체하고, 전투 기록에서 조합에 따른 지난 전투의 차이를 살펴보세요.	These are your equipped skills. After the tour, tap to inspect or swap them, and use Combat Records to compare how your combinations performed.
+준비가 되면 '균열 입장'으로 출발해요. 빠른 진행은 {0} {1}이 필요하니, 안내를 마친 뒤 원하는 방식으로 들어가 주세요.	When you're ready, choose Enter Rift. Faster progress costs {1} {0}, so please choose how to enter after the tour.
+안내 완료를 저장하지 못했어요. 다시 확인하거나 건너뛰기를 눌러 주세요.	I couldn't save your tour completion. Please confirm again or choose Skip to retry.
+알겠어요	Got it
+건너뛰기	Skip
+균열 레벨 {0} 달성 시 오픈됩니다	Opens when you reach Rift Level {0}
+마을에서 룬 보드 안내를 마치면 열립니다.	The Rune Board opens after its introduction in town.
+룬 보드의 문이 열렸어요. 저는 룬 마스터, 인젤 미르예요.	The Rune Board is open. I am Injel Mir, the Rune Master.
+룬은 균열의 적을 쓰러뜨리면 얻고 룬 상인에게서도 살 수 있어요. 룬 보드에 놓으면 무기마다 새로운 힘이 깨어나요.	You earn runes by defeating Rift enemies, and the rune merchant sells them too. Place them on the board and every weapon awakens new power.
+인사 선물로 룬 블럭 세트를 준비했어요. 다섯 종류의 한 칸 룬이 실제 보관함에 들어가요.	I prepared a Rune Block Set as a welcome gift. Five kinds of one-cell runes go into your real storage.
+먼저 선물을 받아 주세요. 그다음 룬 보드의 5단계 플레이어블 가이드를 함께 진행해요.	Please take the gift first. Then we will go through the 5-step playable guide of the Rune Board together.
+룬 보드의 자물쇠가 풀려요!	The Rune Board's lock is coming undone!
+대장간 소개를 저장하지 못했어요. 다시 확인하거나 건너뛰기를 눌러 주세요.	I couldn't save the forge introduction. Please confirm again or choose Skip to retry.
+{0} 기능이 열렸네. 봉인을 풀 테니 잠깐 살펴보게. 소개는 언제든 건너뛸 수 있네.	{0} is now open. Let me break the seal and show you around. You can skip this introduction at any time.
+강화 전에는 고른 장비와 비용을 확인하게. 버튼을 누르기 전까지 장비와 재화는 그대로라네.	Check the chosen equipment and cost before enhancing. Nothing changes until you press the action button.
+이 강화는 선택한 장비 부위에 적용된다네. 시작하면 제작 시간이 필요하니, 완료 뒤 결과를 확인하게.	This upgrade applies to the selected equipment slot. It takes crafting time after you start, so collect the result when it finishes.
+바꿀 속성 한 줄을 먼저 고르게. 고정한 줄과 비용을 확인하고, 재설정 결과는 무작위라는 점을 기억하게.	Choose one affix to change. Check the locked line and cost, and remember that reroll results are random.
+원하는 장비와 같은 부위의 코어 10개가 필요하네. 제작법과 최종 비용을 확인한 뒤 제작하게.	You need ten cores for the equipment's slot. Check the recipe and final cost before crafting.
+# Per-skill hunt edict development window (2026-10-24)
+스킬별 사냥칙령	Per-skill hunt edict
+{0} 사냥칙령	{0} hunt edict
+← 스킬	← Skills
+변경사항 있음	Unsaved changes
+현재 보조: 없음	Current modifier: none
+적용 중인 보조: {0}	Applied modifier: {0}
+미리 보는 보조: {0}	Preview modifier: {0}
+미리 보기 · 저장 불가	Preview · cannot save
+장착됨	Equipped
+전투 연동 전 개발 검증 화면입니다.	Development validation only; combat is not connected.
+범위 {0}–{1} {2} · 간격 {3} · 기본 {4}	Range {0}–{1} {2} · step {3} · default {4}
+스킬의 전술 옵션	Skill tactics
+적용 중인 보조 옵션	Selected modifier options
+기존 전역 설정으로 ›	Existing global settings ›
+✓ 켜짐	✓ On
+− 꺼짐	− Off
+자동 사용이 꺼져 있어도 다른 설정값은 보관하고 편집할 수 있습니다.	Other values remain stored and editable while automatic use is Off.
+마지막 저장 상태입니다.	Last saved state.
+변경한 사냥칙령을 저장할까요?	Save your edict changes?
+사냥칙령 편집본만 처리합니다. 착용 슬롯 변경 저장과는 독립입니다.	This handles only the edict draft, independently of equipped-slot changes.
+저장 후 이동	Save and leave
+변경 버리고 이동	Discard and leave
+사냥칙령 설정	Hunt edict settings
+미리 보기	Preview
+알 수 없는 스킬	Unknown skill
+저장했습니다.	Saved.
+저장하지 않은 변경사항이 있습니다.	You have unsaved changes.
+미리 보는 보조 옵션	Preview modifier options
+그래프창의 제목 부분을 끌면 위치를 옮길 수 있어요. 오른쪽 위 접기 버튼으로 창을 작게 접거나 다시 펼쳐 보세요.	Drag a graph window by its title to move it. Use the fold button at the top right to collapse or expand the window.
+반복 목표	Repeat goal
+멈춤 조건	Stop condition
+진행 설정	Progression
+클리어 횟수	Successful clears
+목표 횟수만큼 클리어하면 멈춥니다.	Stop after the target number of successful clears.
+입장 횟수	Rift entries
+승패와 관계없이 입장 횟수를 셉니다.	Count every entry, whether you win or lose.
+시간 설정	Time limit
+현재 전투를 마친 뒤 다음 입장을 멈춥니다.	Finish the current battle, then stop entering rifts.
+목표 {0}분	Target: {0} min
+목표 {0}회	Target: {0}
+남은 피로도 {0}분 · 현재 결과는 새 목표 횟수에 포함하지 않습니다.	{0} min of fatigue remaining. This result does not count toward a new goal.
+한 번 패배하면 자동 반복을 멈춥니다.	Stop repeating after one defeat.
+물약 부족	Potion depleted
+착용한 물약 중 하나라도 소진되면 멈춥니다.	Stop when any equipped potion runs out.
+조건 없음	None
+선택한 목표와 필수 입장 조건은 유지합니다.	The goal and required entry conditions still apply.
+같은 레벨 반복	Repeat this level
+반복을 시작한 레벨을 유지합니다.	Keep the level chosen at the start of the session.
+상향 도전	Highest unlocked level
+현재 입장 가능한 최고 레벨에 도전합니다.	Always attempt the highest level you can enter.
+타협 도전	Adapt to results
+성공하면 한 단계 위, 패배하면 한 단계 아래입니다.	Go up one level after a win and down one after a loss.
+남은 피로도가 1분 미만이므로 시간 목표를 선택할 수 없습니다.	A time goal needs at least one minute of fatigue remaining.
+전투 중 시간 목표가 끝나도 현재 판의 보상은 유지됩니다.	Reaching the time limit during battle preserves that run's rewards.
+반복 중지	Stop repeating
+저장하고 반복 시작	Save and start
+반복 설정의 목표와 조건을 확인하세요.	Check the repeat goal and conditions.
+현재 균열을 마친 뒤 반복 설정을 변경하세요.	Finish the current rift before changing repeat settings.
+반복 설정이 바뀌었습니다. 창을 다시 열어 주세요.	Repeat settings changed. Reopen this window.
+남은 피로도로 설정할 수 있는 시간을 확인하세요.	Check the time available with your remaining fatigue.
+반복 설정을 저장하지 못했습니다: {0}	Could not save repeat settings: {0}
+목표 클리어 횟수에 도달했습니다.	The successful-clear goal was reached.
+목표 입장 횟수에 도달했습니다.	The rift-entry goal was reached.
+착용한 물약 중 하나가 소진되어 반복을 멈췄습니다.	Repeating stopped because an equipped potion ran out.
+이번 반복 입장 {0}회 · 클리어 {1}회 · 경과 {2:0.0}분	This session: {0} entries, {1} clears, {2:0.0} min elapsed

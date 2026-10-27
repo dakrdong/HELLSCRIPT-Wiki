@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
@@ -173,12 +174,16 @@ namespace Hellscript
                 if(corpse!=null){corpse.consumedBy=e.id;CreateEnemyHazard(e,"E05",corpse.position,1.2f,0,EnemyAttackValue(e)*EnemyCombat.TraitHit(4).power,EnemyCombat.TraitHit(4).element);EnemyEvent(e,"CORPSE_CONSUMED","E05",value:corpse.id);b.traitCooldowns[4]=6;}
             }
         }
+        // Enemies can be added or removed while a tick runs, so it walks a snapshot, held in a buffer instead of a new array every tick.
+        readonly List<EnemyState> enemyTickSnapshot=new List<EnemyState>();
         void TickEnemies(float dt)
         {
             using var sample=PresentationMetrics.Enemies.Auto();PresentationMetrics.EnemyTicks++;
             RefreshEnemyAuras();
-            foreach(var e in State.enemies.ToArray())
+            enemyTickSnapshot.Clear();enemyTickSnapshot.AddRange(State.enemies);
+            for(int enemyIndex=0;enemyIndex<enemyTickSnapshot.Count;enemyIndex++)
             {
+                var e=enemyTickSnapshot[enemyIndex];
                 if(e.dead)continue;e.mark-=dt;e.slow=Mathf.Max(0,e.slow-dt);e.root=Mathf.Max(0,e.root-dt);
                 if(e.poison>0){e.poison-=dt;if(e.poisonDamage>0)Hit(e,e.poisonDamage*dt/Mathf.Max(.0001f,Stats.damage),4,false,canCrit:false,definition:"LEGACY_POISON",kind:DamageKind.Periodic);if(e.dead)continue;}
                 bool hard=CombatEffects.Has(e,StatusKind.Stun)||CombatEffects.Has(e,StatusKind.Freeze)||e.bossControl.staggered>0;
@@ -191,7 +196,8 @@ namespace Hellscript
                 if(visible)
                 {
                     e.lastSeenTime=State.time;e.lastSeenPosition=State.position;b.observations.Add(new MotionObservation{time=State.time,position=State.position});
-                    b.observations.RemoveAll(s=>s.time<State.time-.5f-.00001f);
+                    float expiry=State.time-.5f-.00001f;
+                    for(int i=b.observations.Count-1;i>=0;i--)if(b.observations[i].time<expiry)b.observations.RemoveAt(i);
                 }
                 else b.observations.Clear();
                 TickEnemyTraits(e,visible);
@@ -224,6 +230,7 @@ namespace Hellscript
                 if(e.kind==4&&!State.enemies.Any(x=>!x.dead&&x.health<x.maxHealth&&Vector2.Distance(e.position,x.position)<=3&&Map.LineClear(e.position,x.position)))continue;
                 if(e.cooldown<=.00001f&&distance<=def.range&&line)BeginEnemyAction(e);
             }
+            enemyTickSnapshot.Clear();
         }
         void RegisterEnemyDeath(EnemyState e)
         {

@@ -25,7 +25,7 @@ namespace Hellscript
                 var result=RepeatHuntPolicy.Compile(Policy,edictSource);
                 // Keep the intended owner visible even if a runtime error deactivated its edict.
                 // The controller then blocks repetition instead of silently using legacy settings.
-                result.edict|=Hero.useEdict;return result;
+                result.edict|=Hero.useEdict;return RepeatSettings.Apply(result,Hero.repeatSettings);
             }
         }
         // Navigation failures switch repeat off; the overlay must agree or the controller would restart anyway.
@@ -35,6 +35,20 @@ namespace Hellscript
         // Caller-owned previews still copy and validate their input, and receiver checks remain per evaluation.
         HuntEdictV2Document EdictForEvaluation(HuntEdictV2Document source)
             =>recordingFork&&source!=null&&ReferenceEquals(source,edictSource)?source:HuntEdictV2.Canonical(source);
+        // Most per-decision plans read the edict's globals through a lookup. The document is fixed during a fork, so the lookup is rebuilt
+        // only when the ordered (id, value) list differs from the one it was built from. That comparison is positional and covers every entry,
+        // so a hit means the list is identical to a list that ToDictionary already accepted (unique ids), and a miss rebuilds with ToDictionary,
+        // which throws on duplicate ids exactly as before and leaves the cache untouched. Callers only read the dictionary.
+        Dictionary<string,string> edictGlobalLookup;string[] edictGlobalIds,edictGlobalValues;
+        Dictionary<string,string> EdictGlobals(HuntEdictV2Document d)
+        {
+            var globals=d.global;var ids=edictGlobalIds;bool same=ids!=null&&ids.Length==globals.Count;
+            for(int i=0;same&&i<ids.Length;i++)same=globals[i].id==ids[i]&&globals[i].value==edictGlobalValues[i];
+            if(same)return edictGlobalLookup;
+            var lookup=globals.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);
+            edictGlobalIds=globals.Select(o=>o.id).ToArray();edictGlobalValues=globals.Select(o=>o.value).ToArray();
+            return edictGlobalLookup=lookup;
+        }
         HuntEdictV2Document orderedEdict;
         CombatRecordingState orderedRuleState;
         Rule[] orderedRuleSources;

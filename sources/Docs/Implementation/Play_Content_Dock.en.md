@@ -133,3 +133,7 @@ The battle screen's settings gear, content shortcuts and event icon now take the
 Town no longer reserves an invisible combat-edict preview area above its shortcut column. Settings, toggle and shortcuts share one size, right edge and six-unit gap. The world HUD settings symbol uses a native-alpha silver-and-gold painted cog; town removes the old cream circle and inset. Battle retains its existing shortcut/minimap placement. [Art prompt and provenance](../Art/SettingsCog20261018/manifest.json). The exact generation model is unknown; this is development art, not a claim of gpt-image-2 provenance or production approval.
 
 [Validation: 19 Edit Mode + 15 UI contract cases; native macOS five viewport PASS](TownShortcutStackEvidence20261018/validation.json) | [Portrait](TownShortcutStackEvidence20261018/portrait.png) | [Landscape](TownShortcutStackEvidence20261018/landscape.png). Physical mobile and GPU performance remain unverified.
+
+## Rune Board slot (2026-10-24)
+
+Before it opens, the Rune Board keeps its place (fourth of five) as a locked icon (`menu-rune-board-locked`). A tap says "Opens when you reach Rift Level 10" (after unlock but before the introduction: "The Rune Board opens after its introduction in town.") and is visible in the battle dock too. The unlock show on the first town arrival breaks the padlock and lands the emblem on that slot. [Change record](Rune_Unlock_Rift10_20261024.en.md).

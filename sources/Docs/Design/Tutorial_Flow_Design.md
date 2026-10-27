@@ -113,7 +113,7 @@
 | UL03_OFFLINE | 미접속 보급 | 1단계 |
 | UL10_SLOT_ENHANCE | 장착 슬롯 강화 | 5단계 |
 | UL05_GEM | 보석 장착·교체·합성 | 10단계 |
-| UL11_RUNE | 룬 배치·합성·무기 숙련 | 15단계 |
+| UL11_RUNE | 룬 배치·합성·무기 숙련 | 10단계 |
 | UL07_UNIDENTIFIED_SHOP | 미확인 장비 상점 | 25단계 |
 | UL06_REROLL | 옵션 재설정 | 35단계 |
 | UL12_ASPECT | 위상 성장·각인 | 40단계 |

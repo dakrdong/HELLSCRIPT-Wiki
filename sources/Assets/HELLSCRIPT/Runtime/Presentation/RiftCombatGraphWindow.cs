@@ -18,7 +18,8 @@ namespace Hellscript
             if(feedback!=null)feedback.activityHistory=(activity??new List<CombatActivitySample>()).Select(CombatJournal.Copy).ToList();
             return ContentWindowView.Open(parent,"그래프 확인",EquipmentViewSource.BattleSnapshot,reading,v=>
             {
-                float f=reading?.Invoke()??1,w=v.Width-24;
+                float f=reading?.Invoke()??1,w=v.Width-44;
+                AddScrollbar(v);
                 Text(v.Skin,v.Navigation,"Graph battle time",Loc.F("균열 {0}단계 · {1}",run.stage,TrainingGroundResultWindow.Clock(seconds)),0,0,w,32,Mathf.RoundToInt(UiTheme.Caption*f),UiTheme.Muted);
                 if(timeline==null)
                 {
@@ -50,6 +51,22 @@ namespace Hellscript
                 activityRow.gameObject.AddComponent<LayoutElement>().preferredHeight=y+8;
                 v.Button(v.Actions,"닫기",0,0,w,44,v.Close).name="rift-graph-close";
             },closed,maximumSize:new Vector2(760,760),skin:skin);
+        }
+        // The thumb lives beside the viewport, so clipped graph contents cannot cover it.
+        static void AddScrollbar(ContentWindowView view)
+        {
+            var viewport=view.Scroll.viewport;
+            viewport.sizeDelta-=new Vector2(20,0);
+            var rail=UiLayout.Rect("Graph scrollbar",view.Frame);
+            UiLayout.Place(rail,view.Width-28,UiTheme.Header+40,16,viewport.rect.height);
+            var track=rail.gameObject.AddComponent<StorageSurface>();track.SetSkin(view.Skin??UiSkin.Casual,radius:4,borderWidth:0,shadow:0,fill:(view.Skin??UiSkin.Casual).Disabled,fillEnd:(view.Skin??UiSkin.Casual).Disabled);
+            track.top=track.bottom=(view.Skin??UiSkin.Casual).Disabled;track.raycastTarget=true;
+            var area=UiLayout.Rect("Graph scrollbar area",rail);UiLayout.Stretch(area);area.offsetMin=new Vector2(3,0);area.offsetMax=new Vector2(-3,0);
+            var thumb=UiLayout.Rect("Graph scrollbar thumb",area);UiLayout.Stretch(thumb);
+            var face=thumb.gameObject.AddComponent<StorageSurface>();face.SetSkin(view.Skin??UiSkin.Casual,radius:4,borderWidth:0,shadow:0,fill:(view.Skin??UiSkin.Casual).Edge,fillEnd:(view.Skin??UiSkin.Casual).Edge);
+            face.top=face.bottom=(view.Skin??UiSkin.Casual).Edge;
+            var bar=rail.gameObject.AddComponent<Scrollbar>();bar.handleRect=thumb;bar.targetGraphic=face;bar.direction=Scrollbar.Direction.BottomToTop;
+            view.Scroll.verticalScrollbar=bar;view.Scroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;
         }
         static Text Text(UiSkin skin,Transform parent,string name,string value,float x,float y,float w,float h,int size,Color color)
             =>UiLayout.Text(parent,name,value,x,y,w,h,size,skin?.TextColor(color)??color,skin?.BodyFont);

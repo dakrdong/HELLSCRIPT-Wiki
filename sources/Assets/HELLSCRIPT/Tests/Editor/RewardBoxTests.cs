@@ -135,19 +135,21 @@ namespace Hellscript.Tests
         }
         [Test] public void RuneIntroductionPaysOnceAndRequiresEveryPlayableGuideStep()
         {
-            Assert.IsFalse(RuneBoardTutorial.IconVisible(A));Assert.IsFalse(store.ClaimRuneBoardTutorial());
+            Assert.IsFalse(RuneBoardTutorial.IconVisible(A));Assert.IsFalse(store.ClaimRuneBoardTutorial());Assert.IsFalse(store.BeginRuneBoardIntroduction(),"Nothing is open yet");
             var operational=Add("rune-starter",stage:15);
-            A.Hero.highestClear=15;ContentUnlocks.Reconcile(A);
-            RewardBoxes.CaptureClear(A,new RunState{stage=15,training=-1,phase=RunPhase.Cleared});
-            Assert.AreEqual(RuneBoardLesson.Waiting,A.guide.runeBoard.step,"Highest stage alone is not an exact clear");
-            Cleared(15);RewardBoxes.CaptureClear(A,new RunState{stage=15,training=-1,phase=RunPhase.Cleared});Assert.IsTrue(store.Save());
-            Assert.AreEqual(RuneBoardLesson.Reward,A.guide.runeBoard.step);Assert.IsFalse(RuneBoardTutorial.IconVisible(A));
+            A.Hero.highestClear=9;ContentUnlocks.Reconcile(A);Assert.IsFalse(store.BeginRuneBoardIntroduction(),"The board opens at stage 10");
+            A.Hero.highestClear=10;ContentUnlocks.Reconcile(A);
+            Assert.IsTrue(ContentUnlocks.IntroPending(A,ContentUnlocks.Rune));Assert.IsFalse(RuneBoardTutorial.IconVisible(A));
+            Assert.AreEqual(RuneBoardLesson.Waiting,A.guide.runeBoard.step,"The result window starts nothing");Assert.IsFalse(store.ClaimRuneBoardTutorial(),"The lesson pays the set, and it has not begun");
+            Assert.IsTrue(store.BeginRuneBoardIntroduction(),store.Error);Assert.IsTrue(store.BeginRuneBoardIntroduction());
+            Assert.AreEqual(RuneBoardLesson.Reward,A.guide.runeBoard.step);Assert.IsFalse(ContentUnlocks.IntroPending(A,ContentUnlocks.Rune));Assert.IsFalse(RuneBoardTutorial.IconVisible(A));
             Assert.IsFalse(store.LandRuneBoardEmblem());Assert.IsFalse(store.FinishRuneBoardLesson());
             string before=Json(A),disk=File.ReadAllText(path),mastery=Json(A.runes.mastery);int runes=A.runes.owned.Count;
             Directory.CreateDirectory(path+".tmp");LogAssert.Expect(LogType.Error,new Regex("저장하지 못했습니다:"));Assert.IsFalse(store.ClaimRuneBoardTutorial());
             Assert.AreEqual(before,Json(A));Assert.AreEqual(disk,File.ReadAllText(path));Directory.Delete(path+".tmp");
             Assert.IsTrue(store.ClaimRuneBoardTutorial(),store.Error);Assert.IsTrue(store.ClaimRuneBoardTutorial());
             Assert.IsTrue(A.rewardBoxes.owned.Any(b=>b.id==operational.id),"An unrelated grant must stay unopened");
+            Assert.IsEmpty(A.rewardBoxes.claimedStages,"The set never touches a first-clear claim");Assert.IsFalse(A.rewardBoxes.owned.Any(b=>b.id==RuneBoardTutorial.LessonBoxId),"The lesson box is spent");
             Assert.AreEqual(runes+5,A.runes.owned.Count);Assert.AreEqual(mastery,Json(A.runes.mastery));
             Assert.AreEqual(5,A.guide.runeBoard.rewards.Count);Assert.AreEqual(5,A.runes.owned.Where(r=>A.guide.runeBoard.rewards.Contains(r.id)).Select(r=>r.type).Distinct().Count());
             Assert.AreEqual(RuneBoardLesson.Emblem,A.guide.runeBoard.step);Assert.IsFalse(RuneBoardTutorial.IconVisible(A));
@@ -182,12 +184,21 @@ namespace Hellscript.Tests
         }
         [TestCase(false)] [TestCase(true)] [TestCase(true,true)] public void RuneIntroductionMigratesWithoutReplayingForPreviouslyUnlockedAccounts(bool unlocked,bool previousPolicy=false)
         {
-            A.Hero.highestClear=unlocked?15:14;ContentUnlocks.Reconcile(A);
+            A.Hero.highestClear=unlocked?10:9;ContentUnlocks.Reconcile(A);
             if(previousPolicy){A.schema=12;A.Hero.highestClear=0;A.contentUnlocks.version=1;A.contentUnlocks.unlocked.Clear();}
             // Read a real older JSON document with the newly added field absent, not a normalized write.
             File.WriteAllText(path,Regex.Replace(Json(A),"\\\"runeBoard\\\":(?:null|\\{[^{}]*\\}),?",""));
             store=new GameStore(directory,catalog);Assert.AreEqual(unlocked?RuneBoardLesson.Complete:RuneBoardLesson.Waiting,A.guide.runeBoard.step);
-            Assert.AreEqual(unlocked,RuneBoardTutorial.IconVisible(A));Assert.IsFalse(RuneBoardTutorial.Active(A));
+            Assert.AreEqual(unlocked,RuneBoardTutorial.IconVisible(A));Assert.IsFalse(RuneBoardTutorial.Active(A));Assert.IsFalse(ContentUnlocks.IntroPending(A,ContentUnlocks.Rune),"No replay for an account that already had the board");
+        }
+        [Test] public void AnOldRewardCheckpointKeepsItsStageFifteenPromiseAndPaysNoSecondSet()
+        {
+            // The lesson used to start in the Rift 15 result window: its unclaimed first-clear promise carried the set.
+            A.Hero.highestClear=15;Cleared(15);ContentUnlocks.Reconcile(A);A.guide.runeBoard.step=RuneBoardLesson.Reward;ContentUnlocks.MarkIntroduced(A,ContentUnlocks.Rune);
+            A.rewardBoxes.firstClearPromises.Add(new RewardBoxPromise{stage=15,itemLevel=RewardBoxCatalog.ItemLevel(15),configHash="",grants=new[]{new RewardBoxGrant{boxId=RuneBoardTutorial.Box}}});
+            Assert.IsTrue(store.Save());int runes=A.runes.owned.Count;
+            Assert.IsTrue(store.ClaimRuneBoardTutorial(),store.Error);Assert.AreEqual(RuneBoardLesson.Emblem,A.guide.runeBoard.step);Assert.AreEqual(runes+5,A.runes.owned.Count);
+            CollectionAssert.Contains(A.rewardBoxes.claimedStages,15);Assert.IsFalse(A.rewardBoxes.owned.Any(b=>b.id==RuneBoardTutorial.LessonBoxId),"The promise paid the set");
         }
         [Test] public void RuneIntroductionRejectsUnversionedProgressWithoutRewritingTheSave()
         {

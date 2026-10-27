@@ -2,6 +2,10 @@
 
 작성일: 2026-09-09 · 개발 시험안 · 저장·공유와 실행 연결의 구현 순서
 
+**2026-10-24 D4 추가 계약:** 아래 v0.2·HED1 이력은 보존한다. D4 스킬별 새 전술은 [현행 한·영 계약](../Implementation/Skill_Edict_Pages_Contract_20261024.md)의 희소 `tacticsVersion=1 / tactics[]`, 최대 7행, HED7 스킬 코드·HED8 프리셋 봉투를 따른다. 현재 구현은 대표 3종의 화면 없는 저장 기반이며 B1 시안 승인·전투 반영 전 플레이어 진입은 꺼져 있다. 기존 필드/칙령을 새 의미로 자동 이관하지 않는다.
+
+English: The v0.2/HED1 history below is retained. New D4 tactics use the [English current contract](../Implementation/Skill_Edict_Pages_Contract_20261024.en.md): sparse `tacticsVersion=1 / tactics[]`, at most seven rows, HED7 skill codes and HED8 preset envelopes. Only the headless three-skill foundation is implemented. Player entry stays off pending visual approval and combat integration. Existing fields and edicts are never silently reinterpreted.
+
 최신 [공통 명세](HELLSCRIPT_Hunt_Edict_Detail.md), [전역 8분류](HELLSCRIPT_Hunt_Edict_Global_Options.md), [스킬 화면](HELLSCRIPT_Hunt_Edict_Skill_Options.md), [스킬별 핵심 옵션 v0.2](HELLSCRIPT_Hunt_Edict_Skill_Option_Catalog.md)를 구현 기준으로 삼는다. 사용자 후속 요구에 따라 스킬별 편집은 자동 사용 포함 4~5개, 총 89개로 줄이고 최대 8개를 지킨다. 이전 524개 항목 전체를 구현 대상으로 유지하지 않는다. 미해금 스킬을 빈칸으로 두고 가능한 내용을 가져오는 정책은 유지한다.
 
 

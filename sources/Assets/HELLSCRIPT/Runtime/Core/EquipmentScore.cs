@@ -12,11 +12,18 @@ namespace Hellscript
         static readonly double[] MainReference={20,20,40,2,3,160,2,1};
         static double Extras(Item item)
         {
-            double value=25*ItemCatalog.Base(item).resistance*(1+.08*(item.level-1))/35;
-            foreach(var bonus in ItemCatalog.Base(item).bonuses)
+            var basis=ItemCatalog.Base(item);
+            double value=25*basis.resistance*(1+.08*(item.level-1))/35;
+            for(int index=0;index<basis.bonuses.Count;index++)
             {
-                var reference=ItemCatalog.Affixes.FirstOrDefault(a=>a.stat==bonus.stat);
-                if(reference!=null&&reference.max>0)value+=25*bonus.Value(item)/reference.max;
+                var bonus=basis.bonuses[index];
+                for(int affixIndex=0;affixIndex<ItemCatalog.Affixes.Count;affixIndex++)
+                {
+                    var reference=ItemCatalog.Affixes[affixIndex];
+                    if(reference.stat!=bonus.stat)continue;
+                    if(reference.max>0)value+=25*bonus.Value(item)/reference.max;
+                    break;
+                }
             }
             foreach(var roll in item.rolls)
             {
@@ -43,6 +50,24 @@ namespace Hellscript
             damage+=items.Where(i=>EquipmentSlots.Offhand(i)&&EquipmentSlots.Kind(i)!=WeaponKind.Shield).Sum(i=>(double)ItemCatalog.MainValue(i));
             double shields=items.Where(i=>EquipmentSlots.Kind(i)==WeaponKind.Shield).Sum(i=>100*ItemCatalog.MainValue(i)/24d);
             return Rounded(100*damage*speed/20+shields+items.Sum(Extras));
+        }
+        // A score hint, independent of bag capacity and automatic-equip protection settings.
+        // Any legal ring/hand target may improve; weapons use the full replacement configuration.
+        public static bool Improves(HeroSave hero,Item candidate)
+        {
+            if(hero==null||candidate==null||hero.inventory.Any(i=>i.equipped&&i.id==candidate.id)||Storage.WearError(hero,candidate)!="")return false;
+            var preview=new HeroSave{heroClass=hero.heroClass,level=hero.level,capacity=int.MaxValue,inventory=new List<Item>(hero.inventory)};
+            var item=preview.inventory.FirstOrDefault(i=>i.id==candidate.id);
+            if(item!=candidate||candidate.equipped)
+            {
+                preview.inventory.RemoveAll(i=>i.id==candidate.id);item=CombatJournal.Copy(candidate);item.equipped=false;preview.inventory.Add(item);
+            }
+            foreach(int index in EquipmentSlots.Targets(preview,item))
+            {
+                var plan=EquipmentSlots.Plan(preview,item,index);if(!plan.Valid)continue;
+                var score=Replacement(preview,item,plan);if(score.after>score.before)return true;
+            }
+            return false;
         }
         public static (double before,double after) Replacement(HeroSave hero,Item candidate,EquipmentPlan plan)
         {

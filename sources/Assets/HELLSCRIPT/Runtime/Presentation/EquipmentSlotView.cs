@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,30 @@ namespace Hellscript
         public string ItemId {get;private set;}
         public UiSkin Skin {get;private set;}
         EquipmentDropHighlight dropHighlight;
+        RectTransform upgradeMarker,equippedMarker;
+        public bool UpgradeHighlighted=>upgradeMarker!=null&&upgradeMarker.gameObject.activeSelf;
+        public bool EquippedMarked=>equippedMarker!=null&&equippedMarker.gameObject.activeSelf;
+        // Hosts call this when their displayed equipment changes; there is no per-frame score work.
+        public void RefreshComparison(HeroSave hero,Item item,bool showEquipped=false)
+        {
+            bool upgrade=EquipmentScore.Improves(hero,item);
+            bool worn=showEquipped&&item!=null&&hero!=null&&hero.inventory.Any(i=>i.equipped&&i.id==item.id);
+            float size=((RectTransform)transform).rect.width;var tone=ItemTooltip.ScoreTone.Of(0,1);
+            if(upgrade&&upgradeMarker==null)
+            {
+                float badge=Mathf.Clamp(size*.26f,13,22);upgradeMarker=UiLayout.Rect("Equipment upgrade",transform);UiLayout.Place(upgradeMarker,2,(size-badge)/2,badge,badge);
+                var plate=upgradeMarker.gameObject.AddComponent<StorageSurface>();plate.Paint(tone.fill,tone.fill,tone.edge);plate.radius=badge*.3f;plate.SetSkin(Skin,StorageSurface.Hex(tone.edge),badge*.3f,1.5f,0,StorageSurface.Hex(tone.fill),StorageSurface.Hex(tone.fill));plate.raycastTarget=false;
+                Glyph(upgradeMarker,"Higher score","hint-up",badge*.18f,badge*.18f,badge*.64f,StorageSurface.Hex(tone.ink));
+            }
+            if(upgradeMarker!=null&&upgradeMarker.gameObject.activeSelf!=upgrade)upgradeMarker.gameObject.SetActive(upgrade);
+            if(worn&&equippedMarker==null)
+            {
+                float h=Mathf.Clamp(size*.28f,14,20);equippedMarker=UiLayout.Rect("Equipment equipped marker",transform);UiLayout.Place(equippedMarker,2,(size-h)/2,size-4,h);
+                var plate=equippedMarker.gameObject.AddComponent<StorageSurface>();plate.Paint(tone.fill,tone.fill,tone.edge);plate.radius=4;plate.SetSkin(Skin,StorageSurface.Hex(tone.edge),4,1,0,StorageSurface.Hex(tone.fill),StorageSurface.Hex(tone.fill));plate.raycastTarget=false;
+                var text=UiLayout.Text(equippedMarker,"Equipped label",Loc.T("장착 중"),1,0,size-6,h,Mathf.Clamp(Mathf.RoundToInt(size*.16f),8,12),StorageSurface.Hex(tone.ink),Skin?.BodyFont);text.alignment=TextAnchor.MiddleCenter;text.fontStyle=FontStyle.Bold;
+            }
+            if(equippedMarker!=null&&equippedMarker.gameObject.activeSelf!=worn)equippedMarker.gameObject.SetActive(worn);
+        }
         public bool DropHighlighted=>dropHighlight!=null&&dropHighlight.gameObject.activeSelf;
         public void SetDropHighlight(bool enabled,bool hovered=false)
         {
@@ -20,19 +45,19 @@ namespace Hellscript
             if(dropHighlight==null)return;
             dropHighlight.gameObject.SetActive(enabled);dropHighlight.hovered=hovered;dropHighlight.transform.SetAsLastSibling();
         }
-        public static RectTransform Create(Transform parent,Item item,float x,float y,float size,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,string label=null,UiSkin skin=null)
+        public static RectTransform Create(Transform parent,Item item,float x,float y,float size,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,string label=null,UiSkin skin=null,HeroSave hero=null)
         {
             var r=UiLayout.Rect(item==null?"Empty equipment slot":"Equipment "+item.id,parent);UiLayout.Place(r,x,y,size,size);
-            Paint(r,item,font,selected,equipped,showSelection,skin);if(!string.IsNullOrEmpty(label))Caption(r,label,font,skin);return r;
+            Paint(r,item,font,selected,equipped,showSelection,skin,hero:hero);if(!string.IsNullOrEmpty(label))Caption(r,label,font,skin);return r;
         }
-        public static StorageSurface Paint(RectTransform root,Item item,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,UiSkin skin=null,CellRecipe recipe=null)
+        public static StorageSurface Paint(RectTransform root,Item item,Font font=null,bool selected=false,bool equipped=false,bool showSelection=false,UiSkin skin=null,CellRecipe recipe=null,HeroSave hero=null)
         {
-            if(recipe!=null)return PaintMock(root,item,font,selected,showSelection,skin,recipe);
+            if(recipe!=null){var painted=PaintMock(root,item,font,selected,showSelection,skin,recipe);root.GetComponent<EquipmentSlotView>().RefreshComparison(hero,item);return painted;}
             var view=root.GetComponent<EquipmentSlotView>();if(view==null)view=root.gameObject.AddComponent<EquipmentSlotView>();view.ItemId=item?.id;view.Skin=skin;
             font=font??skin?.BodyFont;
             var frame=root.GetComponent<StorageSurface>();if(frame==null)frame=root.gameObject.AddComponent<StorageSurface>();float size=root.rect.width;
             frame.Paint(item==null?UiTheme.PanelHex:selected?UiTheme.BorderHex:UiTheme.HoverHex,item==null?UiTheme.PanelHex:UiTheme.RaisedHex,selected?UiTheme.GoldHex:item==null?UiTheme.BorderHex:EquipmentGradePalette.Hex[Storage.Grade(item)]);frame.inset=true;frame.SetSkin(skin,selected?skin?.Gold:item==null?skin?.Edge:StorageSurface.Hex(EquipmentGradePalette.Hex[Storage.Grade(item)]),radius:8,shadow:2);
-            if(item==null)return frame;
+            if(item==null){view.RefreshComparison(hero,null);return frame;}
             Icon(root,item,3,3,size-6,skin:skin);
             var level=UiLayout.Text(root,"Equipment level",item.enhancement>0?"+"+item.enhancement+" · "+item.level:"Lv."+item.level,2,equipped?size-26:size-14,size-5,12,8,skin?.Navy??UiTheme.Text,font);level.alignment=TextAnchor.MiddleRight;
             if(item.locked)Glyph(root,"Equipment locked","lock",size-15,2,12,skin?.Navy??UiTheme.Gold);
@@ -43,7 +68,7 @@ namespace Hellscript
                 var check=UiLayout.Rect("Equipment selection",root);UiLayout.Place(check,size-17,2,15,15);var s=check.gameObject.AddComponent<StorageSurface>();s.Paint(UiTheme.PanelHex,UiTheme.PanelHex,UiTheme.GoldHex);s.SetSkin(skin,radius:3,shadow:0);s.raycastTarget=false;
                 if(selected)Glyph(check,"Selected","check",1,1,13,skin?.Navy??UiTheme.Gold);
             }
-            return frame;
+            view.RefreshComparison(hero,item);return frame;
         }
 
         // The slot recipe of the casual canvases: every inset scales with the cell (art 86% at 7%/5%, level .17, chips .14/.2/.22).
@@ -86,7 +111,7 @@ namespace Hellscript
             float size=root.rect.width;var t=UiLayout.Text(root,"Equipment position",label,2,size-13,size-4,12,8,skin?.Navy??UiTheme.Gold,font??skin?.BodyFont);t.alignment=TextAnchor.MiddleCenter;
             t.resizeTextForBestFit=true;t.resizeTextMinSize=6;t.resizeTextMaxSize=8;
         }
-        public static RectTransform Icon(Transform parent,Item item,float x,float y,float size,float opacity=1,UiSkin skin=null)
+        public static RectTransform Icon(Transform parent,Item item,float x,float y,float size,float opacity=1,UiSkin skin=null,HeroSave hero=null)
         {
             var r=UiLayout.Rect("Equipment art",parent);UiLayout.Place(r,x,y,size,size);
             if(item==null)return r;
@@ -95,6 +120,7 @@ namespace Hellscript
             {var image=r.gameObject.AddComponent<RawImage>();image.texture=dedicated;image.raycastTarget=false;image.color=new Color(1,1,1,opacity);}
             else
             {var glyph=r.gameObject.AddComponent<StorageGlyph>();glyph.symbol=EquipmentSlots.Kind(item).ToString().ToLowerInvariant();var c=UiTheme.Gold;c.a=opacity;glyph.color=c;glyph.raycastTarget=false;}
+            if(hero!=null){var view=r.gameObject.AddComponent<EquipmentSlotView>();view.ItemId=item.id;view.Skin=skin;view.RefreshComparison(hero,item);}
             return r;
         }
         public static void Glyph(Transform parent,string name,string symbol,float x,float y,float size,Color color)

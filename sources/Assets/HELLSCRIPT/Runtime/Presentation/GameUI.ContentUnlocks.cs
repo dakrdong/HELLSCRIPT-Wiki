@@ -6,8 +6,14 @@ namespace Hellscript
 {
     public sealed partial class GameUI
     {
+        // An open feature whose unlock show has not played yet waits for it: the show starts on the next quiet town visit.
+        bool IntroBlocks(string id)=>id==ContentUnlocks.Rune&&game.Store.Data.guide.runeBoard.step==RuneBoardLesson.Waiting&&ContentUnlocks.IntroPending(game.Store.Data,id);
         bool RequireContent(string id)
-        {if(ContentUnlocks.Has(game.Store.Data,id)){QueueTutorialContext(id);return true;}ShowToast(ContentUnlocks.Condition(id));return false;}
+        {
+            var a=game.Store.Data;bool open=ContentUnlocks.Has(a,id);
+            if(open&&!IntroBlocks(id)){QueueTutorialContext(id);return true;}
+            ShowToast(open?Loc.T("마을에서 룬 보드 안내를 마치면 열립니다."):ContentUnlocks.Condition(id));return false;
+        }
         void ContentButton(string id,string title,Action action,bool accent=false)
         {
             bool open=ContentUnlocks.Has(game.Store.Data,id);

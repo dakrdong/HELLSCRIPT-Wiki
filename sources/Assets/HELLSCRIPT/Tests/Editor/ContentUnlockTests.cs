@@ -29,7 +29,7 @@ namespace Hellscript.Tests
         [TestCase(ContentUnlocks.Gem,10)]
         [TestCase(ContentUnlocks.Reroll,35)] [TestCase(ContentUnlocks.Shop,25)]
         [TestCase(ContentUnlocks.Sweep,60)] [TestCase(ContentUnlocks.CoreCraft,50)]
-        [TestCase(ContentUnlocks.SlotEnhance,5)] [TestCase(ContentUnlocks.Rune,15)]
+        [TestCase(ContentUnlocks.SlotEnhance,5)] [TestCase(ContentUnlocks.Rune,10)]
         [TestCase(ContentUnlocks.Aspect,40)] [TestCase(ContentUnlocks.Elixir,60)] [TestCase(ContentUnlocks.Masterwork,80)]
         public void U03To15_ThresholdsUseGreaterOrEqualAndPersist(string id,int threshold)
         {

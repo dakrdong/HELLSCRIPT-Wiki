@@ -89,7 +89,7 @@ namespace Hellscript
                     if(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed)
                     {
                         account.repeatHunt=RepeatHunt.Start(run,sim.RepeatPolicy,account.repeatHunt);
-                        RepeatHunt.Complete(account.repeatHunt,run,sim.RepeatPolicy,account.Hero.highestClear);
+                        RepeatHunt.Complete(account.repeatHunt,run,sim.RepeatPolicy,account.Hero.highestClear,account.Hero,sim.ActivePotionSlots);
                         account.suspendedRun=null;
                     }
                     if(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed)

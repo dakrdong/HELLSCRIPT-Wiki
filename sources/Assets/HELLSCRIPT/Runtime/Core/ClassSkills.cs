@@ -84,13 +84,15 @@ namespace Hellscript
         public List<SkillInvestment> ranks=new List<SkillInvestment>();
         public List<ClassSkillOptionSelection> options=new List<ClassSkillOptionSelection>();
         public List<SkillPresetSelection> presetSelections=new List<SkillPresetSelection>();
+        public int tacticsVersion;
+        public List<SkillTacticValue> tactics=new List<SkillTacticValue>();
         public HuntEdictV2Document legacyEdict;
         public ClassSkillLoadout Copy()=>JsonUtility.FromJson<ClassSkillLoadout>(JsonUtility.ToJson(this));
         public int Rank(string id)=>ranks.FirstOrDefault(r=>r.id==id)?.rank??(version==5?0:1);
         public int Modifier(string id)=>version==5?(ranks.FirstOrDefault(r=>r.id==id)?.modifier??-1)+1:0;
         public int ModifierRank(string id)=>version==5?ranks.FirstOrDefault(r=>r.id==id)?.modifierRank??0:0;
         public bool Equipped(string id)=>id=="BASIC"||actives.Contains(id)||passives.Contains(id)||ultimate==id;
-        public static bool IsAbsent(ClassSkillLoadout value)=>value==null||value.version<=2&&string.IsNullOrEmpty(value.format)&&(value.ranks==null||value.ranks.Count==0)&&(value.actives==null||value.actives.All(string.IsNullOrEmpty))&&(value.passives==null||value.passives.All(string.IsNullOrEmpty))&&string.IsNullOrEmpty(value.ultimate)&&(value.options==null||value.options.Count==0);
+        public static bool IsAbsent(ClassSkillLoadout value)=>value==null||value.version<=2&&string.IsNullOrEmpty(value.format)&&(value.ranks==null||value.ranks.Count==0)&&(value.actives==null||value.actives.All(string.IsNullOrEmpty))&&(value.passives==null||value.passives.All(string.IsNullOrEmpty))&&string.IsNullOrEmpty(value.ultimate)&&(value.options==null||value.options.Count==0)&&!SkillTacticsStorage.HasData(value);
         public static ClassSkillLoadout FromHero(HeroSave hero)
         {
             if(!IsAbsent(hero.build.classSkills))return Canonical(hero.build.classSkills);
@@ -104,6 +106,7 @@ namespace Hellscript
         public static ClassSkillLoadout Canonical(ClassSkillLoadout source)
         {
             if(source?.version==5)return SkillTreeD4Loadout.Canonical(source);
+            if(SkillTacticsStorage.HasData(source))throw new ArgumentException("Tactical settings require their original D4 schema.");
             if(source==null||source.format!="CLASS_SKILLS_V1"||(source.version!=1&&source.version!=2&&source.version!=3&&source.version!=4)||source.heroClass<0||source.heroClass>2)throw new ArgumentException("Unsupported class-skill loadout.");
             var d=source.Copy();var definitions=LegacySkillWire.For((HeroClass)d.heroClass).ToArray();
             if(!string.IsNullOrEmpty(d.kitKind)||d.kitLevel!=0||d.kitSkills?.Length>0)throw new ArgumentException("Legacy loadouts cannot contain D4 kit allowances.");

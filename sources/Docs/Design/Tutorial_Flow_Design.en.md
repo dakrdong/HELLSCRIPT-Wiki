@@ -113,7 +113,7 @@ The current new-account unlock schedule is below. Migrated accounts retain previ
 | UL03_OFFLINE | Offline Supplies | Stage 1 |
 | UL10_SLOT_ENHANCE | Slot upgrades | Stage 5 |
 | UL05_GEM | Gem socketing, replacement and synthesis | Stage 10 |
-| UL11_RUNE | Rune boards, fusion and weapon mastery | Stage 15 |
+| UL11_RUNE | Rune boards, fusion and weapon mastery | Stage 10 |
 | UL07_UNIDENTIFIED_SHOP | Unidentified equipment shop | Stage 25 |
 | UL06_REROLL | Affix reroll | Stage 35 |
 | UL12_ASPECT | Aspect upgrades and imprinting | Stage 40 |

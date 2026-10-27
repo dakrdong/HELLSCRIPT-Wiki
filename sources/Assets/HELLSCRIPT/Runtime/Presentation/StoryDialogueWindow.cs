@@ -90,9 +90,10 @@ namespace Hellscript
             =>view=>Render(view,readingScale?.Invoke()??1,state,choices,heading,listener,choicesAtOnce,closable,lineName,()=>Advance(view,state),()=>Skip(view,state));
         static void Advance(ContentWindowView view,StoryDialogueState state){if(view!=null&&state.Next()){state.Current.cue?.Invoke();view.Repaint();}}
         static void Skip(ContentWindowView view,StoryDialogueState state){if(view==null)return;if(state.Skip())state.Current.cue?.Invoke();view.Repaint();}
+        static float FigureAspect(Texture2D texture,Rect uv)=>(float)texture.width/texture.height*Mathf.Abs(uv.width/uv.height);
         static RawImage Figure(ContentWindowView view,string name,Texture2D texture,float x,float y,float height,Color tint,Rect uv)
         {
-            float width=height*texture.width/texture.height;var art=UiLayout.Rect(name,view.Frame);UiLayout.Place(art,x,y,width,height);
+            float width=height*FigureAspect(texture,uv);var art=UiLayout.Rect(name,view.Frame);UiLayout.Place(art,x,y,width,height);
             var image=art.gameObject.AddComponent<RawImage>();image.texture=texture;image.raycastTarget=false;image.color=tint;image.uvRect=uv;return image;
         }
         static void Render(ContentWindowView view,float reading,StoryDialogueState state,Func<IReadOnlyList<StoryChoice>> choices,string heading,string listenerPath,
@@ -123,8 +124,8 @@ namespace Hellscript
             if(listenerArt!=null)
             {
                 // The one who listens stays in shadow, the way a story scene marks who is speaking.
-                float listenerW=figureH*listenerArt.width/listenerArt.height;
-                silent=Figure(view,"Dialogue listener",listenerArt,narrow?w-listenerW:w-4-listenerW,figureY,figureH,new Color(.4f,.4f,.44f,1),listenerProfile?.PortraitUvFor(false)??new Rect(0,0,1,1));
+                var listenerUv=listenerProfile?.PortraitUvFor(false)??new Rect(0,0,1,1);float listenerW=figureH*FigureAspect(listenerArt,listenerUv);
+                silent=Figure(view,"Dialogue listener",listenerArt,narrow?w-listenerW:w-4-listenerW,figureY,figureH,new Color(.4f,.4f,.44f,1),listenerUv);
                 if(!narrow)right=w-4-listenerW-14;
             }
             // Order: narrow figures, band, then every control and line; landscape figures come after the band, in front of it.

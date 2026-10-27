@@ -1015,11 +1015,12 @@ def link_target(target, source, page_paths):
         return 'sources/'+quote(dest,safe='/')+('#'+fragment if fragment else '')
     raise ValueError(f'Unresolved local Markdown link: {source} -> {target}')
 
+INLINE_PATTERN=r'`(?P<code>[^`]+)`|(?P<image>!)?\[(?P<label>[^\]]+)\]\((?P<target><[^>]+>|[^\s)]+)\)'
+
 def inline(text, source, page_paths):
     # Tokenize code and links before escaping prose. Raw HTML is always escaped.
-    pattern=r'`(?P<code>[^`]+)`|(?P<image>!)?\[(?P<label>[^\]]+)\]\((?P<target><[^>]+>|[^\s)]+)\)'
     result=[];pos=0
-    for m in re.finditer(pattern,text):
+    for m in re.finditer(INLINE_PATTERN,text):
         result.append(html.escape(text[pos:m.start()]))
         if m['code'] is not None: result.append('<code>'+html.escape(m['code'])+'</code>')
         else:
@@ -1036,7 +1037,8 @@ def inline(text, source, page_paths):
     return value
 
 def render_markdown(body, source, page_paths):
-    lines=body.splitlines();result=[];headings=[];used={};i=0
+    lines=body.splitlines();result=[];headings=[];used={};reserved=set();i=0
+    anchor_pattern=r'<a id="([A-Za-z][A-Za-z0-9_-]*)"></a>'
     def fmt(s): return inline(s,source,page_paths)
     while i<len(lines):
         line=lines[i];s=line.strip()
@@ -1047,7 +1049,12 @@ def render_markdown(body, source, page_paths):
             result.append('<pre><code>'+html.escape('\n'.join(code))+'</code></pre>');i+=1;continue
         m=re.match(r'^(#{1,6}) (.+)$',s)
         if m:
-            level=len(m[1]);title=m[2];base=slug(title);count=used.get(base,0);used[base]=count+1;ident=base+('-'+str(count) if count else '')
+            level=len(m[1]);title=m[2];base=slug(title);count=used.get(base,0);ident=base+('-'+str(count) if count else '')
+            if level>1:
+                while ident in reserved:
+                    count+=1;ident=base+'-'+str(count)
+                reserved.add(ident)
+            used[base]=count+1
             if level>1:result.append(f'<h{level} id="{html.escape(ident)}">{fmt(title)}</h{level}>')
             if level==2:headings.append({'id':ident,'title':title})
             i+=1;continue
@@ -1067,10 +1074,22 @@ def render_markdown(body, source, page_paths):
         if s.startswith('>'):
             result.append('<blockquote>'+fmt(s.lstrip('> '))+'</blockquote>');i+=1;continue
         if re.fullmatch(r'[-*_]{3,}',s):result.append('<hr>');i+=1;continue
-        paragraph=[s];i+=1
+        paragraph_start=i;paragraph=[s];i+=1
         while i<len(lines) and lines[i].strip() and not re.match(r'^(?:#{1,6} |\||```|>|[-*] |\d+\. )',lines[i].strip()):
             paragraph.append(lines[i].strip());i+=1
-        result.append('<p>'+fmt(' '.join(paragraph))+'</p>')
+        joined=' '.join(paragraph);spans=[m.span() for m in re.finditer(INLINE_PATTERN,joined)]
+        position=0;prose=[]
+        for offset,line in enumerate(paragraph):
+            anchor=re.fullmatch(anchor_pattern,line)
+            if anchor and not any(start<=position<end for start,end in spans):
+                if prose:result.append('<p>'+fmt(' '.join(prose))+'</p>');prose=[]
+                ident=anchor[1]
+                if ident in reserved:raise ValueError('Duplicate Markdown anchor: '+ident)
+                reserved.add(ident);result.append('<a id="'+html.escape(ident,quote=True)+'"></a>')
+                i=paragraph_start+offset+1;break
+            else:prose.append(line)
+            position+=len(line)+1
+        if prose:result.append('<p>'+fmt(' '.join(prose))+'</p>')
     return ''.join(result),headings
 
 def build_pages():

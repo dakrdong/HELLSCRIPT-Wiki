@@ -88,6 +88,7 @@ namespace Hellscript
         readonly HashSet<Vector2Int> reachable=new HashSet<Vector2Int>();
         readonly bool forceGatesOpen;
         bool gridBuilt,gatesClosed;
+        int gridRevision;
         static readonly Vector2[] footprint={new Vector2(1,0),new Vector2(-1,0),new Vector2(0,1),new Vector2(0,-1),new Vector2(1,1),new Vector2(1,-1),new Vector2(-1,1),new Vector2(-1,-1)};
         public bool HeroPathFailed {get{RefreshGates();return routes.TryGetValue(0,out var path)&&!path.HasPath;}}
         public int WalkableCellCount {get{RefreshGates();return cells.Count;}}
@@ -112,7 +113,7 @@ namespace Hellscript
             if(Layout.legacy)return;
             bool closed=!forceGatesOpen&&!Layout.gateOpen&&(Layout.gates?.Count??0)>0;
             if(gridBuilt&&closed==gatesClosed)return;
-            gridBuilt=true;gatesClosed=closed;cells.Clear();reachable.Clear();routes.Clear();savedRoutes?.Clear();
+            gridBuilt=true;gridRevision++;gatesClosed=closed;cells.Clear();reachable.Clear();routes.Clear();savedRoutes?.Clear();
             var candidates=new HashSet<Vector2Int>();
             foreach(var floor in floors)for(int x=Mathf.CeilToInt(floor.xMin);x<=Mathf.FloorToInt(floor.xMax);x++)for(int y=Mathf.CeilToInt(floor.yMin);y<=Mathf.FloorToInt(floor.yMax);y++)candidates.Add(new Vector2Int(x,y));
             foreach(var p in candidates)if(Walkable(p))cells.Add(p);
@@ -211,7 +212,50 @@ namespace Hellscript
             }
             return smooth;
         }
-        public float Length(Vector2 from,Vector2 to)=>Length(FindPath(from,to));
+        // The same (from,to) pairs are measured on every decision while the hero stands still. The length depends on the two
+        // endpoints, on Layout.legacy, on the gate state (gatesClosed already folds in forceGatesOpen and Layout.gateOpen), on the grid
+        // that RefreshGates rebuilds (gridRevision) and on the
+        // geometry and blocksWalk flag of every obstacle and closed gate barrier. The surface is sealed at construction. Only the number
+        // is cached, never the path list, so no caller can alias or modify a shared result.
+        readonly struct LengthKey:IEquatable<LengthKey>
+        {
+            readonly float fromX,fromY,toX,toY;
+            internal LengthKey(Vector2 from,Vector2 to){fromX=from.x;fromY=from.y;toX=to.x;toY=to.y;}
+            public bool Equals(LengthKey o)=>fromX.Equals(o.fromX)&&fromY.Equals(o.fromY)&&toX.Equals(o.toX)&&toY.Equals(o.toY);
+            public override bool Equals(object o)=>o is LengthKey k&&Equals(k);
+            public override int GetHashCode(){unchecked{int h=fromX.GetHashCode();h=h*31+fromY.GetHashCode();h=h*31+toX.GetHashCode();return h*31+toY.GetHashCode();}}
+        }
+        readonly Dictionary<LengthKey,float> lengths=new Dictionary<LengthKey,float>();
+        long lengthObstacles;bool lengthGatesClosed,lengthLegacy;int lengthGrid=-1;
+        // 64-bit FNV-style mix, so an obstacle edited in place (same count) still changes the signature.
+        static long Mix(long h,RiftObstacle o)
+        {
+            unchecked
+            {
+                h=(h^o.position.x.GetHashCode())*1099511628211L;h=(h^o.position.y.GetHashCode())*1099511628211L;
+                h=(h^o.halfSize.x.GetHashCode())*1099511628211L;h=(h^o.halfSize.y.GetHashCode())*1099511628211L;
+                h=(h^o.radius.GetHashCode())*1099511628211L;return (h^(o.blocksWalk?1:0))*1099511628211L;
+            }
+        }
+        long ObstacleSignature()
+        {
+            long h=Layout.obstacles.Count;
+            foreach(var obstacle in Layout.obstacles)h=Mix(h,obstacle);
+            if(gatesClosed)foreach(var gate in Layout.gates)h=Mix(h,gate.barrier);
+            return h;
+        }
+        public float Length(Vector2 from,Vector2 to)
+        {
+            RefreshGates();
+            long signature=ObstacleSignature();
+            if(lengthObstacles!=signature||lengthGatesClosed!=gatesClosed||lengthLegacy!=Layout.legacy||lengthGrid!=gridRevision)
+            {lengths.Clear();lengthObstacles=signature;lengthGatesClosed=gatesClosed;lengthLegacy=Layout.legacy;lengthGrid=gridRevision;}
+            var key=new LengthKey(from,to);
+            if(lengths.TryGetValue(key,out float known))return known;
+            float value=Length(FindPath(from,to));
+            if(lengths.Count>=4096)lengths.Clear();
+            lengths[key]=value;return value;
+        }
         public static float Length(IReadOnlyList<Vector2> path)
         {if(path==null)return float.PositiveInfinity;float value=0;for(int n=1;n<path.Count;n++)value+=Vector2.Distance(path[n-1],path[n]);return value;}
         public Vector2 Move(Vector2 from,Vector2 to,float distance,int agent=0,float time=0,float radius=.45f)

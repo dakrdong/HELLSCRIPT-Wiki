@@ -375,7 +375,7 @@ namespace Hellscript
         void KeepDodgeStepClear(Vector2 before)
         {
             var d=edictSource;var after=State.position;if(d==null)return;
-            var values=d.global.ToDictionary(o=>o.id,o=>o.value,StringComparer.Ordinal);
+            var values=EdictGlobals(d);
             bool Clear(Vector2 p){var risk=AssessEdictSurvival(d,null,p,values);return !risk.DodgeRequested&&!risk.lethal;}
             if(Clear(after))return;
             var step=after-before;float length=step.magnitude;var goal=State.destination;
@@ -386,6 +386,14 @@ namespace Hellscript
                 State.position=next;State.moveDistance+=Vector2.Distance(before,next)-length;return;
             }
             State.position=before;State.moveDistance-=length;
+        }
+        // The rule whose movement policy steers the hero now: the compiled edict rule of the selected target, else the build's rule.
+        Rule CurrentMovementRule()
+        {
+            var movementRule=State.movementRule>=0&&State.movementRule<State.build.rules.Count?State.build.rules[State.movementRule]:null;
+            if(edictSource!=null&&State.movementRule>=0&&(State.movementAction==RuleAction.Skill||State.movementAction==RuleAction.Basic)&&
+                edictMovementRules.TryGetValue(State.targetRuleId??"",out var compiledMovement))movementRule=compiledMovement;
+            return movementRule;
         }
         void MoveHeroTowardGoal(float dt)
         {
@@ -401,9 +409,7 @@ namespace Hellscript
             if(attackMovement&&MoveEdictNova(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="NOVA_POLICY";return;}
             if(attackMovement&&MoveEdictWhirlwind(dt)){ObserveActivity(CombatActivity.Attack);journalMovementTrigger="WHIRLWIND_POLICY";return;}
             var policy=HeroActionBusy?State.heroAction.policy:null;
-            var movementRule=State.movementRule>=0&&State.movementRule<State.build.rules.Count?State.build.rules[State.movementRule]:null;
-            if(edictSource!=null&&State.movementRule>=0&&(State.movementAction==RuleAction.Skill||State.movementAction==RuleAction.Basic)&&
-                edictMovementRules.TryGetValue(State.targetRuleId??"",out var compiledMovement))movementRule=compiledMovement;
+            var movementRule=CurrentMovementRule();
             bool searching=EdictLastSeenGoal(out var lastSeenGoal);
             if(movementRule==null&&!HeroActionBusy&&!searching)return;
             var target=Target;Vector2 goal=State.position;bool recovering=false,farming=false;
