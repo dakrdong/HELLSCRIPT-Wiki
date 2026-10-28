@@ -1,5 +1,7 @@
 # Rift victory result window
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 2026-09-30: After [text-size preference removal](Text_Size_Option_Removal.en.md), future result-screen validation uses the default size with viewport and Korean/English coverage. The 100%/120% outcomes and captures below are historical evidence from before removal, not a future test matrix.
 
 
@@ -82,7 +84,7 @@ Skills read the battle build, never current editor choices. The five fixed slots
 
 ## Actions
 
-Stop repeat calls `StopAutoRepeat` and becomes Return to sanctuary in place. Claim reward uses the existing `RewardBoxesWindow` grant transaction, then opens reward-box inventory after claiming. Retry enters the same tier through existing fatigue, supplies and save validation. Failed result saves block departure/reward actions and provide retry; retrying a stopped result never re-enables repetition. Edit Hunt Edict opens the existing `HuntEdictWindow` skill-policy editor directly. The countdown pauses while editing and closing returns to the same result. Existing `HuntEdictEditSession` / `GameStore.CommitHuntEdict` own draft saving; the finished battle snapshot stays unchanged. Text logs and previous-run comparison remain read-only; full battle details remain available through the existing combat-record window. The first-play guide and duplicate first-reward action are absent from this page.
+Stop repeat calls `StopAutoRepeat` and becomes Return to sanctuary in place. Claim reward uses the existing `RewardBoxesWindow` grant transaction, then opens reward-box inventory after claiming. Retry enters the same tier through existing fatigue, supplies and save validation. Failed result saves block departure/reward actions and provide retry; retrying a stopped result never re-enables repetition. The former Edit Hunt Edict link is removed. Result repeat settings open `RepeatSettingsWindow`; skill, global and preset editing use their Hunt Edict side-menu entries. The finished battle snapshot stays unchanged. Text logs and previous-run comparison remain read-only; full battle details remain available through the existing combat-record window. The first-play guide and duplicate first-reward action are absent from this page.
 
 The inventory and Rift result now share the entire `ItemDetailPopup` shell, including the title, close and range controls, fixed footer and scrolling card viewport. `ItemDetailView` owns equipment fields; a result-specific summary popup is not used. Disposed snapshots stay inspectable without equip or recovery transactions.
 

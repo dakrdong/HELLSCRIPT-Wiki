@@ -1,10 +1,12 @@
 # 장비 점수와 추천 착용
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-10-01
 
 [English](Recommended_Equipment.en.md)
 
-새로 획득한 장비가 사용자가 정한 조건을 만족하면 즉시 착용합니다. 교체한 장비는 공통 설정에 따라 창고 보관·분해·판매합니다. **사냥 칙령 → 장비 추천 착용 → 공통 설정**에서 **추천 장비 자동 장착**을 On으로 켜고 **저장**하면 시작할 수 있습니다. 기존 계정과 새 계정 모두 처음에는 꺼져 있습니다. 사냥 칙령 자체를 끄면 추천 착용도 멈춥니다.
+새로 획득한 장비가 사용자가 정한 조건을 만족하면 즉시 착용합니다. 교체한 장비는 공통 설정에 따라 창고 보관·분해·판매합니다. **사냥 칙령 → 추천 장비 → 칙령 설정**에서 **추천 장비 자동 장착**을 On으로 켜면 칙령 구역에서 즉시 저장합니다. 기존 계정과 새 계정 모두 처음에는 꺼져 있습니다. 사냥 칙령 자체를 끄면 추천 착용도 멈춥니다.
 
 ## 플레이어 설정
 
@@ -26,7 +28,7 @@
 
 ## 교체 장비와 창고 부족 설정
 
-**장비 추천 착용 → 공통 설정 → 교체한 장비 처리**에서 **창고에 보관 / 분해 / 판매**를 선택합니다. 기본값은 창고 보관입니다. 실제 교체가 완료된 뒤 이전 착용품에만 적용합니다. 양손 무기 교체로 두 개가 벗겨지면 각각 처리합니다.
+**추천 장비 → 칙령 설정 → 교체한 장비 처리**에서 **창고에 보관 / 분해 / 판매**를 선택합니다. 기본값은 창고 보관입니다. 실제 교체가 완료된 뒤 이전 착용품에만 적용합니다. 양손 무기 교체로 두 개가 벗겨지면 각각 처리합니다.
 
 **창고가 가득 찼을 때 설정**을 누르면 **가방·자동 정리 → 공간 부족 대응**으로 이동합니다. 추천 착용과 일반 자동 정리의 창고 보관은 아래 규칙을 공유합니다.
 
@@ -94,7 +96,7 @@
 - 계산: [EquipmentScore.cs](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentScore.cs).
 - 부위 정책·검증·실행 연결: [EquipmentRecommendation.cs](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentRecommendation.cs), [GameStore.RecommendedEquipment.cs](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.RecommendedEquipment.cs).
 - 실제 소유 상태는 `HeroSave.inventory`와 `HeroSave.edict`, 편집 상태는 `HuntEdictEditSession.Draft`, 전투 능력치는 `CombatSimulation.Stats`입니다. 상세창은 전달받은 장비의 복사본과 명시적인 `EquipmentViewSource`를 사용하며 저장을 변경하지 않습니다.
-- 화면은 기존 `HuntEdictWindow` 내부의 [전용 탭 어댑터](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Equipment.cs)입니다. 기존 창·스크롤·고정 저장/되돌리기·공통 테마를 유지합니다. 새 독립 창은 만들지 않습니다.
+- 현재 화면은 사이드 메뉴 **추천 장비**가 여는 [RiftGearSettingsWindow](../../Assets/HELLSCRIPT/Runtime/Presentation/RiftGearSettingsWindow.cs)다. 기존 추천 설정에 자동 착용 공통·슬롯별 칙령 행을 추가했다. 칙령 행은 즉시 같은 편집 거래로 저장하며, 추천 팝업 설정의 저장·취소와 범위를 구분한다.
 - 자동 보관·교체 처리는 [EquipmentAutomation.cs](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentAutomation.cs), 기존 `EdictCleanupPolicy`·`Economy`·`Storage` 거래가 소유합니다. 입고 순서는 `Item.warehouseOrder`·`AccountSave.warehouseSequence`, 보관 대기는 `Item.pendingAutoStorage`에 저장합니다.
 - 전역 칙령 버전은 5입니다. 부위별 추천 착용 예외를 추가해 총 152개 설정을 제공합니다. 기존 효과 유지 필드는 저장·공유 코드 호환에만 남깁니다. 버전 1·2·3·4를 검증한 뒤 새 기본값을 추가하며 기존 선택은 유지합니다. 과거 HED2·HED3·HED4·HED5 공유 코드는 원본 정규 형식과 해시 검사를 유지한 채 변환합니다. 알 수 없는 JSON 필드는 거부합니다. 점수는 아이템에 중복 저장하지 않고 계산합니다.
 

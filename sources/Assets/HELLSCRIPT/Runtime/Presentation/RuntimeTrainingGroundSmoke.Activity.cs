@@ -183,9 +183,9 @@ namespace Hellscript
                 var safe=UiSafeArea.Current;var bubble=Bounds((RectTransform)configure.transform.parent);
                 Require(safe.Contains(bubble.min+Vector2.one)&&safe.Contains(bubble.max-Vector2.one),"Repeat hint outside safe area");
                 yield return Capture("repeat-shortcut-"+tag);yield return Tap("victory-repeat-configure");
-                Require(Edict!=null&&Edict.SelectedTab=="repeat"&&game.UI.BlocksRepeat&&result==game.UI.RiftVictory,"Repeat shortcut lost result or selected wrong tab");
-                yield return Capture("repeat-tab-"+tag);yield return Tap("edict-close");
-                Require(Edict==null&&!game.UI.CommonPanelOpen&&result==game.UI.RiftVictory&&result.Run.id==run.id&&game.UI.Page=="result","Closing repeat settings did not restore the same result");
+                Require(FindObjectsByType<ContentWindowView>(FindObjectsSortMode.None).Any(v=>v.Frame.name=="repeat-settings-window")&&game.UI.BlocksRepeat&&result==game.UI.RiftVictory,"Repeat shortcut lost result or selected wrong tab");
+                yield return Capture("repeat-tab-"+tag);yield return Tap("content-close");
+                Require(!game.UI.CommonPanelOpen&&result==game.UI.RiftVictory&&result.Run.id==run.id&&game.UI.Page=="result","Closing repeat settings did not restore the same result");
                 run.stage=battleStage;result.View.Repaint();yield return null;
                 Require(Loc.MissingCount==0,"Missing translations: "+string.Join(";",Loc.Missing));
                 proof.Add("PASS final activity and repeat shortcut "+tag+": saved battle curves/totals/shares, shared DPS, read-only graph, stage-14 configured lock and two-second expiry, stage-15/16 configured availability, compact stage-15 unconfigured pointer action and same-result return");

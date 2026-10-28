@@ -1,5 +1,7 @@
 # Character plaza save audit — 2026-10-14
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [Korean and exact integration edits](Character_Plaza_Save_Audit_20261014.md)
 
 PR1 implements the approved six-hero contract in the isolated source workspace. Schema 23 keeps male Warrior/Ranger/Mage at indices 0–2 and female counterparts at 3–5. Hero IDs and class IDs remain stable. `HeroSlots.Index`, `Created`, and `IsCreated` own mapping and eligibility. The default `NewAccount` factory keeps three created male heroes; PR2 opts the production constructor into `onlyWarriorCreated:true`.

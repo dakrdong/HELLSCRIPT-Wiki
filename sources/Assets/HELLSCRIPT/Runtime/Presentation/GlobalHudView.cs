@@ -13,7 +13,7 @@ namespace Hellscript
         public Action<HudEffectState> EffectSelected;
         public Action<HudSlotState> SlotSelected;
         public Action AllEffectsSelected;
-        public Action EdictSelected,PotionSettingsSelected,SealSelected;
+        public Action EdictSelected,PotionSettingsSelected;
         RectTransform edictAnchor;
         public void BindEdictAnchor(RectTransform anchor){edictAnchor=anchor;edict.gameObject.SetActive(false);}
         public Action<int> SkillTapped,SkillHeld,PotionTapped,PotionHeld;
@@ -43,8 +43,6 @@ namespace Hellscript
             gameObject.AddComponent<GraphicRaycaster>();
             safe=Rect("HUD safe area",transform);
             seal=CreateSeal(safe,"Class seal",out face,out sealFrame);sealState=Picture("Seal health ring",seal,"ring-state");Stretch(sealState.rectTransform);
-            var sealHit=seal.gameObject.AddComponent<Image>();sealHit.color=Color.clear;
-            var sealButton=seal.gameObject.AddComponent<Button>();sealButton.targetGraphic=sealHit;sealButton.transition=Selectable.Transition.None;sealButton.onClick.AddListener(()=>SealSelected?.Invoke());
             edict=Rect("Hunt edict",safe);edictEmblem=Picture("Emblem",edict,"menu-hunt-edict");Stretch(edictEmblem.rectTransform);edictEmblem.preserveAspect=true;
             var edictHit=edict.gameObject.AddComponent<Image>();edictHit.color=Color.clear;var edictButton=edict.gameObject.AddComponent<Button>();edictButton.targetGraphic=edictHit;edictButton.transition=Selectable.Transition.None;
             edictButton.onClick.AddListener(()=>EdictSelected?.Invoke());edict.gameObject.SetActive(false);

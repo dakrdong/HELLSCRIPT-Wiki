@@ -1,5 +1,7 @@
 # 스킬별 사냥칙령 하위 페이지 — B0 저장·계약 설계 메모 (2026-10-24)
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Skill_Edict_Pages_Contract_20261024.en.md). 사용자 항목 17(Part B)의 B0 계약과 아래 구현 기록을 함께 둔다. **B0·B2의 화면 없는 데이터·편집·저장 기반을 구현했고, B1 화면은 직접 시안 승인 근거 확인 전까지 미작성이다.** 초기 제안은 아래 보존하며, 현행 계약은 마지막 구현 기록을 우선한다. 옵션의 의미·수치는 [`HELLSCRIPT_Hunt_Edict_Tactical_Options.md`](../Design/HELLSCRIPT_Hunt_Edict_Tactical_Options.md)가 기준이다. `HEC-*`는 옛 옵션, `HET-*`는 새 기획 행 번호이며 새 저장 키나 화면 문구로 쓰지 않는다.
 
 ## 한 줄 요약 (사용자 보고용)
@@ -28,7 +30,7 @@
 
 **(e) 행 정의는 데이터.** `Resources/Data/SkillTactics.json`(제안 이름): 행 키, 종류(toggle/choice/ref/num), 선택지(스킬 참조 인덱스 포함), 최소·최대·간격·기본값·단위, 비활성 사유 규칙, 소속(부모/보조 id), 교체하는 부모 행 목록, 요약 규칙. 수치·선택지·기본값은 옵션 문서의 표를 그대로 옮기며, 문서 대비 대조 테스트는 문서가 없으면 건너뜀으로 표시한다.
 
-**(f) 전역 설정 링크.** 연결 대상은 현재 존재하는 `HuntEdictWindow`의 `combat`/`survival` 탭이다. 옛 칙령 창을 없앨 때 이 연결(`GameUI`에 진입 래퍼 신설 포함)이 갱신 지점이다.
+**(f) 전역 설정 링크.** 현재 연결은 [전술 창의 복귀 처리](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Tactics.cs) → `GameUI.ShowEdictTab("combat")` → 사이드 메뉴 전투 시트다. 생존은 같은 `ShowEdictTab("survival")` 경로를 사용한다. 삭제한 통합 창을 열지 않는다.
 
 **(g) 편집 항목 상한.** D4 카드당 최대 7개(자동 사용 포함). 옛 `Hunt_Edict_Detail`의 8개 상한은 기존 v0.2의 이력이며 D4 새 카드는 7개를 따른다. 초기 메모의 A02 8행 우려는 현재 옵션 문서 §3·목록과 맞지 않는다. 문서는 장비와 보조가 같은 두 행을 재사용하고 추가 행을 만들지 않도록 정했으며 A02는 6행이다.
 

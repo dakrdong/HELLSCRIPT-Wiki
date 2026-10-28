@@ -1,5 +1,7 @@
 # D4 skill tree: dependents outside the combat engine (read-only audit)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](../../../Implementation/Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Prefixes (absolute): W=/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/wt-d4-skill-plan; RC=W/Assets/HELLSCRIPT/Runtime/Core; RP=W/Assets/HELLSCRIPT/Runtime/Presentation; RR=W/Assets/HELLSCRIPT/Resources; T=W/Assets/HELLSCRIPT/Tests/Editor; E=W/Assets/HELLSCRIPT/Editor. Counts are my own greps unless marked (tool).
 
 ## 0. Reading the inventory

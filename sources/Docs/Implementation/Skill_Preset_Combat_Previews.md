@@ -1,5 +1,7 @@
 # 스킬 프리셋의 실제 전투 예시
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-09-30 · [English](Skill_Preset_Combat_Previews.en.md)
 
 사냥 칙령의 액티브·궁극기 54종을 검토해 장비 의존 없는 프리셋 122개로 정리했습니다. 전사 41개, 궁수 40개, 마법사 41개입니다. 프리셋 탭에는 기존 도해 대신 실제 전투 코드와 게임의 캐릭터·몬스터·애니메이션·효과를 사용하는 독립 예시를 표시합니다. 직접 설정에는 예시 없이 세부 옵션을 표시합니다.
@@ -42,7 +44,7 @@
 
 값이 같은 프리셋은 ID를 유지합니다. 설정을 바꾼 프리셋에는 새 ID를 사용합니다. 명시된 기존 ID 47개는 이전 옵션 값을 보존한 직접 설정으로 읽습니다. 임의의 알 수 없는 ID는 계속 거부합니다. HED4 스킬 코드와 이를 포함한 HED5 설정 코드의 엄격한 검증은 유지합니다.
 
-원본: [프리셋](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json) · [예시 조건](../../Assets/HELLSCRIPT/Resources/SkillPresetScenarios.json) · [실행기](../../Assets/HELLSCRIPT/Runtime/Core/CombatPreviewSession.cs) · [생성·복원](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.SkillPreview.cs) · [화면 소유](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillCombatPreviewPresenter.cs).
+원본: [프리셋](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json) · [예시 조건](../../Assets/HELLSCRIPT/Resources/SkillPresetScenarios.json) · [실행기](../../Assets/HELLSCRIPT/Runtime/Core/CombatPreviewSession.cs) · [생성·복원](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.SkillPreview.cs) · [현재 스킬 전술 화면·실시간 예시 제거](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTacticsWindow.cs).
 
 ## 검증 기록
 

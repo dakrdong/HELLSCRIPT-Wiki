@@ -1,5 +1,7 @@
 # Tutorial hub follow-up and per-hero tutorials
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 > Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
 
 Updated: 2026-10-08 · [한국어](Tutorial_Hub_Followup_20261008.md)

@@ -1,5 +1,7 @@
 # 튜토리얼 v3 다시보기 스모크 수정
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-10-05 · [English](Tutorial_Replay_Smoke_V3_20261005.en.md)
 
 > 역사 기록: 이 문서는 2026-10-05의 v3 튜토리얼 검사 결과입니다. 이후 v4 구덩이 시험과 15레벨 퍼즐 튜토리얼로 대체되었습니다. 현재 구현은 [퍼즐 튜토리얼](Puzzle_Tutorial_Final_Acceptance.md)을 참고하세요.
@@ -20,7 +22,7 @@
 
 ## 남아 있는 앱 버그와 스모크의 실제 조작
 
-기존 계정의 v3 다시보기 생존 실습은 아직 잘못된 대상을 안내한다. [HuntEdictWindow.Summary.cs](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Summary.cs)의 `DrawSelectedGroup`는 원래 `store.Data`의 legacy 상태로 간편 선택기를 만든다. [DrawQuickPresetPicker](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.QuickPresets.cs)는 직접 설정이 펼쳐지기 전에는 false를 반환해 숫자 옵션 행 생성을 막는다. 반면 [ProgressiveSurvivalLessonStep](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialComparison.cs)은 격리된 v3 실행 영웅을 기준으로 `edict-option-survival.potionHpPercent`를 요구한다.
+A2 이전 v3 다시보기에서는 `DrawSelectedGroup`가 원래 계정의 legacy 상태를 읽어 간편 선택기를 만들었고, `DrawQuickPresetPicker`가 직접 설정을 펼치기 전까지 숫자 행 생성을 막았다. 반면 당시 `ProgressiveSurvivalLessonStep`는 격리된 실행 영웅을 기준으로 숫자 버튼을 요구해 안내 대상이 없었다. 현재 옵션은 [사이드 메뉴 시트](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictCatalog.cs), 프리셋은 [독립 팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs), 프롤로그 안내는 [현재 레슨 처리](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialStaging.cs)가 소유한다. 아래 실패 캡처는 이전 구현의 기록이다.
 
 따라서 화면에는 `edict-quick-picker-global/survival.potion`이 있고, 안내가 가리키는 숫자 버튼은 없다. [실패 화면](TutorialReplaySmokeEvidence20261005/replay-hp-timeout.png), [실패 기록](TutorialReplaySmokeEvidence20261005/replay-hp-failure.txt), [실제 활성 버튼 목록](TutorialReplaySmokeEvidence20261005/replay-hp-timeout-controls.txt)이 이를 보인다. 앱 코드는 이 작업에서 수정하지 않았다.
 

@@ -1,5 +1,7 @@
 # Tutorial forge and the removed summary tab
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 > Updated: 2026-10-14 · the puzzle-level tutorial was retired; its code, tests and shipped assets were deleted. This page records that time. [Retirement record](Puzzle_Tutorial_Retirement_20261014.en.md)
 
 > 2026-10-08 (PR #77): Maintenance puzzle P2 (the +1 enhancement with 110 trial gold) is replaced by the equipment-enhancement level L14 and gone; gear enhancement also opens after the first loss at L14, through the same `ForgeOpen` gate. Three faces of danger and graduation became L15 and L16. "L15" in the table below means the last level (`PuzzleTutorial.Count`). See [Native monster patterns](Puzzle_Tutorial_Native_Patterns.en.md).

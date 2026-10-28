@@ -28,7 +28,6 @@ namespace Hellscript
             foreach(var child in header.GetComponentsInChildren<Image>())if(child.name=="Gold divider")child.enabled=false;
             footer.gameObject.SetActive(false);headerApron.gameObject.SetActive(false);footerApron.gameObject.SetActive(false);
             meterText=Label(header,"",15,pale);timerText=Label(header,"",18,gold);actionText=Label(header,"",14,gold);
-            var menu=CasualCombatHud?UiIconButton.CreateGlyph(header,"관찰 메뉴","menu",0,0,44,44,ShowObservationMenu):Button(header,"☰",ShowObservationMenu,Color.clear);menu.name="관찰 메뉴";
             // Medallions from the HUD menu family, each captioned underneath; the mandatory road has no way out.
             powerSavingButton=Button(header,"절전 모드",game.RequestIdle,Color.clear);powerSavingButton.targetGraphic=Emblem(powerSavingButton,"menu-power-saving");
             powerSavingButton.name="power-saving-entry";
@@ -93,7 +92,6 @@ namespace Hellscript
             // Gear and content dock share one column around the fixed Hunt Edict button.
             var settings=header.GetComponentsInChildren<Button>().Single(b=>b.name=="설정·안내");Right((RectTransform)settings.transform,12,8,settingsSize,settingsSize);CompactGear(settings,settingsSize);
             Right((RectTransform)contentDock.transform,12,dockTop,dockIcon,dockIcon);contentDock.Reflow(dockIcon,6);ReflowEventButton();
-            var menu=header.GetComponentsInChildren<Button>().Single(b=>b.name=="관찰 메뉴");Place((RectTransform)menu.transform,medals.width>0?medals.xMin-52:w-64-dockIcon,8,44,44);
             // Boss status owns the top centre. On phones it gets the first clear row under the header,
             // with symmetric width beside the map; neither the map nor a moved graph may push it downward.
             float bossY=w>=1200?8:narrow?158:120,bossWidth=Mathf.Min(430,w-36);
@@ -119,7 +117,7 @@ namespace Hellscript
             Ink(headerTitle,casual.Gold);Ink(headerSubtitle,casual.White);Ink(timerText,casual.Gold);Ink(meterText,casual.White);Ink(actionText,casual.Gold);
             Ink(powerSavingCaption,casual.White);Ink(escapeCaption,casual.White);Ink(bossTitle,casual.Gold);Ink(bossActionLabel,casual.White);
         }
-        // Keep the captioned shortcuts immediately left of Settings, with the observation menu to their left.
+        // Keep the captioned shortcuts immediately left of Settings, beside the settings gear.
         Rect ReflowBattleMedallions(float w,Rect panel)
         {
             if(powerSavingButton==null)return default;

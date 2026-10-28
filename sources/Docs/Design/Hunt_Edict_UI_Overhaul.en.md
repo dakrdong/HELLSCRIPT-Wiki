@@ -1,5 +1,7 @@
 # Hunt Edict UI Overhaul Design — Tutorial-Compatible
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](../Implementation/Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-05 · [한국어](Hunt_Edict_UI_Overhaul.md) · [Open the mockup](../../Prototypes/HuntEdict/HELLSCRIPT-HuntEdict.html) · [Mockup README](../../Prototypes/HuntEdict/README.md) · [Native port prompt](../../Prototypes/HuntEdict/NATIVE_PORT_PROMPT.md)
 
 Status: design settled (HTML mockup v2). **Nothing is implemented in Unity yet.** This is the handoff document that lets the developer who rebuilds the Hunt Edict window and the tutorial author work against one contract. Inputs are `Docs/Design/Tutorial_Hunt_Edict_UI_Brief.md` on the tutorial branch (`claude/tutorial-chronicle`, not merged) and six code investigations (tutorial contract, current window structure, smoke and disclosure impact, two porting maps, test impact). Everything below was read from code and captures; none of it was confirmed by running the game.

@@ -1,5 +1,7 @@
 # HELLSCRIPT Play-Screen Content Dock
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 The follow-up on 2026-09-21 ports the HTML inventory design and paired weapon slots to Unity. See [Native inventory and paired weapon slots](Native_Inventory.en.md) for the current screen and behavior. The old-inventory hookup and captures below document the preceding stage.
 
 
@@ -15,7 +17,7 @@ A folding group of content shortcuts sits beneath the settings gear in the upper
 | Order | Button | Connection |
 |---|---|---|
 | 1 | Character (bag and equipped items) | Since 2026-09-21, `ShowPlayInventory` opens the existing in-game inventory. Closing returns to the originating play screen. |
-| 2 | Hunt Edict (skill management and edict editing) | Opens the existing Hunt Edict entry point `ShowEdictEditor`. |
+| 2 | Hunt Edict | `ToggleEdictQuick` opens the nine-entry side menu. Its entries route to the standalone skill tree, settings sheets and repeat, recommended-gear and preset popups. |
 | 3 | Rune Board (rune block placement and management) | Opens the existing Rune Growth screen `ShowRunes` since 2026-09-17. Before that it showed only the notice. |
 
 The Character and Rune Board screens were out of scope for this work: only the buttons and their art were present. The Rune Board was wired to its existing screen on 2026-09-17, and Character on 2026-09-21.

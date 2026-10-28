@@ -207,10 +207,10 @@ namespace Hellscript
             // the window left both on screen and neither reachable.
             if(record.useEdict)BigButton(content,"실제 칙령 편집안으로 불러오기",()=>
             {
-                game.ReturnTown();ShowEdictEditor();
-                if(huntEdictWindow==null)return;
+                game.ReturnTown();ShowEdictShare();
+                if(edictPresetsWindow==null)return;
                 var loadout=HuntEdictLoadout.FromHero(record.AttemptHero(useB));
-                huntEdictWindow.Session.ReplaceDraft(loadout);huntEdictWindow.Repaint();
+                edictPresetsWindow.Session.ReplaceDraft(loadout);edictPresetsWindow.Repaint();
             },true);
             else BigButton(content,"실제 행동 편집안으로 불러오기",()=>{game.ReturnTown();ShowBuild();LoadEditing(chosen);},true);
             FooterButton(0,1,"비교 결과로",()=>ShowComparisonRecord(record));

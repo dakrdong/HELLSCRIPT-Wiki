@@ -1,5 +1,7 @@
 # Hunt Edict controls and Rift equipment recommendations
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 2026-10-13 card update [validation and captures](Rift_Gear_Offer_Cards_Plan_20261013.en.md#final-verification): 185 related Edit Mode tests, shared UI/refresh checks and native macOS screens/actions/save/portal/end checks across five sizes and both languages passed. Only failed coverage was rechecked. Full tests/public wiki await main merge; there is no physical-device/WebGL proof.
 
 Updated: 2026-10-01 · [한국어](Hunt_Edict_Control_Refinement.md)

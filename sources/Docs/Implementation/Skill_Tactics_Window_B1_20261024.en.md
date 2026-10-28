@@ -1,5 +1,7 @@
 # Per-skill hunt edict B1 — development validation window (2026-10-24)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [한국어](Skill_Tactics_Window_B1_20261024.md). **Player entry stays OFF; combat integration is not implemented.** This implements original U-E §9.4/9.5's B1 UI and connection to the existing B0/B2 save contract. The remaining 27 parents, 81 modifiers and per-class combat work remain the existing B3 follow-ups.
 
 ## Reference and entry
@@ -33,7 +35,7 @@ No functional choices, numbers or defaults were duplicated into UI switches. The
 | A03 Venom Trap / A03-3 Crossbow Turret | Parent 4 / replace three trap rows with two turret rows, yielding 3 |
 | M04 Teleport / M04-3 Elemental Shield | Parent 5 / modifier 7 |
 
-HET numbers and development state pickers are absent from the screen. Modifier entry scrolls to its rows and distinguishes the previewed modifier from the applied one. Global navigation opens the existing `HuntEdictWindow` combat destination; its existing recommended-mode and unlock restrictions remain authoritative.
+HET numbers and development state pickers stay absent. Modifier entry scrolls to its rows and distinguishes a previewed modifier. Global navigation in [SkillTreeD4Window.Tactics](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Tactics.cs) closes the skill window and calls `GameUI.ShowEdictTab("combat")` to open the Combat sheet. `SkillTacticsEditSession.RefreshEligibility` and the save-time recheck own the recommended-defaults lock.
 
 ## Save, return and lifetime
 

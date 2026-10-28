@@ -1,5 +1,7 @@
 # Hunt Edict overview implementation
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-09-28 · [한국어](Hunt_Edict_Overview.md)
 
 ## 2026-10-01: an Overview with combat styles only

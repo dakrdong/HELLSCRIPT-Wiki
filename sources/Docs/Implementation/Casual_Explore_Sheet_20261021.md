@@ -1,5 +1,7 @@
 # 사냥 칙령 탐색 탭 캐주얼 적용 — 2026-10-21
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Casual_Explore_Sheet_20261021.en.md)
 
 기준: 캔버스 "HELLSCRIPT 사냥 칙령 · 탐색 · 캐주얼"(98a2LCvDqd1ftBG8uGt4CW)의 구성 명세 g~m절. 시작 `origin/main` `c6354cbf`. 전투 HUD 사냥 칙령 시트(`GameUI.EdictSheet`)의 **탐색 탭 표현만** 어두운 레거시 시트에서 캐주얼 압축 카드 팝업으로 바꿨다. 옵션 의미, 저장 키(`explore.*`), 저장·되돌리기·재생·거래(`SheetApply`/`SheetCommit`/`CommitHuntEdict`), 튜토리얼, 전투 일시정지 규칙, 큰 창(`HuntEdictWindow`)은 그대로다. 반복 설정 탭은 아직 레거시 시트, 프리셋 탭은 안내 토스트 그대로다.

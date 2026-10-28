@@ -1,5 +1,7 @@
 # 사냥 칙령 UI 개편 설계 — 튜토리얼 호환형
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](../Implementation/Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-10-05 · [English](Hunt_Edict_UI_Overhaul.en.md) · [시안 열기](../../Prototypes/HuntEdict/HELLSCRIPT-HuntEdict.html) · [시안 README](../../Prototypes/HuntEdict/README.md) · [이식 프롬프트](../../Prototypes/HuntEdict/NATIVE_PORT_PROMPT.md)
 
 상태: 설계 확정(HTML 시안 v2). **Unity 구현은 아직 없다.** 이 문서는 사냥 칙령 창을 새로 짜는 개발자와 튜토리얼 작업자가 같은 계약을 보게 하는 인계 문서다. 입력은 튜토리얼 브랜치(`claude/tutorial-chronicle`, 병합 전)의 `Docs/Design/Tutorial_Hunt_Edict_UI_Brief.md`와 코드 조사 6건(튜토리얼 계약, 현재 창 구조, 스모크·공개표 영향, 이식 지도 2건, 테스트 영향)이다. 아래 내용은 코드를 읽어 정리한 것이며 게임을 실행해 확인한 것이 아니다.

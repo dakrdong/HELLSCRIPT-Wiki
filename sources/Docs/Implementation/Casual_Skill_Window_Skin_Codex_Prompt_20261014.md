@@ -1,5 +1,7 @@
 # 스킬창 캐주얼 스킨 교체 — Codex 작업 지시
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 작성일: 2026-10-14
 
 아래 전체를 Codex에 그대로 붙여 넣는다. 같은 내용이 `Docs/Design/D4SkillTree/casual/README.md`(시안 설명)와 함께 `claude/casual-art-concept` 브랜치에 있다.

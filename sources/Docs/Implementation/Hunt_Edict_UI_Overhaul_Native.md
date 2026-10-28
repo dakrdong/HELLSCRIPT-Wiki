@@ -1,5 +1,7 @@
 # 사냥 칙령 UI 개편 — 네이티브 이식 기록
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-10-05 · [English](Hunt_Edict_UI_Overhaul_Native.en.md) · [설계 문서](../Design/Hunt_Edict_UI_Overhaul.md) · [시안 README](../../Prototypes/HuntEdict/README.md) · [이식 프롬프트](../../Prototypes/HuntEdict/NATIVE_PORT_PROMPT.md)
 
 상태: 승인된 HTML 시안 v2의 표면과 정보 설계를 사냥 칙령 창(`HuntEdictWindow`)에 옮겼다(M1~M6). 새 슬롯(안내 캡션·3박자 띠·저장 후 버튼)은 창이 자리와 모양을 제공하며 **튜토리얼은 아직 연결하지 않았다**(설계 문서 10장, Phase 4). 저장 필드·도메인 규칙·튜토리얼 코드는 바꾸지 않았다.

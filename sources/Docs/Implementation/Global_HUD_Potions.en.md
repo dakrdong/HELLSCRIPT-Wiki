@@ -1,5 +1,7 @@
 # Global HUD, Potions and Hunting Edicts
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 2026-10-14 update: casual base HUD layout, independent graphs and top-right edict follow the [new source handoff](Casual_Battle_HUD_20261014.en.md). Historical runtime evidence below does not validate the new skin.
 
 Update, 2026-09-28: the whole bottom HUD retains one landscape composition at one scale. Portrait no longer splits ultimate/ordinary skills into rows or changes individual potion, seal, XP, HP or MP dimensions. The historical orientation-specific descriptions and captures below are superseded by [window shrinking and a unified bottom HUD](Responsive_Hud_20260928.en.md).
@@ -53,7 +55,7 @@ Account schema is 5, potion inventory/runtime version 1 and edict global options
 
 ## Observation and page navigation
 
-The upper-right observation menu provides pause, speed selection, build/edict editing, map, combat details, growth, return and idle display. Existing speed entitlements still apply. Closing inspection restores its previous pause state. Keep the HUD in town, inventory and results; reserve scrolling space in non-combat lists. Move the existing town movement control above the left HUD so they do not overlap. In small windows, boss names and action descriptions grow to their actual line count and move the health bar below them.
+The ≡ observation button and popup are removed. Settings use the Hunt Edict side menu, the map panel opens the expanded map, and portal return and power saving retain their HUD buttons. The portrait seal opens no window. Menu-only pause, speed, build-edit and idle-peek shortcuts are removed. Effect, skill and potion inspection retain the [existing HUD popups](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.GlobalHud.cs).
 
 ## One shared skill icon
 

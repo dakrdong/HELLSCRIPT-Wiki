@@ -1,5 +1,7 @@
 # Battle HUD inspection windows casual — 2026-10-18
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [한국어](Casual_HUD_Inspection_Windows_20261018.md)
 
 Basis: the build spec of the canvas "HELLSCRIPT 전투 관찰 메뉴 · 캐주얼" (FYfemHtqRJFH7wdCg1rsT5). Started from `origin/main` `3d3e0f4f`. All of these windows are drawn by the single `GameUI.GlobalHud.ShowHudPanel`, which already had a casual branch for `skin != null` (used only by the skill popups). This change applies that branch to every window.

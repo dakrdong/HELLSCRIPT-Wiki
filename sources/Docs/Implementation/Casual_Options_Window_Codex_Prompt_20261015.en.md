@@ -1,5 +1,7 @@
 # Options (Settings) Window Casual Skin — Codex Task Prompt
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Written: 2026-10-15 · [한국어](Casual_Options_Window_Codex_Prompt_20261015.md)
 
 Paste the whole code block below into Codex as it is. The mockup material is on the `claude/casual-options` branch (pushed to the remote).

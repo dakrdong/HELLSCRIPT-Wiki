@@ -1,8 +1,10 @@
 # Hunt Edict quick presets
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-09-30 · [한국어](Hunt_Edict_Quick_Presets.md)
 
-Each item offers named recipes and a final **Custom Settings** tab. Skills, basic attacks and common attack order use tabs with descriptions and combat examples. **Activate preset** applies and immediately saves the previewed recipe; editing active Custom Settings also saves immediately. Global groups retain their existing picker and Save/Revert workflow.
+Current presets live in the standalone **Presets & Share** side-menu popup. It retains five stored slots, names, share codes, import and a **Quick Presets** page. Recipe selection changes only the draft; the footer **Save** commits it. Per-skill custom settings are edited and saved through **Skills → Skill Tactics**. The tabs, immediate recipe saves and combat examples below describe the pre-A2 UI.
 
 ## 2026-09-29 saving with a suspended rift
 
@@ -27,9 +29,9 @@ Updated 2026-09-29: Combat, Survival, Loot, Bag, Exploration, Repeat Hunt and Re
 - First select a preset name, then select that name again to rename it inline. Confirming the input saves through `RenameHuntEdictPreset`. Long names stay clipped within the field.
 - The disk stores the current settings in that slot. Existing slots require overwrite confirmation. Sharing reads that slot's saved snapshot. Import validation, five destinations and overwrite confirmation remain intact.
 - The existing footer still applies or reverts the overall draft. Skill-specific auto-saving is described below.
-- Use default settings lives in [Overview](Hunt_Edict_Overview.en.md), with no duplicate control in preset storage.
+- **Use default settings** is at the top of the Presets & Share popup, outside the locked quick-preset list. It becomes available with Sharing (Rift 20 or legacy access); earlier accounts see the unlock reason. `GameStore.SetRecommendedEdict` saves each switch immediately and preserves the previous mode on failure. Overview is removed; the stored `useRecommendedEdict` value, recommended values and combat policy remain.
 
-`HuntEdictUi.json` owns section metadata; `HuntEdictWindow.Summary` and `.Presets` own the layout. `.Glyphs` draws the icons with the shared `SkillTreeGraphic` mesh renderer. No new raster assets are used.
+[HuntEdictUi.json](../../Assets/HELLSCRIPT/Resources/HuntEdictUi.json) retains group definitions. Current global rows belong to the [side-menu catalog](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictCatalog.cs); preset storage and quick pickers belong to the [standalone popup](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs) and [storage page](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.Presets.cs). The unified window's section tabs and dedicated glyph file are removed.
 
 ## Skill tabs and combat examples
 
@@ -56,9 +58,9 @@ Updated 2026-09-29: Combat, Survival, Loot, Bag, Exploration, Repeat Hunt and Re
 
 `HuntEdictQuickPresets` and `Resources/HuntEdictQuickPresets.json` own recipes. Expanded skills reuse bilingual choices in `Resources/Data/ClassSkills.json`; Mana Recovery binds both use policy and recovery goal. `HuntEdictSkillPresets` validates active tabs and copies one policy. `HuntEdictEditSession.SaveSkillPolicy` invokes the existing atomic save callback and preserves owner/draft on failure.
 
-The page remains an adapter within `HuntEdictWindow`, reusing shared buttons, theme, fonts and scrolling. `SkillCombatPreviewPresenter` owns the independent battle and rendering resources; basic attacks and common order retain `SkillPresetExampleView` diagrams. Presentation components do not access account persistence. HED4/HED5 preserve explicit tabs while continuing to read old codes and reject unknown fields.
+The current [preset popup](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs) hosts the reused storage page in the shared casual shell. The [skill tactics page](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTacticsWindow.cs) provides direct settings through its own draft and save transaction. The old live combat examples and basic-attack/common-order diagram components are removed. Core recipes, share formats and existing-code reading and validation remain.
 
-Sources: [recipes](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [scope/application](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [activation/policy copy](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictSkillPresets.cs), [preset page](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.SkillPresets.cs), [examples](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillPresetExampleView.cs), [Whirlwind movement](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
+Sources: [recipes](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [scope/application](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [activation/policy copy](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictSkillPresets.cs), [current Presets & Share popup](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs), [current skill tactics; old diagrams removed](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTacticsWindow.cs), [Whirlwind movement](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
 
 ## Tab and auto-save verification, 2026-09-29
 

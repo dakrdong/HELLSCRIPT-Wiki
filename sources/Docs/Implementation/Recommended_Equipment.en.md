@@ -1,10 +1,12 @@
 # Gear score and automatic equipment
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-01
 
 [한국어](Recommended_Equipment.md)
 
-Newly acquired equipment is immediately equipped when it meets the player's rules. Displaced gear is stored, salvaged or sold according to the common setting. Open **Hunt Edict → Auto Equip → Common settings**, turn **Auto-equip recommended gear** ON, and **Save**. The feature starts disabled for both new and existing accounts. Turning Hunt Edict itself off also disables automatic equipment.
+Newly acquired equipment is immediately equipped when it meets the player's rules. Displaced gear is stored, salvaged or sold according to the common setting. Open **Hunt Edict → Recommended Gear** and enable **Auto-equip recommended gear** in its immediately applied edict section. The feature starts disabled for both new and existing accounts. Turning Hunt Edict itself off also disables automatic equipment.
 
 ## Player settings
 
@@ -93,7 +95,9 @@ HELLSCRIPT adapts the idea of a readable growth indicator alongside detailed opt
 
 [EquipmentScore](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentScore.cs) owns scoring. [EquipmentRecommendation](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentRecommendation.cs) owns policy, while [GameStore.RecommendedEquipment](../../Assets/HELLSCRIPT/Runtime/Core/GameStore.RecommendedEquipment.cs) owns atomic hunt pickup.
 
-`HeroSave.inventory` and `HeroSave.edict` hold live ownership/settings; `HuntEdictEditSession.Draft` owns edits; `CombatSimulation.Stats` holds combat-derived values. Details use copied items with an explicit `EquipmentViewSource` and never mutate saves. The existing Hunt Edict window receives a [tab adapter](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Equipment.cs), retaining shared scrolling, fixed Save/Revert and theme. No independent content window is introduced.
+`HeroSave.inventory` and `HeroSave.edict` hold live ownership/settings; `HuntEdictEditSession.Draft` owns edits; `CombatSimulation.Stats` holds combat-derived values. Details use copied items with an explicit `EquipmentViewSource` and never mutate saves.
+
+- **Recommended Gear** in the side menu now opens [RiftGearSettingsWindow](../../Assets/HELLSCRIPT/Runtime/Presentation/RiftGearSettingsWindow.cs). Its existing recommendation controls are joined by common and per-slot auto-equip edict rows. Edict rows save immediately through the same edit transaction, independently of Save/Cancel for the recommendation popup preferences.
 
 Automatic storage and replacement disposal reuse [EquipmentAutomation.cs](../../Assets/HELLSCRIPT/Runtime/Core/EquipmentAutomation.cs), `EdictCleanupPolicy`, `Economy` and `Storage` transactions. `Item.warehouseOrder` and `AccountSave.warehouseSequence` persist deposit order; `Item.pendingAutoStorage` persists deferred storage.
 

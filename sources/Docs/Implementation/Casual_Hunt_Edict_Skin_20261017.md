@@ -1,5 +1,7 @@
 # 사냥 칙령 Casual 화면 연결 · 2026-10-17
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 기준 `main`: `dbec4dbed084596471675f375c1d1ac517b4b86c`. 원본 Unity/작업 브랜치/미커밋 파일을 조작하지 않고 소스 전용 sparse clone에서 작업했다. 근거는 실제 Claude 30대지 조사 인계 `task/design-5-hunt-edict.md`와 통합 담당의 `shared-api-handoff.md`다. 조사 인계를 구현 계약으로 사용했으며 모든 대지를 게임에서 검수했다는 뜻은 아니다.
 
 ## 적용과 보존

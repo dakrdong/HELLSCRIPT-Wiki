@@ -1,5 +1,7 @@
 # Town rift entry and first-clear rewards
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-02 · [한국어](Rift_Entry.md)
 
 The town rift interaction opens the approved preparation layout with actual hero state and domain transactions. The Repeat settings shortcut opens the shared Hunt Edict Repeat settings tab and restores the entry window when closed.
@@ -86,7 +88,7 @@ The window now follows the layout of the new [HTML prototype](../../Prototypes/R
 
 ## 2026-09-29 portal return and re-entry
 
-The battle HUD and observation menu use **Return through portal**. Confirmation saves the unfinished rift and returns to the sanctuary without finalizing it as a failure. Tutorial and training exit behavior is preserved.
+The battle HUD's **Return through portal** button saves the unfinished rift and returns to the sanctuary. The ≡ observation menu and its duplicate return entry are removed. Confirmation does not finalize the rift as a failure; tutorial and training exit behavior remains.
 
 When a saved rift exists, the entry window and existing sanctuary/rift-service menus show two actions.
 

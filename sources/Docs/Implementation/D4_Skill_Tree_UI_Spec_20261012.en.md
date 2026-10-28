@@ -1,5 +1,7 @@
 # Skill Window Screen Implementation Spec (for Codex)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-12 · For: Codex implementation work · [한국어](D4_Skill_Tree_UI_Spec_20261012.md)
 
 Author: Claude (spec and verification material). Codex implements, verifies and commits.

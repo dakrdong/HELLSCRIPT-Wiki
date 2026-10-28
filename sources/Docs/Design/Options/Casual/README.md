@@ -1,5 +1,7 @@
 # 옵션(설정) 창 — 캐주얼 시안 정본
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](../../../Implementation/Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 작성일: 2026-10-15 · [English](README.en.md)
 
 캐주얼 StyleD 아트 컨셉에 맞춰 공통 설정 창(톱니바퀴로 여는 창: 화면·소리·언어·캐릭터 변경·계정 탭, 게임 안내, 전투 상태)을 다시 그린 시안이다. 구성과 순서는 지금 게임(`GameUI.ScreenSettings` 외)을 그대로 따랐다. 이 폴더는 시안 자료이며 게임 코드는 바꾸지 않았다. 게임 적용 지시는 [Codex 작업 지시](../../../Implementation/Casual_Options_Window_Codex_Prompt_20261015.md)에 있다.

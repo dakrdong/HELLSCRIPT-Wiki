@@ -1,5 +1,7 @@
 # 훈련장 캐주얼 스킨 후보 · 2026-10-14
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Casual_Training_Ground_Skin_20261014.en.md)
 
 현재 상태: **소스 편집 동결 · 개별 Unity/빌드 계획 종료 · 모든 화면 통합 검증으로 인계**. 0ccba80e는 읽기만 했고 미반영이다. [최종 인계 정본](Casual_Training_Ground_Final_Handoff_20261014.md)을 우선한다. 아래 구현·검증 기록은 cdb9 기반 입력의 이력이다.

@@ -1,5 +1,7 @@
 # 스킬 창 흐름 정리 — 착용 스킬 줄·닫기·옛 안내 팝업 제거 (2026-10-24)
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Skill_Window_Flow_20261024.en.md). 사용자 테스트(main `a045c626`) 보고 8·12·13(Part A)과 항목 17(Part B, [사냥칙령 하위 페이지 계약](Skill_Edict_Pages_Contract_20261024.md))을 한 단위로 묶은 기록이다. 이 문서는 Part A의 결정·규칙·인계를 한곳에 둔다.
 
 ## 시안(승인 기준)

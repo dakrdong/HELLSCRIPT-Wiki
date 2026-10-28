@@ -1,5 +1,7 @@
 # Casual Hunt Edict Explore tab — 2026-10-21
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [한국어](Casual_Explore_Sheet_20261021.md)
 
 Basis: spec sections g–m of the canvas "HELLSCRIPT 사냥 칙령 · 탐색 · 캐주얼" (98a2LCvDqd1ftBG8uGt4CW). Started from `origin/main` `c6354cbf`. Only **how the Explore tab looks** in the battle HUD's Hunt Edict sheet (`GameUI.EdictSheet`) changed, from the dark legacy sheet to a casual compact-card popup. Option meaning, save keys (`explore.*`), saving, revert, play and transactions (`SheetApply`/`SheetCommit`/`CommitHuntEdict`), tutorials, battle pause rules and the full window (`HuntEdictWindow`) are unchanged. The Repeat tab still uses the legacy sheet and Presets still shows its notice toast.

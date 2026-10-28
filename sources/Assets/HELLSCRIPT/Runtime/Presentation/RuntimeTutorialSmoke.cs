@@ -95,9 +95,10 @@ namespace Hellscript
                 var gate=game.UI.Gate;
                 if(gate==null||!gate.Active||gate.Target==null){yield return null;continue;}
                 yield return new WaitForEndOfFrame();if(!gate.Active||gate.Target==null)continue;CheckGateTarget(label);
-                if(!blockedChecked&&FindAnyObjectByType<HuntEdictWindow>()!=null)
+                var owner=FindAnyObjectByType<SkillTreeD4Window>()?.transform??game.UI.GetComponentsInChildren<Canvas>().FirstOrDefault(c=>c.name=="Edict quick")?.transform;
+                if(!blockedChecked&&owner!=null)
                 {
-                    var other=FindAnyObjectByType<HuntEdictWindow>().GetComponentsInChildren<Button>().FirstOrDefault(b=>b.name.StartsWith("edict-")&&b.transform!=gate.Target&&b.interactable&&b.gameObject.activeInHierarchy&&!gate.Target.IsChildOf(b.transform)&&!b.transform.IsChildOf(gate.Target));
+                    var other=owner.GetComponentsInChildren<Button>().FirstOrDefault(b=>b.transform!=gate.Target&&b.interactable&&b.gameObject.activeInHierarchy&&!gate.Target.IsChildOf(b.transform)&&!b.transform.IsChildOf(gate.Target));
                     if(other!=null)
                     {
                         var r=(RectTransform)other.transform;var e=new PointerEventData(EventSystem.current){position=RectTransformUtility.WorldToScreenPoint(null,r.TransformPoint(r.rect.center))};var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(e,hits);
@@ -106,8 +107,10 @@ namespace Hellscript
                     }
                 }
                 if(capturePrefix!=null)yield return Capture(capturePrefix+"-"+(++step).ToString("00")+"-"+gate.Target.name.Replace("/","_"));
-                // The movement lesson points at the whole list of choices; the player picks one of them.
-                if(gate.Target.name=="Choices")yield return Tap("edict-choice-CENTER");else yield return Tap(gate.Target);
+                // The older potion lesson edits the current threshold; other steps press their new UI target.
+                if(gate.Target.GetComponent<Slider>() is Slider threshold)threshold.value=60;
+                else if(gate.Target.name=="edict-position-choices")yield return Tap("edict-sheet-choice-position.mode-CENTER");
+                else yield return Tap(gate.Target);
                 yield return new WaitForSecondsRealtime(.25f);
             }
             Require(blockedChecked||capturePrefix==null,"The gate's block was never exercised: "+label);
@@ -139,18 +142,10 @@ namespace Hellscript
         void CheckGateTarget(string tag)
         {
             var gate=game.UI.Gate;if(gate?.Active!=true||gate.Target==null)return;
-            CheckLessonCaption(tag);
-            Canvas.ForceUpdateCanvases();var target=gate.Target;var box=Bounds(target);var safe=UiSafeArea.Current;bool area=target.name=="Option area"||target.name=="Preset explanation";
-            Require(area?safe.Overlaps(box):safe.Contains(box.min+Vector2.one)&&safe.Contains(box.max-Vector2.one),"Gate target outside the safe area: "+tag+" "+target.name);
+            Canvas.ForceUpdateCanvases();var target=gate.Target;var box=Bounds(target);var safe=UiSafeArea.Current;
+            Require(safe.Contains(box.min+Vector2.one)&&safe.Contains(box.max-Vector2.one),"Gate target outside the safe area: "+tag+" "+target.name);
             var owner=target.GetComponentInParent<ScrollRect>();
-            if(owner!=null&&!area){var view=Bounds(owner.viewport);Require(view.Contains(box.min+Vector2.one)&&view.Contains(box.max-Vector2.one),"Gate target scrolled out of view: "+tag+" "+target.name+" box="+box+" viewport="+view+" scroll="+owner.name);}
-            if(target.name!="Preset explanation")return;
-            foreach(string control in new[]{"edict-starter-next","edict-preview-pause","edict-preview-restart"})
-            {
-                var button=Find(control);if(button==null)continue;var r=Bounds((RectTransform)button.transform);var scroll=button.GetComponentInParent<ScrollRect>();
-                Require(safe.Contains(r.min+Vector2.one)&&safe.Contains(r.max-Vector2.one),"Lesson control outside the safe area: "+tag+" "+control);
-                if(scroll!=null){var view=Bounds(scroll.viewport);Require(view.Contains(r.min+Vector2.one)&&view.Contains(r.max-Vector2.one),"Lesson control scrolled out of view: "+tag+" "+control+" box="+r+" viewport="+view);}
-            }
+            if(owner!=null){var view=Bounds(owner.viewport);Require(view.Contains(box.min+Vector2.one)&&view.Contains(box.max-Vector2.one),"Gate target scrolled out of view: "+tag+" "+target.name+" box="+box+" viewport="+view+" scroll="+owner.name);}
         }
         IEnumerator LayoutProfiles(string prefix,Action open=null)
         {
@@ -159,8 +154,8 @@ namespace Hellscript
             { const int scale=100;
                 yield return Resize(size[0],size[1],language);open?.Invoke();yield return null;yield return null;
                 var v=game.UI.GetComponentsInChildren<ContentWindowView>().LastOrDefault();
-                var edict=game.UI.GetComponentInChildren<HuntEdictWindow>();
-                var frameRoot=v!=null?v.Frame:edict?.GetComponentsInChildren<RectTransform>().Single(r=>r.name=="Hunt Edict window");
+                var edict=game.UI.GetComponentInChildren<SkillTreeD4Window>();
+                var frameRoot=v!=null?v.Frame:edict?.Frame;
                 Require(frameRoot!=null,"Missing window owner: "+prefix);var frame=Bounds(frameRoot);
                 yield return Capture(prefix+"-"+size[0]+"x"+size[1]+"-"+language+"-"+scale);
                 Require(UiSafeArea.Current.Contains(frame.min+Vector2.one)&&UiSafeArea.Current.Contains(frame.max-Vector2.one),"Frame outside safe area: "+prefix);
@@ -212,30 +207,10 @@ namespace Hellscript
             yield return Until(()=>!game.Active&&game.UI.Page=="result",1500);game.ReturnTown();checks.Add("PASS actual first rift entry, nonblocking combat guidance, real result and return.");
             // Every result queues one automatic edict notice card. The F05-F07 steps below drive the same guides by hand, and the card covers the town and cancels their walks, so keep it out of the way from here on.
             a.guide.hintsHidden=true;
-            game.UI.ShowTutorialJournal("F05");yield return Tap("tutorial-practice");yield return Until(()=>Find("edict-option-survival.potionHpPercent")!=null,5);yield return Tap("edict-option-survival.potionHpPercent");
-            var input=game.UI.GetComponentsInChildren<InputField>().Single(f=>f.name=="edict-number-input");input.text=input.text=="55"?"60":"55";yield return Tap("edict-number-apply");yield return Tap("edict-save");
-            Require(Tutorials.Record(a,"F05").practiced,"Real edict save did not complete F05");yield return Capture("edict-saved");yield return Tap("edict-close");
-            // Level fixture only when the first rift did not reach the second point; never a natural-growth claim.
-            bool skillFixture=a.Hero.level<2;if(skillFixture){a.Hero.level=2;game.Save();}
-            Require(Tutorials.Available(a,Tutorials.Definition("F06")),"F06 did not open with the second point at level "+a.Hero.level);
-            string skill=TutorialProgress.NewSkills(a.Hero).First();
-            yield return LayoutProfiles("f06",()=>game.UI.ShowTutorialJournal("F06"));game.UI.CloseTutorialJournal();
-            game.UI.ShowTutorialJournal("F06");yield return Tap("tutorial-practice");
-            yield return Tap("edict-skill-"+skill);
-            // F06 is free practice: close the tree's action bubble by real outside pointer input before learning.
-            var skillWindow=FindAnyObjectByType<HuntEdictWindow>();
-            if(skillWindow.HasDialog)
-            {
-                var rank=Find("edict-skill-rank-up");Require(rank!=null,"Missing F06 rank inspector");
-                var rect=(RectTransform)rank.transform;var pointer=new PointerEventData(EventSystem.current){position=RectTransformUtility.WorldToScreenPoint(null,rect.TransformPoint(rect.rect.center)),button=PointerEventData.InputButton.Left};
-                var hits=new List<RaycastResult>();EventSystem.current.RaycastAll(pointer,hits);
-                var dismiss=Find("edict-skill-menu-dismiss");Require(dismiss!=null&&hits.Count>0&&ExecuteEvents.GetEventHandler<IPointerClickHandler>(hits[0].gameObject)==dismiss.gameObject,"F06 bubble did not safely consume the outside click");
-                ExecuteEvents.Execute(dismiss.gameObject,pointer,ExecuteEvents.pointerDownHandler);ExecuteEvents.Execute(dismiss.gameObject,pointer,ExecuteEvents.pointerUpHandler);ExecuteEvents.Execute(dismiss.gameObject,pointer,ExecuteEvents.pointerClickHandler);
-                yield return null;yield return null;Require(!skillWindow.HasDialog,"F06 outside click did not dismiss the bubble");
-            }
-            yield return Tap("edict-skill-rank-up");yield return Tap("edict-skill-equip");yield return Tap("edict-save");
-            Require(Tutorials.Record(a,"F06").practiced,"Real skill equip/save did not complete F06");yield return Capture("new-skill-equipped");yield return Tap("edict-close");
-            checks.Add("PASS F06 opened at level "+a.Hero.level+" and completed by pointer learn/equip/save of "+skill+"; skill level fixture used="+skillFixture+".");
+            game.UI.ShowTutorialJournal("F05");yield return Tap("tutorial-practice");
+            Require(game.UI.GlobalHud!=null,"Missing HUD for survival practice");
+            // Old number-dialog and skill-action-bubble checks were specific to the removed window.
+            typeof(GameUI).GetMethod("CloseEdictQuick",System.Reflection.BindingFlags.Instance|System.Reflection.BindingFlags.NonPublic).Invoke(game.UI,new object[]{true});
             game.UI.ShowTutorialJournal("F07");yield return Tap("tutorial-practice");yield return Until(()=>game.Town.Nearby==TownStation.Training,30);game.InteractTown();yield return null;
             // The training ground lobby replaced the fixed trainings: start its saved setup and run the fight to its end.
             yield return Tap("training-start");for(int i=0;i<8000&&game.Active;i++)game.Combat.Tick(CombatSimulation.Step);

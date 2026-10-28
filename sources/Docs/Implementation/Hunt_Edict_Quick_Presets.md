@@ -1,8 +1,10 @@
 # 사냥 칙령 항목별 간편 프리셋
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-09-30 · [English](Hunt_Edict_Quick_Presets.en.md)
 
-설정 항목마다 목적이 분명한 프리셋을 제공하고, 마지막에 **직접 설정**을 둡니다. 스킬·기본 공격·공통 공격 순서는 탭에서 설명과 전투 예시를 살펴본 뒤 **프리셋 활성화**로 적용합니다. 활성화와 직접 설정의 옵션 변경은 즉시 저장합니다. 전역 옵션 묶음은 기존 선택 창과 저장·되돌리기를 유지합니다.
+현재 프리셋은 사이드 메뉴 **프리셋·공유**의 독립 팝업에서 편집한다. 다섯 보관 슬롯·이름·공유 코드·가져오기와 **간편 프리셋** 페이지를 유지하며, 프리셋 선택은 초안만 바꾸고 하단 **저장**으로 확정한다. 스킬별 직접 설정은 **스킬 → 스킬 전술**에서 편집하고 저장한다. 아래의 탭·즉시 저장·전투 예시는 A2 이전 화면의 기록이다.
 
 ## 2026-09-29 진행 균열이 있을 때 저장
 
@@ -27,9 +29,9 @@
 - 이름을 처음 누르면 편집할 프리셋을 선택합니다. 선택된 이름을 다시 누르면 그 자리에서 입력할 수 있으며, 입력을 확정하면 `RenameHuntEdictPreset` 거래로 저장합니다. 긴 이름은 입력 영역 안에서만 표시합니다.
 - 디스크 버튼은 현재 설정을 해당 슬롯에 보관합니다. 기존 슬롯을 덮어쓰려면 확인이 필요합니다. 슬롯의 공유 코드는 그 슬롯의 저장본을 사용합니다. 코드 가져오기의 검증·다섯 목적지·덮어쓰기 확인 절차도 유지합니다.
 - 전체 설정의 적용·되돌리기는 기존 하단 버튼을 사용합니다. 스킬별 프리셋의 즉시 저장 규칙은 아래와 같습니다.
-- **기본 세팅 적용** 버튼은 [요약 탭](Hunt_Edict_Overview.md)에 있습니다. 프리셋·공유 페이지에는 중복해서 표시하지 않습니다.
+- **기본 세팅 적용** 토글은 프리셋·공유 팝업 상단에 있다. Sharing 공개(균열 20단계 또는 기존 계정 접근 권한) 후 켜고 끌 수 있으며, 이전에는 해금 이유를 표시한다. 토글은 잠긴 간편 프리셋 목록 밖에 있다. `GameStore.SetRecommendedEdict`로 즉시 저장하며 저장 실패 시 기존 모드를 유지한다. 요약 탭은 제거했고, 저장된 `useRecommendedEdict` 값·추천값·전투 규칙은 유지한다.
 
-표시 정의는 [HuntEdictUi.json](../../Assets/HELLSCRIPT/Resources/HuntEdictUi.json), 화면은 `HuntEdictWindow.Summary`, `HuntEdictWindow.Presets`, 선 아이콘은 `HuntEdictWindow.Glyphs`와 공통 `SkillTreeGraphic`이 소유합니다. 신규 래스터 리소스는 없습니다.
+[HuntEdictUi.json](../../Assets/HELLSCRIPT/Resources/HuntEdictUi.json)은 그룹 정의를 유지한다. 현재 전역 행은 [사이드 메뉴 카탈로그](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictCatalog.cs), 프리셋 보관함과 간편 선택기는 [독립 팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs)과 [보관함 페이지](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.Presets.cs)가 소유한다. 옛 통합 창의 분류 탭과 전용 글리프 파일은 제거했다.
 
 ## 스킬 프리셋 탭과 전투 예시
 
@@ -56,9 +58,9 @@
 
 프리셋 값은 `HuntEdictQuickPresets`와 `Resources/HuntEdictQuickPresets.json`이 소유합니다. 신규 스킬은 `Resources/Data/ClassSkills.json`의 한국어·영어 사용 방침을 재사용하며, 마력 회수는 사용 방침과 회복 목표를 함께 지정합니다. `HuntEdictSkillPresets`가 활성 탭 검증과 해당 항목만 복사하는 처리를 담당합니다. `HuntEdictEditSession.SaveSkillPolicy`는 기존 저장 콜백으로 원자적 거래를 실행하며 실패하면 실제 구성과 편집본을 모두 유지합니다.
 
-화면은 기존 `HuntEdictWindow` 안의 어댑터입니다. `HuntEdictWindow.SkillPresets`가 공통 버튼·테마·글꼴·스크롤을 사용하고, `SkillCombatPreviewPresenter`가 독립 전투와 렌더링 자원을 소유합니다. 기본 공격·공통 순서는 `SkillPresetExampleView`의 도해를 유지합니다. 표시 부품은 계정 저장에 접근하지 않습니다. HED4·HED5는 선택한 탭을 함께 보존하되 기존 코드의 읽기를 유지하며, 알 수 없는 필드는 계속 거부합니다.
+현재 [프리셋 팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs)은 기존 보관함 페이지를 공통 캐주얼 창에 옮긴 것이다. [스킬 전술 화면](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTacticsWindow.cs)은 별도 편집본과 저장 거래로 직접 설정을 제공한다. 옛 실시간 전투 예시와 기본 공격·공통 순서 도해의 표시 부품은 제거했다. Core 프리셋·공유 형식과 기존 코드의 읽기·검증은 유지한다.
 
-원본: [프리셋 설정표](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [범위와 적용](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [활성 탭과 정책 복사](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictSkillPresets.cs), [스킬 프리셋 화면](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.SkillPresets.cs), [예시 그림](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillPresetExampleView.cs), [회오리 이동](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
+원본: [프리셋 설정표](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json), [범위와 적용](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictQuickPresets.cs), [활성 탭과 정책 복사](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictSkillPresets.cs), [현재 프리셋·공유 팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs), [현재 스킬 전술 화면·옛 도해 제거](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTacticsWindow.cs), [회오리 이동](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.EdictWhirlwindMovement.cs).
 
 ## 2026-09-29 탭·즉시 저장 검증
 

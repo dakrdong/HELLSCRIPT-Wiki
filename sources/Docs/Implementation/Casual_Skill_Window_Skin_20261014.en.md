@@ -1,5 +1,7 @@
 # Casual skill window skin pilot
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 2026-10-14 · [Korean](Casual_Skill_Window_Skin_20261014.md) · [Shared rules](Casual_UI_Skin_Rules_20261014.en.md)
 
 Implemented only the skill window in local branch `codex/casual-skill-skin`, based on `origin/main 53d6a3e1` after the verified `083b03f0` integration. Attendance commit `6378320b` is not included. Attendance, HUD, currency, rewards, equipment effects, CI, other UI and existing skill artwork are unchanged. No push, PR, main integration, web build or public deployment occurred.

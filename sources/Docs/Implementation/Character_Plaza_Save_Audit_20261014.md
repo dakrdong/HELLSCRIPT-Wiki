@@ -1,5 +1,7 @@
 # 캐릭터 광장 저장 영향 조사 — 2026-10-14
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Character_Plaza_Save_Audit_20261014.en.md)
 
 사용자가 승인한 옵션 A를 구현한다. 격리 소스 폴더 `task-21/character-plaza`에서 저장·Core·관련 시험만 변경했다. 원본 체크아웃, 실제 저장, Unity Library/Build는 건드리지 않았다. UI·아트·공통 스킨은 다른 소유자가 이어서 통합한다.

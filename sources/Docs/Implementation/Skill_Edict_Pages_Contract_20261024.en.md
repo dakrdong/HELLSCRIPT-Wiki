@@ -1,5 +1,7 @@
 # Per-skill hunt edict sub page — B0 storage and contract design memo (2026-10-24)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [한국어](Skill_Edict_Pages_Contract_20261024.md). B0 contract and implementation record for user item 17 (Part B). **The headless B0/B2 catalog, draft and persistence foundation is implemented; B1 screen code awaits direct visual approval evidence.** The initial proposal is retained below; the final implementation section supersedes it. Option meanings and numbers come from [`HELLSCRIPT_Hunt_Edict_Tactical_Options.en.md`](../Design/HELLSCRIPT_Hunt_Edict_Tactical_Options.en.md). `HEC-*` are old options and `HET-*` are planning row numbers, never new save keys or UI text.
 
 ## One-line summary (for the user report)
@@ -28,7 +30,7 @@ Per-skill values live in `ClassSkillLoadout` (v5) as a **sparse list** (`skill i
 
 **(e) Row definitions are data.** `Resources/Data/SkillTactics.json` (proposed name): row key, kind (toggle/choice/ref/num), options (with skill-reference index), min/max/step/default/unit, disabled-reason rules, owner (parent/modifier id), the parent rows a modifier replaces, summary rule. Numbers, choices and defaults are copied from the option document's tables; the cross-check test reports "skipped" when the document is absent.
 
-**(f) Global settings link.** Today's target is the `combat`/`survival` tab of `HuntEdictWindow`. When the old edict window is removed, this link (including a new `GameUI` entry wrapper) is the point to update.
+**(f) Global settings link.** The current route is [tactics return handling](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Tactics.cs) → `GameUI.ShowEdictTab("combat")` → the Combat side-menu sheet. Survival uses the same `ShowEdictTab("survival")` route. The deleted unified window is no longer opened.
 
 **(g) Row ceiling.** D4 cards allow at most seven editable rows including automatic use. Eight remains historical v0.2 scope. The initial concern about eight A02 rows is superseded by the current tactical document §3 and count table: equipment and modifiers reuse the same two rows without adding another pair, leaving six rows.
 

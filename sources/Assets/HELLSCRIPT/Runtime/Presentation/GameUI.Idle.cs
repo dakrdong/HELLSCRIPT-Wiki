@@ -20,7 +20,7 @@ namespace Hellscript
             idleIntroductionOpen = true; pageRepaint = ShowIdleIntroduction;
             Base("idle-introduction", "절전 방치", "실제 사냥 유지", responsive: true);
             RepeatText("현재 균열 사냥을 계속하며 화면 표시를 줄입니다. 화면을 잠그거나 앱을 나가면 사냥을 보존합니다. 돌아온 뒤 재개를 눌러 계속할 수 있습니다.", pale);
-            RepeatText("화면을 누르면 현재 전투를 잠깐 봅니다. 마지막 입력 후 10초가 지나면 다시 어두워집니다. 계속 보기를 누르면 일반 화면을 유지합니다.", pale);
+            RepeatText("화면을 누르면 현재 전투를 잠깐 봅니다. 마지막 입력 후 10초가 지나면 다시 어두워집니다. 절전 화면에서 해제 버튼을 길게 누르면 일반 화면을 유지합니다.", pale);
             AddRepeatPreparation(game.Combat.RepeatPolicy);
             FooterButton(0, 2, "취소", () => { idleIntroductionOpen = false; ShowBattle(); });
             FooterButton(1, 2, "절전 방치 시작", () => { idleIntroductionOpen = false; ShowBattle(); game.EnterIdle(); }, true);

@@ -1,5 +1,7 @@
 # 사냥 칙령 생존 서브 메뉴 캐주얼 적용 — 2026-10-18
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Casual_Survival_Menu_20261018.en.md)
 
 기준: 캔버스 "HELLSCRIPT 사냥 칙령 · 생존"(RydEW2cMjvHRr2dPXU7H2a)의 구성 명세 g~m절. 시작 `origin/main` `3d3e0f4f`. 전투 HUD 사냥 칙령 시트(`GameUI.EdictSheet`)의 생존 탭만 바꿨다. 저장·되돌리기·재생·거래(`SheetApply`/`SheetCommit`/`CommitHuntEdict`)와 옵션 id·값은 그대로다.

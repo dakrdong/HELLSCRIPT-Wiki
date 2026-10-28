@@ -1,5 +1,7 @@
 # Options (Settings) Window — Casual Mockup Source of Truth
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](../../../Implementation/Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Written: 2026-10-15 · [한국어](README.md)
 
 This redraws the shared settings window (the one the gear button opens: Screen, Audio, Language, Character and Account tabs, plus the game guide and the combat state) in the casual StyleD art concept. Structure and order follow the current game (`GameUI.ScreenSettings` and friends). This folder is mockup material and changes no game code. The brief for applying it to the game is the [Codex task prompt](../../../Implementation/Casual_Options_Window_Codex_Prompt_20261015.en.md).

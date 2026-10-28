@@ -1,5 +1,7 @@
 # Map display option
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Bottom-layout update, 2026-09-28: the live journal is at the bottom, with the full HUD above it. The minimap reserves space above that stack and recalculates on journal expansion/collapse. See [integration validation](All_Work_Integration_20260928.en.md).
 
 Updated: 2026-09-28 · [한국어](Map_Display_Option.md)
@@ -70,7 +72,7 @@ The previous code skipped the shrink in step 3 and left the map out at once, so 
 
 ## Reaching the expanded map
 
-In every style the expanded map (`ShowRiftMap`, which pauses the battle) has two entries: tapping the corner panel, and ☰ observation menu → Map. The panel stays in Overlay and Hidden so that the chest counter remains visible and the existing tap keeps working.
+In every style, tapping the corner map panel opens the expanded map (`ShowRiftMap`, pausing the battle). The ≡ menu's Map entry was removed with that menu. Overlay and Hidden retain the corner panel for chest counts and map access. See the [current map entry](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.Rift.cs).
 
 ## Device save and migration
 

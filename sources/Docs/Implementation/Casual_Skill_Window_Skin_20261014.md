@@ -1,5 +1,7 @@
 # 스킬 창 캐주얼 스킨 파일럿
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 2026-10-14 · [English](Casual_Skill_Window_Skin_20261014.en.md) · [공통 규칙 정본](Casual_UI_Skin_Rules_20261014.md)
 
 스킬 창 한 개를 로컬 브랜치 `codex/casual-skill-skin`에 구현했다. 기준은 `origin/main 53d6a3e13304a781f9823134ba0f497bafb78621`이며 검증된 `083b03f0` 이후의 작업 지침을 포함한다. 출석 `6378320b`는 조상이 아니며 이 작업에 포함하지 않았다. 출석·HUD·재화·보상·장비 효과·CI·다른 UI와 기존 스킬 원화는 변경하지 않았다. 원격 push, PR, main 통합, 웹 빌드와 공개 배포는 실행하지 않았다.

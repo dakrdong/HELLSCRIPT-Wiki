@@ -274,8 +274,8 @@ namespace Hellscript
             BigButton(content,"성소 거닐기 · NPC 방문",()=>game.EnterPlaza());
             BigButton(content,"균열 관리자 · 단계·소탕·훈련",ShowRiftKeeper);
             BigButton(content,"자동 행동 설계",()=>ShowBuild());
-            BigButton(content,"사냥 칙령 v0.2 편집",ShowEdictEditor);
-            if(HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Presets))BigButton(content,HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Sharing)?"사냥 칙령 공유 · v0.2 사용":"로컬 프리셋",()=>{ClearEdictShare();ShowEdictShare();});
+            BigButton(content,"전투",()=>ShowEdictTab("combat"));
+            if(HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Presets))BigButton(content,HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Sharing)?"프리셋·공유":"로컬 프리셋",ShowEdictShare);
             BigButton(content,"성장과 스킬",ShowGrowth);
             ContentButton(ContentUnlocks.Rune,"룬 성장",ShowRunes);
             BigButton(content,"장비 · 대장간 · 창고",()=>ShowBag());
@@ -476,7 +476,7 @@ namespace Hellscript
                 }
             }
             // The label promises the hunt edict; its overview opens on advice drawn from this defeat.
-            BigButton(content,"사냥 칙령 수정하러 가기",ShowEdictEditor,true);
+            BigButton(content,"전투",()=>ShowEdictTab("combat"),true);
             FooterButton(0,1,"결과 화면으로",ShowResult);
         }
         public void ShowTrainingPresetSave()

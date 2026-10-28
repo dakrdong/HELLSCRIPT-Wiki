@@ -1,5 +1,7 @@
 # Live combat examples for skill presets
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-09-30 · [한국어](Skill_Preset_Combat_Previews.md)
 
 All 54 active and ultimate skills offer 122 equipment-independent presets: 41 Warrior, 40 Ranger and 41 Mage. Preset tabs now show an independent battle using the production combat code and existing character/enemy assets, animation and effects. Custom Settings displays detailed controls without an example.
@@ -42,7 +44,7 @@ This replaces the example area in the existing Hunt Edict window rather than int
 
 Unchanged recipe values retain their ID. Changed recipes use new IDs. The explicit compatibility list contains 47 published retired IDs; these normalize to Custom Settings while preserving executable values. Arbitrary unknown IDs remain rejected. Strict HED4 and enclosing HED5 validation is preserved.
 
-Sources: [presets](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json) · [scenario conditions](../../Assets/HELLSCRIPT/Resources/SkillPresetScenarios.json) · [session](../../Assets/HELLSCRIPT/Runtime/Core/CombatPreviewSession.cs) · [creation/restoration](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.SkillPreview.cs) · [presentation owner](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillCombatPreviewPresenter.cs).
+Sources: [presets](../../Assets/HELLSCRIPT/Resources/HuntEdictQuickPresets.json) · [scenario conditions](../../Assets/HELLSCRIPT/Resources/SkillPresetScenarios.json) · [session](../../Assets/HELLSCRIPT/Runtime/Core/CombatPreviewSession.cs) · [creation/restoration](../../Assets/HELLSCRIPT/Runtime/Core/CombatSimulation.SkillPreview.cs) · [current skill tactics; live examples removed](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTacticsWindow.cs).
 
 ## Validation record
 

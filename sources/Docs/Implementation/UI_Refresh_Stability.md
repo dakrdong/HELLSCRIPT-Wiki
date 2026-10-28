@@ -1,5 +1,7 @@
 # HELLSCRIPT UI 갱신 안정성 조사
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 확인일: 2026-10-03
 
 ## 결과와 근거 수준
@@ -45,8 +47,8 @@
 | 균열 결과·획득 아이템·아이템 정보/비교·반복 설정·재도전 countdown | `RiftVictoryWindow*`, `GameUI.RiftVictory`, `.Repeat` | 기존 save 제외; rewardStatus/repeat 실제 변화 및 popup guard; 정상 countdown 유지 |
 | 훈련장 캐릭터/스킬/적 목록·적 추가 picker·실전 스킬 편집 | `TrainingGroundWindow*`, `GameUI.TrainingGround` | 기존 save 제외; dropdown 변경의 다음 프레임 redraw 유지; 실제 non-save 변경 및 중첩 상호작용 runtime 미확인 |
 | 훈련 결과·이전 결과/DPS·스킬/칙령 상세 | `TrainingGroundResultWindow*` | 기존 save 제외; snapshot 중심, 실제 non-save repaint runtime 미확인 |
-| 사냥 칙령 요약·스킬·전투·생존·전리품·가방/정리·탐색·반복·추천 착용·프리셋/공유 | `HuntEdictWindow*`, `GameUI.HuntEdict` | draft 소유; 무조건 save subscription 없음; 크기/언어 reflow는 입력/스크롤 복원 |
-| 칙령 옵션 숫자/집합/순서·스킬 행동/정책·프리셋 이름/가져오기·저장/되돌리기/닫기 확인 | `HuntEdictWindow.Summary`, `.Skills`, `.Presets`, `GameUI.Presets` | 명시적 사용자의 draft 변경/창 크기 변화; 정상 미리보기 애니메이션 유지 |
+| 사냥 칙령 시트·스킬 트리·반복·추천 장비·프리셋 | `GameUI.EdictSheet`, `SkillTreeD4Window`, `RepeatSettingsWindow`, `RiftGearSettingsWindow`, `EdictPresetsWindow` | 각 소유자의 편집본·입력·스크롤 유지; 명시적 칙령 거래로 갱신 |
+| 칙령 행·스킬 전술·프리셋 대화상자 | `EdictCasualRows`, `EdictSettingsSection`, `SkillTacticsWindow`, `EdictPresetsWindow.Presets` | 저장 범위 구분; 옛 창의 예시나 부모 편집본 없음 |
 | 룬 보드·무기/효과/보유 필터·정보/도움말/범례/도감·프리셋/저장·영역/영역 정보/잠금/칸·실습·닫기/되돌리기 | `RuneBoardWindow*`, `GameUI.RuneBoard` | 기존 rune revision guard, Dirty draft reload 금지; 드래그 중 갱신 보류; 정상 카메라 overlay 갱신 |
 | 룬 장인 변형·업그레이드·재료 선택·드래그·합성/업그레이드 결과 공개 | `RuneMasterWindow*`, `GameUI.RuneMaster` | 실제 rune revision만 repaint; 합성·공개 연출 정상 |
 | 전투 기록·전투 로그·DPS/기여도 그래프·사망 분석·구간/틱/규칙/당시 칙령 | `CombatRecordsWindow`, `CombatLogWindow`, `RiftCombatGraphWindow`, `GameUI.History`, `.CombatJournal` | 고정 기록/snapshot; explicit 페이지/필터 변경, 무조건 save repaint 없음 |
@@ -90,4 +92,4 @@ JSON 비용은 **동기 Save + binding flush + Canvas update 구간의 wall time
 
 ## 사냥 칙령 단계 공개, 2026-10-04
 
-HuntEdictWindow는 영웅·레벨·공개 ID·물약 revision·칙령/스킬/프리셋·안내 단계를 표시 키로 사용하는 StoreViewBinding을 붙인다. 대화상자와 순서 드래그 동안 갱신을 보류하고 명시적 repaint 후 기준을 기록한다. 편집본·포커스·스크롤은 기존 소유자를 따른다. 선택형 공개 카드는 StoryDialogueWindow를 재사용한다. [구현과 해당 runtime 검증 범위](Hunt_Edict_Progression.md)를 참고한다. 이 행은 이번에 바뀐 편집기와 안내 경로의 범위이며 기존 전체 UI 후보의 시각 합격표가 아니다.
+현재 프리셋·전술 팝업은 각 표시 키로 `StoreViewBinding`을 붙이고 대화상자 중 재그리기를 보류한다. 전술 자격은 기본 추천 세팅 플래그를 포함하며 저장 직전에도 검사한다. 옛 통합 창의 바인딩은 제거했다. [현재 소유와 과거 검증의 경계](Hunt_Edict_Window_Removal_20261028.md)를 따르며 이전 runtime 수치는 대체 화면의 검증 결과가 아니다.

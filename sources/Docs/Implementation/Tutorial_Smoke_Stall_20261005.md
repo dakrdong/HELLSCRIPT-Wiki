@@ -1,5 +1,7 @@
 # 튜토리얼 호환 스모크 정지 조사
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-10-06 · [English](Tutorial_Smoke_Stall_20261005.en.md)
 
 `-hellscriptTutorialSmoke`의 두 번째 실행(`-hellscriptTutorialResume`)이 `origin/main`의 `ee5a949c`와 튜토리얼 연대기 브랜치에서 모두 약 170초 뒤 `Timed out following the prologue gate: survival lesson target=`으로 실패한다고 보고되었다. 이 스모크는 `edictLegacyAccess=true` 계정으로 단계 공개 이전의 v2 흐름을 확인하는 호환 검증이다. 원인은 하나가 아니었다. 단계 공개 구현(`93d59959`)과 그 뒤의 변경이 만든 동작과 스모크의 오래된 기대가 네 곳에서 겹쳤다. 넷 모두 고쳐서 스모크가 처음으로 끝까지 통과한다(최종 표지 `HELLSCRIPT_TUTORIAL_RUNTIME_SMOKE_OK`). 넷째를 고치는 중에 첫 수정(앱)이 만든 회귀도 하나 찾아 고쳤다. 조사 중 연대기 브랜치(PR #52), 패시브 조정(PR #55), Hunt Edict 네이티브 포트(PR #53), 튜토리얼 연결(PR #56)이 차례로 `main`에 병합되어, 최종 검증은 네 병합을 모두 포함한 트리에서 했다. 마지막 병합 뒤에는 F05 단계에서 포인터가 가끔 빗나가는 간헐 실패가 하나 더 드러나 스모크의 `Tap`을 고쳤다(5절). PR #54가 그 수정보다 먼저 병합되어, 이 수정과 실행 8~13의 기록은 후속 PR로 올렸다. 후속 PR을 준비하는 동안 마을 모델 PR #57(`4fc52dba`)과 구덩이 튜토리얼 PR #58(`945fa46f`)이 병합되어, 실행 14·15는 #57까지의 트리에서, 실행 16~19는 #58까지의 트리에서 했다.
@@ -8,7 +10,7 @@
 
 ## 1. 생존 실습의 물약 선택기 — 앱, 수정함
 
-[HuntEdictWindow.DrawSelectedGroup](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Summary.cs)이 `자동 물약` 그룹(`survival.potion`)의 간편 프리셋 선택기를 그룹 이름 검사로 모든 계정에서 제외했다. 신규 계정은 [HuntEdictProgression.Quick](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictProgression.cs)이 이미 이 범위를 거절하므로 같은 검사가 이중이었다. 기존(legacy) 계정에서는 `Quick`이 항상 참인데도 선택기가 사라졌다.
+A2 이전 구현의 `DrawSelectedGroup`는 `자동 물약` 그룹(`survival.potion`)의 간편 선택기를 모든 계정에서 제외했다. 신규 계정은 [공개 판정](../../Assets/HELLSCRIPT/Runtime/Core/HuntEdictProgression.cs)이 이미 이 범위를 제한하지만 기존 계정에는 선택기가 필요해 당시 이를 고쳤다. 현재 옵션 편집은 [사이드 메뉴 시트](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictCatalog.cs), 간편 프리셋 선택은 [프리셋·공유 팝업](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs)이 각각 소유한다. 삭제된 창의 메서드는 현재 파일에 존재하지 않는다.
 
 v2 생존 실습(`GameUI.SurvivalLessonStep`)은 기존 계정에 `edict-quick-picker-global/survival.potion`을 누르라고 안내한다. 버튼이 없어 `LessonTarget`이 null을 돌려주었고 게이트는 대상 없이 안내만 띄웠다. 게이트는 2초 뒤 입력을 풀어 플레이어를 가두지는 않는다. 그러나 안내가 존재하지 않는 버튼을 가리키며, 그 방법으로는 실습을 마칠 수 없다. 스모크의 `FollowGate`는 대상이 생기기를 120초 기다린 뒤 실패한다.
 

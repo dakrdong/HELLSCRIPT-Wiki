@@ -1,5 +1,7 @@
 # Casual UI follow-up handoff
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 2026-10-14 · [Korean](Casual_UI_Parallel_Handoff_20261014.md) · [Canonical style rules](Casual_UI_Skin_Rules_20261014.md)
 
 The user authorized 13 other UI tasks in separate threads. Parent thread `01a10416-f8fa-77cc-b19d-070c6bc290c5` owns assignments, the validation queue and integration. This skill pilot remains the sole editor of common style documentation, theme and rendering code. Each screen starts with its actual design and source investigation. Shared edits and Unity execution require coordination with the parent.

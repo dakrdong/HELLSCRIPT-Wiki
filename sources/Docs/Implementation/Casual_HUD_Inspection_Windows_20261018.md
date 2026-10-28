@@ -1,5 +1,7 @@
 # 전투 HUD 정보 창 캐주얼 적용 — 2026-10-18
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Casual_HUD_Inspection_Windows_20261018.en.md)
 
 기준: 캔버스 "HELLSCRIPT 전투 관찰 메뉴 · 캐주얼"(FYfemHtqRJFH7wdCg1rsT5)의 구성 명세. 시작 `origin/main` `3d3e0f4f`. 이 창들은 모두 `GameUI.GlobalHud.ShowHudPanel` 하나가 그리고, 그 안에 `skin != null`일 때 쓰는 캐주얼 분기가 이미 있었다(스킬 팝업만 사용). 이번에는 그 분기를 모든 창에 적용했다.

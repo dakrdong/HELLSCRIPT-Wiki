@@ -1,5 +1,7 @@
 # Hunt Edict Tutorial Summary — Input for the UI Overhaul
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](../Implementation/Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-04
 
 [한국어](Tutorial_Hunt_Edict_UI_Brief.md)

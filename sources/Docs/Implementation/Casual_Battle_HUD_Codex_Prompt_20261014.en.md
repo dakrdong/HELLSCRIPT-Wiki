@@ -1,5 +1,7 @@
 # Casual skin for the battle HUD and live graphs — Codex brief
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 > Historical implementation brief: this code survey describes published main `a3f96545`. The completed local UI/HUD and validation are owned by [the integration record](Casual_UI_Integration_20261014.en.md) and [the HUD handoff](Casual_Battle_HUD_20261014.en.md). Do not treat the old survey as missing implementation or restart generation.
 
 Date: 2026-10-14 · [한국어](Casual_Battle_HUD_Codex_Prompt_20261014.md)

@@ -1,5 +1,7 @@
 # Casual UI mockup fidelity audit — 2026-10-20
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [한국어](Casual_UI_Fidelity_Audit_20261020.md)
 
 ## Method

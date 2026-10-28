@@ -1,5 +1,7 @@
 # 사냥 칙령 UI 개편 — 튜토리얼 연결 기록 (Phase 4)
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-10-05 · [English](Hunt_Edict_Tutorial_Wiring.en.md) · [네이티브 이식 기록](Hunt_Edict_UI_Overhaul_Native.md) · [설계 문서](../Design/Hunt_Edict_UI_Overhaul.md) · [튜토리얼 UI 입력 문서](../Design/Tutorial_Hunt_Edict_UI_Brief.md)
 
 상태: 설계 문서 10장의 튜토리얼 측 요청 T1~T7을 반영했다. 네이티브 이식(Phase 3)이 마련한 슬롯(안내 캡션·3박자 띠·저장 후 버튼)에 튜토리얼 코드(`GameUI`)를 연결했고, 게이트가 스크롤 밖 컨트롤에 갇히지 않게 했다. 이슈 NPC·장 대본·두루마리 창(장 구성 D~I)은 이 작업이 아니며, 캡션은 시스템 문장이다. 저장 필드·공개 판정·저장 경로·컨트롤 이름은 바꾸지 않았다.

@@ -1,5 +1,7 @@
 # Skill window flow — equipped-skill row, close, old info popup removed (2026-10-24)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 [한국어](Skill_Window_Flow_20261024.md). One record for user-test reports 8, 12, 13 (Part A, main `a045c626`) and item 17 (Part B, the [per-skill hunt edict page contract](Skill_Edict_Pages_Contract_20261024.en.md)). This document holds Part A's decisions, rules and hand-over.
 
 ## Mock-up (approval baseline)

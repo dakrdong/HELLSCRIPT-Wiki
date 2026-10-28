@@ -1,5 +1,7 @@
 # 스킬별 사냥칙령 B1 — 개발 검증 창 (2026-10-24)
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 [English](Skill_Tactics_Window_B1_20261024.en.md). **실제 플레이어 진입은 OFF이며 전투 연동은 구현하지 않았다.** 원문 U-E §9.4/9.5의 B1 UI·기존 B0/B2 저장 연결 범위다. 대표 외 부모 27종·보조 81종 데이터와 직업별 전투 반영은 기존 B3 후속 단위로 남는다.
 
 ## 기준과 진입
@@ -33,7 +35,7 @@
 | A03 맹독 덫 / A03-3 교차 쇠뇌 | 부모 4 / 덫 3행을 쇠뇌 2행으로 교체하여 3 |
 | M04 순간이동 / M04-3 원소 보호막 | 부모 5 / 보조 적용 7 |
 
-화면에 HET 번호나 개발용 상태 선택 메뉴를 넣지 않는다. 보조에서 진입하면 해당 보조 행으로 바로 스크롤하고, 미선택 보조는 실제 적용 중 보조와 구분한다. 전역 이동은 새 편집기를 만들지 않고 기존 `HuntEdictWindow`의 combat 진입으로 연결한다. 기존 기본 세팅·해금 제한은 그 창이 계속 소유한다.
+화면에 HET 번호나 개발용 상태 선택 메뉴를 넣지 않는다. 보조에서 진입하면 해당 보조 행으로 바로 스크롤하고 미선택 보조를 구분한다. 전역 이동은 [SkillTreeD4Window.Tactics](../../Assets/HELLSCRIPT/Runtime/Presentation/SkillTreeD4Window.Tactics.cs)가 스킬 창을 닫고 `GameUI.ShowEdictTab("combat")`으로 전투 시트를 연다. 기본 추천 세팅 잠금은 `SkillTacticsEditSession.RefreshEligibility`와 저장 직전 재검사가 소유한다.
 
 ## 저장·복귀·수명
 

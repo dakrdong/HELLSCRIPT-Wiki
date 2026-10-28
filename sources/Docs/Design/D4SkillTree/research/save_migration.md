@@ -1,5 +1,7 @@
 # D4 skill tree: save, migration and level-cap impact map (read-only)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](../../../Implementation/Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 **Paths.** W = `/Users/t8g-2410-pn-005/Documents/MyProject/HELLSCRIPT/wt-d4-skill-plan` (branch `claude/d4-skill-tree-plan`; runtime code is identical to main a3fe67c5). Aliases:
 - `C` = `W/Assets/HELLSCRIPT/Runtime/Core`
 - `P` = `W/Assets/HELLSCRIPT/Runtime/Presentation`

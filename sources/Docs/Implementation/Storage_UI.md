@@ -1,5 +1,7 @@
 # HELLSCRIPT 창고 UI 구현
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 갱신일: 2026-09-20 · 최초 작성일: 2026-09-16 · [English](Storage_UI.en.md)
 
 현재 화면은 [HTML 기준 창고 UI 적용 기록](Storage_Reference_Parity.md)의 2026-09-20 구현을 따른다. 데이터·이동·구매·프리셋 정책은 유지한다. 아래의 화면 설명·검증 표·캡처는 2026-09-16 당시 기록이며, 최신 외형과 검증 결과는 연결 문서에서 확인한다. 기존 스킨 대신 `StorageSurface`와 `StorageGlyph`를 사용하고, 정렬은 펼침 목록으로 바뀌었다. 보관함 이름 변경과 기록·안내 기능도 추가했다.

@@ -1,5 +1,7 @@
 # HELLSCRIPT Storage UI
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-09-20 · Originally written: 2026-09-16 · [한국어](Storage_UI.md)
 
 The current screen follows the [HTML reference implementation](Storage_Reference_Parity.en.md), dated 2026-09-20. Data, movement, purchase and preset policies remain in effect. Screen descriptions, verification tables and captures below are historical records from 2026-09-16; use the linked document for current visuals and results. `StorageSurface` and `StorageGlyph` replace the earlier skins, sorting uses a dropdown, and tab renaming, history and a guide are now available.

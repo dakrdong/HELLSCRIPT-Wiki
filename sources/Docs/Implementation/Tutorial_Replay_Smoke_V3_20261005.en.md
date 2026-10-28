@@ -1,5 +1,7 @@
 # Tutorial v3 replay smoke repair
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-05 · [한국어](Tutorial_Replay_Smoke_V3_20261005.md)
 
 > Historical record: these results cover the v3 tutorial on 2026-10-05. It was later replaced by the v4 pit trial and the fifteen-level puzzle tutorial. See the [current puzzle tutorial](Puzzle_Tutorial_Final_Acceptance.en.md).
@@ -20,7 +22,7 @@ The existing snapshot compares gold, materials, premium currency, cores, runes, 
 
 ## Remaining application defect and actual smoke interaction
 
-A legacy account's v3 replay survival guidance still points to a missing control. `DrawSelectedGroup` in [HuntEdictWindow.Summary.cs](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.Summary.cs) uses the original `store.Data` legacy state to display a quick picker. [DrawQuickPresetPicker](../../Assets/HELLSCRIPT/Runtime/Presentation/HuntEdictWindow.QuickPresets.cs) returns false until Custom is expanded, preventing numeric option rows from being created. [ProgressiveSurvivalLessonStep](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialComparison.cs) instead uses the isolated v3 executing hero and requests `edict-option-survival.potionHpPercent`.
+In the pre-A2 v3 replay, `DrawSelectedGroup` used the original account's legacy state to display a quick picker, and `DrawQuickPresetPicker` suppressed numeric rows until Custom was expanded. The former `ProgressiveSurvivalLessonStep` requested a numeric button using the isolated executing hero, so its target was absent. Current options belong to the [side-menu sheet](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.EdictCatalog.cs), recipes to the [standalone popup](../../Assets/HELLSCRIPT/Runtime/Presentation/EdictPresetsWindow.cs), and prologue guidance to the [current lesson handling](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.TutorialStaging.cs). The failure captures below document the earlier implementation.
 
 The screen has `edict-quick-picker-global/survival.potion` and lacks the numeric target. The [failure screenshot](TutorialReplaySmokeEvidence20261005/replay-hp-timeout.png), [failure trace](TutorialReplaySmokeEvidence20261005/replay-hp-failure.txt) and [active button dump](TutorialReplaySmokeEvidence20261005/replay-hp-timeout-controls.txt) show the mismatch. Application code is not repaired in this task.
 

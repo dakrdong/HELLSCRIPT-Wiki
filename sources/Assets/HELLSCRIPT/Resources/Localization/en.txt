@@ -226,9 +226,7 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 {0}항상 검사 또는 조건 OR 묶음 1–2개를 선택하세요.	{0}choose always-check, or 1 to 2 OR groups of conditions.
 {0}행동·목표·이동 선택이 유효하지 않습니다.	{0}the action, target or movement choice is not valid.
 • {0}: {1} ×{2}회	• {0}: {1} ×{2}
-• {0}번 칸을 비운 채로 가져옵니다. {1}	• Slot {0} is imported empty. {1}
 … 그 밖에 {0}개	… and {0} more
-… 그 밖에 {0}개가 더 바뀝니다.	… and {0} more change.
 ▲ 영웅   × 보스   ◇ 정예   + 성소\n□ 상자 · 잠금 표시: 봉인 · 빨간 빗금: 저주\n체크 표시는 개봉 완료를 뜻합니다.	▲ hero   × boss   ◇ elite   + shrine\n□ chest · a lock means sealed · red hatching means cursed\nA check mark means it has been opened.
 ▲ 위로	▲ Up
 ▼ 아래로	▼ Down
@@ -267,8 +265,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 가시 돋친	Barbed
 가장자리	Edge
 가장자리 선회	Orbit the edge
-가져오기	Import
-가져오기 취소	Cancel the import
 가죽 외투	Leather Coat
 가죽 장화	Leather Boots
 가중치 추첨 오류	Weighted draw error
@@ -382,7 +378,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 공유 코드가 손상됐습니다. 원본을 다시 복사해 주세요.	The share code is damaged. Copy the original again.
 공유 코드가 손상되었습니다. 원본을 다시 복사하세요.	The share code is damaged. Copy the original again.
 공유 코드가 없거나 너무 깁니다.	The share code is missing or too long.
-공유 코드를 클립보드에 복사했습니다.	The share code was copied to the clipboard.
 공유 코드의 문자가 손상됐습니다.	The characters in the share code are damaged.
 공유 코드의 문자가 손상되었습니다.	The characters in the share code are damaged.
 공유할 설정이 너무 큽니다.	The setup you are sharing is too large.
@@ -420,7 +415,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 군집에 연쇄 번개와 제어를 연결합니다.	Chains lightning and control into a crowd.
 궁수	Ranger
 궁수가 사용 가능	Usable by the ranger
-귀환	Return
 규칙 거리	Rule distance
 규칙 꺼짐	Rule is off
 규칙 대상	Rule target
@@ -507,7 +501,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 길잡이의 성소 제외	Skip the guide shrine
 길잡이의 축복 · 비전투 이동 +15%	Guide's blessing · out of combat movement +15%
 깊은 한기	Deep Chill
-꺼져 있습니다. 기존 자동 행동 설계가 단독으로 행동을 결정합니다.	It is off. The older behavior design decides everything on its own.
 꺼지지 않는 심장	Unquenched Heart
 꺼짐	off
 꾸준히 공격|무리 위주|세트 노출 우선	Attack steadily|Favour packs|Favour set exposure
@@ -538,7 +531,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 낮은 가치의 가방 장비 교체	Replace the cheapest piece in the bag
 내려찍기	Slam
 내려찍기 추가타 준비	Extra slam incoming
-내보내기	Export
 냉기	Cold
 냉기 저항	Cold Resistance
 냉기 피해	Cold Damage
@@ -751,7 +743,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 밀집 연소	Dense Burn
 밀집 중심	Centre of the pack
 밀집 판정 반경	Radius that counts as dense
-바뀌는 값 {0}개	{0} values change
 바람	Wind
 밖	outside
 반경	Radius
@@ -761,7 +752,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 반지	Ring
 받는 치유 효과	Healing Received
 받은	Took
-받은 코드를 복사한 뒤 위 버튼을 누르면 적용 전에 바뀌는 내용을 확인할 수 있습니다.	Copy the code you were given and press the button above to see what would change before anything is applied.
 받은 피해 {0:0} / HP {1:0}	Damage taken {0:0} / HP {1:0}
 발	Feet
 발견물 순서	Order of discoveries
@@ -900,9 +890,14 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 사냥 칙령 v0.2 사용하기	Use hunt edict v0.2
 사냥 칙령 v0.2 자동 판단이 꺼져 있습니다.	Automatic decisions from hunt edict v0.2 are off.
 사냥 칙령 v0.2 편집	Edit hunt edict v0.2
+사냥 칙령 · 바로 적용	Hunt Edict · applies immediately
+전투에 적용되는 사용 조건	Combat use conditions
+전투에 적용되는 세부 설정	Combat details
+기본 공격 세부 설정	Basic attack details
+스킬 미리 보기 · 기본 공격 편집 가능	Skill preview · basic attack settings are editable
+이 값은 위에서 고른 사용 조건을 따릅니다. 기본 사용 조건을 고르면 직접 바꿀 수 있습니다.	This value follows the selected use condition above. Choose the default condition to edit it directly.
 사냥 칙령 공유	Share the hunt edict
 사냥 칙령 공유 · v0.2 사용	Share hunt edict · using v0.2
-사냥 칙령 수정하러 가기	Go edit the hunt edict
 사냥 칙령 원본을 사용할 수 없습니다: {0}	The hunt edict source cannot be used: {0}
 사냥 칙령 원본이 없습니다.	There is no hunt edict source.
 사냥 칙령 조준 판단을 중단했습니다: {0}	Hunt edict aiming decisions stopped: {0}
@@ -910,13 +905,10 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 사냥 칙령 판단을 다시 사용합니다.	Hunt edict decisions are in use again.
 사냥 칙령 판단을 중단했습니다: {0}	Hunt edict decisions stopped: {0}
 사냥 칙령에서 자동 사용을 껐습니다.	Automatic use was turned off in the hunt edict.
-사냥 칙령을 끕니다.	The hunt edict is now off.
-사냥 칙령을 사용합니다.	The hunt edict is now in use.
 사냥 칙령을 저장하지 못했습니다: {0}	The hunt edict could not be saved: {0}
 사냥 칙령을 저장하지 못했습니다: 저장된 원본이 없습니다.	The hunt edict could not be saved: there is no stored source.
 사냥 칙령을 저장하지 못했습니다: 캐릭터를 찾을 수 없습니다.	The hunt edict could not be saved: the character could not be found.
 사냥 칙령을 저장했습니다.	The hunt edict was saved.
-사냥 칙령을 적용했습니다.	The hunt edict was applied.
 사냥 칙령을 편집한 캐릭터를 먼저 선택하세요.	Select the character whose hunt edict you edited first.
 사냥 칙령의 직업	The hunt edict's class
 사냥 칙령이 없습니다.	There is no hunt edict.
@@ -1277,7 +1269,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 이 캐릭터에 저장된 사냥 칙령 원본이 없습니다.	This character has no stored hunt edict source.
 이 캐릭터의 가방에 없는 장비입니다.	That piece is not in this character's bag.
 이 캐릭터의 최근 비교 1개를 지금 결과로 바꿉니다. 저장할까요?	This replaces the one saved comparison on this character with the current result. Save it?
-이 코드로 적용	Apply this code
 이 필터에 맞는 장비가 없습니다. 하단 ‘필터’에서 조건을 바꿀 수 있습니다.	No gear matches this filter. Change the conditions under "Filter" below.
 이 훈련의 표적은 공격하지 않습니다. 피격과 회피를 비교하려면 위험 패턴 훈련을 선택하세요.	The targets in this trial do not attack. Pick the danger pattern trial to compare hits taken and dodging.
 이동	Movement
@@ -1344,7 +1335,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 자동 설치	Automatic placement
 자동 전투 이해	Understand the auto combat
 자동 정리 시점	When to clean up
-자동 판단 사용	Automatic decisions
 자동 행동 설계	Automatic behavior design
 자신 아래	Under yourself
 자신 아래 매복에서는 기존 덫과의 겹침 선택을 적용하지 않습니다.	For an ambush under yourself, the overlap choice for existing traps does not apply.
@@ -1412,7 +1402,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 장판 이동	Zone movement
 장판·사망 효과 생성	Zone or death effect created
 장판을 설치할 수 없는 위치	A position where the zone cannot be placed
-재개	Resume
 재료 {0}개	{0} materials
 재료 회수	Collect materials
 재사용 대기	On cooldown
@@ -1741,6 +1730,7 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 첫 플레이 안내는 성소와 균열 결과의 ‘첫 플레이 안내’에서 다시 열 수 있습니다. 진행 단계와 다음에 할 일을 확인하세요.	The first play guide can be reopened from "First play guide" at the sanctuary and on the rift result. It shows how far you have come and what to do next.
 체력 위기 대응	React to low health
 초	s
+분	min
 초 이상	s or more
 초당 {0:0.#}	{0:0.#}/s
 초당 자원 회복이 20% 증가합니다. 평면 자원 회복 옵션에도 적용됩니다.	Increases resource regeneration per second by 20%, including flat regeneration affixes.
@@ -1800,8 +1790,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 켜진 규칙 없음	No rule enabled
 켜짐	on
 코드 복사	Copy the code
-코드를 만들지 못했습니다: {0}	The code could not be made: {0}
-코드를 사용할 수 없습니다: {0}	The code cannot be used: {0}
 코드에 누락·추가·중복 항목 또는 정규 형식이 아닌 표현이 있습니다.	The code has missing, added or duplicated entries, or an expression that is not canonical.
 코드에 누락·추가·중복 항목 또는 지원하지 않는 표현이 있습니다.	The code has missing, added or duplicated entries, or an expression that is not supported.
 코드의 자료 구조가 손상됐습니다.	The code's data structure is damaged.
@@ -1810,8 +1798,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 코드의 정규 표현을 확인해 주세요.	Check the code's canonical form.
 코드의 중첩이 너무 깊습니다.	The code nests too deeply.
 코어 회수	Collect cores
-클립보드에 코드가 없습니다. 받은 코드를 복사한 뒤 다시 누르세요.	There is no code on the clipboard. Copy the code you were given and press this again.
-클립보드의 코드 확인	Review the code on the clipboard
 타오르는	Blazing
 탈출의 발걸음	Escaping Step
 탈출의 발걸음 · {0:0.00}초\n이동속도 증가 +20%p	Escaping Step · {0:0.00}s\nMovement speed +20%p
@@ -1898,7 +1884,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 함께 사용|도약 방어 종료 후	Use them together|After the leap defense ends
 함성 운영 목적	What the shout is for
 합산 HP 손실 기준	Combined HP loss threshold
-항목 편집	Edit the entries
 항상 검사	Always checked
 항상 검사 또는 OR 묶음 1~2개를 선택하세요.	Choose always-check, or 1 to 2 OR groups.
 항상 사용	Always used
@@ -1914,7 +1899,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 행동 규칙의 거리·반경·기준값을 확인하세요.	Check the distance, radius and threshold on the behavior rules.
 행동 설계	Behavior design
 행동 설정이 없습니다.	There are no behavior settings.
-행동 수정	Edit behavior
 행동 이유 확인	Read why a behavior ran
 행동 잠김	Action locked
 행동 추가	Add a behavior
@@ -1945,9 +1929,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 현재 스킬 카탈로그를 확인하세요.	Check the current skill catalogue.
 현재 스킬 카탈로그와 원본의 콘텐츠 기준이 다릅니다: {0}	The current skill catalogue and the source disagree on the content baseline: {0}
 현재 영웅에게 부착되는 지속 피해의 실행 자료는 아직 없습니다. 바닥 장판을 부착 피해로 대신 계산하지 않습니다.	There is no runtime data yet for damage over time attached to the hero. A ground zone is not counted as attached damage instead.
-현재 원본과 같은 설정입니다. 적용해도 달라지는 값이 없습니다.	These settings match your current source. Applying it would change nothing.
-현재 원본을 코드로 내보내고, 받은 코드를 확인한 뒤 적용합니다	Export your source as a code, and review a code you were given before applying it
-현재 원본의 공유 코드 · {0}자\n{1}	Share code for your current source · {0} characters\n{1}
 현재 위치|예상 적중 위치	Where they stand|Where the hit is predicted
 현재 위치|예상 착탄 위치	Where they stand|Where they are predicted to be
 현재 위치에서만|현재 교전 안에서 접근	Only from where you stand|Move in within the fight
@@ -1973,7 +1954,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 현재 캐릭터와 스킬 정보를 확인해 주세요.	Check the current character and the skill data.
 현재 캐릭터의 가방으로 이동	Move to this character's bag
 현재 필터의 장비 중 {0}개를 처리합니다.\n예상 골드 +{1:N0} · 재료 +{2:N0}\n보호·전설·세트 제외 {3}개	{0} pieces from the current filter will be handled.\nExpected gold +{1:N0} · materials +{2:N0}\n{3} skipped as protected, legendary or set
-현재 행동	Current behavior
 현재 행동\n{0}	Current behavior\n{0}
 현재 행동 구간에서 중단할 수 없습니다.	The current action cannot be interrupted here.
 현재 행동 구간에서는 보행으로 전환할 수 없습니다.	The current action cannot switch to walking here.
@@ -2001,7 +1981,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 화염구 폭발에 적이 3명 이상 포함되면 직접 폭발의 가산 피해 +30%를 적용합니다.	Adds +30% damage to the Fireball blast itself when it catches three or more enemies.
 확인	Confirm
 확인하는 동안 전투 시간이 멈춥니다.	Combat time stops while you read this.
-확인한 코드	Reviewed code
 확인할 버프	Buff to check
 환류의 매듭	Knot of Feedback
 활력	Vigor
@@ -2111,7 +2090,6 @@ SW 4세트와 자동 사용 가능한 도약이 필요합니다. 현재는 연�
 {0} 사냥 칙령	{0} hunt edict
 {0}이 먼저 실행됩니다.	{0} takes priority.
 {0} 사냥 칙령 · {1} ×{2}\n{3:0.0}–{4:0.0}초 / {5}	{0} hunt edict · {1} ×{2}\n{3:0.0}–{4:0.0}s / {5}
-사냥 칙령이 생존 대응, 대상 선택, 공격 순서와 전리품 회수를 결정합니다. 스킬별 설정은 구현된 판단부터 전투에 반영됩니다.	Hunt Edict controls survival, target selection, attack order, and loot collection. Skill options take effect as their combat policies are connected.
 사냥 칙령을 사용하면 화염구의 자동 사용, 사용 방식, 우선 대상과 조준 방식이 전투에 반영됩니다.	When Hunt Edict is enabled, Fireball follows its automatic use, purpose, target priority, and aiming settings.
 사냥 칙령 사용 조건 대기	Waiting for Hunt Edict conditions
 사냥 칙령 자동 사용 꺼짐	Hunt Edict automatic use off
@@ -2530,7 +2508,6 @@ G0 등급의 기본 룬 블록을 판매합니다. 구입한 블록은 룬 보�
 저장 위치 선택	Choose a slot
 저장할 프리셋을 선택하세요	Choose the preset slot to save to
 장착 해제	Unequip
-위에 있는 공격부터 사용을 검토합니다.	Attacks higher in the list are considered first.
 전투	Combat
 생존	Survival
 가방·정리	Bag & Cleanup
@@ -2901,7 +2878,6 @@ DPS 변화	DPS over time
 균열 {0}단계 · 모든 적을 처치할 때까지 · 보상 없음	Rift tier {0} · until every enemy falls · no rewards
 기본 추천 세팅	Recommended defaults
 기본 세팅 적용: {0} → {1}	Use default settings: {0} → {1}
-기본 추천 세팅이 적용 중입니다. 스킬별 칙령을 바꾸려면 사냥 칙령 설정에서 기본 세팅 적용을 끄세요.	The recommended defaults are on. To change a skill's edict, turn off Use default settings in Hunt Edict settings.
 # Training ground: lobby layout, graph marks and skill cards (2026-09-30)
 1마리 고정	Always 1
 이 세팅의 기록	Records for this setup
@@ -3412,47 +3388,9 @@ UID는 문의용 번호입니다. 로그인이나 비밀번호 복구 수단이 
 반짝이는 유혹	The Glittering Temptation
 말 없는 돌판	The Silent Stone
 수상한 거래	A Dubious Deal
-지금의 싸움	How you fight
-배우고 장착	Learn and equip
-위치·대상	Position, target
-물약·후퇴·회피	Potion, retreat
-무엇을 주울까	What to pick up
-가득 차면	When full
-탐색·상자	Explore, chests
-자동 착용	Auto equip
-저장·비교·공유	Save, compare, share
-현재 공개된 설정이 없습니다.	Nothing is open here yet.
-후퇴 HP {0}%	Retreat at {0}% HP
-처음이라면	New players
-어느 성향과도 다릅니다	Matches no style
-다음에 열릴 문장	Next sentence
-첫 일반 균열 종료 후	After the first rift ends
-룬 필수 안내 완료 후	After the rune guide
-균열 {0}단계 클리어 시	At rift {0} clear
-지금 {0}/{1}	Now {0}/{1}
-받은 쪽	pages
 물약 자동 사용과 기본 회피	Auto potion and basic dodging
 직접 설정과 훈련 비교	Custom values and training comparison
 반복 사냥	Auto repeat
-겪은 문제	Problem
-고칠 한 가지	One fix
-달라진 점	What changed
-저장했습니다	Saved
-저장하면 여기에 표시됩니다.	Shown here after you save.
-관찰 완료	Observed
-{0}/10초 관찰	Observed {0}/10 s
-기본 세팅이 켜져 있어 이 설정은 바꿀 수 없습니다. 기본 세팅을 먼저 끄세요.	The default settings are on, so this cannot be changed. Turn the default settings off first.
-바꾼 값을 저장하세요.	Save the value you changed.
-값을 정한 뒤 '적용'을 누르세요.	Set the value, then press 'Apply'.
-새 스킬을 슬롯에 장착하세요.	Equip the new skill in a slot.
-전투 성향 카드 하나를 고르세요.	Pick one combat style card.
-'{0}'을(를) 눌러 값을 바꿔 보세요.	Tap '{0}' to change its value.
-'{0}'의 선택을 눌러 바꿔 보세요.	Tap the choice under '{0}' to change it.
-'{0}' 묶음을 여세요.	Open the '{0}' group.
-'{0}' 탭을 여세요.	Open the '{0}' tab.
-'{0}'에서 한 가지만 바꿉니다	Change just one thing in '{0}'.
-훈련장에서 확인	Check in training
-다음 사냥에서 관찰	Watch the next hunt
 인력 붕괴	Gravity Collapse
 인력술사	Gravity Caster
 끌어당김 안에서는 걸어서 벗어날 수 없습니다.	Walking cannot escape the pull.
@@ -4485,6 +4423,7 @@ HP {0:0}/{1:0} · 자원 {2:0}\n위치 ({3:0.0}, {4:0.0}) · 대상 {5}\n{6} · 
 절전 방치	Idle display
 화면 표시를 줄이며 실제 사냥을 계속합니다.	Keep hunting with reduced screen activity.
 현재 균열 사냥을 계속하며 화면 표시를 줄입니다. 화면을 잠그거나 앱을 나가면 사냥을 보존합니다. 돌아온 뒤 재개를 눌러 계속할 수 있습니다.	The current rift continues while screen activity is reduced. Locking the screen or leaving the app preserves the hunt. Press Resume when you return to continue.
+화면을 누르면 현재 전투를 잠깐 봅니다. 마지막 입력 후 10초가 지나면 다시 어두워집니다. 절전 화면에서 해제 버튼을 길게 누르면 일반 화면을 유지합니다.	Tap the screen for a brief view of combat. It dims again after 10 seconds without input. Hold the unlock button on the power-saving screen to return to normal viewing.
 화면을 누르면 현재 전투를 잠깐 봅니다. 마지막 입력 후 10초가 지나면 다시 어두워집니다. 계속 보기를 누르면 일반 화면을 유지합니다.	Tap the screen to peek at the current battle. It dims again 10 seconds after your last input. Choose Keep watching to stay on the normal screen.
 절전 방치 시작	Start idle display
 현재 전투 잠깐 보기	Peek at current battle
@@ -5681,6 +5620,7 @@ G{0} {1}칸 룬 {2}개 · 종류와 모양은 무작위입니다.	G{0} {1}-cell 
 현재 설정을 유지한 채 모든 세부 옵션을 직접 조정합니다.	Keep the current settings and adjust every option yourself.
 무리 중심 진입	Move into the pack center
 현재 설정	Current Settings
+현재 설정을 유지합니다. 프리셋을 골라 저장하세요.	Current settings are kept. Choose a preset and save to apply it.
 프리셋을 고르거나 직접 설정을 선택해 세부 옵션을 조정하세요.	Choose a preset, or select Custom Settings to adjust detailed options.
 미접속 보급	Offline Supplies
 미접속 보급 · 골드 {0:N0} / 강화석 {1:N0}	Offline Supplies · Gold {0:N0} / Enhancement Stones {1:N0}
@@ -6321,6 +6261,8 @@ HP가 낮은 적 마무리	Finish low-HP enemies
 원소 강화와 연계	Follow up on elemental buffs
 기본 세팅 적용	Use default settings
 기본 추천 세팅이 적용 중입니다. 사용자 설정이 적용되지 않습니다	Recommended defaults are active. Your custom settings are not being used.
+기본 추천 세팅이 적용 중입니다. 프리셋·공유에서 기본 세팅 적용을 끄면 사용자 설정이 적용됩니다.	Recommended defaults are active. Turn off Use default settings in Presets & Share to use your custom settings.
+기본 추천 세팅 적용 중에는 스킬별 칙령을 변경할 수 없습니다. 프리셋·공유에서 기본 세팅 적용을 끄세요.	Skill edicts are read-only while recommended defaults are active. Turn off Use default settings in Presets & Share.
 사용자 설정이 적용되고 있습니다.	Your custom settings are active.
 이름을 누르면 선택합니다. 선택한 이름을 다시 누르면 바꿀 수 있습니다.	Select a name to choose a preset. Select it again to rename it.
 # Blacksmith locked service navigation
@@ -7450,6 +7392,7 @@ Lv.{0} → {1} · HP·MP 모두 회복{2}	Lv.{0} → {1} · HP/MP fully restored
 무조건 피함	Always dodges
 초당 HP 손실 {0}% 초과 시 회피	Dodges when HP loss exceeds {0}% per second
 우선 회피를 적용할 특수 위험 선택	Choose special threats to dodge first
+고른 특수 위험의 예고를 감지하면 회피를 시도합니다.	Attempts to dodge when a warning for a selected special danger is detected.
 고른 특수 위험의 예고를 감지하면 회피를 시도합니다. 회피 수단은 사냥 칙령 창에서 바꿀 수 있습니다.	When a chosen special threat is announced, the hero tries to dodge it. The dodge method can be changed in the Hunt Edict window.
 특수 위험을 고르면 회피 방식이 여기에 표시됩니다.	Pick a special threat to see how you will dodge it.
 {0} → 회피 수단: {1}	{0} → dodge method: {1}

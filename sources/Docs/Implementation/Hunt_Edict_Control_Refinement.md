@@ -1,5 +1,7 @@
 # 사냥 칙령 조작 정비와 균열 장비 추천
 
+> **2026-10-28 A2 정정:** 큰 칙령 창·≡ 메뉴·전용 부품·스모크 설명은 과거 기록이다. [현재 진입 코드](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs)와 [대체 화면·소유 코드](Hunt_Edict_Window_Removal_20261028.md)를 따른다. 이전 캡처와 검사 수치는 당시 구현의 근거다.
+
 2026-10-13 카드 개편의 [검증 기록과 캡처](Rift_Gear_Offer_Cards_Plan_20261013.md#최종-검증): 관련 Edit Mode 185개와 공통 UI·갱신 검사, macOS 다섯 크기 × 두 언어의 화면·조작·저장·마을 왕복·종료 검증을 통과했다. 실패 범위만 재검사했다. 전체 검사·공개 위키는 main 병합 단계이며 실기기·WebGL 결과는 없다.
 
 갱신일: 2026-10-01 · [English](Hunt_Edict_Control_Refinement.en.md)

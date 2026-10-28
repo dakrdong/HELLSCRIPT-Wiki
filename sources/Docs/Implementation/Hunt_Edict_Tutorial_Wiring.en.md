@@ -1,5 +1,7 @@
 # Hunt Edict UI Overhaul — Tutorial Wiring Record (Phase 4)
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-05 · [한국어](Hunt_Edict_Tutorial_Wiring.md) · [Native port record](Hunt_Edict_UI_Overhaul_Native.en.md) · [Design document](../Design/Hunt_Edict_UI_Overhaul.en.md) · [Tutorial UI brief](../Design/Tutorial_Hunt_Edict_UI_Brief.en.md)
 
 Status: the tutorial-side requests T1-T7 of design document chapter 10 are in. The tutorial code (`GameUI`) is connected to the slots the native port (Phase 3) made (guide caption, three-beat strip, after-save button), and the gate can no longer be left covering a control that is scrolled out of reach. The Ish NPC, the chapter scripts and the scroll window (chapters D-I) are not part of this work, so the captions are system sentences. No save field, disclosure rule, save path or control name changed.

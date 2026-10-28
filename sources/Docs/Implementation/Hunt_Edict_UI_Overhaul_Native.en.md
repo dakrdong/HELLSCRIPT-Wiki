@@ -1,5 +1,7 @@
 # Hunt Edict UI Overhaul — Native Port Record
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Updated: 2026-10-05 · [한국어](Hunt_Edict_UI_Overhaul_Native.md) · [Design document](../Design/Hunt_Edict_UI_Overhaul.en.md) · [Mockup README](../../Prototypes/HuntEdict/README.md) · [Native port prompt](../../Prototypes/HuntEdict/NATIVE_PORT_PROMPT.md)
 
 Status: the surface and information design of the approved HTML mockup v2 now lives in the Hunt Edict window (`HuntEdictWindow`), milestones M1-M6. The window provides the places and shapes for the new slots (guide caption, three-beat strip, after-save button), but **the tutorial is not connected to them yet** (design document chapter 10, Phase 4). No save field, domain rule or tutorial code changed.

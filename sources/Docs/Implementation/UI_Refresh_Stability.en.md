@@ -1,5 +1,7 @@
 # HELLSCRIPT UI refresh stability audit
 
+> **2026-10-28 A2 correction:** References to the large edict window, ≡ menu and their dedicated components or smokes are historical. Use the [current entry points](../../Assets/HELLSCRIPT/Runtime/Presentation/GameUI.HuntEdict.cs) and [replacement screens and source owners](Hunt_Edict_Window_Removal_20261028.en.md). Earlier captures and test counts describe the earlier implementation.
+
 Verified: 2026-10-03
 
 ## Findings and evidence level
@@ -47,8 +49,8 @@ Paths below are relative to `Runtime/Presentation/`; a wildcard includes the own
 | Rift result/loot/detail/comparison, repeat settings, retry countdown | `RiftVictoryWindow*`, `GameUI.RiftVictory`, `.Repeat` | Existing save exclusion, actual rewardStatus/repeat change and popup gate; intentional countdown |
 | Training lobby hero/skills/enemies, add-enemy picker, live skill editing | `TrainingGroundWindow*`, `GameUI.TrainingGround` | Existing save exclusion; next-frame redraw for dropdown actions; non-save/nested runtime interaction remains unverified |
 | Training result, previous result/DPS, skill/edict detail | `TrainingGroundResultWindow*` | Existing save exclusion and snapshots; actual non-save repaint runtime unverified |
-| Hunt edict Overview/Skills/Combat/Survival/Loot/Bag/Explore/Repeat/Auto-equip/Presets-share | `HuntEdictWindow*`, `GameUI.HuntEdict` | Owned draft; no unconditional save subscription; size/locale reflow restores input/scroll |
-| Edict numeric/set/order choices, skill actions/policy, preset names/import, save/revert/close confirmation | `.Summary`, `.Skills`, `.Presets`, `GameUI.Presets` | Explicit draft/size changes; intentional preview animation |
+| Hunt Edict side-menu sheets, skill tree, repeat/gear settings and Presets & Share | `GameUI.EdictSheet`, `SkillTreeD4Window`, `RepeatSettingsWindow`, `RiftGearSettingsWindow`, `EdictPresetsWindow` | Each current owner preserves its draft, input and scrolling; explicit edict commits drive refresh |
+| Edict rows, per-skill tactics and preset dialogs | `EdictCasualRows`, `EdictSettingsSection`, `SkillTacticsWindow`, `EdictPresetsWindow.Presets` | Separate save scopes; no old-window preview or parent draft |
 | Rune board weapon/effects/owned filters; information/help/legend/catalog, presets/store, regions/info/lock/slot, practice/close/revert | `RuneBoardWindow*`, `GameUI.RuneBoard` | Existing rune revision and dirty-draft guards; defer drag refresh; intentional camera overlays |
 | Rune master reshape/upgrade, materials/drag, fusion/upgrade reveal | `RuneMasterWindow*`, `GameUI.RuneMaster` | Actual rune revision drives repaint; fusion/reveal animation remains |
 | Combat records/log/DPS contribution graph, defeat analysis, window/tick/rule/archived edict | `CombatRecordsWindow`, `CombatLogWindow`, `RiftCombatGraphWindow`, `GameUI.History`, `.CombatJournal` | Fixed records/snapshots, explicit paging/filtering; no unconditional save repaint |
@@ -92,4 +94,4 @@ Only newly found causes are added to [UI refresh recurrence rules](UI_Refresh_St
 
 ## Hunt Edict progression, 2026-10-04
 
-HuntEdictWindow uses StoreViewBinding with hero, level, disclosed IDs, potion revision, edict/skills/presets and tutorial step keys. Dialogs and order dragging defer refresh; explicit repaint records the new baseline. Draft/focus/scroll follow the existing owners. The optional disclosure card uses StoryDialogueWindow. See [implementation and focused runtime coverage](Hunt_Edict_Progression.en.md). This row covers the changed editor and guidance paths, not all historical UI candidates.
+Current preset and tactics popups attach `StoreViewBinding` to their own visible-state keys and defer repaint during dialogs. Tactics eligibility includes the recommended-defaults flag and is checked again at save. The old unified-window binding is removed. [Current owners and historical-proof boundaries](Hunt_Edict_Window_Removal_20261028.en.md) define this flow; the earlier runtime counts do not validate these replacement screens.
