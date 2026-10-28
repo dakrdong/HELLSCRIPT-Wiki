@@ -16,9 +16,9 @@ namespace Hellscript
         sealed class ClassEffectView{public GameObject go;public int count;public bool placed;}
         readonly Dictionary<string,ClassEffectView> classEffectViews=new Dictionary<string,ClassEffectView>();
         readonly List<string> endedClassEffects=new List<string>();
-        static readonly Color PhysicalTint=new Color(.92f,.82f,.66f,1),FireTint=new Color(1,.52f,.18f,1),ColdTint=new Color(.62f,.86f,1,1),
-            LightningTint=new Color(.66f,.72f,1,1),PoisonTint=new Color(.55f,1,.35f,1),ShadowTint=new Color(.7f,.45f,1,1),BloodTint=new Color(.85f,.14f,.1f,1),
-            SpiritTint=new Color(.6f,.8f,1,1);
+        static readonly Color PhysicalTint=new Color(1,.5f,0,1),FireTint=new Color(1,.22f,0,1),ColdTint=new Color(0,.58f,1,1),
+            LightningTint=new Color(.38f,.3f,1,1),PoisonTint=new Color(.28f,.86f,0,1),ShadowTint=new Color(.55f,.1f,.95f,1),BloodTint=new Color(.92f,.04f,.1f,1),
+            SpiritTint=new Color(0,.72f,.9f,1);
         static Color ElementTint(int element)=>element==1?FireTint:element==2?ColdTint:element==3?LightningTint:element==4?PoisonTint:element==5?ShadowTint:PhysicalTint;
         static float SkillNumber(string id,string key,float fallback){var d=ClassSkills.Find(id);return d!=null?d.Number(key,fallback):fallback;}
         static string ClassEffectKind(ClassSkillEffect effect)=>effect.kind switch
@@ -54,30 +54,29 @@ namespace Hellscript
             {
                 case "W08":
                     var hookAt=hookViews.TryGetValue(c.root,out var hook)?Position(hook.before):A;
-                    if(c.mod==1)fx.Beam(O+up*1.2f,T+up*1.1f,PhysicalTint,.12f,.3f);
-                    fx.Flash(O+up*1.3f,.65f,PhysicalTint);fx.Burst("impact",hookAt+up*1.1f,.9f,PhysicalTint);fx.Burst("sparks",hookAt+up*1.1f,.65f,PhysicalTint);
-                    fx.Burst("star",hookAt+up*1.1f,1.2f,PhysicalTint);fx.Burst("ring",hookAt+up*.1f,1.5f,PhysicalTint);break;
+                    if(c.mod==1)fx.Beam(O+up*1.2f,T+up*1.1f,PhysicalTint,.12f,.3f,true);
+                    fx.Burst("flare",O+up*1.3f,1.3f,PhysicalTint);fx.Burst("impact",hookAt+up*1.1f,1.1f,PhysicalTint);fx.Burst("strike",hookAt+up*1.1f,1.8f,PhysicalTint);break;
                 case "W09":
-                    if(c.mod==2){fx.Slash(O+up*.9f,D,2.4f,40,BloodTint,.28f);fx.Burst("blood",T+up,1.1f);fx.Burst("lines",T+up*1.2f,1.4f,BloodTint);break;}
+                    if(c.mod==2){fx.Slash(O+up*.9f,D,2.4f,40,BloodTint,.28f,true);fx.Burst("blood",T+up,1.1f);fx.Burst("lines",T+up*1.2f,1.4f,BloodTint);break;}
                     var rendArea=Combat.RakingWoundArea(c);
-                    fx.Slash(O+up*.9f,D,rendArea.radius,rendArea.angle,BloodTint,.3f);
+                    fx.Slash(O+up*.9f,D,rendArea.radius,rendArea.angle,BloodTint,.3f,true);
                     // Two follow-up rakes, the same arc turned either way, read as claw marks.
                     var rakeLeft=Quaternion.Euler(0,-14,0)*D;var rakeRight=Quaternion.Euler(0,14,0)*D;
-                    After(.05f,f=>f.Slash(O+up*1f,rakeLeft,rendArea.radius*.95f,rendArea.angle*.9f,WarmWhite,.24f));
-                    After(.1f,f=>f.Slash(O+up*.8f,rakeRight,rendArea.radius*.9f,rendArea.angle*.85f,BloodTint,.22f));
+                    After(.05f,f=>f.Slash(O+up*1f,rakeLeft,rendArea.radius*.95f,rendArea.angle*.9f,new Color(1,.35f,.25f,1),.24f,true));
+                    After(.1f,f=>f.Slash(O+up*.8f,rakeRight,rendArea.radius*.9f,rendArea.angle*.85f,BloodTint,.22f,true));
                     fx.Burst("blood",O+D*Mathf.Min(rendArea.radius,1.8f)+up,1.1f);break;
-                case "W17":fx.Burst("arcane",O+up*1.2f,1.5f,SpiritTint);fx.Burst("holy",O+up*1.2f,1.6f,SpiritTint);fx.Burst("ring",O+up*.1f,3f,SpiritTint);fx.Burst("lines",O+up*1.3f,2.4f,SpiritTint);break;
+                case "W17":fx.Burst("flare",O+up*1.3f,2.6f,SpiritTint);fx.Burst("lines",O+up*1.3f,2.6f,SpiritTint);break;
                 case "W18":
                     // The shake comes from the style table (JuiceRelease); three rings roll out and dust jets up around the rim.
                     float titan=Mathf.Max(3.5f,radius);
-                    fx.Burst("ring",O+up*.1f,titan,GoldTint);After(.12f,f=>f.Burst("ring",O+up*.1f,titan*1.4f,Color.white));After(.26f,f=>f.Burst("ring",O+up*.1f,titan*1.8f,GoldTint));
+                    fx.Burst("ring",O+up*.1f,titan,GoldTint);After(.12f,f=>f.Burst("ring",O+up*.1f,titan*1.4f,WarCryTint));After(.26f,f=>f.Burst("ring",O+up*.1f,titan*1.8f,GoldTint));
                     fx.Burst("explosion",O+up*1.1f,1.5f,new Color(1,.85f,.6f,1));fx.Burst("lines.ground",O+up*.08f,titan*1.2f,GoldTint);fx.Burst("star",O+up*1.4f,2.6f,GoldTint);fx.Flash(O+up*1.5f,5,Color.white);
                     fx.Burst("dust",O,2.2f);fx.Decal("crack",O,titan*.9f);
                     for(int jet=0;jet<8;jet++){float rim=jet*Mathf.PI/4;var at=O+new Vector3(Mathf.Cos(rim),0,Mathf.Sin(rim))*titan*.85f;After(.04f*jet,f=>f.Burst("dust",at,1.8f));}
                     break;
                 case "A18":fx.Burst("shadow",O+up,1.2f);break;
-                case "M07":{float range=run.build.classSkills.version==5&&c.mod==3?12:SkillNumber(c.id,"range",10);var tint=run.build.classSkills.version==5?ElementTint(c.element):FireTint;fx.Beam(O+up*1.3f,O+D*range+up*1.1f,tint,.35f,.3f);fx.Burst(c.element==2?"frost":c.element==3?"lightning":"fire",O+D*range+up,1.1f);
-                    fx.Streak(O+D*1.2f+up*1.2f,O+D*range+up*1.15f,Color.Lerp(tint,Color.white,.55f),.55f,.28f);fx.Burst("star",O+D*range+up,1.4f,tint);
+                case "M07":{float range=run.build.classSkills.version==5&&c.mod==3?12:SkillNumber(c.id,"range",10);var tint=run.build.classSkills.version==5?ElementTint(c.element):FireTint;fx.Beam(O+up*1.3f,O+D*range+up*1.1f,tint,2f,.36f,true);fx.Beam(O+up*1.3f,O+D*range+up*1.1f,Color.white,.6f,.3f);fx.Burst(c.element==2?"frost":c.element==3?"lightning":"fire",O+D*range+up,1.1f);
+                    fx.Streak(O+D*1.2f+up*1.2f,O+D*range+up*1.15f,tint,2.4f,.34f,solid:true);fx.Burst("strike",O+D*range+up,1.9f,tint);
                     for(int mid=1;mid<4;mid++)fx.Burst("pop",O+D*(range*mid/4f)+up*1.2f,.5f,tint);break;}
                 case "M18":fx.Flash(O+up*1.2f,2,new Color(.85f,.75f,1,1));fx.Burst("arcane",O+up*1.2f,1.5f);break;
                 // Projectiles and placed current effects render from their own state.
@@ -121,22 +120,22 @@ namespace Hellscript
             {
                 case "arrow":
                 {
-                    var tint=e.element==4?green:e.element==5?purple:trim;
-                    var arrow=SkillLine("Class arrow",world.transform,new[]{Vector3.back*1.1f,Vector3.zero},tint,.09f);
+                    var tint=e.element==4?green:e.element==5?purple:Mat("Ranger arrow",RangerTint,true);
+                    var arrow=SkillLine("Class arrow",world.transform,new[]{Vector3.back*1.4f,Vector3.zero},tint,.15f);
                     // A glowing head and a trail of light; a split arrow announces itself with a star where it was born.
-                    fx.Aura(arrow.transform,e.element==4?4:e.element==5?5:0,.8f);
-                    if(e.generation>0)fx.Burst("star",at+up*1.25f,.8f,e.element==4?PoisonTint:e.element==5?ShadowTint:WarmWhite);
+                    fx.Aura(arrow.transform,e.element==4?4:e.element==5?5:0,1.3f,e.element==4||e.element==5?default:RangerTint);
+                    if(e.generation>0)fx.Burst("star",at+up*1.25f,.8f,e.element==4?PoisonTint:e.element==5?ShadowTint:RangerTint);
                     return arrow;
                 }
                 case "globe":case "returnGlobe":
                 {
-                    bool fire=e.kind=="d4fireball"||e.kind=="d4split";var globe=Shape(fire?"Fireball":"Frost globe",PrimitiveType.Sphere,world.transform,at+up*1.2f,Vector3.one*(fire?.6f:.55f),fire?ember:blue);
-                    fx.Aura(globe.transform,fire?1:2,fire?1.1f:1.2f);fx.Burst(fire?"fire":"frost",at+up*1.2f,.6f);fx.Burst("star",at+up*1.2f,.9f,fire?FireTint:ColdTint);return globe;
+                    bool fire=e.kind=="d4fireball"||e.kind=="d4split";var globe=Shape(fire?"Fireball":"Frost globe",PrimitiveType.Sphere,world.transform,at+up*1.2f,Vector3.one*(fire?.85f:.8f),fire?ember:blue);
+                    fx.Aura(globe.transform,fire?1:2,fire?1.7f:1.8f);fx.Burst(fire?"fire":"frost",at+up*1.2f,.9f);fx.Burst("flare",at+up*1.2f,1.7f,fire?FireTint:ColdTint);return globe;
                 }
                 case "conduit":
                 {
                     var spear=Shape("Grounding spear",PrimitiveType.Cylinder,world.transform,at+up,new Vector3(.14f,1,.14f),blue);
-                    fx.Aura(spear.transform,3,1.2f);fx.Burst("star",at+up*1.2f,1,LightningTint);
+                    fx.Aura(spear.transform,3,1.7f);fx.Burst("flare",at+up*1.2f,1.7f,LightningTint);
                     fx.Decal("rune",at,1.2f,LightningTint,Mathf.Max(.1f,e.until-Combat.State.time));return spear;
                 }
                 case "afterimage":
@@ -168,8 +167,8 @@ namespace Hellscript
                 }
                 case "orb":
                 {
-                    var orb=Shape("Capacitor orb",PrimitiveType.Sphere,world.transform,at+up*1.4f,Vector3.one*.5f,blue);
-                    fx.Aura(orb.transform,3,1.25f);fx.Burst("lightning",at+up*1.4f,.7f);fx.Burst("star",at+up*1.4f,1,LightningTint);return orb;
+                    var orb=Shape("Capacitor orb",PrimitiveType.Sphere,world.transform,at+up*1.4f,Vector3.one*.7f,blue);
+                    fx.Aura(orb.transform,3,1.8f);fx.Burst("lightning",at+up*1.4f,1.1f);fx.Burst("flare",at+up*1.4f,1.8f,LightningTint);return orb;
                 }
                 case "vortex":
                 {
@@ -184,7 +183,7 @@ namespace Hellscript
                 case "rain":case "collapse":
                 {
                     bool rainfall=ClassEffectKind(e)=="rain";float area=Mathf.Max(e.kind.StartsWith("d4",System.StringComparison.Ordinal)?0:3,radius);
-                    var ring=Ring(world.transform,at+up*.05f,area,rainfall?trim:ember,.07f);ring.name=rainfall?"Killing rain":"Triune collapse";
+                    var ring=Ring(world.transform,at+up*.05f,area,rainfall?Mat("Volley ring",RangerTint,true):ember,.07f);ring.name=rainfall?"Killing rain":"Triune collapse";
                     if(rainfall)fx.Zone(ring.transform,"rain",area);else fx.Decal("rune",at,Mathf.Max(3,area),ArcaneTint,Mathf.Max(.5f,e.until-Combat.State.time));
                     return ring;
                 }
@@ -207,7 +206,7 @@ namespace Hellscript
                     var rock=Shape("Meteor",PrimitiveType.Sphere,world.transform,at+new Vector3(-5,18,-4),Vector3.one*1.3f,ember);fx.Fire(rock.transform,2.2f,FireTint);return rock;
                 }
                 case "nova":case "burst":return null;
-                case "trail":fx.Beam(Position(e.origin)+up*.08f,at+up*.08f,FireTint,.45f,Mathf.Max(.1f,e.until-Combat.State.time));return null;
+                case "trail":fx.Beam(Position(e.origin)+up*.08f,at+up*.08f,FireTint,.45f,Mathf.Max(.1f,e.until-Combat.State.time),true);return null;
             }
             return null;
         }
@@ -241,18 +240,18 @@ namespace Hellscript
                     fx.Burst("ring",at+up*.1f,stage,tint);fx.Burst("lines.ground",at+up*.08f,stage*.9f,tint);lighting.Shake(.4f,.3f);
                     if(element==1){fx.Burst("explosion",at+up*1.1f,1.5f,tint);fx.Decal("scorch",at,stage*.8f);}
                     else if(element==2){fx.Burst("frost",at+up,1.8f);fx.Decal("ice",at,stage*.8f);for(int spike=0;spike<8;spike++){float rim=spike*Mathf.PI/4;var tip=at+new Vector3(Mathf.Cos(rim),0,Mathf.Sin(rim))*stage*.8f;After(.025f*spike,f=>f.Burst("frost",tip+up*.3f,.7f));}}
-                    else{fx.Beam(at+up*15+Vector3.right*1.5f,at+up*.2f,tint,.5f,.28f);fx.Flash(at+up*1.2f,4,Color.white);fx.Burst("lightning",at+up,1.8f);}
+                    else{fx.Beam(at+up*15+Vector3.right*1.5f,at+up*.2f,tint,.5f,.28f,true);fx.Flash(at+up*1.2f,4,Color.white);fx.Burst("lightning",at+up,1.8f);}
                     fx.Burst("star",at+up*1.3f,1.7f,tint);break;
                 }
                 case "orb":case "vortex":
                 {
                     EnemyState near=null;float best=float.MaxValue;
                     foreach(var enemy in run.enemies){if(enemy.dead)continue;float d=Vector2.Distance(enemy.position,e.position);if(d<=Mathf.Max(3,radius)&&d<best){best=d;near=enemy;}}
-                    if(near!=null){fx.Beam(at+up*(ClassEffectKind(e)=="orb"?1.4f:.6f),Position(near.position)+up*1.1f,LightningTint,.12f,.16f);fx.Burst("star",Position(near.position)+up*1.2f,.8f,LightningTint);}
+                    if(near!=null){fx.Beam(at+up*(ClassEffectKind(e)=="orb"?1.4f:.6f),Position(near.position)+up*1.1f,LightningTint,.12f,.16f,true);fx.Burst("star",Position(near.position)+up*1.2f,.8f,LightningTint);}
                     else if(e.kind=="vortex")fx.Burst("lightning",at+up*.6f,.8f);
                     break;
                 }
-                case "ancestor":fx.Slash(at+up*1.1f,Vector3.forward,1.8f,140,SpiritTint,.22f);fx.Burst("star",at+Vector3.forward*1.2f+up*1.1f,.9f,SpiritTint);break;
+                case "ancestor":fx.Slash(at+up*1.1f,Vector3.forward,1.8f,140,SpiritTint,.22f,true);fx.Burst("star",at+Vector3.forward*1.2f+up*1.1f,.9f,SpiritTint);break;
             }
         }
     }

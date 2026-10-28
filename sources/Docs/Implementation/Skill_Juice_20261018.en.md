@@ -32,14 +32,14 @@ The combat presentation of all 30 active skills of the D4 skill tree is heavier 
 | ID | skill | presentation |
 |---|---|---|
 | `W09` | Raking Wound | Three rakes (two delayed), a red star and blood when the bleed lands, blood and a heal sparkle when it is reclaimed. |
-| `W08` | Impaling Hook | A star, ring and speed lines at the hook; another star and dust when the target is pulled in. |
+| `W08` | Impaling Hook | A `flare` and `strike` at the hook (no ground ring); another star and dust when the target is pulled in. |
 | `W01` | Whirlwind | Two opposed crescents plus a reach ring and dust on every spin tick. |
 | `W03` | Crushing Blow | A gold and a white crescent, a crack, ring and dust where it lands, charge-up motes. |
 | `W05` | Iron Wall | A gold ring, star and sparks and a hero flash; a star pops whenever the shield takes a hit. |
 | `W06` | Battle Shout | Two rings from orange to white, speed lines, embers, a hero flash and a shake. |
 | `W02` | Leap Slam | A streak along the leap, two landing rings, ground speed lines, rubble, a crack and a camera shake. |
 | `W04` | Ground Slam | Two rings and ground speed lines, six rim chunks thrown in turn, a cracked floor; a ground rune shows the charge. |
-| `W17` | War of the Ancestors | A spirit-light ring and speed lines; each ancestor gets a spirit aura, a summoning rune and a star, and a star on every swing. |
+| `W17` | War of the Ancestors | A `flare` and speed lines on the hero (no ground ring or rune); each ancestor gets a spirit aura, a summoning rune and a star, and a star on every swing. |
 | `W18` | Titan's Judgment | A ground rune shows the charge, then three big rings, eight rim dust jets, a star, a white flash and a crack; shake 1.0; Giant Form (W18-2) grows the hero. |
 
 ### Ranger
@@ -53,9 +53,9 @@ The combat presentation of all 30 active skills of the D4 skill tree is heavier 
 | `A04` | Retreat Leap | A streak, dust and rings between take-off and landing; smoke for Smoke Cover, violet afterimages for Shadow Step. |
 | `A03` | Venom Trap | A set-down ring with poison mist (snow for Frost Snare); a poison burst, star and small shake when it springs. |
 | `A06` | Elemental Imbuement | A hero flash, ring and star; an aura in the element of the loaded arrows stays on the bow. |
-| `A05` | Hunter's Mark | A star over the head and a ground ring when the mark lands; the mark then pulses. |
+| `A05` | Hunter's Mark | A `flare` and a small star over the head when the mark lands (no ground ring); the mark then pulses. |
 | `A17` | Killing Rain | A ground rune shows the charge, a ring and speed lines, streaking arrows falling over the area, dust and a star at each impact. |
-| `A18` | Afterimage March | A ring, speed lines and a hero flash; a shadow aura and a summon star on each afterimage. |
+| `A18` | Afterimage March | Speed lines, a `flare` and a hero flash (no ground ring); a shadow aura and a summon star on each afterimage. |
 
 ### Mage
 
@@ -77,6 +77,17 @@ The combat presentation of all 30 active skills of the D4 skill tree is heavier 
 - The developer-only `-hellscriptSkillShowcaseSmoke` records the 30 skills (all 84 modifiers with `-hellscriptShowcaseModifiers`) frame by frame in the skill window's example fights. Before and after were compared on the same scenes; 113 of 114 recordings exist (`W06-2` does not cast in its example fight). The recordings are not committed.
 - Unity Edit Mode: `SkillJuiceTests` (all 30 styles, presets and textures, auras and zones dying with their anchor, ribbon pooling, the shove, timed follow-ups), `WorldFxTests`, `HookPresentationTests` and `RakingWoundPresentationTests`. The full Edit Mode suite and the smoke bundle were not run.
 - `generate_fx_textures.py --check` passes for all 36 textures.
+
+## 2026-10-28 follow-up: bigger and clearer in a restrained League-of-Legends style, no floor marks for single-target skills
+
+User report: in battle the skill effects are hard to see and feel weak, and single-target attacks that have no area still show a ground range mark, which is confusing. Then a request for the League of Legends look: cool and flashy, but restrained.
+
+- **Cause confirmed**: the real battle camera frames 10-12 m vertically while the recordings above were a 5 m close-up. The same effect is half as large in play, and additive white on a pale floor has little contrast. The dev recording now takes `-hellscriptShowcaseHalfHeight 10.5` to check at the real distance.
+- **Visual language**: a small bright core, a thin ring and fine sparks. Big soft flash blobs wash out on a pale floor, so they are not used. The new presets `ripple` (a thin camera-facing ring), `strike` (a hit: hot core, ring, 10 fine sparks) and `flare` (a cast flash: core, ring, 8 sparks) are white based and painted per skill or element.
+- **Deep, vivid colour (League style)**: on a pale floor light added with additive blending washes out to white. Each preset (`ring`, `ripple`, `strike`, `flare`, `star`, `lines`, `pop` and the rune decal) now has a normal-blended colour layer underneath (`WorldFx.Solid`), and beams, slashes and ribbons take a `solid` option (a coloured band with a white additive core). One colour per class or element: warrior crimson and orange, ranger rose pink, mage violet, the shield cobalt, spirits cyan; fire red-orange, cold azure, lightning indigo, poison lime, shadow violet, physical orange. The gold and white wording in the tables above is superseded by this palette.
+- **Hierarchy**: an ordinary hit is one `strike`. The comic star is kept for crits and boss hits and the long speed lines for ultimates and big buffs. The struck enemy glows in the skill's colour for 0.16 s (0.11 s for a plain hit) and a crit adds a small camera shake. Each cast gets a small `flare`, release shake x1.15. Charge motes x1.5; the bodies and auras of arrows, globes, lightning and the capacitor orb and the lance/chain-lightning beams are larger (a beam is a coloured band with a white core). The `star` preset has a dark pad behind it so it reads on a pale floor.
+- **Single target**: `WorldView.SingleTarget` (Impaling Hook W08, War of the Ancestors W17, Piercing Shot A01, Hunter's Mark A05, Rapid Shots A07, Afterimage March A18, Chain Lightning M03, Elemental Lance M07) draws no charge ground rune, ground ring or ground speed lines. Their weight goes into a `flare` and `strike` over the target. Area skills keep their thin ground ring.
+- **Checks**: two more `SkillJuiceTests` (only area skills may wind up with a ground rune; casting a single-target skill leaves no ground preset in the pool, with the area skill W18 as the positive control) and the new presets in the preset test. No physical-device or performance measurement.
 
 ## Not done
 

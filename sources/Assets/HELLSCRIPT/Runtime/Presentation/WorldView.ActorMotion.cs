@@ -161,7 +161,7 @@ namespace Hellscript
                     var f=FigureOf(hero);f.flash=f.flashTotal=HeroFlashTime;f.flashColor=new Color(1,.28f,.2f);FlinchRig(hero,false);
                     strongest=Mathf.Max(strongest,Mathf.Max(d.hpLoss,d.absorbed*.5f)/maxHealth);
                     // A shield that takes the blow flares in the hero's colour.
-                    if(d.absorbed>0&&library!=null)library.Burst("star",hero.transform.position+Vector3.up*1.2f,.9f,Combat.Hero.heroClass==HeroClass.Warrior?GoldTint:ColdTint);
+                    if(d.absorbed>0&&library!=null)library.Burst("star",hero.transform.position+Vector3.up*1.2f,.9f,ColdTint);
                     if(library!=null)library.Burst(d.element>0&&d.element<6?ElementBurst[d.element]:"blood",hero.transform.position+Vector3.up*1.3f,.8f);
                     return;
                 }
