@@ -43,16 +43,7 @@ namespace Hellscript
                 default:return entering?"자, 마법 쇼를 시작해 볼까?":"반짝반짝, 마법 시작이야!";
             }
         }
-        public static int LockedHero(AccountSave account)
-        {
-            if(account?.suspendedRun==null)return -1;
-            int owner=account.heroes.FindIndex(h=>h.id==account.suspendedRun.heroId);
-            return owner<0?-2:owner;
-        }
         public static bool CanChoose(AccountSave account,int index)
-        {
-            if(account==null||index<0||index>=account.heroes.Count)return false;
-            int locked=LockedHero(account);return locked==-1||locked==index;
-        }
+            =>account!=null&&index>=0&&index<account.heroes.Count;
     }
 }

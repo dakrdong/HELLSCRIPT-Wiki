@@ -175,7 +175,7 @@ export function createHandler({fetcher,now=Date.now,authenticate:overrideIdentit
         return reply({error:error instanceof Rejected?error.code:'storage_unavailable',...(error instanceof Rejected&&error.details?{details:error.details}:{})},error instanceof Rejected?error.status:503);
       }
       })();
-      if(cors)for(const [key,value] of Object.entries(cors))response.headers.set(key,value);
+      if(cors){for(const [key,value] of Object.entries(cors))response.headers.set(key,value);response.headers.set('Access-Control-Expose-Headers','X-Hellscript-Utc');}
       return response;
     }
   };

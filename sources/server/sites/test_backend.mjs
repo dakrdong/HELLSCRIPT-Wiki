@@ -57,6 +57,7 @@ test('existing Google account ID survives OAuth, cookie/PKCE proofs, replay and 
   assert.equal((await send('/v1/auth/google/exchange','POST',{code,verifier:randomToken(),state})).status,401);
   const exchanges=await Promise.all([send('/v1/auth/google/exchange','POST',{code,verifier,state}),send('/v1/auth/google/exchange','POST',{code,verifier,state})]);
   assert.deepEqual(exchanges.map(r=>r.status).sort(),[200,401]);const session=await exchanges.find(r=>r.status===200).json();assert.equal(session.accountId,id);
+  assert.equal(Number(exchanges.find(r=>r.status===200).headers.get('X-Hellscript-Utc')),AT/1000);
   assert.equal((await send('/v1/telemetry/session','GET',undefined,{Authorization:'Bearer '+session.accessToken})).status,200);
   assert.equal((await send('/v1/auth/session','DELETE',undefined,{Authorization:'Bearer '+session.accessToken})).status,200);
   assert.equal((await send('/v1/telemetry/session','GET',undefined,{Authorization:'Bearer '+session.accessToken})).status,401);

@@ -10,7 +10,7 @@ namespace Hellscript
     {
         GameController game;TitleSession session;CharacterSelectionState state;CharacterPlazaSlots provider;CharacterPlazaSlot[] slots;
         RectTransform root,design,worldArea,badge,nameplate,crestRail;Text title,hint,heroName,level,levelLabel,bubble;RectTransform levelPill;CharacterPlazaPlay playIcon;Button back,start,create,gear;
-        Button[] crests;Text[] locks;StorageSurface topFog,topCap,bottomFog;Image entryFade;Canvas parentCanvas;
+        Button[] crests;StorageSurface topFog,topCap,bottomFog;Image entryFade;Canvas parentCanvas;
         Rect lastArea;Vector2 lastSize,logical,lastDisplay;float units,minimumHit,lastPixels;bool portrait,compact,entered,tutorialArrival;int revision=-1;ContentWindowView gearWindow;
         int anchorRevision=-1;bool anchorsDirty=true;StorageSurface[] crestDiscs;
         static readonly int[] KeyboardOrder={0,3,1,4,2,5};
@@ -46,7 +46,6 @@ namespace Hellscript
             create=Button(badge,"character-create","+",Create,26,true);((UiButton)create).SetCasualAppearance(null,3,3,skin.Navy);((UiButton)create).Face.SetRound(true);gear=Button(badge,"character-equipment","",OpenEquipment,16);((UiButton)gear).SetCasualAppearance(null,2.5f,2,skin.Navy);((UiButton)gear).Face.SetRound(true);
             var person=UiLayout.Rect("Equipment person glyph",gear.transform).gameObject.AddComponent<CharacterPlazaPerson>();person.raycastTarget=false;person.color=skin.Navy;UiLayout.Stretch(person.rectTransform);person.rectTransform.offsetMin=new Vector2(12,10);person.rectTransform.offsetMax=new Vector2(-12,-10);
             bubble=Caption(Panel(badge,"Hero speech",16,2.5f,3,skin.White),"hero-speech","",15,skin.Navy,true);
-            locks=new Text[slots.Length];for(int i=0;i<locks.Length;i++){var panel=Panel(design,"Locked hero "+i,12);locks[i]=Caption(panel,"Rift lock","",12,skin.Muted);EquipmentSlotView.Glyph(panel,"Rift lock symbol","lock",5,4,14,skin.Muted);}
             entryFade=UiLayout.Rect("Entry cream fade",design).gameObject.AddComponent<Image>();entryFade.color=Color.clear;entryFade.raycastTarget=false;
             Reflow();Refresh();
         }
@@ -82,10 +81,8 @@ namespace Hellscript
                 heroName.text=Loc.T(game.catalog.classNames[(int)slot.Class])+" "+(slot.Gender==HeroGender.Female?"♀":"♂");heroName.font=skin.LabelFont(heroName.text);heroName.color=skin.OnLight(ClassColor(slot.Class));
                 level.text=slot.Level.ToString();levelLabel.color=skin.OnLight(ClassColor(slot.Class));bubble.text=Loc.T(CharacterSelectionState.Line(slot.Class,slot.Gender,state.Phase==CharacterPlazaPhase.Entering));bubble.color=skin.OnLight(ClassColor(slot.Class));
             }
-            bool locked=Array.Exists(slots,s=>s.Locked);
-            hint.color=locked||state.Phase==CharacterPlazaPhase.Entering?StorageSurface.Hex("1f7fd1"):skin.Muted;hint.text=Loc.T(state.Phase==CharacterPlazaPhase.Entering?"성소로 향하는 중…":locked?"진행 중인 균열의 캐릭터로 이어갑니다.":!selected?"캐릭터를 눌러 선택하세요":!slot.Created?"+를 눌러 새 모험가를 만들어요":"선택한 캐릭터로 성소에 입장합니다.");
+            hint.color=state.Phase==CharacterPlazaPhase.Entering?StorageSurface.Hex("1f7fd1"):skin.Muted;hint.text=Loc.T(state.Phase==CharacterPlazaPhase.Entering?"성소로 향하는 중…":!selected?"캐릭터를 눌러 선택하세요":!slot.Created?"+를 눌러 새 모험가를 만들어요":"선택한 캐릭터로 성소에 입장합니다.");
             hint.transform.parent.gameObject.SetActive(!equipment&&state.Phase!=CharacterPlazaPhase.Creating&&(!start.gameObject.activeSelf||!portrait&&!compact));
-            for(int i=0;i<locks.Length;i++)locks[i].transform.parent.gameObject.SetActive(slots[i].Locked);
             LayoutCrests();
             LayoutAnchors();
         }
@@ -100,7 +97,7 @@ namespace Hellscript
             if(state.Phase==CharacterPlazaPhase.Entering)
             {
                 var tint=skin.Cream;tint.a=.32f+.68f*Mathf.Clamp01((state.Age-1.8f)/.65f);entryFade.color=tint;
-                if(!entered&&state.Age>=2.45f){entered=true;game.EnterPlaza(true);if(tutorialArrival)game.UI.ShowGuideTownArrival();}return;
+                if(!entered&&state.Age>=2.45f){entered=true;game.EnterSelectedCharacter();if(tutorialArrival)game.UI.ShowGuideTownArrival();}return;
             }
             if(state.Busy||game.UI.CommonPanelOpen)return;
             var keyboard=Keyboard.current;if(keyboard==null)return;
@@ -149,7 +146,6 @@ namespace Hellscript
             anchorsDirty=false;anchorRevision=Stage.LayoutRevision;
             float fog=Stage.TopFog;topCap.gameObject.SetActive(portrait);
             if(portrait){UiLayout.Place(topCap.rectTransform,0,0,logical.x,fog*.4f);UiLayout.Place(topFog.rectTransform,0,fog*.4f,logical.x,fog*.6f);}else UiLayout.Place(topFog.rectTransform,0,0,logical.x,fog*.8f);
-            for(int i=0;i<locks.Length;i++){var p=Stage.Head(i);UiLayout.Place((RectTransform)locks[i].transform.parent,p.x-12,p.y-30,24,24);}
             if(state.Selected<0)return;
             var head=Stage.Head(state.Selected);var feet=Stage.Feet(state.Selected);
             // Mockup badge: a 260 wide row of bottom-aligned pieces centred on the head, badgeH 36/30 (bubbleH 60/52 while a line is spoken), 8 above the head.

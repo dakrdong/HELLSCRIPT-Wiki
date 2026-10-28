@@ -124,6 +124,7 @@ namespace Hellscript
     {
         public RiftEntryProgress riftProgress=new RiftEntryProgress();
         public RepeatSettings repeatSettings;
+        public RepeatHuntSession interruptedRiftResult;
         public SlotProgress slotProgress=new SlotProgress();
         public bool classSkillValidation;
         public D4SkillRefundNotice d4SkillRefund;
@@ -199,6 +200,9 @@ namespace Hellscript
         public List<RunRecord> records=new List<RunRecord>();
         public List<string> receipts=new List<string>();
         public List<EconomyReceipt> transactions=new List<EconomyReceipt>();
+        // Recovery belongs to the account session, never the deterministic combat state.
+        public string riftResumeRunId;
+        public long riftResumeUntilUtc;
         public RunState suspendedRun;
         public RepeatHuntSession repeatHunt;
         public HeroSave Hero => heroes[Mathf.Clamp(selectedHero,0,heroes.Count-1)];

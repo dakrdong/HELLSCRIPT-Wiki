@@ -60,7 +60,7 @@ namespace Hellscript
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
                 fixtureClock=RuntimePresentationProfile.PrepareFixture(activeProfileDirectory,catalog,args);
 #endif
-                Store=new GameStore(activeProfileDirectory,catalog,offlineClock:fixtureClock);
+                Store=new GameStore(activeProfileDirectory,catalog,offlineClock:fixtureClock??(()=>OfflineUtcNow()));
                 if(fixtureClock!=null)Store.AttendanceClock=()=>fixtureClock()*1000;
                 if(!Store.StartNewHeroesWithoutSkills()||!Store.ActivateSkillTrees(catalog))throw new InvalidOperationException(Store.Error);
             }
@@ -84,7 +84,9 @@ namespace Hellscript
         }
         public void SelectHero(int index)
         {
-            if(Running||!HeroSlots.IsCreated(Store.Data,index))return;CancelRiftEntry();CancelPotionDeparture();Tutorials.Switch(Store.Data,Store.Data.selectedHero,index);SelectedStage=Store.Data.Hero.highestClear+1;Save();if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
+            if(Running||!HeroSlots.IsCreated(Store.Data,index))return;
+            if(!Store.EnterCharacter(index,catalog)){Notify(Store.Error);return;}
+            CancelRiftEntry();CancelPotionDeparture();SelectedStage=Store.Data.Hero.highestClear+1;if(UI.Page=="title")UI.ShowTitle();else UI.ShowTown();
         }
         public bool ChangeCharacterFromSettings(int index)
         {
@@ -113,6 +115,7 @@ namespace Hellscript
         void BeginRun(int training,bool resume,uint? seed,bool fullSkillTraining,bool continueRepeat=false,float riftSpeed=1,bool liveOpsReady=false,TrainingGroundSetup ground=null,string replaceRunId=null)
         {
             if(Active||liveOpsAdmissionPending)return;
+            if(resume&&!RecoverInterruptedRift())return;
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
             if(training<0&&!resume&&TownQuest.RiftLocked(Store.Data.guide)){Notify(Loc.T(TownQuest.LockLine(Store.Data.guide)));return;}
             if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
@@ -189,6 +192,7 @@ namespace Hellscript
         public void RestartRift(string portalId)=>BeginRun(-1,false,null,false,replaceRunId:portalId);
         public void TogglePause()
         {if(!Active)return;
+            if(foregroundResumeRequired&&!RecoverInterruptedRift())return;
             // A tutorial run that is waiting is resumed by its card (which checks the level's skills), not by the pause button.
             if(TutorialActive&&Combat.TutorialWaiting){UI.ShowTutorialPrompt();return;}
             if(foregroundSaveBlocked&&!Store.Save()){Notify(ForegroundPauseReason);return;}if(foregroundResumeRequired){RestoreForegroundClock();Combat.State.paused=false;}else Combat.State.paused=!Combat.State.paused;if(!Combat.State.paused&&!string.IsNullOrEmpty(Combat.Playback?.Error))Combat.Playback?.Invalidate();Combat.Log("PAUSE",Combat.State.paused?"일시정지":"전투 재개");UI.RefreshHud();}
@@ -425,9 +429,11 @@ namespace Hellscript
                 ForegroundPauseReason="미접속 보급을 저장하지 못했습니다. 저장 공간을 확인한 뒤 재개를 눌러 주세요.";
                 if(Active)Combat.State.paused=true;Notify(ForegroundPauseReason);return;
             }
+            // Entry pages keep their preview until the player confirms a hero.
+            if(!paused&&wasPaused&&Store!=null&&UI?.EntryPage==false&&!RecoverInterruptedRift())return;
             if(!paused&&foregroundResumeRequired)Notify(ForegroundPauseReason);
             if(!paused&&wasPaused&&!string.IsNullOrEmpty(Store?.OfflineMessage))Notify(ForegroundPauseReason+"\n"+Store.OfflineMessage);
-            if(Store!=null)Save();
+            if(Store!=null){Save();if(paused)Store.EndRiftSession();}
         }
         // Desktop players can suspend updates on focus loss without a mobile pause callback.
         void OnApplicationFocus(bool focused){if(!focused){Town?.Cancel();UI?.ResetTownInput();}repeatClock=Time.realtimeSinceStartupAsDouble;combatClock.Reset(repeatClock);}

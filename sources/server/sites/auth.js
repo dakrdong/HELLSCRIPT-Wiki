@@ -162,7 +162,7 @@ export function createAuth({fetcher=(url,init)=>globalThis.fetch(url,init),now=D
       if(attempt.status===4) {
         const session=await db.prepare('SELECT expires FROM auth_sessions WHERE token_hash=? AND account_id=? AND expires>?').bind(tokenHash,attempt.account_id,at).first();
         if(!session||!equal(attempt.session_hash,tokenHash))throw new Rejected(401,'exchange_proof');
-        return sessionReply(db,attempt.account_id,token,session.expires);
+        return sessionReply(db,attempt.account_id,token,session.expires,at);
       }
       const expires=at+SESSION_SECONDS,claim=await sha256(randomToken()),statements=[];
       if(attempt.target_account_id) {
@@ -182,7 +182,7 @@ export function createAuth({fetcher=(url,init)=>globalThis.fetch(url,init),now=D
       }
       const session=await db.prepare('SELECT expires FROM auth_sessions WHERE token_hash=? AND account_id=? AND expires>?').bind(tokenHash,attempt.account_id,at).first();
       if(!session)throw new Rejected(409,'google_account_conflict');
-      return sessionReply(db,attempt.account_id,token,session.expires);
+      return sessionReply(db,attempt.account_id,token,session.expires,at);
     }
     if(path==='/v1/auth/google/exchange'&&method==='POST') {
       const v=await jsonBody(request);fields(v,['code','verifier','state']);
@@ -198,7 +198,7 @@ export function createAuth({fetcher=(url,init)=>globalThis.fetch(url,init),now=D
         db.prepare('DELETE FROM auth_attempts WHERE handoff_hash=? AND protocol_version=1 AND status=4').bind(hash)
       ]);
       if(changed(written[0])!==1||changed(written[2])!==1)throw new Rejected(401,'exchange_proof');
-      return reply({accountId:attempt.account_id,displayName:attempt.display_name,accessToken:token,expiresAt:expires});
+      return reply({accountId:attempt.account_id,displayName:attempt.display_name,accessToken:token,expiresAt:expires},200,{'X-Hellscript-Utc':String(at)});
     }
     if(path==='/v1/auth/session'&&['GET','DELETE'].includes(method)) {
       const hash=await sha256(bearer(request));

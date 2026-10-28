@@ -83,6 +83,7 @@ namespace Hellscript
             if(s==null||!Terminal(run)||run.training>=0||s.heroId!=run.heroId||s.runId!=run.id||s.completedRunId==run.id)return false;
             if(RepeatSettings.Configured(policy.settings)&&policy.settings.stopCondition==RepeatStopCondition.Potions&&(hero==null||hero.id!=run.heroId))throw new ArgumentException("Missing repeat potion owner.");
             s.policy=policy;s.pendingResult=run;s.completedRunId=run.id;s.completed++;
+            s.cleanupDone=false;s.cleanup=null;
             s.gold+=Math.Max(0,run.earnedGold);bool won=run.phase==RunPhase.Cleared;
             if(won)s.clears++;
             s.consecutiveFailures=won?0:s.consecutiveFailures+1;
@@ -141,8 +142,17 @@ namespace Hellscript
                 if(RepeatSettings.Configured(hero.repeatSettings))RepeatSettings.Validate(hero.repeatSettings);
                 else hero.repeatSettings=null;
             }
-            var s=account.repeatHunt;
-            if(s==null||string.IsNullOrEmpty(s.id)){account.repeatHunt=null;return;}
+            account.repeatHunt=NormalizeSession(account,account.repeatHunt,true);
+            foreach(var hero in account.heroes)
+            {
+                hero.interruptedRiftResult=NormalizeSession(account,hero.interruptedRiftResult,false);
+                if(hero.interruptedRiftResult is RepeatHuntSession result&&(result.heroId!=hero.id||result.pendingResult==null))
+                    throw new System.IO.InvalidDataException(Loc.T("반복 사냥의 저장 상태가 일치하지 않습니다."));
+            }
+        }
+        static RepeatHuntSession NormalizeSession(AccountSave account,RepeatHuntSession s,bool active)
+        {
+            if(s==null||string.IsNullOrEmpty(s.id))return null;
             if(s.version>2)throw new NotSupportedException("더 새로운 반복 사냥 버전이 필요합니다. 저장 파일은 보존했습니다.");
             if(s.pendingResult!=null&&string.IsNullOrEmpty(s.pendingResult.id))s.pendingResult=null;
             // JsonUtility materializes absent nested classes. Legacy repetition never owns an
@@ -156,11 +166,12 @@ namespace Hellscript
                 float.IsNaN(s.delayElapsed)||float.IsInfinity(s.delayElapsed)||s.delayElapsed<0||s.consecutiveFailures<0||s.cleanupAttempt<0||
                 !Enum.IsDefined(typeof(RepeatStop),s.stop)||!Enum.IsDefined(typeof(RepeatBlock),s.blocked)||
                 s.pendingResult!=null&&(!Terminal(s.pendingResult)||s.pendingResult.training>=0||s.pendingResult.heroId!=s.heroId||s.pendingResult.id!=s.runId)||
-                account.suspendedRun!=null&&(s.pendingResult!=null||account.suspendedRun.id!=s.runId||account.suspendedRun.heroId!=s.heroId))
+                active&&account.suspendedRun!=null&&(s.pendingResult!=null||account.suspendedRun.id!=s.runId||account.suspendedRun.heroId!=s.heroId))
                 throw new System.IO.InvalidDataException("반복 사냥의 저장 상태가 일치하지 않습니다.");
             s.policy.effects??=Array.Empty<string>();s.policy.sets??=Array.Empty<string>();
             if(s.policy.settings!=null)RepeatSettings.Validate(s.policy.settings);
             if(s.pendingResult!=null)GameStore.NormalizeRun(s.pendingResult);
+            return s;
         }
         static bool Valid(RepeatHuntPolicy p)=>p!=null&&p.failures>0&&p.count>=0&&p.count<=10000&&p.minutes>=0&&(RepeatSettings.Configured(p.settings)||p.minutes<=1440)&&p.gold>=0&&p.gold<=100000000&&
             p.stage>=0&&p.stage<=1000&&p.freeSlots>=0&&p.freeSlots<=100&&!float.IsNaN(p.resultSeconds)&&p.resultSeconds>=0&&p.resultSeconds<=30&&

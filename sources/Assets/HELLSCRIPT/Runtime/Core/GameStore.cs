@@ -24,6 +24,7 @@ namespace Hellscript
         public int LocalIdleStonesAwarded {get;private set;}
         readonly Func<long> offlineClock;
         long SeenNow()=>Math.Max(Data.lastSeenUtc,offlineClock());
+        string liveRiftId;
         long? pendingLocalIdleThrough;
         bool settlingLocalIdle;
         readonly string path;
@@ -62,7 +63,7 @@ namespace Hellscript
         {
             try
             {
-                if(!File.Exists(file))return null;var a=JsonUtility.FromJson<AccountSave>(File.ReadAllText(file));
+                if(!File.Exists(file))return null;string json=File.ReadAllText(file);var a=JsonUtility.FromJson<AccountSave>(json);
                 if(a!=null&&a.schema>CurrentSchemaVersion)throw new NotSupportedException("이 저장 파일은 더 새로운 게임 버전이 필요합니다. 원본을 보존하고 불러오기를 중단했습니다.");
                 if(a==null||a.schema<1||a.heroes==null||(a.heroes.Count!=3&&a.heroes.Count!=HeroSlots.Count)||a.cores==null||a.cores.Length!=8)return null;
                 if(a.heroes.Any(h=>h==null||h.build==null||h.inventory==null||h.level<1||h.level>(SkillTreeD4.Enabled?60:40)))return null;
@@ -84,6 +85,7 @@ namespace Hellscript
                 if(a.heroes.Count==3&&a.schema<HeroSlots.SchemaVersion)
                     foreach(var hero in a.heroes){hero.gender=HeroGender.Male;hero.created=true;}
                 HeroSlots.Validate(a,allowLegacy:true);
+                RiftInterruption.MigrateDeadline(a,json);
                 if(SkillTreeD4.Enabled&&SkillTreeD4Migration.Needed(a))
                 {
                     try
@@ -182,6 +184,7 @@ namespace Hellscript
             // JsonUtility materializes a null plain serializable class as an empty object.
             if(a.suspendedRun!=null&&string.IsNullOrEmpty(a.suspendedRun.id))a.suspendedRun=null;
             if(a.suspendedRun!=null)NormalizeRun(a.suspendedRun);
+            RiftInterruption.NormalizeDeadline(a);
             if(a.records!=null)foreach(var record in a.records)
                 {if(record?.review!=null&&record.review.version==0)record.review=null;
                  if(record?.review!=null)record.review.dps=CombatDpsTimeline.Normalize(record.review.dps);
@@ -294,7 +297,7 @@ namespace Hellscript
         static System.Collections.Generic.IEnumerable<Item> PersistedItems(AccountSave a)
         {
             var items=a.heroes.SelectMany(h=>h.inventory).Concat(a.warehouse).Concat(RecordedItems(a));
-            foreach(var run in new[]{a.suspendedRun,a.repeatHunt?.pendingResult})
+            foreach(var run in new[]{a.suspendedRun,a.repeatHunt?.pendingResult}.Concat(a.heroes.Select(h=>h.interruptedRiftResult?.pendingResult)))
                 if(run!=null)items=items.Concat(run.drops.Select(d=>d.item)).Concat(run.layout.chests.Where(c=>c.reward!=null).Select(c=>c.reward));
             return items.Concat(EquipmentShop.PersistedItems(a)).Concat(a.coreCraft.history.Select(r=>r.item));
         }
@@ -312,10 +315,8 @@ namespace Hellscript
             Storage.Validate(a);
             foreach(var i in owned)ItemCatalog.Validate(i);
             foreach(var i in RecordedItems(a))if(i.contentVersion>=ItemQuality.ItemVersion||ItemQuality.HasQuality(i))ItemCatalog.Validate(i);
-            if(a.suspendedRun!=null)foreach(var d in a.suspendedRun.drops)ItemCatalog.Validate(d.item);
-            if(a.suspendedRun?.layout!=null)foreach(var c in a.suspendedRun.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);
-            if(a.repeatHunt?.pendingResult!=null)
-            {foreach(var d in a.repeatHunt.pendingResult.drops)ItemCatalog.Validate(d.item);foreach(var c in a.repeatHunt.pendingResult.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);}
+            foreach(var run in new[]{a.suspendedRun,a.repeatHunt?.pendingResult}.Concat(a.heroes.Select(h=>h.interruptedRiftResult?.pendingResult)))
+                if(run!=null){foreach(var d in run.drops)ItemCatalog.Validate(d.item);foreach(var c in run.layout.chests)if(c.reward!=null)ItemCatalog.Validate(c.reward);}
         }
         public static AccountSave NewAccount(GameCatalog catalog=null,bool onlyWarriorCreated=false)
         {
@@ -405,6 +406,7 @@ namespace Hellscript
                 target.riftProgress=source.riftProgress;target.potions=source.potions;target.guide=source.guide;target.slotProgress=source.slotProgress;
                 target.equipmentShop=source.equipmentShop;target.d4SkillRefund=source.d4SkillRefund;
                 target.riftGearOffer=source.riftGearOffer;
+                target.interruptedRiftResult=source.interruptedRiftResult;
                 target.build=source.build;target.presets=source.presets;target.inventory=source.inventory;target.firstClears=source.firstClears;
             }
             Data.dailyQuests=staged.dailyQuests;
@@ -416,7 +418,8 @@ namespace Hellscript
             Data.sweepDay=staged.sweepDay;Data.sweepCount=staged.sweepCount;Data.receipts=staged.receipts;Data.transactions=staged.transactions;
             RiftResult.SyncDisposals(Data.suspendedRun,staged.suspendedRun);
             RiftGearRecommendations.Sync(Data.suspendedRun,staged.suspendedRun);
-            if(Data.suspendedRun!=null&&Data.suspendedRun.id==staged.suspendedRun?.id)Data.suspendedRun.monsterKillsCommitted=staged.suspendedRun.monsterKillsCommitted;
+            if(Data.suspendedRun!=null&&Data.suspendedRun.id==staged.suspendedRun?.id)
+                Data.suspendedRun.monsterKillsCommitted=staged.suspendedRun.monsterKillsCommitted;
             var liveResult=Data.repeatHunt?.pendingResult;RiftResult.SyncDisposals(liveResult,staged.repeatHunt?.pendingResult);
             if(liveResult!=null&&liveResult.id==staged.repeatHunt?.pendingResult?.id)liveResult.monsterKillsCommitted=staged.repeatHunt.pendingResult.monsterKillsCommitted;
             if(liveResult!=null&&staged.repeatHunt?.pendingResult?.id==liveResult.id)staged.repeatHunt.pendingResult=liveResult;
@@ -457,8 +460,11 @@ namespace Hellscript
             var previousCodex=data.monsterCodex;
             var codexRuns=new[]{data.suspendedRun,data.repeatHunt?.pendingResult,data.guide?.tutorialRun}.Where(r=>MonsterCodex.Eligible(r)&&RepeatHunt.Terminal(r)).Distinct().Select(r=>(run:r,committed:r.monsterKillsCommitted)).ToArray();
             var previousEdictUnlocks=data.guide.edictUnlocks.ToList();
+            var checkpointRun=data.suspendedRun;string previousResumeRun=data.riftResumeRunId;long previousDeadline=data.riftResumeUntilUtc;
             try
             {
+                if(!RiftInterruption.Applies(checkpointRun)||RepeatHunt.Terminal(checkpointRun)||checkpointRun.id==liveRiftId||data.riftResumeRunId!=checkpointRun.id||data.riftResumeUntilUtc==0)
+                    RiftInterruption.Checkpoint(data,SeenNow());
                 edictBoundary.guide=Data.guide;edictBoundary.contentUnlocks=Data.contentUnlocks;edictBoundary.selectedHero=Data.selectedHero;
                 foreach(var h in edictBoundary.heroes){var current=Data.heroes.FirstOrDefault(v=>v.id==h.id)??Data.heroes.FirstOrDefault(v=>v.heroClass==h.heroClass&&v.gender==h.gender);if(current!=null)h.level=current.level;}
                 HuntEdictProgression.ValidateTransaction(edictBoundary,data,edictSession);
@@ -500,10 +506,12 @@ namespace Hellscript
                 }
                 PresentationMetrics.SaveCalls++;PresentationMetrics.SaveBytes+=System.Text.Encoding.UTF8.GetByteCount(saveJson);
                 PresentationMetrics.SaveMilliseconds+=(System.Diagnostics.Stopwatch.GetTimestamp()-saveStarted)*1000d/System.Diagnostics.Stopwatch.Frequency;
-                CaptureEdictBoundary(data);Data.guide=data.guide;Error="";return true;
+                CaptureEdictBoundary(data);Data.guide=data.guide;
+                Data.riftResumeRunId=data.riftResumeRunId;Data.riftResumeUntilUtc=data.riftResumeUntilUtc;Error="";return true;
             }
             catch(Exception e)
             {
+                data.riftResumeRunId=previousResumeRun;data.riftResumeUntilUtc=previousDeadline;
                 data.playerObservations=previousObservations;data.guide.edictUnlocks=previousEdictUnlocks;
                 data.monsterCodex=previousCodex;foreach(var entry in codexRuns)entry.run.monsterKillsCommitted=entry.committed;
                 if(e is ArgumentException||e is NotSupportedException)

@@ -47,12 +47,12 @@ export async function accountSession(request,env,at) {
   if(!row)throw new Rejected(401,'authentication');
   return {...row,tokenHash:hash};
 }
-export async function sessionReply(db,accountId,token,expires) {
+export async function sessionReply(db,accountId,token,expires,at) {
   const row=await db.prepare('SELECT a.identity_hash,c.username_key FROM auth_accounts a LEFT JOIN auth_credentials c ON c.account_id=a.id WHERE a.id=?').bind(accountId).first();
   if(!row)throw new Rejected(401,'authentication');
   const guest=row.identity_hash.startsWith('guest:');
   return reply({accountId,displayName:row.username_key||(guest?'Guest':'Google'),accessToken:token,expiresAt:expires,
-    googleLinked:guest||row.identity_hash.startsWith('local:')?0:1});
+    googleLinked:guest||row.identity_hash.startsWith('local:')?0:1},200,{'X-Hellscript-Utc':String(at)});
 }
 
 // An existing application owns its auth. No recovery by UID, email collection or cloud-save writes.
@@ -64,7 +64,7 @@ export async function localAccountRoute(request,env,at) {
     if(request.method==='DELETE'){
       await db.prepare('DELETE FROM auth_sessions WHERE token_hash=?').bind(session.tokenHash).run();return reply({signedOut:true});
     }
-    return sessionReply(db,session.account_id,request.headers.get('Authorization').slice(7),session.expires);
+    return sessionReply(db,session.account_id,request.headers.get('Authorization').slice(7),session.expires,at);
   }
   if(!['/v1/accounts/register','/v1/accounts/login'].includes(path)||request.method!=='POST')throw new Rejected(404,'route');
   if(path.endsWith('/register')&&env.HELLSCRIPT_LOCAL_ACCOUNTS_ENABLED!=='true')throw new Rejected(503,'local_accounts_disabled');
@@ -81,7 +81,7 @@ export async function localAccountRoute(request,env,at) {
     const row=await db.prepare('SELECT r.*,s.expires AS session_expires FROM auth_local_requests r LEFT JOIN auth_sessions s ON s.token_hash=r.session_hash WHERE r.request_hash=?').bind(requestHash).first();
     if(!row)return null;
     if(!equal(row.payload_hash,payloadHash)||!equal(row.session_hash,tokenHash)||row.expires<=at||!(row.session_expires>at))throw new Rejected(401,'credentials_rejected');
-    return sessionReply(db,row.account_id,token,row.session_expires);
+    return sessionReply(db,row.account_id,token,row.session_expires,at);
   }
   const prior=await replay();if(prior)return prior;
   const existing=await db.prepare('SELECT * FROM auth_credentials WHERE username_key=?').bind(name).first();
@@ -107,5 +107,5 @@ export async function localAccountRoute(request,env,at) {
     if(register&&await db.prepare('SELECT account_id FROM auth_credentials WHERE username_key=?').bind(name).first())throw new Rejected(401,'credentials_rejected');
     throw error;
   }
-  return sessionReply(db,accountId,token,expires);
+  return sessionReply(db,accountId,token,expires,at);
 }
