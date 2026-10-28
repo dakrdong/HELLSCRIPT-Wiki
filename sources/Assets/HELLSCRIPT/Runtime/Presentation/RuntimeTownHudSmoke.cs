@@ -145,6 +145,9 @@ namespace Hellscript
             var args=Environment.GetCommandLineArgs();int save=Array.IndexOf(args,"-hellscriptSavePath"),shots=Array.IndexOf(args,"-hellscriptScreenshots");
             Require(save>=0&&shots>=0,"Use isolated save and evidence directories.");output=args[shots+1];Directory.CreateDirectory(output);
             yield return new WaitForSecondsRealtime(1);game=FindAnyObjectByType<GameController>();Require(game?.Store!=null,"Game failed to initialize.");
+            // Named-service and layout checks use an established account; guide/unlock smokes own first-time progression.
+            var account=game.Store.Data;account.guide.legacyExempt=true;account.guide.hintsHidden=true;account.Hero.highestClear=Math.Max(account.Hero.highestClear,RuneBoardTutorial.Stage);
+            ContentUnlocks.Reconcile(account);account.guide.runeBoard.step=RuneBoardLesson.Complete;ContentUnlocks.MarkIntroduced(account,ContentUnlocks.Rune);Require(game.Store.Save(),game.Store.Error);
             game.EnterPlaza(true);UiSafeArea.AspectRatio=0;game.ApplyLanguage("ko");
             game.UI.RefreshCanvasLayout();yield return VisitNamedNpcs();
             foreach(string language in new[]{"ko","en"})

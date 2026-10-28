@@ -17,7 +17,8 @@ namespace Hellscript
         void ContentButton(string id,string title,Action action,bool accent=false)
         {
             bool open=ContentUnlocks.Has(game.Store.Data,id);
-            BigButton(content,title,()=>{if(RequireContent(id))action();},accent).interactable=open;
+            var button=BigButton(content,title,()=>{if(RequireContent(id))action();},accent);button.interactable=open;
+            if(id==ContentUnlocks.Rune)((UiButton)button).UnavailableClick=()=>RequireContent(id);
             if(!open)Note(content,ContentUnlocks.Condition(id),18,100,muted);
         }
         public void ShowContentUnlocks()

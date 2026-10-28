@@ -22,10 +22,12 @@ namespace Hellscript
             dock.gameObject.AddComponent<GraphicRaycaster>();
             var view=dock.gameObject.AddComponent<ContentDockView>();contentDock=view;
             var items=Rect("Shortcuts",dock);Place(items,0,0,size,0);items.gameObject.AddComponent<RectMask2D>();
+            bool runeOpen=ContentUnlocks.Has(game.Store.Data,ContentUnlocks.Rune);
+            float noteWidth=!game.TutorialActive&&!runeOpen?Mathf.Max(132,size*3):0;
             int count=0;
             Button Add(string name,string sprite,Action action)
             {
-                var b=Button(items,name,action,sprite==null?new Color(.07f,.085f,.1f,.92f):Color.clear);Place((RectTransform)b.transform,0,count++*(size+gap),size,size);
+                var b=Button(items,name,action,sprite==null?new Color(.07f,.085f,.1f,.92f):Color.clear);Place((RectTransform)b.transform,noteWidth,count++*(size+gap),size,size);
                 if(sprite!=null)b.targetGraphic=Emblem(b,sprite);
                 else{var label=b.GetComponentInChildren<Text>();label.fontSize=Mathf.RoundToInt(size*.3f);label.color=gold;}
                 return b;
@@ -41,12 +43,23 @@ namespace Hellscript
             {
                 // The rune slot is always there, so the dock keeps its shape when the board opens: locked art until the introduction lands its emblem.
                 bool rune=RuneBoardTutorial.IconVisible(game.Store.Data);
-                contentDockRune=Add("룬 보드",rune||runeLockBroken?"menu-rune-board":"menu-rune-board-locked",OnRuneShortcut);
-                if(!rune&&runeLockBroken)contentDockRune.gameObject.AddComponent<CanvasGroup>().alpha=0;
+                contentDockRune=Add("룬 보드",rune||runeOpen&&runeLockBroken?"menu-rune-board":"menu-rune-board-locked",OnRuneShortcut);
+                contentDockRune.interactable=runeOpen;((UiButton)contentDockRune).UnavailableClick=OnRuneShortcut;
+                if(!runeOpen)
+                {
+                    var buttonRect=(RectTransform)contentDockRune.transform;
+                    buttonRect.anchoredPosition=new Vector2(0,buttonRect.anchoredPosition.y);buttonRect.sizeDelta=new Vector2(noteWidth+size,size);
+                    contentDockRune.targetGraphic.color=muted;
+                    var icon=contentDockRune.targetGraphic.rectTransform;icon.anchorMin=new Vector2(1,0);icon.anchorMax=Vector2.one;icon.pivot=new Vector2(1,.5f);icon.sizeDelta=new Vector2(size,0);icon.anchoredPosition=Vector2.zero;
+                    var note=Label(contentDockRune.transform,ContentUnlocks.LockedToast(ContentUnlocks.Rune),14,pale,TextAnchor.MiddleRight);
+                    note.name="Rune locked condition";note.raycastTarget=false;
+                    var r=note.rectTransform;r.anchorMin=Vector2.zero;r.anchorMax=Vector2.up;r.pivot=new Vector2(0,.5f);r.sizeDelta=new Vector2(noteWidth-6,0);r.anchoredPosition=Vector2.zero;
+                }
+                if(runeOpen&&!rune&&runeLockBroken)contentDockRune.gameObject.AddComponent<CanvasGroup>().alpha=0;
                 Add("창고","menu-storage",ShowStorage);
             }
             var toggle=Button(dock,"콘텐츠 메뉴",()=>{view.Set(!view.Open);contentDockOpen=view.Open;},Color.clear);toggle.targetGraphic=Emblem(toggle,"menu-toggle");
-            view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap));view.Snap(contentDockOpen||prologue);
+            view.Configure(items,(RectTransform)toggle.transform,size,count*(size+gap),noteWidth);view.Snap(contentDockOpen||prologue);
             // Keep references available for reflow without exposing shortcuts during the tutorial.
             dock.gameObject.SetActive(!prologue);
         }
@@ -90,16 +103,16 @@ namespace Hellscript
     public sealed class ContentDockView:MonoBehaviour
     {
         public const float Seconds=.22f;
-        RectTransform items,toggle;float size,reach,slide,turn;
+        RectTransform items,toggle;float size,reach,slide,turn,noteWidth;
         public bool Open {get;private set;}
         public RectTransform Items=>items;
         public RectTransform Toggle=>toggle;
         public float ButtonSize=>size;
         public float Reach=>reach;
         public bool Settled=>Open?slide>=1&&turn>=1:slide<=0&&turn<=0;
-        public void Configure(RectTransform shortcuts,RectTransform arrow,float buttonSize,float travel)
+        public void Configure(RectTransform shortcuts,RectTransform arrow,float buttonSize,float travel,float conditionWidth=0)
         {
-            items=shortcuts;toggle=arrow;size=buttonSize;reach=travel;
+            items=shortcuts;toggle=arrow;size=buttonSize;reach=travel;noteWidth=conditionWidth;
             toggle.anchorMin=toggle.anchorMax=new Vector2(0,1);toggle.pivot=new Vector2(.5f,.5f);toggle.sizeDelta=new Vector2(size,size);
         }
         public static float Decelerate(float t)=>1-Mathf.Pow(1-t,3);
@@ -108,7 +121,12 @@ namespace Hellscript
         {
             if(Mathf.Approximately(size,buttonSize)&&Mathf.Approximately(reach,items.childCount*(buttonSize+gap)))return;
             size=buttonSize;reach=items.childCount*(size+gap);
-            for(int i=0;i<items.childCount;i++)UiLayout.Place((RectTransform)items.GetChild(i),0,i*(size+gap),size,size);
+            for(int i=0;i<items.childCount;i++)
+            {
+                var item=(RectTransform)items.GetChild(i);bool condition=noteWidth>0&&item.Find("Rune locked condition")!=null;
+                UiLayout.Place(item,condition?0:noteWidth,i*(size+gap),condition?noteWidth+size:size,size);
+                if(condition)item.GetComponent<Button>().targetGraphic.rectTransform.sizeDelta=new Vector2(size,0);
+            }
             toggle.sizeDelta=new Vector2(size,size);Apply();
         }
         public void Snap(bool open){Open=open;slide=turn=open?1:0;Apply();}
@@ -122,8 +140,8 @@ namespace Hellscript
         void Apply()
         {
             // The shortcuts decelerate into place and the arrow settles with a small overshoot; the steps above stay linear.
-            items.sizeDelta=new Vector2(size,Decelerate(slide)*reach);
-            items.anchoredPosition=new Vector2(0,-reach/Mathf.Max(1,items.childCount));
+            items.sizeDelta=new Vector2(size+noteWidth,Decelerate(slide)*reach);
+            items.anchoredPosition=new Vector2(-noteWidth,-reach/Mathf.Max(1,items.childCount));
             toggle.anchoredPosition=new Vector2(size*.5f,-size*.5f);
             toggle.localRotation=Quaternion.Euler(0,0,180*UiPopIn.EaseOutBack(turn));
         }

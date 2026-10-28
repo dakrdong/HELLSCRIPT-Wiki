@@ -19,6 +19,11 @@ namespace Hellscript
         bool SaveEntryCharacter(int index)
         {
             if(!CharacterSelectionState.CanChoose(Store.Data,index)||!HeroSlots.IsCreated(Store.Data,index))return false;
+            if(Store.Data.guide.heroSelectionPending)
+            {
+                if(!Store.CompleteTutorialHeroSelection(index)){UI.ShowToast(Store.Error);return false;}
+                CancelPotionDeparture();SelectedStage=Store.Data.Hero.highestClear+1;return true;
+            }
             // The tutorial is each hero's own: choosing a hero continues their share of it.
             int previous=Store.Data.selectedHero;Tutorials.Switch(Store.Data,previous,index);
             if(!Store.Save()){Tutorials.Switch(Store.Data,index,previous);UI.ShowToast(Store.Error);return false;}

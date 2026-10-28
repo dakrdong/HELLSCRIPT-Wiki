@@ -44,7 +44,7 @@ namespace Hellscript
             var hero=combat?.Hero??game.Store.Data.Hero;var build=run?.build??hero.build;int level=combat?.EffectiveLevel??hero.level;
             if(run==null||run.training<0)game.RecordGuide(()=>FirstPlayGuide.ReadBuild(hero));
             pageRepaint=()=>ShowGrowth();Base("growth","성장과 스킬",Loc.F("{0} Lv.{1} · 현재 장비와 행동을 확인합니다", game.catalog.classNames[(int)hero.heroClass], level));
-            BigButton(content,"룬 성장",()=>{if(run!=null)run.paused=paused;ShowRunes();});
+            ContentButton(ContentUnlocks.Rune,"룬 성장",()=>{if(run!=null)run.paused=paused;ShowRunes();});
             Note(content,run?.training>=0?"훈련 복사본입니다. 실제 XP와 성장에는 반영하지 않습니다.":level>=30?"최대 레벨에 도달했습니다.":Loc.F("다음 레벨까지 XP {0:N0} / {1:N0}", hero.xp, Economy.XpRequired(level)),22,82,gold);
             Note(content,"스킬을 배워도 장착과 꺼 둔 규칙은 자동으로 바뀌지 않습니다. 사용할 설정은 행동 설계에서 직접 확인해 주세요.",20,106,pale);
             for(int n=(int)hero.heroClass*6;n<(int)hero.heroClass*6+6;n++)

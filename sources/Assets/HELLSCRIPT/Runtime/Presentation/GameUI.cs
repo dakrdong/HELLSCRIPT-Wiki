@@ -277,7 +277,7 @@ namespace Hellscript
             BigButton(content,"사냥 칙령 v0.2 편집",ShowEdictEditor);
             if(HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Presets))BigButton(content,HuntEdictProgression.Has(game.Store.Data,HuntEdictProgression.Sharing)?"사냥 칙령 공유 · v0.2 사용":"로컬 프리셋",()=>{ClearEdictShare();ShowEdictShare();});
             BigButton(content,"성장과 스킬",ShowGrowth);
-            BigButton(content,"룬 성장",ShowRunes);
+            ContentButton(ContentUnlocks.Rune,"룬 성장",ShowRunes);
             BigButton(content,"장비 · 대장간 · 창고",()=>ShowBag());
             ContentButton(ContentUnlocks.Train,"훈련장",ShowTraining);
             BigButton(content,"콘텐츠 해금 · 안내",ShowContentUnlocks);

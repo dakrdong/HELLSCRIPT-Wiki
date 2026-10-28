@@ -35,7 +35,7 @@ namespace Hellscript.Tests
         {
             var a=New();a.heroes[1].highestClear=threshold-1;Assert.IsFalse(ContentUnlocks.Has(a,id));
             a.heroes[1].highestClear=threshold;Assert.IsTrue(ContentUnlocks.Has(a,id));
-            a.heroes[1].highestClear=0;Assert.IsTrue(ContentUnlocks.Has(a,id));
+            a.heroes[1].highestClear=0;Assert.AreEqual(id!=ContentUnlocks.Rune,ContentUnlocks.Has(a,id),"Runes require the actual account clear even if an old save granted access.");
             var jump=New();jump.heroes[2].highestClear=1000;Assert.IsTrue(ContentUnlocks.Has(jump,id));
         }
         [Test] public void U06_GemAcquisitionHistorySurvivesReloadAndConsumption()
@@ -43,6 +43,19 @@ namespace Hellscript.Tests
             var a=New();ContentUnlocks.RecordGemAcquisition(a);var copy=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(a));
             ContentUnlocks.Normalize(copy);Assert.IsTrue(copy.contentUnlocks.gemAcquired);Assert.IsFalse(ContentUnlocks.Has(copy,ContentUnlocks.Gem));Assert.AreEqual(0,copy.gold);
             copy.Hero.highestClear=10;Assert.IsTrue(ContentUnlocks.Has(copy,ContentUnlocks.Gem));
+        }
+        [TestCase(0)] [TestCase(9)] public void GraduationAndVerifiedGrantsCannotBypassTheRuneStage(int stage)
+        {
+            var a=New();a.Hero.highestClear=stage;string runes=JsonUtility.ToJson(a.runes);
+            GuideTutorial.OpenEverything(a);
+            Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.Rune));Assert.IsFalse(RuneBoardTutorial.IconVisible(a));
+            Assert.AreEqual(RuneBoardLesson.Waiting,a.guide.runeBoard.step);Assert.IsFalse(ContentUnlocks.IntroPending(a,ContentUnlocks.Rune));
+            Assert.IsTrue(RepeatHunt.SettingsUnlocked(a),"Repeat settings retain their existing graduation shortcut.");
+            Assert.IsTrue(ContentUnlocks.Rules.features.Where(f=>f.id!=ContentUnlocks.Rune).All(f=>ContentUnlocks.Has(a,f.id)));
+            var incoming=new ContentUnlockState{version=ContentUnlocks.Version,introSeeded=true};incoming.unlocked.Add(ContentUnlocks.Rune);incoming.introduced.Add(ContentUnlocks.Rune);
+            ContentUnlocks.MergeVerified(a,incoming);
+            Assert.IsFalse(ContentUnlocks.Has(a,ContentUnlocks.Rune));Assert.AreEqual(runes,JsonUtility.ToJson(a.runes));
+            a.Hero.highestClear=10;Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.Rune));Assert.IsTrue(ContentUnlocks.IntroPending(a,ContentUnlocks.Rune));
         }
         [Test] public void U07_RerollCostsDoNotEscalate()
         {

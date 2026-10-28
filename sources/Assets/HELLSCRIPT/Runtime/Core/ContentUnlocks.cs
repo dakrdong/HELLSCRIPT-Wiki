@@ -80,7 +80,7 @@ namespace Hellscript
             for(int i=0;i<ids.Length;i++)if(best>=stages[i])Grant(s,ids[i]);
             if(s.gemAcquired||(a.gems?.Count??0)>0)Grant(s,Gem);
             if(s.coreReady||a.cores.Any(c=>c>=10))Grant(s,CoreCraft);
-            Grant(s,Rune);Grant(s,Aspect); // Both editors were available from town arrival.
+            Grant(s,Aspect); // The rune board now requires its actual rift stage, including migrated saves.
             if(s.unlocked.Contains(Enhance)){Grant(s,SlotEnhance);Grant(s,Masterwork);}
             if(s.unlocked.Contains(Gem))Grant(s,Elixir);
             if(s.unlocked.Contains(Offline)&&s.offlineActivatedUtc==0)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
@@ -91,22 +91,25 @@ namespace Hellscript
             Reconcile(a);var s=a.contentUnlocks;
             foreach(var f in Rules.features)
             {
+                if(f.id==Rune)continue; // Reconcile alone owns the rune gate and its unlock show.
                 if(s.unlocked.Contains(f.id))continue;
                 Grant(s,f.id);if(f.id==Offline)s.offlineActivatedUtc=DateTimeOffset.UtcNow.ToUnixTimeSeconds();
             }
-            // Opening everything at once is the guide's graduation, which carries no unlock show.
-            foreach(var f in Rules.features)if(!ForgeIntroductions.Feature(f.id)||ForgeAccess(a,f.id))Introduce(s,f.id);
+            // Graduation suppresses the other existing shows; runes retain their own introduction.
+            foreach(var f in Rules.features)if(f.id!=Rune&&(!ForgeIntroductions.Feature(f.id)||ForgeAccess(a,f.id)))Introduce(s,f.id);
         }
         public static void Reconcile(AccountSave a)
         {
             if(a.contentUnlocks?.version!=Version){Normalize(a);return;}
             a.contentUnlocks??=new ContentUnlockState();var s=a.contentUnlocks;
             s.unlocked??=new List<string>();s.guidesCompleted??=new List<string>();s.introduced??=new List<string>();
+            int best=AccountClear(a);
+            if(best<Rules.features.Single(f=>f.id==Rune).stage)
+            {s.unlocked.RemoveAll(id=>id==Rune);s.introduced.RemoveAll(id=>id==Rune);}
             if(!s.introSeeded){foreach(string id in s.unlocked)Introduce(s,id);s.introSeeded=true;}
             ForgeIntroductions.Reconcile(a);
             s.coreReady|=a.cores.Any(c=>c>=Rules.coreCount);
             foreach(var item in HeroSlots.Created(a).SelectMany(h=>h.inventory).Concat(a.warehouse))RecordEquipment(a,item);
-            int best=AccountClear(a);
             s.firstRunEnded|=best>0;
             foreach(var f in Rules.features)
             {
@@ -121,11 +124,12 @@ namespace Hellscript
         public static bool Has(AccountSave a,string id){Reconcile(a);return a.contentUnlocks.unlocked.Contains(id);}
         static void Introduce(ContentUnlockState s,string id){if(!s.introduced.Contains(id))s.introduced.Add(id);}
         // The locked-shortcut toast speaks of "Rift Level" like the player does; the number comes from the unlock data.
-        public static string LockedToast(string id)=>Loc.F("균열 레벨 {0} 달성 시 오픈됩니다",Rules.features.Single(f=>f.id==id).stage);
+        public static string LockedToast(string id)=>Loc.F(id==Rune?"균열 레벨 {0}단계에 열립니다":"균열 레벨 {0} 달성 시 오픈됩니다",Rules.features.Single(f=>f.id==id).stage);
         // The unlock show of a registered feature is pending from the moment Reconcile opens it until MarkIntroduced.
         public static bool IntroPending(AccountSave a,string id){Reconcile(a);return Pending(a,id);}
         static bool Pending(AccountSave a,string id)=>Array.IndexOf(IntroIds,id)>=0&&a.contentUnlocks.unlocked.Contains(id)&&
-            !a.contentUnlocks.introduced.Contains(id)&&(!ForgeIntroductions.Feature(id)||ForgeAccess(a,id));
+            !a.contentUnlocks.introduced.Contains(id)&&(!ForgeIntroductions.Feature(id)||ForgeAccess(a,id))&&
+            (id!=Rune||a.guide?.runeBoard==null||a.guide.runeBoard.step==RuneBoardLesson.Waiting);
         // Pending shows run one at a time in unlock order; null when nothing waits.
         public static string NextIntro(AccountSave a)=>NextIntro(a,null);
         // Town and forge own separate queues, so a forge visit can never block a pending rune introduction.
@@ -145,6 +149,7 @@ namespace Hellscript
         }
         public static string Condition(string id)
         {
+            if(id==Rune)return LockedToast(id);
             var f=Rules.features.Single(x=>x.id==id);
             string text=f.stage>0?Loc.F("계정 내 영웅으로 균열 {0}단계 클리어 시 개방",f.stage):Loc.T("마을 도착부터 언제든 이용 가능");
             return string.IsNullOrEmpty(f.early)?text:text+" · "+Loc.T(f.early);

@@ -11,7 +11,7 @@ namespace Hellscript
         GameController game;TitleSession session;CharacterSelectionState state;CharacterPlazaSlots provider;CharacterPlazaSlot[] slots;
         RectTransform root,design,worldArea,badge,nameplate,crestRail;Text title,hint,heroName,level,levelLabel,bubble;RectTransform levelPill;CharacterPlazaPlay playIcon;Button back,start,create,gear;
         Button[] crests;Text[] locks;StorageSurface topFog,topCap,bottomFog;Image entryFade;Canvas parentCanvas;
-        Rect lastArea;Vector2 lastSize,logical,lastDisplay;float units,minimumHit,lastPixels;bool portrait,compact,entered;int revision=-1;ContentWindowView gearWindow;
+        Rect lastArea;Vector2 lastSize,logical,lastDisplay;float units,minimumHit,lastPixels;bool portrait,compact,entered,tutorialArrival;int revision=-1;ContentWindowView gearWindow;
         int anchorRevision=-1;bool anchorsDirty=true;StorageSurface[] crestDiscs;
         static readonly int[] KeyboardOrder={0,3,1,4,2,5};
         readonly UiSkin skin=UiSkin.Casual.WithEquipmentArt(CasualEquipmentArt.Provider);
@@ -23,6 +23,7 @@ namespace Hellscript
         public void Initialize(GameController owner,CharacterSelectionState selection,TitleSession login)
         {
             game=owner;state=selection;session=login;root=(RectTransform)transform;provider=new CharacterPlazaSlots(game.Store);slots=provider.Read();
+            tutorialArrival=game.Store.Data.guide.heroSelectionPending;
             parentCanvas=root.GetComponentInParent<Canvas>();root.gameObject.AddComponent<RectMask2D>();
             design=UiLayout.Rect("Plaza design units",root);worldArea=UiLayout.Rect("Hero stage",design);
             Stage=worldArea.gameObject.AddComponent<CharacterPlazaStage>();Stage.Initialize(state,slots);Stage.Choose=Choose;
@@ -99,7 +100,7 @@ namespace Hellscript
             if(state.Phase==CharacterPlazaPhase.Entering)
             {
                 var tint=skin.Cream;tint.a=.32f+.68f*Mathf.Clamp01((state.Age-1.8f)/.65f);entryFade.color=tint;
-                if(!entered&&state.Age>=2.45f){entered=true;game.EnterPlaza(true);}return;
+                if(!entered&&state.Age>=2.45f){entered=true;game.EnterPlaza(true);if(tutorialArrival)game.UI.ShowGuideTownArrival();}return;
             }
             if(state.Busy||game.UI.CommonPanelOpen)return;
             var keyboard=Keyboard.current;if(keyboard==null)return;

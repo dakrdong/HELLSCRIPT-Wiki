@@ -237,6 +237,7 @@ namespace Hellscript
         {
             CancelRiftEntry();
             if(Active)return;
+            if(Store.Data.guide.heroSelectionPending){UI.OpenCharacterSelection();return;}
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
             if(!Store.ActivateSkillTrees(catalog)){Notify(Store.Error);return;}
             if(fresh||Town==null)VisitSanctuary(PotionVisit());

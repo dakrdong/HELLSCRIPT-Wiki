@@ -186,10 +186,11 @@ namespace Hellscript.Tests
         {
             A.Hero.highestClear=unlocked?10:9;ContentUnlocks.Reconcile(A);
             if(previousPolicy){A.schema=12;A.Hero.highestClear=0;A.contentUnlocks.version=1;A.contentUnlocks.unlocked.Clear();}
+            bool eligible=unlocked&&!previousPolicy;
             // Read a real older JSON document with the newly added field absent, not a normalized write.
             File.WriteAllText(path,Regex.Replace(Json(A),"\\\"runeBoard\\\":(?:null|\\{[^{}]*\\}),?",""));
-            store=new GameStore(directory,catalog);Assert.AreEqual(unlocked?RuneBoardLesson.Complete:RuneBoardLesson.Waiting,A.guide.runeBoard.step);
-            Assert.AreEqual(unlocked,RuneBoardTutorial.IconVisible(A));Assert.IsFalse(RuneBoardTutorial.Active(A));Assert.IsFalse(ContentUnlocks.IntroPending(A,ContentUnlocks.Rune),"No replay for an account that already had the board");
+            store=new GameStore(directory,catalog);Assert.AreEqual(eligible?RuneBoardLesson.Complete:RuneBoardLesson.Waiting,A.guide.runeBoard.step);
+            Assert.AreEqual(eligible,RuneBoardTutorial.IconVisible(A));Assert.IsFalse(RuneBoardTutorial.Active(A));Assert.IsFalse(ContentUnlocks.IntroPending(A,ContentUnlocks.Rune),"No replay for an eligible account that already had the board");
         }
         [Test] public void AnOldRewardCheckpointKeepsItsStageFifteenPromiseAndPaysNoSecondSet()
         {
