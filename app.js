@@ -22,7 +22,8 @@
     if(!PUBLIC||!object(delivery)||Object.keys(delivery).length!==keys.length||!keys.every(key=>owns(delivery,key))||delivery.schemaVersion!==1||delivery.repository!=='dakrdong/HELLSCRIPT-Wiki'||typeof delivery.commit!=='string'||!/^[0-9a-f]{40}$/.test(delivery.commit)||!object(delivery.externalSources)||!object(delivery.mediaSources))throw new Error('Invalid wiki asset-delivery manifest');
     for(const [path,entry] of Object.entries(delivery.externalSources)){
       sourcePath(path);
-      if(!object(entry)||Object.keys(entry).length!==2||!owns(entry,'sha256')||!owns(entry,'bytes')||typeof entry.sha256!=='string'||!/^[0-9a-f]{64}$/.test(entry.sha256)||entry.sha256!==D.inputManifest[path]||!Number.isSafeInteger(entry.bytes)||entry.bytes<=0)throw new Error('Invalid wiki external source: '+path);
+      if(!object(entry)||Object.keys(entry).length!==(owns(entry,'snapshotPath')?3:2)||!owns(entry,'sha256')||!owns(entry,'bytes')||typeof entry.sha256!=='string'||!/^[0-9a-f]{64}$/.test(entry.sha256)||entry.sha256!==D.inputManifest[path]||!Number.isSafeInteger(entry.bytes)||entry.bytes<=0)throw new Error('Invalid wiki external source: '+path);
+      if(owns(entry,'snapshotPath'))safeAssetPath(entry.snapshotPath);
     }
     for(const [file,path] of Object.entries(delivery.mediaSources)){safeAssetPath(file);sourcePath(path)}
     return delivery;
@@ -31,7 +32,11 @@
   function resolveSourceUrl(path){
     sourcePath(path);
     const relative='sources/'+encodeAssetPath(path);
-    return assetDelivery&&owns(assetDelivery.externalSources,path)?'https://raw.githubusercontent.com/dakrdong/HELLSCRIPT-Wiki/'+assetDelivery.commit+'/'+relative:relative;
+    if(assetDelivery&&owns(assetDelivery.externalSources,path)){
+      const entry=assetDelivery.externalSources[path];
+      return 'https://raw.githubusercontent.com/dakrdong/HELLSCRIPT-Wiki/'+assetDelivery.commit+'/sources/'+encodeAssetPath(entry.snapshotPath??path);
+    }
+    return relative;
   }
   function resolveMediaUrl(file){
     safeAssetPath(file);

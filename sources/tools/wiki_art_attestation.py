@@ -30,7 +30,9 @@ def _index(api):
     result = {}; guids = set()
     for entry in entries:
         path = entry['path']
-        if (not path.startswith('Assets/HELLSCRIPT/Resources/Art/') or not path.endswith('.png')
+        if ((not path.startswith('Assets/HELLSCRIPT/Resources/Art/')
+                and not re.fullmatch(r'Assets/HELLSCRIPT/Art/NpcPortraitMirrors/[a-z0-9-]+-mirror\.png', path))
+                or not path.endswith('.png')
                 or '\\' in path or '..' in path.split('/') or path in result):
             raise ValueError('Invalid or duplicate approved art path: ' + path)
         if (not re.fullmatch('[0-9a-f]{64}', entry.get('sha256', ''))

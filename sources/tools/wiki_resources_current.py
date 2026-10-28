@@ -11,6 +11,7 @@ from pathlib import Path, PurePosixPath
 
 RESOURCES = 'Assets/HELLSCRIPT/Resources/'
 ART = RESOURCES + 'Art/'
+NPC_MIRRORS = 'Assets/HELLSCRIPT/Art/NpcPortraitMirrors/'
 ARCHIVE_MANIFEST = 'tools/wiki_retired_art_sources.json'
 RETIRED = tuple(ART + folder + '/' for folder in (
     'ClassLegendaryIcons', 'ClassSetIcons', 'EquipmentVariants', 'Jeweler/Gems', 'Jeweler/Potions'))
@@ -140,7 +141,8 @@ def image_sources(databases):
                     source = evidence
                 elif source:
                     safe_relative(source)
-                    if not source.startswith(RESOURCES):
+                    if (not source.startswith(RESOURCES)
+                            and not re.fullmatch(re.escape(NPC_MIRRORS) + r'[a-z0-9-]+-mirror\.png', source)):
                         raise ValueError('Preview outside runtime resources: ' + source)
                 if source:
                     if file in paths and paths[file] != source:
@@ -208,6 +210,8 @@ def _image_row(api, path, identifier=None, category=None, source=None, fields=No
                    '상태 해석 / Scope': '등록과 실제 적용·출시 승인을 구분합니다. / Registration is not release approval.'}
     details.update(fields or {})
     media = path.removeprefix(ART) if path.startswith(ART) else '_resources/' + path.removeprefix(RESOURCES)
+    if path.startswith(NPC_MIRRORS):
+        media = 'NpcPortraits/' + path.removeprefix(NPC_MIRRORS)
     ident = identifier or 'asset-current-' + re.sub(r'[^a-zA-Z0-9_-]', '-', media)
     category = category or '현재 이미지 · ' + str(PurePosixPath(media).parent)
     return api.record(ident, Path(path).stem, category,
@@ -354,8 +358,8 @@ def _town_models(api):
 def build(api, databases, existing):
     rows = _equipment(api, databases)
     represented = {r.get('assetPath') for r in existing + rows if r.get('image') or r.get('historicalOnly')}
-    # These are runtime Resources, not original artwork, scratch output or historical archives.
-    roots = [api.ROOT / ART, api.ROOT / (RESOURCES + 'DailyQuestCasual'), api.ROOT / (RESOURCES + 'UI/PotionQuickCasual')]
+    # Registered Resources and preserved NPC mirror fixtures; exclude scratch and historical archives.
+    roots = [api.ROOT / ART, api.ROOT / NPC_MIRRORS, api.ROOT / (RESOURCES + 'DailyQuestCasual'), api.ROOT / (RESOURCES + 'UI/PotionQuickCasual')]
     for root in roots:
         for file in sorted(root.rglob('*.png')):
             path = file.relative_to(api.ROOT).as_posix()

@@ -1,6 +1,6 @@
 # Monster Roster per Field and Hunyuan Model Plan
 
-Updated: 2026-10-20 · [한국어](HELLSCRIPT_Monster_Roster_20261011.md)
+Updated: 2026-10-28 · [한국어](HELLSCRIPT_Monster_Roster_20261011.md)
 
 This plan gives each of the six rift fields at least 20 regular monsters and at least 3 bosses: 120 regular monsters (20 existing + 100 new) and 18 bosses (5 existing + 13 new), 138 in total. Models are made with the Tencent HY 3D (Hunyuan) free allowance of 20 generations per day, 20 per day in the priority order below. Field rules follow [Six Rift Fields](HELLSCRIPT_Rift_Fields.en.md); existing enemy and boss numbers follow the [regular enemy and elite detail](HELLSCRIPT_Enemy_Combat_Detail.md) and the [boss combat detail](HELLSCRIPT_Boss_Combat_Detail.en.md).
 
@@ -17,14 +17,16 @@ This plan gives each of the six rift fields at least 20 regular monsters and at 
 
 | Field | From tier | Families | Existing regular | New regular | Bosses |
 | --- | --- | --- | --- | --- | --- |
-| Forgotten Graveyard | 1 | Risen corpses, skeleton legion, wraiths, grave cult, grave beasts | N01–N06 | N21–N34 (14) | B01 Executioner · B06 Bone Matron · B07 Crypt Lich |
-| Dank Cavern | 1 | Cave ghouls, fungus, spiders, the drowned, rift crystal, cave beasts | N15–N16 | N35–N52 (18) | B03 Devourer · B08 Brood Queen · B09 Drowned Abyss King |
+| Forgotten Graveyard | 1 | Risen corpses, skeleton legion, wraiths, grave cult, grave beasts | N01–N06 | N21–N23 · N25–N26 · N30–N34 (10) | B01 Executioner · B06 Bone Matron · B07 Crypt Lich |
+| Dank Cavern | 1 | Cave ghouls, fungus, spiders, the drowned, rift crystal, cave beasts | N15–N16 | N35–N38 · N40–N48 · N50–N52 (16) | B03 Devourer · B08 Brood Queen · B09 Drowned Abyss King |
 | Dusk Grassland | 1 | Thornhorn beastmen, werewolves and wolves, briar coven, standing stones and spirits | N17–N18 | N53–N70 (18) | B10 Thornhorn Warchief · B11 Dusk Wolf King · B12 Briar Mother |
-| Ruined Fortress | 11 | Penitent order, fanatics, ember cult, cathedral statues, hell minions | N07–N12 | N71–N84 (14) | B02 Chorister · B13 Iron Inquisitor · B14 Forge Lord |
-| Scorched Desert | 11 | Dune raiders, sandworms and beetles, tomb mummies, serpent cult, fire spirits | N13–N14 | N85–N102 (18) | B04 Tyrant · B15 Sand Pharaoh · B16 Sun-Eater Djinn |
-| Snowbound Highland | 11 | Frost revenants, frost cult, snowfield beasts, ice spirits | N19–N20 | N103–N120 (18) | B05 Matriarch · B17 Frost Giant King · B18 Revenant King of the Ice Crown |
+| Ruined Fortress | 11 | Penitent order, fanatics, ember cult, cathedral statues, hell minions, skeleton legion, grave cult | N07–N12 | N24 · N27 · N71–N84 (16) | B02 Chorister · B13 Iron Inquisitor · B14 Forge Lord |
+| Scorched Desert | 11 | Dune raiders, sandworms and beetles, tomb mummies, serpent cult, fire spirits, corpses and wraiths | N13–N14 | N28–N29 · N85–N102 (20) | B04 Tyrant · B15 Sand Pharaoh · B16 Sun-Eater Djinn |
+| Snowbound Highland | 11 | Frost revenants, frost cult, snowfield beasts, ice spirits, cave ghouls, the drowned | N19–N20 | N39 · N49 · N103–N120 (20) | B05 Matriarch · B17 Frost Giant King · B18 Revenant King of the Ice Crown |
 
 B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cathedral choir) and the Devourer to the cavern (rift crystal beast).
+
+2026-10-28: Six trimmed models were restored and moved: N24/N27 from F0 to F1 fortress, N28/N29 from F0 to F2 desert, and N39/N49 from F3 to F5 highland (unlock tier 11, pack slots preserved). This fills F1/F2/F5 to 8 regular rift kinds each at maximum tier; F0 stays at 10, F3 at 12, and F4 at 8. F3's actual pool is its 6 base kinds plus the modelled N35/N40/N42/N43/N45/N50. The field tables and roster JSON below reflect the current homes; the generation schedule preserves the original plan.
 
 ## 3. Forgotten Graveyard (wet flagstones, pale moonlight, teal fog)
 
@@ -39,12 +41,8 @@ B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cath
 | N21 | Grave Maggot Swarm | Beast | Swarm | Packs of 5, HP 0.25, short bites | Clear with one area skill | Area skill by enemy count | D2 |
 | N22 | Skeleton Shieldbearer | Skeleton | Melee (guard) | Takes 60% less direct damage from the front 120°, 1 m shield shove | Circle behind or stun to drop the shield | Circle behind | D2 |
 | N23 | Skeleton Spearman | Skeleton | Melee (reach) | 0.8 s telegraph, 4.5 m × 1 m thrust | Stay beyond the tip or sidestep | Hold melee distance | D2 |
-| N24 | Barrow Knight | Skeleton | Melee (heavy) | 1.4 s telegraph, 2.2 m slam, knocks down for 0.5 s | Step back on the long telegraph | Leave during telegraph | D2 |
 | N25 | Wailing Wraith | Wraith | Ranged (control) | Takes 50% less damage while drifting; materialises, then a 0.9 s scream cone seals skills for 1.2 s | Burst it when it materialises | Skill timing | D2 |
 | N26 | Skeletal Mage | Skeleton | Ranged | 1 s telegraph, 12 m piercing bone spear | Leave the line; allies do not block it | Line dodge | D2 |
-| N27 | Corpse Puppeteer | Cult | Summoner | Every 8 s raises a skeleton from a corpse under 10 s old (max 3) | Kill the puppeteer first, clear corpses | Summoner first | D2 |
-| N28 | Gravedigger | Corpse | Ambush | Hidden in a dirt mound; within 4 m, 1 s telegraph then a 2.5 m shovel burst | Read the mound and go around | Ambush response | D2 |
-| N29 | Chain Specter | Wraith | Control | 1 s telegraph, 10 m chain, pulls 2.5 m on hit | Kill it from outside its line | Keep movement skill | D2 |
 | N30 | Carrion Crow Flock | Beast | Flying charge | Flies over terrain, 0.6 s telegraph, 6 m dive | Low HP, kill quickly with a single skill | Fast enemies first | D2 |
 | N31 | Rotting Brute | Corpse | Melee (heavy) | HP ×2.5, 3 m ring shockwave (1.5 s), 3 maggots on death | Clear the maggots with area damage after the kill | Kill order | D2 |
 | N32 | Shroud Maiden | Wraith | Support | Every 8 s shields one ally for 20% of max HP | Kill her first or burst through the shield | Support first | D2 |
@@ -67,7 +65,6 @@ B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cath
 | N36 | Webweaver | Spider | Ranged (control) | 0.9 s telegraph, 9 m web shot, roots for 1 s | Kill it first, dodge the line | Ranged first | D2 |
 | N37 | Venomfang Lurker | Spider | Ambush | Drops from the ceiling after a 0.8 s circle telegraph; bite adds 3 poison stacks | Leave the drop circle | Leave telegraphed spot | D2 |
 | N38 | Spider Egg Sac | Spider | Stationary spawner | Cannot move; hatches 2 spiderlings every 5 s | Destroy it first | Stationary target first | D3 |
-| N39 | Drowned Thrall | Drowned | Melee | Rises from puddles and grabs (40% slow for 2 s) | Kill before the grab | Clear slows | D3 |
 | N40 | Tidecaller | Drowned | Zone (knockback) | 1.3 s telegraph, 7 m wave, knocks back 3 m | Step out of the wave's path | Dodge near walls | D3 |
 | N41 | Barnacle Brute | Drowned | Melee (guard) | 50% less damage from the front, 30% more from behind, double pincer | Attack from behind | Circle behind | D3 |
 | N42 | Cave Bat Swarm | Cave beast | Swarm (leech) | Erratic flight, bites heal it for 50% of damage | Area skill, manage health | Area skill / heal condition | D3 |
@@ -77,7 +74,6 @@ B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cath
 | N46 | Crystal Shardback | Rift crystal | Melee (retaliation) | Every third hit taken, 0.6 s telegraph, 2 m crystal spikes | Big hits instead of many small ones; leave on the telegraph | Hit-count control | D3 |
 | N47 | Cave Ooze | Fungus | Splitter | Splits into 2 smaller oozes on death (twice) | Finish with area damage | Kill order | D3 |
 | N48 | Blood Leech | Cave beast | Attacher | Latches on and drains 20% of attack every 0.5 s; a movement skill shakes it off | Shake it off with a movement skill | Movement skill condition | D3 |
-| N49 | Ghoul Butcher | Ghoul | Melee (frenzy) | Each nearby ally death gives +30% attack speed for 5 s (stacks 3) | Kill it first, or last with single-target burst | Kill order | D3 |
 | N50 | Drowned Hag | Drowned | Curse | 1.4 s cast (stun interrupts): hero takes 20% more damage for 6 s | Stun or kill during the cast | Interrupt casts | D3 |
 | N51 | Crystal Sentinel | Rift crystal | Stationary zone | Cannot move; a beam sweeps 90° over 2 s (1 s telegraph) | Move against the sweep | Rotating zone dodge | D3 |
 | N52 | Sporebearer Beetle | Fungus | Charge | 1 s telegraph, 8 m charge, leaves a 4 s poison spore trail | Fight off the trail | Leave zones | D3 |
@@ -129,6 +125,8 @@ B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cath
 | N10 | Emberfire Sorcerer | Ember cult | Zone | Existing: predicted fire pool on the hero's path | Change path | Change predicted path | D1 |
 | N11 | Bellringer | Fanatic | Support | Existing: allies within 4 m +20% attack | Kill it first | Remove support | D1 |
 | N12 | Rift Shardling | Hell minion | Death burst | Existing: 3 shards after death | Manage kill position and lines | Kill position | Done |
+| N24 | Barrow Knight | Skeleton | Melee (heavy) | 1.4 s telegraph, 2.2 m slam, knocks down for 0.5 s | Step back on the long telegraph | Leave during telegraph | D2 |
+| N27 | Corpse Puppeteer | Cult | Summoner | Every 8 s raises a skeleton from a corpse under 10 s old (max 3) | Kill the puppeteer first, clear corpses | Summoner first | D2 |
 | N71 | Penitent Flagellant | Fanatic | Melee (support) | 30% of damage it takes heals allies within 4 m | Focus it instead of spreading area damage | Switch to single target | D4 |
 | N72 | Bulwark Halberdier | Penitent order | Melee (guard) | Immune to frontal projectiles, 1 s telegraph, 3.5 m halberd sweep | Close in or flank | Circle behind / close in | D4 |
 | N73 | Ember Imp | Hell minion | Swarm | Packs of 5, short blinks, leaves 1 s embers | Area skill | Area skill by enemy count | D5 |
@@ -156,6 +154,8 @@ B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cath
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | N13 | Dune Marauder | Raider | Melee | Existing: double slash | Gather the pack | Gathering | Done |
 | N14 | Burrowing Sandworm | Sandworm | Charge (burrow) | Existing: tunnels and erupts | Leave the telegraphed spot | Leave telegraphed spot | D2 |
+| N28 | Gravedigger | Corpse | Ambush | Hidden in a dirt mound; within 4 m, 1 s telegraph then a 2.5 m shovel burst | Read the mound and go around | Ambush response | D2 |
+| N29 | Chain Specter | Wraith | Control | 1 s telegraph, 10 m chain, pulls 2.5 m on hit | Kill it from outside its line | Keep movement skill | D2 |
 | N85 | Scarab Swarm | Beetle | Swarm | Packs of 6, burst out of the sand | Area skill | Area skill by enemy count | D5 |
 | N86 | Dune Scorpion | Beetle | Melee | Double pincer plus a 0.8 s telegraphed tail sting (poison stacks) | Sidestep the tail telegraph | Leave during telegraph | D5 |
 | N87 | Tomb Mummy | Mummy | Melee (revive) | Rises with 50% HP 3 s after first falling (hitting it meanwhile destroys it) | Finish fallen mummies | Corpse handling | D5 |
@@ -187,6 +187,8 @@ B02 and B03 had no fixed field. Here the Chorister belongs to the fortress (cath
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | N19 | Frostbitten Revenant | Frost revenant | Melee | Existing: frost slash, slow | Clear the slow | Gathering / clear slows | D1 |
 | N20 | Rime Caller | Frost cult | Zone | Existing: frost ring, slow | Ring centre or outside | Ring dodge | D1 |
+| N39 | Drowned Thrall | Drowned | Melee | Rises from puddles and grabs (40% slow for 2 s) | Kill before the grab | Clear slows | D3 |
+| N49 | Ghoul Butcher | Ghoul | Melee (frenzy) | Each nearby ally death gives +30% attack speed for 5 s (stacks 3) | Kill it first, or last with single-target burst | Kill order | D3 |
 | N103 | Frost Wolf | Snow beast | Melee (stacks) | Packs of 3; each bite adds a chill stack, 3 stacks freeze for 1 s | Kill or leave before 3 stacks | Stack management | D6 |
 | N104 | Yeti | Snow beast | Ranged (lob) | 1.2 s telegraph, big snowball (2 m); slams when close | Leave the circle | Leave telegraphed spot | D6 |
 | N105 | Glacier Golem | Ice spirit | Melee (death effect) | HP ×2, 0.8 s after death fires ice shards in 8 directions | Stand between shards | Kill position | D6 |
@@ -294,10 +296,11 @@ The foundation for adding monsters and bosses as data, without code changes. Whe
 
 ### 11.3 Spawn tables and bosses
 
-- A pack slot's candidates are the slot's original kind plus every shipped monster of the same field and `slot` whose `unlockTier` is at most the current tier (in kind order). The pick is a hash of the layout's `encounterSeed` and the spawn index (`RiftGenerator.SpawnPick`), never a run or encounter stream value. A slot with one candidate spawns exactly as before, and positions, roles, elites and rewards never change. Tiers 1–5 still use slot 0 only.
+- A pack slot's candidates are the slot's original kind plus every shipped monster of the same field and `slot` that has a 3D model and whose `unlockTier` is at most the current tier (in kind order). The pick is a hash of the layout's `encounterSeed` and the spawn index (`RiftGenerator.SpawnPick`), never a run or encounter stream value. A slot with one candidate spawns exactly as before, and positions, roles, elites and rewards never change. Tiers 1–5 still use slot 0 only.
+- A non-empty registry `art` key means the monster has a model. Art-pending entries and entries whose models were trimmed are excluded from the additional rift candidates; they stay in the registry and codex. Their codex cards and details use the shared "Coming soon." message instead of kill counts, and they do not contribute to discovery progress.
 - New regular monsters unlock at tier 6 in the tier-1 fields (graveyard, cavern, grassland) and tier 11 in the tier-11 fields (fortress, desert, highland), so tier 1–5 natural progression and the recorded results (FieldTests goldens, tier-1 fights) stay unchanged.
 - A swarm's placed spawn leads `pack` − 1 followers. Followers count as adds (no reward, kill-gauge meter or corpse), so rift rewards stay as they were.
-- Bosses: follow the "actual selection rule" in section 9. The boss the stage rule picks (unlocks at tiers 1/11/21/31/41, unchanged) is pooled with the shipped data bosses whose home is that field and whose tier is reached, and the layout's hash (`RiftGenerator.FieldBoss`) picks one. Fields and tiers without a data boss keep their boss.
+- Bosses: follow the "actual selection rule" in section 9. The boss the stage rule picks (unlocks at tiers 1/11/21/31/41, unchanged) is pooled with the shipped data bosses that have a 3D model, whose home is that field and whose tier is reached, and the layout's hash (`RiftGenerator.FieldBoss`) picks one. Fields and tiers without additional candidates keep their boss.
 - The training ground picker and the skill preview scenario check accept every registered kind.
 
 ### 11.4 Tool

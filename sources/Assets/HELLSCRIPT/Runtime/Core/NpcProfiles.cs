@@ -45,10 +45,10 @@ namespace Hellscript
         // town placement and reach checks only see residents. The village chief speaks only in dialogue until he is given a place in the town.
         public const string Voice="prologue-voice",Commander="pit-commander",Guide="guide-goddess",Chief="dun-kas";
         static readonly NpcProfile[] Speakers={
-            new NpcProfile{id=Voice,name="하늘의 목소리",role="칙령의 목소리",portrait="Art/NpcPortraits/prologue-divine-voice",portraitFacing="right",portraitMirror="Art/NpcPortraits/prologue-divine-voice-mirror"},
-            new NpcProfile{id=Guide,name="벨리나",role="칙령의 여신",portrait="Art/NpcPortraits/guide-goddess",portraitFacing="right",portraitMirror="Art/NpcPortraits/guide-goddess-mirror"},
-            new NpcProfile{id=Commander,name="사령관",role="최종 시험 감독관",portrait="Art/NpcPortraits/pit-commander",portraitFacing="right",portraitMirror="Art/NpcPortraits/pit-commander-mirror"},
-            new NpcProfile{id=Chief,name="던 카스",role="촌장",portrait="Art/NpcPortraits/dun-kas",portraitFacing="right",portraitMirror="Art/NpcPortraits/dun-kas-mirror"},
+            new NpcProfile{id=Voice,name="하늘의 목소리",role="칙령의 목소리",portrait="Art/NpcPortraits/prologue-divine-voice",portraitFacing="right",portraitMirror="Assets/HELLSCRIPT/Art/NpcPortraitMirrors/prologue-divine-voice-mirror.png"},
+            new NpcProfile{id=Guide,name="벨리나",role="칙령의 여신",portrait="Art/NpcPortraits/guide-goddess",portraitFacing="right",portraitMirror="Assets/HELLSCRIPT/Art/NpcPortraitMirrors/guide-goddess-mirror.png"},
+            new NpcProfile{id=Commander,name="사령관",role="최종 시험 감독관",portrait="Art/NpcPortraits/pit-commander",portraitFacing="right",portraitMirror="Assets/HELLSCRIPT/Art/NpcPortraitMirrors/pit-commander-mirror.png"},
+            new NpcProfile{id=Chief,name="던 카스",role="촌장",portrait="Art/NpcPortraits/dun-kas",portraitFacing="right",portraitMirror="Assets/HELLSCRIPT/Art/NpcPortraitMirrors/dun-kas-mirror.png"},
             new NpcProfile{id="hero-warrior",name="전사",role="수습전사",portrait="Art/NpcPortraits/hero-warrior",portraitFacing="left"},
             new NpcProfile{id="hero-ranger",name="궁수",role="수습전사",portrait="Art/NpcPortraits/hero-ranger",portraitFacing="left"},
             new NpcProfile{id="hero-mage",name="마법사",role="수습전사",portrait="Art/NpcPortraits/hero-mage",portraitFacing="left"}};

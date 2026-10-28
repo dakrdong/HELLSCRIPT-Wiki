@@ -1191,12 +1191,14 @@ def public_delivery(dataset):
     for path, entry in external.items():
         wiki_resources_current.safe_relative(path)
         original = SITE / 'sources' / path
-        if (not isinstance(entry, dict) or set(entry) != {'sha256', 'bytes'}
+        if (not isinstance(entry, dict) or set(entry) not in ({'sha256', 'bytes'}, {'sha256', 'bytes', 'snapshotPath'})
                 or entry.get('sha256') != dataset['inputManifest'][path]
                 or not re.fullmatch(r'[0-9a-f]{64}', str(entry.get('sha256', '')))
                 or type(entry.get('bytes')) is not int or entry['bytes'] < 1
                 or not original.is_file() or original.stat().st_size != entry['bytes']):
             raise ValueError('Changed public original: ' + path)
+        if 'snapshotPath' in entry:
+            wiki_resources_current.safe_relative(entry['snapshotPath'])
     media = wiki_resources_current.image_sources(dataset['databases'])
     for file, path in media.items():
         wiki_resources_current.safe_relative(file)

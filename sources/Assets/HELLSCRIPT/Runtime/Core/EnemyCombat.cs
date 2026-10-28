@@ -126,11 +126,11 @@ namespace Hellscript
         // The first field whose roster holds the kind; kinds shared by several fields name the earliest.
         public static int FieldOf(int kind)=>kind>=Roles.Length&&MonsterRegistry.ForKind(kind) is MonsterDefinition d?d.field:Array.FindIndex(Rosters,r=>Array.IndexOf(r,kind)>=0);
         // The kinds that can fill a field's pack slot at a tier: the slot's original kind, then every registered data monster
-        // native to the field in that slot whose unlock tier is reached, in kind order.
+        // with a model, native to the field in that slot whose unlock tier is reached, in kind order.
         public static int[] SlotKinds(int field,int slot,int stage)
         {
             int baseKind=Rosters[field][slot];var list=new List<int>{baseKind};
-            foreach(var d in MonsterRegistry.All)if(!d.boss&&d.Data&&d.field==field&&d.slot==slot&&d.unlockTier<=stage&&d.kind!=baseKind)list.Add(d.kind);
+            foreach(var d in MonsterRegistry.All)if(!d.boss&&d.Data&&!string.IsNullOrEmpty(d.art)&&d.field==field&&d.slot==slot&&d.unlockTier<=stage&&d.kind!=baseKind)list.Add(d.kind);
             if(list.Count>2)list.Sort(1,list.Count-1,null);
             return list.ToArray();
         }

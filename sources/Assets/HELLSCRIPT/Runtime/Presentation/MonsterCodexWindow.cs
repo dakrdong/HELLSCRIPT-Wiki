@@ -47,7 +47,7 @@ namespace Hellscript
         {
             view=v;var frame=v.Frame;W=frame.rect.width;H=frame.rect.height;
             board=H>W?UiBoard.Portrait:UiMock.Of(UiSafeArea.Current);kit=new MockKit(frame,skin,reading);
-            if(selected!=null&&(Definition==null||MonsterCodex.Count(Account.monsterCodex,selected)<=0))selected=null;
+            if(selected!=null&&(Definition==null||!MonsterCodexPreview.ComingSoon(Definition)&&MonsterCodex.Count(Account.monsterCodex,selected)<=0))selected=null;
             tier=Mathf.Clamp(tier,1,MonsterCodex.MaximumTier(Account));damageRows.Clear();listScroll=skillsScroll=tabScroll=detailScroll=null;slider=null;syncFill=null;
             var backdrop=v.transform.Find("Backdrop");if(backdrop!=null)backdrop.GetComponent<Image>().color=UiTheme.MockSkyMid;
             DrawSky(v);
@@ -62,7 +62,7 @@ namespace Hellscript
         }
         void OpenDetail(string id)
         {
-            if(MonsterCodex.Count(Account.monsterCodex,id)<=0||MonsterRegistry.ById(id)==null)return;
+            var d=MonsterRegistry.ById(id);if(d==null||!MonsterCodexPreview.ComingSoon(d)&&MonsterCodex.Count(Account.monsterCodex,id)<=0)return;
             selected=id;elite=false;skillOffset=0;detailOffset=0;Repaint();
         }
         LiveOpsRiftSettings Tuning()
