@@ -264,7 +264,7 @@ namespace Hellscript
             else go=Ring(world.transform,Position(kind==0||kind==4||kind==16||kind==20?origin:target)+Vector3.up*.15f,kind==24?2:Mathf.Clamp(amount,.8f,4),mat,kind==0?.16f:.09f);
             float life=kind==24?amount:kind==0?.22f:.45f;effects.Add(new VisualFx{go=go,life=life,total=life,scale=go.transform.localScale});
         }
-        void LateUpdate(){TickEdictTargetPreview();if(Isolated)return;zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
+        void LateUpdate(){TickEdictTargetPreview();if(Isolated)return;zoomNow=Mathf.Lerp(zoomNow,stagedZoom,1-Mathf.Exp(-Time.unscaledDeltaTime*2.2f));ApplyBattleViewport();townLife?.Tick(Time.deltaTime,presentationSuspended);if(hero!=null&&!presentationSuspended)lighting.Tick(hero.transform.position,Time.deltaTime);}
         void ApplyBattleViewport()
         {
             if(viewCamera==null||presentationSuspended)return;

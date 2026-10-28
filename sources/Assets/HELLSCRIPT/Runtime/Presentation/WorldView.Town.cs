@@ -19,6 +19,7 @@ namespace Hellscript
         public void BuildTown(TownWalk walk)
         {
             ResumeCamera();ClearDungeon();world=new GameObject("Ashwood Settlement");lighting.ApplyTown();
+            townLife=new TownLife(world.transform,viewCamera,WorldLighting.MobileQuality);
             var layout=new GameObject("Village ground").transform;layout.SetParent(world.transform,false);layout.rotation=TownRotation;
             BuildForestGround(layout);
             BuildTownEnvironment(layout);
@@ -29,6 +30,7 @@ namespace Hellscript
                 if(s.id==TownStation.Training)BuildTrainingYard(layout,s);
                 if(s.id==TownStation.RiftKeeper)BuildTownPortal(layout,s.position);
                 var attendant=CreateTownAttendant(s);attendant.transform.SetParent(world.transform,false);attendant.transform.position=TownPoint(s.NpcPosition);attendant.transform.rotation=TownRotation;
+                townLife.AddNpc(attendant.transform);
                 // The rune master works beside an altar on the workshop forecourt, at the attendant's left.
                 if(s.id==TownStation.RuneMaster)SpawnTownModel(TownArt+"Prop_RuneAltar",layout,new Vector3(s.position.x-3.5f,0,s.position.y-.2f));
             }
@@ -39,6 +41,7 @@ namespace Hellscript
                 var cloth=i==0?TownMat("Resident blue",.2f,.29f,.4f):i==1?TownMat("Resident burgundy",.4f,.19f,.23f):TownMat("Resident green",.24f,.36f,.29f);
                 var figure=CreateTownModelFigure("Resident "+resident.id,NpcProfiles.ForResident(resident.id))??CreateTownFigure("Resident "+resident.id,cloth);
                 figure.transform.SetParent(world.transform,false);figure.transform.position=TownPoint(resident.position);figure.transform.rotation=TownRotation*Quaternion.Euler(0,i==0?-25:i==1?20:-15,0);
+                townLife.AddNpc(figure.transform);
             }
             foreach(var s in TownLayout.Stations)
             {
@@ -46,11 +49,13 @@ namespace Hellscript
             }
             hero=CreateBody("Hero",(int)game.Store.Data.Hero.heroClass,false,false,HeroBodyArt((int)game.Store.Data.Hero.heroClass));hero.transform.position=TownPoint(walk.Position);
             hero.transform.rotation=Quaternion.LookRotation(TownPoint(walk.Facing));
+            BuildTownLife();
             BuildTownGuide();
             viewCamera.transform.position=CameraPosition(TownLayout.ToWorld(walk.Position));
         }
         void ClearTownPresentation()
         {
+            townLife=null;
             foreach(var b in townBuildings)b.Dispose();townBuildings.Clear();stationMarks.Clear();ClearTownGuide();portalSparks.Clear();townPortalRunes.Clear();townReturnPortal=null;ClearRigs();
             foreach(var m in townMeshes)if(m!=null)Destroy(m);townMeshes.Clear();
         }
@@ -97,7 +102,7 @@ namespace Hellscript
         public Vector3 TownStationScreen(TownStation station)=>station==TownStation.AspectStone?viewCamera.WorldToScreenPoint(TownPoint(TownLayout.Station(station).building.center,AspectStoneHeight+.4f)):TownNpcScreen(TownLayout.Station(station).NpcPosition);
         public void PresentTown(TownWalk walk,float dt)
         {
-            if(world==null||hero==null)return;elapsed+=dt;hero.transform.position=TownPoint(walk.Position);
+            if(presentationSuspended||world==null||hero==null)return;elapsed+=dt;hero.transform.position=TownPoint(walk.Position);
             Vector3 facing=TownPoint(walk.Facing);if(facing.sqrMagnitude>.01f)hero.transform.rotation=Quaternion.Slerp(hero.transform.rotation,Quaternion.LookRotation(facing),dt*14);
             // The primitive figure bobs as it walks; a model body walks with its rig.
             if(rigs.TryGetValue(hero,out var rig)&&rig!=null)rig.Tick(dt,new ActorPose{time=elapsed,speed=walk.Walking?3.2f:0,action=ActorAction.Idle,aimLocal=Vector3.forward});
@@ -167,6 +172,7 @@ namespace Hellscript
             {
                 var combines=group.Select(f=>new CombineInstance{mesh=f.sharedMesh,transform=parent.worldToLocalMatrix*f.transform.localToWorldMatrix}).ToArray();
                 var mesh=new Mesh{name="Village batch",indexFormat=IndexFormat.UInt32};mesh.CombineMeshes(combines);townMeshes.Add(mesh);
+                if(group.Key.HasProperty("_TownWind")&&group.Key.GetVector("_TownWind").x>0){var bounds=mesh.bounds;bounds.Expand(.5f);mesh.bounds=bounds;}
                 MeshPart(parent,"Static "+group.Key.name,mesh,Vector3.zero,group.Key);
             }
             foreach(var f in filters){f.gameObject.SetActive(false);Destroy(f.gameObject);}
@@ -209,7 +215,7 @@ namespace Hellscript
             {
                 // The model brings its own doorway, forge, crates and awning, shown at the layout's scale; the street lanterns light it.
                 model.transform.localScale=Vector3.one*s.scale;
-                townBuildings.Add(new TownBuildingFade(house.GetComponentsInChildren<Renderer>(),Resources.Load<Shader>("TownFade")));
+                townBuildings.Add(new TownBuildingFade(house.GetComponentsInChildren<Renderer>(),Resources.Load<Shader>("TownFade"),townLife.AddWindMaterial));
                 return;
             }
             float w=s.building.width,d=s.building.height;var timber=TownMat("Timber",.23f,.16f,.1f);var plaster=TownMat("Old plaster",.43f,.4f,.31f);
@@ -252,7 +258,7 @@ namespace Hellscript
             TownLantern(house,new Vector3(w/2-1,0,-d/2-1.2f));
             BuildServiceProps(house,s,w,d);
             BatchTownGeometry(house);
-            townBuildings.Add(new TownBuildingFade(house.GetComponentsInChildren<Renderer>(),Resources.Load<Shader>("TownFade")));
+            townBuildings.Add(new TownBuildingFade(house.GetComponentsInChildren<Renderer>(),Resources.Load<Shader>("TownFade"),townLife.AddWindMaterial));
         }
         void BuildServiceProps(Transform p,TownStationDefinition s,float w,float d)
         {
@@ -279,6 +285,8 @@ namespace Hellscript
             {
                 Material cloth=s.id==TownStation.Merchant?TownMat("Merchant canvas",.42f,.23f,.15f):s.id==TownStation.Gambler?TownMat("Gambler canvas",.27f,.14f,.32f):s.id==TownStation.GemMerchant?TownMat("Jewel canvas",.2f,.35f,.33f):TownMat("Rune canvas",.3f,.23f,.4f);
                 var canopy=Block(p,"Shop awning",new Vector3(-w*.23f,3.5f,z-.5f),new Vector3(w*.43f,.13f,2.5f),cloth);canopy.transform.localRotation=Quaternion.Euler(-9,0,0);
+                var canvas=TownToon(cloth);canvas.SetVector("_TownWind",new Vector4(.05f,3.9f,2,1));canvas.SetVector("_TownWindMask",new Vector4(-100,100,3.2f,100));
+                canopy.GetComponent<Renderer>().sharedMaterial=canvas;townLife.AddWindMaterial(canvas);
                 foreach(float x in new[]{-w*.45f,-w*.02f})Block(p,"Awning pole",new Vector3(x,1.7f,z-1.6f),new Vector3(.12f,3.4f,.12f),wood);
                 Block(p,"Display counter",new Vector3(-w*.23f,.9f,z-.5f),new Vector3(w*.4f,1.5f,1.4f),wood);
                 for(int n=0;n<5;n++)

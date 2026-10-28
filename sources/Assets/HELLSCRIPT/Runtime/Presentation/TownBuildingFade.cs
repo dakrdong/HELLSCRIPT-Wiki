@@ -15,7 +15,7 @@ namespace Hellscript
         readonly Transform frame;
         bool fading;
         public float Alpha {get;private set;}=1;
-        public TownBuildingFade(Renderer[] renderers,Shader shader)
+        public TownBuildingFade(Renderer[] renderers,Shader shader,System.Action<Material> registerMotion=null)
         {
             this.renderers=renderers;opaque=new Material[renderers.Length];transparent=new Material[renderers.Length];shadows=new ShadowCastingMode[renderers.Length];
             frame=renderers[0].transform.parent;
@@ -24,6 +24,12 @@ namespace Hellscript
             {
                 var r=renderers[i];opaque[i]=r.sharedMaterial;shadows[i]=r.shadowCastingMode;
                 transparent[i]=new Material(shader){name=opaque[i].name+" faded"};transparent[i].SetColor("_BaseColor",opaque[i].color);
+                if(opaque[i].HasProperty("_TownWind"))
+                {
+                    transparent[i].SetVector("_TownWind",opaque[i].GetVector("_TownWind"));transparent[i].SetVector("_TownWindMask",opaque[i].GetVector("_TownWindMask"));
+                    transparent[i].SetFloat("_TownMotion",opaque[i].GetFloat("_TownMotion"));
+                    registerMotion?.Invoke(transparent[i]);
+                }
                 if(opaque[i].mainTexture!=null){transparent[i].mainTexture=opaque[i].mainTexture;transparent[i].mainTextureScale=opaque[i].mainTextureScale;transparent[i].mainTextureOffset=opaque[i].mainTextureOffset;}
                 // Measure in the building's own axes. A rotated world AABB includes empty front-yard space.
                 var local=r.localBounds;var matrix=frame.worldToLocalMatrix*r.localToWorldMatrix;
