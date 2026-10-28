@@ -38,7 +38,8 @@ namespace Hellscript
         static readonly string[] Rarities={"NORMAL","MAGIC","RARE","LEGENDARY","SET"};
         public static readonly EdictOptionDefinition[] Version6Global=CreateVersion6Global();
         public static readonly EdictOptionDefinition[] Version7Global=CreateVersion7Global();
-        public static readonly EdictOptionDefinition[] Global=Version7Global.Select(d=>d.id=="common.order"?O(d.id,d.group,d.label,EdictRuleOrder.DefaultCategories):d).ToArray();
+        public static readonly EdictOptionDefinition[] Version8Global=Version7Global.Select(d=>d.id=="common.order"?O(d.id,d.group,d.label,EdictRuleOrder.DefaultCategories):d).ToArray();
+        public static readonly EdictOptionDefinition[] Global=Version8Global.Select(d=>d.id=="loot.gold"?C(d.id,d.group,d.label,"PRIORITY",d.choices):d).ToArray();
         // Positional share envelopes retain the original definitions as well as their order.
         public static readonly EdictOptionDefinition[] Version5Global=Version6Global.Where(d=>!PositionV6(d.id)).Select(d=>d.id=="position.mode"?C(d.id,d.group,d.label,"ORBIT","CENTER","EDGE","DISTANCE","ORBIT","STAND"):
             d.id=="position.distance"?N(d.id,d.group,d.label,.5f,10,.5f,2):d).ToArray();
@@ -47,7 +48,7 @@ namespace Hellscript
         public static readonly EdictOptionDefinition[] RecommendationGlobal=WarehouseGlobal.Where(d=>!EquipmentAutomation.NewOption(d.id)).ToArray();
         public static readonly EdictOptionDefinition[] PotionGlobal=RecommendationGlobal.Where(d=>!d.id.StartsWith(EquipmentRecommendation.Prefix,StringComparison.Ordinal)).ToArray();
         public static readonly EdictOptionDefinition[] LegacyGlobal=PotionGlobal.Where(d=>!d.id.StartsWith("potion.",StringComparison.Ordinal)).ToArray();
-        public static EdictOptionDefinition[] GlobalsForVersion(int version)=>version==1?LegacyGlobal:version==2?PotionGlobal:version==3?RecommendationGlobal:version==4?WarehouseGlobal:version==5?Version5Global:version==6?Version6Global:version==7?Version7Global:Global;
+        public static EdictOptionDefinition[] GlobalsForVersion(int version)=>version==1?LegacyGlobal:version==2?PotionGlobal:version==3?RecommendationGlobal:version==4?WarehouseGlobal:version==5?Version5Global:version==6?Version6Global:version==7?Version7Global:version==8?Version8Global:Global;
         static EdictOptionDefinition T(string id,string group,string label,bool initial=false)=>new EdictOptionDefinition(id,group,label,EdictOptionKind.Toggle,initial?"ON":"OFF");
         static EdictOptionDefinition N(string id,string group,string label,float min,float max,float step,float initial)=>new EdictOptionDefinition(id,group,label,EdictOptionKind.Number,initial.ToString("0.###",CultureInfo.InvariantCulture),min:min,max:max,step:step);
         static EdictOptionDefinition C(string id,string group,string label,string initial,params string[] choices)=>new EdictOptionDefinition(id,group,label,EdictOptionKind.Choice,initial,choices);

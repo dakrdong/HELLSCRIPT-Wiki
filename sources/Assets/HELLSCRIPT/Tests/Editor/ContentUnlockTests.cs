@@ -143,11 +143,25 @@ namespace Hellscript.Tests
             sim.State.training=-1;sim.State.stage=1;sim.State.enemies.Clear();
             sim.State.enemies.Add(new EnemyState{boss=true,dead=true});
             sim.Tick(.05f);Assert.AreEqual(1,a.Hero.highestClear);Assert.IsTrue(sim.State.bossRewarded);
-            Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.Enhance));int gold=a.gold+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed).Sum(r=>r.amount),mats=a.materials+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed).Sum(r=>r.amount);var grants=a.contentUnlocks.unlocked.ToList();
+            Assert.IsTrue(ContentUnlocks.Has(a,ContentUnlocks.Enhance));int gold=a.gold+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed).Sum(r=>r.amount),mats=a.materials+sim.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed).Sum(r=>r.amount);
+            int stones=a.enhancementStones+sim.State.resources.Where(r=>r.kind==RiftResourceKind.EnhancementStone&&!r.claimed).Sum(r=>r.amount);var grants=a.contentUnlocks.unlocked.ToList();
+            Assert.AreEqual(1950,gold);Assert.AreEqual(15,mats);Assert.AreEqual(12,stones);
             a.suspendedRun=sim.State;var copy=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(a));
             var restored=new CombatSimulation(copy,catalog,50,restore:copy.suspendedRun);restored.Tick(.05f);
+            Assert.AreEqual(a.gold,copy.gold,"The death presentation must not collect the scattered reward early.");
+            for(int i=0;i<800&&restored.State.phase==RunPhase.Looting;i++)
+            {
+                restored.Tick(CombatSimulation.Step);
+                Assert.AreEqual(gold,copy.gold+restored.State.resources.Where(r=>r.kind==RiftResourceKind.Gold&&!r.claimed&&!r.ignored).Sum(r=>r.amount));
+                Assert.AreEqual(mats,copy.materials+restored.State.resources.Where(r=>r.kind==RiftResourceKind.Material&&!r.claimed&&!r.ignored).Sum(r=>r.amount));
+                Assert.AreEqual(stones,copy.enhancementStones+restored.State.resources.Where(r=>r.kind==RiftResourceKind.EnhancementStone&&!r.claimed&&!r.ignored).Sum(r=>r.amount));
+            }
+            Assert.AreEqual(RunPhase.Cleared,restored.State.phase);
             Assert.AreEqual(gold,copy.gold);Assert.AreEqual(mats,copy.materials);CollectionAssert.AreEquivalent(grants,copy.contentUnlocks.unlocked);Assert.AreEqual(1,restored.State.stage);
-            restored.Tick(.05f);Assert.AreEqual(gold,copy.gold);CollectionAssert.AreEquivalent(grants,copy.contentUnlocks.unlocked);
+            Assert.AreEqual(stones,copy.enhancementStones);Assert.AreEqual(1,copy.Hero.firstClears.Count(s=>s==1));
+            restored.Tick(.05f);Assert.AreEqual(gold,copy.gold);Assert.AreEqual(mats,copy.materials);Assert.AreEqual(stones,copy.enhancementStones);CollectionAssert.AreEquivalent(grants,copy.contentUnlocks.unlocked);
+            var settled=JsonUtility.FromJson<AccountSave>(JsonUtility.ToJson(copy));var replay=new CombatSimulation(settled,catalog,50,restore:settled.suspendedRun);replay.Tick(CombatSimulation.Step);
+            Assert.AreEqual(gold,settled.gold);Assert.AreEqual(mats,settled.materials);Assert.AreEqual(stones,settled.enhancementStones);CollectionAssert.AreEquivalent(grants,settled.contentUnlocks.unlocked);Assert.AreEqual(1,settled.records.Count);
         }
         [Test] public void U03_OfflineUnlockDoesNotBackdateAndRepeatedLoadDoesNotDuplicate()
         {

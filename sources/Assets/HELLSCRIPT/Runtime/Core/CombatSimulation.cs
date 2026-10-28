@@ -209,7 +209,8 @@ namespace Hellscript
         {
             if(State.paused||State.portal||!string.IsNullOrEmpty(State.navigationError)||State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;
             journalMovementReason=null;journalMovementTrigger=null;
-            if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
+            if(State.phase==RunPhase.Looting){TickPotionTimers(dt);TickShields(dt);CommitExperience();if(BossLooting)TickBossLoot(dt);else Loot(dt);RiftVisibility.Get(State,Map)?.Update();return;}
+            if(State.bossIntroRemaining>0){State.bossIntroRemaining=Mathf.Max(0,State.bossIntroRemaining-dt);if(State.bossIntroRemaining<.0001f)State.bossIntroRemaining=0;return;}
             // The pre-death window has to include the tick that kills the hero, and this body has many
             // early returns, so the snapshot is flushed in a finally rather than at the last statement.
             float observedTime=State.time,observedHealth=State.health;
@@ -220,6 +221,7 @@ namespace Hellscript
         void TickCombat(float dt)
         {
             TickPreviewSpawns();if(State.paused)return;ResolveCombatDeaths();if(SettleCombatOutcome())return;
+            if(State.bossIntroRemaining>0)return;
             State.guideShrineTime=Mathf.Max(0,State.guideShrineTime-dt);State.resolveShrineTime=Mathf.Max(0,State.resolveShrineTime-dt);
             State.time+=dt;State.statistics.ticks++;State.potionCd=Mathf.Max(0,State.potionCd-dt);State.actionCd=Mathf.Max(0,State.actionCd-dt);
             TickPotionTimers(dt);
@@ -232,6 +234,7 @@ namespace Hellscript
             RegenerateClassResource(dt);RegenerateLife(dt);
             UsePotion();
             RiftExploration.Discover(State,Map);UpdateChestAvailability();UpdateSealAvailability();TrySpawnBoss(dt);
+            if(State.bossIntroRemaining>0)return;
             TickHeroAction(dt);TickClassSkills(dt);
             AdvanceChestOpening(dt);AdvanceSealBreaking(dt);AdvanceOffering(dt);AdvanceShrine(dt);
             State.decisionTime-=dt;
@@ -654,15 +657,16 @@ namespace Hellscript
                     var mode=DropMode(drop);
                     if(mode==EdictLootMode.Ignore||State.phase==RunPhase.Looting&&!edictLoot.collectAtEnd){drop.ignored=true;continue;}
                     if(mode==EdictLootMode.AfterCombat&&!combatClear)continue;
-                    if(State.phase!=RunPhase.Looting&&!Map.LineClear(State.position,drop.position))continue;
+                    if((State.phase!=RunPhase.Looting||BossLooting)&&!Map.LineClear(State.position,drop.position))continue;
                 }
                 else if(drop.item.rarity<Policy.minimumRarity){drop.ignored=true;continue;}
-                if(Vector2.Distance(State.position,drop.position)>Stats.pickup&&State.phase!=RunPhase.Looting)continue;
+                if(BossLooting&&!Map.LineClear(State.position,drop.position))continue;
+                if(Vector2.Distance(State.position,drop.position)>Stats.pickup&&(State.phase!=RunPhase.Looting||BossLooting))continue;
                 // The shortage trigger can fire before the bag is completely full: keep the configured
                 // slots free by ignoring further equipment or by cleaning up in town early.
                 bool shortage=BagShort;
                 if(shortage&&Policy.bagPolicy==BagPolicy.Ignore){drop.ignored=true;continue;}
-                if(shortage&&Policy.bagPolicy==BagPolicy.Portal&&Economy.FreeSlots(Hero)>0){PortalForBag(dt);return;}
+                if(shortage&&Policy.bagPolicy==BagPolicy.Portal&&Economy.FreeSlots(Hero)>0){if(BossLooting){drop.ignored=true;continue;}PortalForBag(dt);return;}
                 var rewardSnapshot=CombatJournal.Copy(drop.item);
                 bool atomic=(State.training<0&&EquipmentRecommendation.Enabled(Hero)||IsGuide)&&CommitRecommendedLoot!=null;
                 var acquired=atomic?CommitRecommendedLoot(drop.item.id,Policy.bagPolicy,edictField?.replacementRank=="RARITY"):
@@ -679,24 +683,29 @@ namespace Hellscript
                         Log("AUTO_EQUIP",Loc.F("추천 착용: {0} · 장비 점수 {1:0.0}",owned.DisplayName,EquipmentScore.Value(owned)));
                     }
                 }
-                else if(Policy.bagPolicy==BagPolicy.Portal||Policy.bagPolicy==BagPolicy.Replace&&edictField?.replacementFail=="PORTAL"){PortalForBag(dt);return;}
+                else if(Policy.bagPolicy==BagPolicy.Portal||Policy.bagPolicy==BagPolicy.Replace&&edictField?.replacementFail=="PORTAL"){if(BossLooting){drop.ignored=true;continue;}PortalForBag(dt);return;}
                 else drop.ignored=true;
             }
-            if(State.phase==RunPhase.Looting&&State.drops.All(d=>d.claimed||d.ignored)&&State.resources.All(d=>d.claimed||d.ignored))Finish(true,"균열 클리어");
+            if(State.phase==RunPhase.Looting&&!BossLooting&&State.drops.All(d=>d.claimed||d.ignored)&&State.resources.All(d=>d.claimed||d.ignored))Finish(true,"균열 클리어");
         }
         void BossClear()
         {
             if(State.bossRewarded)return;CompleteReadyChest();if(!string.IsNullOrEmpty(State.navigationError))return;CloseUnopenedChests();State.bossRewarded=true;State.phase=RunPhase.Looting;InterruptHeroAction("보스 처치 후 전리품 정리");State.activeSkill=-1;
-            RiftResources.Add(State,RiftResourceKind.Gold,State.position,KillGold(Tuning.ClearGold(State.stage)));
-            RiftResources.Add(State,RiftResourceKind.Material,State.position,Tuning.ClearMaterials(State.stage),source:RiftLootSource.BossMonster);
-            RiftResources.Add(State,RiftResourceKind.EnhancementStone,State.position+Vector2.left*.4f,LiveOpsConfig.Scale(BlacksmithCatalog.RewardStones(State.stage),Tuning.bossStoneMultiplier),source:RiftLootSource.BossMonster);
-            RiftResources.RollGems(State,RiftRewardSource.Boss,State.position);
+            State.bossIntroRemaining=0;State.bossDeathRemaining=BossDeathSeconds;State.bossLootElapsed=0;State.bossLootWait=-1;State.movementDrop=-1;Map.Repath();
+            var boss=State.enemies.Find(e=>e.id==State.bossId)??State.enemies.Find(e=>e.boss&&e.dead);
+            var at=boss?.position??State.position;if(!Map.CanLand(at))at=Map.MoveDirect(State.position,at,Vector2.Distance(State.position,at));
+            int firstDrop=State.drops.Count,firstResource=State.resources.Count;
+            RiftResources.Add(State,RiftResourceKind.Gold,at,KillGold(Tuning.ClearGold(State.stage)),source:RiftLootSource.BossMonster);
+            RiftResources.Add(State,RiftResourceKind.Material,at,Tuning.ClearMaterials(State.stage),source:RiftLootSource.BossMonster);
+            RiftResources.Add(State,RiftResourceKind.EnhancementStone,at,LiveOpsConfig.Scale(BlacksmithCatalog.RewardStones(State.stage),Tuning.bossStoneMultiplier),source:RiftLootSource.BossMonster);
+            RiftResources.RollGems(State,RiftRewardSource.Boss,at);
             var upcoming=ContentUnlocks.NextLocked(account);
             QueueExperience(Mathf.FloorToInt(300*(1+.05f*(State.stage-1))));Hero.highestClear=Mathf.Max(Hero.highestClear,State.stage);
             if(!Hero.firstClears.Contains(State.stage)){Hero.firstClears.Add(State.stage);RiftEarnings.GrantGold(account,State,Gold(Tuning.FirstGold(State.stage)));RiftEarnings.GrantMaterials(account,State,Tuning.FirstMaterials(State.stage));Log("FIRST_CLEAR","캐릭터 초회 보상 지급");}
             for(int i=0;i<Tuning.bossEquipmentCount;i++)
                 if(Tuning.bossEquipmentChance>=1||RandomStream.Unit(ref State.rewardRng)<Tuning.bossEquipmentChance)
-                    DropFrom(State.position+new Vector2(i%3-1,1+i/3*.3f),RollRarity(RiftRewardSource.Boss,ref State.rewardRng),ref State.rewardRng,RiftLootSource.BossMonster);
+                    DropFrom(at,RollRarity(RiftRewardSource.Boss,ref State.rewardRng),ref State.rewardRng,RiftLootSource.BossMonster);
+            ScatterBossLoot(at,firstDrop,firstResource);
             RuneGrowth.GrantVictory(account,State);
             ContentUnlocks.Reconcile(account);
             if(State.journal!=null)
@@ -711,6 +720,7 @@ namespace Hellscript
         void Finish(bool won,string reason,CombatFinish completion=CombatFinish.Other)
         {
             if(State.phase==RunPhase.Cleared||State.phase==RunPhase.Failed)return;
+            SettleBossCurrencies();
             CommitExperience();
             InterruptHeroAction(reason);
             CombatTelemetry.Finish(State.statistics,completion);

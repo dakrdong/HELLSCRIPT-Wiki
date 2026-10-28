@@ -128,9 +128,11 @@ namespace Hellscript.Tests
                 {
                     var account=ContentTestAccounts.Legacy();account.selectedHero=hero;account.Hero.level=30;account.Hero.build=GameCatalog.Preset((HeroClass)hero,build);
                     var sim=new CombatSimulation(account,catalog,1,seed:(uint)(710+hero*2+build));
-                    for(int tick=0;tick<6001&&sim.State.phase!=RunPhase.Cleared&&sim.State.phase!=RunPhase.Failed;tick++)
+                    int maxTicks=Mathf.CeilToInt((sim.TimeLimit+CombatSimulation.BossIntroSeconds+CombatSimulation.BossDeathSeconds+CombatSimulation.BossLootTimeout+CombatSimulation.BossFinishDelay)/CombatSimulation.Step)+1;
+                    for(int tick=0;tick<maxTicks&&sim.State.phase!=RunPhase.Cleared&&sim.State.phase!=RunPhase.Failed;tick++)
                     {sim.Tick(.05f);Assert.IsTrue(sim.HeroTravelling?sim.Map.LineClear(sim.State.heroAction.origin,sim.State.position)&&sim.Map.CanLand(sim.State.heroAction.destination):sim.Map.Walkable(sim.State.position),$"hero={hero} build={build} tick={tick}");Assert.IsEmpty(sim.State.navigationError);if(sim.State.portal)sim.Abandon();}
                     Assert.Greater(sim.State.kills,10);Assert.Greater(sim.State.visited.Count,1);Assert.IsTrue(sim.State.phase==RunPhase.Cleared||sim.State.phase==RunPhase.Failed);
+                    Assert.LessOrEqual(sim.State.time,sim.TimeLimit+CombatSimulation.Step);
                     Debug.Log($"RIFT_BUILD class={hero} build={build} phase={sim.State.phase} visited={sim.State.visited.Count} kills={sim.State.kills} meter={sim.State.meter} time={sim.State.time} chests={sim.State.layout.chests.Count(c=>c.phase==ChestPhase.Opened)}");
                 }
             }finally{UnityEngine.Object.DestroyImmediate(catalog);}

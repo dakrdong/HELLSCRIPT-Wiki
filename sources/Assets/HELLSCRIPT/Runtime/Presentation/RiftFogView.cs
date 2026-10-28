@@ -13,6 +13,9 @@ namespace Hellscript
         readonly Dictionary<Material, Material> originals = new Dictionary<Material, Material>();
         Shader shader;
         int uploaded = -1;
+        Vector2? presentationFocus;
+        public void Focus(Vector2? position)
+        {if(presentationFocus==position)return;presentationFocus=position;uploaded=-1;}
         public void Initialize(RiftVisibility visibility)
         {
             Visibility = visibility; obstacleProperties = new MaterialPropertyBlock();
@@ -69,14 +72,31 @@ namespace Hellscript
             var near = obstacle.radius > 0 ? obstacle.position + delta.normalized * obstacle.radius : obstacle.position + new Vector2(Mathf.Clamp(delta.x, -obstacle.halfSize.x, obstacle.halfSize.x), Mathf.Clamp(delta.y, -obstacle.halfSize.y, obstacle.halfSize.y));
             near += (origin - near).normalized * .04f;
             // The first face of a sight-blocking pillar is visible even though its centre is not.
-            obstacleProperties.SetFloat("_ObjectVisibility", Visibility.Visible(near) ? 1 : 0); renderer.SetPropertyBlock(obstacleProperties);
+            obstacleProperties.SetFloat("_ObjectVisibility", Visibility.Visible(near)||FocusVisible(near) ? 1 : 0); renderer.SetPropertyBlock(obstacleProperties);
         }
+        bool FocusVisible(Vector2 point)=>presentationFocus.HasValue&&(point-presentationFocus.Value).sqrMagnitude<=36&&Visibility.Navigation.LineClear(presentationFocus.Value,point);
         public void Present()
         {
             Visibility.Update();
             if (uploaded == Visibility.Revision) return;
             foreach (var entry in obstacles) PresentObstacle(entry.renderer, entry.obstacle);
-            Texture.SetPixels32(Visibility.Pixels); Texture.Apply(false, false); uploaded = Visibility.Revision;
+            Texture.SetPixels32(Visibility.Pixels);
+            if(presentationFocus.HasValue)
+            {
+                var focus=presentationFocus.Value;
+                int x0=Mathf.Max(0,Mathf.FloorToInt((focus.x-6-Visibility.Origin.x)/RiftVisibility.CellSize)),y0=Mathf.Max(0,Mathf.FloorToInt((focus.y-6-Visibility.Origin.y)/RiftVisibility.CellSize));
+                int x1=Mathf.Min(Visibility.Width-1,Mathf.CeilToInt((focus.x+6-Visibility.Origin.x)/RiftVisibility.CellSize)),y1=Mathf.Min(Visibility.Height-1,Mathf.CeilToInt((focus.y+6-Visibility.Origin.y)/RiftVisibility.CellSize));
+                int width=x1-x0+1,height=y1-y0+1;
+                if(width>0&&height>0)
+                {
+                    // The title shot lights only its GPU mask; exploration and enemy perception stay authoritative.
+                    var pixels=new Color32[width*height];
+                    for(int y=y0;y<=y1;y++)for(int x=x0;x<=x1;x++)
+                    {var color=Visibility.Pixels[y*Visibility.Width+x];if(FocusVisible(Visibility.Position(x,y)))color.r=color.g=255;pixels[(y-y0)*width+x-x0]=color;}
+                    Texture.SetPixels32(x0,y0,width,height,pixels);
+                }
+            }
+            Texture.Apply(false, false); uploaded = Visibility.Revision;
         }
         void OnDestroy()
         {

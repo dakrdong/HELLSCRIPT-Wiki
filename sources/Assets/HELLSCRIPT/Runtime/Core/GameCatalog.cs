@@ -415,6 +415,10 @@ namespace Hellscript
         [NonSerialized] public RiftVisibility visibility;
         public RiftExplorationState exploration=new RiftExplorationState();
         public float lastDamageTime=-20, bossWait;
+        public float bossIntroRemaining,bossDeathRemaining;
+        // Keep fixed-step rounding from delaying the loot deadline by a whole tick.
+        public double bossLootElapsed;
+        public float bossLootWait;
         public float lastAttackTime=-20,lastOutgoingDamageTime=-20,guideShrineTime,resolveShrineTime;
         public string navigationError="";
         // Logged once per run; kept here so reopening a suspended rift does not repeat the line.

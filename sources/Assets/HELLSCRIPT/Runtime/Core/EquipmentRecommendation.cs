@@ -35,7 +35,7 @@ namespace Hellscript
         public static HuntEdictV2Document Upgrade(HuntEdictV2Document source)
         {
             source=PotionEdict.Upgrade(source);
-            if(source==null||source.globalVersion<2||source.globalVersion>7)return source;
+            if(source==null||source.globalVersion<2||source.globalVersion>8)return source;
             var copy=source.Copy();
             if(copy.globalVersion==2)
             {
@@ -79,9 +79,16 @@ namespace Hellscript
                 }
                 copy.globalVersion=7;
             }
-            copy.global=EdictOptions.Canonical(EdictOptions.Version7Global,copy.global,copy.heroClass);
-            copy.global.Single(o=>o.id=="common.order").value=EdictRuleOrder.UpgradeOrder(copy.global.Single(o=>o.id=="common.order").value);
-            copy.globalVersion=8;return copy;
+            if(copy.globalVersion==7)
+            {
+                copy.global=EdictOptions.Canonical(EdictOptions.Version7Global,copy.global,copy.heroClass);
+                copy.global.Single(o=>o.id=="common.order").value=EdictRuleOrder.UpgradeOrder(copy.global.Single(o=>o.id=="common.order").value);
+                copy.globalVersion=8;
+            }
+            copy.global=EdictOptions.Canonical(EdictOptions.Version8Global,copy.global,copy.heroClass);
+            // Old PASSING has no edit provenance; migrate it once, while keeping later explicit choices.
+            var gold=copy.global.Single(o=>o.id=="loot.gold");if(gold.value=="PASSING")gold.value="PRIORITY";
+            copy.globalVersion=9;return copy;
         }
         public static bool Excluded(HuntEdictV2Document policy,int position)=>Get(policy,ExcludedSlots).Split(',').Contains(position.ToString(CultureInfo.InvariantCulture));
         static bool TouchesExcludedSlot(HuntEdictV2Document policy,Item candidate,int index,Item[] outgoing)

@@ -9,6 +9,8 @@ namespace Hellscript
         public int version=1;
         public string accountId,leaseId,runId;
         public long revision,sequence,ticks,issuedMs,heartbeatMs;
+        // Replay wall time starts at the lease, independently of earlier run attendance.
+        public double replayMs;
         public AccountSave account;
         public RunRecord combatTelemetry;
     }
@@ -49,11 +51,14 @@ namespace Hellscript
             if(trusted?.version!=1||ownedRun==null||ownedRun.training>=0||
                 ownedRun.id!=trusted.runId||trusted.account.Hero.id!=ownedRun.heroId||
                 string.IsNullOrEmpty(trusted.accountId)||string.IsNullOrEmpty(trusted.leaseId)||trusted.issuedMs<0||trusted.heartbeatMs<trusted.issuedMs||
-                trusted.sequence<0||trusted.ticks<0||trusted.revision<0||ownedRun.riftAttendance?.version!=1)
+                trusted.sequence<0||trusted.ticks<0||trusted.revision<0||ownedRun.riftAttendance?.version!=1||
+                !double.IsFinite(trusted.replayMs)||trusted.replayMs<0)
                 throw new ArgumentException("A server-owned, admitted rift checkpoint is required.");
             this.catalog=catalog??throw new ArgumentNullException(nameof(catalog));
             this.serverClock=serverClock??throw new ArgumentNullException(nameof(serverClock));this.repository=repository??throw new ArgumentNullException(nameof(repository));
             checkpoint=Copy(trusted);
+            // Checkpoints predating segment timing used the admitted speed for every tick.
+            if(checkpoint.replayMs==0&&checkpoint.ticks>0)checkpoint.replayMs=checkpoint.ticks*50d/ownedRun.riftAttendance.speed;
         }
         public HuntAuthorityCheckpoint Snapshot(){lock(gate)return Copy(checkpoint);}
         public bool Advance(string authenticatedAccountId,HuntTickRequest request)
@@ -80,7 +85,9 @@ namespace Hellscript
                     for(int n=0;n<count;n++)
                     {
                         if(run.phase==RunPhase.Cleared||run.phase==RunPhase.Failed||run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError))break;
-                        double charge=50d/run.riftAttendance.speed;
+                        double charge=50d/sim.EffectiveSpeed;
+                        if(next.replayMs+charge>now-current.issuedMs+.001)return Reject("SPEED_HACK");
+                        next.replayMs+=charge;
                         double paid=RiftEntryRules.Attend(account.riftFatigue,run.riftAttendance,now,charge);
                         run.realTime=(float)(run.riftAttendance.elapsedMs/1000d);
                         if(paid+.001<charge||account.riftFatigue.Total<=0){sim.ExhaustFatigue();break;}

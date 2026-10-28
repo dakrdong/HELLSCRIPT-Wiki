@@ -47,6 +47,13 @@ namespace Hellscript
         // Editing and explicit pauses retain only an unfinished tick, never deferred active work.
         public void Pause()
         { Pending %= StepSeconds; backlogDuration = 0; }
+        // All pending time keeps its real duration when a boss segment changes the speed.
+        public void Pause(double previousSpeed,double nextSpeed)
+        {
+            if(!double.IsFinite(previousSpeed)||previousSpeed<=0)throw new ArgumentOutOfRangeException(nameof(previousSpeed));
+            if(!double.IsFinite(nextSpeed)||nextSpeed<=0)throw new ArgumentOutOfRangeException(nameof(nextSpeed));
+            Pending=Pending/previousSpeed*nextSpeed;backlogDuration=0;
+        }
         // An application suspension or a new run starts at its last completed tick.
         public void Reset(double now)
         { initialized = false; Pending = backlogDuration = 0; Overloaded = false; Sample(now); }

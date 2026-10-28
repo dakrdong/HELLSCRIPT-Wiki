@@ -233,6 +233,11 @@ namespace Hellscript
         }
         public static void NormalizeRun(RunState run)
         {
+            if(!float.IsFinite(run.bossIntroRemaining)||run.bossIntroRemaining<0||run.bossIntroRemaining>CombatSimulation.BossIntroSeconds||
+                !float.IsFinite(run.bossDeathRemaining)||run.bossDeathRemaining<0||run.bossDeathRemaining>CombatSimulation.BossDeathSeconds||
+                !double.IsFinite(run.bossLootElapsed)||run.bossLootElapsed<0||run.bossLootElapsed>CombatSimulation.BossLootTimeout||
+                !float.IsFinite(run.bossLootWait)||run.bossLootWait< -1||run.bossLootWait>CombatSimulation.BossFinishDelay)
+                throw new NotSupportedException("Invalid saved boss sequence timers; the save is preserved.");
             // JsonUtility materializes an absent reference as a default inline object.
             // Only the empty, originless placeholder is null; real casts stay validated.
             if(run.classSkills?.action is ClassSkillCast action&&string.IsNullOrEmpty(action.id)&&action.root==0)run.classSkills.action=null;

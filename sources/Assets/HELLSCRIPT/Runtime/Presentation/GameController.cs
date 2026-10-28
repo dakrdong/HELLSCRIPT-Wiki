@@ -33,9 +33,9 @@ namespace Hellscript
         public bool CanChangeCharacterFromSettings=>!TutorialActive&&!(Active&&Combat.State.training<0)&&(UI.EntryPage||!Tutorials.Mandatory(Store.Data));
         public float EffectiveSpeed =>
 #if UNITY_EDITOR || DEVELOPMENT_BUILD
-            RuntimePresentationProfile.Speed*
+            (Combat?.BossSequenceActive==true?1f:RuntimePresentationProfile.Speed)*
 #endif
-            (Combat?.State.training<0&&Combat.State.riftAttendance?.version==1?Combat.State.riftAttendance.speed:1f);
+            (Combat?.EffectiveSpeed??1f);
         float saveClock,resultDelay;
         bool resultShown,backgroundPaused;
         void Awake()
@@ -379,10 +379,11 @@ namespace Hellscript
             if(Active&&!backgroundPaused){if(run.riftAttendance?.version==1)run.realTime=(float)(run.riftAttendance.elapsedMs/1000);else run.realTime+=real;}
             if(Active&&!run.paused&&!run.portal&&!backgroundPaused&&!foregroundResumeRequired&&string.IsNullOrEmpty(run.navigationError))
             {
-                combatClock.Accumulate(elapsed,EffectiveSpeed);int guard=0;
+                float speed=EffectiveSpeed;combatClock.Accumulate(elapsed,speed);int guard=0;
                 while(guard++<ForegroundCombatClock.TickBudget&&Active&&!run.paused&&!run.portal&&string.IsNullOrEmpty(run.navigationError)&&combatClock.TakeTick())
-                {using var sample=PresentationMetrics.Combat.Auto();PresentationMetrics.CombatTicks++;if(!Combat.Playback.Advance())
-                    {combatClock.Pause();if(Combat.Playback.Error!=""){run.paused=true;Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");}break;}}
+                {using var sample=PresentationMetrics.Combat.Auto();PresentationMetrics.CombatTicks++;bool bossSequence=Combat.BossSequenceActive;if(!Combat.Playback.Advance())
+                    {combatClock.Pause();if(Combat.Playback.Error!=""){run.paused=true;Notify("전투 기록을 준비하지 못했습니다. 재개하면 다시 시도합니다.");}break;}
+                    if(bossSequence!=Combat.BossSequenceActive){combatClock.Pause(speed,EffectiveSpeed);break;}}
                 if(Active&&combatClock.CheckBacklog(elapsed,EffectiveSpeed))PauseForForeground("기기 상태로 사냥이 일시정지되었습니다. 계속하려면 재개를 눌러 주세요.");
             }
             else combatClock.Pause();

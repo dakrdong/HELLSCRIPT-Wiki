@@ -518,7 +518,7 @@ namespace Hellscript
             if(toast!=null&&toastTime>0){toastTime-=Time.unscaledDeltaTime;if(toastTime<=0){toast.text="";noticeMessage="";toastFrame.gameObject.SetActive(false);}}
             if(game.Store!=null&&shownStoreRevision!=game.Store.Revision){shownStoreRevision=game.Store.Revision;RefreshHud();}
             if(game.DisplayDimmed){gearShownAt.Clear();RefreshIdleSummary();return;}
-            TickGlobalHud();TickTutorialUI();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();
+            TickGlobalHud();TickTutorialUI();TickRiftBossPresentation();TickOfflineSupplies();TickAttendance();UpdateTrainingKeys();
             if(idleIntroductionOpen)ReflowIdleIntroduction();
             using var sample=PresentationMetrics.UI.Auto();
             PresentationMetrics.HudCalls++;

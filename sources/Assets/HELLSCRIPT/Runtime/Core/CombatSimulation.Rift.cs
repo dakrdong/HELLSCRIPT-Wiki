@@ -87,6 +87,7 @@ namespace Hellscript
                 int room=State.layout.roamingBoss?Map.RoomAt(position.Value):State.layout.bossRoom;
                 if(room<0)room=State.layout.rooms.OrderBy(r=>Vector2.Distance(r.position,position.Value)).First().index;
                 SpawnEnemy(room,0,position.Value,-1,true);
+                State.bossIntroRemaining=BossIntroSeconds;
                 Log("BOSS_SPAWN",Loc.F("처치 게이지 충전 · {0}", GameCatalog.BossName(State.layout.bossKind)));return;
             }
             State.action="보스 등장 위치 확인";

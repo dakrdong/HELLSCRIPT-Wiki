@@ -66,6 +66,7 @@ namespace Hellscript
         {
             HideEdictForecast();
             RestoreSettingsWorld();ClearTownPresentation();presentedRunId=null;StagedHeroAction=null;riftFog=null;lighting.UnregisterAll();stagedFocus=null;stagedZoom=zoomNow=1;
+            bossSequenceStage=0;bossDropOrigin=Vector2.zero;
             if(riftBackground.HasValue&&viewCamera!=null){viewCamera.backgroundColor=riftBackground.Value;riftBackground=null;}
             shieldView=shadowView=shoutView=null;
             // Destroy is deferred to the end of the frame, so forget the old root's effects library now: a world rebuilt in the
@@ -165,7 +166,7 @@ namespace Hellscript
             using var sample=PresentationMetrics.World.Auto();
             PresentationMetrics.WorldCalls++;
             if(world==null)return;bool frozen=run.paused||run.portal||!string.IsNullOrEmpty(run.navigationError);elapsed+=frozen?0:dt*PresentationSpeed;motionStep=frozen?0:dt*PresentationSpeed;
-            PresentExploredGeometry(run);
+            PresentBossSequence(run);PresentExploredGeometry(run);
             Vector3 hp=Position(run.position)+Vector3.up*Combat.HeroAirHeight;Vector3 movement=hp-hero.transform.position;movement.y=0;
             hero.transform.position=snapPresentation?hp:Vector3.Lerp(hero.transform.position,hp,Mathf.Min(1,dt*22));
             var currentFacing=CurrentHeroFacing(run);
@@ -183,7 +184,8 @@ namespace Hellscript
                 bool buried=!enemy.dead&&MonsterBehavior.Hidden(enemy);
                 if(mounds.TryGetValue(enemy.id,out var mound)&&(!buried||mound==null)){if(mound!=null)Destroy(mound);mounds.Remove(enemy.id);}
                 if(enemy.dead){if(actors.TryGetValue(enemy.id,out var dead)){StartDying(dead,enemy,run);actors.Remove(enemy.id);}continue;}
-                if(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!Combat.Map.LineClear(run.position,enemy.position)||buried)
+                bool bossIntro=enemy.boss&&run.bossIntroRemaining>0;
+                if(!bossIntro&&(Vector2.Distance(enemy.position,run.position)>(run.layout.legacy?22:12)||!run.layout.legacy&&!Combat.Map.LineClear(run.position,enemy.position)||buried))
                 {
                     if(actors.TryGetValue(enemy.id,out var hidden))hidden.SetActive(false);
                     // A hidden ambusher shows only a low mound of disturbed earth.
@@ -223,6 +225,7 @@ namespace Hellscript
                     else{var color=drop.item.rarity==3?ember:drop.item.rarity==2?purple:blue;visual=Shape(drop.item.name,PrimitiveType.Cube,world.transform,Position(drop.position)+Vector3.up*.4f,new Vector3(.35f,.65f,.2f),color);drops.Add(drop.id,visual);Ring(visual.transform,Vector3.zero,1,color,.04f);}
                 }
                 visual.transform.rotation=visual.name.StartsWith("Drop Model")?Quaternion.Euler(0,elapsed*55,0):Quaternion.Euler(15,elapsed*55,25);
+                PresentBossDrop(visual,run,drop.position,drop.source,visual.name.StartsWith("Drop Model")?.02f:.4f);
             }
             PresentDropFx(run);PresentResources(run);PresentResourceFx(run);PresentChests(run,dt);PresentObjectives(run);PresentGates(run);PresentObjectiveChains(run);PresentActions(run);PresentEnemyCombat(run);PresentSkillStates(run);
             PresentCombatFeedback(run);PresentGrowthFeedback(run);PresentGuideAppearances(run);PresentShots(Fx,run);PresentZones(Fx,run);ShadeFigures(motionStep);
