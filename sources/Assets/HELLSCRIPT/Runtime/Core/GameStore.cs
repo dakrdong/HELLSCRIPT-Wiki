@@ -423,6 +423,19 @@ namespace Hellscript
             var liveResult=Data.repeatHunt?.pendingResult;RiftResult.SyncDisposals(liveResult,staged.repeatHunt?.pendingResult);
             if(liveResult!=null&&liveResult.id==staged.repeatHunt?.pendingResult?.id)liveResult.monsterKillsCommitted=staged.repeatHunt.pendingResult.monsterKillsCommitted;
             if(liveResult!=null&&staged.repeatHunt?.pendingResult?.id==liveResult.id)staged.repeatHunt.pendingResult=liveResult;
+            // Supply and cleanup transactions keep the session held by the result and repeat controller.
+            var session=Data.repeatHunt;var committed=staged.repeatHunt;
+            if(session!=null&&committed!=null&&session.id==committed.id&&session.heroId==committed.heroId&&session.runId==committed.runId)
+            {
+                session.version=committed.version;session.completedRunId=committed.completedRunId;
+                session.completed=committed.completed;session.consecutiveFailures=committed.consecutiveFailures;session.nextStage=committed.nextStage;session.cleanupAttempt=committed.cleanupAttempt;
+                session.entries=committed.entries;session.clears=committed.clears;session.firstStage=committed.firstStage;
+                session.seconds=committed.seconds;session.gold=committed.gold;session.delayElapsed=committed.delayElapsed;
+                session.cancelled=committed.cancelled;session.cleanupDone=committed.cleanupDone;session.stopRequested=committed.stopRequested;
+                session.stop=committed.stop;session.blocked=committed.blocked;session.error=committed.error;
+                session.policy=committed.policy;session.cleanup=committed.cleanup;session.pendingResult=committed.pendingResult;
+                staged.repeatHunt=session;
+            }
             Data.repeatHunt=staged.repeatHunt;Data.records=staged.records;
             Data.telemetryAccountId=staged.telemetryAccountId;Data.combatSequence=staged.combatSequence;Data.combatTelemetryLossCount=staged.combatTelemetryLossCount;
             Data.playerObservations=staged.playerObservations;

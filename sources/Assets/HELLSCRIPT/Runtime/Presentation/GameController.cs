@@ -116,17 +116,27 @@ namespace Hellscript
         {
             if(Active||liveOpsAdmissionPending)return;
             if(resume&&!RecoverInterruptedRift())return;
+            bool fromResult=training<0&&!resume&&Combat?.State.training<0&&RepeatHunt.Terminal(Combat.State);
+            if(fromResult&&(SelectedStage<1||SelectedStage>RiftEntryRules.RewardStages||SelectedStage>Store.Data.Hero.highestClear+1))
+            {Notify(Loc.T("입장할 균열을 확인하세요."));return;}
             if(Tutorials.Mandatory(Store.Data)){BeginTutorial();return;}
             if(training<0&&!resume&&TownQuest.RiftLocked(Store.Data.guide)){Notify(Loc.T(TownQuest.LockLine(Store.Data.guide)));return;}
             if(training<0&&!resume&&!liveOpsReady&&LiveOps?.Configured==true)
             {StartCoroutine(RefreshLiveOpsAndBegin(training,resume,seed,fullSkillTraining,continueRepeat,riftSpeed,replaceRunId));return;}
-            if(training<0&&(!Store.RefreshRiftDay()||Store.Data.riftFatigue.Total<=0)){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Store.Error!=""?Store.Error:Loc.T("남은 피로도가 없습니다."));return;}
+            if(training<0&&!Store.RefreshRiftDay()){BlockRepeat(RepeatBlock.Save,Store.Error);Notify(Store.Error);return;}
+            if(training<0&&Store.Data.riftFatigue.Total<=0){BlockRepeat(RepeatBlock.Configuration,Loc.T("남은 피로도가 없습니다."));Notify(Loc.T("남은 피로도가 없습니다."));return;}
             if(!continueRepeat)ExitIdle(false);
             if(training>=0&&!fullSkillTraining&&!ContentUnlocks.Has(Store.Data,ContentUnlocks.Train)){Notify(ContentUnlocks.Condition(ContentUnlocks.Train));return;}
             if(!resume&&(replaceRunId!=null?!RiftEntryRules.CanReplace(Store.Data,replaceRunId):Store.Data.suspendedRun!=null))
             {Notice="포탈로 이동하거나 균열로 다시 시작해 주세요.";UI.ShowToast(Notice);return;}
-            Comparison=null;
-            // Restore a candidate copy so a failed admission cannot alter the town checkpoint.
+            // Persist the completed result (including codex and telemetry) before replacing its checkpoint.
+            if(fromResult)
+            {
+                if(!Store.Save()){BlockRepeat(RepeatBlock.Save,Store.Error);Notify(Store.Error);return;}
+                if(!CheckResultSpace())return;
+            }
+            Comparison=null;ComparisonError="";
+            // Restore a candidate copy so a failed admission cannot alter the previous checkpoint.
             RunState snapshot=resume&&Store.Data.suspendedRun!=null?CombatJournal.Copy(Store.Data.suspendedRun):null;
             if(snapshot!=null){int hero=Store.Data.heroes.FindIndex(h=>h.id==snapshot.heroId);if(hero<0){Notify("저장된 영웅을 찾을 수 없습니다.");return;}Store.Data.selectedHero=hero;}
             if(training<0&&snapshot==null)
@@ -135,29 +145,31 @@ namespace Hellscript
                 if(riftSpeed!=1)CancelPotionDeparture();
                 string visit=PotionVisit();
                 if(!PrepareDeparturePotions(visit,continueRepeat,replaceRunId))
-                {if(!continueRepeat&&riftSpeed==1&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;waitingReplaceRunId=replaceRunId;}return;}
+                {if(!fromResult&&!continueRepeat&&riftSpeed==1&&string.IsNullOrEmpty(Store.Error)){waitingHero=Store.Data.Hero.id;waitingVisit=visit;waitingSeed=seed;waitingReplaceRunId=replaceRunId;}return;}
             }
             CancelPotionDeparture();
-            var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;
+            var previous=Combat;var previousSession=Store.Data.repeatHunt;var previousSuspended=Store.Data.suspendedRun;CombatSimulation candidate;
             string fingerprint=Store.Data.Hero.lastRiftFingerprint;int boss=Store.Data.Hero.lastRiftBoss;
             int stage=Mathf.Clamp(SelectedStage,1,Mathf.Min(1000,Store.Data.Hero.highestClear+1));
-            try{Combat=new CombatSimulation(Store.Data,catalog,ground?.stage??stage,training,snapshot,seed,ownedTraining:!fullSkillTraining,liveOps:snapshot==null&&(training<0||ground!=null)?LiveOps?.Capture(ground?.stage??stage):null,trainingGround:ground);}
-            catch(Exception e){Combat=previous;BlockRepeat(RepeatBlock.Configuration,e.Message);Notify(e.Message);return;}
-            if(training<0){Store.Data.suspendedRun=Combat.State;Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRecommendedLoot=(id,policy,rarityOnly)=>Store.CommitRecommendedLoot(Combat.State,id,policy,rarityOnly);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
+            try{candidate=new CombatSimulation(Store.Data,catalog,ground?.stage??stage,training,snapshot,seed,ownedTraining:!fullSkillTraining,liveOps:snapshot==null&&(training<0||ground!=null)?LiveOps?.Capture(ground?.stage??stage):null,trainingGround:ground);}
+            catch(Exception e){Store.Data.Hero.lastRiftFingerprint=fingerprint;Store.Data.Hero.lastRiftBoss=boss;BlockRepeat(RepeatBlock.Configuration,e.Message);Notify(e.Message);return;}
+            if(training<0)Store.Data.suspendedRun=candidate.State;
             if(training<0)
             {
-                var continuing=(continueRepeat||resume)&&previousSession?.heroId==Combat.Hero.id&&(!resume||previousSession.runId==Combat.State.id)?
+                var continuing=(continueRepeat||resume)&&previousSession?.heroId==candidate.Hero.id&&(!resume||previousSession.runId==candidate.State.id)?
                     JsonUtility.FromJson<RepeatHuntSession>(JsonUtility.ToJson(previousSession)):null;
-                Store.Data.repeatHunt=RepeatHunt.Start(Combat.State,Combat.RepeatPolicy,continuing);
-                if(!resume&&Combat.EdictActive&&!Store.Data.repeatHunt.policy.stopWhenFull&&Economy.FreeSlots(Store.Data.Hero)<=0)Combat.State.limitedLoot=true;
+                Store.Data.repeatHunt=RepeatHunt.Start(candidate.State,candidate.RepeatPolicy,continuing);
+                if(!resume&&candidate.EdictActive&&!Store.Data.repeatHunt.policy.stopWhenFull&&Economy.FreeSlots(Store.Data.Hero)<=0)candidate.State.limitedLoot=true;
             }
             else Store.Data.repeatHunt=null;
-            if(!(training<0?Store.CommitRiftEntry(Combat.State,riftSpeed,resume):Store.Save()))
+            if(!(training<0?Store.CommitRiftEntry(candidate.State,riftSpeed,resume):Store.Save()))
             {
-                Combat=previous;Store.Data.repeatHunt=previousSession;Store.Data.suspendedRun=previousSuspended;
+                Store.Data.repeatHunt=previousSession;Store.Data.suspendedRun=previousSuspended;
                 Store.Data.Hero.lastRiftFingerprint=fingerprint;Store.Data.Hero.lastRiftBoss=boss;
                 BlockRepeat(RepeatBlock.Save,Store.Error);Notify(Store.Error);return;
             }
+            Combat=candidate;
+            if(training<0){Combat.CommitChest=c=>Store.CommitChest(Combat.State,c);Combat.CommitRecommendedLoot=(id,policy,rarityOnly)=>Store.CommitRecommendedLoot(Combat.State,id,policy,rarityOnly);Combat.CommitRunChange=(request,operation,change)=>Store.CommitRunMutation(Combat.State,request,operation,change);}
             UI.CloseRiftEntry();
             // The last errand: the first rift entered after the hero has put on his armor.
             if(training<0&&!resume)Store.AdvanceTownQuest(TownQuest.RiftOne);

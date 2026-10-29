@@ -27,7 +27,7 @@ namespace Hellscript
         {
             if (training) return "training";
             if (phase == RunPhase.Boss) return "boss";
-            if (phase.HasValue && phase != RunPhase.Cleared && phase != RunPhase.Failed) return "rift";
+            if (phase.HasValue || page == "result") return "rift";
             return page is "title" or "characters" ? page : "sanctuary";
         }
 

@@ -99,7 +99,8 @@ namespace Hellscript
                 return true;
             }
             var outcome=won?policy.success:policy.failure;
-            s.nextStage=Math.Max(1,Math.Min(highestClear+1,run.stage+(outcome==RepeatOutcome.Next?1:outcome==RepeatOutcome.Lower?-1:0)));
+            int maximum=Math.Min(RiftEntryRules.RewardStages,highestClear+1);
+            s.nextStage=Math.Max(1,Math.Min(maximum,run.stage+(outcome==RepeatOutcome.Next?1:outcome==RepeatOutcome.Lower?-1:0)));
             s.stop=s.cancelled?RepeatStop.Cancelled:!policy.enabled?RepeatStop.Disabled:
                 outcome==RepeatOutcome.Stop?(won?RepeatStop.Success:RepeatStop.Failure):
                 s.consecutiveFailures>=policy.failures?RepeatStop.FailureLimit:
@@ -112,7 +113,7 @@ namespace Hellscript
         }
         public static int NextStage(RepeatHuntSession session,RunState run,int highestClear)
         {
-            var settings=session.policy.settings;int maximum=Math.Min(1000,highestClear+1);
+            var settings=session.policy.settings;int maximum=Math.Min(RiftEntryRules.RewardStages,highestClear+1);
             int stage=settings.progress==RepeatProgress.Highest?maximum:settings.progress==RepeatProgress.Fixed?session.firstStage:
                 run.stage+(run.phase==RunPhase.Cleared?1:-1);
             return Math.Max(1,Math.Min(maximum,stage));
