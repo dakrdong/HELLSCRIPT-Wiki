@@ -10,7 +10,6 @@ namespace Hellscript
         public GlobalHudLayout Layout {get;private set;}
         public GlobalHudSnapshot Snapshot {get;private set;}
         public StatusStripView StatusStrip {get;private set;}
-        public Action<HudEffectState> EffectSelected;
         public Action<HudSlotState> SlotSelected;
         public Action AllEffectsSelected;
         public Action EdictSelected,PotionSettingsSelected;
@@ -64,7 +63,7 @@ namespace Hellscript
             for(int i=0;i<4;i++)slots.Add(CreateSlot("Active "+i,false,i));
             slots.Add(CreateSlot("Ultimate",false,4));
             var strip=Rect("Status strip",safe);StatusStrip=strip.gameObject.AddComponent<StatusStripView>();
-            StatusStrip.Initialize(this,font,e=>EffectSelected?.Invoke(e),()=>AllEffectsSelected?.Invoke());ready=true;
+            StatusStrip.Initialize(this,font,()=>AllEffectsSelected?.Invoke());ready=true;
         }
         RectTransform Vital(string name,Color color,out Image fill,out Text label)
         {

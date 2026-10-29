@@ -22,7 +22,6 @@ namespace Hellscript
             if(game.Store==null)return;
             var obj=new GameObject("Global observation HUD",typeof(RectTransform));obj.transform.SetParent(transform,false);
             globalHud=obj.AddComponent<GlobalHudView>();globalHud.Initialize(font,null);
-            globalHud.EffectSelected=effect=>ShowHudInformation(effect.name,EffectDescription(effect),effect.id);
             globalHud.SlotSelected=ShowHudSlot;
             globalHud.AllEffectsSelected=ShowHudEffects;
             globalHud.EdictSelected=()=>
@@ -35,7 +34,7 @@ namespace Hellscript
                 ToggleEdictQuick();
             };globalHud.PotionSettingsSelected=TogglePotionQuick;globalHud.SkillTapped=SkillSlotTapped;globalHud.SkillHeld=SkillSlotHeld;globalHud.PotionTapped=PotionSlotTapped;globalHud.PotionHeld=PotionSlotHeld;
         }
-        static string EffectDescription(HudEffectState effect)=>effect.description+"\n"+(effect.permanent?Loc.T("상시"):Loc.F("남은 시간 {0}초",GlobalHudSnapshot.TimeLabel(effect.remaining)))+"\n"+Loc.F("중첩 {0} · 출처 {1}",effect.stacks,effect.id);
+        static string EffectDescription(HudEffectState effect)=>effect.description+"\n"+effect.DurationText+"\n"+effect.StackText;
         void RefreshGlobalHud()
         {
             if(globalHud==null)return;
@@ -61,8 +60,6 @@ namespace Hellscript
             if(!SkillIconAssets.TryResolve(id,out bool passive,out var sprite))return;
             var row=Row(parent,72);var icon=SkillIconView.Create(row,passive);Place(icon.Rect,0,2,64,64);icon.SetCasualHudFrame(status:passive);icon.SetSprite(sprite);
         }
-        void ShowHudInformation(string title,string body,string skillId=null)
-        {ShowHudPanel(title,parent=>{AddSkillInspectionIcon(parent,skillId);Note(parent,body,20,Mathf.Max(120,body.Split('\n').Length*32),pale);});}
         void ShowHudSlot(HudSlotState slot)
         {
             string description=slot.description+(slot.count>=0?"\n"+Loc.F("보유 수량 {0}",slot.count):"")+(slot.remaining>0?"\n"+Loc.F("재사용 대기 {0}초",GlobalHudSnapshot.TimeLabel(slot.remaining)):"");
@@ -89,7 +86,7 @@ namespace Hellscript
             ShowHudPanel("현재 상태",parent=>{foreach(var effect in effects){AddSkillInspectionIcon(parent,effect.id);Note(parent,effect.name+"\n"+EffectDescription(effect),19,150,pale);}});
         }
         Action hudPanelClosed;
-        // Every HUD inspection window (effect and slot information, potion and skill popups) is casual.
+        // Slot information, potion and skill inspection windows retain their modal pause behavior.
         void ShowHudPanel(string title,Action<RectTransform> build,Action onClose=null,UiSkin skin=null)
         {
             skin=skin??UiSkin.Casual;

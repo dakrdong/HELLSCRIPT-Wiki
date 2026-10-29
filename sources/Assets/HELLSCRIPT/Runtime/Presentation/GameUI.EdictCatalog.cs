@@ -37,7 +37,7 @@ namespace Hellscript
             var data=game.Store.Data;var hero=data.Hero;var groups=HuntEdictHudRows.Groups(sheetTab,data,hero);
             SurvivalNote(sheetContent,"edict-sheet-description",groups[sheetGroup].Description,UiTheme.Caption,UiSkin.Casual.Muted);
             AddSelectedCatalogRows(HuntEdictLoadout.FromHero(hero).edict);
-            FinishSurvivalBody(keep);
+            FinishEdictBody(keep);
         }
     }
 }

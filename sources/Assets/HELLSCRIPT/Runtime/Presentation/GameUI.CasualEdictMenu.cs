@@ -89,6 +89,17 @@ namespace Hellscript
                     quickAnchor=new Rect(anchor.x,safe.yMin/quickScale+164*unit-anchor.height,anchor.width,anchor.height);
                 }
                 build();
+                if(sheetScroll!=null)
+                {
+                    float top=safe.yMax-14*positionUnit*quickScale;
+                    // Live portrait editors share the space above the dock with the framed world.
+                    // Reserve its header and minimum viewport before letting the body grow upward.
+                    if(quickLive&&(PositionPanel||TargetPanel||OrderPanel)&&safe.height>=safe.width)
+                        top=Mathf.Min(top,EdictWorldBounds().yMax-EdictWorldMinimum-EdictWorldGap);
+                    float maximum=top/quickScale-sheetCard.anchoredPosition.y;
+                    EdictPopupLayout.Fit(sheetCard,sheetScroll,maximum:maximum);
+                    SheetEntrance(sheetCard,sheetFrameKey);
+                }
             }
             finally{quickAnchor=anchor;}
         }

@@ -62,7 +62,7 @@ namespace Hellscript
                 var label=Text(parent,"repeat-goal-value",Label(Math.Max(value,max)),12,y,width-24,UiTheme.Heading);label.text=Label(value);
                 float sliderY=y+label.rectTransform.rect.height+8;
                 var area=UiLayout.Rect("repeat-goal-slider",parent);UiLayout.Place(area,20,sliderY,width-40,28);area.gameObject.AddComponent<UnityEngine.UI.Image>().color=Color.clear;
-                var slider=area.gameObject.AddComponent<SettingsStepSlider>();slider.minValue=1;slider.maxValue=Math.Max(1,max);slider.wholeNumbers=true;slider.transition=UnityEngine.UI.Selectable.Transition.None;
+                var slider=area.gameObject.AddComponent<SettingsStepSlider>();slider.ScrollOnVerticalDrag=true;slider.minValue=1;slider.maxValue=Math.Max(1,max);slider.wholeNumbers=true;slider.transition=UnityEngine.UI.Selectable.Transition.None;
                 var track=UiLayout.Rect("Track",area);UiLayout.Place(track,0,10,width-40,8);var ink=track.gameObject.AddComponent<StorageSurface>();ink.raycastTarget=false;ink.SetSkin(Skin,Skin.Edge,4,1,0,Skin.Disabled,Skin.Disabled);
                 var travel=UiLayout.Rect("Handle area",area);UiLayout.Stretch(travel);travel.offsetMin=new Vector2(8,0);travel.offsetMax=new Vector2(-8,0);
                 var handle=UiLayout.Rect("Handle",travel);handle.sizeDelta=new Vector2(18,28);var face=handle.gameObject.AddComponent<StorageSurface>();face.SetSkin(Skin,Skin.Navy,8,1,2,Skin.Gold,Skin.GoldShade);
@@ -108,7 +108,8 @@ namespace Hellscript
             public void Render(ContentWindowView window)
             {
                 view=window;factor=readingScale?.Invoke()??1;view.Frame.name="repeat-settings-window";
-                float width=view.Width-24;bool wide=width>=760;const float gap=12;float column=wide?(width-gap*2)/3:width;
+                EdictPopupLayout.AddScrollbar(view.Scroll);view.Body.sizeDelta=new Vector2(-20,0);
+                float width=view.Width-44;bool wide=width>=760;const float gap=12;float column=wide?(width-gap*2)/3:width;
                 var help=Text(view.Navigation,"Repeat help",Loc.F("남은 피로도 {0}분 · 현재 결과는 새 목표 횟수에 포함하지 않습니다.",Maximum),0,0,width,UiTheme.Caption,Skin.Muted);
                 var groups=UiLayout.Rect("Repeat choices",view.Body);UiLayout.Place(groups,0,0,width,1);var groupLayout=groups.gameObject.AddComponent<UnityEngine.UI.LayoutElement>();
                 var goal=Card(groups,"repeat-goal-group",0,0,column,"반복 목표",out float y);
@@ -133,6 +134,7 @@ namespace Hellscript
                 string message=notice!=""?notice:Maximum<1?Loc.T("남은 피로도가 1분 미만이므로 시간 목표를 선택할 수 없습니다."):Loc.T("전투 중 시간 목표가 끝나도 현재 판의 보상은 유지됩니다.");
                 var note=Text(view.Body,"Repeat notice",message,0,0,width,UiTheme.Caption,Skin.Muted);note.gameObject.AddComponent<UnityEngine.UI.LayoutElement>().preferredHeight=Mathf.Max(44,note.rectTransform.rect.height);
                 FitShell(Mathf.Max(36,help.rectTransform.rect.height),Actions(width));
+                EdictPopupLayout.Fit(view.Frame,view.Scroll);
             }
             void Save(bool enabled)
             {

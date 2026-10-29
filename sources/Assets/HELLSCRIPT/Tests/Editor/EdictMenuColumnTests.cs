@@ -28,6 +28,7 @@ namespace Hellscript.Tests
         }
         [TearDown] public void Teardown()
         {
+            if(ui!=null&&ui.Gate!=null)Call("OnDestroy");
             Object.DestroyImmediate(host);Object.DestroyImmediate(hudHost);Object.DestroyImmediate(controller);Object.DestroyImmediate(catalog);UiSafeArea.AspectRatio=aspect;Loc.UseSource();
         }
         void Set(string field,object value)=>typeof(GameUI).GetField(field,Access).SetValue(ui,value);
@@ -229,6 +230,52 @@ namespace Hellscript.Tests
             }
         }
 
+        void OpenWorldPreviewEditor(string language,int width,int height,string option)
+        {
+            if(language=="en")Loc.Use("en",LocalizationTable.Parse(Resources.Load<TextAsset>("Localization/en").text).Entries);
+            float ratio=width/(float)height;UiSafeArea.AspectRatio=ratio;var safe=UiSafeArea.Current;bool land=width>height;
+            float scale=Mathf.Min(safe.width/(land?956:440),safe.height/(land?440:956));
+            Set("quickScale",scale);quick.transform.localScale=Vector3.one*scale;LayoutColumn(ratio);
+            var header=GlobalHudView.Rect("Battle header",host.transform);GlobalHudView.SetRect(header,new Rect(safe.xMin,safe.yMax-116*scale,safe.width,116*scale));Set("header",header);
+            Set("quickLive",true);Set("sheetTab","combat");Set("positionList",false);
+            Set("sheetGroup",HuntEdictHudRows.Groups("combat",store.Data,store.Data.Hero).ToList().FindIndex(g=>g.ids.Contains(option)));
+            Call("BuildEdictSheet");Canvas.ForceUpdateCanvases();
+        }
+        [TestCase("ko")][TestCase("en")]
+        public void PortraitSevenCardOrderReservesTheWorldPreviewBeforeGrowingThePopup(string language)
+        {
+            OpenWorldPreviewEditor(language,440,956,"common.order");var safe=UiSafeArea.Current;float scale=safe.width/440;
+            var card=(RectTransform)typeof(GameUI).GetField("sheetCard",Access).GetValue(ui);
+            var scroll=(ScrollRect)typeof(GameUI).GetField("sheetScroll",Access).GetValue(ui);
+            Assert.AreEqual(7,card.GetComponentsInChildren<HuntEdictOrderCard>().Length,"All seven actions must remain available.");
+            var viewport=(Rect)Call("EdictWorldViewport");Assert.Greater(viewport.width,0);Assert.GreaterOrEqual(viewport.height*Screen.height,64-.01f);
+            float gap=Mathf.Max(8,14*scale),top=safe.yMax-116*scale-36*Mathf.Max(.75f,hud.Layout.scale)-64-gap;
+            Assert.AreEqual(top,Bounds(card).yMax,.05f,"The overflowing frame must stop below the header and minimum world viewport.");
+            Assert.AreEqual((top-Bounds(card).yMin)/scale,card.rect.height,.05f);
+            Assert.Greater(scroll.content.rect.height,scroll.viewport.rect.height);Assert.IsTrue(scroll.vertical);
+            Assert.IsNotNull(scroll.verticalScrollbar);Assert.IsTrue(scroll.verticalScrollbar.gameObject.activeSelf);
+            Assert.AreEqual(scroll.viewport.rect.height/scroll.content.rect.height,scroll.verticalScrollbar.size,.01f);
+        }
+        static System.Collections.Generic.IEnumerable<TestCaseData> PreviewEditorSizes()
+        {
+            foreach(var size in new[]{new[]{440,956},new[]{956,440},new[]{1600,900},new[]{1600,1000},new[]{2100,900},new[]{900,1000}})
+                foreach(string language in new[]{"ko","en"})foreach(string option in new[]{"position.engage","target.priorityGrade","common.order"})
+                    yield return new TestCaseData(language,size[0],size[1],option);
+        }
+        [TestCaseSource(nameof(PreviewEditorSizes))]
+        public void EveryPreviewEditorKeepsTheWorldOutsideThePopupAndInsideTheHeader(string language,int width,int height,string option)
+        {
+            OpenWorldPreviewEditor(language,width,height,option);
+            var viewport=(Rect)Call("EdictWorldViewport");var world=new Rect(viewport.x*Screen.width,viewport.y*Screen.height,viewport.width*Screen.width,viewport.height*Screen.height);
+            var card=(RectTransform)typeof(GameUI).GetField("sheetCard",Access).GetValue(ui);var safe=UiSafeArea.Current;
+            Assert.GreaterOrEqual(world.width,64-.01f);Assert.GreaterOrEqual(world.height,64-.01f);Assert.IsFalse(world.Overlaps(Bounds(card)));
+            float scale=(float)typeof(GameUI).GetField("quickScale",Access).GetValue(ui);
+            Assert.LessOrEqual(world.yMax,safe.yMax-116*scale-36*Mathf.Max(.75f,hud.Layout.scale)+.01f);
+            Assert.GreaterOrEqual(world.xMin,safe.xMin-.01f);Assert.LessOrEqual(world.xMax,safe.xMax+.01f);
+            var scroll=(ScrollRect)typeof(GameUI).GetField("sheetScroll",Access).GetValue(ui);bool overflow=scroll.content.rect.height>scroll.viewport.rect.height+.01f;
+            Assert.AreEqual(overflow,scroll.vertical);Assert.AreEqual(overflow,scroll.verticalScrollbar.gameObject.activeSelf);
+        }
+
         [TestCase("강화 스킬·버프 물약이 끝나기 전에 다시 사용")]
         [TestCase("Refresh enhancement skills and buff potions before they expire")]
         public void NarrowOrderDescriptionsStayComplete(string text)
@@ -277,6 +324,94 @@ namespace Hellscript.Tests
             Assert.IsNotEmpty(cards.Single(c=>c.Id=="TREASURE").GetComponentsInChildren<Text>(),"Keep the full card content visible.");
         }
 
+        ScrollRect OpenOverflowingPriorityGuide(string language)
+        {
+            Assert.IsNull(ContentWindowHost.BackLocked,"The fixture must not replace another tutorial input owner.");
+            if(language=="en")Loc.Use("en",LocalizationTable.Parse(Resources.Load<TextAsset>("Localization/en").text).Entries);
+            store=GuideTutorialTests.FreshWarrior(catalog);var run=store.StartGuideTutorial(catalog);Assert.IsNotNull(run,store.Error);
+            var sim=new CombatSimulation(store.Data,catalog,1,3,run,recordResume:false,tutorial:true);
+            run.tutorialPhase=GuideTutorial.TargetTalk;run.paused=true;Assert.IsTrue(store.UnlockGuideEdict(run),store.Error);
+            var game=controller.GetComponent<GameController>();typeof(GameController).GetProperty("Store").GetSetMethod(true).Invoke(game,new object[]{store});
+            typeof(GameController).GetField("combat",Access).SetValue(game,sim);
+            LayoutColumn(956f/440);Set("guideLesson","target-grade");Set("sheetTab","combat");Set("positionList",false);
+            Set("sheetGroup",HuntEdictHudRows.Groups("combat",store.Data,store.Data.Hero).ToList().FindIndex(g=>g.ids.Contains("target.priorityGrade")));
+            Call("BuildEdictSheet");TickPriorityGuide();
+            var scroll=(ScrollRect)typeof(GameUI).GetField("sheetScroll",Access).GetValue(ui);
+            Assert.IsTrue(game.TutorialActive);Assert.IsTrue(Tutorials.Mandatory(store.Data));Assert.IsTrue(scroll.vertical);
+            Assert.Greater(scroll.content.rect.height,scroll.viewport.rect.height+.01f,"The regression requires an overflowing landscape list.");
+            Assert.IsTrue(scroll.verticalScrollbar.gameObject.activeInHierarchy);Assert.AreEqual("edict-target-card-BOSS",ui.Gate.Target.name);
+            return scroll;
+        }
+        void TickPriorityGuide()
+        {
+            Quiet(()=>Assert.IsTrue((bool)Call("TickGuideTargetLesson")));
+            typeof(PrologueGate).GetMethod("LateUpdate",Access).Invoke(ui.Gate,null);
+        }
+        [TestCase("ko")][TestCase("en")]
+        public void TheGuidedCenterDragReordersAnOverflowingPriorityListAndAdvancesTheLesson(string language)
+        {
+            OpenOverflowingPriorityGuide(language);
+            for(int step=0;step<2;step++)
+            {
+                var from=ui.Gate.Target;var to=ui.GuideDragTo;Assert.IsNotNull(to);var order=from.GetComponentInParent<HuntEdictOrderList>();
+                Assert.IsNotNull(from.GetComponent<HuntEdictOrderCard>());Assert.GreaterOrEqual(UiVisibility.Fraction(from,UiSafeArea.Current),.99f);
+                var start=ui.Gate.Hole.center;Assert.Less(Vector2.Distance(start,UiVisibility.ScreenRect(from).center),.01f,"Use the center shown by the guide hand.");
+                string before=HuntEdictSummary.Value(store.Data.Hero.edict,"target.priorityGrade"),sourceName=from.name;long revision=store.Revision;
+                var pointer=new UnityEngine.EventSystems.PointerEventData(null){button=UnityEngine.EventSystems.PointerEventData.InputButton.Left,position=start,pressPosition=start,delta=Vector2.up,eligibleForClick=true};
+                Quiet(()=>
+                {
+                    try
+                    {
+                        UnityEngine.EventSystems.ExecuteEvents.Execute(from.gameObject,pointer,UnityEngine.EventSystems.ExecuteEvents.beginDragHandler);
+                        Assert.IsTrue(HuntEdictOrderCard.Dragging,"The guided card's center must reorder even when its list scrolls.");
+                        pointer.position=UiVisibility.ScreenRect(to).center;
+                        UnityEngine.EventSystems.ExecuteEvents.Execute(from.gameObject,pointer,UnityEngine.EventSystems.ExecuteEvents.dragHandler);
+                        Assert.AreEqual(revision,store.Revision,"The drag preview must not save.");
+                        UnityEngine.EventSystems.ExecuteEvents.Execute(from.gameObject,pointer,UnityEngine.EventSystems.ExecuteEvents.endDragHandler);
+                    }
+                    finally{order.Cancel();}
+                });
+                Assert.AreNotEqual(before,HuntEdictSummary.Value(store.Data.Hero.edict,"target.priorityGrade"),store.Error);Assert.Greater(store.Revision,revision);
+                TickPriorityGuide();Assert.AreNotEqual(sourceName,ui.Gate.Target.name,"The completed guided move must advance to the next instruction.");
+            }
+            Assert.IsTrue(GuideTutorial.GradeDone(store.Data.Hero.edict));Assert.AreEqual("message",typeof(GameUI).GetField("guideLesson",Access).GetValue(ui));
+            Assert.AreEqual("Voice narration",ui.Gate.Target.name);
+            ui.Gate.Target.GetComponent<Button>().onClick.Invoke();TickPriorityGuide();
+            Assert.AreEqual("target-type",typeof(GameUI).GetField("guideLesson",Access).GetValue(ui));Assert.AreEqual("edict-target-category-TYPE",ui.Gate.Target.name);
+        }
+        [TestCase("ko")][TestCase("en")]
+        public void TheSamePriorityCardCenterScrollsWhenTheGuideIsHidden(string language)
+        {
+            var scroll=OpenOverflowingPriorityGuide(language);var from=ui.Gate.Target;ui.Gate.Hide();
+            Canvas.ForceUpdateCanvases();scroll.Rebuild(CanvasUpdate.PostLayout);
+            float maximum=scroll.content.rect.height-scroll.viewport.rect.height;scroll.content.anchoredPosition=new Vector2(0,maximum/2);
+            float beforeOffset=scroll.content.anchoredPosition.y;string before=HuntEdictSummary.Value(store.Data.Hero.edict,"target.priorityGrade");long revision=store.Revision;
+            var start=UiVisibility.ScreenRect(from).center;
+            var pointer=new UnityEngine.EventSystems.PointerEventData(null){button=UnityEngine.EventSystems.PointerEventData.InputButton.Left,position=start,pressPosition=start,delta=Vector2.up,eligibleForClick=true};
+            Quiet(()=>
+            {
+                UnityEngine.EventSystems.ExecuteEvents.Execute(from.gameObject,pointer,UnityEngine.EventSystems.ExecuteEvents.beginDragHandler);
+                pointer.position+=Vector2.up*(maximum/4);
+                UnityEngine.EventSystems.ExecuteEvents.Execute(from.gameObject,pointer,UnityEngine.EventSystems.ExecuteEvents.dragHandler);
+                UnityEngine.EventSystems.ExecuteEvents.Execute(from.gameObject,pointer,UnityEngine.EventSystems.ExecuteEvents.endDragHandler);
+            });
+            Assert.Greater(scroll.content.anchoredPosition.y,beforeOffset);Assert.IsFalse(HuntEdictOrderCard.Dragging);Assert.IsFalse(pointer.eligibleForClick);
+            Assert.AreEqual(before,HuntEdictSummary.Value(store.Data.Hero.edict,"target.priorityGrade"));Assert.AreEqual(revision,store.Revision);
+        }
+
+        [Test] public void BothEndsOfAnExpandedGripReorderAnOverflowingList()
+        {
+            var scroll=OpenOverflowingPriorityGuide("ko");var card=ui.Gate.Target.GetComponent<HuntEdictOrderCard>();ui.Gate.Hide();
+            var grip=card.GetComponentsInChildren<Text>().Single(t=>t.text=="≡").rectTransform;
+            grip.anchoredPosition=new Vector2(card.Rect.rect.xMax-65,grip.anchoredPosition.y);grip.sizeDelta=new Vector2(60,grip.rect.height);
+            Canvas.ForceUpdateCanvases();Assert.IsTrue(scroll.vertical);var bounds=Bounds(grip);
+            foreach(float x in new[]{bounds.xMin+2,bounds.xMax-2})
+            {
+                var point=new Vector2(x,bounds.center.y);var pointer=new UnityEngine.EventSystems.PointerEventData(null){button=UnityEngine.EventSystems.PointerEventData.InputButton.Left,position=point,pressPosition=point};
+                Quiet(()=>{try{card.OnBeginDrag(pointer);Assert.IsTrue(HuntEdictOrderCard.Dragging,"The whole visible grip must reorder.");}finally{card.OnCancel(new UnityEngine.EventSystems.BaseEventData(null));}});
+            }
+        }
+
         [Test] public void ADescriptionCanGrowWhileTheDragInsertionMarkerExists()
         {
             LayoutColumn(440f/956);var groups=HuntEdictHudRows.Groups("combat",store.Data,store.Data.Hero);
@@ -284,7 +419,8 @@ namespace Hellscript.Tests
             var notes=(System.Collections.Generic.List<Text>)typeof(GameUI).GetField("orderDescriptions",Access).GetValue(ui);var note=notes[0];
             var card=note.GetComponentInParent<HuntEdictOrderCard>();Assert.IsNotNull(card);var list=card.GetComponentInParent<HuntEdictOrderList>();
             float before=list.GetComponent<LayoutElement>().preferredHeight;long revision=store.Revision;
-            var e=new UnityEngine.EventSystems.PointerEventData(null){position=Bounds(card).center,button=UnityEngine.EventSystems.PointerEventData.InputButton.Left};
+            var grip=new Vector2(Bounds(card).xMax-4,Bounds(card).center.y);
+            var e=new UnityEngine.EventSystems.PointerEventData(null){position=grip,pressPosition=grip,button=UnityEngine.EventSystems.PointerEventData.InputButton.Left};
             bool ignored=UnityEngine.TestTools.LogAssert.ignoreFailingMessages;UnityEngine.TestTools.LogAssert.ignoreFailingMessages=true;
             try
             {
@@ -325,12 +461,12 @@ namespace Hellscript.Tests
 
         [TestCase("ko",.5f)][TestCase("ko",1f)][TestCase("ko",2f)]
         [TestCase("en",.5f)][TestCase("en",1f)][TestCase("en",2f)]
-        public void PortraitPositionModesKeepTheirHeightAndExposeTheRestoredDirection(string language,float scale)
+        public void PortraitPositionModesFitTheirContentsAndExposeTheRestoredDirection(string language,float scale)
         {
             if(language=="en")Loc.Use("en",LocalizationTable.Parse(Resources.Load<TextAsset>("Localization/en").text).Entries);
             UiSafeArea.AspectRatio=440f/956;Set("quickScale",UiSafeArea.Current.width/440*scale);LayoutColumn(440f/956);
             Set("sheetTab","combat");Set("positionList",false);Set("sheetGroup",HuntEdictHudRows.Groups("combat",store.Data,store.Data.Hero).ToList().FindIndex(g=>g.ids.Contains("position.engage")));
-            Call("BuildEdictSheet");float height=0;
+            Call("BuildEdictSheet");
             Assert.IsTrue((bool)typeof(GameUI).GetField("sheetPosition",Access).GetValue(ui),"The fixture must open the dedicated position editor.");
             bool ignored=UnityEngine.TestTools.LogAssert.ignoreFailingMessages;UnityEngine.TestTools.LogAssert.ignoreFailingMessages=true;
             try
@@ -341,20 +477,48 @@ namespace Hellscript.Tests
                     edit.ReplaceDraft(HuntEdictQuickMenu.With(edit.Draft,new System.Collections.Generic.Dictionary<string,string>{{key,mode},{"position.engageDistanceSource","EXPLICIT"},{"position.distanceSource","EXPLICIT"}}));
                     Assert.IsTrue(store.CommitHuntEdict(edit,catalog),store.Error);Assert.AreEqual(mode,HuntEdictSummary.Value(HuntEdictLoadout.FromHero(store.Data.Hero).edict,key));
                     Set("positionOpening",opening);Call("RebuildEdictSheet");var scroll=(ScrollRect)typeof(GameUI).GetField("sheetScroll",Access).GetValue(ui);
-                    LayoutRebuilder.ForceRebuildLayoutImmediate(scroll.content);
-                    float current=((RectTransform)quick.transform.Find("edict-sheet")).rect.height;
-                    if(height==0)height=current;Assert.AreEqual(height,current,.01f,"A mode change must keep the fixed panel height.");
-                    string measure=language+" "+mode+" scale="+scale+" safe="+UiSafeArea.Current+" panel="+((RectTransform)quick.transform.Find("edict-sheet")).rect+" unit="+typeof(GameUI).GetField("positionUnit",Access).GetValue(ui)+" canvas="+typeof(GameUI).GetField("quickScale",Access).GetValue(ui)+" anchor="+typeof(GameUI).GetField("quickAnchor",Access).GetValue(ui)+" body="+scroll.content.rect+" viewport="+scroll.viewport.rect;
-                    if(opening)Assert.LessOrEqual(scroll.content.rect.height,scroll.viewport.rect.height+1,measure);
-                    else
+                    // Deferred Destroy leaves inactive same-name cards in this synchronous fixture.
+                    var card=(RectTransform)typeof(GameUI).GetField("sheetCard",Access).GetValue(ui);
+                    Assert.IsTrue(card.gameObject.activeInHierarchy);Assert.IsTrue(scroll.transform.IsChildOf(card));float current=card.rect.height;
+                    var fit=scroll.GetComponent<EdictPopupLayout>();Assert.IsNotNull(fit);
+                    float chrome=(float)typeof(EdictPopupLayout).GetField("chrome",Access).GetValue(fit),maximum=(float)typeof(EdictPopupLayout).GetField("maximum",Access).GetValue(fit);
+                    Assert.AreEqual(Mathf.Min(maximum,chrome+scroll.content.rect.height),current,.5f,"Mode changes must refit the contents up to the safe-area limit.");
+                    string measure=language+" "+mode+" scale="+scale+" safe="+UiSafeArea.Current+" panel="+card.rect+" unit="+typeof(GameUI).GetField("positionUnit",Access).GetValue(ui)+" canvas="+typeof(GameUI).GetField("quickScale",Access).GetValue(ui)+" anchor="+typeof(GameUI).GetField("quickAnchor",Access).GetValue(ui)+" body="+scroll.content.rect+" viewport="+scroll.viewport.rect;
+                    bool overflow=scroll.content.rect.height>scroll.viewport.rect.height+.01f;
+                    Assert.AreEqual(overflow,scroll.vertical,measure);Assert.AreEqual(overflow,scroll.verticalScrollbar.gameObject.activeSelf,measure);
+                    if(!opening)
                     {
-                        Assert.IsTrue(scroll.vertical,"The added direction setting uses the existing scrolling body.");
                         Assert.IsTrue(quick.GetComponentsInChildren<Button>().Any(b=>b.name=="edict-sheet-choice-position.clockwise-ON"));
                         Assert.IsTrue(quick.GetComponentsInChildren<Button>().Any(b=>b.name=="edict-sheet-choice-position.clockwise-OFF"));
                     }
                 }
             }
             finally{UnityEngine.TestTools.LogAssert.ignoreFailingMessages=ignored;}
+        }
+
+        [TestCase("ko")][TestCase("en")]
+        public void PositionChoicesImmediatelyGrowAndShrinkTheSamePopupWithoutAFrameTick(string language)
+        {
+            if(language=="en")Loc.Use("en",LocalizationTable.Parse(Resources.Load<TextAsset>("Localization/en").text).Entries);
+            var edit=new HuntEdictEditSession(store.Data.Hero);
+            edit.ReplaceDraft(HuntEdictQuickMenu.With(edit.Draft,new System.Collections.Generic.Dictionary<string,string>{{"position.engage","STAND"},{"position.engageDistanceSource","EXPLICIT"}}));
+            Assert.IsTrue(store.CommitHuntEdict(edit,catalog),store.Error);
+            LayoutColumn(440f/956);Set("sheetTab","combat");Set("positionList",false);Set("positionOpening",true);
+            Set("sheetGroup",HuntEdictHudRows.Groups("combat",store.Data,store.Data.Hero).ToList().FindIndex(g=>g.ids.Contains("position.engage")));Call("BuildEdictSheet");
+            var card=(RectTransform)typeof(GameUI).GetField("sheetCard",Access).GetValue(ui);
+            var scroll=(ScrollRect)typeof(GameUI).GetField("sheetScroll",Access).GetValue(ui);float shortHeight=card.rect.height;
+            foreach(string mode in new[]{"DISTANCE","STAND","LURE","STAND","APPROACH","STAND"})
+            {
+                var button=card.GetComponentsInChildren<Button>().Single(b=>b.name=="edict-sheet-choice-position.engage-"+mode);
+                if(mode=="STAND")scroll.content.anchoredPosition=new Vector2(0,50);
+                Quiet(()=>button.onClick.Invoke());Assert.AreEqual(mode,HuntEdictSummary.Value(HuntEdictLoadout.FromHero(store.Data.Hero).edict,"position.engage"));
+                Assert.AreSame(card,typeof(GameUI).GetField("sheetCard",Access).GetValue(ui));Assert.AreSame(scroll,typeof(GameUI).GetField("sheetScroll",Access).GetValue(ui));
+                if(mode=="STAND")Assert.AreEqual(shortHeight,card.rect.height,.5f,"Removing the extra rows must shrink the current popup immediately.");
+                else Assert.Greater(card.rect.height,shortHeight,"Adding option rows must grow the current popup immediately.");
+                bool overflow=scroll.content.rect.height>scroll.viewport.rect.height+.01f;
+                Assert.AreEqual(overflow,scroll.vertical);Assert.AreEqual(overflow,scroll.verticalScrollbar.gameObject.activeSelf);
+                Assert.AreEqual(0,scroll.content.anchoredPosition.y,.01f,"Shrinking must clamp any obsolete scroll offset.");
+            }
         }
 
         [TestCase(false,false)][TestCase(false,true)][TestCase(true,false)][TestCase(true,true)]

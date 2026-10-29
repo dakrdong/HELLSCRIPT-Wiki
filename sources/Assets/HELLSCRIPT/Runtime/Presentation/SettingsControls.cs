@@ -32,12 +32,12 @@ namespace Hellscript
         }
     }
     // The track represents integer 5% steps; dragging never resizes the track underneath the pointer.
-    public sealed class SettingsStepSlider : Slider,IScrollHandler
+    public sealed class SettingsStepSlider : DialogSlider,IScrollHandler
     {
         public bool Dragging {get;private set;}
         public Action Released;
         public override void OnPointerDown(PointerEventData e){Dragging=true;base.OnPointerDown(e);}
-        public override void OnPointerUp(PointerEventData e){base.OnPointerUp(e);Dragging=false;Released?.Invoke();}
+        public override void OnPointerUp(PointerEventData e){base.OnPointerUp(e);Dragging=false;if(!Scrolling)Released?.Invoke();}
         public void OnScroll(PointerEventData e)
         {if(!IsInteractable()||Mathf.Abs(e.scrollDelta.y)<.01f)return;value+=Mathf.Sign(e.scrollDelta.y);e.Use();}
         protected override void OnDisable(){Dragging=false;base.OnDisable();}

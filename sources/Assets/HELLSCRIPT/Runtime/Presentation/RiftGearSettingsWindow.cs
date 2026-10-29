@@ -52,6 +52,8 @@ namespace Hellscript
                 var backdrop=view.transform.Find("Backdrop");if(backdrop!=null)backdrop.GetComponent<Image>().color=Veil;
                 bool portrait=H>W;
                 float pw=portrait?W-24:Mathf.Min(560,W-16),ph=portrait?H-60:Mathf.Min(780,H-16),px=portrait?12:(W-pw)/2,py=portrait?30:(H-ph)/2;
+                float cw=pw-34,contentH=Probe(t=>Body(t,cw)),bottom=H-py-ph;
+                ph=EdictPopupLayout.Height(contentH,133,H-bottom-(portrait?16:8));py=H-bottom-ph;
                 var card=kit.Box(frame,"Rift gear settings",px,py,pw,ph,skin.CreamShade,Navy,20,3,5,hit:true);
                 var clip=kit.Clip(card,"Panel glow",3,3,pw-6,ph-6);kit.Glow(clip,(pw-6)/2,0,.9f*(pw-6),.6f*(ph-6),Color.white,.7f);
                 kit.Dashed(card,9,9,pw-18,ph-18,14,2,Trim,6,6);
@@ -67,8 +69,9 @@ namespace Hellscript
                 var rule=UiLayout.Rect("Header rule",card);UiLayout.Place(rule,17,63,pw-34,1);var fade=rule.gameObject.AddComponent<GearSettingsBar>();fade.raycastTarget=false;
                 var gild=UiTheme.MockGildLine;var clear=new Color(gild.r,gild.g,gild.b,0);fade.Set(new[]{clear,gild,gild,clear},new[]{0f,.2f,.8f,1f});
                 // body: scrolls between the rule and the pinned buttons (64 px below the card top, 66 above its bottom)
-                float cw=pw-34,viewH=Mathf.Max(60,ph-133),contentH=Probe(t=>Body(t,cw));
+                float viewH=Mathf.Max(1,ph-133);
                 var scroll=kit.Scroll(card,"Content scroll",3,64,pw-6,viewH,contentH,out var content);view.Adopt(scroll,content);
+                EdictPopupLayout.AddScrollbar(scroll);
                 Body(content,cw);
                 if(state.offset>0)content.anchoredPosition=new Vector2(0,Mathf.Clamp(state.offset,0,Mathf.Max(0,contentH-viewH)));else scroll.verticalNormalizedPosition=1; // a ScrollRect opens at its end
                 scroll.onValueChanged.AddListener(_=>state.offset=content.anchoredPosition.y);

@@ -71,7 +71,7 @@ namespace Hellscript
             foreach(var button in new[]{minus,plus})button.GetComponentInChildren<Text>().font=skin.BodyFont;
             minus.interactable=row.editable&&float.Parse(row.value,CultureInfo.InvariantCulture)>d.min;plus.interactable=row.editable&&float.Parse(row.value,CultureInfo.InvariantCulture)<d.max;
             var area=UiLayout.Rect("edict-sheet-number-"+d.id,line);UiLayout.Place(area,10,50,width-20,28);area.gameObject.AddComponent<Image>().color=Color.clear;
-            var slider=area.gameObject.AddComponent<SettingsStepSlider>();slider.minValue=0;slider.maxValue=(d.max-d.min)/d.step;slider.wholeNumbers=true;slider.transition=Selectable.Transition.None;
+            var slider=area.gameObject.AddComponent<SettingsStepSlider>();slider.ScrollOnVerticalDrag=true;slider.minValue=0;slider.maxValue=(d.max-d.min)/d.step;slider.wholeNumbers=true;slider.transition=Selectable.Transition.None;
             var track=UiLayout.Rect("Track",area);UiLayout.Place(track,0,10,width-20,8);track.gameObject.AddComponent<StorageSurface>().SetSkin(skin,radius:4,shadow:0,fill:skin.Disabled,fillEnd:skin.Disabled);
             var travel=UiLayout.Rect("Handle area",area);UiLayout.Stretch(travel);travel.offsetMin=new Vector2(8,0);travel.offsetMax=new Vector2(-8,0);
             var handle=UiLayout.Rect("Handle",travel);handle.sizeDelta=new Vector2(18,28);var face=handle.gameObject.AddComponent<StorageSurface>();face.SetSkin(skin,radius:8,shadow:2,fill:skin.Gold,fillEnd:skin.GoldShade);

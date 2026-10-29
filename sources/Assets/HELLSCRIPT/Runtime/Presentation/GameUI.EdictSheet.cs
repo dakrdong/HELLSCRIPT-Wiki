@@ -112,6 +112,13 @@ namespace Hellscript
             if(PositionPanel){BuildPositionBody();return;}
             if(TargetPanel){BuildTargetBody();return;}
         }
+        void FinishEdictBody(float keep)
+        {
+            Canvas.ForceUpdateCanvases();LayoutRebuilder.ForceRebuildLayoutImmediate(sheetContent);
+            sheetContent.anchoredPosition=new Vector2(0,keep);sheetUndoButton.interactable=sheetUndo.Count>0;
+            // Fit after measuring the new rows, including removals, before restoring focus or drawing the preview.
+            sheetScroll.GetComponent<EdictPopupLayout>()?.Refresh();
+        }
         string SheetChoiceText(EdictOptionDefinition d,string code)=>EdictCasualRows.ChoiceText(d,code);
         static bool SheetNumberStacks(float inner,float unit)=>inner<166*unit;
         // A slider over the declared steps with minus and plus; dragging shows the value and the release saves it.
@@ -142,7 +149,7 @@ namespace Hellscript
             var track=Box("edict-sheet-slider-"+d.id,line,UiTheme.Tint(UiTheme.EdgeHex,.7f));QuickRect(track,stacked?8*u:44*u,stacked?78*u:12*u,stacked?Mathf.Max(u,inner-16*u):inner-valueW-92*u,16*u);
             var fill=Box("Fill",track,UiTheme.Tint(UiTheme.GoldHex,.55f));fill.GetComponent<Image>().raycastTarget=false;fill.anchorMin=Vector2.zero;fill.anchorMax=new Vector2(current/(float)steps,1);fill.offsetMin=fill.offsetMax=Vector2.zero;
             var area=Rect("Slide area",track);Stretch(area);var knob=Box("Knob",area,gold);knob.anchorMin=knob.anchorMax=new Vector2(0,.5f);knob.pivot=new Vector2(.5f,.5f);knob.sizeDelta=new Vector2(14,26)*u;knob.GetComponent<Image>().raycastTarget=false;
-            var hit=track.GetComponent<Image>();var slider=track.gameObject.AddComponent<Slider>();slider.targetGraphic=hit;slider.transition=Selectable.Transition.None;slider.handleRect=knob;slider.direction=Slider.Direction.LeftToRight;
+            var hit=track.GetComponent<Image>();var slider=track.gameObject.AddComponent<DialogSlider>();slider.ScrollOnVerticalDrag=true;slider.targetGraphic=hit;slider.transition=Selectable.Transition.None;slider.handleRect=knob;slider.direction=Slider.Direction.LeftToRight;
             slider.minValue=0;slider.maxValue=steps;slider.wholeNumbers=true;slider.SetValueWithoutNotify(current);slider.interactable=row.editable;int shown=current;
             slider.onValueChanged.AddListener(x=>{shown=(int)x;valueText.text=Format(shown)+suffix;fill.anchorMax=new Vector2(shown/(float)steps,1);if(PositionPanel)game.World?.UpdateEdictDistancePreview((float)(min+shown*step));else if(TargetPanel){targetDraft=HuntEdictV2Editing.WithGlobal(targetDraft??HuntEdictLoadout.FromHero(game.Store.Data.Hero).edict,d.id,Format(shown));ShowSheetForecast();}});
             StyleSheetNumber(minus,plus,valueText,hit,fill.GetComponent<Image>(),knob.GetComponent<Image>());

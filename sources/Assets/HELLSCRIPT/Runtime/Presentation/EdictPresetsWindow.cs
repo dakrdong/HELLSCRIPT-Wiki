@@ -65,6 +65,7 @@ namespace Hellscript
             float action=(w-8)/2;
             var revert=view.Button(view.Actions,"되돌리기",0,0,action,44,()=>{Session.Revert();Repaint();});revert.name="edict-presets-revert";revert.interactable=Session.Dirty;
             var save=view.Button(view.Actions,"저장",action+8,0,action,44,()=>Save(),true);save.name="edict-presets-save";save.interactable=Session.Dirty;
+            if(mainScroll!=null){EdictPopupLayout.Fit(view.Frame,mainScroll);height=window.rect.height;bodyHeight=view.Scroll.viewport.rect.height;}
             if(reopen!=null){reopen();var fields=modal.GetComponentsInChildren<InputField>();for(int i=0;i<Math.Min(fields.Length,inputs.Length);i++){fields[i].SetTextWithoutNotify(inputs[i]);dialogValues[i]=inputs[i];}}
         }
         public bool Save(){if(!commit(Session)){Error(saveError());return false;}Repaint();return true;}
@@ -219,6 +220,8 @@ namespace Hellscript
                 h=Mathf.Min(height-2*Look.Padding,needed);Place(panel,(width-DialogWidth)/2,(height-h)/2,DialogWidth,h);
                 Place((RectTransform)panel.Find("Dialog stitch"),0,0,DialogWidth,h);
             }
+            var dialogScroll=panel.GetComponentInChildren<ScrollRect>();
+            if(dialogScroll!=null){Stretch((RectTransform)panel.Find("Dialog stitch"));EdictPopupLayout.Fit(panel,dialogScroll);}
         }
         void FullScreen(RectTransform rect)
         {
@@ -322,7 +325,7 @@ namespace Hellscript
             var barRoot=Panel(viewport,"Scroll track","scroll-track");Place(barRoot,w-12,0,12,h);
             var thumb=Panel(barRoot,"Scroll thumb","scroll-thumb");Stretch(thumb);
             var bar=barRoot.gameObject.AddComponent<Scrollbar>();bar.handleRect=thumb;bar.targetGraphic=thumb.GetComponent<Image>();bar.direction=Scrollbar.Direction.BottomToTop;
-            scroll.verticalScrollbar=bar;if(mock)scroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;return scroll;
+            scroll.verticalScrollbar=bar;scroll.verticalScrollbarVisibility=ScrollRect.ScrollbarVisibility.AutoHide;return scroll;
         }
         RectTransform Row(Transform parent,string name,float height,string skin=null)
         {

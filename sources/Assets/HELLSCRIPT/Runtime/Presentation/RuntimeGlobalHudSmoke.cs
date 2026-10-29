@@ -181,8 +181,8 @@ namespace Hellscript
             var scroller=strip.Viewport.GetComponent<HudStatusScroll>();var pointer=new PointerEventData(EventSystem.current){button=PointerEventData.InputButton.Left,position=new Vector2(300,200)};
             scroller.OnBeginDrag(pointer);strip.Viewport.Find("Effects/Effect 0").GetComponent<Button>().onClick.Invoke();Require(!game.UI.CommonPanelOpen,"Drag triggered inspection.");
             game.UI.SetHudPreview(GlobalHudSnapshot.Sample(12));Require(strip.VisibleEntries==43,"Dragging did not retain expiry placeholders.");scroller.OnEndDrag(pointer);yield return null;yield return null;Require(strip.VisibleEntries==15,"Deferred effect changes were lost.");
-            strip.ScrollTo(0);strip.Viewport.Find("Effects/Effect 0").GetComponent<Button>().onClick.Invoke();Require(game.UI.CommonPanelOpen,"Effect details unavailable.");yield return Capture("14-effect-inspection");
-            yield return Resize(900,1600);yield return Capture("15-inspection-rotated");Click("hud-details-close");Require(game.Combat.State.paused,"Inspection changed original pause state.");
+            strip.ScrollTo(0);strip.Viewport.Find("Effects/Effect 0").GetComponent<Button>().onClick.Invoke();Require(!game.UI.CommonPanelOpen&&game.UI.GlobalHud.transform.Find("Status speech bubble").gameObject.activeSelf,"Effect bubble unavailable.");yield return Capture("14-effect-bubble");
+            yield return Resize(900,1600);yield return Capture("15-bubble-rotated");Require(game.Combat.State.paused,"Bubble changed original pause state.");
             game.UI.SetHudPreview(null);var run=game.Combat.State;run.health=game.Combat.Stats.hp*.1f;run.resource=0;run.potionCd=0;run.potions.resourceCooldown=run.potions.utilityCooldown=0;run.paused=false;
             int hpStock=hero.potions.Count("PH01"),mpStock=hero.potions.Count("PM01"),utilityStock=hero.potions.Count("PU04");
             game.Combat.Tick(.05f);run.paused=true;game.UI.RefreshHud();yield return Capture("17-real-potion-use");
