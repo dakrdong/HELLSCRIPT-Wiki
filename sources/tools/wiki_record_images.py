@@ -5,6 +5,7 @@ image remains a separate first-image copy for old consumers. No pixel generation
 """
 import json
 import re
+import wiki_art_attestation
 
 ART = 'Assets/HELLSCRIPT/Resources/Art/'
 REGISTRY = 'Assets/HELLSCRIPT/Resources/Monsters/MonsterRegistry.json'
@@ -47,7 +48,7 @@ def attach(api, databases):
             resource_paths.setdefault(resource['assetPath'], resource)
     approval = json.loads(api.read(APPROVAL))
     if (approval.get('schemaVersion') != 1 or approval.get('adoption') != 'approved_for_import'
-            or len(approval.get('records', [])) != 604):
+            or len(approval.get('records', [])) != wiki_art_attestation.EXPECTED_COUNT):
         raise ValueError('Changed current art approval unit')
     approved = _unique(approval['records'], 'path', 'approved art path')
     registry = _unique(json.loads(api.read(REGISTRY))['monsters'], 'id', 'monster')

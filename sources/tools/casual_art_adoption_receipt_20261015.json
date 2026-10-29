@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "adoption": "approved_for_import",
-  "recordCount": 604,
+  "recordCount": 605,
   "records": [
     {
       "id": "gold",
@@ -41464,6 +41464,55 @@
       },
       "method": "기존 동결 입력과 현재 PNG/메타 바이트 대조; 생성 모델 확인 주장 없음 / Frozen input and current PNG/meta bytes verified; no model provenance claim",
       "finalAssemblyScope": "Import byte identity only; no model provenance claim"
+    },
+    {
+      "id": "menu-edict-skills",
+      "group": "shared-ui",
+      "family": "painted-menu",
+      "path": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/Casual/menu-edict-skills.png",
+      "sha256": "c0bd8c271de8c4d61bd04e701d3dd69bd5871cc3c4c7161fb63c1f9f5a1a3c57",
+      "previous_sha256": "16befce49c126dea03cbc912d0888ed44338d5ca3945649f7c2382c4e0499a95",
+      "bytes": 401592,
+      "size": [
+        512,
+        512
+      ],
+      "mode": "RGBA",
+      "transparentPixels": 102880,
+      "alphaExtrema": [
+        0,
+        255
+      ],
+      "approvalSha256": "c0bd8c271de8c4d61bd04e701d3dd69bd5871cc3c4c7161fb63c1f9f5a1a3c57",
+      "guid": "bd2f700f11bee4976857c384b237e2c8",
+      "meta_sha256": "74240e684e58ac318a39abd18159c3cca5f241b3f54a7c659f5b9ea03a21d4e8",
+      "finalAssemblyEvidence": {
+        "sourcePath": "Assets/HELLSCRIPT/Resources/Art/GlobalHUD/Casual/menu-edict-skills.png",
+        "sourceSha256": "c0bd8c271de8c4d61bd04e701d3dd69bd5871cc3c4c7161fb63c1f9f5a1a3c57",
+        "sourceCommit": "71fe2cb96568a4ed21567ef4be55274c55aacd9c",
+        "approval": "2026-10-28 user instruction: 메인 HUD에 있는 사냥칙령에 '스킬' 버튼을 추가해줘 (코덱스로 이미지 그려서 넣어줘). 그 버튼으로 스킬 트리 창이 열리게 해줘",
+        "approvalMeaning": "Approved replacement for development import by the 2026-10-28 user instruction; runtime/release approval remains separate",
+        "previousPublicSnapshot": "c75066bd7f25bf57722a0a35cb45b268bfe631e1",
+        "previousBytes": 259120,
+        "nativeGeneration": {
+          "tool": "native image_gen.imagegen",
+          "model": "Unverified: the native tool did not expose its model; gpt-image-2 use is not claimed",
+          "output": "/Users/t8g-2410-pn-005/.codex/generated_images/01a18146-69a3-76c1-8131-58d197981b79/exec-81b7ed9d-e5ca-49bd-a199-0b203f65d16b.png",
+          "sha256": "e8c88a29f779db4fb512a8430f1a45e44cc714f30999665391ed27a0ad5b60eb",
+          "bytes": 1988598,
+          "size": [
+            1254,
+            1254
+          ],
+          "transparent_background": true,
+          "prompt": "Use case: stylized-concept. Create a brand new single game HUD skills icon, a square transparent PNG with genuine RGBA alpha. Subject: one compact closed purple leather spellbook, slightly tilted in three-quarter view, with thick gold corner fittings and a large clear cyan four-point skill rune inset into the cover; the rune glows within the object's silhouette. Match the neighboring HELLSCRIPT casual fantasy icons described here: hand-painted polished mobile RPG item art, faceted painterly planes, rich royal blue/purple, bright warm gold trim, ivory highlights, fine dark navy outer outline, upper-left illumination, strong clean silhouette readable at 30px. The nearby presets icon is an open parchment book with three colored ribbon bookmarks, so this skills icon must be a distinct CLOSED purple rune grimoire. Composition: centered full object filling roughly 87% of a square, generous transparent margin, no cropping. The complete exterior AND gaps must be fully transparent, no background, no scenery, no frame, no badge, no circle, no floor, no drop shadow, no text, no lettering, no extra floating objects, no checkerboard, no solid color matte, no halo. Native transparency, preserve alpha. Deliver one icon only.",
+          "postProcess": "Native RGBA alpha retained; Lanczos resize to existing 512x512 budget; diagnostic composites only."
+        },
+        "metadata": "Existing Unity GUID and .meta bytes preserved",
+        "visualQa": "Light/dark composites inspected during A1 creation; no Unity import/render validation in this attestation task"
+      },
+      "method": "Codex 내장 image_gen으로 생성한 원화와 유지된 PNG 알파/GUID/메타 바이트 검증; 생성 모델 식별자는 확인 불가 / Native image_gen artwork with verified alpha and preserved GUID/meta; model identifier not exposed",
+      "finalAssemblyScope": "User-approved replacement byte identity and offline alpha QA; no additional runtime/release approval claim"
     }
   ],
   "pathAliases": [
