@@ -1,0 +1,14 @@
+/* Compare surface: aligned property columns; horizontal access stays inside each table. */
+.record-table-wrap{max-width:100%;width:100%;overflow:auto;overscroll-behavior-x:contain;border:1px solid var(--line);border-radius:14px;margin:14px 0;scrollbar-color:#526778 transparent}
+.record-grid{width:100%;min-width:calc(var(--columns,5)*148px);table-layout:fixed;border-collapse:collapse}
+.record-grid th,.record-grid td{width:148px;min-width:0;overflow-wrap:anywhere;vertical-align:top;font-size:12px}
+.record-grid th{position:sticky;top:0;z-index:1}
+.record-grid th button{min-height:44px;width:100%;text-align:left;justify-content:flex-start;border:0;background:transparent;padding:0;color:inherit;white-space:normal;font-size:11px}
+.record-grid details{margin:0;padding:0 8px;background:transparent}
+.record-grid summary{font-size:11px;padding:8px 0}
+.record-grid pre{padding:8px;font-size:10px;white-space:pre-wrap;overflow-wrap:anywhere}
+.record-grid .record-value{white-space:pre-wrap}
+.record-grid p{font-size:11px}
+.record-table-wrap:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+#record-count,#table-count{min-height:24px}
+@media(max-width:760px){.record-grid{min-width:calc(var(--columns,5)*140px)}.record-grid th,.record-grid td{width:140px;padding:11px 10px}.record-grid th button{min-height:44px}.record-table-wrap{border-radius:12px}}

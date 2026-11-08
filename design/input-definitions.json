@@ -1,0 +1,313 @@
+{
+  "schemaVersion": 1,
+  "readOnly": true,
+  "source": {
+    "name": "CURRENT_RULES.json",
+    "sha256": "4c10cf88eac0642089382d8f675f7244420ac5b94a82089ffbd220b772e3b22a"
+  },
+  "acceptedProposalSha256": "67bbfcebfef09c9fddc5298dfee64faafd0b41709ff2e7da50048b20a3ee1261",
+  "fields": [
+    {
+      "sourceNamespace": "rules",
+      "sourceKey": "training.points_per_training_level",
+      "sourcePointer": "/rules/training.points_per_training_level",
+      "label": "단련 레벨당 투자 포인트",
+      "value": 5,
+      "valueType": "integer",
+      "unit": "point / training level",
+      "group": "training",
+      "meaning": "단련 레벨이 오를 때 지급하는 투자 포인트 수의 기존 정의입니다.",
+      "relation": "분류별 상한500, 500포인트 증가량 표와 현재 선형식의 분모를 함께 해석합니다. 이 정의만 변경해 파생표를 자동 재계산하지 않습니다. 고정값 분류에는 초당 재생이 포함됩니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "training-allocation",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "단련 StatId 배선 미검증 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/training.per_category_point_cap",
+        "/rules/training.percentage_multiplier",
+        "/rules/training.fixed_value_multiplier"
+      ]
+    },
+    {
+      "sourceNamespace": "rules",
+      "sourceKey": "training.per_category_point_cap",
+      "sourcePointer": "/rules/training.per_category_point_cap",
+      "label": "단련 분류별 투자 상한",
+      "value": 500,
+      "valueType": "integer",
+      "unit": "point",
+      "group": "training",
+      "meaning": "한 단련 분류에 투자할 수 있는 포인트 상한의 기존 정의입니다.",
+      "relation": "분류별 상한500, 500포인트 증가량 표와 현재 선형식의 분모를 함께 해석합니다. 이 정의만 변경해 파생표를 자동 재계산하지 않습니다. 고정값 분류에는 초당 재생이 포함됩니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "training-allocation",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "단련 StatId 배선 미검증 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/training.points_per_training_level",
+        "/rules/training.percentage_multiplier",
+        "/rules/training.fixed_value_multiplier"
+      ]
+    },
+    {
+      "sourceNamespace": "rules",
+      "sourceKey": "training.percentage_multiplier",
+      "sourcePointer": "/rules/training.percentage_multiplier",
+      "label": "단련 비율형 증가량 배율",
+      "value": "1.5",
+      "valueType": "decimal_string",
+      "unit": "multiplier",
+      "group": "training",
+      "meaning": "Lv60 장비 기본 접사 최대 대비 비율형 분류의 500포인트 단련 증가량 배율입니다. 장비 접사 수정 배율이 아닙니다.",
+      "relation": "분류별 상한500, 500포인트 증가량 표와 현재 선형식의 분모를 함께 해석합니다. 이 정의만 변경해 파생표를 자동 재계산하지 않습니다. 고정값 분류에는 초당 재생이 포함됩니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "training-allocation",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "단련 StatId 배선 미검증 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/training.points_per_training_level",
+        "/rules/training.per_category_point_cap",
+        "/rules/training.fixed_value_multiplier"
+      ]
+    },
+    {
+      "sourceNamespace": "rules",
+      "sourceKey": "training.fixed_value_multiplier",
+      "sourcePointer": "/rules/training.fixed_value_multiplier",
+      "label": "단련 고정값 증가량 배율",
+      "value": "2",
+      "valueType": "decimal_string",
+      "unit": "multiplier",
+      "group": "training",
+      "meaning": "Lv60 장비 기본 접사 최대 대비 고정값 분류의 500포인트 단련 증가량 배율입니다. 초당 재생 분류를 포함하며 장비 접사 수정 배율이 아닙니다.",
+      "relation": "분류별 상한500, 500포인트 증가량 표와 현재 선형식의 분모를 함께 해석합니다. 이 정의만 변경해 파생표를 자동 재계산하지 않습니다. 고정값 분류에는 초당 재생이 포함됩니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "training-allocation",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "단련 StatId 배선 미검증 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/training.points_per_training_level",
+        "/rules/training.per_category_point_cap",
+        "/rules/training.percentage_multiplier"
+      ]
+    },
+    {
+      "sourceNamespace": "caps.caps",
+      "sourceKey": "attack_speed_additional_bonus_percent",
+      "sourcePointer": "/rules/caps.caps/attack_speed_additional_bonus_percent",
+      "label": "추가 공격속도 보너스 상한",
+      "value": 50,
+      "valueType": "integer",
+      "unit": "%",
+      "group": "caps",
+      "meaning": "기본 속도에 더하는 추가 보너스의 상한입니다. 절대 공격횟수나 절대 이동속도를 뜻하지 않습니다.",
+      "relation": "실제 합산/상한 적용 순서와 소비 코드는 별도 확인 사항입니다. 정확히 상한일 때는 기존 표시, 내부 미반올림 값이 초과할 때만 초과 표시를 적용하는 기획입니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "stat-caps",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "개별 게임 소비 미확인 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/caps.caps/critical_hit_chance_percent",
+        "/rules/caps.caps/cooldown_reduction_percent",
+        "/rules/caps.caps/dodge_chance_percent",
+        "/rules/caps.caps/movement_speed_additional_bonus_percent",
+        "/rules/caps.caps/total_pickup_radius_meters"
+      ]
+    },
+    {
+      "sourceNamespace": "caps.caps",
+      "sourceKey": "critical_hit_chance_percent",
+      "sourcePointer": "/rules/caps.caps/critical_hit_chance_percent",
+      "label": "치명타 확률 상한",
+      "value": 100,
+      "valueType": "integer",
+      "unit": "%",
+      "group": "caps",
+      "meaning": "기존 수용 기획의 능력치 상한 정의입니다. 현재 게임의 설정이 이미 이 값으로 작동한다는 뜻은 아닙니다.",
+      "relation": "정본의 전체 합산/상한 적용 의미를 보존합니다. 내부 미반올림 값이 상한을 초과한 경우와 정확히 같은 경우를 구분합니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "stat-caps",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "개별 게임 소비 미확인 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/caps.caps/attack_speed_additional_bonus_percent",
+        "/rules/caps.caps/cooldown_reduction_percent",
+        "/rules/caps.caps/dodge_chance_percent",
+        "/rules/caps.caps/movement_speed_additional_bonus_percent",
+        "/rules/caps.caps/total_pickup_radius_meters"
+      ]
+    },
+    {
+      "sourceNamespace": "caps.caps",
+      "sourceKey": "cooldown_reduction_percent",
+      "sourcePointer": "/rules/caps.caps/cooldown_reduction_percent",
+      "label": "쿨다운 감소 상한",
+      "value": 40,
+      "valueType": "integer",
+      "unit": "%",
+      "group": "caps",
+      "meaning": "기존 수용 기획의 능력치 상한 정의입니다. 현재 게임의 설정이 이미 이 값으로 작동한다는 뜻은 아닙니다.",
+      "relation": "정본의 전체 합산/상한 적용 의미를 보존합니다. 내부 미반올림 값이 상한을 초과한 경우와 정확히 같은 경우를 구분합니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "stat-caps",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "개별 게임 소비 미확인 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/caps.caps/attack_speed_additional_bonus_percent",
+        "/rules/caps.caps/critical_hit_chance_percent",
+        "/rules/caps.caps/dodge_chance_percent",
+        "/rules/caps.caps/movement_speed_additional_bonus_percent",
+        "/rules/caps.caps/total_pickup_radius_meters"
+      ]
+    },
+    {
+      "sourceNamespace": "caps.caps",
+      "sourceKey": "dodge_chance_percent",
+      "sourcePointer": "/rules/caps.caps/dodge_chance_percent",
+      "label": "회피 확률 상한",
+      "value": 60,
+      "valueType": "integer",
+      "unit": "%",
+      "group": "caps",
+      "meaning": "기존 수용 기획의 능력치 상한 정의입니다. 현재 게임의 설정이 이미 이 값으로 작동한다는 뜻은 아닙니다.",
+      "relation": "정본의 전체 합산/상한 적용 의미를 보존합니다. 내부 미반올림 값이 상한을 초과한 경우와 정확히 같은 경우를 구분합니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "stat-caps",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "개별 게임 소비 미확인 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/caps.caps/attack_speed_additional_bonus_percent",
+        "/rules/caps.caps/critical_hit_chance_percent",
+        "/rules/caps.caps/cooldown_reduction_percent",
+        "/rules/caps.caps/movement_speed_additional_bonus_percent",
+        "/rules/caps.caps/total_pickup_radius_meters"
+      ]
+    },
+    {
+      "sourceNamespace": "caps.caps",
+      "sourceKey": "movement_speed_additional_bonus_percent",
+      "sourcePointer": "/rules/caps.caps/movement_speed_additional_bonus_percent",
+      "label": "추가 이동속도 보너스 상한",
+      "value": 50,
+      "valueType": "integer",
+      "unit": "%",
+      "group": "caps",
+      "meaning": "기본 속도에 더하는 추가 보너스의 상한입니다. 절대 공격횟수나 절대 이동속도를 뜻하지 않습니다.",
+      "relation": "실제 합산/상한 적용 순서와 소비 코드는 별도 확인 사항입니다. 정확히 상한일 때는 기존 표시, 내부 미반올림 값이 초과할 때만 초과 표시를 적용하는 기획입니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "stat-caps",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "개별 게임 소비 미확인 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/caps.caps/attack_speed_additional_bonus_percent",
+        "/rules/caps.caps/critical_hit_chance_percent",
+        "/rules/caps.caps/cooldown_reduction_percent",
+        "/rules/caps.caps/dodge_chance_percent",
+        "/rules/caps.caps/total_pickup_radius_meters"
+      ]
+    },
+    {
+      "sourceNamespace": "caps.caps",
+      "sourceKey": "total_pickup_radius_meters",
+      "sourcePointer": "/rules/caps.caps/total_pickup_radius_meters",
+      "label": "총 줍기 반경 상한",
+      "value": 6,
+      "valueType": "integer",
+      "unit": "m",
+      "group": "caps",
+      "meaning": "기본값과 적용 가능한 보너스를 포함한 전체 줍기 반경 상한입니다. 장비 보너스만의 상한이 아닙니다.",
+      "relation": "상한 적용 전 승인된 명품화 성장 자격과 총반경 의미를 보존합니다. 상한에 정확히 도달한 값은 초과가 아닙니다.",
+      "planId": "equipment-current-rules",
+      "tableId": "stat-caps",
+      "registered": false,
+      "editable": false,
+      "gameApplied": false,
+      "runtimeParameterKey": null,
+      "changeRange": {
+        "status": "UNDECIDED_NOT_UNBOUNDED",
+        "min": null,
+        "max": null
+      },
+      "consumerStatus": "개별 게임 소비 미확인 · 운영 등록/서버 adapter 연결 안 됨",
+      "relatedPointers": [
+        "/rules/caps.caps/attack_speed_additional_bonus_percent",
+        "/rules/caps.caps/critical_hit_chance_percent",
+        "/rules/caps.caps/cooldown_reduction_percent",
+        "/rules/caps.caps/dodge_chance_percent",
+        "/rules/caps.caps/movement_speed_additional_bonus_percent"
+      ]
+    }
+  ]
+}
