@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "status": "CONTRACT_ONLY_NO_GAME_SERVER_ADAPTER",
+  "activeGameVersion": null,
+  "currentImplementation": "Loopback editor stores SQLite drafts and immutable local review declarations; POST /api/apply always rejects with NO_GAME_SERVER_ADAPTER. No server credentials, client hot reload or live deployment exists.",
+  "futureEndpoints": {
+    "GET /balance/active": {"response": ["environment", "versionId", "contentHash", "etag", "activationReceipt"]},
+    "POST /balance/stage": {"required": ["authenticatedActor", "role", "immutableVersionId", "schemaVersion", "contentHash", "expectedActiveETag", "idempotencyKey", "validationReceipt", "independentReviewReceipt", "reason", "targetEnvironment", "activateAtUTC", "rolloutPercent"], "roles": ["editor", "reviewer", "deployer"], "identityStatus": "NOT_IMPLEMENTED_LOCALLY", "rules": ["server validates schema, references, units, bounds and consumer compatibility", "reviewer and deployer identities cannot be inferred from typed names", "same idempotency key and payload returns same receipt; different payload rejects", "ETag mismatch rejects without partial update", "all-or-nothing configuration publication", "future timestamp must carry explicit UTC timezone", "rollout targeting must be deterministic per new run"]},
+    "POST /balance/activate": {"requires": ["authenticatedDeployer", "stagedVersion", "expectedActiveETag", "idempotencyKey"], "onFailure": "keep last known-good active version and produce rejected receipt"},
+    "POST /balance/rollback": {"requires": ["authenticatedDeployer", "knownGoodVersion", "expectedActiveETag", "reason", "idempotencyKey"], "meaning": "atomic new activation receipt referencing old immutable payload; never delete history"}
+  },
+  "runningRunPolicy": "Each run records and pins its configuration version/hash at creation. Active runs never adopt later edits. New runs use the explicitly activated version/rollout selection.",
+  "hotConfigReadiness": "NOT_PROVEN. Each key currently has NO_SERVER_ADAPTER; client/code-bound values require separately verified consumers and release compatibility.",
+  "publicSecurity": "GitHub Pages contains read-only data and no editor or write service. Local editor binds 127.0.0.1, validates Host/Origin and CSRF, and does not claim authenticated multi-user roles.",
+  "rollbackDistinction": "The local restore button copies immutable values into a revision-guarded draft. It is not live server rollback."
+}
