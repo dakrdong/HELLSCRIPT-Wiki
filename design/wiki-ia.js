@@ -6,7 +6,28 @@ window.WikiIA=(()=>{
  const kinds={audio:['AudioClip','Audio','BGM','SFX','audio'],models:['Model','Prefab','Mesh','Avatar','Animation','AnimatorController','model','prefab'],materials:['Material','Texture','Shader','material','texture'],fonts:['Font','font'],ui:['UI','Sprite','ui']};
  const steps=[['draft','초안 편집'],['validate','형식 검증'],['compare','버전 비교'],['versions','로컬 버전'],['restore','초안 복구'],['history','변경 이력'],['server','서버 상태']];
  const isLocal=()=>['127.0.0.1','localhost'].includes(location.hostname);
- function chapter(p){const s=(p.domain+' '+p.title+' '+p.id).toLowerCase();if(/legacy_reference/.test(p.designStatus))return 'archive';if(/각성|ga |affix-coexistence/.test(s))return 'awakening';if(/ui|입력|저장|정지|pause|save|화면/.test(s))return 'ui';if(/장비|강화|단련|명품|equipment|loadout|equip/.test(s))return 'equipment';if(/경제|보상|판매|정산|재화|sale|wallet|reward|firstgold|gold/.test(s))return 'economy';if(/균열|진행|레벨|rift|retry|progression/.test(s))return 'rift';if(/전투|스킬|칙령|회복|피격|starter|combat|skill|recovery|incoming/.test(s))return 'combat';return 'system';}
+ function chapter(p){
+  if(p.designStatus==='legacy_reference')return 'archive';
+  const fixed={r1:'rift','equipment-current-rules':'equipment','m02-affix-coexistence':'awakening',starter:'combat',skills:'combat',recovery:'combat',incoming:'combat','skill-save-pause':'ui'};
+  if(Object.hasOwn(fixed,p.id))return fixed[p.id];
+  const d=String(p.domain||'').toLowerCase(),s=(d+' '+p.title+' '+p.id).toLowerCase();
+  const ui=/(?:^|[^a-z0-9])ui(?:$|[^a-z0-9])/;
+  // Awakening remains a semantic override, including equipment-domain documents.
+  if(/각성|ga |affix-coexistence/.test(s))return 'awakening';
+  // Authoritative domain precedes generic title words such as 고정 입력.
+  if(ui.test(d)||/화면|입력|저장|정지/.test(d))return 'ui';
+  if(/장비|성장|강화|단련|명품|equipment|loadout|equip/.test(d))return 'equipment';
+  if(/경제|보상|판매|정산|재화|sale|wallet|reward|gold/.test(d))return 'economy';
+  if(/균열|진행|레벨|rift|retry|progression/.test(d))return 'rift';
+  if(/전투|스킬|칙령|회복|피격|combat|skill/.test(d))return 'combat';
+  // Title fallback is only for domains not resolved above; UI is a token, not equipment's substring.
+  if(ui.test(s)||/입력|저장|정지|pause|save|화면/.test(s))return 'ui';
+  if(/장비|강화|단련|명품|equipment|loadout|equip/.test(s))return 'equipment';
+  if(/경제|보상|판매|정산|재화|sale|wallet|reward|firstgold|gold/.test(s))return 'economy';
+  if(/균열|진행|레벨|rift|retry|progression/.test(s))return 'rift';
+  if(/전투|스킬|칙령|회복|피격|starter|combat|skill|recovery|incoming/.test(s))return 'combat';
+  return 'system';
+ }
  function matches(x,kind,scope){if(scope.startsWith('design/')){const c=scope.split('/')[1];if(c==='pending')return ['proposal','deferred','partially_superseded','excluded_scope'].includes(x.designStatus);return chapter(x)===c;}if(kind==='resources'){const k=String(x.kind);const z=k.toLowerCase();if(scope==='audio')return /audio|bgm|sfx|sound|오디오|음원/.test(z);if(scope==='models')return /model|prefab|mesh|avatar|animation|animator|모델/.test(z);if(scope==='materials')return /material|texture|shader|재질|텍스처|셰이더/.test(z);if(scope==='fonts')return /font|폰트/.test(z);if(scope==='ui')return /sprite|ui|image/.test(z);}return true;}
  function link(href,text,current=false){return `<a href="${h(href)}"${current?' aria-current="page" class="active"':''}>${h(text)}</a>`;}
  function shell(group,sub='',editor=false){const prefix=editor?'index.html':'';const top=document.querySelector('#top-tabs');if(top)top.innerHTML=[['design','기획'],['db','DB'],['ops','운영']].map(([k,t])=>link(k==='ops'&&editor?'#/ops/draft':prefix+'#/'+k,t,k===group)).join('');const side=document.querySelector('#section-nav');let links=[];
