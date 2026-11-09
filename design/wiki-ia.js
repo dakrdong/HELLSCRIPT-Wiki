@@ -8,7 +8,7 @@ window.WikiIA=(()=>{
  const isLocal=()=>['127.0.0.1','localhost'].includes(location.hostname);
  function chapter(p){
   if(p.designStatus==='legacy_reference')return 'archive';
-  const fixed={r1:'rift','equipment-current-rules':'equipment','m02-affix-coexistence':'awakening',starter:'combat',skills:'combat',recovery:'combat',incoming:'combat','skill-save-pause':'ui'};
+  const fixed={'rune-three-colours01':'equipment',r1:'rift','equipment-current-rules':'equipment','m02-affix-coexistence':'awakening',starter:'combat',skills:'combat',recovery:'combat',incoming:'combat','skill-save-pause':'ui'};
   if(Object.hasOwn(fixed,p.id))return fixed[p.id];
   const d=String(p.domain||'').toLowerCase(),s=(d+' '+p.title+' '+p.id).toLowerCase();
   const ui=/(?:^|[^a-z0-9])ui(?:$|[^a-z0-9])/;
