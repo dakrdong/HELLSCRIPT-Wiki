@@ -1,5 +1,5 @@
 {
-  "revision": "GD-RUNE-THREE-COLOURS01",
+  "revision": "GD-RUNE-AUTHORITY-FIX01",
   "runtimeApplied": false,
   "provenance": {
     "html": {
@@ -15,7 +15,7 @@
     },
     "canonicalSource": {
       "name": "rune-rules.json",
-      "sha256": "d1768fc1910b5b5b402b75aba498bc674f8c8bbb167fba23011c9df79e631ef8"
+      "sha256": "6aefd402f75a1c52e357d1f398c5c9683e82f064cc84b242297d613224c82917"
     }
   },
   "snapshot": {
@@ -127,11 +127,90 @@
     "runtimeApplied": false,
     "forge": {
       "legacyMaterialCount": 2,
+      "legacyRuleIsEffective": false,
       "snapshotAscendMaterialFormula": "size + 1",
-      "adoptedAscendMaterialFormula": null,
-      "decision": "기존2개와 시안 n+1개 충돌. 색 감소에 따른 비용 증액을 채택하지 않고 후속 결정 필요."
+      "adoptedAscendMaterialFormula": "size + 1",
+      "authorityDecisionIds": [
+        "D12",
+        "R10"
+      ],
+      "inputSizes": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "maximumSize": 5,
+      "sameColour": true,
+      "sameSize": true,
+      "sameGrade": true,
+      "sameShapeRequired": false,
+      "gradePolicy": "PRESERVE_INPUT_GRADE",
+      "gradeRollover": false,
+      "receipt": "IMMEDIATE",
+      "recipes": [
+        {
+          "inputSize": 1,
+          "allowed": true,
+          "materials": 2,
+          "outputSize": 2,
+          "outputCount": 1
+        },
+        {
+          "inputSize": 2,
+          "allowed": true,
+          "materials": 3,
+          "outputSize": 3,
+          "outputCount": 1
+        },
+        {
+          "inputSize": 3,
+          "allowed": true,
+          "materials": 4,
+          "outputSize": 4,
+          "outputCount": 1
+        },
+        {
+          "inputSize": 4,
+          "allowed": true,
+          "materials": 5,
+          "outputSize": 5,
+          "outputCount": 1
+        },
+        {
+          "inputSize": 5,
+          "allowed": false,
+          "materials": null,
+          "outputSize": null,
+          "outputCount": 0
+        }
+      ],
+      "decision": "현행 D12/R10 확정. 모든 크기 고정2개/U2·혼합등급·5칸 등급순환·수령대기는 채택하지 않음. 재형성2개는 별도 보존."
     },
-    "legacySaveAutoMappingAllowed": false
+    "legacySaveAutoMappingAllowed": false,
+    "starterGrant": {
+      "authorityDecisionIds": [
+        "R03"
+      ],
+      "requiredFirstClearStage": 10,
+      "trigger": "FIRST_ACTUAL_ENTRY_GROWTH_RUNE_BOARD",
+      "singleGrant": true,
+      "lessonMayBeDeferred": true,
+      "grade": 0,
+      "sizeCounts": {
+        "1": 12,
+        "2": 1,
+        "3": 1,
+        "4": 1,
+        "5": 1
+      },
+      "grantAtAccountCreation": false,
+      "grantAtGraduationOrSkip": false,
+      "additionalLegacyTutorialFiveGrant": false,
+      "requiresTownOrNpcVisit": false,
+      "threeColourAllocation": null,
+      "allocationStatus": "UNDECIDED"
+    }
   },
   "catalog": {
     "types": [
@@ -17463,11 +17542,11 @@
       "Master.dc.html:250-265 / 데모모양 a~h와 전체34종 구분"
     ],
     [
-      "승급",
-      "기존 같은등급·크기2개, 같은색 우선/다른색도 혼합",
-      "시안은 같은색·등급·크기 n+1개; 출력크기+1/5칸이면 다음G1칸",
-      "시안 승급결과/색보존은 기록; 2→n+1 재료증가는 자동채택 안 함. 다른색20% 표기는 현재3색 활성 규칙에서 제거",
-      "정식 3색 승급 소비계약 미정; 원시안 정정/결정 필요"
+      "승급 제작",
+      "역사 관측: 옛 구현 고정2개·등급순환/대기 및 구 문서 혼합색 설명은 현행 규칙 아님",
+      "시안 size+1은 D12와 부합하나 5칸 등급순환은 R10과 충돌",
+      "D12/R10: 같은 색·크기·등급 size+1개→같은 등급 다음 크기1개. 입력1~4,5칸 최대·등급변경 없음·즉시 수납",
+      "확정 정본 / 게임 적용은 이번 범위 아님"
     ],
     [
       "상점·제작·분해·환전",
@@ -17477,18 +17556,18 @@
       "신규 활성 공급/수요를 발명하지 않음"
     ],
     [
-      "초기꾸러미",
-      "기존 G0 1칸12개+2~5칸예제각1개",
-      "시안 Unlock은 옛5색 15개 그림이 남음",
-      "계정 지급 총량 변경0; 3색 배분/형태별 새 지급표 미정. 시안 그림15개를 실제지급으로 채택 안 함",
-      "Unlock.dc.html:81-84 수정 요청 / 보상복제 없음"
+      "최초 꾸러미",
+      "옛 계정 초기16개·별도 튜토리얼5개 경로는 현행 추가 지급 근거 아님",
+      "옛5색15개 시안 그림은 현행 지급표로 사용하지 않음",
+      "R03/Core137: 균열10 첫 클리어 후 성장>룬 보드 실제 첫 진입 조건. G0 1칸12개+2/3/4/5칸 각1개 단일16개, 수업 나중에 가능",
+      "지급 조건·구성 확정 / 3색 배분만 미정 / 중복지급 없음"
     ],
     [
       "해금·성장",
-      "D12:균열10클리어후마을장인; 구R03/R07은15단계·6색 잔재",
-      "시안은10단계 도달/넘어섰다 혼재, 최신완전동기화 미확인",
-      "구15단계/6색 안내에 최신정정 연결; 기존10클리어+마을 계약보다 빠른 보상 해금은 채택 안 함",
-      "새 단계를 발급하지 않음 / 도달 vs 클리어 문구 정정 요청"
+      "과거15단계/마을장인 선행조건 해석은 철회",
+      "3색·시작점 없음은 제작법/최초 지급 조건을 변경하지 않음",
+      "R03: 균열10 첫 클리어 후 실제 룬 보드 첫 진입으로 안내. 졸업/스킵 지급·마을/NPC 방문 선행조건 없음",
+      "현행 정본 우선 / 옛 원문·실패·봉인 보존"
     ]
   ],
   "operations": [
@@ -17507,7 +17586,7 @@
     [
       "운영초안",
       "기존 등록10/편집8에 룬 필드 없음",
-      "확정색 규칙은 읽기전용 문맥/자료표로 연결. 새 키/미정 확률·비용을 working 값으로 등록하지 않음",
+      "제작·지급 정본은 읽기전용 기준으로 연결. 3색 배분·옛 저장 매핑 미정은 working 값으로 등록하지 않음",
       false
     ],
     [
@@ -17540,5 +17619,19 @@
       "이 SHA의 전달스냅샷만 근거. 이후룬 수정/최신전체동기화 보장 안 함",
       false
     ]
+  ],
+  "authoritySources": [
+    {
+      "name": "Docs/Design/ReferenceSpec/DECISIONS.md",
+      "sha256": "1a9dbb3424c6cd9ed7feca1c218344fea90a2f6988dc6a7b40cf346fb181d8b3"
+    },
+    {
+      "name": "Docs/Design/ReferenceSpec/CORE_IMPLEMENTATION_PLAN.md",
+      "sha256": "8f1b0239f96e9bd76eab915b2a5bb89efa49d17a76e2c230fe4cfaf8ae464789"
+    },
+    {
+      "name": "Docs/Design/ReferenceSpec/06-runes.md",
+      "sha256": "a4023b2780bc76bb3a58272d09fa6b77580e9a39913bb9158d23e33a66816d3e"
+    }
   ]
 }
